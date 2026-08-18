@@ -14,6 +14,20 @@ void main() {
       );
     });
 
+    test('separates the same host on different ports', () {
+      final a = CredentialStore.keyFor(
+        instanceUrl: 'https://gitlab.example',
+        userId: 1,
+        kind: 'pat',
+      );
+      final b = CredentialStore.keyFor(
+        instanceUrl: 'https://gitlab.example:8443',
+        userId: 1,
+        kind: 'pat',
+      );
+      expect(a, isNot(b));
+    });
+
     test('separates the same user id on different instances', () {
       // Multi-account is a core feature and user ids are only unique per
       // instance, so a key that ignored the host would cross the streams.
