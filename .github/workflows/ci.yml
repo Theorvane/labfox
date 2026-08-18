@@ -1,0 +1,188 @@
+name: CI
+
+# `dev` is the default branch and the target of all contributor pull requests;
+# `main` only ever receives releases. Pull requests are built for every branch.
+on:
+  push:
+    branches: [dev, main]
+  pull_request:
+
+# Least privilege: nothing in this workflow writes to the repository.
+permissions:
+  contents: read
+
+# A newer push to the same ref makes the in-flight run obsolete, so cancel it
+# instead of paying for runner minutes on a result nobody will read.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Always runs. LabFox targets a global audience, so every tracked text file
+  # must be English (see AGENTS.md -> "Language: English only").
+  # ---------------------------------------------------------------------------
+  language-policy:
+    name: Language policy (English only)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for Hangul / CJK characters in tracked files
+        run: |
+          python3 - <<'PY'
+          import re
+          import subprocess
+          import sys
+
+          # Character ranges that must never appear in this repository.
+          # Written as \u escapes on purpose: this file stays pure ASCII, so the
+          # check can never flag its own source.
+          # Covers Hangul (syllables + every Jamo block + halfwidth), CJK
+          # ideographs, Kana and CJK/fullwidth punctuation, so Korean, Chinese
+          # and Japanese text are all rejected by a single pass.
+          NON_ENGLISH = re.compile(
+              r"["
+              r"\u1100-\u11FF"  # Hangul Jamo
+              r"\u2E80-\u2EFF"  # CJK Radicals Supplement
+              r"\u2F00-\u2FDF"  # Kangxi Radicals
+              r"\u3000-\u303F"  # CJK Symbols and Punctuation
+              r"\u3040-\u309F"  # Hiragana
+              r"\u30A0-\u30FF"  # Katakana
+              r"\u3130-\u318F"  # Hangul Compatibility Jamo
+              r"\u3400-\u4DBF"  # CJK Unified Ideographs Extension A
+              r"\u4E00-\u9FFF"  # CJK Unified Ideographs
+              r"\uA960-\uA97F"  # Hangul Jamo Extended-A
+              r"\uAC00-\uD7A3"  # Hangul Syllables
+              r"\uD7B0-\uD7FF"  # Hangul Jamo Extended-B
+              r"\uF900-\uFAFF"  # CJK Compatibility Ideographs
+              r"\uFF01-\uFF60"  # Fullwidth forms
+              r"\uFF66-\uFF9F"  # Halfwidth Katakana
+              r"\uFFA0-\uFFDC"  # Halfwidth Hangul
+              r"]"
+          )
+
+          # LICENSE is verbatim upstream text that contributors never edit.
+          EXCLUDED = {"LICENSE"}
+
+          # git ls-files keeps untracked scratch files out of the check.
+          files = subprocess.run(
+              ["git", "ls-files", "-z"],
+              check=True,
+              capture_output=True,
+              text=True,
+          ).stdout.split("\0")
+
+          violations = []
+          scanned = 0
+
+          for path in files:
+              if not path or path in EXCLUDED:
+                  continue
+              try:
+                  with open(path, "rb") as handle:
+                      raw = handle.read()
+              except OSError:
+                  # Symlinks to directories, submodules, unreadable entries.
+                  continue
+              if b"\0" in raw:
+                  continue  # binary file
+              try:
+                  text = raw.decode("utf-8")
+              except UnicodeDecodeError:
+                  continue  # not UTF-8 text
+              scanned += 1
+              for lineno, line in enumerate(text.splitlines(), start=1):
+                  if NON_ENGLISH.search(line):
+                      violations.append((path, lineno, line.strip()))
+
+          if violations:
+              print("Language policy violation: non-English (Hangul/CJK) characters found.")
+              print("LabFox is English-only. See AGENTS.md -> 'Language: English only'.")
+              print("")
+              print("Offending files:")
+              for path in sorted({v[0] for v in violations}):
+                  print("  " + path)
+              print("")
+              print("Offending lines:")
+              for path, lineno, line in violations:
+                  print("  {}:{}: {}".format(path, lineno, line))
+              sys.exit(1)
+
+          print(
+              "Language policy OK: {} tracked text files scanned, all English.".format(
+                  scanned
+              )
+          )
+          PY
+
+  # ---------------------------------------------------------------------------
+  # The repository is documentation-only until milestone M0 lands the Flutter
+  # monorepo scaffolding. Running Flutter steps now would fail on every pull
+  # request, so this job is gated on actually finding a pubspec.yaml.
+  #
+  # This is deliberate, NOT an oversight: the detection below self-activates the
+  # quality gate the moment M0 commits a pubspec.yaml, with no edit to this
+  # file. A gated-off job reports as skipped (neutral), never as a failure.
+  # ---------------------------------------------------------------------------
+  detect-flutter:
+    name: Detect Flutter project
+    runs-on: ubuntu-latest
+    outputs:
+      found: ${{ steps.detect.outputs.found }}
+      project_dir: ${{ steps.detect.outputs.project_dir }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Look for pubspec.yaml
+        id: detect
+        run: |
+          if [ -f pubspec.yaml ]; then
+            project_dir="."
+          else
+            # Monorepo layout planned for M0: apps/<name>/pubspec.yaml
+            project_dir="$(
+              find apps -mindepth 2 -maxdepth 2 -name pubspec.yaml -print 2>/dev/null \
+                | sort | head -n 1 | xargs -r dirname
+            )"
+          fi
+
+          if [ -n "$project_dir" ]; then
+            echo "found=true" >> "$GITHUB_OUTPUT"
+            echo "project_dir=$project_dir" >> "$GITHUB_OUTPUT"
+            echo "Flutter project detected in '$project_dir'; quality gate will run."
+          else
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            echo "project_dir=" >> "$GITHUB_OUTPUT"
+            echo "No pubspec.yaml found. Repository is still documentation-only."
+            echo "The Flutter quality gate stays skipped until milestone M0."
+          fi
+
+  flutter:
+    name: Flutter quality gate
+    runs-on: ubuntu-latest
+    needs: detect-flutter
+    # Skipped (neutral, not failed) while the repository is documentation-only.
+    if: needs.detect-flutter.outputs.found == 'true'
+    defaults:
+      run:
+        working-directory: ${{ needs.detect-flutter.outputs.project_dir }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Analyze
+        run: flutter analyze --fatal-infos
+
+      - name: Test
+        run: flutter test

@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="brand/generated/icon-128.png" width="96" height="96" alt="LabFox">
+</p>
+
 # LabFox
 
 **A Flutter-based cross-platform GitLab workflow client that pairs GitHub Mobile-grade UX
@@ -102,9 +106,9 @@ Work flows **Issue → Branch → Pull Request**. Nothing is committed directly 
 
 ```
 gh issue create --title "..."
-git switch -c feat/12-mr-diff-viewer main
+git switch -c feat/12-mr-diff-viewer dev
 git commit -s -m "feat(scope): ..."
-gh pr create --fill --base main
+gh pr create --fill --base dev
 ```
 
 - Branches: `<type>/<issue-number>-<slug>` (`feat` `fix` `docs` `refactor` `test` `chore`)

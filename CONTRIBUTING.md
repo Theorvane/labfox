@@ -52,10 +52,10 @@ Issue → Branch → Commit → Pull Request
 > LabFox is a GitLab client, but **development happens on GitHub.**
 > The domain term inside the app is still Merge Request; only the contribution process uses Pull Request.
 
-Nothing is committed directly to `main`.
+Branch from `dev` and target your pull request at `dev`. Nothing is committed directly to `dev` or `main` — `main` holds releases only.
 
 ```bash
-git switch -c feat/12-mr-diff-viewer main
+git switch -c feat/12-mr-diff-viewer dev
 ```
 
 - Branches: `<type>/<issue-number>-<slug>` — type is one of `feat` `fix` `docs` `refactor` `test` `chore`
@@ -142,4 +142,10 @@ There is no separate CLA to sign.
 
 ---
 
-Questions: sloki9637@gmail.com
+## Questions
+
+Open a [GitHub issue](https://github.com/labfox-app/labfox/issues) with the `question` label, or
+comment on the issue or pull request you are working on — see [SUPPORT.md](SUPPORT.md).
+
+For anything that must stay private, email **inquiry@sloki9637.com**. Suspected vulnerabilities go
+through [SECURITY.md](SECURITY.md) instead.

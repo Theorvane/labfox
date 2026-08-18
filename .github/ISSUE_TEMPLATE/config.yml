@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security reports
+    url: https://github.com/labfox-app/labfox/blob/dev/SECURITY.md
+    about: >-
+      Report vulnerabilities privately. Never publish tokens, instance hostnames, or exploit
+      material in a public issue.
+  - name: Support and setup
+    url: https://github.com/labfox-app/labfox/blob/dev/SUPPORT.md
+    about: >-
+      Questions about installing, signing in, or connecting to a self-hosted GitLab instance.

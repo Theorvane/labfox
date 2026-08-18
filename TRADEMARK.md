@@ -48,7 +48,7 @@ You may do the following without separate permission.
 - Any expression that gives the impression that LabFox sponsors, certifies, or is affiliated with you
 - Producing and selling merchandise (goods)
 
-Inquiries: **sloki9637@gmail.com**
+Inquiries: **inquiry@sloki9637.com**. Describe the intended use.
 
 ---
 

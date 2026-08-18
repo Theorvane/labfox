@@ -20,9 +20,41 @@ https://github.com/labfox-app/labfox.git
 >
 > App domain terminology stays **Merge Request**. Only the development process uses PR.
 
-The `gitlab` remote is the previous host (a personal self-hosted GitLab instance) and remains as a backup.
-For day-to-day work, use only `origin` (GitHub).
-This is a public repository, so **never leave the personal instance address in docs, issues, or commit messages.**
+`origin` (GitHub) is the only remote. The project previously lived on a personal self-hosted
+GitLab instance; that remote is gone.
+
+This is a public repository, so **never put the old instance address in docs, issues, or commit
+messages.**
+
+---
+
+## Branch model
+
+```
+feature branch ──PR──> dev ──release PR──> main
+```
+
+| Branch | Role |
+|---|---|
+| `dev` | Default branch. Integration target. **Every contributor PR goes here.** |
+| `main` | Releases only. Updated through a separate reviewed `dev` → `main` release PR. |
+
+Rules:
+
+- Branch from `dev`, open the PR into `dev`.
+- Never commit directly to `dev` or `main`.
+- Never open a PR against `main`. Promoting `dev` to `main` is a maintainer decision and gets its
+  own reviewed release PR.
+- Rebase or merge `dev` into your branch to resolve conflicts. Do not rewrite published history.
+
+### Branch protection
+
+Ruleset definitions live in `.github/rulesets/` and are applied with `gh api`.
+They are **not active yet** — GitHub only allows rulesets on public repositories on the free plan,
+and this repository is still private. See `.github/rulesets/README.md`.
+
+Once applied, `dev` and `main` both block direct pushes, force pushes, and branch deletion,
+and require the CI checks to pass.
 
 ---
 
@@ -31,7 +63,7 @@ This is a public repository, so **never leave the personal instance address in d
 ```
 Create Issue
    ↓
-Create branch (branched from main)
+Create branch (branched from dev)
    ↓
 Commit (with Signed-off-by)
    ↓
@@ -46,7 +78,7 @@ CI passes + Review
 Merge  ← done by a maintainer
 ```
 
-Never commit or push directly to `main`.
+Never commit or push directly to `dev` or `main`.
 
 ---
 
@@ -70,14 +102,52 @@ gh issue view 12
 
 ### Labels
 
-| Label | Purpose |
+Labels are defined in `.github/labels.sh` and synced with:
+
+```bash
+bash .github/labels.sh
+```
+
+The script is idempotent — it creates missing labels and updates existing ones.
+Edit the script rather than the GitHub UI, so the taxonomy stays reviewable.
+
+### Automation
+
+| Trigger | What happens | Where |
+|---|---|---|
+| Pull request opened / updated | `area:*` labels from changed paths | `.github/labeler.yml` |
+| Pull request opened / retitled | type label (`feat`, `fix`, …) from the Conventional Commit title | `.github/workflows/triage.yml` |
+| Pull request opened | author set as assignee | `.github/workflows/triage.yml` |
+| Pull request opened | reviewers requested | `.github/CODEOWNERS` |
+| Issue opened / reopened | `status:needs-triage` added, maintainer assigned | `.github/workflows/triage.yml` |
+
+Notes:
+
+- Type labels come from the **title**, not the changed files — the kind of change is not a
+  function of which paths were touched. A title that is not a Conventional Commit gets no type
+  label and does not fail the run.
+- Both workflows use `pull_request_target` so labels also apply to pull requests from forks.
+  Neither one checks out or executes contributor code, which is what makes that safe.
+- Assignment is best effort. Outside contributors cannot be assignees until they are
+  collaborators, so the step logs and continues instead of failing.
+- `CODEOWNERS` requests review but does not require it — `require_code_owner_review` is `false`
+  in the rulesets.
+
+Structured prefixes so filters stay useful as the tracker grows.
+
+| Prefix | Labels |
 |---|---|
-| `feat` `fix` `docs` `refactor` `test` `chore` | Type of change |
-| `M0` `M1` `M2` `M3` `M4` | Milestone |
-| `android` `ios` `desktop` | Platform-specific issues |
-| `api` `ui` `design-system` | Area |
-| `self-hosted` | Self-hosted GitLab-only problems |
-| `good first issue` | For new contributors |
+| type | `feat` `fix` `docs` `refactor` `test` `chore` |
+| area | `area:api` `area:ui` `area:design-system` `area:ci` `area:docs` `area:mobile` `area:desktop` `area:security` |
+| milestone | `M0` `M1` `M2` `M3` `M4` |
+| platform | `platform:android` `platform:ios` `platform:windows` `platform:macos` |
+| priority | `priority:critical` `priority:high` `priority:medium` `priority:low` |
+| size | `size:XS` `size:S` `size:M` `size:L` `size:XL` |
+| status | `status:needs-triage` `status:in-progress` `status:blocked` |
+| special | `self-hosted` `good first issue` `help wanted` `question` `duplicate` `invalid` |
+
+`self-hosted` marks problems that only reproduce against a self-managed GitLab instance.
+Those are hard for maintainers to reproduce, so they need extra detail from the reporter.
 
 ---
 
@@ -99,11 +169,11 @@ chore/35-melos-bootstrap
 - The slug is lowercase + hyphens. Keep it short.
 
 ```
-git switch main && git pull
+git switch dev && git pull
 git switch -c feat/12-mr-diff-viewer
 ```
 
-**Always branch from the latest `main`.** Don't stack on top of another working branch.
+**Always branch from the latest `dev`.** Don't stack on top of another working branch.
 If a dependency is unavoidable, state the prerequisite PR in the PR description.
 
 ---
@@ -157,13 +227,13 @@ flutter test
 
 ```
 git push -u origin feat/12-mr-diff-viewer
-gh pr create --fill --base main
+gh pr create --fill --base dev
 ```
 
 Start as a Draft:
 
 ```
-gh pr create --draft --fill --base main
+gh pr create --draft --fill --base dev
 gh pr ready 42
 ```
 
@@ -203,7 +273,8 @@ What agents may do without confirmation:
 
 **What they do not do:**
 
-- ❌ Push directly to `main`
+- ❌ Push directly to `dev` or `main`
+- ❌ Open a PR against `main` (release promotion is a maintainer decision)
 - ❌ Force push (both `--force` and `--force-with-lease`)
 - ❌ **Merge PRs** — a maintainer does that
 - ❌ Delete Issues / PRs / branches

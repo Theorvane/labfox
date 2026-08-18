@@ -1,0 +1,136 @@
+name: Bug report
+description: Report something in LabFox that does not work as expected
+title: "fix: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ⚠️ Read this before you paste anything
+
+        LabFox talks to GitLab with **Personal Access Tokens (`glpat-...`)**, OAuth access/refresh
+        tokens, and often against **self-hosted instances on private hostnames**. Job logs, diffs and
+        API responses copied out of the app frequently contain secrets and employer-confidential code.
+
+        **Never paste into this issue:**
+
+        - Tokens of any kind (`glpat-...`, OAuth access/refresh tokens, CI job tokens, cookies)
+        - `Authorization`, `Private-Token` or `Job-Token` headers
+        - Self-hosted instance hostnames, internal URLs, IP addresses or project paths
+        - Private or employer-confidential source code, diffs or raw job logs
+        - Exploit details or proof-of-concept material
+
+        **Redact before pasting.** Replace secrets with `<REDACTED>` and hostnames with
+        `gitlab.example.com`. A public issue cannot be un-published.
+
+        🔒 If you think you found a **security vulnerability**, do **not** open an issue here.
+        Follow [SECURITY.md](https://github.com/labfox-app/labfox/blob/dev/SECURITY.md) instead.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: Describe the observed behavior. What did LabFox actually do?
+      placeholder: |
+        Opening a merge request from the to-do inbox shows an empty diff pane instead of the file list.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Give the minimal numbered steps someone else can follow to see the same result.
+      placeholder: |
+        1. Sign in to gitlab.example.com with a PAT
+        2. Open the to-do inbox
+        3. Tap a merge request entry
+        4. Observe the diff pane
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen instead?
+      placeholder: |
+        The diff pane should list the changed files and render the unified diff.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      description: Where did you see this? Open one issue per platform if it differs.
+      options:
+        - Android
+        - iOS
+        - Windows
+        - macOS
+    validations:
+      required: true
+
+  - type: dropdown
+    id: instance-type
+    attributes:
+      label: GitLab instance type
+      description: Which kind of GitLab instance were you connected to?
+      options:
+        - GitLab.com
+        - Self-hosted (GitLab CE)
+        - Self-hosted (GitLab EE)
+    validations:
+      required: true
+
+  - type: input
+    id: gitlab-version
+    attributes:
+      label: GitLab version
+      description: >-
+        Version of the GitLab instance, if you know it. Leave this empty if the version itself is
+        sensitive information for your organization. Do not enter the hostname here.
+      placeholder: "17.4.1"
+    validations:
+      required: false
+
+  - type: input
+    id: labfox-version
+    attributes:
+      label: LabFox version or commit SHA
+      description: >-
+        The app version you are running, or the commit SHA you built from. LabFox is
+        pre-scaffolding, so a commit SHA is expected for now.
+      placeholder: "0.1.0 or a1b2c3d"
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs and screenshots
+      description: >-
+        Optional. Stack traces, redacted job logs or screenshots that help. ⚠️ Redact first —
+        strip every token, `Authorization` header, instance hostname, internal URL and any
+        confidential source code. Blur the same things out of screenshots.
+      placeholder: |
+        [ERROR] GET https://gitlab.example.com/api/v4/projects/<REDACTED>/merge_requests/12/changes -> 401
+        Authorization: Bearer <REDACTED>
+      render: shell
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched the existing issues and this is not a duplicate.
+          required: true
+        - label: >-
+            I removed every token, `Authorization` header, instance hostname, internal URL,
+            credential and confidential piece of data from this report.
+          required: true
+        - label: This report is written in English.
+          required: true

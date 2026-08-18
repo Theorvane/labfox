@@ -77,6 +77,9 @@ So "do not build separate UIs per platform" (§10) is not taste — it is a **bu
 | `TRADEMARK.md` | Trademark policy — the "LabFox" name and logo are excluded from the license |
 | `THIRD_PARTY_NOTICES.md` | Dependency license allow/deny list, in-app notices |
 | `CONTRIBUTING.md` | How outside contributions work |
+| `CODE_OF_CONDUCT.md` | Contributor Covenant, enforcement contact |
+| `SECURITY.md` | Vulnerability reporting, token-handling scope |
+| `SUPPORT.md` | Where to ask questions, what maintainers do not cover |
 
 - **The "LabFox" name and logo are trademarks and are not covered by the license** (Apache-2.0 §6).
   Anyone may use the code, but nobody else may ship it to a store under the same name.
@@ -287,10 +290,23 @@ The origin remote is **GitHub** (`labfox-app/labfox`). The CLI is `gh`.
 >
 > Code and UI vocabulary stays GitLab's. Do not change it.
 
-Every change follows the sequence below. Never commit directly to `main`.
+### Branches
 
 ```
-Issue → Branch → Commit → Push → PR → Review → Merge
+feature branch ──PR──> dev ──release PR──> main
+```
+
+| Branch | Role |
+|---|---|
+| `dev` | Default branch. Integration. **All contributor PRs target `dev`.** |
+| `main` | Releases only. Updated through a separate reviewed `dev` → `main` release PR. |
+
+Never commit directly to `dev` or `main`, and never push a feature branch straight to `main`.
+
+Every change follows the sequence below.
+
+```
+Issue → Branch (from dev) → Commit → Push → PR (into dev) → Review → Merge
 ```
 
 ### 1) Issue
@@ -315,10 +331,11 @@ fix/28-self-hosted-cert-error
 type: `feat` · `fix` · `docs` · `refactor` · `test` · `chore`
 
 ```
-git switch -c feat/12-mr-diff-viewer main
+git switch dev && git pull
+git switch -c feat/12-mr-diff-viewer
 ```
 
-Branch from `main`. Do not stack work on another feature branch.
+Branch from `dev`. Do not stack work on another feature branch.
 
 ### 3) Commit
 
@@ -345,9 +362,10 @@ Do not open a PR with `analyze` warnings outstanding. If something fails, report
 ### 5) PR
 
 ```
-gh pr create --fill --base main
+gh pr create --fill --base dev
 ```
 
+- **Target `dev`, never `main`.** Releases are promoted separately.
 - Put **`Closes #12`** in the description to link the issue.
 - Template: `.github/PULL_REQUEST_TEMPLATE.md`
 - CI must pass before merging.
@@ -355,7 +373,8 @@ gh pr create --fill --base main
 ### Commit / push / PR permissions
 
 - **Committing, creating branches, pushing, and opening PRs are fine.** Do not ask every time.
-- **But never push directly to `main`.** Never force push.
+- **Never push directly to `dev` or `main`.** Never force push.
+- **Never open a PR against `main`.** Release promotion is a maintainer decision.
 - **Maintainers merge.** An agent does not merge a PR.
 - Close or delete issues and PRs only when asked.
 
