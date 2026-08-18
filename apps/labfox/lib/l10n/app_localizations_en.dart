@@ -392,4 +392,47 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeSwitchAccount => 'Accounts';
+
+  @override
+  String get homeInbox => 'To-do list';
+
+  @override
+  String get inboxTitle => 'To-do list';
+
+  @override
+  String get inboxEmpty => 'You\'re all caught up.';
+
+  @override
+  String get inboxError => 'Your to-do items could not be loaded.';
+
+  @override
+  String get inboxMarkAllDone => 'Mark all as done';
+
+  @override
+  String get inboxMarkDone => 'Mark done';
+
+  @override
+  String get inboxMarkDoneError =>
+      'The item could not be cleared. Please try again.';
+
+  @override
+  String get inboxActionAssigned => 'Assigned to you';
+
+  @override
+  String get inboxActionMentioned => 'Mentioned you';
+
+  @override
+  String get inboxActionBuildFailed => 'Pipeline failed';
+
+  @override
+  String get inboxActionMarked => 'Added a to-do';
+
+  @override
+  String get inboxActionApprovalRequired => 'Approval required';
+
+  @override
+  String get inboxActionUnmergeable => 'Cannot be merged';
+
+  @override
+  String get inboxActionDirectlyAddressed => 'Directly addressed you';
 }

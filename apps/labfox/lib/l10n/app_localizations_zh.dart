@@ -375,4 +375,46 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get homeSwitchAccount => '账户';
+
+  @override
+  String get homeInbox => '待办列表';
+
+  @override
+  String get inboxTitle => '待办列表';
+
+  @override
+  String get inboxEmpty => '全部处理完毕。';
+
+  @override
+  String get inboxError => '无法加载待办事项。';
+
+  @override
+  String get inboxMarkAllDone => '全部标记为完成';
+
+  @override
+  String get inboxMarkDone => '标记为完成';
+
+  @override
+  String get inboxMarkDoneError => '无法清除该事项，请重试。';
+
+  @override
+  String get inboxActionAssigned => '已指派给你';
+
+  @override
+  String get inboxActionMentioned => '提到了你';
+
+  @override
+  String get inboxActionBuildFailed => '流水线失败';
+
+  @override
+  String get inboxActionMarked => '添加了待办';
+
+  @override
+  String get inboxActionApprovalRequired => '需要批准';
+
+  @override
+  String get inboxActionUnmergeable => '无法合并';
+
+  @override
+  String get inboxActionDirectlyAddressed => '直接提及你';
 }

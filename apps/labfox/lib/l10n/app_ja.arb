@@ -119,5 +119,19 @@
   "accountsTitle": "アカウント",
   "accountAdd": "アカウントを追加",
   "accountRemove": "アカウントを削除",
-  "homeSwitchAccount": "アカウント"
+  "homeSwitchAccount": "アカウント",
+  "homeInbox": "To Do リスト",
+  "inboxTitle": "To Do リスト",
+  "inboxEmpty": "すべて完了しました。",
+  "inboxError": "To Do を読み込めませんでした。",
+  "inboxMarkAllDone": "すべて完了にする",
+  "inboxMarkDone": "完了にする",
+  "inboxMarkDoneError": "項目を完了にできませんでした。もう一度お試しください。",
+  "inboxActionAssigned": "あなたに割り当て",
+  "inboxActionMentioned": "あなたにメンション",
+  "inboxActionBuildFailed": "パイプライン失敗",
+  "inboxActionMarked": "To Do を追加",
+  "inboxActionApprovalRequired": "承認が必要",
+  "inboxActionUnmergeable": "マージできません",
+  "inboxActionDirectlyAddressed": "あなたを直接指定"
 }

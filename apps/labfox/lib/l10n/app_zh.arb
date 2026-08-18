@@ -119,5 +119,19 @@
   "accountsTitle": "账户",
   "accountAdd": "添加账户",
   "accountRemove": "移除账户",
-  "homeSwitchAccount": "账户"
+  "homeSwitchAccount": "账户",
+  "homeInbox": "待办列表",
+  "inboxTitle": "待办列表",
+  "inboxEmpty": "全部处理完毕。",
+  "inboxError": "无法加载待办事项。",
+  "inboxMarkAllDone": "全部标记为完成",
+  "inboxMarkDone": "标记为完成",
+  "inboxMarkDoneError": "无法清除该事项，请重试。",
+  "inboxActionAssigned": "已指派给你",
+  "inboxActionMentioned": "提到了你",
+  "inboxActionBuildFailed": "流水线失败",
+  "inboxActionMarked": "添加了待办",
+  "inboxActionApprovalRequired": "需要批准",
+  "inboxActionUnmergeable": "无法合并",
+  "inboxActionDirectlyAddressed": "直接提及你"
 }

@@ -8,6 +8,7 @@ import 'notes/notes_api.dart';
 import 'pipelines/pipelines_api.dart';
 import 'projects/projects_api.dart';
 import 'repository/repository_api.dart';
+import 'todos/todos_api.dart';
 import 'users/users_api.dart';
 
 /// Entry point for every GitLab REST call.
@@ -35,6 +36,7 @@ class GitLabClient {
     notes = NotesApi(_dio);
     pipelines = PipelinesApi(_dio);
     jobs = JobsApi(_dio);
+    todos = TodosApi(_dio);
   }
 
   final Dio _dio;
@@ -47,6 +49,7 @@ class GitLabClient {
   late final NotesApi notes;
   late final PipelinesApi pipelines;
   late final JobsApi jobs;
+  late final TodosApi todos;
 
   /// Derives the REST endpoint from an instance URL.
   ///

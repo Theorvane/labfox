@@ -19,5 +19,6 @@ export 'src/note.dart';
 export 'src/pipeline.dart';
 export 'src/project.dart';
 export 'src/repository_entry.dart';
+export 'src/todo.dart';
 export 'src/unified_diff.dart';
 export 'src/user.dart';

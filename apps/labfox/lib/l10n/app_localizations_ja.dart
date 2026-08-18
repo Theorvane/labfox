@@ -378,4 +378,46 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get homeSwitchAccount => 'アカウント';
+
+  @override
+  String get homeInbox => 'To Do リスト';
+
+  @override
+  String get inboxTitle => 'To Do リスト';
+
+  @override
+  String get inboxEmpty => 'すべて完了しました。';
+
+  @override
+  String get inboxError => 'To Do を読み込めませんでした。';
+
+  @override
+  String get inboxMarkAllDone => 'すべて完了にする';
+
+  @override
+  String get inboxMarkDone => '完了にする';
+
+  @override
+  String get inboxMarkDoneError => '項目を完了にできませんでした。もう一度お試しください。';
+
+  @override
+  String get inboxActionAssigned => 'あなたに割り当て';
+
+  @override
+  String get inboxActionMentioned => 'あなたにメンション';
+
+  @override
+  String get inboxActionBuildFailed => 'パイプライン失敗';
+
+  @override
+  String get inboxActionMarked => 'To Do を追加';
+
+  @override
+  String get inboxActionApprovalRequired => '承認が必要';
+
+  @override
+  String get inboxActionUnmergeable => 'マージできません';
+
+  @override
+  String get inboxActionDirectlyAddressed => 'あなたを直接指定';
 }
