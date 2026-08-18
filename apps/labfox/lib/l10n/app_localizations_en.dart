@@ -116,4 +116,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get fileBinary => 'This is a binary file and cannot be shown as text.';
+
+  @override
+  String get projectOverviewBranches => 'Branches';
+
+  @override
+  String get projectOverviewCommits => 'Commits';
+
+  @override
+  String get branchesTitle => 'Branches';
+
+  @override
+  String get branchesError => 'Could not load branches.';
+
+  @override
+  String get branchesEmpty => 'This repository has no branches.';
+
+  @override
+  String get branchDefault => 'Default branch';
+
+  @override
+  String get commitsTitle => 'Commits';
+
+  @override
+  String get commitsError => 'Could not load commits.';
+
+  @override
+  String get commitsEmpty => 'No commits on this branch yet.';
+
+  @override
+  String get commitTitle => 'Commit';
+
+  @override
+  String get commitError => 'Could not load this commit.';
 }

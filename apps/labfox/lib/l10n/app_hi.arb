@@ -33,5 +33,16 @@
   "repositoryEmpty": "यह डायरेक्टरी खाली है।",
   "fileError": "यह फ़ाइल लोड नहीं हो सकी।",
   "fileNotFound": "यह फ़ाइल नहीं मिली।",
-  "fileBinary": "यह एक बाइनरी फ़ाइल है और इसे टेक्स्ट के रूप में नहीं दिखाया जा सकता।"
+  "fileBinary": "यह एक बाइनरी फ़ाइल है और इसे टेक्स्ट के रूप में नहीं दिखाया जा सकता।",
+  "projectOverviewBranches": "ब्रांच",
+  "projectOverviewCommits": "कमिट",
+  "branchesTitle": "ब्रांच",
+  "branchesError": "ब्रांच लोड नहीं हो सकीं।",
+  "branchesEmpty": "इस रिपॉज़िटरी में कोई ब्रांच नहीं है।",
+  "branchDefault": "डिफ़ॉल्ट ब्रांच",
+  "commitsTitle": "कमिट",
+  "commitsError": "कमिट लोड नहीं हो सके।",
+  "commitsEmpty": "इस ब्रांच पर अभी कोई कमिट नहीं है।",
+  "commitTitle": "कमिट",
+  "commitError": "यह कमिट लोड नहीं हो सका।"
 }

@@ -33,5 +33,16 @@
   "repositoryEmpty": "此目录为空。",
   "fileError": "无法加载此文件。",
   "fileNotFound": "未找到此文件。",
-  "fileBinary": "这是二进制文件，无法作为文本显示。"
+  "fileBinary": "这是二进制文件，无法作为文本显示。",
+  "projectOverviewBranches": "分支",
+  "projectOverviewCommits": "提交",
+  "branchesTitle": "分支",
+  "branchesError": "无法加载分支。",
+  "branchesEmpty": "此仓库没有分支。",
+  "branchDefault": "默认分支",
+  "commitsTitle": "提交",
+  "commitsError": "无法加载提交。",
+  "commitsEmpty": "此分支还没有提交。",
+  "commitTitle": "提交",
+  "commitError": "无法加载此提交。"
 }

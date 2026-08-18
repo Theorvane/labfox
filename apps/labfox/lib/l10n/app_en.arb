@@ -141,5 +141,49 @@
   "fileBinary": "This is a binary file and cannot be shown as text.",
   "@fileBinary": {
     "description": "Shown for a binary file"
+  },
+  "projectOverviewBranches": "Branches",
+  "@projectOverviewBranches": {
+    "description": "Overview link that opens the branches list"
+  },
+  "projectOverviewCommits": "Commits",
+  "@projectOverviewCommits": {
+    "description": "Overview link that opens the commits list"
+  },
+  "branchesTitle": "Branches",
+  "@branchesTitle": {
+    "description": "Title of the branches screen"
+  },
+  "branchesError": "Could not load branches.",
+  "@branchesError": {
+    "description": "Shown when the branches list fails"
+  },
+  "branchesEmpty": "This repository has no branches.",
+  "@branchesEmpty": {
+    "description": "Shown for a repository with no branches"
+  },
+  "branchDefault": "Default branch",
+  "@branchDefault": {
+    "description": "Label marking the default branch"
+  },
+  "commitsTitle": "Commits",
+  "@commitsTitle": {
+    "description": "Title of the commits screen"
+  },
+  "commitsError": "Could not load commits.",
+  "@commitsError": {
+    "description": "Shown when the commits list fails"
+  },
+  "commitsEmpty": "No commits on this branch yet.",
+  "@commitsEmpty": {
+    "description": "Shown for a branch with no commits"
+  },
+  "commitTitle": "Commit",
+  "@commitTitle": {
+    "description": "Fallback title for the commit detail screen"
+  },
+  "commitError": "Could not load this commit.",
+  "@commitError": {
+    "description": "Shown when a commit fails to load"
   }
 }

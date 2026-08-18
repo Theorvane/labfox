@@ -117,4 +117,37 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get fileBinary =>
       'यह एक बाइनरी फ़ाइल है और इसे टेक्स्ट के रूप में नहीं दिखाया जा सकता।';
+
+  @override
+  String get projectOverviewBranches => 'ब्रांच';
+
+  @override
+  String get projectOverviewCommits => 'कमिट';
+
+  @override
+  String get branchesTitle => 'ब्रांच';
+
+  @override
+  String get branchesError => 'ब्रांच लोड नहीं हो सकीं।';
+
+  @override
+  String get branchesEmpty => 'इस रिपॉज़िटरी में कोई ब्रांच नहीं है।';
+
+  @override
+  String get branchDefault => 'डिफ़ॉल्ट ब्रांच';
+
+  @override
+  String get commitsTitle => 'कमिट';
+
+  @override
+  String get commitsError => 'कमिट लोड नहीं हो सके।';
+
+  @override
+  String get commitsEmpty => 'इस ब्रांच पर अभी कोई कमिट नहीं है।';
+
+  @override
+  String get commitTitle => 'कमिट';
+
+  @override
+  String get commitError => 'यह कमिट लोड नहीं हो सका।';
 }

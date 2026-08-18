@@ -307,6 +307,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This is a binary file and cannot be shown as text.'**
   String get fileBinary;
+
+  /// Overview link that opens the branches list
+  ///
+  /// In en, this message translates to:
+  /// **'Branches'**
+  String get projectOverviewBranches;
+
+  /// Overview link that opens the commits list
+  ///
+  /// In en, this message translates to:
+  /// **'Commits'**
+  String get projectOverviewCommits;
+
+  /// Title of the branches screen
+  ///
+  /// In en, this message translates to:
+  /// **'Branches'**
+  String get branchesTitle;
+
+  /// Shown when the branches list fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load branches.'**
+  String get branchesError;
+
+  /// Shown for a repository with no branches
+  ///
+  /// In en, this message translates to:
+  /// **'This repository has no branches.'**
+  String get branchesEmpty;
+
+  /// Label marking the default branch
+  ///
+  /// In en, this message translates to:
+  /// **'Default branch'**
+  String get branchDefault;
+
+  /// Title of the commits screen
+  ///
+  /// In en, this message translates to:
+  /// **'Commits'**
+  String get commitsTitle;
+
+  /// Shown when the commits list fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load commits.'**
+  String get commitsError;
+
+  /// Shown for a branch with no commits
+  ///
+  /// In en, this message translates to:
+  /// **'No commits on this branch yet.'**
+  String get commitsEmpty;
+
+  /// Fallback title for the commit detail screen
+  ///
+  /// In en, this message translates to:
+  /// **'Commit'**
+  String get commitTitle;
+
+  /// Shown when a commit fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this commit.'**
+  String get commitError;
 }
 
 class _AppLocalizationsDelegate

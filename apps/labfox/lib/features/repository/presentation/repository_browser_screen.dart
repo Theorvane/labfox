@@ -33,7 +33,23 @@ class RepositoryBrowserScreen extends ConsumerWidget {
     final title = path.isEmpty ? l10n.repositoryTitle : path.split('/').last;
 
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(
+        title: Text(title),
+        actions: [
+          // The current branch, tappable to pick another. At the root it also
+          // labels which ref is being browsed.
+          TextButton.icon(
+            onPressed: () => context.go(Routes.branches(projectId)),
+            icon: const Icon(Icons.account_tree_outlined, size: 16),
+            label: Text(ref, overflow: TextOverflow.ellipsis),
+          ),
+          IconButton(
+            tooltip: l10n.commitsTitle,
+            icon: const Icon(Icons.history),
+            onPressed: () => context.go(Routes.commits(projectId, ref)),
+          ),
+        ],
+      ),
       body: entries.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, _) => Center(
