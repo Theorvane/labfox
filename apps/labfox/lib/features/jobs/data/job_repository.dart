@@ -14,4 +14,13 @@ class JobRepository {
   Future<String> trace({required int projectId, required int jobId}) {
     return _client.jobs.trace(projectId, jobId: jobId);
   }
+
+  Future<Job> retry({required int projectId, required int jobId}) =>
+      _client.jobs.retry(projectId, jobId: jobId);
+
+  Future<Job> cancel({required int projectId, required int jobId}) =>
+      _client.jobs.cancel(projectId, jobId: jobId);
+
+  Future<Job> play({required int projectId, required int jobId}) =>
+      _client.jobs.play(projectId, jobId: jobId);
 }

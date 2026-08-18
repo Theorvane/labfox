@@ -1,6 +1,7 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gitlab_api/gitlab_api.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 import 'package:go_router/go_router.dart';
 
@@ -42,12 +43,21 @@ class PipelineDetailScreen extends ConsumerWidget {
             detail.when(
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (error, _) => Text(l10n.pipelineError),
-              data: (p) => Row(
+              data: (p) => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CiStatusIcon(status: p.ciStatus, label: p.status),
-                  const SizedBox(width: LabFoxSpacing.md),
-                  if (p.ref != null)
-                    Text(p.ref!, style: Theme.of(context).textTheme.bodySmall),
+                  Row(
+                    children: [
+                      CiStatusIcon(status: p.ciStatus, label: p.status),
+                      const SizedBox(width: LabFoxSpacing.md),
+                      if (p.ref != null)
+                        Text(
+                          p.ref!,
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                    ],
+                  ),
+                  _PipelineActions(pipelineRef: pipelineRef, pipeline: p),
                 ],
               ),
             ),
@@ -125,5 +135,67 @@ class _Stage extends StatelessWidget {
           ),
       ],
     );
+  }
+}
+
+class _PipelineActions extends ConsumerWidget {
+  const _PipelineActions({required this.pipelineRef, required this.pipeline});
+
+  final PipelineRef pipelineRef;
+  final Pipeline pipeline;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final busy = ref
+        .watch(pipelineActionsControllerProvider(pipelineRef))
+        .isLoading;
+    final notifier = ref.read(
+      pipelineActionsControllerProvider(pipelineRef).notifier,
+    );
+
+    final buttons = <Widget>[
+      if (pipeline.canRetry)
+        OutlinedButton.icon(
+          onPressed: busy ? null : () => _run(context, l10n, notifier.retry),
+          icon: const Icon(Icons.refresh, size: 18),
+          label: Text(l10n.pipelineActionRetry),
+        ),
+      if (pipeline.canCancel)
+        OutlinedButton.icon(
+          onPressed: busy ? null : () => _run(context, l10n, notifier.cancel),
+          icon: const Icon(Icons.stop_circle_outlined, size: 18),
+          label: Text(l10n.pipelineActionCancel),
+        ),
+    ];
+    if (buttons.isEmpty) {
+      return const SizedBox.shrink();
+    }
+    return Padding(
+      padding: const EdgeInsets.only(top: LabFoxSpacing.sm),
+      child: Wrap(spacing: LabFoxSpacing.sm, children: buttons),
+    );
+  }
+
+  Future<void> _run(
+    BuildContext context,
+    AppLocalizations l10n,
+    Future<void> Function() action,
+  ) async {
+    try {
+      await action();
+    } on GitLabException catch (error) {
+      if (context.mounted) {
+        final message = switch (error) {
+          GitLabForbiddenException() ||
+          GitLabAuthException() => l10n.pipelineActionForbidden,
+          GitLabConflictException() => l10n.pipelineActionInvalid,
+          _ => l10n.pipelineActionError,
+        };
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(message)));
+      }
+    }
   }
 }

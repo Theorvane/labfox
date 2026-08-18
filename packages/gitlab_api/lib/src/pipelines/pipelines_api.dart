@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
+import '../common/exceptions.dart';
 import '../common/paginated.dart';
 import '../gitlab_client.dart';
 
@@ -96,6 +97,44 @@ class PipelinesApi {
       return List.unmodifiable(jobs);
     } on DioException catch (error) {
       throw mapError(error, context: 'loading jobs');
+    }
+  }
+
+  /// Retries a pipeline, returning the updated resource.
+  Future<Pipeline> retry(Object projectId, {required int pipelineId}) =>
+      _action(projectId, pipelineId: pipelineId, action: 'retry');
+
+  /// Cancels a pipeline.
+  Future<Pipeline> cancel(Object projectId, {required int pipelineId}) =>
+      _action(projectId, pipelineId: pipelineId, action: 'cancel');
+
+  Future<Pipeline> _action(
+    Object projectId, {
+    required int pipelineId,
+    required String action,
+  }) async {
+    try {
+      final response = await _dio.post<Map<String, dynamic>>(
+        '/projects/${_enc(projectId)}/pipelines/$pipelineId/$action',
+      );
+      final status = response.statusCode ?? 0;
+      if (status == 409 || status == 422) {
+        throw GitLabConflictException(
+          'This pipeline cannot be $action-ed in its current state.',
+          statusCode: status,
+        );
+      }
+      final data = response.data;
+      if (status < 200 || status >= 300 || data == null) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'updating the pipeline',
+        );
+      }
+      return Pipeline.fromJson(data);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'updating the pipeline');
     }
   }
 

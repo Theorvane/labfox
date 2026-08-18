@@ -733,6 +733,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This job has no log output.'**
   String get jobLogEmpty;
+
+  /// Button to retry a job
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get jobActionRetry;
+
+  /// Button to cancel a job
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get jobActionCancel;
+
+  /// Button to run a manual job
+  ///
+  /// In en, this message translates to:
+  /// **'Run'**
+  String get jobActionRun;
+
+  /// Shown when a job action is forbidden
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have permission for this action.'**
+  String get jobActionForbidden;
+
+  /// Shown when a job action conflicts with status
+  ///
+  /// In en, this message translates to:
+  /// **'This action is not available for the job\'s current state.'**
+  String get jobActionInvalid;
+
+  /// Generic job action error
+  ///
+  /// In en, this message translates to:
+  /// **'The action could not be completed. Please try again.'**
+  String get jobActionError;
+
+  /// Button to retry a pipeline
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get pipelineActionRetry;
+
+  /// Button to cancel a pipeline
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get pipelineActionCancel;
+
+  /// Shown when a pipeline action is forbidden
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have permission for this action.'**
+  String get pipelineActionForbidden;
+
+  /// Shown when a pipeline action conflicts with status
+  ///
+  /// In en, this message translates to:
+  /// **'This action is not available for the pipeline\'s current state.'**
+  String get pipelineActionInvalid;
+
+  /// Generic pipeline action error
+  ///
+  /// In en, this message translates to:
+  /// **'The action could not be completed. Please try again.'**
+  String get pipelineActionError;
 }
 
 class _AppLocalizationsDelegate

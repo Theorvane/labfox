@@ -85,3 +85,42 @@ Map<String, List<Job>> groupJobsByStage(List<Job> jobs) {
   }
   return groups;
 }
+
+/// Runs retry / cancel on a pipeline, then refreshes the pipeline and its jobs
+/// so the new status comes from the server, not a local guess.
+class PipelineActionsController extends FamilyAsyncNotifier<void, PipelineRef> {
+  @override
+  Future<void> build(PipelineRef arg) async {}
+
+  Future<void> retry() => _run(
+    (repo) => repo.retry(projectId: arg.projectId, pipelineId: arg.pipelineId),
+  );
+
+  Future<void> cancel() => _run(
+    (repo) => repo.cancel(projectId: arg.projectId, pipelineId: arg.pipelineId),
+  );
+
+  Future<void> _run(
+    Future<void> Function(PipelinesRepository repo) action,
+  ) async {
+    final repo = await ref.read(pipelinesRepositoryProvider.future);
+    if (repo == null) {
+      throw StateError('No authenticated account');
+    }
+    state = const AsyncLoading();
+    try {
+      await action(repo);
+      ref.invalidate(pipelineDetailProvider(arg));
+      ref.invalidate(pipelineJobsControllerProvider(arg));
+      state = const AsyncData(null);
+    } catch (error, stack) {
+      state = AsyncError(error, stack);
+      rethrow;
+    }
+  }
+}
+
+final pipelineActionsControllerProvider =
+    AsyncNotifierProvider.family<PipelineActionsController, void, PipelineRef>(
+      PipelineActionsController.new,
+    );

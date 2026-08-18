@@ -18,6 +18,19 @@ void main() {
       expect(p.shortSha, 'abc123de');
       expect(p.ciStatus, CiStatus.failed);
     });
+
+    test('exposes which actions its status allows', () {
+      Pipeline withStatus(String s) => Pipeline(id: 1, status: s);
+
+      // A finished pipeline can be retried, not cancelled.
+      expect(withStatus('failed').canRetry, isTrue);
+      expect(withStatus('success').canRetry, isTrue);
+      expect(withStatus('failed').canCancel, isFalse);
+
+      // A running pipeline can be cancelled, not retried.
+      expect(withStatus('running').canCancel, isTrue);
+      expect(withStatus('running').canRetry, isFalse);
+    });
   });
 
   group('Job', () {
@@ -32,6 +45,25 @@ void main() {
       expect(j.name, 'unit-test');
       expect(j.stage, 'test');
       expect(j.ciStatus, CiStatus.success);
+    });
+
+    test('exposes which actions its status allows', () {
+      Job withStatus(String s) => Job(id: 1, name: 'x', status: s);
+
+      // Finished jobs can be retried, not cancelled.
+      expect(withStatus('failed').canRetry, isTrue);
+      expect(withStatus('success').canRetry, isTrue);
+      expect(withStatus('canceled').canRetry, isTrue);
+      expect(withStatus('failed').canCancel, isFalse);
+
+      // Active jobs can be cancelled, not retried.
+      expect(withStatus('running').canCancel, isTrue);
+      expect(withStatus('pending').canCancel, isTrue);
+      expect(withStatus('running').canRetry, isFalse);
+
+      // A manual job can be played.
+      expect(withStatus('manual').canPlay, isTrue);
+      expect(withStatus('failed').canPlay, isFalse);
     });
   });
 

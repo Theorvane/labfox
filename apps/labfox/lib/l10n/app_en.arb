@@ -445,5 +445,49 @@
   "jobLogEmpty": "This job has no log output.",
   "@jobLogEmpty": {
     "description": "Shown when a job has no log"
+  },
+  "jobActionRetry": "Retry",
+  "@jobActionRetry": {
+    "description": "Button to retry a job"
+  },
+  "jobActionCancel": "Cancel",
+  "@jobActionCancel": {
+    "description": "Button to cancel a job"
+  },
+  "jobActionRun": "Run",
+  "@jobActionRun": {
+    "description": "Button to run a manual job"
+  },
+  "jobActionForbidden": "You do not have permission for this action.",
+  "@jobActionForbidden": {
+    "description": "Shown when a job action is forbidden"
+  },
+  "jobActionInvalid": "This action is not available for the job's current state.",
+  "@jobActionInvalid": {
+    "description": "Shown when a job action conflicts with status"
+  },
+  "jobActionError": "The action could not be completed. Please try again.",
+  "@jobActionError": {
+    "description": "Generic job action error"
+  },
+  "pipelineActionRetry": "Retry",
+  "@pipelineActionRetry": {
+    "description": "Button to retry a pipeline"
+  },
+  "pipelineActionCancel": "Cancel",
+  "@pipelineActionCancel": {
+    "description": "Button to cancel a pipeline"
+  },
+  "pipelineActionForbidden": "You do not have permission for this action.",
+  "@pipelineActionForbidden": {
+    "description": "Shown when a pipeline action is forbidden"
+  },
+  "pipelineActionInvalid": "This action is not available for the pipeline's current state.",
+  "@pipelineActionInvalid": {
+    "description": "Shown when a pipeline action conflicts with status"
+  },
+  "pipelineActionError": "The action could not be completed. Please try again.",
+  "@pipelineActionError": {
+    "description": "Generic pipeline action error"
   }
 }

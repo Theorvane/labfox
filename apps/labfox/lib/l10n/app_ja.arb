@@ -104,5 +104,16 @@
   "jobError": "このジョブを読み込めませんでした。",
   "jobRefresh": "更新",
   "jobLogError": "ログを読み込めませんでした。",
-  "jobLogEmpty": "このジョブにはログ出力がありません。"
+  "jobLogEmpty": "このジョブにはログ出力がありません。",
+  "jobActionRetry": "再試行",
+  "jobActionCancel": "キャンセル",
+  "jobActionRun": "実行",
+  "jobActionForbidden": "この操作の権限がありません。",
+  "jobActionInvalid": "現在のジョブの状態ではこの操作はできません。",
+  "jobActionError": "操作を完了できませんでした。もう一度お試しください。",
+  "pipelineActionRetry": "再試行",
+  "pipelineActionCancel": "キャンセル",
+  "pipelineActionForbidden": "この操作の権限がありません。",
+  "pipelineActionInvalid": "現在のパイプラインの状態ではこの操作はできません。",
+  "pipelineActionError": "操作を完了できませんでした。もう一度お試しください。"
 }
