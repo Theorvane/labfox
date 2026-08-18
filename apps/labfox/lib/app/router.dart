@@ -26,11 +26,14 @@ abstract final class Routes {
   // parameter, not a nested segment, because a repository path contains its own
   // slashes; encoding it as one query value keeps go_router from splitting it
   // into route segments.
-  static String repository(int id, String ref) => '/projects/$id/tree?ref=$ref';
+  static String repository(int id, String ref) =>
+      '/projects/$id/tree?ref=${Uri.encodeQueryComponent(ref)}';
   static String repositoryPath(int id, String ref, String path) =>
-      '/projects/$id/tree?ref=$ref&path=${Uri.encodeQueryComponent(path)}';
+      '/projects/$id/tree?ref=${Uri.encodeQueryComponent(ref)}'
+      '&path=${Uri.encodeQueryComponent(path)}';
   static String file(int id, String ref, String path) =>
-      '/projects/$id/file?ref=$ref&path=${Uri.encodeQueryComponent(path)}';
+      '/projects/$id/file?ref=${Uri.encodeQueryComponent(ref)}'
+      '&path=${Uri.encodeQueryComponent(path)}';
 }
 
 final routerProvider = Provider<GoRouter>((ref) {
