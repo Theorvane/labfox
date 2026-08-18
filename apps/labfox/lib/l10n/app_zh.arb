@@ -99,5 +99,10 @@
   "pipelinesEmpty": "还没有流水线。",
   "pipelineError": "无法加载此流水线。",
   "pipelineJobsError": "无法加载作业。",
-  "pipelineNoJobs": "此流水线没有作业。"
+  "pipelineNoJobs": "此流水线没有作业。",
+  "jobTitle": "作业",
+  "jobError": "无法加载此作业。",
+  "jobRefresh": "刷新",
+  "jobLogError": "无法加载日志。",
+  "jobLogEmpty": "此作业没有日志输出。"
 }

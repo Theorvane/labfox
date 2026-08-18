@@ -326,4 +326,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pipelineNoJobs => 'This pipeline has no jobs.';
+
+  @override
+  String get jobTitle => 'Job';
+
+  @override
+  String get jobError => 'Could not load this job.';
+
+  @override
+  String get jobRefresh => 'Refresh';
+
+  @override
+  String get jobLogError => 'Could not load the log.';
+
+  @override
+  String get jobLogEmpty => 'This job has no log output.';
 }

@@ -5,6 +5,7 @@
 library;
 
 export 'src/account.dart';
+export 'src/ansi.dart';
 export 'src/branch.dart';
 export 'src/ci_status.dart';
 export 'src/commit.dart';

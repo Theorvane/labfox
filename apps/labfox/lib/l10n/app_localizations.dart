@@ -703,6 +703,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This pipeline has no jobs.'**
   String get pipelineNoJobs;
+
+  /// Fallback title for the job detail screen
+  ///
+  /// In en, this message translates to:
+  /// **'Job'**
+  String get jobTitle;
+
+  /// Shown when a job fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this job.'**
+  String get jobError;
+
+  /// Tooltip for the job refresh action
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get jobRefresh;
+
+  /// Shown when a job log fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load the log.'**
+  String get jobLogError;
+
+  /// Shown when a job has no log
+  ///
+  /// In en, this message translates to:
+  /// **'This job has no log output.'**
+  String get jobLogEmpty;
 }
 
 class _AppLocalizationsDelegate

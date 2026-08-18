@@ -2,7 +2,9 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_models/gitlab_models.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../app/router.dart';
 import '../../../l10n/app_localizations.dart';
 import 'controllers/pipelines_controllers.dart';
 
@@ -62,7 +64,11 @@ class PipelineDetailScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     for (final entry in byStage.entries)
-                      _Stage(stage: entry.key, jobs: entry.value),
+                      _Stage(
+                        projectId: projectId,
+                        stage: entry.key,
+                        jobs: entry.value,
+                      ),
                   ],
                 );
               },
@@ -75,8 +81,13 @@ class PipelineDetailScreen extends ConsumerWidget {
 }
 
 class _Stage extends StatelessWidget {
-  const _Stage({required this.stage, required this.jobs});
+  const _Stage({
+    required this.projectId,
+    required this.stage,
+    required this.jobs,
+  });
 
+  final int projectId;
   final String stage;
   final List<Job> jobs;
 
@@ -96,16 +107,20 @@ class _Stage extends StatelessWidget {
           ),
         ),
         for (final job in jobs)
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: LabFoxSpacing.xs),
-            child: Row(
-              children: [
-                CiStatusIcon(status: job.ciStatus),
-                const SizedBox(width: LabFoxSpacing.sm),
-                Expanded(
-                  child: Text(job.name, overflow: TextOverflow.ellipsis),
-                ),
-              ],
+          InkWell(
+            onTap: () => context.go(Routes.job(projectId, job.id)),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: LabFoxSpacing.sm),
+              child: Row(
+                children: [
+                  CiStatusIcon(status: job.ciStatus),
+                  const SizedBox(width: LabFoxSpacing.sm),
+                  Expanded(
+                    child: Text(job.name, overflow: TextOverflow.ellipsis),
+                  ),
+                  const Icon(Icons.chevron_right, size: 18),
+                ],
+              ),
             ),
           ),
       ],

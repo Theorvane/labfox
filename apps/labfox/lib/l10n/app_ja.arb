@@ -99,5 +99,10 @@
   "pipelinesEmpty": "まだパイプラインはありません。",
   "pipelineError": "このパイプラインを読み込めませんでした。",
   "pipelineJobsError": "ジョブを読み込めませんでした。",
-  "pipelineNoJobs": "このパイプラインにはジョブがありません。"
+  "pipelineNoJobs": "このパイプラインにはジョブがありません。",
+  "jobTitle": "ジョブ",
+  "jobError": "このジョブを読み込めませんでした。",
+  "jobRefresh": "更新",
+  "jobLogError": "ログを読み込めませんでした。",
+  "jobLogEmpty": "このジョブにはログ出力がありません。"
 }

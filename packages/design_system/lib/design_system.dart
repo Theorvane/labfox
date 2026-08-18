@@ -1,6 +1,7 @@
 /// The LabFox Design System.
 library;
 
+export 'src/components/ansi_log_view.dart';
 export 'src/components/ci_status_icon.dart';
 export 'src/components/diff_viewer.dart';
 export 'src/components/gitlab_label.dart';

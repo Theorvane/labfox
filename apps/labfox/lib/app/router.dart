@@ -12,6 +12,7 @@ import '../features/diff/presentation/controllers/diff_controllers.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/issues/presentation/issue_detail_screen.dart';
 import '../features/issues/presentation/issues_screen.dart';
+import '../features/jobs/presentation/job_detail_screen.dart';
 import '../features/merge_requests/presentation/merge_request_detail_screen.dart';
 import '../features/merge_requests/presentation/merge_requests_screen.dart';
 import '../features/pipelines/presentation/pipeline_detail_screen.dart';
@@ -59,6 +60,7 @@ abstract final class Routes {
   static String pipelines(int id) => '/projects/$id/pipelines';
   static String pipeline(int id, int pipelineId) =>
       '/projects/$id/pipelines/$pipelineId';
+  static String job(int id, int jobId) => '/projects/$id/jobs/$jobId';
   static String commitChanges(int id, String sha) =>
       '/projects/$id/commit/$sha/changes';
   static String mergeRequestChanges(int id, int iid) =>
@@ -200,6 +202,13 @@ final routerProvider = Provider<GoRouter>((ref) {
                 builder: (context, state) => PipelineDetailScreen(
                   projectId: int.parse(state.pathParameters['id']!),
                   pipelineId: int.parse(state.pathParameters['pid']!),
+                ),
+              ),
+              GoRoute(
+                path: 'jobs/:jid',
+                builder: (context, state) => JobDetailScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                  jobId: int.parse(state.pathParameters['jid']!),
                 ),
               ),
               GoRoute(
