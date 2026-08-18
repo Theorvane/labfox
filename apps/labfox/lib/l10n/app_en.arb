@@ -287,5 +287,33 @@
   "mrDraft": "Draft",
   "@mrDraft": {
     "description": "Label marking a draft MR"
+  },
+  "changesTitle": "Changes",
+  "@changesTitle": {
+    "description": "Title of the changed-files (diff) screen"
+  },
+  "changesError": "Could not load the changes.",
+  "@changesError": {
+    "description": "Shown when a diff fails to load"
+  },
+  "changesEmpty": "No changes.",
+  "@changesEmpty": {
+    "description": "Shown when there are no file changes"
+  },
+  "changesBinary": "Binary file — not shown.",
+  "@changesBinary": {
+    "description": "Shown for a binary file in a diff"
+  },
+  "commitViewChanges": "View changes",
+  "@commitViewChanges": {
+    "description": "Button on commit detail that opens the diff"
+  },
+  "mrViewChanges": "View changes",
+  "@mrViewChanges": {
+    "description": "Button on MR detail that opens the diff"
+  },
+  "changesOmitted": "Diff not shown because it is too large or collapsed.",
+  "@changesOmitted": {
+    "description": "Shown for a text file whose diff GitLab omitted (too large or collapsed)"
   }
 }

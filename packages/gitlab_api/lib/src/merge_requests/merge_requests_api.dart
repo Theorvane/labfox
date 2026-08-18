@@ -80,6 +80,30 @@ class MergeRequestsApi {
     }
   }
 
+  /// The files changed by a merge request, as parsed diffs.
+  Future<List<FileDiff>> diffs(Object projectId, {required int iid}) async {
+    try {
+      final response = await _dio.get<dynamic>(
+        '/projects/${_enc(projectId)}/merge_requests/$iid/diffs',
+        // unidiff=true guarantees the unified-diff format the parser expects.
+        queryParameters: {'unidiff': true},
+      );
+      if (response.statusCode != 200) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'loading the merge request diff',
+        );
+      }
+      return (response.data as List<dynamic>? ?? const [])
+          .cast<Map<String, dynamic>>()
+          .map(FileDiff.fromJson)
+          .toList(growable: false);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'loading the merge request diff');
+    }
+  }
+
   static String _enc(Object projectId) =>
       projectId is int ? '$projectId' : Uri.encodeComponent('$projectId');
 }

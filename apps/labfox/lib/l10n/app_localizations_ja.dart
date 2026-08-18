@@ -220,4 +220,25 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mrDraft => '下書き';
+
+  @override
+  String get changesTitle => '変更';
+
+  @override
+  String get changesError => '変更を読み込めませんでした。';
+
+  @override
+  String get changesEmpty => '変更はありません。';
+
+  @override
+  String get changesBinary => 'バイナリファイル — 表示しません。';
+
+  @override
+  String get commitViewChanges => '変更を表示';
+
+  @override
+  String get mrViewChanges => '変更を表示';
+
+  @override
+  String get changesOmitted => 'diff が大きすぎるか折りたたまれているため表示しません。';
 }

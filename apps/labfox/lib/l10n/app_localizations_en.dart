@@ -223,4 +223,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mrDraft => 'Draft';
+
+  @override
+  String get changesTitle => 'Changes';
+
+  @override
+  String get changesError => 'Could not load the changes.';
+
+  @override
+  String get changesEmpty => 'No changes.';
+
+  @override
+  String get changesBinary => 'Binary file — not shown.';
+
+  @override
+  String get commitViewChanges => 'View changes';
+
+  @override
+  String get mrViewChanges => 'View changes';
+
+  @override
+  String get changesOmitted =>
+      'Diff not shown because it is too large or collapsed.';
 }

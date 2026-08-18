@@ -68,5 +68,12 @@
   "mrStateOpen": "打开",
   "mrStateMerged": "已合并",
   "mrStateClosed": "已关闭",
-  "mrDraft": "草稿"
+  "mrDraft": "草稿",
+  "changesTitle": "变更",
+  "changesError": "无法加载变更。",
+  "changesEmpty": "没有变更。",
+  "changesBinary": "二进制文件 — 不显示。",
+  "commitViewChanges": "查看变更",
+  "mrViewChanges": "查看变更",
+  "changesOmitted": "diff 太大或已折叠，未显示。"
 }

@@ -161,6 +161,35 @@ class RepositoryApi {
     }
   }
 
+  /// The files changed by a commit, as parsed diffs.
+  Future<List<FileDiff>> commitDiff(
+    Object projectId, {
+    required String sha,
+  }) async {
+    try {
+      final response = await _dio.get<dynamic>(
+        '/projects/${_enc(projectId)}/repository/commits/${Uri.encodeComponent(sha)}/diff',
+        // unidiff=true returns the diff in unified format, the grammar
+        // parseUnifiedDiff accepts. The default (false) is not guaranteed to be
+        // that format. Older instances ignore the unknown parameter.
+        queryParameters: {'unidiff': true},
+      );
+      if (response.statusCode != 200) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'loading the diff',
+        );
+      }
+      return (response.data as List<dynamic>? ?? const [])
+          .cast<Map<String, dynamic>>()
+          .map(FileDiff.fromJson)
+          .toList(growable: false);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'loading the diff');
+    }
+  }
+
   /// Encodes a project id: numeric ids pass through, `group/project` paths are
   /// URL-encoded.
   static String _enc(Object projectId) =>
