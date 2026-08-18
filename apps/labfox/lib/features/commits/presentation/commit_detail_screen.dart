@@ -2,8 +2,10 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_models/gitlab_models.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../../../app/router.dart';
 import '../../../l10n/app_localizations.dart';
 import 'controllers/history_controllers.dart';
 
@@ -63,6 +65,12 @@ class CommitDetailScreen extends ConsumerWidget {
                   DateFormat.yMMMd().add_jm().format(c.authoredDate!.toLocal()),
               ].join(' · '),
               style: Theme.of(context).textTheme.bodySmall,
+            ),
+            const SizedBox(height: LabFoxSpacing.md),
+            OutlinedButton.icon(
+              onPressed: () => context.go(Routes.commitChanges(projectId, sha)),
+              icon: const Icon(Icons.difference_outlined, size: 18),
+              label: Text(AppLocalizations.of(context).commitViewChanges),
             ),
             if (c.stats != null) ...[
               const SizedBox(height: LabFoxSpacing.sm),

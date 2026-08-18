@@ -68,5 +68,11 @@
   "mrStateOpen": "खुला",
   "mrStateMerged": "मर्ज किया गया",
   "mrStateClosed": "बंद",
-  "mrDraft": "ड्राफ़्ट"
+  "mrDraft": "ड्राफ़्ट",
+  "changesTitle": "परिवर्तन",
+  "changesError": "परिवर्तन लोड नहीं हो सके।",
+  "changesEmpty": "कोई परिवर्तन नहीं।",
+  "changesBinary": "बाइनरी फ़ाइल — नहीं दिखाई गई।",
+  "commitViewChanges": "परिवर्तन देखें",
+  "mrViewChanges": "परिवर्तन देखें"
 }

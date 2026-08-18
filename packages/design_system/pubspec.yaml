@@ -11,6 +11,8 @@ resolution: workspace
 dependencies:
   flutter:
     sdk: flutter
+  gitlab_models:
+    path: ../gitlab_models
   markdown: ^7.3.1
 
 dev_dependencies:

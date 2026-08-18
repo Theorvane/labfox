@@ -218,4 +218,22 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mrDraft => '草稿';
+
+  @override
+  String get changesTitle => '变更';
+
+  @override
+  String get changesError => '无法加载变更。';
+
+  @override
+  String get changesEmpty => '没有变更。';
+
+  @override
+  String get changesBinary => '二进制文件 — 不显示。';
+
+  @override
+  String get commitViewChanges => '查看变更';
+
+  @override
+  String get mrViewChanges => '查看变更';
 }

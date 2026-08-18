@@ -220,4 +220,22 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mrDraft => '초안';
+
+  @override
+  String get changesTitle => '변경 사항';
+
+  @override
+  String get changesError => '변경 사항을 불러올 수 없습니다.';
+
+  @override
+  String get changesEmpty => '변경 사항이 없습니다.';
+
+  @override
+  String get changesBinary => '바이너리 파일 — 표시하지 않음.';
+
+  @override
+  String get commitViewChanges => '변경 사항 보기';
+
+  @override
+  String get mrViewChanges => '변경 사항 보기';
 }

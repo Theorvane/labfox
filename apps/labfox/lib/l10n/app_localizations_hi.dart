@@ -224,4 +224,22 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get mrDraft => 'ड्राफ़्ट';
+
+  @override
+  String get changesTitle => 'परिवर्तन';
+
+  @override
+  String get changesError => 'परिवर्तन लोड नहीं हो सके।';
+
+  @override
+  String get changesEmpty => 'कोई परिवर्तन नहीं।';
+
+  @override
+  String get changesBinary => 'बाइनरी फ़ाइल — नहीं दिखाई गई।';
+
+  @override
+  String get commitViewChanges => 'परिवर्तन देखें';
+
+  @override
+  String get mrViewChanges => 'परिवर्तन देखें';
 }

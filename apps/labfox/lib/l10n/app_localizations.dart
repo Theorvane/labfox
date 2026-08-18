@@ -517,6 +517,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Draft'**
   String get mrDraft;
+
+  /// Title of the changed-files (diff) screen
+  ///
+  /// In en, this message translates to:
+  /// **'Changes'**
+  String get changesTitle;
+
+  /// Shown when a diff fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load the changes.'**
+  String get changesError;
+
+  /// Shown when there are no file changes
+  ///
+  /// In en, this message translates to:
+  /// **'No changes.'**
+  String get changesEmpty;
+
+  /// Shown for a binary file in a diff
+  ///
+  /// In en, this message translates to:
+  /// **'Binary file — not shown.'**
+  String get changesBinary;
+
+  /// Button on commit detail that opens the diff
+  ///
+  /// In en, this message translates to:
+  /// **'View changes'**
+  String get commitViewChanges;
+
+  /// Button on MR detail that opens the diff
+  ///
+  /// In en, this message translates to:
+  /// **'View changes'**
+  String get mrViewChanges;
 }
 
 class _AppLocalizationsDelegate

@@ -2,7 +2,9 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_models/gitlab_models.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../app/router.dart';
 import '../../../l10n/app_localizations.dart';
 import 'controllers/merge_requests_controllers.dart';
 
@@ -69,6 +71,13 @@ class MergeRequestDetailScreen extends ConsumerWidget {
             Text(
               '${data.sourceBranch} → ${data.targetBranch}',
               style: Theme.of(context).textTheme.bodySmall,
+            ),
+            const SizedBox(height: LabFoxSpacing.md),
+            OutlinedButton.icon(
+              onPressed: () =>
+                  context.go(Routes.mergeRequestChanges(projectId, iid)),
+              icon: const Icon(Icons.difference_outlined, size: 18),
+              label: Text(AppLocalizations.of(context).mrViewChanges),
             ),
             if (data.labels.isNotEmpty) ...[
               const SizedBox(height: LabFoxSpacing.md),

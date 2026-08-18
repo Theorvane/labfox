@@ -7,6 +7,8 @@ import '../features/auth/presentation/sign_in_screen.dart';
 import '../features/branches/presentation/branches_screen.dart';
 import '../features/commits/presentation/commit_detail_screen.dart';
 import '../features/commits/presentation/commits_screen.dart';
+import '../features/diff/presentation/changes_screen.dart';
+import '../features/diff/presentation/controllers/diff_controllers.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/issues/presentation/issue_detail_screen.dart';
 import '../features/issues/presentation/issues_screen.dart';
@@ -52,6 +54,10 @@ abstract final class Routes {
   // The user-facing MR number is the iid, not the global id.
   static String mergeRequest(int id, int iid) =>
       '/projects/$id/merge_requests/$iid';
+  static String commitChanges(int id, String sha) =>
+      '/projects/$id/commit/$sha/changes';
+  static String mergeRequestChanges(int id, int iid) =>
+      '/projects/$id/merge_requests/$iid/changes';
 }
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -143,6 +149,21 @@ final routerProvider = Provider<GoRouter>((ref) {
                   projectId: int.parse(state.pathParameters['id']!),
                   sha: state.pathParameters['sha']!,
                 ),
+                routes: [
+                  GoRoute(
+                    path: 'changes',
+                    builder: (context, state) {
+                      final id = int.parse(state.pathParameters['id']!);
+                      final sha = state.pathParameters['sha']!;
+                      return ChangesScreen(
+                        title: sha.length > 8 ? sha.substring(0, 8) : sha,
+                        provider: commitDiffControllerProvider(
+                          CommitDiffRef(projectId: id, sha: sha),
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
               GoRoute(
                 path: 'issues',
@@ -169,6 +190,21 @@ final routerProvider = Provider<GoRouter>((ref) {
                   projectId: int.parse(state.pathParameters['id']!),
                   iid: int.parse(state.pathParameters['iid']!),
                 ),
+                routes: [
+                  GoRoute(
+                    path: 'changes',
+                    builder: (context, state) {
+                      final id = int.parse(state.pathParameters['id']!);
+                      final iid = int.parse(state.pathParameters['iid']!);
+                      return ChangesScreen(
+                        title: '!$iid',
+                        provider: mergeRequestDiffControllerProvider(
+                          MergeRequestDiffRef(projectId: id, iid: iid),
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),

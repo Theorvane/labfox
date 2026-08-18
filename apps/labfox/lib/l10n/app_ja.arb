@@ -68,5 +68,11 @@
   "mrStateOpen": "オープン",
   "mrStateMerged": "マージ済み",
   "mrStateClosed": "クローズ",
-  "mrDraft": "下書き"
+  "mrDraft": "下書き",
+  "changesTitle": "変更",
+  "changesError": "変更を読み込めませんでした。",
+  "changesEmpty": "変更はありません。",
+  "changesBinary": "バイナリファイル — 表示しません。",
+  "commitViewChanges": "変更を表示",
+  "mrViewChanges": "変更を表示"
 }
