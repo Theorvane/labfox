@@ -44,5 +44,16 @@
   "commitsError": "コミットを読み込めませんでした。",
   "commitsEmpty": "このブランチにはまだコミットがありません。",
   "commitTitle": "コミット",
-  "commitError": "このコミットを読み込めませんでした。"
+  "commitError": "このコミットを読み込めませんでした。",
+  "projectOverviewIssues": "課題",
+  "issuesTitle": "課題",
+  "issuesFilterOpen": "オープン",
+  "issuesFilterClosed": "クローズ",
+  "issuesError": "課題を読み込めませんでした。",
+  "issuesEmpty": "課題はありません。",
+  "issueError": "この課題を読み込めませんでした。",
+  "issueStateOpen": "オープン",
+  "issueStateClosed": "クローズ",
+  "issueNoDescription": "説明はありません。",
+  "issueOpenedBy": "{username} が作成"
 }

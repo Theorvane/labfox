@@ -1,6 +1,8 @@
 /// The LabFox Design System.
 library;
 
+export 'src/components/gitlab_label.dart';
+export 'src/components/issue_state_badge.dart';
 export 'src/components/markdown_viewer.dart';
 export 'src/components/project_tile.dart';
 export 'src/components/state_indicator.dart';

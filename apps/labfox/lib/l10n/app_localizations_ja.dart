@@ -146,4 +146,39 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get commitError => 'このコミットを読み込めませんでした。';
+
+  @override
+  String get projectOverviewIssues => '課題';
+
+  @override
+  String get issuesTitle => '課題';
+
+  @override
+  String get issuesFilterOpen => 'オープン';
+
+  @override
+  String get issuesFilterClosed => 'クローズ';
+
+  @override
+  String get issuesError => '課題を読み込めませんでした。';
+
+  @override
+  String get issuesEmpty => '課題はありません。';
+
+  @override
+  String get issueError => 'この課題を読み込めませんでした。';
+
+  @override
+  String get issueStateOpen => 'オープン';
+
+  @override
+  String get issueStateClosed => 'クローズ';
+
+  @override
+  String get issueNoDescription => '説明はありません。';
+
+  @override
+  String issueOpenedBy(String username) {
+    return '$username が作成';
+  }
 }

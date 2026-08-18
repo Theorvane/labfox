@@ -149,4 +149,39 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get commitError => 'Could not load this commit.';
+
+  @override
+  String get projectOverviewIssues => 'Issues';
+
+  @override
+  String get issuesTitle => 'Issues';
+
+  @override
+  String get issuesFilterOpen => 'Open';
+
+  @override
+  String get issuesFilterClosed => 'Closed';
+
+  @override
+  String get issuesError => 'Could not load issues.';
+
+  @override
+  String get issuesEmpty => 'No issues here.';
+
+  @override
+  String get issueError => 'Could not load this issue.';
+
+  @override
+  String get issueStateOpen => 'Open';
+
+  @override
+  String get issueStateClosed => 'Closed';
+
+  @override
+  String get issueNoDescription => 'No description provided.';
+
+  @override
+  String issueOpenedBy(String username) {
+    return 'opened by $username';
+  }
 }

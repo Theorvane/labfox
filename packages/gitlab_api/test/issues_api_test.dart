@@ -1,0 +1,123 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:dio/dio.dart';
+import 'package:gitlab_api/gitlab_api.dart';
+import 'package:test/test.dart';
+
+void main() {
+  group('IssuesApi.list', () {
+    test('lists open issues by default with pagination', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (
+          status: 200,
+          headers: {
+            'x-next-page': ['2'],
+          },
+          body: [
+            {'id': 1, 'iid': 5, 'title': 'first', 'state': 'opened'},
+          ],
+        );
+      });
+
+      final page = await client.issues.list(42);
+
+      expect(captured.path, '/projects/42/issues');
+      expect(captured.queryParameters['state'], 'opened');
+      expect(page.items.single.iid, 5);
+      expect(page.nextPage, 2);
+    });
+
+    test('passes a closed state filter through', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (status: 200, headers: const {}, body: const []);
+      });
+
+      await client.issues.list(42, state: IssueState.closed);
+
+      expect(captured.queryParameters['state'], 'closed');
+    });
+  });
+
+  group('IssuesApi.get', () {
+    test('fetches one issue by iid, not id', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (
+          status: 200,
+          headers: const {},
+          body: {
+            'id': 99401,
+            'iid': 282,
+            'title': 'Android login error',
+            'state': 'opened',
+          },
+        );
+      });
+
+      final issue = await client.issues.get(42, iid: 282);
+
+      // The path uses the iid; using the global id here would 404 or hit the
+      // wrong project.
+      expect(captured.path, '/projects/42/issues/282');
+      expect(issue.iid, 282);
+    });
+
+    test('maps a 404 to not found', () async {
+      final client = _client(
+        (_) => (status: 404, headers: const {}, body: const {}),
+      );
+      await expectLater(
+        client.issues.get(1, iid: 999),
+        throwsA(isA<GitLabNotFoundException>()),
+      );
+    });
+  });
+}
+
+GitLabClient _client(
+  ({int status, Map<String, List<String>> headers, Object? body}) Function(
+    RequestOptions,
+  )
+  handler,
+) {
+  final dio = Dio(BaseOptions(validateStatus: (s) => s != null && s < 500));
+  dio.httpClientAdapter = _Adapter(handler);
+  return GitLabClient(
+    baseUrl: 'https://gitlab.com',
+    token: 'glpat-x',
+    dio: dio,
+  );
+}
+
+class _Adapter implements HttpClientAdapter {
+  _Adapter(this.handler);
+  final ({int status, Map<String, List<String>> headers, Object? body})
+  Function(RequestOptions)
+  handler;
+
+  @override
+  Future<ResponseBody> fetch(
+    RequestOptions options,
+    Stream<Uint8List>? requestStream,
+    Future<void>? cancelFuture,
+  ) async {
+    final r = handler(options);
+    return ResponseBody.fromString(
+      r.body == null ? '' : json.encode(r.body),
+      r.status,
+      headers: {
+        Headers.contentTypeHeader: [Headers.jsonContentType],
+        ...r.headers,
+      },
+    );
+  }
+
+  @override
+  void close({bool force = false}) {}
+}

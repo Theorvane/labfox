@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import 'common/exceptions.dart';
+import 'issues/issues_api.dart';
 import 'projects/projects_api.dart';
 import 'repository/repository_api.dart';
 import 'users/users_api.dart';
@@ -25,6 +26,7 @@ class GitLabClient {
     users = UsersApi(_dio);
     projects = ProjectsApi(_dio);
     repository = RepositoryApi(_dio);
+    issues = IssuesApi(_dio);
   }
 
   final Dio _dio;
@@ -32,6 +34,7 @@ class GitLabClient {
   late final UsersApi users;
   late final ProjectsApi projects;
   late final RepositoryApi repository;
+  late final IssuesApi issues;
 
   /// Derives the REST endpoint from an instance URL.
   ///

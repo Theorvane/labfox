@@ -1,0 +1,39 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'issue.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_Issue _$IssueFromJson(Map<String, dynamic> json) => _Issue(
+  id: (json['id'] as num).toInt(),
+  iid: (json['iid'] as num).toInt(),
+  title: json['title'] as String,
+  state: json['state'] as String,
+  description: json['description'] as String?,
+  author: json['author'] == null
+      ? null
+      : User.fromJson(json['author'] as Map<String, dynamic>),
+  labels:
+      (json['labels'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+      const <String>[],
+  webUrl: json['web_url'] as String?,
+  commentCount: (json['user_notes_count'] as num?)?.toInt() ?? 0,
+  createdAt: json['created_at'] == null
+      ? null
+      : DateTime.parse(json['created_at'] as String),
+);
+
+Map<String, dynamic> _$IssueToJson(_Issue instance) => <String, dynamic>{
+  'id': instance.id,
+  'iid': instance.iid,
+  'title': instance.title,
+  'state': instance.state,
+  'description': instance.description,
+  'author': instance.author?.toJson(),
+  'labels': instance.labels,
+  'web_url': instance.webUrl,
+  'user_notes_count': instance.commentCount,
+  'created_at': instance.createdAt?.toIso8601String(),
+};

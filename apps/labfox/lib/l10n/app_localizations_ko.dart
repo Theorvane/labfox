@@ -146,4 +146,39 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get commitError => '이 커밋을 불러올 수 없습니다.';
+
+  @override
+  String get projectOverviewIssues => '이슈';
+
+  @override
+  String get issuesTitle => '이슈';
+
+  @override
+  String get issuesFilterOpen => '열림';
+
+  @override
+  String get issuesFilterClosed => '닫힘';
+
+  @override
+  String get issuesError => '이슈를 불러올 수 없습니다.';
+
+  @override
+  String get issuesEmpty => '이슈가 없습니다.';
+
+  @override
+  String get issueError => '이 이슈를 불러올 수 없습니다.';
+
+  @override
+  String get issueStateOpen => '열림';
+
+  @override
+  String get issueStateClosed => '닫힘';
+
+  @override
+  String get issueNoDescription => '설명이 없습니다.';
+
+  @override
+  String issueOpenedBy(String username) {
+    return '$username 님이 열었습니다';
+  }
 }

@@ -373,6 +373,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not load this commit.'**
   String get commitError;
+
+  /// Overview link that opens the issues list
+  ///
+  /// In en, this message translates to:
+  /// **'Issues'**
+  String get projectOverviewIssues;
+
+  /// Title of the issues list screen
+  ///
+  /// In en, this message translates to:
+  /// **'Issues'**
+  String get issuesTitle;
+
+  /// Label for the open-issues filter
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get issuesFilterOpen;
+
+  /// Label for the closed-issues filter
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get issuesFilterClosed;
+
+  /// Shown when the issues list fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load issues.'**
+  String get issuesError;
+
+  /// Shown when the issues list is empty
+  ///
+  /// In en, this message translates to:
+  /// **'No issues here.'**
+  String get issuesEmpty;
+
+  /// Shown when an issue fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this issue.'**
+  String get issueError;
+
+  /// Issue state badge, open
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get issueStateOpen;
+
+  /// Issue state badge, closed
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get issueStateClosed;
+
+  /// Shown when an issue has no description
+  ///
+  /// In en, this message translates to:
+  /// **'No description provided.'**
+  String get issueNoDescription;
+
+  /// Attribution line on an issue
+  ///
+  /// In en, this message translates to:
+  /// **'opened by {username}'**
+  String issueOpenedBy(String username);
 }
 
 class _AppLocalizationsDelegate
