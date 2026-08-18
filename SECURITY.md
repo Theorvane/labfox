@@ -23,9 +23,13 @@ Report privately through **GitHub private vulnerability reporting**:
 
 Or from the repository: **Security** tab → **Report a vulnerability**.
 
-This opens a draft security advisory visible only to you and the maintainers. It is the only
-private reporting channel for this project — there is no security mailing address. Do not attempt
-to reach maintainers privately through public issues, pull request comments, or social media.
+This opens a draft security advisory visible only to you and the maintainers.
+
+If you cannot use GitHub advisories, email **inquiry@sloki9637.com** instead. Advisories are
+preferred: they keep the report, the fix, and the disclosure in one place.
+
+Do not attempt to reach maintainers privately through public issues, pull request comments, or
+social media.
 
 **Do not open a public issue or pull request that contains:**
 

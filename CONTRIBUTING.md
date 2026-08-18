@@ -145,8 +145,7 @@ There is no separate CLA to sign.
 ## Questions
 
 Open a [GitHub issue](https://github.com/labfox-app/labfox/issues) with the `question` label, or
-comment on the issue or pull request you are working on. There is no private support address — see
-[SUPPORT.md](SUPPORT.md).
+comment on the issue or pull request you are working on — see [SUPPORT.md](SUPPORT.md).
 
-For anything that must stay private, use
-[private vulnerability reporting](https://github.com/labfox-app/labfox/security/advisories/new).
+For anything that must stay private, email **inquiry@sloki9637.com**. Suspected vulnerabilities go
+through [SECURITY.md](SECURITY.md) instead.
