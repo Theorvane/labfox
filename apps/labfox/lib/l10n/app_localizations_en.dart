@@ -380,4 +380,16 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get pipelineActionError =>
       'The action could not be completed. Please try again.';
+
+  @override
+  String get accountsTitle => 'Accounts';
+
+  @override
+  String get accountAdd => 'Add account';
+
+  @override
+  String get accountRemove => 'Remove account';
+
+  @override
+  String get homeSwitchAccount => 'Accounts';
 }

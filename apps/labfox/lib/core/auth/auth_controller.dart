@@ -31,13 +31,30 @@ class AuthController extends AsyncNotifier<AuthState> {
     });
   }
 
-  Future<void> signOut() async {
+  /// All connected accounts, for the switcher UI.
+  List<Account> accounts() => ref.read(authRepositoryProvider).accounts();
+
+  /// Switches the active account and reflects it in the session.
+  ///
+  /// Account-scoped providers watch the active account, so switching here
+  /// invalidates them and their data reloads for the new account.
+  Future<void> switchTo(Account account) async {
+    await ref.read(authRepositoryProvider).switchTo(account);
+    state = AsyncData(SignedIn(account));
+  }
+
+  /// Removes an account. If it was active, the session falls back to another
+  /// connected account, or to signed out when none remain.
+  Future<void> signOut([Account? account]) async {
+    final repo = ref.read(authRepositoryProvider);
     final current = state.valueOrNull;
-    if (current is! SignedIn) {
+    final target = account ?? (current is SignedIn ? current.account : null);
+    if (target == null) {
       return;
     }
-    await ref.read(authRepositoryProvider).signOut(current.account);
-    state = const AsyncData(SignedOut());
+    await repo.signOut(target);
+    final next = repo.currentAccount();
+    state = AsyncData(next == null ? const SignedOut() : SignedIn(next));
   }
 }
 

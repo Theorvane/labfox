@@ -799,6 +799,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The action could not be completed. Please try again.'**
   String get pipelineActionError;
+
+  /// Title of the accounts switcher screen
+  ///
+  /// In en, this message translates to:
+  /// **'Accounts'**
+  String get accountsTitle;
+
+  /// Button to add another account
+  ///
+  /// In en, this message translates to:
+  /// **'Add account'**
+  String get accountAdd;
+
+  /// Tooltip for removing an account
+  ///
+  /// In en, this message translates to:
+  /// **'Remove account'**
+  String get accountRemove;
+
+  /// Home action that opens the account switcher
+  ///
+  /// In en, this message translates to:
+  /// **'Accounts'**
+  String get homeSwitchAccount;
 }
 
 class _AppLocalizationsDelegate

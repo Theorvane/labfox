@@ -115,5 +115,9 @@
   "pipelineActionCancel": "キャンセル",
   "pipelineActionForbidden": "この操作の権限がありません。",
   "pipelineActionInvalid": "現在のパイプラインの状態ではこの操作はできません。",
-  "pipelineActionError": "操作を完了できませんでした。もう一度お試しください。"
+  "pipelineActionError": "操作を完了できませんでした。もう一度お試しください。",
+  "accountsTitle": "アカウント",
+  "accountAdd": "アカウントを追加",
+  "accountRemove": "アカウントを削除",
+  "homeSwitchAccount": "アカウント"
 }

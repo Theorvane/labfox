@@ -115,5 +115,9 @@
   "pipelineActionCancel": "रद्द करें",
   "pipelineActionForbidden": "आपके पास इस क्रिया की अनुमति नहीं है।",
   "pipelineActionInvalid": "पाइपलाइन की वर्तमान स्थिति में यह क्रिया उपलब्ध नहीं है।",
-  "pipelineActionError": "क्रिया पूरी नहीं हो सकी। कृपया पुनः प्रयास करें।"
+  "pipelineActionError": "क्रिया पूरी नहीं हो सकी। कृपया पुनः प्रयास करें।",
+  "accountsTitle": "खाते",
+  "accountAdd": "खाता जोड़ें",
+  "accountRemove": "खाता हटाएँ",
+  "homeSwitchAccount": "खाते"
 }
