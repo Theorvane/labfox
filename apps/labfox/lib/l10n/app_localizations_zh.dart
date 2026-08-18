@@ -330,4 +330,22 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get jobLogEmpty => '此作业没有日志输出。';
+
+  @override
+  String get jobActionRetry => '重试';
+
+  @override
+  String get jobActionCancel => '取消';
+
+  @override
+  String get jobActionRun => '运行';
+
+  @override
+  String get jobActionForbidden => '您没有执行此操作的权限。';
+
+  @override
+  String get jobActionInvalid => '作业当前状态下无法执行此操作。';
+
+  @override
+  String get jobActionError => '操作无法完成。请重试。';
 }

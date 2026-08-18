@@ -342,4 +342,24 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get jobLogEmpty => 'इस जॉब में कोई लॉग आउटपुट नहीं है।';
+
+  @override
+  String get jobActionRetry => 'पुनः प्रयास';
+
+  @override
+  String get jobActionCancel => 'रद्द करें';
+
+  @override
+  String get jobActionRun => 'चलाएँ';
+
+  @override
+  String get jobActionForbidden => 'आपके पास इस क्रिया की अनुमति नहीं है।';
+
+  @override
+  String get jobActionInvalid =>
+      'जॉब की वर्तमान स्थिति में यह क्रिया उपलब्ध नहीं है।';
+
+  @override
+  String get jobActionError =>
+      'क्रिया पूरी नहीं हो सकी। कृपया पुनः प्रयास करें।';
 }

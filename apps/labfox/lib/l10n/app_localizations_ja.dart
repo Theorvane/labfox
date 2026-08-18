@@ -333,4 +333,22 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get jobLogEmpty => 'このジョブにはログ出力がありません。';
+
+  @override
+  String get jobActionRetry => '再試行';
+
+  @override
+  String get jobActionCancel => 'キャンセル';
+
+  @override
+  String get jobActionRun => '実行';
+
+  @override
+  String get jobActionForbidden => 'この操作の権限がありません。';
+
+  @override
+  String get jobActionInvalid => '現在のジョブの状態ではこの操作はできません。';
+
+  @override
+  String get jobActionError => '操作を完了できませんでした。もう一度お試しください。';
 }

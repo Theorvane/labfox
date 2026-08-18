@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
+import '../common/exceptions.dart';
 import '../gitlab_client.dart';
 
 /// Job detail and trace (log) endpoints.
@@ -49,6 +50,50 @@ class JobsApi {
       return response.data ?? '';
     } on DioException catch (error) {
       throw mapError(error, context: 'loading the job log');
+    }
+  }
+
+  /// Retries a finished job, returning the new run.
+  Future<Job> retry(Object projectId, {required int jobId}) =>
+      _action(projectId, jobId: jobId, action: 'retry');
+
+  /// Cancels a running job.
+  Future<Job> cancel(Object projectId, {required int jobId}) =>
+      _action(projectId, jobId: jobId, action: 'cancel');
+
+  /// Runs a manual job.
+  Future<Job> play(Object projectId, {required int jobId}) =>
+      _action(projectId, jobId: jobId, action: 'play');
+
+  Future<Job> _action(
+    Object projectId, {
+    required int jobId,
+    required String action,
+  }) async {
+    try {
+      final response = await _dio.post<Map<String, dynamic>>(
+        '/projects/${_enc(projectId)}/jobs/$jobId/$action',
+      );
+      final status = response.statusCode ?? 0;
+      // 409/422: the job is not in a state that allows this action — distinct
+      // from a 403 (no permission).
+      if (status == 409 || status == 422) {
+        throw GitLabConflictException(
+          'This job cannot be $action-ed in its current state.',
+          statusCode: status,
+        );
+      }
+      final data = response.data;
+      if (status < 200 || status >= 300 || data == null) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'updating the job',
+        );
+      }
+      return Job.fromJson(data);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'updating the job');
     }
   }
 

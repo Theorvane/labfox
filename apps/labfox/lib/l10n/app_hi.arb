@@ -104,5 +104,11 @@
   "jobError": "यह जॉब लोड नहीं हो सकी।",
   "jobRefresh": "रीफ़्रेश",
   "jobLogError": "लॉग लोड नहीं हो सका।",
-  "jobLogEmpty": "इस जॉब में कोई लॉग आउटपुट नहीं है।"
+  "jobLogEmpty": "इस जॉब में कोई लॉग आउटपुट नहीं है।",
+  "jobActionRetry": "पुनः प्रयास",
+  "jobActionCancel": "रद्द करें",
+  "jobActionRun": "चलाएँ",
+  "jobActionForbidden": "आपके पास इस क्रिया की अनुमति नहीं है।",
+  "jobActionInvalid": "जॉब की वर्तमान स्थिति में यह क्रिया उपलब्ध नहीं है।",
+  "jobActionError": "क्रिया पूरी नहीं हो सकी। कृपया पुनः प्रयास करें।"
 }

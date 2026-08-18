@@ -23,4 +23,19 @@ abstract class Job with _$Job {
   factory Job.fromJson(Map<String, dynamic> json) => _$JobFromJson(json);
 
   CiStatus get ciStatus => CiStatus.parse(status);
+
+  /// A finished job can be retried.
+  bool get canRetry => switch (ciStatus) {
+    CiStatus.success || CiStatus.failed || CiStatus.canceled => true,
+    _ => false,
+  };
+
+  /// An active job can be cancelled.
+  bool get canCancel => switch (ciStatus) {
+    CiStatus.running || CiStatus.pending || CiStatus.created => true,
+    _ => false,
+  };
+
+  /// A manual job can be played.
+  bool get canPlay => ciStatus == CiStatus.manual;
 }

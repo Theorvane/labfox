@@ -733,6 +733,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This job has no log output.'**
   String get jobLogEmpty;
+
+  /// Button to retry a job
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get jobActionRetry;
+
+  /// Button to cancel a job
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get jobActionCancel;
+
+  /// Button to run a manual job
+  ///
+  /// In en, this message translates to:
+  /// **'Run'**
+  String get jobActionRun;
+
+  /// Shown when a job action is forbidden
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have permission for this action.'**
+  String get jobActionForbidden;
+
+  /// Shown when a job action conflicts with status
+  ///
+  /// In en, this message translates to:
+  /// **'This action is not available for the job\'s current state.'**
+  String get jobActionInvalid;
+
+  /// Generic job action error
+  ///
+  /// In en, this message translates to:
+  /// **'The action could not be completed. Please try again.'**
+  String get jobActionError;
 }
 
 class _AppLocalizationsDelegate

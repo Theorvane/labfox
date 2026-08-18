@@ -53,6 +53,12 @@ class GitLabNotMergeableException extends GitLabException {
   const GitLabNotMergeableException(super.message, {super.statusCode});
 }
 
+/// The resource is not in a state that allows the requested action (409 / 422):
+/// retrying a running job, cancelling a finished one, and the like.
+class GitLabConflictException extends GitLabException {
+  const GitLabConflictException(super.message, {super.statusCode});
+}
+
 /// The instance could not be reached at all.
 ///
 /// Kept separate from every HTTP failure because self-hosted instances fail

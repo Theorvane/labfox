@@ -341,4 +341,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get jobLogEmpty => 'This job has no log output.';
+
+  @override
+  String get jobActionRetry => 'Retry';
+
+  @override
+  String get jobActionCancel => 'Cancel';
+
+  @override
+  String get jobActionRun => 'Run';
+
+  @override
+  String get jobActionForbidden =>
+      'You do not have permission for this action.';
+
+  @override
+  String get jobActionInvalid =>
+      'This action is not available for the job\'s current state.';
+
+  @override
+  String get jobActionError =>
+      'The action could not be completed. Please try again.';
 }
