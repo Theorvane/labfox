@@ -82,5 +82,15 @@
   "commentComposerHint": "コメントを入力…",
   "commentComposerSubmit": "コメント",
   "commentPostForbidden": "ここにコメントする権限がありません。トークンに api スコープがあるか確認してください。",
-  "commentPostError": "コメントを投稿できませんでした。もう一度お試しください。"
+  "commentPostError": "コメントを投稿できませんでした。もう一度お試しください。",
+  "cancel": "キャンセル",
+  "mrApprove": "承認",
+  "mrUnapprove": "承認を取り消す",
+  "mrMerge": "マージ",
+  "mrMergeConfirmTitle": "このマージリクエストをマージしますか？",
+  "mrMergeConfirmBody": "{mr} のマージは取り消せません。",
+  "mrApprovalsSummary": "承認 {approved}/{required}",
+  "mrNotMergeable": "現在マージできません。承認、リベース、またはパイプラインの成功が必要な場合があります。",
+  "mrActionForbidden": "この操作の権限がありません。トークンのスコープとロールを確認してください。",
+  "mrActionError": "操作を完了できませんでした。もう一度お試しください。"
 }

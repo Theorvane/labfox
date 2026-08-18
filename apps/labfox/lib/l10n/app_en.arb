@@ -343,5 +343,59 @@
   "commentPostError": "Could not post your comment. Please try again.",
   "@commentPostError": {
     "description": "Generic comment post error"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Generic cancel button"
+  },
+  "mrApprove": "Approve",
+  "@mrApprove": {
+    "description": "Button to approve a merge request"
+  },
+  "mrUnapprove": "Revoke approval",
+  "@mrUnapprove": {
+    "description": "Button to remove approval"
+  },
+  "mrMerge": "Merge",
+  "@mrMerge": {
+    "description": "Button to merge a merge request"
+  },
+  "mrMergeConfirmTitle": "Merge this merge request?",
+  "@mrMergeConfirmTitle": {
+    "description": "Merge confirmation dialog title"
+  },
+  "mrMergeConfirmBody": "Merging {mr} cannot be undone.",
+  "@mrMergeConfirmBody": {
+    "description": "Merge confirmation dialog body",
+    "placeholders": {
+      "mr": {
+        "type": "String",
+        "example": "!142"
+      }
+    }
+  },
+  "mrApprovalsSummary": "{approved} of {required} approvals",
+  "@mrApprovalsSummary": {
+    "description": "Approval summary line",
+    "placeholders": {
+      "approved": {
+        "type": "int"
+      },
+      "required": {
+        "type": "int"
+      }
+    }
+  },
+  "mrNotMergeable": "This merge request cannot be merged right now. It may need approval, a rebase, or a passing pipeline.",
+  "@mrNotMergeable": {
+    "description": "Shown when a merge is rejected as not mergeable"
+  },
+  "mrActionForbidden": "You do not have permission for this action. Check your token scope and role.",
+  "@mrActionForbidden": {
+    "description": "Shown when an approve/merge is forbidden"
+  },
+  "mrActionError": "The action could not be completed. Please try again.",
+  "@mrActionError": {
+    "description": "Generic MR action error"
   }
 }

@@ -268,4 +268,41 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get commentPostError =>
       'Could not post your comment. Please try again.';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get mrApprove => 'Approve';
+
+  @override
+  String get mrUnapprove => 'Revoke approval';
+
+  @override
+  String get mrMerge => 'Merge';
+
+  @override
+  String get mrMergeConfirmTitle => 'Merge this merge request?';
+
+  @override
+  String mrMergeConfirmBody(String mr) {
+    return 'Merging $mr cannot be undone.';
+  }
+
+  @override
+  String mrApprovalsSummary(int approved, int required) {
+    return '$approved of $required approvals';
+  }
+
+  @override
+  String get mrNotMergeable =>
+      'This merge request cannot be merged right now. It may need approval, a rebase, or a passing pipeline.';
+
+  @override
+  String get mrActionForbidden =>
+      'You do not have permission for this action. Check your token scope and role.';
+
+  @override
+  String get mrActionError =>
+      'The action could not be completed. Please try again.';
 }

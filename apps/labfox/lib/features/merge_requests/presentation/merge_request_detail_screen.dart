@@ -9,6 +9,7 @@ import '../../../app/router.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../comments/presentation/widgets/comment_thread.dart';
 import 'controllers/merge_requests_controllers.dart';
+import 'widgets/mr_actions.dart';
 
 /// One merge request: title, state, branches, labels, and the rendered
 /// description. The diff, discussions, approve and merge are later slices.
@@ -81,6 +82,8 @@ class MergeRequestDetailScreen extends ConsumerWidget {
               icon: const Icon(Icons.difference_outlined, size: 18),
               label: Text(AppLocalizations.of(context).mrViewChanges),
             ),
+            const SizedBox(height: LabFoxSpacing.md),
+            MrActions(mr: data, projectId: projectId),
             if (data.labels.isNotEmpty) ...[
               const SizedBox(height: LabFoxSpacing.md),
               Wrap(

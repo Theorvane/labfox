@@ -11,6 +11,7 @@ export 'src/file_diff.dart';
 export 'src/issue.dart';
 export 'src/label.dart';
 export 'src/merge_request.dart';
+export 'src/merge_request_approvals.dart';
 export 'src/note.dart';
 export 'src/project.dart';
 export 'src/repository_entry.dart';

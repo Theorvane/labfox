@@ -601,6 +601,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not post your comment. Please try again.'**
   String get commentPostError;
+
+  /// Generic cancel button
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// Button to approve a merge request
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get mrApprove;
+
+  /// Button to remove approval
+  ///
+  /// In en, this message translates to:
+  /// **'Revoke approval'**
+  String get mrUnapprove;
+
+  /// Button to merge a merge request
+  ///
+  /// In en, this message translates to:
+  /// **'Merge'**
+  String get mrMerge;
+
+  /// Merge confirmation dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Merge this merge request?'**
+  String get mrMergeConfirmTitle;
+
+  /// Merge confirmation dialog body
+  ///
+  /// In en, this message translates to:
+  /// **'Merging {mr} cannot be undone.'**
+  String mrMergeConfirmBody(String mr);
+
+  /// Approval summary line
+  ///
+  /// In en, this message translates to:
+  /// **'{approved} of {required} approvals'**
+  String mrApprovalsSummary(int approved, int required);
+
+  /// Shown when a merge is rejected as not mergeable
+  ///
+  /// In en, this message translates to:
+  /// **'This merge request cannot be merged right now. It may need approval, a rebase, or a passing pipeline.'**
+  String get mrNotMergeable;
+
+  /// Shown when an approve/merge is forbidden
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have permission for this action. Check your token scope and role.'**
+  String get mrActionForbidden;
+
+  /// Generic MR action error
+  ///
+  /// In en, this message translates to:
+  /// **'The action could not be completed. Please try again.'**
+  String get mrActionError;
 }
 
 class _AppLocalizationsDelegate

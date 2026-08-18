@@ -269,4 +269,41 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get commentPostError =>
       'आपकी टिप्पणी पोस्ट नहीं हो सकी। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get cancel => 'रद्द करें';
+
+  @override
+  String get mrApprove => 'स्वीकृत करें';
+
+  @override
+  String get mrUnapprove => 'स्वीकृति वापस लें';
+
+  @override
+  String get mrMerge => 'मर्ज करें';
+
+  @override
+  String get mrMergeConfirmTitle => 'इस मर्ज रिक्वेस्ट को मर्ज करें?';
+
+  @override
+  String mrMergeConfirmBody(String mr) {
+    return '$mr को मर्ज करना पूर्ववत नहीं किया जा सकता।';
+  }
+
+  @override
+  String mrApprovalsSummary(int approved, int required) {
+    return '$required में से $approved स्वीकृतियाँ';
+  }
+
+  @override
+  String get mrNotMergeable =>
+      'अभी यह मर्ज रिक्वेस्ट मर्ज नहीं हो सकती। इसे स्वीकृति, रीबेस, या पास पाइपलाइन की ज़रूरत हो सकती है।';
+
+  @override
+  String get mrActionForbidden =>
+      'आपके पास इस क्रिया की अनुमति नहीं है। अपने टोकन स्कोप और भूमिका की जाँच करें।';
+
+  @override
+  String get mrActionError =>
+      'क्रिया पूरी नहीं हो सकी। कृपया पुनः प्रयास करें।';
 }
