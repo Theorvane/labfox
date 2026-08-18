@@ -34,6 +34,9 @@ class IssuesApi {
         queryParameters: {
           if (state != IssueState.all) 'state': state.value,
           'order_by': 'updated_at',
+          // Return each label as an object with its colour, not a bare name, so
+          // the UI can render readable label chips.
+          'with_labels_details': true,
           'page': page,
           'per_page': perPage,
         },
@@ -61,6 +64,7 @@ class IssuesApi {
     try {
       final response = await _dio.get<Map<String, dynamic>>(
         '/projects/${_enc(projectId)}/issues/$iid',
+        queryParameters: {'with_labels_details': true},
       );
       final data = response.data;
       if (response.statusCode != 200 || data == null) {

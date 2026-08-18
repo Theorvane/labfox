@@ -44,7 +44,24 @@ void main() {
       expect(issue.isOpen, isTrue);
     });
 
-    test('parses labels with their colours', () {
+    test('parses detailed labels with their colours', () {
+      // with_labels_details=true returns objects; the colour must survive so
+      // GitLabLabel can compute a readable foreground.
+      final issue = Issue.fromJson(const {
+        'id': 1,
+        'iid': 1,
+        'title': 'x',
+        'state': 'opened',
+        'labels': [
+          {'name': 'bug', 'color': '#d73a4a', 'text_color': '#ffffff'},
+          {'name': 'android', 'color': '#0e8a16'},
+        ],
+      });
+      expect(issue.labels.map((l) => l.name), ['bug', 'android']);
+      expect(issue.labels.first.color, '#d73a4a');
+    });
+
+    test('parses plain string labels as names without a colour', () {
       final issue = Issue.fromJson(const {
         'id': 1,
         'iid': 1,
@@ -52,7 +69,8 @@ void main() {
         'state': 'opened',
         'labels': ['bug', 'android'],
       });
-      expect(issue.labels, ['bug', 'android']);
+      expect(issue.labels.map((l) => l.name), ['bug', 'android']);
+      expect(issue.labels.first.color, isNull);
     });
 
     test('defaults labels to empty when absent', () {

@@ -26,6 +26,8 @@ void main() {
 
       expect(captured.path, '/projects/42/issues');
       expect(captured.queryParameters['state'], 'opened');
+      // Label colours must be requested, or the chips have nothing to render.
+      expect(captured.queryParameters['with_labels_details'], true);
       expect(page.items.single.iid, 5);
       expect(page.nextPage, 2);
     });
@@ -65,6 +67,7 @@ void main() {
       // The path uses the iid; using the global id here would 404 or hit the
       // wrong project.
       expect(captured.path, '/projects/42/issues/282');
+      expect(captured.queryParameters['with_labels_details'], true);
       expect(issue.iid, 282);
     });
 

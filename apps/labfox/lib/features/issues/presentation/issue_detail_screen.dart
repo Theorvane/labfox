@@ -76,7 +76,8 @@ class IssueDetailScreen extends ConsumerWidget {
                 spacing: LabFoxSpacing.sm,
                 runSpacing: LabFoxSpacing.sm,
                 children: [
-                  for (final label in data.labels) GitLabLabel(name: label),
+                  for (final label in data.labels)
+                    GitLabLabel(name: label.name, color: label.color),
                 ],
               ),
             ],

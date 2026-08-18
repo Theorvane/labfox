@@ -53,7 +53,10 @@ void main() {
           state: 'opened',
           description: 'The OAuth redirect fails.',
           author: User(id: 7, username: 'jungwon', name: 'Jungwon'),
-          labels: ['bug', 'android'],
+          labels: [
+            Label(name: 'bug', color: '#d73a4a'),
+            Label(name: 'android'),
+          ],
         ),
       ),
     );

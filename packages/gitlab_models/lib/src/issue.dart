@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'label.dart';
 import 'user.dart';
 
 part 'issue.freezed.dart';
@@ -19,7 +20,9 @@ abstract class Issue with _$Issue {
     required String state,
     String? description,
     User? author,
-    @Default(<String>[]) List<String> labels,
+    @JsonKey(fromJson: Label.listFromJson)
+    @Default(<Label>[])
+    List<Label> labels,
     @JsonKey(name: 'web_url') String? webUrl,
     @JsonKey(name: 'user_notes_count') @Default(0) int commentCount,
     @JsonKey(name: 'created_at') DateTime? createdAt,

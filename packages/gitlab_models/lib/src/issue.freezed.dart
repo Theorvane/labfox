@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Issue {
 
- int get id; int get iid; String get title; String get state; String? get description; User? get author; List<String> get labels;@JsonKey(name: 'web_url') String? get webUrl;@JsonKey(name: 'user_notes_count') int get commentCount;@JsonKey(name: 'created_at') DateTime? get createdAt;
+ int get id; int get iid; String get title; String get state; String? get description; User? get author;@JsonKey(fromJson: Label.listFromJson) List<Label> get labels;@JsonKey(name: 'web_url') String? get webUrl;@JsonKey(name: 'user_notes_count') int get commentCount;@JsonKey(name: 'created_at') DateTime? get createdAt;
 /// Create a copy of Issue
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $IssueCopyWith<$Res>  {
   factory $IssueCopyWith(Issue value, $Res Function(Issue) _then) = _$IssueCopyWithImpl;
 @useResult
 $Res call({
- int id, int iid, String title, String state, String? description, User? author, List<String> labels,@JsonKey(name: 'web_url') String? webUrl,@JsonKey(name: 'user_notes_count') int commentCount,@JsonKey(name: 'created_at') DateTime? createdAt
+ int id, int iid, String title, String state, String? description, User? author,@JsonKey(fromJson: Label.listFromJson) List<Label> labels,@JsonKey(name: 'web_url') String? webUrl,@JsonKey(name: 'user_notes_count') int commentCount,@JsonKey(name: 'created_at') DateTime? createdAt
 });
 
 
@@ -74,7 +74,7 @@ as String,state: null == state ? _self.state : state // ignore: cast_nullable_to
 as String,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String?,author: freezed == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
 as User?,labels: null == labels ? _self.labels : labels // ignore: cast_nullable_to_non_nullable
-as List<String>,webUrl: freezed == webUrl ? _self.webUrl : webUrl // ignore: cast_nullable_to_non_nullable
+as List<Label>,webUrl: freezed == webUrl ? _self.webUrl : webUrl // ignore: cast_nullable_to_non_nullable
 as String?,commentCount: null == commentCount ? _self.commentCount : commentCount // ignore: cast_nullable_to_non_nullable
 as int,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
@@ -174,7 +174,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int iid,  String title,  String state,  String? description,  User? author,  List<String> labels, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'user_notes_count')  int commentCount, @JsonKey(name: 'created_at')  DateTime? createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int iid,  String title,  String state,  String? description,  User? author, @JsonKey(fromJson: Label.listFromJson)  List<Label> labels, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'user_notes_count')  int commentCount, @JsonKey(name: 'created_at')  DateTime? createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Issue() when $default != null:
 return $default(_that.id,_that.iid,_that.title,_that.state,_that.description,_that.author,_that.labels,_that.webUrl,_that.commentCount,_that.createdAt);case _:
@@ -195,7 +195,7 @@ return $default(_that.id,_that.iid,_that.title,_that.state,_that.description,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int iid,  String title,  String state,  String? description,  User? author,  List<String> labels, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'user_notes_count')  int commentCount, @JsonKey(name: 'created_at')  DateTime? createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int iid,  String title,  String state,  String? description,  User? author, @JsonKey(fromJson: Label.listFromJson)  List<Label> labels, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'user_notes_count')  int commentCount, @JsonKey(name: 'created_at')  DateTime? createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _Issue():
 return $default(_that.id,_that.iid,_that.title,_that.state,_that.description,_that.author,_that.labels,_that.webUrl,_that.commentCount,_that.createdAt);case _:
@@ -215,7 +215,7 @@ return $default(_that.id,_that.iid,_that.title,_that.state,_that.description,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int iid,  String title,  String state,  String? description,  User? author,  List<String> labels, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'user_notes_count')  int commentCount, @JsonKey(name: 'created_at')  DateTime? createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int iid,  String title,  String state,  String? description,  User? author, @JsonKey(fromJson: Label.listFromJson)  List<Label> labels, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'user_notes_count')  int commentCount, @JsonKey(name: 'created_at')  DateTime? createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _Issue() when $default != null:
 return $default(_that.id,_that.iid,_that.title,_that.state,_that.description,_that.author,_that.labels,_that.webUrl,_that.commentCount,_that.createdAt);case _:
@@ -230,7 +230,7 @@ return $default(_that.id,_that.iid,_that.title,_that.state,_that.description,_th
 @JsonSerializable()
 
 class _Issue extends Issue {
-  const _Issue({required this.id, required this.iid, required this.title, required this.state, this.description, this.author, final  List<String> labels = const <String>[], @JsonKey(name: 'web_url') this.webUrl, @JsonKey(name: 'user_notes_count') this.commentCount = 0, @JsonKey(name: 'created_at') this.createdAt}): _labels = labels,super._();
+  const _Issue({required this.id, required this.iid, required this.title, required this.state, this.description, this.author, @JsonKey(fromJson: Label.listFromJson) final  List<Label> labels = const <Label>[], @JsonKey(name: 'web_url') this.webUrl, @JsonKey(name: 'user_notes_count') this.commentCount = 0, @JsonKey(name: 'created_at') this.createdAt}): _labels = labels,super._();
   factory _Issue.fromJson(Map<String, dynamic> json) => _$IssueFromJson(json);
 
 @override final  int id;
@@ -239,8 +239,8 @@ class _Issue extends Issue {
 @override final  String state;
 @override final  String? description;
 @override final  User? author;
- final  List<String> _labels;
-@override@JsonKey() List<String> get labels {
+ final  List<Label> _labels;
+@override@JsonKey(fromJson: Label.listFromJson) List<Label> get labels {
   if (_labels is EqualUnmodifiableListView) return _labels;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_labels);
@@ -283,7 +283,7 @@ abstract mixin class _$IssueCopyWith<$Res> implements $IssueCopyWith<$Res> {
   factory _$IssueCopyWith(_Issue value, $Res Function(_Issue) _then) = __$IssueCopyWithImpl;
 @override @useResult
 $Res call({
- int id, int iid, String title, String state, String? description, User? author, List<String> labels,@JsonKey(name: 'web_url') String? webUrl,@JsonKey(name: 'user_notes_count') int commentCount,@JsonKey(name: 'created_at') DateTime? createdAt
+ int id, int iid, String title, String state, String? description, User? author,@JsonKey(fromJson: Label.listFromJson) List<Label> labels,@JsonKey(name: 'web_url') String? webUrl,@JsonKey(name: 'user_notes_count') int commentCount,@JsonKey(name: 'created_at') DateTime? createdAt
 });
 
 
@@ -309,7 +309,7 @@ as String,state: null == state ? _self.state : state // ignore: cast_nullable_to
 as String,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String?,author: freezed == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
 as User?,labels: null == labels ? _self._labels : labels // ignore: cast_nullable_to_non_nullable
-as List<String>,webUrl: freezed == webUrl ? _self.webUrl : webUrl // ignore: cast_nullable_to_non_nullable
+as List<Label>,webUrl: freezed == webUrl ? _self.webUrl : webUrl // ignore: cast_nullable_to_non_nullable
 as String?,commentCount: null == commentCount ? _self.commentCount : commentCount // ignore: cast_nullable_to_non_nullable
 as int,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
