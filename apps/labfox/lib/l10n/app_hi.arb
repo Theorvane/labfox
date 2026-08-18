@@ -110,5 +110,10 @@
   "jobActionRun": "चलाएँ",
   "jobActionForbidden": "आपके पास इस क्रिया की अनुमति नहीं है।",
   "jobActionInvalid": "जॉब की वर्तमान स्थिति में यह क्रिया उपलब्ध नहीं है।",
-  "jobActionError": "क्रिया पूरी नहीं हो सकी। कृपया पुनः प्रयास करें।"
+  "jobActionError": "क्रिया पूरी नहीं हो सकी। कृपया पुनः प्रयास करें।",
+  "pipelineActionRetry": "पुनः प्रयास",
+  "pipelineActionCancel": "रद्द करें",
+  "pipelineActionForbidden": "आपके पास इस क्रिया की अनुमति नहीं है।",
+  "pipelineActionInvalid": "पाइपलाइन की वर्तमान स्थिति में यह क्रिया उपलब्ध नहीं है।",
+  "pipelineActionError": "क्रिया पूरी नहीं हो सकी। कृपया पुनः प्रयास करें।"
 }

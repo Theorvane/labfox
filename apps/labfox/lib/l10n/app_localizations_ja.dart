@@ -351,4 +351,19 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get jobActionError => '操作を完了できませんでした。もう一度お試しください。';
+
+  @override
+  String get pipelineActionRetry => '再試行';
+
+  @override
+  String get pipelineActionCancel => 'キャンセル';
+
+  @override
+  String get pipelineActionForbidden => 'この操作の権限がありません。';
+
+  @override
+  String get pipelineActionInvalid => '現在のパイプラインの状態ではこの操作はできません。';
+
+  @override
+  String get pipelineActionError => '操作を完了できませんでした。もう一度お試しください。';
 }

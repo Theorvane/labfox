@@ -469,5 +469,25 @@
   "jobActionError": "The action could not be completed. Please try again.",
   "@jobActionError": {
     "description": "Generic job action error"
+  },
+  "pipelineActionRetry": "Retry",
+  "@pipelineActionRetry": {
+    "description": "Button to retry a pipeline"
+  },
+  "pipelineActionCancel": "Cancel",
+  "@pipelineActionCancel": {
+    "description": "Button to cancel a pipeline"
+  },
+  "pipelineActionForbidden": "You do not have permission for this action.",
+  "@pipelineActionForbidden": {
+    "description": "Shown when a pipeline action is forbidden"
+  },
+  "pipelineActionInvalid": "This action is not available for the pipeline's current state.",
+  "@pipelineActionInvalid": {
+    "description": "Shown when a pipeline action conflicts with status"
+  },
+  "pipelineActionError": "The action could not be completed. Please try again.",
+  "@pipelineActionError": {
+    "description": "Generic pipeline action error"
   }
 }

@@ -352,4 +352,19 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get jobActionError => '작업을 완료할 수 없습니다. 다시 시도하세요.';
+
+  @override
+  String get pipelineActionRetry => '다시 시도';
+
+  @override
+  String get pipelineActionCancel => '취소';
+
+  @override
+  String get pipelineActionForbidden => '이 작업을 수행할 권한이 없습니다.';
+
+  @override
+  String get pipelineActionInvalid => '현재 파이프라인 상태에서는 이 작업을 할 수 없습니다.';
+
+  @override
+  String get pipelineActionError => '작업을 완료할 수 없습니다. 다시 시도하세요.';
 }

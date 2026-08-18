@@ -348,4 +348,19 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get jobActionError => '操作无法完成。请重试。';
+
+  @override
+  String get pipelineActionRetry => '重试';
+
+  @override
+  String get pipelineActionCancel => '取消';
+
+  @override
+  String get pipelineActionForbidden => '您没有执行此操作的权限。';
+
+  @override
+  String get pipelineActionInvalid => '流水线当前状态下无法执行此操作。';
+
+  @override
+  String get pipelineActionError => '操作无法完成。请重试。';
 }

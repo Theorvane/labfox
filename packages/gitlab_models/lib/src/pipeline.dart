@@ -33,4 +33,16 @@ abstract class Pipeline with _$Pipeline {
     }
     return value.length <= 8 ? value : value.substring(0, 8);
   }
+
+  /// A finished pipeline can be retried.
+  bool get canRetry => switch (ciStatus) {
+    CiStatus.success || CiStatus.failed || CiStatus.canceled => true,
+    _ => false,
+  };
+
+  /// An active pipeline can be cancelled.
+  bool get canCancel => switch (ciStatus) {
+    CiStatus.running || CiStatus.pending || CiStatus.created => true,
+    _ => false,
+  };
 }

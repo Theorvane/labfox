@@ -769,6 +769,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The action could not be completed. Please try again.'**
   String get jobActionError;
+
+  /// Button to retry a pipeline
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get pipelineActionRetry;
+
+  /// Button to cancel a pipeline
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get pipelineActionCancel;
+
+  /// Shown when a pipeline action is forbidden
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have permission for this action.'**
+  String get pipelineActionForbidden;
+
+  /// Shown when a pipeline action conflicts with status
+  ///
+  /// In en, this message translates to:
+  /// **'This action is not available for the pipeline\'s current state.'**
+  String get pipelineActionInvalid;
+
+  /// Generic pipeline action error
+  ///
+  /// In en, this message translates to:
+  /// **'The action could not be completed. Please try again.'**
+  String get pipelineActionError;
 }
 
 class _AppLocalizationsDelegate

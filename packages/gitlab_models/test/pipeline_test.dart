@@ -18,6 +18,19 @@ void main() {
       expect(p.shortSha, 'abc123de');
       expect(p.ciStatus, CiStatus.failed);
     });
+
+    test('exposes which actions its status allows', () {
+      Pipeline withStatus(String s) => Pipeline(id: 1, status: s);
+
+      // A finished pipeline can be retried, not cancelled.
+      expect(withStatus('failed').canRetry, isTrue);
+      expect(withStatus('success').canRetry, isTrue);
+      expect(withStatus('failed').canCancel, isFalse);
+
+      // A running pipeline can be cancelled, not retried.
+      expect(withStatus('running').canCancel, isTrue);
+      expect(withStatus('running').canRetry, isFalse);
+    });
   });
 
   group('Job', () {

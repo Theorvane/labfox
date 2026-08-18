@@ -362,4 +362,22 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get jobActionError =>
       'The action could not be completed. Please try again.';
+
+  @override
+  String get pipelineActionRetry => 'Retry';
+
+  @override
+  String get pipelineActionCancel => 'Cancel';
+
+  @override
+  String get pipelineActionForbidden =>
+      'You do not have permission for this action.';
+
+  @override
+  String get pipelineActionInvalid =>
+      'This action is not available for the pipeline\'s current state.';
+
+  @override
+  String get pipelineActionError =>
+      'The action could not be completed. Please try again.';
 }
