@@ -57,8 +57,16 @@ class _CommentThreadState extends ConsumerState<CommentThread> {
     });
     try {
       await ref.read(commentsControllerProvider(_ref).notifier).post(body);
+      if (!mounted) {
+        return;
+      }
       _controller.clear();
     } on GitLabException catch (error) {
+      // The user may have left the screen while the post was in flight; touching
+      // context or setState after dispose would throw, so bail out first.
+      if (!mounted) {
+        return;
+      }
       setState(() => _error = _messageFor(error, AppLocalizations.of(context)));
     } finally {
       if (mounted) {

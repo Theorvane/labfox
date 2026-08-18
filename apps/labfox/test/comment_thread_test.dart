@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,11 +18,18 @@ class _StubComments extends CommentsController {
   final Object? rejectWith;
   final List<String> posted = [];
 
+  /// When set, post() awaits this so a test can hold a post in flight and
+  /// control when it completes.
+  Completer<void>? gate;
+
   @override
   Future<List<Note>> build(CommentsRef arg) async => _initial;
 
   @override
   Future<void> post(String body) async {
+    if (gate != null) {
+      await gate!.future;
+    }
     if (rejectWith != null) {
       throw rejectWith!;
     }
@@ -72,6 +81,42 @@ Note _note(String body, {bool system = false}) => Note(
 );
 
 void main() {
+  testWidgets('a failed post after the widget is disposed does not throw', (
+    tester,
+  ) async {
+    final stub = _StubComments(
+      const [],
+      rejectWith: const GitLabForbiddenException('no'),
+    );
+    stub.gate = Completer<void>();
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [commentsControllerProvider.overrideWith(() => stub)],
+        child: const MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: Scaffold(
+            body: CommentThread(type: NoteableType.issue, projectId: 1, iid: 5),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.enterText(find.byType(TextField), 'x');
+    await tester.tap(find.widgetWithText(FilledButton, 'Comment'));
+    await tester.pump(); // in flight, awaiting the gate
+
+    // Navigate away: dispose CommentThread while the post is pending.
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: SizedBox())),
+    );
+    stub.gate!.complete(); // let the in-flight post fail now
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('renders comments and filters out system notes', (tester) async {
     await _pump(
       tester,
