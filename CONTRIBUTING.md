@@ -142,4 +142,10 @@ There is no separate CLA to sign.
 
 ---
 
-Questions: sloki9637@gmail.com
+## Questions
+
+Open a [GitHub issue](https://github.com/labfox-app/labfox/issues) with the `question` label, or
+comment on the issue or pull request you are working on — see [SUPPORT.md](SUPPORT.md).
+
+For anything that must stay private, email **inquiry@sloki9637.com**. Suspected vulnerabilities go
+through [SECURITY.md](SECURITY.md) instead.
