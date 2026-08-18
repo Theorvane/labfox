@@ -94,6 +94,13 @@ class _MyWork extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
+              leading: const Icon(Icons.inbox_outlined),
+              title: Text(l10n.homeInbox),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => context.go(Routes.inbox),
+            ),
+            const Divider(height: 1),
+            ListTile(
               leading: const Icon(Icons.folder_outlined),
               title: Text(l10n.homeProjects),
               trailing: const Icon(Icons.chevron_right),

@@ -823,6 +823,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Accounts'**
   String get homeSwitchAccount;
+
+  /// Home entry that opens the to-do inbox
+  ///
+  /// In en, this message translates to:
+  /// **'To-do list'**
+  String get homeInbox;
+
+  /// Title of the to-do inbox screen
+  ///
+  /// In en, this message translates to:
+  /// **'To-do list'**
+  String get inboxTitle;
+
+  /// Shown when the to-do inbox has no pending items
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re all caught up.'**
+  String get inboxEmpty;
+
+  /// Shown when the to-do list fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'Your to-do items could not be loaded.'**
+  String get inboxError;
+
+  /// Action that clears every pending to-do item
+  ///
+  /// In en, this message translates to:
+  /// **'Mark all as done'**
+  String get inboxMarkAllDone;
+
+  /// Tooltip for clearing a single to-do item
+  ///
+  /// In en, this message translates to:
+  /// **'Mark done'**
+  String get inboxMarkDone;
+
+  /// Shown when marking a to-do item done fails
+  ///
+  /// In en, this message translates to:
+  /// **'The item could not be cleared. Please try again.'**
+  String get inboxMarkDoneError;
+
+  /// To-do reason: the item was assigned to the user
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned to you'**
+  String get inboxActionAssigned;
+
+  /// To-do reason: the user was mentioned
+  ///
+  /// In en, this message translates to:
+  /// **'Mentioned you'**
+  String get inboxActionMentioned;
+
+  /// To-do reason: a pipeline the user owns failed
+  ///
+  /// In en, this message translates to:
+  /// **'Pipeline failed'**
+  String get inboxActionBuildFailed;
+
+  /// To-do reason: the user added the item to their list
+  ///
+  /// In en, this message translates to:
+  /// **'Added a to-do'**
+  String get inboxActionMarked;
+
+  /// To-do reason: the user's approval is required
+  ///
+  /// In en, this message translates to:
+  /// **'Approval required'**
+  String get inboxActionApprovalRequired;
+
+  /// To-do reason: the merge request cannot be merged
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot be merged'**
+  String get inboxActionUnmergeable;
+
+  /// To-do reason: the user was directly addressed
+  ///
+  /// In en, this message translates to:
+  /// **'Directly addressed you'**
+  String get inboxActionDirectlyAddressed;
 }
 
 class _AppLocalizationsDelegate

@@ -391,4 +391,47 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get homeSwitchAccount => 'खाते';
+
+  @override
+  String get homeInbox => 'कार्य सूची';
+
+  @override
+  String get inboxTitle => 'कार्य सूची';
+
+  @override
+  String get inboxEmpty => 'आप पूरी तरह अद्यतित हैं।';
+
+  @override
+  String get inboxError => 'आपकी कार्य सूची लोड नहीं हो सकी।';
+
+  @override
+  String get inboxMarkAllDone => 'सभी को पूर्ण करें';
+
+  @override
+  String get inboxMarkDone => 'पूर्ण करें';
+
+  @override
+  String get inboxMarkDoneError =>
+      'आइटम को हटाया नहीं जा सका। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get inboxActionAssigned => 'आपको सौंपा गया';
+
+  @override
+  String get inboxActionMentioned => 'आपका उल्लेख किया';
+
+  @override
+  String get inboxActionBuildFailed => 'पाइपलाइन विफल';
+
+  @override
+  String get inboxActionMarked => 'एक कार्य जोड़ा';
+
+  @override
+  String get inboxActionApprovalRequired => 'अनुमोदन आवश्यक';
+
+  @override
+  String get inboxActionUnmergeable => 'मर्ज नहीं किया जा सकता';
+
+  @override
+  String get inboxActionDirectlyAddressed => 'आपको सीधे संबोधित किया';
 }

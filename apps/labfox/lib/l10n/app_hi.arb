@@ -119,5 +119,19 @@
   "accountsTitle": "खाते",
   "accountAdd": "खाता जोड़ें",
   "accountRemove": "खाता हटाएँ",
-  "homeSwitchAccount": "खाते"
+  "homeSwitchAccount": "खाते",
+  "homeInbox": "कार्य सूची",
+  "inboxTitle": "कार्य सूची",
+  "inboxEmpty": "आप पूरी तरह अद्यतित हैं।",
+  "inboxError": "आपकी कार्य सूची लोड नहीं हो सकी।",
+  "inboxMarkAllDone": "सभी को पूर्ण करें",
+  "inboxMarkDone": "पूर्ण करें",
+  "inboxMarkDoneError": "आइटम को हटाया नहीं जा सका। कृपया पुनः प्रयास करें।",
+  "inboxActionAssigned": "आपको सौंपा गया",
+  "inboxActionMentioned": "आपका उल्लेख किया",
+  "inboxActionBuildFailed": "पाइपलाइन विफल",
+  "inboxActionMarked": "एक कार्य जोड़ा",
+  "inboxActionApprovalRequired": "अनुमोदन आवश्यक",
+  "inboxActionUnmergeable": "मर्ज नहीं किया जा सकता",
+  "inboxActionDirectlyAddressed": "आपको सीधे संबोधित किया"
 }

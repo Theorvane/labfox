@@ -119,5 +119,19 @@
   "accountsTitle": "계정",
   "accountAdd": "계정 추가",
   "accountRemove": "계정 제거",
-  "homeSwitchAccount": "계정"
+  "homeSwitchAccount": "계정",
+  "homeInbox": "할 일 목록",
+  "inboxTitle": "할 일 목록",
+  "inboxEmpty": "모두 처리했습니다.",
+  "inboxError": "할 일 목록을 불러오지 못했습니다.",
+  "inboxMarkAllDone": "모두 완료 처리",
+  "inboxMarkDone": "완료 처리",
+  "inboxMarkDoneError": "항목을 완료 처리하지 못했습니다. 다시 시도해 주세요.",
+  "inboxActionAssigned": "나에게 할당됨",
+  "inboxActionMentioned": "나를 언급함",
+  "inboxActionBuildFailed": "파이프라인 실패",
+  "inboxActionMarked": "할 일 추가됨",
+  "inboxActionApprovalRequired": "승인 필요",
+  "inboxActionUnmergeable": "병합할 수 없음",
+  "inboxActionDirectlyAddressed": "나를 직접 지목함"
 }

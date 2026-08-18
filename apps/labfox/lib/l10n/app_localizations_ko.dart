@@ -379,4 +379,46 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get homeSwitchAccount => '계정';
+
+  @override
+  String get homeInbox => '할 일 목록';
+
+  @override
+  String get inboxTitle => '할 일 목록';
+
+  @override
+  String get inboxEmpty => '모두 처리했습니다.';
+
+  @override
+  String get inboxError => '할 일 목록을 불러오지 못했습니다.';
+
+  @override
+  String get inboxMarkAllDone => '모두 완료 처리';
+
+  @override
+  String get inboxMarkDone => '완료 처리';
+
+  @override
+  String get inboxMarkDoneError => '항목을 완료 처리하지 못했습니다. 다시 시도해 주세요.';
+
+  @override
+  String get inboxActionAssigned => '나에게 할당됨';
+
+  @override
+  String get inboxActionMentioned => '나를 언급함';
+
+  @override
+  String get inboxActionBuildFailed => '파이프라인 실패';
+
+  @override
+  String get inboxActionMarked => '할 일 추가됨';
+
+  @override
+  String get inboxActionApprovalRequired => '승인 필요';
+
+  @override
+  String get inboxActionUnmergeable => '병합할 수 없음';
+
+  @override
+  String get inboxActionDirectlyAddressed => '나를 직접 지목함';
 }

@@ -505,5 +505,61 @@
   "homeSwitchAccount": "Accounts",
   "@homeSwitchAccount": {
     "description": "Home action that opens the account switcher"
+  },
+  "homeInbox": "To-do list",
+  "@homeInbox": {
+    "description": "Home entry that opens the to-do inbox"
+  },
+  "inboxTitle": "To-do list",
+  "@inboxTitle": {
+    "description": "Title of the to-do inbox screen"
+  },
+  "inboxEmpty": "You're all caught up.",
+  "@inboxEmpty": {
+    "description": "Shown when the to-do inbox has no pending items"
+  },
+  "inboxError": "Your to-do items could not be loaded.",
+  "@inboxError": {
+    "description": "Shown when the to-do list fails to load"
+  },
+  "inboxMarkAllDone": "Mark all as done",
+  "@inboxMarkAllDone": {
+    "description": "Action that clears every pending to-do item"
+  },
+  "inboxMarkDone": "Mark done",
+  "@inboxMarkDone": {
+    "description": "Tooltip for clearing a single to-do item"
+  },
+  "inboxMarkDoneError": "The item could not be cleared. Please try again.",
+  "@inboxMarkDoneError": {
+    "description": "Shown when marking a to-do item done fails"
+  },
+  "inboxActionAssigned": "Assigned to you",
+  "@inboxActionAssigned": {
+    "description": "To-do reason: the item was assigned to the user"
+  },
+  "inboxActionMentioned": "Mentioned you",
+  "@inboxActionMentioned": {
+    "description": "To-do reason: the user was mentioned"
+  },
+  "inboxActionBuildFailed": "Pipeline failed",
+  "@inboxActionBuildFailed": {
+    "description": "To-do reason: a pipeline the user owns failed"
+  },
+  "inboxActionMarked": "Added a to-do",
+  "@inboxActionMarked": {
+    "description": "To-do reason: the user added the item to their list"
+  },
+  "inboxActionApprovalRequired": "Approval required",
+  "@inboxActionApprovalRequired": {
+    "description": "To-do reason: the user's approval is required"
+  },
+  "inboxActionUnmergeable": "Cannot be merged",
+  "@inboxActionUnmergeable": {
+    "description": "To-do reason: the merge request cannot be merged"
+  },
+  "inboxActionDirectlyAddressed": "Directly addressed you",
+  "@inboxActionDirectlyAddressed": {
+    "description": "To-do reason: the user was directly addressed"
   }
 }
