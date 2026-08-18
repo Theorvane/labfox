@@ -181,4 +181,43 @@ class AppLocalizationsJa extends AppLocalizations {
   String issueOpenedBy(String username) {
     return '$username が作成';
   }
+
+  @override
+  String get projectOverviewMergeRequests => 'マージリクエスト';
+
+  @override
+  String get mergeRequestsTitle => 'マージリクエスト';
+
+  @override
+  String get mrFilterOpen => 'オープン';
+
+  @override
+  String get mrFilterMerged => 'マージ済み';
+
+  @override
+  String get mrFilterClosed => 'クローズ';
+
+  @override
+  String get mergeRequestsError => 'マージリクエストを読み込めませんでした。';
+
+  @override
+  String get mergeRequestsEmpty => 'マージリクエストはありません。';
+
+  @override
+  String get mergeRequestError => 'このマージリクエストを読み込めませんでした。';
+
+  @override
+  String get mergeRequestNoDescription => '説明はありません。';
+
+  @override
+  String get mrStateOpen => 'オープン';
+
+  @override
+  String get mrStateMerged => 'マージ済み';
+
+  @override
+  String get mrStateClosed => 'クローズ';
+
+  @override
+  String get mrDraft => '下書き';
 }

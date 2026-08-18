@@ -64,7 +64,7 @@ void main() {
 
     expect(find.text('Android login error'), findsOneWidget);
     expect(find.text('#282'), findsOneWidget);
-    expect(find.byType(IssueStateBadge), findsOneWidget);
+    expect(find.byType(StateBadge), findsOneWidget);
     expect(find.byType(GitLabLabel), findsNWidgets(2));
     expect(find.byType(MarkdownViewer), findsOneWidget);
   });

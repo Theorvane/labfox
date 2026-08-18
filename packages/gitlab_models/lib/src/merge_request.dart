@@ -1,0 +1,46 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'label.dart';
+import 'user.dart';
+
+part 'merge_request.freezed.dart';
+part 'merge_request.g.dart';
+
+/// A GitLab merge request.
+///
+/// `iid` and `id` are kept distinct: the number a user sees (`!142`) is the
+/// `iid`, used in routes and API paths. A merge request has three states —
+/// opened, merged, closed — unlike an issue's two.
+@freezed
+abstract class MergeRequest with _$MergeRequest {
+  const factory MergeRequest({
+    required int id,
+    required int iid,
+    required String title,
+    required String state,
+    @JsonKey(name: 'source_branch') required String sourceBranch,
+    @JsonKey(name: 'target_branch') required String targetBranch,
+    String? description,
+    User? author,
+    @JsonKey(fromJson: Label.listFromJson)
+    @Default(<Label>[])
+    List<Label> labels,
+    @Default(false) bool draft,
+    @JsonKey(name: 'merge_status') String? mergeStatus,
+    @JsonKey(name: 'user_notes_count') @Default(0) int commentCount,
+    @JsonKey(name: 'web_url') String? webUrl,
+    @JsonKey(name: 'created_at') DateTime? createdAt,
+  }) = _MergeRequest;
+
+  const MergeRequest._();
+
+  factory MergeRequest.fromJson(Map<String, dynamic> json) =>
+      _$MergeRequestFromJson(json);
+
+  bool get isOpen => state == 'opened';
+  bool get isMerged => state == 'merged';
+  bool get isClosed => state == 'closed';
+
+  /// True for a draft (work-in-progress) merge request.
+  bool get isDraft => draft;
+}

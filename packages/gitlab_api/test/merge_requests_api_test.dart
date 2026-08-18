@@ -1,0 +1,134 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:dio/dio.dart';
+import 'package:gitlab_api/gitlab_api.dart';
+import 'package:test/test.dart';
+
+void main() {
+  group('MergeRequestsApi.list', () {
+    test(
+      'lists open MRs by default with label details and pagination',
+      () async {
+        late RequestOptions captured;
+        final client = _client((o) {
+          captured = o;
+          return (
+            status: 200,
+            headers: {
+              'x-next-page': ['2'],
+            },
+            body: [
+              {
+                'id': 1,
+                'iid': 142,
+                'title': 'Add OAuth',
+                'state': 'opened',
+                'source_branch': 'feature/oauth',
+                'target_branch': 'develop',
+              },
+            ],
+          );
+        });
+
+        final page = await client.mergeRequests.list(42);
+
+        expect(captured.path, '/projects/42/merge_requests');
+        expect(captured.queryParameters['state'], 'opened');
+        expect(captured.queryParameters['with_labels_details'], true);
+        expect(page.items.single.iid, 142);
+        expect(page.nextPage, 2);
+      },
+    );
+
+    test('passes the merged state filter through', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (status: 200, headers: const {}, body: const []);
+      });
+
+      await client.mergeRequests.list(42, state: MergeRequestState.merged);
+
+      expect(captured.queryParameters['state'], 'merged');
+    });
+  });
+
+  group('MergeRequestsApi.get', () {
+    test('fetches one MR by iid', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (
+          status: 200,
+          headers: const {},
+          body: {
+            'id': 55123,
+            'iid': 142,
+            'title': 'Add OAuth',
+            'state': 'opened',
+            'source_branch': 'feature/oauth',
+            'target_branch': 'develop',
+          },
+        );
+      });
+
+      final mr = await client.mergeRequests.get(42, iid: 142);
+
+      expect(captured.path, '/projects/42/merge_requests/142');
+      expect(mr.iid, 142);
+    });
+
+    test('maps a 404 to not found', () async {
+      final client = _client(
+        (_) => (status: 404, headers: const {}, body: const {}),
+      );
+      await expectLater(
+        client.mergeRequests.get(1, iid: 999),
+        throwsA(isA<GitLabNotFoundException>()),
+      );
+    });
+  });
+}
+
+GitLabClient _client(
+  ({int status, Map<String, List<String>> headers, Object? body}) Function(
+    RequestOptions,
+  )
+  handler,
+) {
+  final dio = Dio(BaseOptions(validateStatus: (s) => s != null && s < 500));
+  dio.httpClientAdapter = _Adapter(handler);
+  return GitLabClient(
+    baseUrl: 'https://gitlab.com',
+    token: 'glpat-x',
+    dio: dio,
+  );
+}
+
+class _Adapter implements HttpClientAdapter {
+  _Adapter(this.handler);
+  final ({int status, Map<String, List<String>> headers, Object? body})
+  Function(RequestOptions)
+  handler;
+
+  @override
+  Future<ResponseBody> fetch(
+    RequestOptions options,
+    Stream<Uint8List>? requestStream,
+    Future<void>? cancelFuture,
+  ) async {
+    final r = handler(options);
+    return ResponseBody.fromString(
+      r.body == null ? '' : json.encode(r.body),
+      r.status,
+      headers: {
+        Headers.contentTypeHeader: [Headers.jsonContentType],
+        ...r.headers,
+      },
+    );
+  }
+
+  @override
+  void close({bool force = false}) {}
+}

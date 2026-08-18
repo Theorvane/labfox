@@ -179,4 +179,43 @@ class AppLocalizationsZh extends AppLocalizations {
   String issueOpenedBy(String username) {
     return '由 $username 创建';
   }
+
+  @override
+  String get projectOverviewMergeRequests => '合并请求';
+
+  @override
+  String get mergeRequestsTitle => '合并请求';
+
+  @override
+  String get mrFilterOpen => '打开';
+
+  @override
+  String get mrFilterMerged => '已合并';
+
+  @override
+  String get mrFilterClosed => '已关闭';
+
+  @override
+  String get mergeRequestsError => '无法加载合并请求。';
+
+  @override
+  String get mergeRequestsEmpty => '这里没有合并请求。';
+
+  @override
+  String get mergeRequestError => '无法加载此合并请求。';
+
+  @override
+  String get mergeRequestNoDescription => '未提供描述。';
+
+  @override
+  String get mrStateOpen => '打开';
+
+  @override
+  String get mrStateMerged => '已合并';
+
+  @override
+  String get mrStateClosed => '已关闭';
+
+  @override
+  String get mrDraft => '草稿';
 }

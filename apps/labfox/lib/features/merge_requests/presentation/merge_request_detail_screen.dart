@@ -1,15 +1,15 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gitlab_models/gitlab_models.dart';
 
 import '../../../l10n/app_localizations.dart';
-import 'controllers/issues_controllers.dart';
+import 'controllers/merge_requests_controllers.dart';
 
-/// One issue: title, state, author, labels, and the rendered description.
-///
-/// Read-only for this slice; comments, state changes and label editing follow.
-class IssueDetailScreen extends ConsumerWidget {
-  const IssueDetailScreen({
+/// One merge request: title, state, branches, labels, and the rendered
+/// description. The diff, discussions, approve and merge are later slices.
+class MergeRequestDetailScreen extends ConsumerWidget {
+  const MergeRequestDetailScreen({
     required this.projectId,
     required this.iid,
     super.key,
@@ -21,12 +21,12 @@ class IssueDetailScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final issueRef = IssueRef(projectId: projectId, iid: iid);
-    final issue = ref.watch(issueControllerProvider(issueRef));
+    final mrRef = MergeRequestRef(projectId: projectId, iid: iid);
+    final mr = ref.watch(mergeRequestControllerProvider(mrRef));
 
     return Scaffold(
-      appBar: AppBar(title: Text('#$iid')),
-      body: issue.when(
+      appBar: AppBar(title: Text('!$iid')),
+      body: mr.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, _) => Center(
           child: Padding(
@@ -34,11 +34,11 @@ class IssueDetailScreen extends ConsumerWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(l10n.issueError, textAlign: TextAlign.center),
+                Text(l10n.mergeRequestError, textAlign: TextAlign.center),
                 const SizedBox(height: LabFoxSpacing.md),
                 FilledButton(
                   onPressed: () =>
-                      ref.invalidate(issueControllerProvider(issueRef)),
+                      ref.invalidate(mergeRequestControllerProvider(mrRef)),
                   child: Text(l10n.retry),
                 ),
               ],
@@ -53,22 +53,22 @@ class IssueDetailScreen extends ConsumerWidget {
             Row(
               children: [
                 StateBadge(
-                  state: data.isOpen ? EntityState.open : EntityState.closed,
-                  label: data.isOpen
-                      ? l10n.issueStateOpen
-                      : l10n.issueStateClosed,
+                  state: _stateOf(data),
+                  label: _stateLabel(data, l10n),
                 ),
-                if (data.author != null) ...[
-                  const SizedBox(width: LabFoxSpacing.md),
-                  Flexible(
-                    child: Text(
-                      l10n.issueOpenedBy(data.author!.username),
-                      style: Theme.of(context).textTheme.bodySmall,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                if (data.isDraft) ...[
+                  const SizedBox(width: LabFoxSpacing.sm),
+                  Text(
+                    l10n.mrDraft,
+                    style: Theme.of(context).textTheme.labelMedium,
                   ),
                 ],
               ],
+            ),
+            const SizedBox(height: LabFoxSpacing.sm),
+            Text(
+              '${data.sourceBranch} → ${data.targetBranch}',
+              style: Theme.of(context).textTheme.bodySmall,
             ),
             if (data.labels.isNotEmpty) ...[
               const SizedBox(height: LabFoxSpacing.md),
@@ -86,12 +86,26 @@ class IssueDetailScreen extends ConsumerWidget {
               MarkdownViewer(data: data.description!)
             else
               Text(
-                l10n.issueNoDescription,
+                l10n.mergeRequestNoDescription,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
           ],
         ),
       ),
     );
+  }
+
+  EntityState _stateOf(MergeRequest mr) {
+    if (mr.isMerged) {
+      return EntityState.merged;
+    }
+    return mr.isOpen ? EntityState.open : EntityState.closed;
+  }
+
+  String _stateLabel(MergeRequest mr, AppLocalizations l10n) {
+    if (mr.isMerged) {
+      return l10n.mrStateMerged;
+    }
+    return mr.isOpen ? l10n.mrStateOpen : l10n.mrStateClosed;
   }
 }

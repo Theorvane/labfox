@@ -55,5 +55,18 @@
   "issueStateOpen": "オープン",
   "issueStateClosed": "クローズ",
   "issueNoDescription": "説明はありません。",
-  "issueOpenedBy": "{username} が作成"
+  "issueOpenedBy": "{username} が作成",
+  "projectOverviewMergeRequests": "マージリクエスト",
+  "mergeRequestsTitle": "マージリクエスト",
+  "mrFilterOpen": "オープン",
+  "mrFilterMerged": "マージ済み",
+  "mrFilterClosed": "クローズ",
+  "mergeRequestsError": "マージリクエストを読み込めませんでした。",
+  "mergeRequestsEmpty": "マージリクエストはありません。",
+  "mergeRequestError": "このマージリクエストを読み込めませんでした。",
+  "mergeRequestNoDescription": "説明はありません。",
+  "mrStateOpen": "オープン",
+  "mrStateMerged": "マージ済み",
+  "mrStateClosed": "クローズ",
+  "mrDraft": "下書き"
 }

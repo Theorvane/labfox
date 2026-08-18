@@ -235,5 +235,57 @@
         "example": "jungwon"
       }
     }
+  },
+  "projectOverviewMergeRequests": "Merge requests",
+  "@projectOverviewMergeRequests": {
+    "description": "Overview link that opens the merge requests list"
+  },
+  "mergeRequestsTitle": "Merge requests",
+  "@mergeRequestsTitle": {
+    "description": "Title of the merge requests list screen"
+  },
+  "mrFilterOpen": "Open",
+  "@mrFilterOpen": {
+    "description": "Merge requests filter, open"
+  },
+  "mrFilterMerged": "Merged",
+  "@mrFilterMerged": {
+    "description": "Merge requests filter, merged"
+  },
+  "mrFilterClosed": "Closed",
+  "@mrFilterClosed": {
+    "description": "Merge requests filter, closed"
+  },
+  "mergeRequestsError": "Could not load merge requests.",
+  "@mergeRequestsError": {
+    "description": "Shown when the MR list fails"
+  },
+  "mergeRequestsEmpty": "No merge requests here.",
+  "@mergeRequestsEmpty": {
+    "description": "Shown when the MR list is empty"
+  },
+  "mergeRequestError": "Could not load this merge request.",
+  "@mergeRequestError": {
+    "description": "Shown when an MR fails to load"
+  },
+  "mergeRequestNoDescription": "No description provided.",
+  "@mergeRequestNoDescription": {
+    "description": "Shown when an MR has no description"
+  },
+  "mrStateOpen": "Open",
+  "@mrStateOpen": {
+    "description": "MR state badge, open"
+  },
+  "mrStateMerged": "Merged",
+  "@mrStateMerged": {
+    "description": "MR state badge, merged"
+  },
+  "mrStateClosed": "Closed",
+  "@mrStateClosed": {
+    "description": "MR state badge, closed"
+  },
+  "mrDraft": "Draft",
+  "@mrDraft": {
+    "description": "Label marking a draft MR"
   }
 }

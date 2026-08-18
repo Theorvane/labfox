@@ -55,5 +55,18 @@
   "issueStateOpen": "열림",
   "issueStateClosed": "닫힘",
   "issueNoDescription": "설명이 없습니다.",
-  "issueOpenedBy": "{username} 님이 열었습니다"
+  "issueOpenedBy": "{username} 님이 열었습니다",
+  "projectOverviewMergeRequests": "병합 요청",
+  "mergeRequestsTitle": "병합 요청",
+  "mrFilterOpen": "열림",
+  "mrFilterMerged": "병합됨",
+  "mrFilterClosed": "닫힘",
+  "mergeRequestsError": "병합 요청을 불러올 수 없습니다.",
+  "mergeRequestsEmpty": "병합 요청이 없습니다.",
+  "mergeRequestError": "이 병합 요청을 불러올 수 없습니다.",
+  "mergeRequestNoDescription": "설명이 없습니다.",
+  "mrStateOpen": "열림",
+  "mrStateMerged": "병합됨",
+  "mrStateClosed": "닫힘",
+  "mrDraft": "초안"
 }
