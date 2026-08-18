@@ -305,4 +305,25 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get mrActionError =>
       'The action could not be completed. Please try again.';
+
+  @override
+  String get projectOverviewPipelines => 'Pipelines';
+
+  @override
+  String get pipelinesTitle => 'Pipelines';
+
+  @override
+  String get pipelinesError => 'Could not load pipelines.';
+
+  @override
+  String get pipelinesEmpty => 'No pipelines yet.';
+
+  @override
+  String get pipelineError => 'Could not load this pipeline.';
+
+  @override
+  String get pipelineJobsError => 'Could not load jobs.';
+
+  @override
+  String get pipelineNoJobs => 'This pipeline has no jobs.';
 }

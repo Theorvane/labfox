@@ -297,4 +297,25 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mrActionError => '操作を完了できませんでした。もう一度お試しください。';
+
+  @override
+  String get projectOverviewPipelines => 'パイプライン';
+
+  @override
+  String get pipelinesTitle => 'パイプライン';
+
+  @override
+  String get pipelinesError => 'パイプラインを読み込めませんでした。';
+
+  @override
+  String get pipelinesEmpty => 'まだパイプラインはありません。';
+
+  @override
+  String get pipelineError => 'このパイプラインを読み込めませんでした。';
+
+  @override
+  String get pipelineJobsError => 'ジョブを読み込めませんでした。';
+
+  @override
+  String get pipelineNoJobs => 'このパイプラインにはジョブがありません。';
 }

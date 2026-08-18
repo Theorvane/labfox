@@ -14,6 +14,8 @@ import '../features/issues/presentation/issue_detail_screen.dart';
 import '../features/issues/presentation/issues_screen.dart';
 import '../features/merge_requests/presentation/merge_request_detail_screen.dart';
 import '../features/merge_requests/presentation/merge_requests_screen.dart';
+import '../features/pipelines/presentation/pipeline_detail_screen.dart';
+import '../features/pipelines/presentation/pipelines_screen.dart';
 import '../features/project_overview/presentation/project_overview_screen.dart';
 import '../features/projects/presentation/projects_screen.dart';
 import '../features/repository/presentation/file_viewer_screen.dart';
@@ -54,6 +56,9 @@ abstract final class Routes {
   // The user-facing MR number is the iid, not the global id.
   static String mergeRequest(int id, int iid) =>
       '/projects/$id/merge_requests/$iid';
+  static String pipelines(int id) => '/projects/$id/pipelines';
+  static String pipeline(int id, int pipelineId) =>
+      '/projects/$id/pipelines/$pipelineId';
   static String commitChanges(int id, String sha) =>
       '/projects/$id/commit/$sha/changes';
   static String mergeRequestChanges(int id, int iid) =>
@@ -182,6 +187,19 @@ final routerProvider = Provider<GoRouter>((ref) {
                 path: 'merge_requests',
                 builder: (context, state) => MergeRequestsScreen(
                   projectId: int.parse(state.pathParameters['id']!),
+                ),
+              ),
+              GoRoute(
+                path: 'pipelines',
+                builder: (context, state) => PipelinesScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+              ),
+              GoRoute(
+                path: 'pipelines/:pid',
+                builder: (context, state) => PipelineDetailScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                  pipelineId: int.parse(state.pathParameters['pid']!),
                 ),
               ),
               GoRoute(

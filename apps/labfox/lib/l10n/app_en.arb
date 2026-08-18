@@ -397,5 +397,33 @@
   "mrActionError": "The action could not be completed. Please try again.",
   "@mrActionError": {
     "description": "Generic MR action error"
+  },
+  "projectOverviewPipelines": "Pipelines",
+  "@projectOverviewPipelines": {
+    "description": "Overview link that opens the pipelines list"
+  },
+  "pipelinesTitle": "Pipelines",
+  "@pipelinesTitle": {
+    "description": "Title of the pipelines list screen"
+  },
+  "pipelinesError": "Could not load pipelines.",
+  "@pipelinesError": {
+    "description": "Shown when the pipelines list fails"
+  },
+  "pipelinesEmpty": "No pipelines yet.",
+  "@pipelinesEmpty": {
+    "description": "Shown when there are no pipelines"
+  },
+  "pipelineError": "Could not load this pipeline.",
+  "@pipelineError": {
+    "description": "Shown when a pipeline fails to load"
+  },
+  "pipelineJobsError": "Could not load jobs.",
+  "@pipelineJobsError": {
+    "description": "Shown when a pipeline's jobs fail to load"
+  },
+  "pipelineNoJobs": "This pipeline has no jobs.",
+  "@pipelineNoJobs": {
+    "description": "Shown when a pipeline has no jobs"
   }
 }

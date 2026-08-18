@@ -92,5 +92,12 @@
   "mrApprovalsSummary": "{required} में से {approved} स्वीकृतियाँ",
   "mrNotMergeable": "अभी यह मर्ज रिक्वेस्ट मर्ज नहीं हो सकती। इसे स्वीकृति, रीबेस, या पास पाइपलाइन की ज़रूरत हो सकती है।",
   "mrActionForbidden": "आपके पास इस क्रिया की अनुमति नहीं है। अपने टोकन स्कोप और भूमिका की जाँच करें।",
-  "mrActionError": "क्रिया पूरी नहीं हो सकी। कृपया पुनः प्रयास करें।"
+  "mrActionError": "क्रिया पूरी नहीं हो सकी। कृपया पुनः प्रयास करें।",
+  "projectOverviewPipelines": "पाइपलाइन",
+  "pipelinesTitle": "पाइपलाइन",
+  "pipelinesError": "पाइपलाइन लोड नहीं हो सकीं।",
+  "pipelinesEmpty": "अभी तक कोई पाइपलाइन नहीं।",
+  "pipelineError": "यह पाइपलाइन लोड नहीं हो सकी।",
+  "pipelineJobsError": "जॉब लोड नहीं हो सके।",
+  "pipelineNoJobs": "इस पाइपलाइन में कोई जॉब नहीं है।"
 }
