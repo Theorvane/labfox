@@ -19,7 +19,7 @@ yet, so most reports at this stage concern the source code rather than a shipped
 
 Report privately through **GitHub private vulnerability reporting**:
 
-> [Report a vulnerability](https://github.com/labfox-app/labfox/security/advisories/new)
+> [Report a vulnerability](https://github.com/theorvane/labfox/security/advisories/new)
 
 Or from the repository: **Security** tab → **Report a vulnerability**.
 

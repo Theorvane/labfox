@@ -41,7 +41,7 @@ Read these only when relevant — do not load them into context by default.
 
 ## Workflow
 
-The origin remote is **GitHub** (`labfox-app/labfox`). The CLI is **`gh`**.
+The origin remote is **GitHub** (`theorvane/labfox`). The CLI is **`gh`**.
 
 ```
 Issue → Branch → Commit (-s) → Push → PR → Merge (maintainer)

@@ -14,7 +14,7 @@ body:
         use `<REDACTED>` and `gitlab.example.com`.
 
         🔒 Security vulnerabilities do not belong in a public issue. Follow
-        [SECURITY.md](https://github.com/labfox-app/labfox/blob/dev/SECURITY.md) instead.
+        [SECURITY.md](https://github.com/theorvane/labfox/blob/dev/SECURITY.md) instead.
 
   - type: markdown
     attributes:

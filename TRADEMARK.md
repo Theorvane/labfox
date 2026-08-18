@@ -63,7 +63,7 @@ Forks are welcome. They are a right guaranteed by Apache-2.0. You only need to o
 
 Example wording:
 
-> This project is a fork of LabFox (https://github.com/labfox-app/labfox),
+> This project is a fork of LabFox (https://github.com/theorvane/labfox),
 > licensed under Apache-2.0. It is not affiliated with or endorsed by
 > the LabFox project.
 
