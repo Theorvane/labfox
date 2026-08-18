@@ -49,14 +49,14 @@ promotion preserves the `dev` history rather than flattening it again.
 
 ## Two settings to revisit
 
-**`required_approving_review_count` is `0`.** With a single maintainer, requiring an approval
-would make every pull request unmergeable — GitHub does not let you approve your own, and these
-rulesets define no bypass actors. Raise it to `1` as soon as a second maintainer exists:
+**`required_approving_review_count` is `1`.** Every pull request needs one approval from an
+account other than its author before it can merge — GitHub does not let you approve your own. With
+two accounts on the repository (`sjungwon03` and `sjungwon03-ai`), this is enforceable. It was `0`
+during the initial bootstrap, when a single account meant requiring an approval would have made
+every pull request unmergeable; that no longer applies.
 
-```bash
-# edit both json files, then re-apply with PUT
-"required_approving_review_count": 1
-```
+`dismiss_stale_reviews_on_push` and `require_last_push_approval` are both on, so an approval does
+not carry over to commits pushed after it — the state that was approved is the state that merges.
 
 **`Flutter quality gate` is not a required check.** The repository is documentation-only until
 milestone M0, so that job is skipped and cannot be required yet. Add it to
