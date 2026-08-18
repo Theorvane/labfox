@@ -4,6 +4,9 @@ import 'package:go_router/go_router.dart';
 import '../core/auth/auth_controller.dart';
 import '../core/auth/auth_state.dart';
 import '../features/auth/presentation/sign_in_screen.dart';
+import '../features/branches/presentation/branches_screen.dart';
+import '../features/commits/presentation/commit_detail_screen.dart';
+import '../features/commits/presentation/commits_screen.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/project_overview/presentation/project_overview_screen.dart';
 import '../features/projects/presentation/projects_screen.dart';
@@ -34,6 +37,10 @@ abstract final class Routes {
   static String file(int id, String ref, String path) =>
       '/projects/$id/file?ref=${Uri.encodeQueryComponent(ref)}'
       '&path=${Uri.encodeQueryComponent(path)}';
+  static String branches(int id) => '/projects/$id/branches';
+  static String commits(int id, String ref) =>
+      '/projects/$id/commits?ref=${Uri.encodeQueryComponent(ref)}';
+  static String commit(int id, String sha) => '/projects/$id/commit/$sha';
 }
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -105,6 +112,26 @@ final routerProvider = Provider<GoRouter>((ref) {
                   final path = state.uri.queryParameters['path']!;
                   return FileViewerScreen(projectId: id, ref: ref, path: path);
                 },
+              ),
+              GoRoute(
+                path: 'branches',
+                builder: (context, state) => BranchesScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+              ),
+              GoRoute(
+                path: 'commits',
+                builder: (context, state) => CommitsScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                  ref: state.uri.queryParameters['ref']!,
+                ),
+              ),
+              GoRoute(
+                path: 'commit/:sha',
+                builder: (context, state) => CommitDetailScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                  sha: state.pathParameters['sha']!,
+                ),
               ),
             ],
           ),

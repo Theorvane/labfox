@@ -84,6 +84,83 @@ class RepositoryApi {
     }
   }
 
+  /// Lists the repository's branches.
+  Future<Paginated<Branch>> branches(
+    Object projectId, {
+    int page = 1,
+    int perPage = 100,
+  }) async {
+    try {
+      final response = await _dio.get<dynamic>(
+        '/projects/${_enc(projectId)}/repository/branches',
+        queryParameters: {'page': page, 'per_page': perPage},
+      );
+      if (response.statusCode != 200) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'listing branches',
+        );
+      }
+      final branches = (response.data as List<dynamic>? ?? const [])
+          .cast<Map<String, dynamic>>()
+          .map(Branch.fromJson)
+          .toList(growable: false);
+      return Paginated.fromHeaders(branches, response.headers.map);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'listing branches');
+    }
+  }
+
+  /// Lists commits on a ref, most recent first.
+  Future<Paginated<Commit>> commits(
+    Object projectId, {
+    required String ref,
+    int page = 1,
+    int perPage = 20,
+  }) async {
+    try {
+      final response = await _dio.get<dynamic>(
+        '/projects/${_enc(projectId)}/repository/commits',
+        queryParameters: {'ref_name': ref, 'page': page, 'per_page': perPage},
+      );
+      if (response.statusCode != 200) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'listing commits',
+        );
+      }
+      final commits = (response.data as List<dynamic>? ?? const [])
+          .cast<Map<String, dynamic>>()
+          .map(Commit.fromJson)
+          .toList(growable: false);
+      return Paginated.fromHeaders(commits, response.headers.map);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'listing commits');
+    }
+  }
+
+  /// A single commit by SHA, including its line-change stats.
+  Future<Commit> commit(Object projectId, {required String sha}) async {
+    try {
+      final response = await _dio.get<Map<String, dynamic>>(
+        '/projects/${_enc(projectId)}/repository/commits/${Uri.encodeComponent(sha)}',
+      );
+      final data = response.data;
+      if (response.statusCode != 200 || data == null) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'loading the commit',
+        );
+      }
+      return Commit.fromJson(data);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'loading the commit');
+    }
+  }
+
   /// Encodes a project id: numeric ids pass through, `group/project` paths are
   /// URL-encoded.
   static String _enc(Object projectId) =>

@@ -46,18 +46,48 @@ class ProjectOverviewScreen extends ConsumerWidget {
               if (data.project.defaultBranch != null)
                 Card(
                   margin: EdgeInsets.zero,
-                  child: ListTile(
-                    leading: const Icon(Icons.folder_copy_outlined),
-                    title: Text(
-                      AppLocalizations.of(context).projectOverviewRepository,
-                    ),
-                    trailing: const Icon(Icons.chevron_right),
-                    onTap: () => context.go(
-                      Routes.repository(
-                        data.project.id,
-                        data.project.defaultBranch!,
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: const Icon(Icons.folder_copy_outlined),
+                        title: Text(
+                          AppLocalizations.of(
+                            context,
+                          ).projectOverviewRepository,
+                        ),
+                        trailing: const Icon(Icons.chevron_right),
+                        onTap: () => context.go(
+                          Routes.repository(
+                            data.project.id,
+                            data.project.defaultBranch!,
+                          ),
+                        ),
                       ),
-                    ),
+                      const Divider(height: 1),
+                      ListTile(
+                        leading: const Icon(Icons.account_tree_outlined),
+                        title: Text(
+                          AppLocalizations.of(context).projectOverviewBranches,
+                        ),
+                        trailing: const Icon(Icons.chevron_right),
+                        onTap: () =>
+                            context.go(Routes.branches(data.project.id)),
+                      ),
+                      const Divider(height: 1),
+                      ListTile(
+                        leading: const Icon(Icons.history),
+                        title: Text(
+                          AppLocalizations.of(context).projectOverviewCommits,
+                        ),
+                        trailing: const Icon(Icons.chevron_right),
+                        onTap: () => context.go(
+                          Routes.commits(
+                            data.project.id,
+                            data.project.defaultBranch!,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               const SizedBox(height: LabFoxSpacing.lg),

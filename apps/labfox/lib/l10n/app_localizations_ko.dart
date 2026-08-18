@@ -113,4 +113,37 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get fileBinary => '바이너리 파일이라 텍스트로 표시할 수 없습니다.';
+
+  @override
+  String get projectOverviewBranches => '브랜치';
+
+  @override
+  String get projectOverviewCommits => '커밋';
+
+  @override
+  String get branchesTitle => '브랜치';
+
+  @override
+  String get branchesError => '브랜치를 불러올 수 없습니다.';
+
+  @override
+  String get branchesEmpty => '이 저장소에는 브랜치가 없습니다.';
+
+  @override
+  String get branchDefault => '기본 브랜치';
+
+  @override
+  String get commitsTitle => '커밋';
+
+  @override
+  String get commitsError => '커밋을 불러올 수 없습니다.';
+
+  @override
+  String get commitsEmpty => '이 브랜치에는 아직 커밋이 없습니다.';
+
+  @override
+  String get commitTitle => '커밋';
+
+  @override
+  String get commitError => '이 커밋을 불러올 수 없습니다.';
 }

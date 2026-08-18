@@ -113,4 +113,37 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get fileBinary => 'バイナリファイルのためテキストとして表示できません。';
+
+  @override
+  String get projectOverviewBranches => 'ブランチ';
+
+  @override
+  String get projectOverviewCommits => 'コミット';
+
+  @override
+  String get branchesTitle => 'ブランチ';
+
+  @override
+  String get branchesError => 'ブランチを読み込めませんでした。';
+
+  @override
+  String get branchesEmpty => 'このリポジトリにはブランチがありません。';
+
+  @override
+  String get branchDefault => 'デフォルトブランチ';
+
+  @override
+  String get commitsTitle => 'コミット';
+
+  @override
+  String get commitsError => 'コミットを読み込めませんでした。';
+
+  @override
+  String get commitsEmpty => 'このブランチにはまだコミットがありません。';
+
+  @override
+  String get commitTitle => 'コミット';
+
+  @override
+  String get commitError => 'このコミットを読み込めませんでした。';
 }

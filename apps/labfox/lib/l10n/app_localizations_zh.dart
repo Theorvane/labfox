@@ -111,4 +111,37 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get fileBinary => '这是二进制文件，无法作为文本显示。';
+
+  @override
+  String get projectOverviewBranches => '分支';
+
+  @override
+  String get projectOverviewCommits => '提交';
+
+  @override
+  String get branchesTitle => '分支';
+
+  @override
+  String get branchesError => '无法加载分支。';
+
+  @override
+  String get branchesEmpty => '此仓库没有分支。';
+
+  @override
+  String get branchDefault => '默认分支';
+
+  @override
+  String get commitsTitle => '提交';
+
+  @override
+  String get commitsError => '无法加载提交。';
+
+  @override
+  String get commitsEmpty => '此分支还没有提交。';
+
+  @override
+  String get commitTitle => '提交';
+
+  @override
+  String get commitError => '无法加载此提交。';
 }

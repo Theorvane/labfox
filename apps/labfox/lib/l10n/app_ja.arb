@@ -33,5 +33,16 @@
   "repositoryEmpty": "このディレクトリは空です。",
   "fileError": "このファイルを読み込めませんでした。",
   "fileNotFound": "ファイルが見つかりませんでした。",
-  "fileBinary": "バイナリファイルのためテキストとして表示できません。"
+  "fileBinary": "バイナリファイルのためテキストとして表示できません。",
+  "projectOverviewBranches": "ブランチ",
+  "projectOverviewCommits": "コミット",
+  "branchesTitle": "ブランチ",
+  "branchesError": "ブランチを読み込めませんでした。",
+  "branchesEmpty": "このリポジトリにはブランチがありません。",
+  "branchDefault": "デフォルトブランチ",
+  "commitsTitle": "コミット",
+  "commitsError": "コミットを読み込めませんでした。",
+  "commitsEmpty": "このブランチにはまだコミットがありません。",
+  "commitTitle": "コミット",
+  "commitError": "このコミットを読み込めませんでした。"
 }
