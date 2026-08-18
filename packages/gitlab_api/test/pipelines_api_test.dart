@@ -80,6 +80,34 @@ void main() {
       expect(captured.path, '/projects/42/pipelines/944/jobs');
       expect(jobs.map((j) => j.name), ['compile', 'unit-test']);
     });
+
+    test('follows pagination so no jobs are silently dropped', () async {
+      // A pipeline with more jobs than one page: the first page reports a next
+      // page, the second is the last. All jobs must come back, or stage groups
+      // are incomplete while the UI presents them as the whole pipeline.
+      final pages = <int, List<Map<String, dynamic>>>{
+        1: [
+          {'id': 1, 'name': 'a', 'stage': 'build', 'status': 'success'},
+        ],
+        2: [
+          {'id': 2, 'name': 'b', 'stage': 'test', 'status': 'success'},
+        ],
+      };
+      final client = _client((o) {
+        final page = int.parse('${o.queryParameters['page'] ?? 1}');
+        return (
+          status: 200,
+          headers: {
+            'x-next-page': [page < 2 ? '${page + 1}' : ''],
+          },
+          body: pages[page] ?? const [],
+        );
+      });
+
+      final jobs = await client.pipelines.jobs(42, pipelineId: 944);
+
+      expect(jobs.map((j) => j.name), ['a', 'b']);
+    });
   });
 }
 

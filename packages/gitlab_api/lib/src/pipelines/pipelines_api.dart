@@ -58,23 +58,42 @@ class PipelinesApi {
     }
   }
 
-  /// The jobs of a pipeline, in GitLab's order.
-  Future<List<Job>> jobs(Object projectId, {required int pipelineId}) async {
+  /// All jobs of a pipeline, in GitLab's order.
+  ///
+  /// GitLab paginates this endpoint. The detail screen presents these as the
+  /// pipeline's complete job set and groups them by stage, so every page is
+  /// followed — returning only the first would drop jobs and leave stage groups
+  /// silently incomplete. A pipeline's job count is bounded in practice, so
+  /// fetching all pages is safe.
+  Future<List<Job>> jobs(
+    Object projectId, {
+    required int pipelineId,
+    int perPage = 100,
+  }) async {
     try {
-      final response = await _dio.get<dynamic>(
-        '/projects/${_enc(projectId)}/pipelines/$pipelineId/jobs',
-      );
-      if (response.statusCode != 200) {
-        throw mapStatus(
-          response.statusCode,
-          response.headers.map,
-          context: 'loading jobs',
+      final jobs = <Job>[];
+      int? page = 1;
+      while (page != null) {
+        final response = await _dio.get<dynamic>(
+          '/projects/${_enc(projectId)}/pipelines/$pipelineId/jobs',
+          queryParameters: {'page': page, 'per_page': perPage},
         );
+        if (response.statusCode != 200) {
+          throw mapStatus(
+            response.statusCode,
+            response.headers.map,
+            context: 'loading jobs',
+          );
+        }
+        jobs.addAll(
+          (response.data as List<dynamic>? ?? const [])
+              .cast<Map<String, dynamic>>()
+              .map(Job.fromJson),
+        );
+        final next = response.headers.value('x-next-page');
+        page = (next == null || next.isEmpty) ? null : int.tryParse(next);
       }
-      return (response.data as List<dynamic>? ?? const [])
-          .cast<Map<String, dynamic>>()
-          .map(Job.fromJson)
-          .toList(growable: false);
+      return List.unmodifiable(jobs);
     } on DioException catch (error) {
       throw mapError(error, context: 'loading jobs');
     }
