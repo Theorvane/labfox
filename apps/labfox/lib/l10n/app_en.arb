@@ -315,5 +315,33 @@
   "changesOmitted": "Diff not shown because it is too large or collapsed.",
   "@changesOmitted": {
     "description": "Shown for a text file whose diff GitLab omitted (too large or collapsed)"
+  },
+  "commentsHeading": "Comments",
+  "@commentsHeading": {
+    "description": "Heading above a comment thread"
+  },
+  "commentsError": "Could not load comments.",
+  "@commentsError": {
+    "description": "Shown when comments fail to load"
+  },
+  "commentsEmpty": "No comments yet.",
+  "@commentsEmpty": {
+    "description": "Shown when there are no comments"
+  },
+  "commentComposerHint": "Write a comment…",
+  "@commentComposerHint": {
+    "description": "Placeholder in the comment composer"
+  },
+  "commentComposerSubmit": "Comment",
+  "@commentComposerSubmit": {
+    "description": "Button to post a comment"
+  },
+  "commentPostForbidden": "You do not have permission to comment here. Check that your token has the api scope.",
+  "@commentPostForbidden": {
+    "description": "Shown when posting a comment is forbidden (403)"
+  },
+  "commentPostError": "Could not post your comment. Please try again.",
+  "@commentPostError": {
+    "description": "Generic comment post error"
   }
 }

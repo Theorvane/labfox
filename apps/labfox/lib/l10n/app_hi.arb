@@ -75,5 +75,12 @@
   "changesBinary": "बाइनरी फ़ाइल — नहीं दिखाई गई।",
   "commitViewChanges": "परिवर्तन देखें",
   "mrViewChanges": "परिवर्तन देखें",
-  "changesOmitted": "diff बहुत बड़ा है या संक्षिप्त है, इसलिए नहीं दिखाया गया।"
+  "changesOmitted": "diff बहुत बड़ा है या संक्षिप्त है, इसलिए नहीं दिखाया गया।",
+  "commentsHeading": "टिप्पणियाँ",
+  "commentsError": "टिप्पणियाँ लोड नहीं हो सकीं।",
+  "commentsEmpty": "अभी तक कोई टिप्पणी नहीं।",
+  "commentComposerHint": "एक टिप्पणी लिखें…",
+  "commentComposerSubmit": "टिप्पणी करें",
+  "commentPostForbidden": "आपको यहाँ टिप्पणी करने की अनुमति नहीं है। जाँचें कि आपके टोकन में api स्कोप है।",
+  "commentPostError": "आपकी टिप्पणी पोस्ट नहीं हो सकी। कृपया पुनः प्रयास करें।"
 }

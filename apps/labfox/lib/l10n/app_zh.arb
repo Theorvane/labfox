@@ -75,5 +75,12 @@
   "changesBinary": "二进制文件 — 不显示。",
   "commitViewChanges": "查看变更",
   "mrViewChanges": "查看变更",
-  "changesOmitted": "diff 太大或已折叠，未显示。"
+  "changesOmitted": "diff 太大或已折叠，未显示。",
+  "commentsHeading": "评论",
+  "commentsError": "无法加载评论。",
+  "commentsEmpty": "还没有评论。",
+  "commentComposerHint": "写评论…",
+  "commentComposerSubmit": "评论",
+  "commentPostForbidden": "您没有权限在此评论。请检查您的令牌是否具有 api 权限范围。",
+  "commentPostError": "无法发布您的评论。请重试。"
 }

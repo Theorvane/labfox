@@ -1,8 +1,10 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gitlab_api/gitlab_api.dart';
 
 import '../../../l10n/app_localizations.dart';
+import '../../comments/presentation/widgets/comment_thread.dart';
 import 'controllers/issues_controllers.dart';
 
 /// One issue: title, state, author, labels, and the rendered description.
@@ -89,6 +91,12 @@ class IssueDetailScreen extends ConsumerWidget {
                 l10n.issueNoDescription,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
+            const SizedBox(height: LabFoxSpacing.xl),
+            CommentThread(
+              type: NoteableType.issue,
+              projectId: projectId,
+              iid: iid,
+            ),
           ],
         ),
       ),

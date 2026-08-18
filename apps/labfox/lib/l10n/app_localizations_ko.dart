@@ -241,4 +241,26 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get changesOmitted => 'diff가 너무 크거나 접혀 있어 표시하지 않습니다.';
+
+  @override
+  String get commentsHeading => '댓글';
+
+  @override
+  String get commentsError => '댓글을 불러올 수 없습니다.';
+
+  @override
+  String get commentsEmpty => '아직 댓글이 없습니다.';
+
+  @override
+  String get commentComposerHint => '댓글을 작성하세요…';
+
+  @override
+  String get commentComposerSubmit => '댓글 달기';
+
+  @override
+  String get commentPostForbidden =>
+      '여기에 댓글을 달 권한이 없습니다. 토큰에 api 스코프가 있는지 확인하세요.';
+
+  @override
+  String get commentPostError => '댓글을 게시할 수 없습니다. 다시 시도하세요.';
 }

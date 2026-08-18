@@ -1,0 +1,31 @@
+import 'package:gitlab_api/gitlab_api.dart';
+import 'package:gitlab_models/gitlab_models.dart';
+
+/// Loads and posts comments on an issue or merge request.
+class CommentsRepository {
+  CommentsRepository(this._client);
+
+  final GitLabClient _client;
+
+  Future<List<Note>> list({
+    required NoteableType type,
+    required int projectId,
+    required int iid,
+  }) {
+    return _client.notes.list(type, projectId: projectId, iid: iid);
+  }
+
+  Future<Note> post({
+    required NoteableType type,
+    required int projectId,
+    required int iid,
+    required String body,
+  }) {
+    return _client.notes.create(
+      type,
+      projectId: projectId,
+      iid: iid,
+      body: body,
+    );
+  }
+}

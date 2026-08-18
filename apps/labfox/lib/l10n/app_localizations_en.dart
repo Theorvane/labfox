@@ -245,4 +245,27 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get changesOmitted =>
       'Diff not shown because it is too large or collapsed.';
+
+  @override
+  String get commentsHeading => 'Comments';
+
+  @override
+  String get commentsError => 'Could not load comments.';
+
+  @override
+  String get commentsEmpty => 'No comments yet.';
+
+  @override
+  String get commentComposerHint => 'Write a comment…';
+
+  @override
+  String get commentComposerSubmit => 'Comment';
+
+  @override
+  String get commentPostForbidden =>
+      'You do not have permission to comment here. Check that your token has the api scope.';
+
+  @override
+  String get commentPostError =>
+      'Could not post your comment. Please try again.';
 }
