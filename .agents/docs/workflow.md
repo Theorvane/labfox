@@ -45,6 +45,15 @@ Rules:
   own reviewed release PR.
 - Rebase or merge `dev` into your branch to resolve conflicts. Do not rewrite published history.
 
+### Branch protection
+
+Ruleset definitions live in `.github/rulesets/` and are applied with `gh api`.
+They are **not active yet** — GitHub only allows rulesets on public repositories on the free plan,
+and this repository is still private. See `.github/rulesets/README.md`.
+
+Once applied, `dev` and `main` both block direct pushes, force pushes, and branch deletion,
+and require the CI checks to pass.
+
 ---
 
 ## Overall Flow
@@ -90,6 +99,15 @@ gh issue view 12
 - Templates: `.github/ISSUE_TEMPLATE/` (`task`, `bug`)
 
 ### Labels
+
+Labels are defined in `.github/labels.sh` and synced with:
+
+```bash
+bash .github/labels.sh
+```
+
+The script is idempotent — it creates missing labels and updates existing ones.
+Edit the script rather than the GitHub UI, so the taxonomy stays reviewable.
 
 Structured prefixes so filters stay useful as the tracker grows.
 
