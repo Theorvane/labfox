@@ -318,4 +318,19 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get pipelineNoJobs => 'このパイプラインにはジョブがありません。';
+
+  @override
+  String get jobTitle => 'ジョブ';
+
+  @override
+  String get jobError => 'このジョブを読み込めませんでした。';
+
+  @override
+  String get jobRefresh => '更新';
+
+  @override
+  String get jobLogError => 'ログを読み込めませんでした。';
+
+  @override
+  String get jobLogEmpty => 'このジョブにはログ出力がありません。';
 }

@@ -425,5 +425,25 @@
   "pipelineNoJobs": "This pipeline has no jobs.",
   "@pipelineNoJobs": {
     "description": "Shown when a pipeline has no jobs"
+  },
+  "jobTitle": "Job",
+  "@jobTitle": {
+    "description": "Fallback title for the job detail screen"
+  },
+  "jobError": "Could not load this job.",
+  "@jobError": {
+    "description": "Shown when a job fails to load"
+  },
+  "jobRefresh": "Refresh",
+  "@jobRefresh": {
+    "description": "Tooltip for the job refresh action"
+  },
+  "jobLogError": "Could not load the log.",
+  "@jobLogError": {
+    "description": "Shown when a job log fails to load"
+  },
+  "jobLogEmpty": "This job has no log output.",
+  "@jobLogEmpty": {
+    "description": "Shown when a job has no log"
   }
 }

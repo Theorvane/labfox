@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 
 import 'common/exceptions.dart';
 import 'issues/issues_api.dart';
+import 'jobs/jobs_api.dart';
 import 'merge_requests/merge_requests_api.dart';
 import 'notes/notes_api.dart';
 import 'pipelines/pipelines_api.dart';
@@ -33,6 +34,7 @@ class GitLabClient {
     mergeRequests = MergeRequestsApi(_dio);
     notes = NotesApi(_dio);
     pipelines = PipelinesApi(_dio);
+    jobs = JobsApi(_dio);
   }
 
   final Dio _dio;
@@ -44,6 +46,7 @@ class GitLabClient {
   late final MergeRequestsApi mergeRequests;
   late final NotesApi notes;
   late final PipelinesApi pipelines;
+  late final JobsApi jobs;
 
   /// Derives the REST endpoint from an instance URL.
   ///

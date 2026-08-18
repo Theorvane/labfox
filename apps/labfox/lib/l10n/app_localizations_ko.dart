@@ -319,4 +319,19 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get pipelineNoJobs => '이 파이프라인에는 잡이 없습니다.';
+
+  @override
+  String get jobTitle => '잡';
+
+  @override
+  String get jobError => '이 잡을 불러올 수 없습니다.';
+
+  @override
+  String get jobRefresh => '새로고침';
+
+  @override
+  String get jobLogError => '로그를 불러올 수 없습니다.';
+
+  @override
+  String get jobLogEmpty => '이 잡에는 로그 출력이 없습니다.';
 }

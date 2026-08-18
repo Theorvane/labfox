@@ -315,4 +315,19 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get pipelineNoJobs => '此流水线没有作业。';
+
+  @override
+  String get jobTitle => '作业';
+
+  @override
+  String get jobError => '无法加载此作业。';
+
+  @override
+  String get jobRefresh => '刷新';
+
+  @override
+  String get jobLogError => '无法加载日志。';
+
+  @override
+  String get jobLogEmpty => '此作业没有日志输出。';
 }

@@ -99,5 +99,10 @@
   "pipelinesEmpty": "अभी तक कोई पाइपलाइन नहीं।",
   "pipelineError": "यह पाइपलाइन लोड नहीं हो सकी।",
   "pipelineJobsError": "जॉब लोड नहीं हो सके।",
-  "pipelineNoJobs": "इस पाइपलाइन में कोई जॉब नहीं है।"
+  "pipelineNoJobs": "इस पाइपलाइन में कोई जॉब नहीं है।",
+  "jobTitle": "जॉब",
+  "jobError": "यह जॉब लोड नहीं हो सकी।",
+  "jobRefresh": "रीफ़्रेश",
+  "jobLogError": "लॉग लोड नहीं हो सका।",
+  "jobLogEmpty": "इस जॉब में कोई लॉग आउटपुट नहीं है।"
 }

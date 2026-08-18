@@ -327,4 +327,19 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get pipelineNoJobs => 'इस पाइपलाइन में कोई जॉब नहीं है।';
+
+  @override
+  String get jobTitle => 'जॉब';
+
+  @override
+  String get jobError => 'यह जॉब लोड नहीं हो सकी।';
+
+  @override
+  String get jobRefresh => 'रीफ़्रेश';
+
+  @override
+  String get jobLogError => 'लॉग लोड नहीं हो सका।';
+
+  @override
+  String get jobLogEmpty => 'इस जॉब में कोई लॉग आउटपुट नहीं है।';
 }
