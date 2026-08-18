@@ -85,6 +85,8 @@ class MergeRequestsApi {
     try {
       final response = await _dio.get<dynamic>(
         '/projects/${_enc(projectId)}/merge_requests/$iid/diffs',
+        // unidiff=true guarantees the unified-diff format the parser expects.
+        queryParameters: {'unidiff': true},
       );
       if (response.statusCode != 200) {
         throw mapStatus(

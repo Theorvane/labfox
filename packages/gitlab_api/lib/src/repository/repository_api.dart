@@ -169,6 +169,10 @@ class RepositoryApi {
     try {
       final response = await _dio.get<dynamic>(
         '/projects/${_enc(projectId)}/repository/commits/${Uri.encodeComponent(sha)}/diff',
+        // unidiff=true returns the diff in unified format, the grammar
+        // parseUnifiedDiff accepts. The default (false) is not guaranteed to be
+        // that format. Older instances ignore the unknown parameter.
+        queryParameters: {'unidiff': true},
       );
       if (response.statusCode != 200) {
         throw mapStatus(

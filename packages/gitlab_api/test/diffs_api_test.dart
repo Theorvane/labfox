@@ -23,6 +23,8 @@ void main() {
       final files = await client.repository.commitDiff(42, sha: 'abc123');
 
       expect(captured.path, '/projects/42/repository/commits/abc123/diff');
+      // unidiff=true guarantees the unified-diff grammar the parser expects.
+      expect(captured.queryParameters['unidiff'], true);
       expect(files.single.displayPath, 'lib/a.dart');
       expect(files.single.hunks, hasLength(1));
     });
@@ -39,6 +41,7 @@ void main() {
       final files = await client.mergeRequests.diffs(42, iid: 142);
 
       expect(captured.path, '/projects/42/merge_requests/142/diffs');
+      expect(captured.queryParameters['unidiff'], true);
       expect(files.single.hunks, hasLength(1));
     });
 
