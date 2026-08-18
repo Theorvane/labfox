@@ -1,8 +1,21 @@
 #!/usr/bin/env bash
 # Sync LabFox issue labels. Idempotent: creates or updates.
-set -u
-R=labfox-app/labfox
-add() { gh label create "$1" --repo "$R" --color "$2" --description "$3" --force >/dev/null && echo "  ✓ $1"; }
+set -euo pipefail
+R="${LABELS_REPO:-labfox-app/labfox}"
+failed=0
+
+# --force makes create act as upsert. Without an explicit failure branch a
+# transient API error would be swallowed and the sync would report success.
+add() {
+  if gh label create "$1" --repo "$R" --color "$2" --description "$3" --force >/dev/null 2>&1; then
+    echo "  ok   $1"
+  else
+    echo "  FAIL $1" >&2
+    failed=$((failed + 1))
+  fi
+}
+
+trap 'if [ "$failed" -gt 0 ]; then echo "$failed label(s) failed to sync" >&2; exit 1; fi' EXIT
 
 # type
 add "feat"                 "0E8A16" "New feature"
@@ -50,3 +63,5 @@ add "question"             "D876E3" "Needs more information"
 add "duplicate"            "CFD3D7" "Already reported"
 add "invalid"              "CFD3D7" "Not actionable"
 add "bug"                  "D73A4A" "Something is broken"
+
+echo "Label sync complete."
