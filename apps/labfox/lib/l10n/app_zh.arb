@@ -143,5 +143,9 @@
   "searchInitial": "输入以搜索。",
   "searchEmpty": "未找到结果。",
   "searchError": "搜索无法完成。",
-  "searchLoadMore": "加载更多"
+  "searchLoadMore": "加载更多",
+  "projectAddFavorite": "添加到收藏",
+  "projectRemoveFavorite": "从收藏中移除",
+  "homeFavorites": "收藏",
+  "homeRecents": "最近"
 }

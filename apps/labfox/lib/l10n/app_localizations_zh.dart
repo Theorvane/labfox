@@ -447,4 +447,16 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get searchLoadMore => '加载更多';
+
+  @override
+  String get projectAddFavorite => '添加到收藏';
+
+  @override
+  String get projectRemoveFavorite => '从收藏中移除';
+
+  @override
+  String get homeFavorites => '收藏';
+
+  @override
+  String get homeRecents => '最近';
 }

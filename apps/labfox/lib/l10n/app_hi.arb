@@ -143,5 +143,9 @@
   "searchInitial": "खोजने के लिए टाइप करें।",
   "searchEmpty": "कोई परिणाम नहीं मिला।",
   "searchError": "खोज पूरी नहीं हो सकी।",
-  "searchLoadMore": "और लोड करें"
+  "searchLoadMore": "और लोड करें",
+  "projectAddFavorite": "पसंदीदा में जोड़ें",
+  "projectRemoveFavorite": "पसंदीदा से हटाएं",
+  "homeFavorites": "पसंदीदा",
+  "homeRecents": "हाल ही में"
 }

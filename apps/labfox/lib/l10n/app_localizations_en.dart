@@ -465,4 +465,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get searchLoadMore => 'Load more';
+
+  @override
+  String get projectAddFavorite => 'Add to favorites';
+
+  @override
+  String get projectRemoveFavorite => 'Remove from favorites';
+
+  @override
+  String get homeFavorites => 'Favorites';
+
+  @override
+  String get homeRecents => 'Recent';
 }

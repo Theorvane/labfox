@@ -464,4 +464,16 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get searchLoadMore => 'और लोड करें';
+
+  @override
+  String get projectAddFavorite => 'पसंदीदा में जोड़ें';
+
+  @override
+  String get projectRemoveFavorite => 'पसंदीदा से हटाएं';
+
+  @override
+  String get homeFavorites => 'पसंदीदा';
+
+  @override
+  String get homeRecents => 'हाल ही में';
 }
