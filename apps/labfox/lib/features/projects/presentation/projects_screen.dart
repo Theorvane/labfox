@@ -2,7 +2,9 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_models/gitlab_models.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../app/router.dart';
 import '../../../l10n/app_localizations.dart';
 import 'controllers/projects_controller.dart';
 
@@ -39,7 +41,7 @@ class ProjectsScreen extends ConsumerWidget {
             child: ListView.separated(
               itemCount: items.length,
               separatorBuilder: (context, index) => const Divider(height: 1),
-              itemBuilder: (context, index) => _tile(items[index]),
+              itemBuilder: (context, index) => _tile(context, items[index]),
             ),
           );
         },
@@ -47,12 +49,13 @@ class ProjectsScreen extends ConsumerWidget {
     );
   }
 
-  Widget _tile(Project project) {
+  Widget _tile(BuildContext context, Project project) {
     return ProjectTile(
       name: project.name,
       path: project.pathWithNamespace,
       description: project.description,
       starCount: project.starCount,
+      onTap: () => context.go(Routes.projectOverview(project.id)),
     );
   }
 }

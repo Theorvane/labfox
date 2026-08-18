@@ -247,6 +247,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Retry'**
   String get retry;
+
+  /// Fallback title for the project overview screen
+  ///
+  /// In en, this message translates to:
+  /// **'Project'**
+  String get projectOverviewTitle;
+
+  /// Shown when the project overview fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this project.'**
+  String get projectOverviewError;
+
+  /// Shown when a project has no README
+  ///
+  /// In en, this message translates to:
+  /// **'This project has no README.'**
+  String get projectOverviewNoReadme;
 }
 
 class _AppLocalizationsDelegate

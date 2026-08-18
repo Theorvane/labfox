@@ -23,5 +23,8 @@
   "projectsTitle": "プロジェクト",
   "projectsEmpty": "まだどのプロジェクトにも参加していません。",
   "projectsError": "プロジェクトを読み込めませんでした。",
-  "retry": "再試行"
+  "retry": "再試行",
+  "projectOverviewTitle": "プロジェクト",
+  "projectOverviewError": "このプロジェクトを読み込めませんでした。",
+  "projectOverviewNoReadme": "このプロジェクトには README がありません。"
 }

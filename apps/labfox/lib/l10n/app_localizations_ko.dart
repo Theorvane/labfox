@@ -83,4 +83,13 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get retry => '다시 시도';
+
+  @override
+  String get projectOverviewTitle => '프로젝트';
+
+  @override
+  String get projectOverviewError => '이 프로젝트를 불러올 수 없습니다.';
+
+  @override
+  String get projectOverviewNoReadme => '이 프로젝트에는 README가 없습니다.';
 }

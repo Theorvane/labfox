@@ -101,5 +101,17 @@
   "retry": "Retry",
   "@retry": {
     "description": "Label for a retry button"
+  },
+  "projectOverviewTitle": "Project",
+  "@projectOverviewTitle": {
+    "description": "Fallback title for the project overview screen"
+  },
+  "projectOverviewError": "Could not load this project.",
+  "@projectOverviewError": {
+    "description": "Shown when the project overview fails"
+  },
+  "projectOverviewNoReadme": "This project has no README.",
+  "@projectOverviewNoReadme": {
+    "description": "Shown when a project has no README"
   }
 }

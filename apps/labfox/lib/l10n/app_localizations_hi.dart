@@ -86,4 +86,13 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get retry => 'पुनः प्रयास करें';
+
+  @override
+  String get projectOverviewTitle => 'प्रोजेक्ट';
+
+  @override
+  String get projectOverviewError => 'यह प्रोजेक्ट लोड नहीं हो सका।';
+
+  @override
+  String get projectOverviewNoReadme => 'इस प्रोजेक्ट में कोई README नहीं है।';
 }

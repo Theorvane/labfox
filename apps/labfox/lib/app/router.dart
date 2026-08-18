@@ -5,6 +5,7 @@ import '../core/auth/auth_controller.dart';
 import '../core/auth/auth_state.dart';
 import '../features/auth/presentation/sign_in_screen.dart';
 import '../features/home/presentation/home_screen.dart';
+import '../features/project_overview/presentation/project_overview_screen.dart';
 import '../features/projects/presentation/projects_screen.dart';
 
 /// Route paths.
@@ -16,6 +17,8 @@ abstract final class Routes {
   static const String home = '/';
   static const String signIn = '/sign-in';
   static const String projects = '/projects';
+
+  static String projectOverview(int id) => '/projects/$id';
 }
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -58,6 +61,15 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.projects,
         builder: (context, state) => const ProjectsScreen(),
+        routes: [
+          GoRoute(
+            path: ':id',
+            builder: (context, state) {
+              final id = int.parse(state.pathParameters['id']!);
+              return ProjectOverviewScreen(projectId: id);
+            },
+          ),
+        ],
       ),
     ],
   );

@@ -23,5 +23,8 @@
   "projectsTitle": "프로젝트",
   "projectsEmpty": "아직 참여 중인 프로젝트가 없습니다.",
   "projectsError": "프로젝트를 불러올 수 없습니다.",
-  "retry": "다시 시도"
+  "retry": "다시 시도",
+  "projectOverviewTitle": "프로젝트",
+  "projectOverviewError": "이 프로젝트를 불러올 수 없습니다.",
+  "projectOverviewNoReadme": "이 프로젝트에는 README가 없습니다."
 }

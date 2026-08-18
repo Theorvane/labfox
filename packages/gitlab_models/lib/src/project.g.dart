@@ -13,6 +13,7 @@ _Project _$ProjectFromJson(Map<String, dynamic> json) => _Project(
   description: json['description'] as String?,
   starCount: (json['star_count'] as num?)?.toInt() ?? 0,
   visibility: json['visibility'] as String?,
+  defaultBranch: json['default_branch'] as String?,
   avatarUrl: json['avatar_url'] as String?,
   lastActivityAt: json['last_activity_at'] == null
       ? null
@@ -26,6 +27,7 @@ Map<String, dynamic> _$ProjectToJson(_Project instance) => <String, dynamic>{
   'description': instance.description,
   'star_count': instance.starCount,
   'visibility': instance.visibility,
+  'default_branch': instance.defaultBranch,
   'avatar_url': instance.avatarUrl,
   'last_activity_at': instance.lastActivityAt?.toIso8601String(),
 };

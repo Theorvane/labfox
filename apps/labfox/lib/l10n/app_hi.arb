@@ -23,5 +23,8 @@
   "projectsTitle": "प्रोजेक्ट",
   "projectsEmpty": "आप अभी तक किसी प्रोजेक्ट के सदस्य नहीं हैं।",
   "projectsError": "आपके प्रोजेक्ट लोड नहीं हो सके।",
-  "retry": "पुनः प्रयास करें"
+  "retry": "पुनः प्रयास करें",
+  "projectOverviewTitle": "प्रोजेक्ट",
+  "projectOverviewError": "यह प्रोजेक्ट लोड नहीं हो सका।",
+  "projectOverviewNoReadme": "इस प्रोजेक्ट में कोई README नहीं है।"
 }

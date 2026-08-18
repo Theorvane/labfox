@@ -43,4 +43,50 @@ class ProjectsApi {
       throw mapError(error, context: 'loading projects');
     }
   }
+
+  /// A single project by its numeric id.
+  Future<Project> get(int projectId) async {
+    try {
+      final response = await _dio.get<Map<String, dynamic>>(
+        '/projects/$projectId',
+      );
+      final data = response.data;
+      if (response.statusCode != 200 || data == null) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'loading the project',
+        );
+      }
+      return Project.fromJson(data);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'loading the project');
+    }
+  }
+
+  /// The raw README of a project on a given ref, or null when it has none.
+  ///
+  /// A project without a README is normal, so a 404 returns null rather than
+  /// throwing — the overview renders without it. Other failures still surface.
+  Future<String?> readme(int projectId, {required String ref}) async {
+    try {
+      final response = await _dio.get<dynamic>(
+        '/projects/$projectId/repository/files/README.md/raw',
+        queryParameters: {'ref': ref},
+      );
+      if (response.statusCode == 404) {
+        return null;
+      }
+      if (response.statusCode != 200) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'loading the README',
+        );
+      }
+      return response.data?.toString();
+    } on DioException catch (error) {
+      throw mapError(error, context: 'loading the README');
+    }
+  }
 }
