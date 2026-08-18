@@ -26,6 +26,7 @@
           - ".github/labeler.yml"
           - ".github/labels.sh"
           - ".github/rulesets/**"
+          - "scripts/**"
 
 "area:docs":
   - changed-files:
