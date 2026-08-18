@@ -55,6 +55,48 @@ class TodosApi {
     }
   }
 
+  /// Every todo for the current user in the given state, following pagination
+  /// to the last page.
+  ///
+  /// The inbox needs the whole list — a fixed page would silently hide items
+  /// past the first page, so the user could neither open nor clear them.
+  Future<List<Todo>> listAll({
+    TodoState state = TodoState.pending,
+    int perPage = 100,
+  }) async {
+    try {
+      final todos = <Todo>[];
+      int? page = 1;
+      while (page != null) {
+        final response = await _dio.get<dynamic>(
+          '/todos',
+          queryParameters: {
+            'state': state.value,
+            'page': page,
+            'per_page': perPage,
+          },
+        );
+        if (response.statusCode != 200) {
+          throw mapStatus(
+            response.statusCode,
+            response.headers.map,
+            context: 'listing your to-do items',
+          );
+        }
+        todos.addAll(
+          (response.data as List<dynamic>? ?? const [])
+              .cast<Map<String, dynamic>>()
+              .map(Todo.fromJson),
+        );
+        final next = response.headers.value('x-next-page');
+        page = (next == null || next.isEmpty) ? null : int.tryParse(next);
+      }
+      return List.unmodifiable(todos);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'listing your to-do items');
+    }
+  }
+
   /// Marks a single todo as done.
   Future<void> markDone(int id) async {
     try {

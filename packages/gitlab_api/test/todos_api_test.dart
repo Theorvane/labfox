@@ -58,6 +58,52 @@ void main() {
     });
   });
 
+  group('TodosApi.listAll', () {
+    test('follows pagination so no pending todos are dropped', () async {
+      // An inbox with more than one page: the first page reports a next page,
+      // the second is the last. Every pending item must come back, or the user
+      // can neither see, open, nor clear the ones past page one.
+      final pages = <int, List<Map<String, dynamic>>>{
+        1: [
+          {'id': 1, 'action_name': 'assigned', 'state': 'pending'},
+        ],
+        2: [
+          {'id': 2, 'action_name': 'mentioned', 'state': 'pending'},
+        ],
+      };
+      final requested = <String?>[];
+      final client = _client((o) {
+        final page = int.parse('${o.queryParameters['page'] ?? 1}');
+        requested.add('${o.queryParameters['state']}');
+        return (
+          status: 200,
+          headers: {
+            'x-next-page': [page < 2 ? '${page + 1}' : ''],
+          },
+          body: pages[page] ?? const [],
+        );
+      });
+
+      final todos = await client.todos.listAll();
+
+      expect(todos.map((t) => t.id), [1, 2]);
+      // Pending is the default and must hold across every page.
+      expect(requested, everyElement('pending'));
+    });
+
+    test('passes the done state filter through every page', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (status: 200, headers: const {}, body: const []);
+      });
+
+      await client.todos.listAll(state: TodoState.done);
+
+      expect(captured.queryParameters['state'], 'done');
+    });
+  });
+
   group('TodosApi.markDone', () {
     test('posts to the single-todo done path', () async {
       late RequestOptions captured;

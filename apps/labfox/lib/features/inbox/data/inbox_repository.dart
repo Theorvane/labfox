@@ -7,10 +7,10 @@ class InboxRepository {
 
   final GitLabClient _client;
 
-  /// The pending to-do items, newest first.
-  Future<List<Todo>> pending() async {
-    final page = await _client.todos.list(state: TodoState.pending);
-    return page.items;
+  /// Every pending to-do item, newest first — all pages, so a large inbox is
+  /// never silently truncated.
+  Future<List<Todo>> pending() {
+    return _client.todos.listAll(state: TodoState.pending);
   }
 
   Future<void> markDone(int id) => _client.todos.markDone(id);
