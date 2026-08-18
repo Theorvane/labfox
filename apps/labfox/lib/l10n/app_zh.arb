@@ -17,5 +17,11 @@
   "signInErrorToken": "令牌被拒绝。请检查它是否正确且未过期。",
   "signInErrorScope": "令牌缺少必需的权限范围。需要 api 和 read_user。",
   "signInErrorUnreachable": "无法连接到该实例。请检查 URL、网络以及证书是否受信任。",
-  "signInErrorGeneric": "登录失败。请重试。"
+  "signInErrorGeneric": "登录失败。请重试。",
+  "homeMyWork": "我的工作",
+  "homeProjects": "项目",
+  "projectsTitle": "项目",
+  "projectsEmpty": "您还不是任何项目的成员。",
+  "projectsError": "无法加载您的项目。",
+  "retry": "重试"
 }

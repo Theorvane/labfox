@@ -5,4 +5,5 @@
 library;
 
 export 'src/account.dart';
+export 'src/project.dart';
 export 'src/user.dart';

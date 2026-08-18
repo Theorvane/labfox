@@ -68,4 +68,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get signInErrorGeneric => 'Sign-in failed. Please try again.';
+
+  @override
+  String get homeMyWork => 'My work';
+
+  @override
+  String get homeProjects => 'Projects';
+
+  @override
+  String get projectsTitle => 'Projects';
+
+  @override
+  String get projectsEmpty => 'You are not a member of any projects yet.';
+
+  @override
+  String get projectsError => 'Could not load your projects.';
+
+  @override
+  String get retry => 'Retry';
 }

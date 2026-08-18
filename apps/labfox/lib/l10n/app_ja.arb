@@ -17,5 +17,11 @@
   "signInErrorToken": "トークンが拒否されました。正しいか、有効期限が切れていないか確認してください。",
   "signInErrorScope": "トークンに必要なスコープがありません。api と read_user が必要です。",
   "signInErrorUnreachable": "そのインスタンスに接続できませんでした。URL、ネットワーク、証明書の信頼を確認してください。",
-  "signInErrorGeneric": "サインインに失敗しました。もう一度お試しください。"
+  "signInErrorGeneric": "サインインに失敗しました。もう一度お試しください。",
+  "homeMyWork": "マイワーク",
+  "homeProjects": "プロジェクト",
+  "projectsTitle": "プロジェクト",
+  "projectsEmpty": "まだどのプロジェクトにも参加していません。",
+  "projectsError": "プロジェクトを読み込めませんでした。",
+  "retry": "再試行"
 }

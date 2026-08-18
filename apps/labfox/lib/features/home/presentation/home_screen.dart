@@ -1,8 +1,10 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../app/responsive.dart';
+import '../../../app/router.dart';
 import '../../../core/auth/auth_controller.dart';
 import '../../../l10n/app_localizations.dart';
 
@@ -69,6 +71,34 @@ class _Body extends StatelessWidget {
               l10n.homeEmptyWork,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            const SizedBox(height: LabFoxSpacing.lg),
+            const _MyWork(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _MyWork extends StatelessWidget {
+  const _MyWork();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 420),
+      child: Card(
+        margin: EdgeInsets.zero,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.folder_outlined),
+              title: Text(l10n.homeProjects),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => context.go(Routes.projects),
             ),
           ],
         ),

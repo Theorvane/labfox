@@ -65,4 +65,22 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get signInErrorGeneric => 'サインインに失敗しました。もう一度お試しください。';
+
+  @override
+  String get homeMyWork => 'マイワーク';
+
+  @override
+  String get homeProjects => 'プロジェクト';
+
+  @override
+  String get projectsTitle => 'プロジェクト';
+
+  @override
+  String get projectsEmpty => 'まだどのプロジェクトにも参加していません。';
+
+  @override
+  String get projectsError => 'プロジェクトを読み込めませんでした。';
+
+  @override
+  String get retry => '再試行';
 }

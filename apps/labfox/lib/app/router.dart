@@ -5,6 +5,7 @@ import '../core/auth/auth_controller.dart';
 import '../core/auth/auth_state.dart';
 import '../features/auth/presentation/sign_in_screen.dart';
 import '../features/home/presentation/home_screen.dart';
+import '../features/projects/presentation/projects_screen.dart';
 
 /// Route paths.
 ///
@@ -14,6 +15,7 @@ import '../features/home/presentation/home_screen.dart';
 abstract final class Routes {
   static const String home = '/';
   static const String signIn = '/sign-in';
+  static const String projects = '/projects';
 }
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -52,6 +54,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.signIn,
         builder: (context, state) => const SignInScreen(),
+      ),
+      GoRoute(
+        path: Routes.projects,
+        builder: (context, state) => const ProjectsScreen(),
       ),
     ],
   );

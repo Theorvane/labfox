@@ -65,4 +65,22 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get signInErrorGeneric => '로그인에 실패했습니다. 다시 시도하세요.';
+
+  @override
+  String get homeMyWork => '내 작업';
+
+  @override
+  String get homeProjects => '프로젝트';
+
+  @override
+  String get projectsTitle => '프로젝트';
+
+  @override
+  String get projectsEmpty => '아직 참여 중인 프로젝트가 없습니다.';
+
+  @override
+  String get projectsError => '프로젝트를 불러올 수 없습니다.';
+
+  @override
+  String get retry => '다시 시도';
 }

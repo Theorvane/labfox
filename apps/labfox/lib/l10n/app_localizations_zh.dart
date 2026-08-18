@@ -63,4 +63,22 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get signInErrorGeneric => '登录失败。请重试。';
+
+  @override
+  String get homeMyWork => '我的工作';
+
+  @override
+  String get homeProjects => '项目';
+
+  @override
+  String get projectsTitle => '项目';
+
+  @override
+  String get projectsEmpty => '您还不是任何项目的成员。';
+
+  @override
+  String get projectsError => '无法加载您的项目。';
+
+  @override
+  String get retry => '重试';
 }

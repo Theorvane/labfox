@@ -12,7 +12,10 @@
   "@homeSignedInAs": {
     "description": "Shown on the home screen with the signed-in user's username",
     "placeholders": {
-      "username": { "type": "String", "example": "jungwon" }
+      "username": {
+        "type": "String",
+        "example": "jungwon"
+      }
     }
   },
   "homeEmptyWork": "Your issues, merge requests and pipelines will appear here.",
@@ -28,27 +31,75 @@
     "description": "Heading on the sign-in screen"
   },
   "signInInstanceLabel": "GitLab instance URL",
-  "@signInInstanceLabel": { "description": "Label for the instance URL field" },
+  "@signInInstanceLabel": {
+    "description": "Label for the instance URL field"
+  },
   "signInInstanceRequired": "Enter your GitLab instance URL.",
-  "@signInInstanceRequired": { "description": "Validation when the instance URL is empty" },
+  "@signInInstanceRequired": {
+    "description": "Validation when the instance URL is empty"
+  },
   "signInInstanceInvalid": "Enter a valid https URL, for example https://gitlab.com.",
-  "@signInInstanceInvalid": { "description": "Validation when the instance URL is not a valid https URL" },
+  "@signInInstanceInvalid": {
+    "description": "Validation when the instance URL is not a valid https URL"
+  },
   "signInTokenLabel": "Personal Access Token",
-  "@signInTokenLabel": { "description": "Label for the token field" },
+  "@signInTokenLabel": {
+    "description": "Label for the token field"
+  },
   "signInTokenHelp": "Needs the api and read_user scopes.",
-  "@signInTokenHelp": { "description": "Helper text under the token field" },
+  "@signInTokenHelp": {
+    "description": "Helper text under the token field"
+  },
   "signInTokenToggle": "Show or hide the token",
-  "@signInTokenToggle": { "description": "Tooltip for the token visibility toggle" },
+  "@signInTokenToggle": {
+    "description": "Tooltip for the token visibility toggle"
+  },
   "signInTokenRequired": "Enter a Personal Access Token.",
-  "@signInTokenRequired": { "description": "Validation when the token is empty" },
+  "@signInTokenRequired": {
+    "description": "Validation when the token is empty"
+  },
   "signInSubmit": "Sign in",
-  "@signInSubmit": { "description": "Label for the sign-in button" },
+  "@signInSubmit": {
+    "description": "Label for the sign-in button"
+  },
   "signInErrorToken": "The token was rejected. Check that it is correct and has not expired.",
-  "@signInErrorToken": { "description": "Shown when the instance returns 401" },
+  "@signInErrorToken": {
+    "description": "Shown when the instance returns 401"
+  },
   "signInErrorScope": "The token is missing a required scope. It needs api and read_user.",
-  "@signInErrorScope": { "description": "Shown when the instance returns 403" },
+  "@signInErrorScope": {
+    "description": "Shown when the instance returns 403"
+  },
   "signInErrorUnreachable": "Could not reach that instance. Check the URL, your network, and whether the certificate is trusted.",
-  "@signInErrorUnreachable": { "description": "Shown when the instance cannot be reached" },
+  "@signInErrorUnreachable": {
+    "description": "Shown when the instance cannot be reached"
+  },
   "signInErrorGeneric": "Sign-in failed. Please try again.",
-  "@signInErrorGeneric": { "description": "Fallback sign-in error" }
+  "@signInErrorGeneric": {
+    "description": "Fallback sign-in error"
+  },
+  "homeMyWork": "My work",
+  "@homeMyWork": {
+    "description": "Section heading on the home screen"
+  },
+  "homeProjects": "Projects",
+  "@homeProjects": {
+    "description": "Home entry that opens the projects list"
+  },
+  "projectsTitle": "Projects",
+  "@projectsTitle": {
+    "description": "Title of the projects list screen"
+  },
+  "projectsEmpty": "You are not a member of any projects yet.",
+  "@projectsEmpty": {
+    "description": "Shown when the projects list is empty"
+  },
+  "projectsError": "Could not load your projects.",
+  "@projectsError": {
+    "description": "Shown when the projects list fails to load"
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "Label for a retry button"
+  }
 }
