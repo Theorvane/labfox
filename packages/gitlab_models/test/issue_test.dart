@@ -18,6 +18,29 @@ void main() {
       expect(issue.id, isNot(issue.iid));
     });
 
+    test('parses project_id so a search hit can be opened in its project', () {
+      final issue = Issue.fromJson(const {
+        'id': 1,
+        'iid': 5,
+        'title': 't',
+        'state': 'opened',
+        'project_id': 42,
+      });
+
+      expect(issue.projectId, 42);
+    });
+
+    test('leaves project_id null when absent', () {
+      final issue = Issue.fromJson(const {
+        'id': 1,
+        'iid': 5,
+        'title': 't',
+        'state': 'opened',
+      });
+
+      expect(issue.projectId, isNull);
+    });
+
     test('parses state, author, and description', () {
       final issue = Issue.fromJson(const {
         'id': 1,

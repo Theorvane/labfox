@@ -133,5 +133,15 @@
   "inboxActionMarked": "एक कार्य जोड़ा",
   "inboxActionApprovalRequired": "अनुमोदन आवश्यक",
   "inboxActionUnmergeable": "मर्ज नहीं किया जा सकता",
-  "inboxActionDirectlyAddressed": "आपको सीधे संबोधित किया"
+  "inboxActionDirectlyAddressed": "आपको सीधे संबोधित किया",
+  "homeSearch": "खोज",
+  "searchTitle": "खोज",
+  "searchHint": "प्रोजेक्ट, इश्यू, मर्ज अनुरोध खोजें",
+  "searchScopeProjects": "प्रोजेक्ट",
+  "searchScopeIssues": "इश्यू",
+  "searchScopeMergeRequests": "मर्ज अनुरोध",
+  "searchInitial": "खोजने के लिए टाइप करें।",
+  "searchEmpty": "कोई परिणाम नहीं मिला।",
+  "searchError": "खोज पूरी नहीं हो सकी।",
+  "searchLoadMore": "और लोड करें"
 }

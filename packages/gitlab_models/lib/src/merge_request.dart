@@ -20,6 +20,9 @@ abstract class MergeRequest with _$MergeRequest {
     required String state,
     @JsonKey(name: 'source_branch') required String sourceBranch,
     @JsonKey(name: 'target_branch') required String targetBranch,
+    // Present in list and search responses; lets a search hit route to its
+    // project. Absent when a single MR is fetched under a known project.
+    @JsonKey(name: 'project_id') int? projectId,
     String? description,
     User? author,
     @JsonKey(fromJson: Label.listFromJson)

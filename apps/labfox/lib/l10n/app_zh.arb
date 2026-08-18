@@ -133,5 +133,15 @@
   "inboxActionMarked": "添加了待办",
   "inboxActionApprovalRequired": "需要批准",
   "inboxActionUnmergeable": "无法合并",
-  "inboxActionDirectlyAddressed": "直接提及你"
+  "inboxActionDirectlyAddressed": "直接提及你",
+  "homeSearch": "搜索",
+  "searchTitle": "搜索",
+  "searchHint": "搜索项目、议题、合并请求",
+  "searchScopeProjects": "项目",
+  "searchScopeIssues": "议题",
+  "searchScopeMergeRequests": "合并请求",
+  "searchInitial": "输入以搜索。",
+  "searchEmpty": "未找到结果。",
+  "searchError": "搜索无法完成。",
+  "searchLoadMore": "加载更多"
 }

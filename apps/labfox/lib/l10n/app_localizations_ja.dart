@@ -420,4 +420,34 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get inboxActionDirectlyAddressed => 'あなたを直接指定';
+
+  @override
+  String get homeSearch => '検索';
+
+  @override
+  String get searchTitle => '検索';
+
+  @override
+  String get searchHint => 'プロジェクト・イシュー・マージリクエストを検索';
+
+  @override
+  String get searchScopeProjects => 'プロジェクト';
+
+  @override
+  String get searchScopeIssues => 'イシュー';
+
+  @override
+  String get searchScopeMergeRequests => 'マージリクエスト';
+
+  @override
+  String get searchInitial => '検索語を入力してください。';
+
+  @override
+  String get searchEmpty => '結果が見つかりませんでした。';
+
+  @override
+  String get searchError => '検索を完了できませんでした。';
+
+  @override
+  String get searchLoadMore => 'さらに読み込む';
 }

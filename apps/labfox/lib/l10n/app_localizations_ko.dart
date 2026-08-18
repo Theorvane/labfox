@@ -421,4 +421,34 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get inboxActionDirectlyAddressed => '나를 직접 지목함';
+
+  @override
+  String get homeSearch => '검색';
+
+  @override
+  String get searchTitle => '검색';
+
+  @override
+  String get searchHint => '프로젝트, 이슈, 병합 요청 검색';
+
+  @override
+  String get searchScopeProjects => '프로젝트';
+
+  @override
+  String get searchScopeIssues => '이슈';
+
+  @override
+  String get searchScopeMergeRequests => '병합 요청';
+
+  @override
+  String get searchInitial => '검색어를 입력하세요.';
+
+  @override
+  String get searchEmpty => '검색 결과가 없습니다.';
+
+  @override
+  String get searchError => '검색을 완료할 수 없습니다.';
+
+  @override
+  String get searchLoadMore => '더 보기';
 }

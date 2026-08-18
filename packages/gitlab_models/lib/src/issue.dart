@@ -18,6 +18,9 @@ abstract class Issue with _$Issue {
     required int iid,
     required String title,
     required String state,
+    // Present in list and search responses; lets a search hit route to its
+    // project. Absent when a single issue is fetched under a known project.
+    @JsonKey(name: 'project_id') int? projectId,
     String? description,
     User? author,
     @JsonKey(fromJson: Label.listFromJson)

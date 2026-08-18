@@ -15,7 +15,9 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MergeRequest {
 
- int get id; int get iid; String get title; String get state;@JsonKey(name: 'source_branch') String get sourceBranch;@JsonKey(name: 'target_branch') String get targetBranch; String? get description; User? get author;@JsonKey(fromJson: Label.listFromJson) List<Label> get labels; bool get draft;@JsonKey(name: 'merge_status') String? get mergeStatus;@JsonKey(name: 'user_notes_count') int get commentCount;@JsonKey(name: 'web_url') String? get webUrl;@JsonKey(name: 'created_at') DateTime? get createdAt;
+ int get id; int get iid; String get title; String get state;@JsonKey(name: 'source_branch') String get sourceBranch;@JsonKey(name: 'target_branch') String get targetBranch;// Present in list and search responses; lets a search hit route to its
+// project. Absent when a single MR is fetched under a known project.
+@JsonKey(name: 'project_id') int? get projectId; String? get description; User? get author;@JsonKey(fromJson: Label.listFromJson) List<Label> get labels; bool get draft;@JsonKey(name: 'merge_status') String? get mergeStatus;@JsonKey(name: 'user_notes_count') int get commentCount;@JsonKey(name: 'web_url') String? get webUrl;@JsonKey(name: 'created_at') DateTime? get createdAt;
 /// Create a copy of MergeRequest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +30,16 @@ $MergeRequestCopyWith<MergeRequest> get copyWith => _$MergeRequestCopyWithImpl<M
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MergeRequest&&(identical(other.id, id) || other.id == id)&&(identical(other.iid, iid) || other.iid == iid)&&(identical(other.title, title) || other.title == title)&&(identical(other.state, state) || other.state == state)&&(identical(other.sourceBranch, sourceBranch) || other.sourceBranch == sourceBranch)&&(identical(other.targetBranch, targetBranch) || other.targetBranch == targetBranch)&&(identical(other.description, description) || other.description == description)&&(identical(other.author, author) || other.author == author)&&const DeepCollectionEquality().equals(other.labels, labels)&&(identical(other.draft, draft) || other.draft == draft)&&(identical(other.mergeStatus, mergeStatus) || other.mergeStatus == mergeStatus)&&(identical(other.commentCount, commentCount) || other.commentCount == commentCount)&&(identical(other.webUrl, webUrl) || other.webUrl == webUrl)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MergeRequest&&(identical(other.id, id) || other.id == id)&&(identical(other.iid, iid) || other.iid == iid)&&(identical(other.title, title) || other.title == title)&&(identical(other.state, state) || other.state == state)&&(identical(other.sourceBranch, sourceBranch) || other.sourceBranch == sourceBranch)&&(identical(other.targetBranch, targetBranch) || other.targetBranch == targetBranch)&&(identical(other.projectId, projectId) || other.projectId == projectId)&&(identical(other.description, description) || other.description == description)&&(identical(other.author, author) || other.author == author)&&const DeepCollectionEquality().equals(other.labels, labels)&&(identical(other.draft, draft) || other.draft == draft)&&(identical(other.mergeStatus, mergeStatus) || other.mergeStatus == mergeStatus)&&(identical(other.commentCount, commentCount) || other.commentCount == commentCount)&&(identical(other.webUrl, webUrl) || other.webUrl == webUrl)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,iid,title,state,sourceBranch,targetBranch,description,author,const DeepCollectionEquality().hash(labels),draft,mergeStatus,commentCount,webUrl,createdAt);
+int get hashCode => Object.hash(runtimeType,id,iid,title,state,sourceBranch,targetBranch,projectId,description,author,const DeepCollectionEquality().hash(labels),draft,mergeStatus,commentCount,webUrl,createdAt);
 
 @override
 String toString() {
-  return 'MergeRequest(id: $id, iid: $iid, title: $title, state: $state, sourceBranch: $sourceBranch, targetBranch: $targetBranch, description: $description, author: $author, labels: $labels, draft: $draft, mergeStatus: $mergeStatus, commentCount: $commentCount, webUrl: $webUrl, createdAt: $createdAt)';
+  return 'MergeRequest(id: $id, iid: $iid, title: $title, state: $state, sourceBranch: $sourceBranch, targetBranch: $targetBranch, projectId: $projectId, description: $description, author: $author, labels: $labels, draft: $draft, mergeStatus: $mergeStatus, commentCount: $commentCount, webUrl: $webUrl, createdAt: $createdAt)';
 }
 
 
@@ -48,7 +50,7 @@ abstract mixin class $MergeRequestCopyWith<$Res>  {
   factory $MergeRequestCopyWith(MergeRequest value, $Res Function(MergeRequest) _then) = _$MergeRequestCopyWithImpl;
 @useResult
 $Res call({
- int id, int iid, String title, String state,@JsonKey(name: 'source_branch') String sourceBranch,@JsonKey(name: 'target_branch') String targetBranch, String? description, User? author,@JsonKey(fromJson: Label.listFromJson) List<Label> labels, bool draft,@JsonKey(name: 'merge_status') String? mergeStatus,@JsonKey(name: 'user_notes_count') int commentCount,@JsonKey(name: 'web_url') String? webUrl,@JsonKey(name: 'created_at') DateTime? createdAt
+ int id, int iid, String title, String state,@JsonKey(name: 'source_branch') String sourceBranch,@JsonKey(name: 'target_branch') String targetBranch,@JsonKey(name: 'project_id') int? projectId, String? description, User? author,@JsonKey(fromJson: Label.listFromJson) List<Label> labels, bool draft,@JsonKey(name: 'merge_status') String? mergeStatus,@JsonKey(name: 'user_notes_count') int commentCount,@JsonKey(name: 'web_url') String? webUrl,@JsonKey(name: 'created_at') DateTime? createdAt
 });
 
 
@@ -65,7 +67,7 @@ class _$MergeRequestCopyWithImpl<$Res>
 
 /// Create a copy of MergeRequest
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? iid = null,Object? title = null,Object? state = null,Object? sourceBranch = null,Object? targetBranch = null,Object? description = freezed,Object? author = freezed,Object? labels = null,Object? draft = null,Object? mergeStatus = freezed,Object? commentCount = null,Object? webUrl = freezed,Object? createdAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? iid = null,Object? title = null,Object? state = null,Object? sourceBranch = null,Object? targetBranch = null,Object? projectId = freezed,Object? description = freezed,Object? author = freezed,Object? labels = null,Object? draft = null,Object? mergeStatus = freezed,Object? commentCount = null,Object? webUrl = freezed,Object? createdAt = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,iid: null == iid ? _self.iid : iid // ignore: cast_nullable_to_non_nullable
@@ -73,7 +75,8 @@ as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_no
 as String,state: null == state ? _self.state : state // ignore: cast_nullable_to_non_nullable
 as String,sourceBranch: null == sourceBranch ? _self.sourceBranch : sourceBranch // ignore: cast_nullable_to_non_nullable
 as String,targetBranch: null == targetBranch ? _self.targetBranch : targetBranch // ignore: cast_nullable_to_non_nullable
-as String,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String,projectId: freezed == projectId ? _self.projectId : projectId // ignore: cast_nullable_to_non_nullable
+as int?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String?,author: freezed == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
 as User?,labels: null == labels ? _self.labels : labels // ignore: cast_nullable_to_non_nullable
 as List<Label>,draft: null == draft ? _self.draft : draft // ignore: cast_nullable_to_non_nullable
@@ -178,10 +181,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int iid,  String title,  String state, @JsonKey(name: 'source_branch')  String sourceBranch, @JsonKey(name: 'target_branch')  String targetBranch,  String? description,  User? author, @JsonKey(fromJson: Label.listFromJson)  List<Label> labels,  bool draft, @JsonKey(name: 'merge_status')  String? mergeStatus, @JsonKey(name: 'user_notes_count')  int commentCount, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'created_at')  DateTime? createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int iid,  String title,  String state, @JsonKey(name: 'source_branch')  String sourceBranch, @JsonKey(name: 'target_branch')  String targetBranch, @JsonKey(name: 'project_id')  int? projectId,  String? description,  User? author, @JsonKey(fromJson: Label.listFromJson)  List<Label> labels,  bool draft, @JsonKey(name: 'merge_status')  String? mergeStatus, @JsonKey(name: 'user_notes_count')  int commentCount, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'created_at')  DateTime? createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MergeRequest() when $default != null:
-return $default(_that.id,_that.iid,_that.title,_that.state,_that.sourceBranch,_that.targetBranch,_that.description,_that.author,_that.labels,_that.draft,_that.mergeStatus,_that.commentCount,_that.webUrl,_that.createdAt);case _:
+return $default(_that.id,_that.iid,_that.title,_that.state,_that.sourceBranch,_that.targetBranch,_that.projectId,_that.description,_that.author,_that.labels,_that.draft,_that.mergeStatus,_that.commentCount,_that.webUrl,_that.createdAt);case _:
   return orElse();
 
 }
@@ -199,10 +202,10 @@ return $default(_that.id,_that.iid,_that.title,_that.state,_that.sourceBranch,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int iid,  String title,  String state, @JsonKey(name: 'source_branch')  String sourceBranch, @JsonKey(name: 'target_branch')  String targetBranch,  String? description,  User? author, @JsonKey(fromJson: Label.listFromJson)  List<Label> labels,  bool draft, @JsonKey(name: 'merge_status')  String? mergeStatus, @JsonKey(name: 'user_notes_count')  int commentCount, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'created_at')  DateTime? createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int iid,  String title,  String state, @JsonKey(name: 'source_branch')  String sourceBranch, @JsonKey(name: 'target_branch')  String targetBranch, @JsonKey(name: 'project_id')  int? projectId,  String? description,  User? author, @JsonKey(fromJson: Label.listFromJson)  List<Label> labels,  bool draft, @JsonKey(name: 'merge_status')  String? mergeStatus, @JsonKey(name: 'user_notes_count')  int commentCount, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'created_at')  DateTime? createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _MergeRequest():
-return $default(_that.id,_that.iid,_that.title,_that.state,_that.sourceBranch,_that.targetBranch,_that.description,_that.author,_that.labels,_that.draft,_that.mergeStatus,_that.commentCount,_that.webUrl,_that.createdAt);case _:
+return $default(_that.id,_that.iid,_that.title,_that.state,_that.sourceBranch,_that.targetBranch,_that.projectId,_that.description,_that.author,_that.labels,_that.draft,_that.mergeStatus,_that.commentCount,_that.webUrl,_that.createdAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -219,10 +222,10 @@ return $default(_that.id,_that.iid,_that.title,_that.state,_that.sourceBranch,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int iid,  String title,  String state, @JsonKey(name: 'source_branch')  String sourceBranch, @JsonKey(name: 'target_branch')  String targetBranch,  String? description,  User? author, @JsonKey(fromJson: Label.listFromJson)  List<Label> labels,  bool draft, @JsonKey(name: 'merge_status')  String? mergeStatus, @JsonKey(name: 'user_notes_count')  int commentCount, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'created_at')  DateTime? createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int iid,  String title,  String state, @JsonKey(name: 'source_branch')  String sourceBranch, @JsonKey(name: 'target_branch')  String targetBranch, @JsonKey(name: 'project_id')  int? projectId,  String? description,  User? author, @JsonKey(fromJson: Label.listFromJson)  List<Label> labels,  bool draft, @JsonKey(name: 'merge_status')  String? mergeStatus, @JsonKey(name: 'user_notes_count')  int commentCount, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'created_at')  DateTime? createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _MergeRequest() when $default != null:
-return $default(_that.id,_that.iid,_that.title,_that.state,_that.sourceBranch,_that.targetBranch,_that.description,_that.author,_that.labels,_that.draft,_that.mergeStatus,_that.commentCount,_that.webUrl,_that.createdAt);case _:
+return $default(_that.id,_that.iid,_that.title,_that.state,_that.sourceBranch,_that.targetBranch,_that.projectId,_that.description,_that.author,_that.labels,_that.draft,_that.mergeStatus,_that.commentCount,_that.webUrl,_that.createdAt);case _:
   return null;
 
 }
@@ -234,7 +237,7 @@ return $default(_that.id,_that.iid,_that.title,_that.state,_that.sourceBranch,_t
 @JsonSerializable()
 
 class _MergeRequest extends MergeRequest {
-  const _MergeRequest({required this.id, required this.iid, required this.title, required this.state, @JsonKey(name: 'source_branch') required this.sourceBranch, @JsonKey(name: 'target_branch') required this.targetBranch, this.description, this.author, @JsonKey(fromJson: Label.listFromJson) final  List<Label> labels = const <Label>[], this.draft = false, @JsonKey(name: 'merge_status') this.mergeStatus, @JsonKey(name: 'user_notes_count') this.commentCount = 0, @JsonKey(name: 'web_url') this.webUrl, @JsonKey(name: 'created_at') this.createdAt}): _labels = labels,super._();
+  const _MergeRequest({required this.id, required this.iid, required this.title, required this.state, @JsonKey(name: 'source_branch') required this.sourceBranch, @JsonKey(name: 'target_branch') required this.targetBranch, @JsonKey(name: 'project_id') this.projectId, this.description, this.author, @JsonKey(fromJson: Label.listFromJson) final  List<Label> labels = const <Label>[], this.draft = false, @JsonKey(name: 'merge_status') this.mergeStatus, @JsonKey(name: 'user_notes_count') this.commentCount = 0, @JsonKey(name: 'web_url') this.webUrl, @JsonKey(name: 'created_at') this.createdAt}): _labels = labels,super._();
   factory _MergeRequest.fromJson(Map<String, dynamic> json) => _$MergeRequestFromJson(json);
 
 @override final  int id;
@@ -243,6 +246,9 @@ class _MergeRequest extends MergeRequest {
 @override final  String state;
 @override@JsonKey(name: 'source_branch') final  String sourceBranch;
 @override@JsonKey(name: 'target_branch') final  String targetBranch;
+// Present in list and search responses; lets a search hit route to its
+// project. Absent when a single MR is fetched under a known project.
+@override@JsonKey(name: 'project_id') final  int? projectId;
 @override final  String? description;
 @override final  User? author;
  final  List<Label> _labels;
@@ -271,16 +277,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MergeRequest&&(identical(other.id, id) || other.id == id)&&(identical(other.iid, iid) || other.iid == iid)&&(identical(other.title, title) || other.title == title)&&(identical(other.state, state) || other.state == state)&&(identical(other.sourceBranch, sourceBranch) || other.sourceBranch == sourceBranch)&&(identical(other.targetBranch, targetBranch) || other.targetBranch == targetBranch)&&(identical(other.description, description) || other.description == description)&&(identical(other.author, author) || other.author == author)&&const DeepCollectionEquality().equals(other._labels, _labels)&&(identical(other.draft, draft) || other.draft == draft)&&(identical(other.mergeStatus, mergeStatus) || other.mergeStatus == mergeStatus)&&(identical(other.commentCount, commentCount) || other.commentCount == commentCount)&&(identical(other.webUrl, webUrl) || other.webUrl == webUrl)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MergeRequest&&(identical(other.id, id) || other.id == id)&&(identical(other.iid, iid) || other.iid == iid)&&(identical(other.title, title) || other.title == title)&&(identical(other.state, state) || other.state == state)&&(identical(other.sourceBranch, sourceBranch) || other.sourceBranch == sourceBranch)&&(identical(other.targetBranch, targetBranch) || other.targetBranch == targetBranch)&&(identical(other.projectId, projectId) || other.projectId == projectId)&&(identical(other.description, description) || other.description == description)&&(identical(other.author, author) || other.author == author)&&const DeepCollectionEquality().equals(other._labels, _labels)&&(identical(other.draft, draft) || other.draft == draft)&&(identical(other.mergeStatus, mergeStatus) || other.mergeStatus == mergeStatus)&&(identical(other.commentCount, commentCount) || other.commentCount == commentCount)&&(identical(other.webUrl, webUrl) || other.webUrl == webUrl)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,iid,title,state,sourceBranch,targetBranch,description,author,const DeepCollectionEquality().hash(_labels),draft,mergeStatus,commentCount,webUrl,createdAt);
+int get hashCode => Object.hash(runtimeType,id,iid,title,state,sourceBranch,targetBranch,projectId,description,author,const DeepCollectionEquality().hash(_labels),draft,mergeStatus,commentCount,webUrl,createdAt);
 
 @override
 String toString() {
-  return 'MergeRequest(id: $id, iid: $iid, title: $title, state: $state, sourceBranch: $sourceBranch, targetBranch: $targetBranch, description: $description, author: $author, labels: $labels, draft: $draft, mergeStatus: $mergeStatus, commentCount: $commentCount, webUrl: $webUrl, createdAt: $createdAt)';
+  return 'MergeRequest(id: $id, iid: $iid, title: $title, state: $state, sourceBranch: $sourceBranch, targetBranch: $targetBranch, projectId: $projectId, description: $description, author: $author, labels: $labels, draft: $draft, mergeStatus: $mergeStatus, commentCount: $commentCount, webUrl: $webUrl, createdAt: $createdAt)';
 }
 
 
@@ -291,7 +297,7 @@ abstract mixin class _$MergeRequestCopyWith<$Res> implements $MergeRequestCopyWi
   factory _$MergeRequestCopyWith(_MergeRequest value, $Res Function(_MergeRequest) _then) = __$MergeRequestCopyWithImpl;
 @override @useResult
 $Res call({
- int id, int iid, String title, String state,@JsonKey(name: 'source_branch') String sourceBranch,@JsonKey(name: 'target_branch') String targetBranch, String? description, User? author,@JsonKey(fromJson: Label.listFromJson) List<Label> labels, bool draft,@JsonKey(name: 'merge_status') String? mergeStatus,@JsonKey(name: 'user_notes_count') int commentCount,@JsonKey(name: 'web_url') String? webUrl,@JsonKey(name: 'created_at') DateTime? createdAt
+ int id, int iid, String title, String state,@JsonKey(name: 'source_branch') String sourceBranch,@JsonKey(name: 'target_branch') String targetBranch,@JsonKey(name: 'project_id') int? projectId, String? description, User? author,@JsonKey(fromJson: Label.listFromJson) List<Label> labels, bool draft,@JsonKey(name: 'merge_status') String? mergeStatus,@JsonKey(name: 'user_notes_count') int commentCount,@JsonKey(name: 'web_url') String? webUrl,@JsonKey(name: 'created_at') DateTime? createdAt
 });
 
 
@@ -308,7 +314,7 @@ class __$MergeRequestCopyWithImpl<$Res>
 
 /// Create a copy of MergeRequest
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? iid = null,Object? title = null,Object? state = null,Object? sourceBranch = null,Object? targetBranch = null,Object? description = freezed,Object? author = freezed,Object? labels = null,Object? draft = null,Object? mergeStatus = freezed,Object? commentCount = null,Object? webUrl = freezed,Object? createdAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? iid = null,Object? title = null,Object? state = null,Object? sourceBranch = null,Object? targetBranch = null,Object? projectId = freezed,Object? description = freezed,Object? author = freezed,Object? labels = null,Object? draft = null,Object? mergeStatus = freezed,Object? commentCount = null,Object? webUrl = freezed,Object? createdAt = freezed,}) {
   return _then(_MergeRequest(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,iid: null == iid ? _self.iid : iid // ignore: cast_nullable_to_non_nullable
@@ -316,7 +322,8 @@ as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_no
 as String,state: null == state ? _self.state : state // ignore: cast_nullable_to_non_nullable
 as String,sourceBranch: null == sourceBranch ? _self.sourceBranch : sourceBranch // ignore: cast_nullable_to_non_nullable
 as String,targetBranch: null == targetBranch ? _self.targetBranch : targetBranch // ignore: cast_nullable_to_non_nullable
-as String,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String,projectId: freezed == projectId ? _self.projectId : projectId // ignore: cast_nullable_to_non_nullable
+as int?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String?,author: freezed == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
 as User?,labels: null == labels ? _self._labels : labels // ignore: cast_nullable_to_non_nullable
 as List<Label>,draft: null == draft ? _self.draft : draft // ignore: cast_nullable_to_non_nullable

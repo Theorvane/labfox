@@ -907,6 +907,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Directly addressed you'**
   String get inboxActionDirectlyAddressed;
+
+  /// Home entry that opens search
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get homeSearch;
+
+  /// Title of the search screen
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get searchTitle;
+
+  /// Placeholder in the search field
+  ///
+  /// In en, this message translates to:
+  /// **'Search projects, issues, merge requests'**
+  String get searchHint;
+
+  /// Search scope: projects
+  ///
+  /// In en, this message translates to:
+  /// **'Projects'**
+  String get searchScopeProjects;
+
+  /// Search scope: issues
+  ///
+  /// In en, this message translates to:
+  /// **'Issues'**
+  String get searchScopeIssues;
+
+  /// Search scope: merge requests
+  ///
+  /// In en, this message translates to:
+  /// **'Merge requests'**
+  String get searchScopeMergeRequests;
+
+  /// Shown before the user has entered a search term
+  ///
+  /// In en, this message translates to:
+  /// **'Type to search.'**
+  String get searchInitial;
+
+  /// Shown when a search returns nothing
+  ///
+  /// In en, this message translates to:
+  /// **'No results found.'**
+  String get searchEmpty;
+
+  /// Shown when a search request fails
+  ///
+  /// In en, this message translates to:
+  /// **'The search could not be completed.'**
+  String get searchError;
+
+  /// Button that loads the next page of search results
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get searchLoadMore;
 }
 
 class _AppLocalizationsDelegate
