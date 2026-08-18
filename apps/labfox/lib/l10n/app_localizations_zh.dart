@@ -239,4 +239,25 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get changesOmitted => 'diff 太大或已折叠，未显示。';
+
+  @override
+  String get commentsHeading => '评论';
+
+  @override
+  String get commentsError => '无法加载评论。';
+
+  @override
+  String get commentsEmpty => '还没有评论。';
+
+  @override
+  String get commentComposerHint => '写评论…';
+
+  @override
+  String get commentComposerSubmit => '评论';
+
+  @override
+  String get commentPostForbidden => '您没有权限在此评论。请检查您的令牌是否具有 api 权限范围。';
+
+  @override
+  String get commentPostError => '无法发布您的评论。请重试。';
 }

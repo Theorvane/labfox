@@ -246,4 +246,27 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get changesOmitted =>
       'diff बहुत बड़ा है या संक्षिप्त है, इसलिए नहीं दिखाया गया।';
+
+  @override
+  String get commentsHeading => 'टिप्पणियाँ';
+
+  @override
+  String get commentsError => 'टिप्पणियाँ लोड नहीं हो सकीं।';
+
+  @override
+  String get commentsEmpty => 'अभी तक कोई टिप्पणी नहीं।';
+
+  @override
+  String get commentComposerHint => 'एक टिप्पणी लिखें…';
+
+  @override
+  String get commentComposerSubmit => 'टिप्पणी करें';
+
+  @override
+  String get commentPostForbidden =>
+      'आपको यहाँ टिप्पणी करने की अनुमति नहीं है। जाँचें कि आपके टोकन में api स्कोप है।';
+
+  @override
+  String get commentPostError =>
+      'आपकी टिप्पणी पोस्ट नहीं हो सकी। कृपया पुनः प्रयास करें।';
 }

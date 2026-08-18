@@ -1,11 +1,13 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gitlab_api/gitlab_api.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/router.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../comments/presentation/widgets/comment_thread.dart';
 import 'controllers/merge_requests_controllers.dart';
 
 /// One merge request: title, state, branches, labels, and the rendered
@@ -98,6 +100,12 @@ class MergeRequestDetailScreen extends ConsumerWidget {
                 l10n.mergeRequestNoDescription,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
+            const SizedBox(height: LabFoxSpacing.xl),
+            CommentThread(
+              type: NoteableType.mergeRequest,
+              projectId: projectId,
+              iid: iid,
+            ),
           ],
         ),
       ),

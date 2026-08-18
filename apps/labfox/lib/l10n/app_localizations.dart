@@ -559,6 +559,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Diff not shown because it is too large or collapsed.'**
   String get changesOmitted;
+
+  /// Heading above a comment thread
+  ///
+  /// In en, this message translates to:
+  /// **'Comments'**
+  String get commentsHeading;
+
+  /// Shown when comments fail to load
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load comments.'**
+  String get commentsError;
+
+  /// Shown when there are no comments
+  ///
+  /// In en, this message translates to:
+  /// **'No comments yet.'**
+  String get commentsEmpty;
+
+  /// Placeholder in the comment composer
+  ///
+  /// In en, this message translates to:
+  /// **'Write a comment…'**
+  String get commentComposerHint;
+
+  /// Button to post a comment
+  ///
+  /// In en, this message translates to:
+  /// **'Comment'**
+  String get commentComposerSubmit;
+
+  /// Shown when posting a comment is forbidden (403)
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have permission to comment here. Check that your token has the api scope.'**
+  String get commentPostForbidden;
+
+  /// Generic comment post error
+  ///
+  /// In en, this message translates to:
+  /// **'Could not post your comment. Please try again.'**
+  String get commentPostError;
 }
 
 class _AppLocalizationsDelegate

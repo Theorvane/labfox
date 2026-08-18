@@ -75,5 +75,12 @@
   "changesBinary": "バイナリファイル — 表示しません。",
   "commitViewChanges": "変更を表示",
   "mrViewChanges": "変更を表示",
-  "changesOmitted": "diff が大きすぎるか折りたたまれているため表示しません。"
+  "changesOmitted": "diff が大きすぎるか折りたたまれているため表示しません。",
+  "commentsHeading": "コメント",
+  "commentsError": "コメントを読み込めませんでした。",
+  "commentsEmpty": "まだコメントはありません。",
+  "commentComposerHint": "コメントを入力…",
+  "commentComposerSubmit": "コメント",
+  "commentPostForbidden": "ここにコメントする権限がありません。トークンに api スコープがあるか確認してください。",
+  "commentPostError": "コメントを投稿できませんでした。もう一度お試しください。"
 }

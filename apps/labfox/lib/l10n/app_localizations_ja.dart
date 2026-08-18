@@ -241,4 +241,26 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get changesOmitted => 'diff が大きすぎるか折りたたまれているため表示しません。';
+
+  @override
+  String get commentsHeading => 'コメント';
+
+  @override
+  String get commentsError => 'コメントを読み込めませんでした。';
+
+  @override
+  String get commentsEmpty => 'まだコメントはありません。';
+
+  @override
+  String get commentComposerHint => 'コメントを入力…';
+
+  @override
+  String get commentComposerSubmit => 'コメント';
+
+  @override
+  String get commentPostForbidden =>
+      'ここにコメントする権限がありません。トークンに api スコープがあるか確認してください。';
+
+  @override
+  String get commentPostError => 'コメントを投稿できませんでした。もう一度お試しください。';
 }
