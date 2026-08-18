@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="brand/generated/icon-128.png" width="96" height="96" alt="LabFox">
+</p>
+
 # LabFox
 
 **A Flutter-based cross-platform GitLab workflow client that pairs GitHub Mobile-grade UX
