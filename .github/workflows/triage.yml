@@ -1,0 +1,73 @@
+name: Triage
+
+# Labels and assignees that cannot be derived from changed paths:
+#   - new issues start unassessed and need an owner
+#   - a pull request's change type comes from its Conventional Commit title
+on:
+  issues:
+    types: [opened, reopened]
+  pull_request_target:
+    types: [opened, edited, reopened]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  triage-issue:
+    name: Triage new issue
+    if: github.event_name == 'issues'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mark as needing triage and assign a maintainer
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.issue.number }}
+        run: |
+          gh issue edit "$NUMBER" --repo "$REPO" --add-label "status:needs-triage"
+          # --add-assignee is best effort: it fails when the account cannot be
+          # assigned (not a collaborator), which must not fail the whole run.
+          gh issue edit "$NUMBER" --repo "$REPO" --add-assignee sjungwon03 || \
+            echo "Could not assign sjungwon03; leaving the issue unassigned."
+
+  triage-pull-request:
+    name: Label pull request by type
+    if: github.event_name == 'pull_request_target'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Derive the type label from the Conventional Commit title
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.pull_request.number }}
+          TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          set -euo pipefail
+          # feat(scope)!: subject  ->  feat
+          TYPE="$(printf '%s' "$TITLE" | sed -nE 's/^([a-z]+)(\([^)]*\))?!?:.*/\1/p')"
+          if [ -z "$TYPE" ]; then
+            echo "Title is not a Conventional Commit; no type label applied."
+            echo "Got: $TITLE"
+            exit 0
+          fi
+          case "$TYPE" in
+            feat|fix|docs|refactor|test|chore)
+              echo "Applying type label: $TYPE"
+              gh pr edit "$NUMBER" --repo "$REPO" --add-label "$TYPE"
+              ;;
+            *)
+              echo "Unknown Conventional Commit type '$TYPE'; no label applied."
+              ;;
+          esac
+
+      - name: Assign the author
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.pull_request.number }}
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          gh pr edit "$NUMBER" --repo "$REPO" --add-assignee "$AUTHOR" || \
+            echo "Could not assign $AUTHOR; outside contributors cannot be assignees."
