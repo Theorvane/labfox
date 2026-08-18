@@ -118,9 +118,9 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                       const Divider(height: 1),
                   itemBuilder: (context, index) {
                     if (index >= page.items.length) {
-                      return _LoadMoreButton(
-                        label: l10n.searchLoadMore,
-                        onPressed: () => ref
+                      return _LoadMoreFooter(
+                        page: page,
+                        onLoadMore: () => ref
                             .read(searchControllerProvider(query).notifier)
                             .loadMore(),
                       );
@@ -177,18 +177,44 @@ class _ResultTile extends StatelessWidget {
   }
 }
 
-class _LoadMoreButton extends StatelessWidget {
-  const _LoadMoreButton({required this.label, required this.onPressed});
+/// The footer under the results: a load-more button, a spinner while the next
+/// page loads, or a message with a retry when it failed. The button is
+/// disabled while a page is in flight so it cannot be fired twice.
+class _LoadMoreFooter extends StatelessWidget {
+  const _LoadMoreFooter({required this.page, required this.onLoadMore});
 
-  final String label;
-  final VoidCallback onPressed;
+  final SearchResults page;
+  final VoidCallback onLoadMore;
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+
+    if (page.loadingMore) {
+      return const Padding(
+        padding: EdgeInsets.all(LabFoxSpacing.md),
+        child: Center(child: CircularProgressIndicator()),
+      );
+    }
+
     return Padding(
       padding: const EdgeInsets.all(LabFoxSpacing.md),
-      child: Center(
-        child: OutlinedButton(onPressed: onPressed, child: Text(label)),
+      child: Column(
+        children: [
+          if (page.loadMoreFailed) ...[
+            Text(
+              l10n.searchError,
+              textAlign: TextAlign.center,
+              style: theme.textTheme.bodySmall,
+            ),
+            const SizedBox(height: LabFoxSpacing.sm),
+          ],
+          OutlinedButton(
+            onPressed: onLoadMore,
+            child: Text(page.loadMoreFailed ? l10n.retry : l10n.searchLoadMore),
+          ),
+        ],
       ),
     );
   }

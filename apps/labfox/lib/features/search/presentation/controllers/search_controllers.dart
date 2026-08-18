@@ -43,24 +43,35 @@ class SearchController extends FamilyAsyncNotifier<SearchResults, SearchQuery> {
 
   Future<void> loadMore() async {
     final current = state.valueOrNull;
-    if (current == null || current.nextPage == null) {
+    if (current == null || current.nextPage == null || current.loadingMore) {
       return;
     }
-    final repo = await ref.read(searchRepositoryProvider.future);
-    if (repo == null) {
-      throw StateError('No authenticated account');
-    }
-    final next = await repo.search(
-      arg.scope,
-      arg.text,
-      page: current.nextPage!,
-    );
     state = AsyncData(
-      SearchResults(
-        items: [...current.items, ...next.items],
-        nextPage: next.nextPage,
-      ),
+      current.copyWith(loadingMore: true, loadMoreFailed: false),
     );
+    try {
+      final repo = await ref.read(searchRepositoryProvider.future);
+      if (repo == null) {
+        throw StateError('No authenticated account');
+      }
+      final next = await repo.search(
+        arg.scope,
+        arg.text,
+        page: current.nextPage!,
+      );
+      state = AsyncData(
+        SearchResults(
+          items: [...current.items, ...next.items],
+          nextPage: next.nextPage,
+        ),
+      );
+    } catch (_) {
+      // Keep the loaded pages and flag a recoverable failure rather than
+      // letting the error escape and leave the button falsely enabled.
+      state = AsyncData(
+        current.copyWith(loadingMore: false, loadMoreFailed: true),
+      );
+    }
   }
 }
 

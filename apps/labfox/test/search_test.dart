@@ -16,6 +16,7 @@ class _FakeRepo extends SearchRepository {
     : super(GitLabClient(baseUrl: 'https://gitlab.com', token: 'glpat-x'));
 
   final List<int> pagesRequested = [];
+  bool failNextPage = false;
 
   @override
   Future<SearchResults> search(
@@ -26,6 +27,9 @@ class _FakeRepo extends SearchRepository {
     pagesRequested.add(page);
     if (page == 1) {
       return SearchResults(items: [_project(7, 'labfox')], nextPage: 2);
+    }
+    if (failNextPage) {
+      throw const GitLabServerException('boom', statusCode: 500);
     }
     return SearchResults(items: [_project(8, 'labcoat')]);
   }
@@ -85,6 +89,34 @@ void main() {
       expect(all.hasMore, isFalse);
       expect(repo.pagesRequested, [1, 2]);
     });
+
+    test(
+      'a failed loadMore keeps the page and flags a recoverable error',
+      () async {
+        final repo = _FakeRepo()..failNextPage = true;
+        final container = ProviderContainer(
+          overrides: [
+            searchRepositoryProvider.overrideWith((ref) async => repo),
+          ],
+        );
+        addTearDown(container.dispose);
+
+        const query = SearchQuery(scope: SearchScope.projects, text: 'lab');
+        await container.read(searchControllerProvider(query).future);
+
+        // Must not throw out of loadMore — an escaping error becomes an
+        // unhandled async error and leaves the button falsely enabled.
+        await container
+            .read(searchControllerProvider(query).notifier)
+            .loadMore();
+
+        final result = container.read(searchControllerProvider(query)).value!;
+        expect(result.items.length, 1, reason: 'first page is preserved');
+        expect(result.loadingMore, isFalse);
+        expect(result.loadMoreFailed, isTrue);
+        expect(result.hasMore, isTrue, reason: 'the page can be retried');
+      },
+    );
   });
 
   group('SearchScreen', () {
@@ -118,6 +150,25 @@ void main() {
 
       expect(find.text('labfox'), findsOneWidget);
       expect(find.text('labcoat'), findsOneWidget);
+    });
+
+    testWidgets('a failed Load more shows a retry, not a silent failure', (
+      tester,
+    ) async {
+      final repo = _FakeRepo()..failNextPage = true;
+      await _pump(tester, repo);
+
+      await tester.enterText(find.byType(TextField), 'lab');
+      await tester.pump(const Duration(milliseconds: 400));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Load more'));
+      await tester.pumpAndSettle();
+
+      // The first page stays, and the failure is surfaced with a retry.
+      expect(find.text('labfox'), findsOneWidget);
+      expect(find.text('The search could not be completed.'), findsOneWidget);
+      expect(find.text('Retry'), findsOneWidget);
     });
   });
 }

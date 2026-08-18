@@ -3,17 +3,36 @@ import 'package:gitlab_api/gitlab_api.dart';
 /// What kind of thing the user is searching for.
 enum SearchScope { projects, issues, mergeRequests }
 
-/// One page of search results plus the cursor to the next page.
+/// The accumulated search results plus the cursor to the next page and the
+/// status of an in-flight or failed load-more.
 ///
 /// Results are a mixed list of [Project], [Issue] or [MergeRequest] depending
-/// on the scope; the screen renders each by its runtime type.
+/// on the scope; the screen renders each by its runtime type. [loadingMore]
+/// and [loadMoreFailed] let the screen disable the button while a page loads
+/// and offer a retry when one fails, instead of dropping the error.
 class SearchResults {
-  const SearchResults({required this.items, this.nextPage});
+  const SearchResults({
+    required this.items,
+    this.nextPage,
+    this.loadingMore = false,
+    this.loadMoreFailed = false,
+  });
 
   final List<Object> items;
   final int? nextPage;
+  final bool loadingMore;
+  final bool loadMoreFailed;
 
   bool get hasMore => nextPage != null;
+
+  SearchResults copyWith({bool? loadingMore, bool? loadMoreFailed}) {
+    return SearchResults(
+      items: items,
+      nextPage: nextPage,
+      loadingMore: loadingMore ?? this.loadingMore,
+      loadMoreFailed: loadMoreFailed ?? this.loadMoreFailed,
+    );
+  }
 }
 
 /// Runs global search for one scope at a time.
