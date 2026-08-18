@@ -23,6 +23,7 @@ import '../features/project_overview/presentation/project_overview_screen.dart';
 import '../features/projects/presentation/projects_screen.dart';
 import '../features/repository/presentation/file_viewer_screen.dart';
 import '../features/repository/presentation/repository_browser_screen.dart';
+import '../features/search/presentation/search_screen.dart';
 
 /// Route paths.
 ///
@@ -36,6 +37,7 @@ abstract final class Routes {
   // Reuses the sign-in screen to add another account while already signed in.
   static const String addAccount = '/sign-in?add=1';
   static const String inbox = '/inbox';
+  static const String search = '/search';
   static const String projects = '/projects';
 
   static String projectOverview(int id) => '/projects/$id';
@@ -119,6 +121,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.inbox,
         builder: (context, state) => const InboxScreen(),
+      ),
+      GoRoute(
+        path: Routes.search,
+        builder: (context, state) => const SearchScreen(),
       ),
       GoRoute(
         path: Routes.projects,

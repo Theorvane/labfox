@@ -434,4 +434,34 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get inboxActionDirectlyAddressed => 'आपको सीधे संबोधित किया';
+
+  @override
+  String get homeSearch => 'खोज';
+
+  @override
+  String get searchTitle => 'खोज';
+
+  @override
+  String get searchHint => 'प्रोजेक्ट, इश्यू, मर्ज अनुरोध खोजें';
+
+  @override
+  String get searchScopeProjects => 'प्रोजेक्ट';
+
+  @override
+  String get searchScopeIssues => 'इश्यू';
+
+  @override
+  String get searchScopeMergeRequests => 'मर्ज अनुरोध';
+
+  @override
+  String get searchInitial => 'खोजने के लिए टाइप करें।';
+
+  @override
+  String get searchEmpty => 'कोई परिणाम नहीं मिला।';
+
+  @override
+  String get searchError => 'खोज पूरी नहीं हो सकी।';
+
+  @override
+  String get searchLoadMore => 'और लोड करें';
 }

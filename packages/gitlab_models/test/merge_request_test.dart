@@ -20,6 +20,20 @@ void main() {
       expect(mr.targetBranch, 'develop');
     });
 
+    test('parses project_id so a search hit can be opened in its project', () {
+      final mr = MergeRequest.fromJson(const {
+        'id': 1,
+        'iid': 1,
+        'title': 't',
+        'state': 'opened',
+        'source_branch': 'a',
+        'target_branch': 'b',
+        'project_id': 42,
+      });
+
+      expect(mr.projectId, 42);
+    });
+
     test('parses the three states', () {
       MergeRequest state(String s) => MergeRequest.fromJson({
         'id': 1,

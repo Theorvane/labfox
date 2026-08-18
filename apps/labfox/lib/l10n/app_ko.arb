@@ -133,5 +133,15 @@
   "inboxActionMarked": "할 일 추가됨",
   "inboxActionApprovalRequired": "승인 필요",
   "inboxActionUnmergeable": "병합할 수 없음",
-  "inboxActionDirectlyAddressed": "나를 직접 지목함"
+  "inboxActionDirectlyAddressed": "나를 직접 지목함",
+  "homeSearch": "검색",
+  "searchTitle": "검색",
+  "searchHint": "프로젝트, 이슈, 병합 요청 검색",
+  "searchScopeProjects": "프로젝트",
+  "searchScopeIssues": "이슈",
+  "searchScopeMergeRequests": "병합 요청",
+  "searchInitial": "검색어를 입력하세요.",
+  "searchEmpty": "검색 결과가 없습니다.",
+  "searchError": "검색을 완료할 수 없습니다.",
+  "searchLoadMore": "더 보기"
 }

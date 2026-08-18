@@ -435,4 +435,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get inboxActionDirectlyAddressed => 'Directly addressed you';
+
+  @override
+  String get homeSearch => 'Search';
+
+  @override
+  String get searchTitle => 'Search';
+
+  @override
+  String get searchHint => 'Search projects, issues, merge requests';
+
+  @override
+  String get searchScopeProjects => 'Projects';
+
+  @override
+  String get searchScopeIssues => 'Issues';
+
+  @override
+  String get searchScopeMergeRequests => 'Merge requests';
+
+  @override
+  String get searchInitial => 'Type to search.';
+
+  @override
+  String get searchEmpty => 'No results found.';
+
+  @override
+  String get searchError => 'The search could not be completed.';
+
+  @override
+  String get searchLoadMore => 'Load more';
 }

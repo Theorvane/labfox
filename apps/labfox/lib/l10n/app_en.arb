@@ -561,5 +561,45 @@
   "inboxActionDirectlyAddressed": "Directly addressed you",
   "@inboxActionDirectlyAddressed": {
     "description": "To-do reason: the user was directly addressed"
+  },
+  "homeSearch": "Search",
+  "@homeSearch": {
+    "description": "Home entry that opens search"
+  },
+  "searchTitle": "Search",
+  "@searchTitle": {
+    "description": "Title of the search screen"
+  },
+  "searchHint": "Search projects, issues, merge requests",
+  "@searchHint": {
+    "description": "Placeholder in the search field"
+  },
+  "searchScopeProjects": "Projects",
+  "@searchScopeProjects": {
+    "description": "Search scope: projects"
+  },
+  "searchScopeIssues": "Issues",
+  "@searchScopeIssues": {
+    "description": "Search scope: issues"
+  },
+  "searchScopeMergeRequests": "Merge requests",
+  "@searchScopeMergeRequests": {
+    "description": "Search scope: merge requests"
+  },
+  "searchInitial": "Type to search.",
+  "@searchInitial": {
+    "description": "Shown before the user has entered a search term"
+  },
+  "searchEmpty": "No results found.",
+  "@searchEmpty": {
+    "description": "Shown when a search returns nothing"
+  },
+  "searchError": "The search could not be completed.",
+  "@searchError": {
+    "description": "Shown when a search request fails"
+  },
+  "searchLoadMore": "Load more",
+  "@searchLoadMore": {
+    "description": "Button that loads the next page of search results"
   }
 }

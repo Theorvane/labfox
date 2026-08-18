@@ -101,6 +101,13 @@ class _MyWork extends StatelessWidget {
             ),
             const Divider(height: 1),
             ListTile(
+              leading: const Icon(Icons.search),
+              title: Text(l10n.homeSearch),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => context.go(Routes.search),
+            ),
+            const Divider(height: 1),
+            ListTile(
               leading: const Icon(Icons.folder_outlined),
               title: Text(l10n.homeProjects),
               trailing: const Icon(Icons.chevron_right),

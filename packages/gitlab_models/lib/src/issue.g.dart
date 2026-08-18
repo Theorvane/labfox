@@ -11,6 +11,7 @@ _Issue _$IssueFromJson(Map<String, dynamic> json) => _Issue(
   iid: (json['iid'] as num).toInt(),
   title: json['title'] as String,
   state: json['state'] as String,
+  projectId: (json['project_id'] as num?)?.toInt(),
   description: json['description'] as String?,
   author: json['author'] == null
       ? null
@@ -30,6 +31,7 @@ Map<String, dynamic> _$IssueToJson(_Issue instance) => <String, dynamic>{
   'iid': instance.iid,
   'title': instance.title,
   'state': instance.state,
+  'project_id': instance.projectId,
   'description': instance.description,
   'author': instance.author?.toJson(),
   'labels': instance.labels.map((e) => e.toJson()).toList(),

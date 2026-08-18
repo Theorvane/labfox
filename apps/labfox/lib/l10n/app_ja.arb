@@ -133,5 +133,15 @@
   "inboxActionMarked": "To Do を追加",
   "inboxActionApprovalRequired": "承認が必要",
   "inboxActionUnmergeable": "マージできません",
-  "inboxActionDirectlyAddressed": "あなたを直接指定"
+  "inboxActionDirectlyAddressed": "あなたを直接指定",
+  "homeSearch": "検索",
+  "searchTitle": "検索",
+  "searchHint": "プロジェクト・イシュー・マージリクエストを検索",
+  "searchScopeProjects": "プロジェクト",
+  "searchScopeIssues": "イシュー",
+  "searchScopeMergeRequests": "マージリクエスト",
+  "searchInitial": "検索語を入力してください。",
+  "searchEmpty": "結果が見つかりませんでした。",
+  "searchError": "検索を完了できませんでした。",
+  "searchLoadMore": "さらに読み込む"
 }

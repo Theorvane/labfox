@@ -417,4 +417,34 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get inboxActionDirectlyAddressed => '直接提及你';
+
+  @override
+  String get homeSearch => '搜索';
+
+  @override
+  String get searchTitle => '搜索';
+
+  @override
+  String get searchHint => '搜索项目、议题、合并请求';
+
+  @override
+  String get searchScopeProjects => '项目';
+
+  @override
+  String get searchScopeIssues => '议题';
+
+  @override
+  String get searchScopeMergeRequests => '合并请求';
+
+  @override
+  String get searchInitial => '输入以搜索。';
+
+  @override
+  String get searchEmpty => '未找到结果。';
+
+  @override
+  String get searchError => '搜索无法完成。';
+
+  @override
+  String get searchLoadMore => '加载更多';
 }
