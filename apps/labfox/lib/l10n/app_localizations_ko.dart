@@ -263,4 +263,39 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get commentPostError => '댓글을 게시할 수 없습니다. 다시 시도하세요.';
+
+  @override
+  String get cancel => '취소';
+
+  @override
+  String get mrApprove => '승인';
+
+  @override
+  String get mrUnapprove => '승인 취소';
+
+  @override
+  String get mrMerge => '병합';
+
+  @override
+  String get mrMergeConfirmTitle => '이 병합 요청을 병합할까요?';
+
+  @override
+  String mrMergeConfirmBody(String mr) {
+    return '$mr 병합은 되돌릴 수 없습니다.';
+  }
+
+  @override
+  String mrApprovalsSummary(int approved, int required) {
+    return '승인 $approved/$required';
+  }
+
+  @override
+  String get mrNotMergeable =>
+      '지금은 병합할 수 없습니다. 승인, 리베이스, 또는 통과된 파이프라인이 필요할 수 있습니다.';
+
+  @override
+  String get mrActionForbidden => '이 작업을 수행할 권한이 없습니다. 토큰 스코프와 역할을 확인하세요.';
+
+  @override
+  String get mrActionError => '작업을 완료할 수 없습니다. 다시 시도하세요.';
 }

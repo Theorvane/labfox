@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
+import '../common/exceptions.dart';
 import '../common/paginated.dart';
 import '../gitlab_client.dart';
 
@@ -101,6 +102,90 @@ class MergeRequestsApi {
           .toList(growable: false);
     } on DioException catch (error) {
       throw mapError(error, context: 'loading the merge request diff');
+    }
+  }
+
+  /// Approves a merge request.
+  Future<void> approve(Object projectId, {required int iid}) =>
+      _postAction(projectId, iid: iid, action: 'approve');
+
+  /// Removes the current user's approval.
+  Future<void> unapprove(Object projectId, {required int iid}) =>
+      _postAction(projectId, iid: iid, action: 'unapprove');
+
+  Future<void> _postAction(
+    Object projectId, {
+    required int iid,
+    required String action,
+  }) async {
+    try {
+      final response = await _dio.post<dynamic>(
+        '/projects/${_enc(projectId)}/merge_requests/$iid/$action',
+      );
+      final status = response.statusCode ?? 0;
+      if (status < 200 || status >= 300) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'updating the approval',
+        );
+      }
+    } on DioException catch (error) {
+      throw mapError(error, context: 'updating the approval');
+    }
+  }
+
+  /// The approval state of a merge request.
+  Future<MergeRequestApprovals> approvals(
+    Object projectId, {
+    required int iid,
+  }) async {
+    try {
+      final response = await _dio.get<Map<String, dynamic>>(
+        '/projects/${_enc(projectId)}/merge_requests/$iid/approvals',
+      );
+      final data = response.data;
+      if (response.statusCode != 200 || data == null) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'loading approvals',
+        );
+      }
+      return MergeRequestApprovals.fromJson(data);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'loading approvals');
+    }
+  }
+
+  /// Merges a merge request and returns the updated (merged) resource.
+  ///
+  /// A 405/406/409 means the request is not mergeable in its current state —
+  /// distinct from a 403 (no permission) — so it maps to its own exception the
+  /// UI can explain.
+  Future<MergeRequest> merge(Object projectId, {required int iid}) async {
+    try {
+      final response = await _dio.put<Map<String, dynamic>>(
+        '/projects/${_enc(projectId)}/merge_requests/$iid/merge',
+      );
+      final status = response.statusCode ?? 0;
+      if (status == 405 || status == 406 || status == 409) {
+        throw GitLabNotMergeableException(
+          'This merge request cannot be merged in its current state.',
+          statusCode: status,
+        );
+      }
+      final data = response.data;
+      if (status != 200 || data == null) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'merging',
+        );
+      }
+      return MergeRequest.fromJson(data);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'merging');
     }
   }
 

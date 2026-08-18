@@ -260,4 +260,38 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get commentPostError => '无法发布您的评论。请重试。';
+
+  @override
+  String get cancel => '取消';
+
+  @override
+  String get mrApprove => '批准';
+
+  @override
+  String get mrUnapprove => '撤销批准';
+
+  @override
+  String get mrMerge => '合并';
+
+  @override
+  String get mrMergeConfirmTitle => '要合并此合并请求吗？';
+
+  @override
+  String mrMergeConfirmBody(String mr) {
+    return '合并 $mr 无法撤销。';
+  }
+
+  @override
+  String mrApprovalsSummary(int approved, int required) {
+    return '$approved/$required 项批准';
+  }
+
+  @override
+  String get mrNotMergeable => '目前无法合并。可能需要批准、变基或通过的流水线。';
+
+  @override
+  String get mrActionForbidden => '您没有执行此操作的权限。请检查您的令牌范围和角色。';
+
+  @override
+  String get mrActionError => '操作无法完成。请重试。';
 }

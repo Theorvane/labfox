@@ -263,4 +263,38 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get commentPostError => 'コメントを投稿できませんでした。もう一度お試しください。';
+
+  @override
+  String get cancel => 'キャンセル';
+
+  @override
+  String get mrApprove => '承認';
+
+  @override
+  String get mrUnapprove => '承認を取り消す';
+
+  @override
+  String get mrMerge => 'マージ';
+
+  @override
+  String get mrMergeConfirmTitle => 'このマージリクエストをマージしますか？';
+
+  @override
+  String mrMergeConfirmBody(String mr) {
+    return '$mr のマージは取り消せません。';
+  }
+
+  @override
+  String mrApprovalsSummary(int approved, int required) {
+    return '承認 $approved/$required';
+  }
+
+  @override
+  String get mrNotMergeable => '現在マージできません。承認、リベース、またはパイプラインの成功が必要な場合があります。';
+
+  @override
+  String get mrActionForbidden => 'この操作の権限がありません。トークンのスコープとロールを確認してください。';
+
+  @override
+  String get mrActionError => '操作を完了できませんでした。もう一度お試しください。';
 }

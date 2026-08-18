@@ -47,6 +47,12 @@ class GitLabServerException extends GitLabException {
   const GitLabServerException(super.message, {super.statusCode});
 }
 
+/// The merge request cannot be merged in its current state (405 / 406 / 409):
+/// not mergeable, needs a rebase, or a pipeline/approval is missing.
+class GitLabNotMergeableException extends GitLabException {
+  const GitLabNotMergeableException(super.message, {super.statusCode});
+}
+
 /// The instance could not be reached at all.
 ///
 /// Kept separate from every HTTP failure because self-hosted instances fail
