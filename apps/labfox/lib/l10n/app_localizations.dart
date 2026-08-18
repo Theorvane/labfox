@@ -661,6 +661,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The action could not be completed. Please try again.'**
   String get mrActionError;
+
+  /// Overview link that opens the pipelines list
+  ///
+  /// In en, this message translates to:
+  /// **'Pipelines'**
+  String get projectOverviewPipelines;
+
+  /// Title of the pipelines list screen
+  ///
+  /// In en, this message translates to:
+  /// **'Pipelines'**
+  String get pipelinesTitle;
+
+  /// Shown when the pipelines list fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load pipelines.'**
+  String get pipelinesError;
+
+  /// Shown when there are no pipelines
+  ///
+  /// In en, this message translates to:
+  /// **'No pipelines yet.'**
+  String get pipelinesEmpty;
+
+  /// Shown when a pipeline fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this pipeline.'**
+  String get pipelineError;
+
+  /// Shown when a pipeline's jobs fail to load
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load jobs.'**
+  String get pipelineJobsError;
+
+  /// Shown when a pipeline has no jobs
+  ///
+  /// In en, this message translates to:
+  /// **'This pipeline has no jobs.'**
+  String get pipelineNoJobs;
 }
 
 class _AppLocalizationsDelegate

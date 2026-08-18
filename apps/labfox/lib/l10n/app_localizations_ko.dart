@@ -298,4 +298,25 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mrActionError => '작업을 완료할 수 없습니다. 다시 시도하세요.';
+
+  @override
+  String get projectOverviewPipelines => '파이프라인';
+
+  @override
+  String get pipelinesTitle => '파이프라인';
+
+  @override
+  String get pipelinesError => '파이프라인을 불러올 수 없습니다.';
+
+  @override
+  String get pipelinesEmpty => '아직 파이프라인이 없습니다.';
+
+  @override
+  String get pipelineError => '이 파이프라인을 불러올 수 없습니다.';
+
+  @override
+  String get pipelineJobsError => '잡을 불러올 수 없습니다.';
+
+  @override
+  String get pipelineNoJobs => '이 파이프라인에는 잡이 없습니다.';
 }

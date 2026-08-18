@@ -294,4 +294,25 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mrActionError => '操作无法完成。请重试。';
+
+  @override
+  String get projectOverviewPipelines => '流水线';
+
+  @override
+  String get pipelinesTitle => '流水线';
+
+  @override
+  String get pipelinesError => '无法加载流水线。';
+
+  @override
+  String get pipelinesEmpty => '还没有流水线。';
+
+  @override
+  String get pipelineError => '无法加载此流水线。';
+
+  @override
+  String get pipelineJobsError => '无法加载作业。';
+
+  @override
+  String get pipelineNoJobs => '此流水线没有作业。';
 }

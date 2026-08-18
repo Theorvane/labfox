@@ -92,5 +92,12 @@
   "mrApprovalsSummary": "承認 {approved}/{required}",
   "mrNotMergeable": "現在マージできません。承認、リベース、またはパイプラインの成功が必要な場合があります。",
   "mrActionForbidden": "この操作の権限がありません。トークンのスコープとロールを確認してください。",
-  "mrActionError": "操作を完了できませんでした。もう一度お試しください。"
+  "mrActionError": "操作を完了できませんでした。もう一度お試しください。",
+  "projectOverviewPipelines": "パイプライン",
+  "pipelinesTitle": "パイプライン",
+  "pipelinesError": "パイプラインを読み込めませんでした。",
+  "pipelinesEmpty": "まだパイプラインはありません。",
+  "pipelineError": "このパイプラインを読み込めませんでした。",
+  "pipelineJobsError": "ジョブを読み込めませんでした。",
+  "pipelineNoJobs": "このパイプラインにはジョブがありません。"
 }

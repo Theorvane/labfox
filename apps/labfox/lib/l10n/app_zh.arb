@@ -92,5 +92,12 @@
   "mrApprovalsSummary": "{approved}/{required} 项批准",
   "mrNotMergeable": "目前无法合并。可能需要批准、变基或通过的流水线。",
   "mrActionForbidden": "您没有执行此操作的权限。请检查您的令牌范围和角色。",
-  "mrActionError": "操作无法完成。请重试。"
+  "mrActionError": "操作无法完成。请重试。",
+  "projectOverviewPipelines": "流水线",
+  "pipelinesTitle": "流水线",
+  "pipelinesError": "无法加载流水线。",
+  "pipelinesEmpty": "还没有流水线。",
+  "pipelineError": "无法加载此流水线。",
+  "pipelineJobsError": "无法加载作业。",
+  "pipelineNoJobs": "此流水线没有作业。"
 }

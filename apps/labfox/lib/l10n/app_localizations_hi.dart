@@ -306,4 +306,25 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get mrActionError =>
       'क्रिया पूरी नहीं हो सकी। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get projectOverviewPipelines => 'पाइपलाइन';
+
+  @override
+  String get pipelinesTitle => 'पाइपलाइन';
+
+  @override
+  String get pipelinesError => 'पाइपलाइन लोड नहीं हो सकीं।';
+
+  @override
+  String get pipelinesEmpty => 'अभी तक कोई पाइपलाइन नहीं।';
+
+  @override
+  String get pipelineError => 'यह पाइपलाइन लोड नहीं हो सकी।';
+
+  @override
+  String get pipelineJobsError => 'जॉब लोड नहीं हो सके।';
+
+  @override
+  String get pipelineNoJobs => 'इस पाइपलाइन में कोई जॉब नहीं है।';
 }
