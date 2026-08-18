@@ -1,0 +1,37 @@
+LabFox
+Copyright 2026 sjungwon03 and LabFox contributors
+
+This product is licensed under the Apache License, Version 2.0.
+See the LICENSE file for the full license text.
+
+--------------------------------------------------------------------------------
+Trademarks
+--------------------------------------------------------------------------------
+
+The Apache License, Version 2.0 does not grant permission to use the trade
+names, trademarks, service marks, or product names of the Licensor (Section 6).
+
+"LabFox", the LabFox name, logo, and other brand assets are excluded from the
+license granted for the source code. See TRADEMARK.md for details.
+
+--------------------------------------------------------------------------------
+Third-party notices
+--------------------------------------------------------------------------------
+
+This product includes software developed by third parties. Attributions for
+any third-party code incorporated into this product are listed below.
+
+(none yet)
+
+--------------------------------------------------------------------------------
+Unaffiliated projects
+--------------------------------------------------------------------------------
+
+LabFox is an unofficial, third-party client. It is not affiliated with,
+endorsed by, or sponsored by GitLab Inc. or GitHub, Inc.
+
+"GitLab" is a trademark of GitLab Inc.
+"GitHub" is a trademark of GitHub, Inc.
+
+These names are used only to describe interoperability and are the property of
+their respective owners.
