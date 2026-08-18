@@ -92,4 +92,25 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get projectOverviewNoReadme => '이 프로젝트에는 README가 없습니다.';
+
+  @override
+  String get projectOverviewRepository => '저장소';
+
+  @override
+  String get repositoryTitle => '저장소';
+
+  @override
+  String get repositoryError => '이 디렉터리를 불러올 수 없습니다.';
+
+  @override
+  String get repositoryEmpty => '이 디렉터리는 비어 있습니다.';
+
+  @override
+  String get fileError => '이 파일을 불러올 수 없습니다.';
+
+  @override
+  String get fileNotFound => '파일을 찾을 수 없습니다.';
+
+  @override
+  String get fileBinary => '바이너리 파일이라 텍스트로 표시할 수 없습니다.';
 }

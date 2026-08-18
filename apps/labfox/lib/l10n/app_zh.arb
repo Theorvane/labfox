@@ -26,5 +26,12 @@
   "retry": "重试",
   "projectOverviewTitle": "项目",
   "projectOverviewError": "无法加载此项目。",
-  "projectOverviewNoReadme": "此项目没有 README。"
+  "projectOverviewNoReadme": "此项目没有 README。",
+  "projectOverviewRepository": "仓库",
+  "repositoryTitle": "仓库",
+  "repositoryError": "无法加载此目录。",
+  "repositoryEmpty": "此目录为空。",
+  "fileError": "无法加载此文件。",
+  "fileNotFound": "未找到此文件。",
+  "fileBinary": "这是二进制文件，无法作为文本显示。"
 }

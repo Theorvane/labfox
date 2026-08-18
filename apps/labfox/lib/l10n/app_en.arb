@@ -113,5 +113,33 @@
   "projectOverviewNoReadme": "This project has no README.",
   "@projectOverviewNoReadme": {
     "description": "Shown when a project has no README"
+  },
+  "projectOverviewRepository": "Repository",
+  "@projectOverviewRepository": {
+    "description": "Overview link that opens the repository browser"
+  },
+  "repositoryTitle": "Repository",
+  "@repositoryTitle": {
+    "description": "Title of the repository browser at the root"
+  },
+  "repositoryError": "Could not load this directory.",
+  "@repositoryError": {
+    "description": "Shown when a directory listing fails"
+  },
+  "repositoryEmpty": "This directory is empty.",
+  "@repositoryEmpty": {
+    "description": "Shown for an empty directory"
+  },
+  "fileError": "Could not load this file.",
+  "@fileError": {
+    "description": "Shown when a file fails to load"
+  },
+  "fileNotFound": "This file was not found.",
+  "@fileNotFound": {
+    "description": "Shown when a file does not exist"
+  },
+  "fileBinary": "This is a binary file and cannot be shown as text.",
+  "@fileBinary": {
+    "description": "Shown for a binary file"
   }
 }

@@ -265,6 +265,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This project has no README.'**
   String get projectOverviewNoReadme;
+
+  /// Overview link that opens the repository browser
+  ///
+  /// In en, this message translates to:
+  /// **'Repository'**
+  String get projectOverviewRepository;
+
+  /// Title of the repository browser at the root
+  ///
+  /// In en, this message translates to:
+  /// **'Repository'**
+  String get repositoryTitle;
+
+  /// Shown when a directory listing fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this directory.'**
+  String get repositoryError;
+
+  /// Shown for an empty directory
+  ///
+  /// In en, this message translates to:
+  /// **'This directory is empty.'**
+  String get repositoryEmpty;
+
+  /// Shown when a file fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this file.'**
+  String get fileError;
+
+  /// Shown when a file does not exist
+  ///
+  /// In en, this message translates to:
+  /// **'This file was not found.'**
+  String get fileNotFound;
+
+  /// Shown for a binary file
+  ///
+  /// In en, this message translates to:
+  /// **'This is a binary file and cannot be shown as text.'**
+  String get fileBinary;
 }
 
 class _AppLocalizationsDelegate

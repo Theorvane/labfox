@@ -26,5 +26,12 @@
   "retry": "再試行",
   "projectOverviewTitle": "プロジェクト",
   "projectOverviewError": "このプロジェクトを読み込めませんでした。",
-  "projectOverviewNoReadme": "このプロジェクトには README がありません。"
+  "projectOverviewNoReadme": "このプロジェクトには README がありません。",
+  "projectOverviewRepository": "リポジトリ",
+  "repositoryTitle": "リポジトリ",
+  "repositoryError": "このディレクトリを読み込めませんでした。",
+  "repositoryEmpty": "このディレクトリは空です。",
+  "fileError": "このファイルを読み込めませんでした。",
+  "fileNotFound": "ファイルが見つかりませんでした。",
+  "fileBinary": "バイナリファイルのためテキストとして表示できません。"
 }
