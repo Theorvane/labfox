@@ -411,6 +411,9 @@ gh pr create --fill --base dev
 - **Never push directly to `dev` or `main`.** Never force push.
 - **Never open a PR against `main`.** Release promotion is a maintainer decision.
 - **Maintainers merge.** An agent does not merge a PR.
+- **The reviewer resolves review threads, not the author.** Resolving the reviewer's own threads on
+  your pull request defeats the resolution gate. The ruleset blocks merge until all threads are
+  resolved.
 - Close or delete issues and PRs only when asked.
 
 ### Everything else

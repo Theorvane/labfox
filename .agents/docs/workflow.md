@@ -49,12 +49,30 @@ Rules:
 
 ### Branch protection
 
-Ruleset definitions live in `.github/rulesets/` and are applied with `gh api`.
-They are **not active yet** — GitHub only allows rulesets on public repositories on the free plan,
-and this repository is still private. See `.github/rulesets/README.md`.
+Ruleset definitions live in `.github/rulesets/` and are **active** on `dev` and `main`. They block
+direct pushes, force pushes, and branch deletion, and every merge requires:
 
-Once applied, `dev` and `main` both block direct pushes, force pushes, and branch deletion,
-and require the CI checks to pass.
+- **CI green** — the required status checks pass.
+- **One approval** from someone other than the author. GitHub does not let you approve your own
+  pull request, so the author cannot self-merge.
+- **All review conversations resolved.** An unresolved thread keeps the pull request `BLOCKED`,
+  regardless of approval or CI. This is `required_review_thread_resolution`.
+
+The definitions under `.github/rulesets/` are the source of truth; edit them and re-apply with
+`gh api` rather than changing the rules in the web UI. See `.github/rulesets/README.md`.
+
+### Who resolves review threads
+
+**The reviewer resolves their own threads, not the author.** A thread is a question or a request;
+it is done when the person who raised it is satisfied, not when the author decides it is. The
+author replies, pushes a fix, or discusses — then the reviewer resolves and the merge unblocks.
+
+This matters because the author has the mechanical ability to resolve any thread. Doing so on your
+own pull request turns the resolution gate into a rubber stamp. Leave the reviewer's threads for
+the reviewer.
+
+An author may resolve a thread only when the reviewer explicitly says so, or for a thread the
+author opened themselves (a note to reviewers, say).
 
 ---
 
@@ -256,7 +274,7 @@ gh run list
 - The title uses the same format as the commit title: `feat(merge_requests): add unified diff viewer`
 - **CI must pass before merging.**
 - Attach screenshots for UI changes. Both mobile and desktop.
-- Resolve review comments before merging.
+- All review threads must be resolved before merging (by the reviewer — see "Who resolves review threads"). The ruleset enforces this.
 
 ### PR Size
 
