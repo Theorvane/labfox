@@ -242,4 +242,8 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get mrViewChanges => 'परिवर्तन देखें';
+
+  @override
+  String get changesOmitted =>
+      'diff बहुत बड़ा है या संक्षिप्त है, इसलिए नहीं दिखाया गया।';
 }

@@ -236,4 +236,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mrViewChanges => '查看变更';
+
+  @override
+  String get changesOmitted => 'diff 太大或已折叠，未显示。';
 }

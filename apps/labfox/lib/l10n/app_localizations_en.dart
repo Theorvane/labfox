@@ -241,4 +241,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mrViewChanges => 'View changes';
+
+  @override
+  String get changesOmitted =>
+      'Diff not shown because it is too large or collapsed.';
 }

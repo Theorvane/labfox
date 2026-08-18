@@ -13,6 +13,7 @@ class DiffViewer extends StatelessWidget {
   const DiffViewer({
     required this.file,
     this.binaryLabel = 'Binary file',
+    this.omittedLabel = 'Diff not shown',
     super.key,
   });
 
@@ -21,12 +22,20 @@ class DiffViewer extends StatelessWidget {
   /// Text shown for a binary file; the caller localizes it.
   final String binaryLabel;
 
+  /// Text shown when GitLab omitted a text diff because it was too large or
+  /// collapsed. Distinct from [binaryLabel] so a truncated source file is not
+  /// mislabelled as binary.
+  final String omittedLabel;
+
   @override
   Widget build(BuildContext context) {
-    if (file.isBinary) {
+    if (file.isBinary || file.isOmitted) {
       return Padding(
         padding: const EdgeInsets.all(LabFoxSpacing.md),
-        child: Text(binaryLabel, style: Theme.of(context).textTheme.bodySmall),
+        child: Text(
+          file.isOmitted ? omittedLabel : binaryLabel,
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
       );
     }
 

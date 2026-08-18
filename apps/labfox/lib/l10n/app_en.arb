@@ -311,5 +311,9 @@
   "mrViewChanges": "View changes",
   "@mrViewChanges": {
     "description": "Button on MR detail that opens the diff"
+  },
+  "changesOmitted": "Diff not shown because it is too large or collapsed.",
+  "@changesOmitted": {
+    "description": "Shown for a text file whose diff GitLab omitted (too large or collapsed)"
   }
 }

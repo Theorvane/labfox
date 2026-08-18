@@ -76,7 +76,11 @@ class _FileDiffCard extends StatelessWidget {
             ],
           ),
         ),
-        DiffViewer(file: file, binaryLabel: l10n.changesBinary),
+        DiffViewer(
+          file: file,
+          binaryLabel: l10n.changesBinary,
+          omittedLabel: l10n.changesOmitted,
+        ),
         const Divider(height: 1),
       ],
     );

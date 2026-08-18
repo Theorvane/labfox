@@ -74,5 +74,6 @@
   "changesEmpty": "कोई परिवर्तन नहीं।",
   "changesBinary": "बाइनरी फ़ाइल — नहीं दिखाई गई।",
   "commitViewChanges": "परिवर्तन देखें",
-  "mrViewChanges": "परिवर्तन देखें"
+  "mrViewChanges": "परिवर्तन देखें",
+  "changesOmitted": "diff बहुत बड़ा है या संक्षिप्त है, इसलिए नहीं दिखाया गया।"
 }

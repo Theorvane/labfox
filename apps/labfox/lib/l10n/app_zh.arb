@@ -74,5 +74,6 @@
   "changesEmpty": "没有变更。",
   "changesBinary": "二进制文件 — 不显示。",
   "commitViewChanges": "查看变更",
-  "mrViewChanges": "查看变更"
+  "mrViewChanges": "查看变更",
+  "changesOmitted": "diff 太大或已折叠，未显示。"
 }

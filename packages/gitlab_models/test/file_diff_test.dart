@@ -47,7 +47,7 @@ void main() {
       expect(removed.isDeleted, isTrue);
     });
 
-    test('a file with no textual diff is treated as binary', () {
+    test('a file with no textual diff and no flags is treated as binary', () {
       final fd = FileDiff.fromJson(const {
         'old_path': 'logo.png',
         'new_path': 'logo.png',
@@ -55,6 +55,30 @@ void main() {
       });
       expect(fd.isBinary, isTrue);
       expect(fd.hunks, isEmpty);
+    });
+
+    test('a too-large text file is flagged, not called binary', () {
+      // GitLab omits the diff text and sets too_large; showing 'Binary file'
+      // here would lie about a source file whose diff was simply truncated.
+      final fd = FileDiff.fromJson(const {
+        'old_path': 'lib/big.dart',
+        'new_path': 'lib/big.dart',
+        'diff': '',
+        'too_large': true,
+      });
+      expect(fd.isTooLarge, isTrue);
+      expect(fd.isBinary, isFalse);
+    });
+
+    test('a collapsed text file is flagged, not called binary', () {
+      final fd = FileDiff.fromJson(const {
+        'old_path': 'lib/x.dart',
+        'new_path': 'lib/x.dart',
+        'diff': '',
+        'collapsed': true,
+      });
+      expect(fd.isCollapsed, isTrue);
+      expect(fd.isBinary, isFalse);
     });
   });
 }

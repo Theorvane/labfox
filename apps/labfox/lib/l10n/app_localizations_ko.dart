@@ -238,4 +238,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mrViewChanges => '변경 사항 보기';
+
+  @override
+  String get changesOmitted => 'diff가 너무 크거나 접혀 있어 표시하지 않습니다.';
 }

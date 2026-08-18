@@ -238,4 +238,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mrViewChanges => '変更を表示';
+
+  @override
+  String get changesOmitted => 'diff が大きすぎるか折りたたまれているため表示しません。';
 }

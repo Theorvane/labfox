@@ -553,6 +553,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View changes'**
   String get mrViewChanges;
+
+  /// Shown for a text file whose diff GitLab omitted (too large or collapsed)
+  ///
+  /// In en, this message translates to:
+  /// **'Diff not shown because it is too large or collapsed.'**
+  String get changesOmitted;
 }
 
 class _AppLocalizationsDelegate

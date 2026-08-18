@@ -52,4 +52,31 @@ void main() {
     );
     expect(find.text('Binary file, not shown'), findsOneWidget);
   });
+
+  testWidgets('a too-large text file shows the omitted label, not binary', (
+    tester,
+  ) async {
+    final tooLarge = FileDiff(
+      oldPath: 'lib/big.dart',
+      newPath: 'lib/big.dart',
+      isNew: false,
+      isDeleted: false,
+      isRenamed: false,
+      diff: '',
+      isTooLarge: true,
+    );
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: DiffViewer(
+            file: tooLarge,
+            binaryLabel: 'Binary file',
+            omittedLabel: 'Diff too large to show',
+          ),
+        ),
+      ),
+    );
+    expect(find.text('Diff too large to show'), findsOneWidget);
+    expect(find.text('Binary file'), findsNothing);
+  });
 }

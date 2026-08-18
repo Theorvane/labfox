@@ -74,5 +74,6 @@
   "changesEmpty": "変更はありません。",
   "changesBinary": "バイナリファイル — 表示しません。",
   "commitViewChanges": "変更を表示",
-  "mrViewChanges": "変更を表示"
+  "mrViewChanges": "変更を表示",
+  "changesOmitted": "diff が大きすぎるか折りたたまれているため表示しません。"
 }
