@@ -366,4 +366,16 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get pipelineActionError => '操作を完了できませんでした。もう一度お試しください。';
+
+  @override
+  String get accountsTitle => 'アカウント';
+
+  @override
+  String get accountAdd => 'アカウントを追加';
+
+  @override
+  String get accountRemove => 'アカウントを削除';
+
+  @override
+  String get homeSwitchAccount => 'アカウント';
 }

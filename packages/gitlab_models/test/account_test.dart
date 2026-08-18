@@ -10,6 +10,22 @@ void main() {
       expect(account.id, 'gitlab.com/42');
     });
 
+    test('separates the same host on different ports', () {
+      // A self-hosted instance on a custom port is a distinct origin; dropping
+      // the port would let it collide with the default-port instance and
+      // overwrite its token.
+      const a = Account(instanceUrl: 'https://gitlab.example', user: user);
+      const b = Account(instanceUrl: 'https://gitlab.example:8443', user: user);
+      expect(a.id, isNot(b.id));
+    });
+
+    test('keeps the default https port implicit', () {
+      const a = Account(instanceUrl: 'https://gitlab.example', user: user);
+      const b = Account(instanceUrl: 'https://gitlab.example:443', user: user);
+      // :443 is the default, so it is the same origin as no port.
+      expect(a.id, b.id);
+    });
+
     test('separates the same user id on different instances', () {
       // User ids are only unique per instance, so the host has to be part of
       // the identity or two accounts would collide.

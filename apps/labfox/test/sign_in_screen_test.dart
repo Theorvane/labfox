@@ -33,7 +33,13 @@ class _StubAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<void> signOut(Account account) async => _active = null;
+  Future<void> signOut([Account? account]) async => _active = null;
+
+  @override
+  List<Account> accounts() => _active == null ? const [] : [_active!];
+
+  @override
+  Future<void> switchTo(Account account) async => _active = account;
 
   @override
   Future<String?> tokenFor(Account account) async => 'glpat-valid';

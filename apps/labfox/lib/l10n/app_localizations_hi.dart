@@ -379,4 +379,16 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get pipelineActionError =>
       'क्रिया पूरी नहीं हो सकी। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get accountsTitle => 'खाते';
+
+  @override
+  String get accountAdd => 'खाता जोड़ें';
+
+  @override
+  String get accountRemove => 'खाता हटाएँ';
+
+  @override
+  String get homeSwitchAccount => 'खाते';
 }

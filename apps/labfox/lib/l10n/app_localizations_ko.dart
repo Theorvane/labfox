@@ -367,4 +367,16 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get pipelineActionError => '작업을 완료할 수 없습니다. 다시 시도하세요.';
+
+  @override
+  String get accountsTitle => '계정';
+
+  @override
+  String get accountAdd => '계정 추가';
+
+  @override
+  String get accountRemove => '계정 제거';
+
+  @override
+  String get homeSwitchAccount => '계정';
 }

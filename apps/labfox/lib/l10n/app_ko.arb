@@ -115,5 +115,9 @@
   "pipelineActionCancel": "취소",
   "pipelineActionForbidden": "이 작업을 수행할 권한이 없습니다.",
   "pipelineActionInvalid": "현재 파이프라인 상태에서는 이 작업을 할 수 없습니다.",
-  "pipelineActionError": "작업을 완료할 수 없습니다. 다시 시도하세요."
+  "pipelineActionError": "작업을 완료할 수 없습니다. 다시 시도하세요.",
+  "accountsTitle": "계정",
+  "accountAdd": "계정 추가",
+  "accountRemove": "계정 제거",
+  "homeSwitchAccount": "계정"
 }

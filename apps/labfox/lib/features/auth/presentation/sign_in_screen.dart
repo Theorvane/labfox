@@ -2,8 +2,11 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_api/gitlab_api.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../app/router.dart';
 import '../../../core/auth/auth_controller.dart';
+import '../../../core/auth/auth_state.dart';
 import '../../../l10n/app_localizations.dart';
 
 /// Connects an account with an instance URL and a Personal Access Token.
@@ -40,6 +43,14 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
           instanceUrl: _instanceController.text.trim(),
           token: _tokenController.text.trim(),
         );
+    // On success the session becomes signed in; navigate home explicitly so the
+    // add-account flow (which the guard leaves on this screen) returns too.
+    if (!mounted || !context.mounted) {
+      return;
+    }
+    if (ref.read(authControllerProvider).valueOrNull is SignedIn) {
+      context.go(Routes.home);
+    }
   }
 
   @override

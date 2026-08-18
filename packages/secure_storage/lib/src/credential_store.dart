@@ -25,15 +25,22 @@ class CredentialStore {
     required int userId,
     required String kind,
   }) {
-    final host = Uri.parse(instanceUrl).host;
-    if (host.isEmpty) {
+    final uri = Uri.parse(instanceUrl);
+    if (uri.host.isEmpty) {
       throw ArgumentError.value(
         instanceUrl,
         'instanceUrl',
         'must include a host',
       );
     }
-    return 'labfox/$host/$userId/$kind';
+    // Include the port when non-default so two origins on the same host (e.g. a
+    // custom-port self-hosted instance) get distinct keys and never overwrite
+    // each other's token.
+    final isDefaultPort =
+        (uri.scheme == 'https' && uri.port == 443) ||
+        (uri.scheme == 'http' && uri.port == 80);
+    final origin = isDefaultPort ? uri.host : '${uri.host}:${uri.port}';
+    return 'labfox/$origin/$userId/$kind';
   }
 
   Future<void> writeToken({

@@ -25,5 +25,19 @@ abstract class Account with _$Account {
       _$AccountFromJson(json);
 
   /// Stable key for this account, used to namespace its token and cache.
-  String get id => '${Uri.parse(instanceUrl).host}/${user.id}';
+  ///
+  /// The origin includes the port when it is not the scheme default, so a
+  /// self-hosted instance on a custom port is a distinct account from one on
+  /// the default port — dropping the port would let them collide and overwrite
+  /// each other's token.
+  String get id => '${canonicalOrigin(instanceUrl)}/${user.id}';
+
+  /// The host, plus `:port` when the port is not the scheme default.
+  static String canonicalOrigin(String instanceUrl) {
+    final uri = Uri.parse(instanceUrl);
+    final isDefaultPort =
+        (uri.scheme == 'https' && uri.port == 443) ||
+        (uri.scheme == 'http' && uri.port == 80);
+    return isDefaultPort ? uri.host : '${uri.host}:${uri.port}';
+  }
 }

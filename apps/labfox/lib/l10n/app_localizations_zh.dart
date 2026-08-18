@@ -363,4 +363,16 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get pipelineActionError => '操作无法完成。请重试。';
+
+  @override
+  String get accountsTitle => '账户';
+
+  @override
+  String get accountAdd => '添加账户';
+
+  @override
+  String get accountRemove => '移除账户';
+
+  @override
+  String get homeSwitchAccount => '账户';
 }

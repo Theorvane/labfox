@@ -25,10 +25,9 @@ class HomeScreen extends ConsumerWidget {
         title: Text(l10n.homeTitle),
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
-            tooltip: l10n.signOut,
-            onPressed: () =>
-                ref.read(authControllerProvider.notifier).signOut(),
+            icon: const Icon(Icons.account_circle_outlined),
+            tooltip: l10n.homeSwitchAccount,
+            onPressed: () => context.go(Routes.accounts),
           ),
         ],
       ),

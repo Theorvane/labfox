@@ -489,5 +489,21 @@
   "pipelineActionError": "The action could not be completed. Please try again.",
   "@pipelineActionError": {
     "description": "Generic pipeline action error"
+  },
+  "accountsTitle": "Accounts",
+  "@accountsTitle": {
+    "description": "Title of the accounts switcher screen"
+  },
+  "accountAdd": "Add account",
+  "@accountAdd": {
+    "description": "Button to add another account"
+  },
+  "accountRemove": "Remove account",
+  "@accountRemove": {
+    "description": "Tooltip for removing an account"
+  },
+  "homeSwitchAccount": "Accounts",
+  "@homeSwitchAccount": {
+    "description": "Home action that opens the account switcher"
   }
 }

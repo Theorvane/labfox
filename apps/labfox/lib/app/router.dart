@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../core/auth/auth_controller.dart';
 import '../core/auth/auth_state.dart';
+import '../features/auth/presentation/accounts_screen.dart';
 import '../features/auth/presentation/sign_in_screen.dart';
 import '../features/branches/presentation/branches_screen.dart';
 import '../features/commits/presentation/commit_detail_screen.dart';
@@ -30,6 +31,9 @@ import '../features/repository/presentation/repository_browser_screen.dart';
 abstract final class Routes {
   static const String home = '/';
   static const String signIn = '/sign-in';
+  static const String accounts = '/accounts';
+  // Reuses the sign-in screen to add another account while already signed in.
+  static const String addAccount = '/sign-in?add=1';
   static const String projects = '/projects';
 
   static String projectOverview(int id) => '/projects/$id';
@@ -86,11 +90,13 @@ final routerProvider = Provider<GoRouter>((ref) {
       }
       final signedIn = authState.valueOrNull is SignedIn;
       final atSignIn = state.matchedLocation == Routes.signIn;
+      // A signed-in user may reach the sign-in screen only to add an account.
+      final addingAccount = state.uri.queryParameters['add'] == '1';
 
       if (!signedIn) {
         return atSignIn ? null : Routes.signIn;
       }
-      if (atSignIn) {
+      if (atSignIn && !addingAccount) {
         return Routes.home;
       }
       return null;
@@ -103,6 +109,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.signIn,
         builder: (context, state) => const SignInScreen(),
+      ),
+      GoRoute(
+        path: Routes.accounts,
+        builder: (context, state) => const AccountsScreen(),
       ),
       GoRoute(
         path: Routes.projects,

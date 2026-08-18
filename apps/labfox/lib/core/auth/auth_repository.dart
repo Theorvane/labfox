@@ -28,8 +28,14 @@ class AuthRepository {
     required String token,
   }) => GitLabClient(baseUrl: baseUrl, token: token);
 
-  /// The account persisted from a previous session, or null.
+  /// The active account, or null.
   Account? currentAccount() => _accountStore.readActive();
+
+  /// All connected accounts.
+  List<Account> accounts() => _accountStore.readAccounts();
+
+  /// Switches the active account. It must already be connected.
+  Future<void> switchTo(Account account) => _accountStore.setActive(account);
 
   /// Validates a token against an instance, then persists the session.
   ///
@@ -51,7 +57,7 @@ class AuthRepository {
         kind: 'pat',
         token: token,
       );
-      await _accountStore.writeActive(account);
+      await _accountStore.add(account);
 
       return account;
     } finally {
@@ -67,11 +73,13 @@ class AuthRepository {
     );
   }
 
+  /// Removes an account: clears its token and drops it from the store. If it was
+  /// active, the store falls back to another account or to signed out.
   Future<void> signOut(Account account) async {
     await _credentialStore.deleteAccount(
       instanceUrl: account.instanceUrl,
       userId: account.user.id,
     );
-    await _accountStore.clear();
+    await _accountStore.remove(account);
   }
 }
