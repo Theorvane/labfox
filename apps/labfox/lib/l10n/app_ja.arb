@@ -1,0 +1,21 @@
+{
+  "@@locale": "ja",
+  "appTitle": "LabFox",
+  "homeTitle": "ホーム",
+  "homeSignedInAs": "{username} としてサインイン中",
+  "homeEmptyWork": "課題、マージリクエスト、パイプラインがここに表示されます。",
+  "signOut": "サインアウト",
+  "signInTitle": "GitLab アカウントを接続",
+  "signInInstanceLabel": "GitLab インスタンス URL",
+  "signInInstanceRequired": "GitLab インスタンスの URL を入力してください。",
+  "signInInstanceInvalid": "有効な https URL を入力してください。例: https://gitlab.com",
+  "signInTokenLabel": "パーソナルアクセストークン",
+  "signInTokenHelp": "api と read_user のスコープが必要です。",
+  "signInTokenToggle": "トークンの表示 / 非表示",
+  "signInTokenRequired": "パーソナルアクセストークンを入力してください。",
+  "signInSubmit": "サインイン",
+  "signInErrorToken": "トークンが拒否されました。正しいか、有効期限が切れていないか確認してください。",
+  "signInErrorScope": "トークンに必要なスコープがありません。api と read_user が必要です。",
+  "signInErrorUnreachable": "そのインスタンスに接続できませんでした。URL、ネットワーク、証明書の信頼を確認してください。",
+  "signInErrorGeneric": "サインインに失敗しました。もう一度お試しください。"
+}

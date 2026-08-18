@@ -8,8 +8,47 @@
   "@homeTitle": {
     "description": "Title of the home screen"
   },
-  "homeEmptyState": "Sign in to a GitLab instance to get started.",
-  "@homeEmptyState": {
-    "description": "Shown on the home screen before any account is connected"
-  }
+  "homeSignedInAs": "Signed in as {username}",
+  "@homeSignedInAs": {
+    "description": "Shown on the home screen with the signed-in user's username",
+    "placeholders": {
+      "username": { "type": "String", "example": "jungwon" }
+    }
+  },
+  "homeEmptyWork": "Your issues, merge requests and pipelines will appear here.",
+  "@homeEmptyWork": {
+    "description": "Placeholder on the home screen before feature work lands"
+  },
+  "signOut": "Sign out",
+  "@signOut": {
+    "description": "Label for the sign-out action"
+  },
+  "signInTitle": "Connect a GitLab account",
+  "@signInTitle": {
+    "description": "Heading on the sign-in screen"
+  },
+  "signInInstanceLabel": "GitLab instance URL",
+  "@signInInstanceLabel": { "description": "Label for the instance URL field" },
+  "signInInstanceRequired": "Enter your GitLab instance URL.",
+  "@signInInstanceRequired": { "description": "Validation when the instance URL is empty" },
+  "signInInstanceInvalid": "Enter a valid https URL, for example https://gitlab.com.",
+  "@signInInstanceInvalid": { "description": "Validation when the instance URL is not a valid https URL" },
+  "signInTokenLabel": "Personal Access Token",
+  "@signInTokenLabel": { "description": "Label for the token field" },
+  "signInTokenHelp": "Needs the api and read_user scopes.",
+  "@signInTokenHelp": { "description": "Helper text under the token field" },
+  "signInTokenToggle": "Show or hide the token",
+  "@signInTokenToggle": { "description": "Tooltip for the token visibility toggle" },
+  "signInTokenRequired": "Enter a Personal Access Token.",
+  "@signInTokenRequired": { "description": "Validation when the token is empty" },
+  "signInSubmit": "Sign in",
+  "@signInSubmit": { "description": "Label for the sign-in button" },
+  "signInErrorToken": "The token was rejected. Check that it is correct and has not expired.",
+  "@signInErrorToken": { "description": "Shown when the instance returns 401" },
+  "signInErrorScope": "The token is missing a required scope. It needs api and read_user.",
+  "@signInErrorScope": { "description": "Shown when the instance returns 403" },
+  "signInErrorUnreachable": "Could not reach that instance. Check the URL, your network, and whether the certificate is trusted.",
+  "@signInErrorUnreachable": { "description": "Shown when the instance cannot be reached" },
+  "signInErrorGeneric": "Sign-in failed. Please try again.",
+  "@signInErrorGeneric": { "description": "Fallback sign-in error" }
 }

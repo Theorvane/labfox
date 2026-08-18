@@ -77,6 +77,9 @@ Rules:
 
 ## Habits
 
+- **Work test-first** (`AGENTS.md` §5a): write the failing test before the code, and for a bug
+  reproduce it as a failing test first. A behaviour change without a test that would have failed
+  before it is not done.
 - Read neighboring files at the same layer before writing code, and match their patterns.
 - Propose new dependencies and get approval first (`AGENTS.md` §4).
 - Touching a model is not done until `build_runner` has been run.

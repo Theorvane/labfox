@@ -15,5 +15,57 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeTitle => 'Home';
 
   @override
-  String get homeEmptyState => 'Sign in to a GitLab instance to get started.';
+  String homeSignedInAs(String username) {
+    return 'Signed in as $username';
+  }
+
+  @override
+  String get homeEmptyWork =>
+      'Your issues, merge requests and pipelines will appear here.';
+
+  @override
+  String get signOut => 'Sign out';
+
+  @override
+  String get signInTitle => 'Connect a GitLab account';
+
+  @override
+  String get signInInstanceLabel => 'GitLab instance URL';
+
+  @override
+  String get signInInstanceRequired => 'Enter your GitLab instance URL.';
+
+  @override
+  String get signInInstanceInvalid =>
+      'Enter a valid https URL, for example https://gitlab.com.';
+
+  @override
+  String get signInTokenLabel => 'Personal Access Token';
+
+  @override
+  String get signInTokenHelp => 'Needs the api and read_user scopes.';
+
+  @override
+  String get signInTokenToggle => 'Show or hide the token';
+
+  @override
+  String get signInTokenRequired => 'Enter a Personal Access Token.';
+
+  @override
+  String get signInSubmit => 'Sign in';
+
+  @override
+  String get signInErrorToken =>
+      'The token was rejected. Check that it is correct and has not expired.';
+
+  @override
+  String get signInErrorScope =>
+      'The token is missing a required scope. It needs api and read_user.';
+
+  @override
+  String get signInErrorUnreachable =>
+      'Could not reach that instance. Check the URL, your network, and whether the certificate is trusted.';
+
+  @override
+  String get signInErrorGeneric => 'Sign-in failed. Please try again.';
 }

@@ -15,7 +15,7 @@ LabFox ships to a global audience. **Everything in this repository is written in
 | Documentation, `README`, `AGENTS.md`, skills | English |
 | Commit messages, branch names | English |
 | Issues, Pull Requests, code review | English |
-| User-facing UI strings | English source locale, localized via ARB |
+| User-facing UI strings | English source (`app_en.arb`); translations live in other `app_<code>.arb` |
 
 This is not a style preference. Contributors and users are international; anything written in
 another language silently excludes them and has to be rewritten later.
@@ -187,12 +187,46 @@ Propose it and get approval first.
 - **No hardcoded user-facing strings.** Every string a user can read goes through the
   generated localization delegate, not a Dart literal in a widget.
 - English (`en`) is the source locale. Other locales are translated from it, never the reverse.
+- Supported locales: `en`, `ko`, `ja`, `hi`, `zh`. Add a locale by adding its `app_<code>.arb`.
 - Keys are semantic, not literal: `mergeRequestApproveButton`, not `approveText`.
 - Do not concatenate translated fragments to build a sentence. Use a single parameterized
   message — word order differs across languages.
 - Format dates, numbers, and relative times through `intl`, never with manual string building.
+- **Translation files are the one exemption from the English-only rule.** The `app_<code>.arb`
+  files (except `app_en.arb`) and their generated `app_localizations_<code>.dart` contain
+  non-English text by design, so the CI language check skips them. `app_en.arb` and every other
+  file stay English.
 
 Details: `.agents/docs/conventions.md`
+
+---
+
+## 5a. Test-driven development
+
+**Work test-first.** For any behaviour change — a new feature, a bug fix, an edge case — write a
+failing test that captures the expected behaviour before writing the code that satisfies it.
+
+The loop:
+
+1. **Red** — write a test that fails for the right reason. Run it and confirm it fails.
+2. **Green** — write the least code that makes it pass.
+3. **Refactor** — clean up with the test still green.
+
+Why this is a rule here, not a preference:
+
+- The client talks to real GitLab instances with real credentials. A wrong redirect, a leaked
+  token, a mishandled 401 — these are the failures that matter, and a test that pins the intended
+  behaviour is the cheapest place to catch them. The M1 sign-in redirect bug was caught by a
+  widget test asserting "a rejected token stays on sign-in", not by inspection.
+- Tests written after the code tend to assert what the code does, not what it should do. Writing
+  the test first forces the behaviour to be decided before the implementation can bias it.
+
+Applies to bug fixes especially: reproduce the bug as a failing test first, then fix it, so a
+regression cannot return unnoticed.
+
+Not everything needs a test first — a pure rename, a doc change, a formatting pass do not. But any
+change to how the app *behaves* does. A pull request that changes behaviour without a test that
+would have failed before it is incomplete.
 
 ---
 
