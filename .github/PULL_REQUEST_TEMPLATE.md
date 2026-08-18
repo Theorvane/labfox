@@ -1,25 +1,45 @@
-## What changed
+## Summary
 
-<!-- What you changed and why. The diff already tells what was changed. -->
+<!--
+What this change does and why. The diff already shows what changed — explain the reasoning.
+Keep it in English. Do not paste tokens, instance hostnames, internal URLs, or confidential code.
+-->
 
 Closes #
 
-## Checklist
+## Validation
 
 - [ ] `dart format .`
 - [ ] `flutter analyze` reports no warnings
 - [ ] `flutter test` passes
-- [ ] When models change, ran `build_runner` and committed the generated files
-- [ ] Checked both Mobile(<600) and Desktop(>1000) layouts
-- [ ] Checked Light / Dark themes
-- [ ] No tokens or credentials exposed in logs or code
-- [ ] If there are new dependencies, licenses checked (GPL/LGPL/AGPL forbidden)
-- [ ] Commits include `Signed-off-by` (`git commit -s`)
+- [ ] Re-ran `dart run build_runner build --delete-conflicting-outputs` and committed the generated files (only if models changed)
+- [ ] Manually validated the change in the app (only if applicable — LabFox is pre-scaffolding, so state N/A when there is no runnable build yet)
+
+## Checklist
+
+- [ ] This pull request targets `dev` (all contributor PRs go to `dev`; `main` only receives reviewed release PRs)
+- [ ] Linked a GitHub issue above with `Closes #`
+- [ ] Pull request title and commits follow [Conventional Commits](https://www.conventionalcommits.org/)
+- [ ] All commits are signed off with `git commit -s` (DCO)
+- [ ] Added or updated tests, or explained below why none are needed
+- [ ] Updated documentation where behavior changed
+- [ ] Checked both Mobile (<600) and Desktop (>1000) layouts
+- [ ] Checked both Light and Dark themes
+- [ ] New dependencies are license-checked (MIT / BSD / Apache-2.0 / ISC / Zlib allowed — GPL / LGPL / AGPL forbidden) and `THIRD_PARTY_NOTICES.md` is updated
+- [ ] No tokens, instance hostnames, credentials, or confidential data are included in the code, tests, logs, or screenshots
+- [ ] Everything in this pull request is written in English
 
 ## Screenshots
 
-<!-- Attach if there are UI changes. Delete if not. -->
+<!--
+For UI changes, attach both Mobile (<600) and Desktop (>1000) screenshots, in Light and Dark
+themes where the change affects theming. Blur any hostname, project path, or token first.
+Delete this section if it does not apply.
+-->
 
-## References
+## Notes for reviewers
 
-<!-- GitLab API documentation, related PRs -->
+<!--
+Anything that helps review: trade-offs you made, areas you are unsure about, follow-up work you
+deliberately left out, or GitLab API documentation the reviewer should check against.
+-->

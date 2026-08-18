@@ -1,0 +1,105 @@
+name: Feature request
+description: Suggest a capability that strengthens the core LabFox review flow
+title: "feat: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ⚠️ Read this before you paste anything
+
+        Do **not** include tokens (`glpat-...`, OAuth access/refresh tokens), `Authorization` or
+        `Private-Token` headers, self-hosted instance hostnames, internal URLs, private or
+        employer-confidential source code, or exploit details. **Redact before pasting** —
+        use `<REDACTED>` and `gitlab.example.com`.
+
+        🔒 Security vulnerabilities do not belong in a public issue. Follow
+        [SECURITY.md](https://github.com/labfox-app/labfox/blob/dev/SECURITY.md) instead.
+
+  - type: markdown
+    attributes:
+      value: |
+        ## What LabFox is trying to be
+
+        LabFox deliberately does **not** port every GitLab web feature. It is a focused client for
+        one core flow:
+
+        ```
+        check notifications → review Issue/MR → read diff and review
+        → check pipeline status → read job log → Approve / Merge / Retry
+        ```
+
+        A request is far more likely to be accepted when it makes a step of that flow faster,
+        clearer or possible on a phone.
+
+        ### Explicitly out of 1.0 scope
+
+        Requests for the following will be **closed**:
+
+        Wiki · Packages · Container Registry · Infrastructure · Kubernetes ·
+        Security Dashboard · Analytics · Admin Area · Runner Administration · AI features
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve
+      description: >-
+        Describe the problem, not the solution. What are you doing today, and where does it break
+        down or slow you down?
+      placeholder: |
+        When a pipeline fails I cannot tell which job failed without leaving the MR screen, so on
+        mobile I end up opening the GitLab web UI anyway.
+    validations:
+      required: true
+
+  - type: textarea
+    id: core-flow
+    attributes:
+      label: How does this fit the core flow
+      description: >-
+        Which step of "notifications → review Issue/MR → diff and review → pipeline status →
+        job log → Approve/Merge/Retry" does this serve, and how?
+      placeholder: |
+        It shortens the "check pipeline status → read job log" step: the failing job becomes
+        reachable in one tap from the MR screen instead of three.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Optional. If you already have a concrete idea, sketch it here.
+      placeholder: |
+        Show a compact pipeline strip on the MR screen with the failing job highlighted and tappable.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: platforms
+    attributes:
+      label: Which platforms does this matter for
+      description: Optional. Select every platform where this would make a difference.
+      multiple: true
+      options:
+        - Android
+        - iOS
+        - Windows
+        - macOS
+        - All
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Before submitting
+      options:
+        - label: >-
+            I read the 1.0 scope above, my request is not in the out-of-scope list, and I searched
+            the existing issues for a duplicate.
+          required: true
+        - label: >-
+            This request is written in English and contains no tokens, instance hostnames or
+            confidential data.
+          required: true

@@ -52,10 +52,10 @@ Issue → Branch → Commit → Pull Request
 > LabFox is a GitLab client, but **development happens on GitHub.**
 > The domain term inside the app is still Merge Request; only the contribution process uses Pull Request.
 
-Nothing is committed directly to `main`.
+Branch from `dev` and target your pull request at `dev`. Nothing is committed directly to `dev` or `main` — `main` holds releases only.
 
 ```bash
-git switch -c feat/12-mr-diff-viewer main
+git switch -c feat/12-mr-diff-viewer dev
 ```
 
 - Branches: `<type>/<issue-number>-<slug>` — type is one of `feat` `fix` `docs` `refactor` `test` `chore`

@@ -102,9 +102,9 @@ Work flows **Issue → Branch → Pull Request**. Nothing is committed directly 
 
 ```
 gh issue create --title "..."
-git switch -c feat/12-mr-diff-viewer main
+git switch -c feat/12-mr-diff-viewer dev
 git commit -s -m "feat(scope): ..."
-gh pr create --fill --base main
+gh pr create --fill --base dev
 ```
 
 - Branches: `<type>/<issue-number>-<slug>` (`feat` `fix` `docs` `refactor` `test` `chore`)
