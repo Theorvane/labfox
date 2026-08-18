@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import 'common/exceptions.dart';
+import 'projects/projects_api.dart';
 import 'users/users_api.dart';
 
 /// Entry point for every GitLab REST call.
@@ -21,11 +22,13 @@ class GitLabClient {
       ..validateStatus = (status) => status != null && status < 500;
 
     users = UsersApi(_dio);
+    projects = ProjectsApi(_dio);
   }
 
   final Dio _dio;
 
   late final UsersApi users;
+  late final ProjectsApi projects;
 
   /// Derives the REST endpoint from an instance URL.
   ///

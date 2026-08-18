@@ -211,6 +211,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign-in failed. Please try again.'**
   String get signInErrorGeneric;
+
+  /// Section heading on the home screen
+  ///
+  /// In en, this message translates to:
+  /// **'My work'**
+  String get homeMyWork;
+
+  /// Home entry that opens the projects list
+  ///
+  /// In en, this message translates to:
+  /// **'Projects'**
+  String get homeProjects;
+
+  /// Title of the projects list screen
+  ///
+  /// In en, this message translates to:
+  /// **'Projects'**
+  String get projectsTitle;
+
+  /// Shown when the projects list is empty
+  ///
+  /// In en, this message translates to:
+  /// **'You are not a member of any projects yet.'**
+  String get projectsEmpty;
+
+  /// Shown when the projects list fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load your projects.'**
+  String get projectsError;
+
+  /// Label for a retry button
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
 }
 
 class _AppLocalizationsDelegate

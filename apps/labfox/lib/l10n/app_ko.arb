@@ -17,5 +17,11 @@
   "signInErrorToken": "토큰이 거부되었습니다. 올바른지, 만료되지 않았는지 확인하세요.",
   "signInErrorScope": "토큰에 필요한 스코프가 없습니다. api와 read_user가 필요합니다.",
   "signInErrorUnreachable": "해당 인스턴스에 연결할 수 없습니다. URL, 네트워크, 인증서 신뢰 여부를 확인하세요.",
-  "signInErrorGeneric": "로그인에 실패했습니다. 다시 시도하세요."
+  "signInErrorGeneric": "로그인에 실패했습니다. 다시 시도하세요.",
+  "homeMyWork": "내 작업",
+  "homeProjects": "프로젝트",
+  "projectsTitle": "프로젝트",
+  "projectsEmpty": "아직 참여 중인 프로젝트가 없습니다.",
+  "projectsError": "프로젝트를 불러올 수 없습니다.",
+  "retry": "다시 시도"
 }

@@ -68,4 +68,22 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get signInErrorGeneric => 'साइन इन विफल रहा। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get homeMyWork => 'मेरा काम';
+
+  @override
+  String get homeProjects => 'प्रोजेक्ट';
+
+  @override
+  String get projectsTitle => 'प्रोजेक्ट';
+
+  @override
+  String get projectsEmpty => 'आप अभी तक किसी प्रोजेक्ट के सदस्य नहीं हैं।';
+
+  @override
+  String get projectsError => 'आपके प्रोजेक्ट लोड नहीं हो सके।';
+
+  @override
+  String get retry => 'पुनः प्रयास करें';
 }
