@@ -7,6 +7,8 @@ import '../features/auth/presentation/sign_in_screen.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/project_overview/presentation/project_overview_screen.dart';
 import '../features/projects/presentation/projects_screen.dart';
+import '../features/repository/presentation/file_viewer_screen.dart';
+import '../features/repository/presentation/repository_browser_screen.dart';
 
 /// Route paths.
 ///
@@ -19,6 +21,19 @@ abstract final class Routes {
   static const String projects = '/projects';
 
   static String projectOverview(int id) => '/projects/$id';
+
+  // Repository browsing. The tree path and file path travel as a query
+  // parameter, not a nested segment, because a repository path contains its own
+  // slashes; encoding it as one query value keeps go_router from splitting it
+  // into route segments.
+  static String repository(int id, String ref) =>
+      '/projects/$id/tree?ref=${Uri.encodeQueryComponent(ref)}';
+  static String repositoryPath(int id, String ref, String path) =>
+      '/projects/$id/tree?ref=${Uri.encodeQueryComponent(ref)}'
+      '&path=${Uri.encodeQueryComponent(path)}';
+  static String file(int id, String ref, String path) =>
+      '/projects/$id/file?ref=${Uri.encodeQueryComponent(ref)}'
+      '&path=${Uri.encodeQueryComponent(path)}';
 }
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -68,6 +83,30 @@ final routerProvider = Provider<GoRouter>((ref) {
               final id = int.parse(state.pathParameters['id']!);
               return ProjectOverviewScreen(projectId: id);
             },
+            routes: [
+              GoRoute(
+                path: 'tree',
+                builder: (context, state) {
+                  final id = int.parse(state.pathParameters['id']!);
+                  final ref = state.uri.queryParameters['ref']!;
+                  final path = state.uri.queryParameters['path'] ?? '';
+                  return RepositoryBrowserScreen(
+                    projectId: id,
+                    ref: ref,
+                    path: path,
+                  );
+                },
+              ),
+              GoRoute(
+                path: 'file',
+                builder: (context, state) {
+                  final id = int.parse(state.pathParameters['id']!);
+                  final ref = state.uri.queryParameters['ref']!;
+                  final path = state.uri.queryParameters['path']!;
+                  return FileViewerScreen(projectId: id, ref: ref, path: path);
+                },
+              ),
+            ],
           ),
         ],
       ),

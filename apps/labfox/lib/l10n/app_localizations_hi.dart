@@ -95,4 +95,26 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get projectOverviewNoReadme => 'इस प्रोजेक्ट में कोई README नहीं है।';
+
+  @override
+  String get projectOverviewRepository => 'रिपॉज़िटरी';
+
+  @override
+  String get repositoryTitle => 'रिपॉज़िटरी';
+
+  @override
+  String get repositoryError => 'यह डायरेक्टरी लोड नहीं हो सकी।';
+
+  @override
+  String get repositoryEmpty => 'यह डायरेक्टरी खाली है।';
+
+  @override
+  String get fileError => 'यह फ़ाइल लोड नहीं हो सकी।';
+
+  @override
+  String get fileNotFound => 'यह फ़ाइल नहीं मिली।';
+
+  @override
+  String get fileBinary =>
+      'यह एक बाइनरी फ़ाइल है और इसे टेक्स्ट के रूप में नहीं दिखाया जा सकता।';
 }

@@ -95,4 +95,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get projectOverviewNoReadme => 'This project has no README.';
+
+  @override
+  String get projectOverviewRepository => 'Repository';
+
+  @override
+  String get repositoryTitle => 'Repository';
+
+  @override
+  String get repositoryError => 'Could not load this directory.';
+
+  @override
+  String get repositoryEmpty => 'This directory is empty.';
+
+  @override
+  String get fileError => 'Could not load this file.';
+
+  @override
+  String get fileNotFound => 'This file was not found.';
+
+  @override
+  String get fileBinary => 'This is a binary file and cannot be shown as text.';
 }

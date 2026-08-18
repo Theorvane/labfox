@@ -2,7 +2,9 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_models/gitlab_models.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../app/router.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/project_overview.dart';
 import 'controllers/project_overview_controller.dart';
@@ -40,6 +42,24 @@ class ProjectOverviewScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(LabFoxSpacing.md),
             children: [
               _Header(project: data.project),
+              const SizedBox(height: LabFoxSpacing.md),
+              if (data.project.defaultBranch != null)
+                Card(
+                  margin: EdgeInsets.zero,
+                  child: ListTile(
+                    leading: const Icon(Icons.folder_copy_outlined),
+                    title: Text(
+                      AppLocalizations.of(context).projectOverviewRepository,
+                    ),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () => context.go(
+                      Routes.repository(
+                        data.project.id,
+                        data.project.defaultBranch!,
+                      ),
+                    ),
+                  ),
+                ),
               const SizedBox(height: LabFoxSpacing.lg),
               _Readme(overview: data),
             ],

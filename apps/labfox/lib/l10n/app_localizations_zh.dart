@@ -90,4 +90,25 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get projectOverviewNoReadme => '此项目没有 README。';
+
+  @override
+  String get projectOverviewRepository => '仓库';
+
+  @override
+  String get repositoryTitle => '仓库';
+
+  @override
+  String get repositoryError => '无法加载此目录。';
+
+  @override
+  String get repositoryEmpty => '此目录为空。';
+
+  @override
+  String get fileError => '无法加载此文件。';
+
+  @override
+  String get fileNotFound => '未找到此文件。';
+
+  @override
+  String get fileBinary => '这是二进制文件，无法作为文本显示。';
 }

@@ -92,4 +92,25 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get projectOverviewNoReadme => 'このプロジェクトには README がありません。';
+
+  @override
+  String get projectOverviewRepository => 'リポジトリ';
+
+  @override
+  String get repositoryTitle => 'リポジトリ';
+
+  @override
+  String get repositoryError => 'このディレクトリを読み込めませんでした。';
+
+  @override
+  String get repositoryEmpty => 'このディレクトリは空です。';
+
+  @override
+  String get fileError => 'このファイルを読み込めませんでした。';
+
+  @override
+  String get fileNotFound => 'ファイルが見つかりませんでした。';
+
+  @override
+  String get fileBinary => 'バイナリファイルのためテキストとして表示できません。';
 }
