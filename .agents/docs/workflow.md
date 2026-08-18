@@ -115,7 +115,7 @@ Edit the script rather than the GitHub UI, so the taxonomy stays reviewable.
 
 | Trigger | What happens | Where |
 |---|---|---|
-| Pull request opened / updated | `area:*` labels from changed paths | `.github/labeler.yml` |
+| Pull request opened / updated | `area:*` labels from changed paths | `.github/workflows/triage.yml` + `.github/labeler.yml` |
 | Pull request opened / retitled | type label (`feat`, `fix`, …) from the Conventional Commit title | `.github/workflows/triage.yml` |
 | Pull request opened | author set as assignee | `.github/workflows/triage.yml` |
 | Pull request opened | reviewers requested | `.github/CODEOWNERS` |
@@ -126,8 +126,11 @@ Notes:
 - Type labels come from the **title**, not the changed files — the kind of change is not a
   function of which paths were touched. A title that is not a Conventional Commit gets no type
   label and does not fail the run.
-- Both workflows use `pull_request_target` so labels also apply to pull requests from forks.
-  Neither one checks out or executes contributor code, which is what makes that safe.
+- All pull request steps live in one job in `.github/workflows/triage.yml`, running in order:
+  area labels, then the type label, then assignment. They were once two workflows that raced —
+  applied labels in an undefined order and could remove each other's — so they were merged.
+- The workflow uses `pull_request_target` so labels also apply to pull requests from forks.
+  It never checks out or executes contributor code, which is what makes that safe.
 - Assignment is best effort. Outside contributors cannot be assignees until they are
   collaborators, so the step logs and continues instead of failing.
 - `CODEOWNERS` requests review but does not require it — `require_code_owner_review` is `false`
