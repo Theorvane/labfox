@@ -1,28 +1,28 @@
 ---
-name: 버그 리포트 (Bug report)
-about: 잘못 동작하는 부분 신고
+name: Bug report
+about: Report something that is not working correctly
 labels: bug
 ---
 
-## 증상
+## What's wrong
 
-<!-- 무엇이 잘못 동작하는가 -->
+<!-- What is not working correctly -->
 
-## 재현 방법
+## Steps to reproduce
 
 1.
 2.
 3.
 
-**기대 결과**:
-**실제 결과**:
+**Expected**:
+**Actual**:
 
-## 환경
+## Environment
 
-- 플랫폼: <!-- Android / iOS / Windows / macOS -->
-- LabFox 버전:
-- GitLab 인스턴스: <!-- GitLab.com / self-hosted (버전) -->
+- Platform: <!-- Android / iOS / Windows / macOS -->
+- LabFox version:
+- GitLab instance: <!-- GitLab.com / self-hosted (version) -->
 
-## 로그 / 스크린샷
+## Logs / Screenshots
 
-<!-- ⚠️ 토큰(glpat-...)과 Authorization 헤더가 포함되지 않았는지 확인할 것 -->
+<!-- ⚠️ Check that no token (glpat-...) or Authorization header is included -->

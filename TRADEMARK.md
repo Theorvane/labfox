@@ -2,66 +2,66 @@
 
 *Last updated: 2026-08-18*
 
-LabFox의 **소스 코드**는 Apache License 2.0으로 공개된다 ([LICENSE](LICENSE)).
-그러나 **이름과 브랜드는 라이선스에 포함되지 않는다.**
+The **source code** of LabFox is released under the Apache License 2.0 ([LICENSE](LICENSE)).
+However, **the name and the brand are not included in that license.**
 
-Apache License 2.0 Section 6은 상표에 대한 권리를 명시적으로 제외한다.
-이 문서는 그 경계를 구체적으로 설명한다.
-
----
-
-## 1. 보호 대상
-
-다음은 저작권자(sjungwon03)에게 귀속되며 Apache-2.0 라이선스 대상이 아니다.
-
-- **LabFox** 라는 이름 (표기 변형 포함: LabFox, Lab Fox, labfox)
-- LabFox 로고 및 아이콘
-- LabFox 앱 아이콘, 스플래시, 스토어 등록 이미지
-- LabFox 고유 일러스트 및 브랜드 에셋
-- App Store / Play Store / Microsoft Store 등록 명의
-
-소스 코드 자체는 자유롭게 사용·수정·재배포할 수 있다. 제한되는 것은 **브랜드**뿐이다.
+Section 6 of the Apache License 2.0 explicitly excludes any grant of trademark rights.
+This document explains that boundary in concrete terms.
 
 ---
 
-## 2. 허용되는 사용
+## 1. What is covered
 
-별도 허락 없이 할 수 있다.
+The following belong to the copyright holder (sjungwon03) and are not subject to the Apache-2.0 license.
 
-- **소스 코드 사용** — Apache-2.0 조건에 따라 사용, 수정, 재배포, 상업적 이용
-- **지칭(nominative use)** — "LabFox를 사용한다", "LabFox 기반", "LabFox에 기여했다"
-  처럼 사실을 설명하기 위해 이름을 언급하는 것
-- **개인 빌드** — 소스를 직접 빌드해 본인이 사용하는 것 (이름을 바꾸지 않아도 된다)
-- **수정 없는 재배포** — 공식 릴리스 바이너리를 변경 없이 그대로 전달하는 것
-- **기술 문서 · 블로그 · 리뷰 · 강의**에서 LabFox를 다루는 것
-- **패키지 저장소 등록** — 수정 없는 빌드를 배포하되, 출처를 이 프로젝트로 명시할 것
+- The name **LabFox** (including spelling variants: LabFox, Lab Fox, labfox)
+- The LabFox logo and icon
+- The LabFox app icon, splash screen, and store listing images
+- LabFox original illustrations and brand assets
+- The App Store / Play Store / Microsoft Store listing identity
 
----
-
-## 3. 사전 허락이 필요한 사용
-
-- **수정한 버전을 "LabFox" 이름으로 배포하는 것**
-  → 포크는 **다른 이름과 다른 아이콘**을 사용해야 한다.
-- **앱 스토어에 "LabFox" 또는 혼동을 줄 수 있는 이름으로 앱을 등록하는 것**
-- LabFox 로고·아이콘을 자신의 제품·서비스·조직 브랜딩에 사용하는 것
-- **LabFox**를 포함한 도메인, 계정명, 조직명 사용
-- LabFox가 후원·인증·제휴한다는 인상을 주는 표현
-- 상품(굿즈) 제작 및 판매
-
-문의: **sloki9637@gmail.com**
+The source code itself may be freely used, modified, and redistributed. The only thing restricted is the **brand**.
 
 ---
 
-## 4. 포크에 대한 안내
+## 2. Permitted uses
 
-포크는 환영한다. Apache-2.0이 보장하는 권리다. 다음만 지켜주면 된다.
+You may do the following without separate permission.
 
-1. 애플리케이션 이름을 변경한다 (`LabFox` → 본인의 이름)
-2. 앱 아이콘과 로고를 교체한다
-3. 원본이 LabFox임을 밝히되, LabFox의 공식 배포판이 아님을 명확히 한다
-4. [LICENSE](LICENSE)와 [NOTICE](NOTICE)를 유지한다
+- **Use of the source code** — use, modification, redistribution, and commercial use under the Apache-2.0 terms
+- **Nominative use** — mentioning the name in order to state a fact, such as "uses LabFox",
+  "based on LabFox", or "contributed to LabFox"
+- **Personal builds** — building the source yourself and using it yourself (you do not have to change the name)
+- **Unmodified redistribution** — passing on official release binaries exactly as they are, without changes
+- Covering LabFox in **technical documentation, blogs, reviews, and courses**
+- **Listing in package repositories** — distributing an unmodified build, provided the origin is identified as this project
 
-원문 표현 예시:
+---
+
+## 3. Uses requiring prior permission
+
+- **Distributing a modified version under the "LabFox" name**
+  → A fork must use **a different name and a different icon**.
+- **Publishing an app to an app store under the name "LabFox" or under any name likely to cause confusion**
+- Using the LabFox logo or icon in the branding of your own product, service, or organization
+- Using a domain name, account name, or organization name that contains **LabFox**
+- Any expression that gives the impression that LabFox sponsors, certifies, or is affiliated with you
+- Producing and selling merchandise (goods)
+
+Inquiries: **sloki9637@gmail.com**
+
+---
+
+## 4. Guidance for forks
+
+Forks are welcome. They are a right guaranteed by Apache-2.0. You only need to observe the following.
+
+1. Change the application name (`LabFox` → your own name)
+2. Replace the app icon and logo
+3. State that the original is LabFox, while making clear that it is not an official LabFox distribution
+4. Keep [LICENSE](LICENSE) and [NOTICE](NOTICE)
+
+Example wording:
 
 > This project is a fork of LabFox (https://github.com/labfox-app/labfox),
 > licensed under Apache-2.0. It is not affiliated with or endorsed by
@@ -69,34 +69,34 @@ Apache License 2.0 Section 6은 상표에 대한 권리를 명시적으로 제�
 
 ---
 
-## 5. 왜 이렇게 하는가
+## 5. Why it is done this way
 
-LabFox는 **open core** 모델이다.
+LabFox follows an **open core** model.
 
 ```
-소스 코드        Apache-2.0 오픈소스 — 누구나 사용·수정·재배포 가능
-모바일 앱        App Store / Play Store 유료 판매
+Source code      Apache-2.0 open source — anyone may use, modify, and redistribute it
+Mobile apps      Sold for a price on the App Store / Play Store
 ```
 
-코드는 열어두되, 스토어에서 유통되는 "LabFox"라는 이름의 앱은 하나여야
-사용자가 무엇을 설치하는지 신뢰할 수 있다. 상표를 유보하는 이유는 코드 사용을
-제한하기 위해서가 아니라, **동일한 이름의 서로 다른 앱이 유통되는 혼란을 막기 위해서**다.
+The code is kept open, but there must be only one app named "LabFox" distributed through the
+stores so that users can trust what they are installing. The trademark is reserved not in order
+to restrict use of the code, but **to prevent the confusion of different apps circulating under the same name**.
 
-Signal, Element, Firefox 등도 같은 방식을 사용한다.
+Signal, Element, and Firefox use the same approach.
 
 ---
 
-## 6. 제3자 상표
+## 6. Third-party trademarks
 
-LabFox는 **비공식 서드파티 클라이언트**이며 GitLab Inc. 또는 GitHub, Inc.와
-제휴·후원·인증 관계가 없다.
+LabFox is an **unofficial third-party client** and has no affiliation, sponsorship, or
+certification relationship with GitLab Inc. or GitHub, Inc.
 
-- "GitLab"은 GitLab Inc.의 상표다.
-- "GitHub"은 GitHub, Inc.의 상표다.
+- "GitLab" is a trademark of GitLab Inc.
+- "GitHub" is a trademark of GitHub, Inc.
 
-LabFox는 상호 운용성을 설명하기 위해서만 해당 명칭을 사용하며,
-GitHub의 로고·아이콘·일러스트·UI 에셋·브랜드 요소는 사용하지 않는다.
+LabFox uses these names solely to describe interoperability, and does not use
+GitHub's logos, icons, illustrations, UI assets, or brand elements.
 
 ---
 
-*이 문서는 법률 자문이 아니다. 정식 상표 등록 여부와 관할에 따라 실제 권리 범위는 달라질 수 있다.*
+*This document is not legal advice. The actual scope of rights may differ depending on whether the trademark is formally registered and on the applicable jurisdiction.*

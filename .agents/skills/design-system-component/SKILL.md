@@ -1,20 +1,20 @@
 ---
 name: design-system-component
-description: packages/design_system 에 공용 위젯이나 디자인 토큰을 추가/수정할 때. 여러 feature에서 재사용되는 UI를 만들 경우 사용한다.
+description: When adding or modifying a shared widget or design token in packages/design_system. Use it when building UI that is reused across multiple features.
 ---
 
-# Design System 컴포넌트
+# Design System components
 
-## 어디에 둘 것인가
+## Where it goes
 
-| 위치 | 기준 |
+| Location | Criteria |
 |---|---|
-| `packages/design_system` | 2개 이상 feature에서 쓰이거나, 쓰일 것이 분명한 UI |
-| `features/<f>/presentation/widgets/` | 해당 feature에서만 쓰는 UI |
+| `packages/design_system` | UI used by two or more features, or clearly about to be |
+| `features/<f>/presentation/widgets/` | UI used only by that feature |
 
-애매하면 feature 안에 두고, 두 번째 사용처가 생길 때 승격한다. 미리 일반화하지 않는다.
+When in doubt, keep it inside the feature and promote it once a second usage appears. Do not generalize ahead of time.
 
-## 구성
+## Structure
 
 ```
 packages/design_system/lib/
@@ -25,42 +25,42 @@ packages/design_system/lib/
 └── design_system.dart
 ```
 
-**기본 컴포넌트** — Button, Surface, Card, Divider, Avatar, Badge, Label,
+**Base components** — Button, Surface, Card, Divider, Avatar, Badge, Label,
 State Indicator, Markdown, Code, Diff
 
-**GitLab 전용 컴포넌트** — ProjectTile, IssueTile, MergeRequestTile, PipelineTile,
+**GitLab-specific components** — ProjectTile, IssueTile, MergeRequestTile, PipelineTile,
 JobTile, GitLabAvatar, GitLabLabel, DiffViewer, CodeViewer, MarkdownViewer
 
-## 규칙
+## Rules
 
-- 색·간격·타이포는 **토큰만** 쓴다. `Color(0xFF...)`, `EdgeInsets.all(13)` 같은 매직값 금지.
-- Light / Dark 양쪽에서 확인한다. 한쪽만 보고 끝내지 않는다.
-- 컴포넌트는 Riverpod provider를 직접 읽지 않는다. 데이터는 파라미터로 받는다
-  (재사용성과 프리뷰/테스트를 위해).
-- 네트워크 호출을 하지 않는다.
-- `GitLabLabel`은 GitLab이 내려주는 임의 색상(hex)을 받는다.
-  배경색에 따라 전경색 대비를 계산해 가독성을 보장한다.
-- 밀도는 GitHub Mobile 수준의 개발자 친화적 정보 밀도를 목표로 하되,
-  **GitHub의 아이콘·일러스트·브랜드 에셋은 사용하지 않는다.** LabFox 고유 디자인으로 만든다.
+- Use **tokens only** for color, spacing, and typography. Magic values like `Color(0xFF...)` or `EdgeInsets.all(13)` are forbidden.
+- Check both Light and Dark. Do not stop after looking at one.
+- Components do not read Riverpod providers directly. Data comes in as parameters
+  (for reuse and for previews/tests).
+- Do not make network calls.
+- `GitLabLabel` receives arbitrary colors (hex) served by GitLab.
+  Compute foreground contrast against the background color to guarantee readability.
+- Target a developer-friendly information density on par with GitHub Mobile, but
+  **do not use GitHub's icons, illustrations, or brand assets.** Build a design unique to LabFox.
 
-## 반응형
+## Responsive
 
-컴포넌트 자체는 주어진 제약(`LayoutBuilder` / 부모 폭)에 반응한다.
-화면 전체 레이아웃 분기는 컴포넌트가 아니라 화면의 책임이다 (`responsive-screen` 스킬).
+Components themselves respond to the constraints they are given (`LayoutBuilder` / parent width).
+Branching the overall screen layout is the screen's responsibility, not the component's (`responsive-screen` skill).
 
-`DiffViewer`는 예외로 unified / split 두 모드를 지원한다. 모드는 파라미터로 받고,
-어느 모드를 쓸지는 호출하는 화면이 결정한다.
+`DiffViewer` is the exception: it supports both unified and split modes. The mode comes in as a parameter,
+and the calling screen decides which one to use.
 
-## 접근성
+## Accessibility
 
-- 터치 타겟 최소 44dp.
-- 아이콘 전용 버튼에 semantic label을 붙인다.
-- 상태를 색으로만 표현하지 않는다 (pipeline passed/failed 에 아이콘·텍스트 병행).
+- Minimum touch target of 44dp.
+- Attach a semantic label to icon-only buttons.
+- Do not convey state by color alone (pair pipeline passed/failed with an icon and text).
 
-## 완료 조건
+## Definition of done
 
-- [ ] 토큰만 사용, 매직값 없음
-- [ ] Light / Dark 확인
-- [ ] provider 의존 없음, 데이터는 파라미터
-- [ ] `design_system.dart`에서 export
-- [ ] analyze 통과
+- [ ] Tokens only, no magic values
+- [ ] Light / Dark checked
+- [ ] No provider dependency, data via parameters
+- [ ] Exported from `design_system.dart`
+- [ ] analyze passes

@@ -1,37 +1,37 @@
 # LabFox
 
-**GitHub Mobile 수준의 UX에 GitLab의 Merge Request · CI/CD · Self-hosted를 결합한
-Flutter 기반 Cross-platform GitLab Workflow Client.**
+**A Flutter-based cross-platform GitLab workflow client that pairs GitHub Mobile-grade UX
+with GitLab's Merge Requests, CI/CD, and self-hosted support.**
 
 <p>
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-Apache--2.0-blue.svg"></a>
   <img alt="Platforms" src="https://img.shields.io/badge/platform-Android%20%7C%20iOS%20%7C%20Windows%20%7C%20macOS-lightgrey.svg">
 </p>
 
-> 🚧 개발 초기 단계입니다. 아직 실행 가능한 빌드가 없습니다.
+> 🚧 Early development. There is no runnable build yet.
 
 ---
 
-## 무엇을 만드는가
+## What we're building
 
-LabFox는 GitLab 웹의 모든 기능을 옮기지 않는다.
-**개발자가 자주 사용하는 업무를 빠르게 처리하는 것**이 목표다.
+LabFox does not try to port every feature of GitLab's web UI.
+The goal is to **make the work developers do every day fast.**
 
 ```
-알림 확인
+Check notifications
    ↓
-Issue / Merge Request 확인
+Open the Issue / Merge Request
    ↓
-Diff 확인 및 Review
+Read the diff and review
    ↓
-Pipeline 상태 확인
+Check pipeline status
    ↓
-Job Log 확인
+Check job logs
    ↓
 Approve / Merge / Retry
 ```
 
-웹 GitLab이 기능 중심으로 메뉴를 나눈다면, LabFox는 **사용자 작업 중심**으로 재구성한다.
+Where the GitLab web UI splits its menus by feature, LabFox reorganizes them **around the task at hand.**
 
 ```
 Home
@@ -43,16 +43,16 @@ Home
 └── To-do
 ```
 
-## 차별점
+## What sets it apart
 
 | | |
 |---|---|
-| **GitHub Mobile 수준의 UX** | 정보 밀도와 흐름을 모바일 개발 작업에 맞춰 설계 |
-| **GitLab CI/CD** | Pipeline, Job Log, Retry, Manual Job까지 모바일에서 처리 |
-| **Self-hosted / Multi Account** | GitLab.com과 사내 인스턴스를 동등하게 지원 |
-| **4개 플랫폼** | Android · iOS · Windows · macOS |
+| **GitHub Mobile-grade UX** | Information density and flow designed for development work on the go |
+| **GitLab CI/CD** | Pipelines, job logs, retries, and manual jobs — all from your phone |
+| **Self-hosted / Multi Account** | GitLab.com and your company's instance are equal citizens |
+| **Four platforms** | Android · iOS · Windows · macOS |
 
-## 기술 스택
+## Tech stack
 
 Flutter · Dart · Riverpod · Dio · go_router · Drift/SQLite · flutter_secure_storage
 
@@ -60,45 +60,45 @@ Flutter · Dart · Riverpod · Dio · go_router · Drift/SQLite · flutter_secur
 UI → Controller (Riverpod) → Repository → GitLab API Client → GitLab
 ```
 
-Monorepo 구성:
+Monorepo layout:
 
 ```
 labfox/
-├── apps/labfox/          Flutter 애플리케이션
+├── apps/labfox/          Flutter application
 └── packages/
-    ├── gitlab_api/       GitLab REST / GraphQL 클라이언트 (순수 Dart)
+    ├── gitlab_api/       GitLab REST / GraphQL client (pure Dart)
     ├── gitlab_models/    DTO / Entity
     ├── design_system/    LabFox Design System
-    └── secure_storage/   플랫폼 Secure Storage 래퍼
+    └── secure_storage/   Platform secure storage wrapper
 ```
 
-## 로드맵
+## Roadmap
 
 | | |
 |---|---|
-| **M0** Foundation | 스캐폴딩, 라우팅, 테마, 반응형, API 클라이언트 골격 |
-| **M1** Repository | PAT 로그인, Projects, Repository Browser, File Viewer |
+| **M0** Foundation | Scaffolding, routing, theming, responsive layout, API client skeleton |
+| **M1** Repository | PAT login, Projects, Repository Browser, File Viewer |
 | **M2** Collaboration | Issues, Merge Requests, Diff, Discussion, Approve, Merge |
 | **M3** CI/CD | Pipeline, Jobs, Job Log, Retry, Cancel, Manual Job |
 | **M4** Product | OAuth, Self-hosted, Multi Account, Inbox, Search, Offline |
 
-상세: [`.agents/docs/roadmap.md`](.agents/docs/roadmap.md)
+Details: [`.agents/docs/roadmap.md`](.agents/docs/roadmap.md)
 
-## 기여
+## Contributing
 
-**기여를 환영합니다.** 시작 전에 [CONTRIBUTING.md](CONTRIBUTING.md)를 읽어주세요.
+**Contributions are welcome.** Read [CONTRIBUTING.md](CONTRIBUTING.md) before you start.
 
-하나의 Flutter 코드베이스로 4개 플랫폼을 지원하므로,
-**데스크톱에서 고친 버그가 모바일에서도 그대로 고쳐집니다.**
+One Flutter codebase powers all four platforms, so
+**a bug you fix on desktop is fixed on mobile too.**
 
 ```
-데스크톱 기여 → 공유 코드베이스 → 모든 플랫폼 개선
+Desktop contribution → shared codebase → every platform improves
 ```
 
-이 저장소는 코딩 에이전트와 함께 개발한다.
-작업 규칙은 [`AGENTS.md`](AGENTS.md)에 정리돼 있으며, 사람이 기여할 때도 동일하게 적용된다.
+This repository is developed together with coding agents.
+The working rules live in [`AGENTS.md`](AGENTS.md), and they apply to human contributors just the same.
 
-작업은 **Issue → Branch → Pull Request** 순서로 진행한다. `main`에 직접 커밋하지 않는다.
+Work flows **Issue → Branch → Pull Request**. Nothing is committed directly to `main`.
 
 ```
 gh issue create --title "..."
@@ -107,47 +107,47 @@ git commit -s -m "feat(scope): ..."
 gh pr create --fill --base main
 ```
 
-- 브랜치: `<type>/<issue-number>-<slug>` (`feat` `fix` `docs` `refactor` `test` `chore`)
-- 커밋: [Conventional Commits](https://www.conventionalcommits.org/) + DCO 서명 (`git commit -s`)
-- PR 설명에 `Closes #N`으로 Issue를 연결한다
-- 상세: [`.agents/docs/workflow.md`](.agents/docs/workflow.md)
+- Branches: `<type>/<issue-number>-<slug>` (`feat` `fix` `docs` `refactor` `test` `chore`)
+- Commits: [Conventional Commits](https://www.conventionalcommits.org/) with a DCO sign-off (`git commit -s`)
+- Link the issue from the PR description with `Closes #N`
+- Details: [`.agents/docs/workflow.md`](.agents/docs/workflow.md)
 
-### 문서
+### Docs
 
-- [CONTRIBUTING.md](CONTRIBUTING.md) — 기여 절차, DCO, 라이선스 규칙
-- [`AGENTS.md`](AGENTS.md) — 아키텍처, 컨벤션, 금지 사항, 1.0 범위
-- [`.agents/docs/`](.agents/docs/) — 상세 문서 (architecture · conventions · api-reference · references · roadmap)
-- [`.agents/docs/workflow.md`](.agents/docs/workflow.md) — Issue → Branch → PR 절차
-- [`.agents/skills/`](.agents/skills/) — 작업 유형별 절차서
+- [CONTRIBUTING.md](CONTRIBUTING.md) — contribution process, DCO, license rules
+- [`AGENTS.md`](AGENTS.md) — architecture, conventions, what's off-limits, 1.0 scope
+- [`.agents/docs/`](.agents/docs/) — detailed docs (architecture · conventions · api-reference · references · roadmap)
+- [`.agents/docs/workflow.md`](.agents/docs/workflow.md) — the Issue → Branch → PR process
+- [`.agents/skills/`](.agents/skills/) — playbooks for each type of task
 
-## 라이선스
+## License
 
-소스 코드는 **Apache License 2.0**으로 공개된다. → [LICENSE](LICENSE)
+The source code is released under the **Apache License 2.0**. → [LICENSE](LICENSE)
 
 ```
-소스 코드              Apache-2.0 오픈소스 — 누구나 사용·수정·재배포 가능
-데스크톱 (Win/macOS)   무료
-모바일 (Android/iOS)   App Store / Play Store 유료 판매
+Source code            Apache-2.0 open source — anyone may use, modify, redistribute
+Desktop (Win/macOS)    Free
+Mobile (Android/iOS)   Sold on the App Store / Play Store
 ```
 
-데스크톱은 무료로 제공되고, 모바일 앱 판매가 개발을 지속시킨다.
-LabFox는 하나의 Flutter 코드베이스를 공유하므로 **데스크톱에 기여한 개선이
-모바일 앱에도 그대로 반영된다.**
+Desktop is free, and mobile app sales keep development going.
+Because LabFox shares a single Flutter codebase, **improvements contributed on desktop
+land in the mobile apps as well.**
 
-서드파티 의존성 라이선스: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
+Third-party dependency licenses: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
 
-## 상표
+## Trademark
 
-**"LabFox" 이름과 로고는 Apache-2.0 라이선스에 포함되지 않는다.**
-Apache License 2.0 Section 6은 상표에 대한 권리를 명시적으로 제외한다.
+**The "LabFox" name and logo are not covered by the Apache-2.0 license.**
+Section 6 of the Apache License 2.0 explicitly withholds trademark rights.
 
-코드는 자유롭게 사용·수정·재배포할 수 있다. 다만 **수정한 버전을 "LabFox" 이름이나
-로고로 배포하려면 사전 허락이 필요하다.** 포크는 다른 이름과 아이콘을 사용해야 한다.
+You are free to use, modify, and redistribute the code. However, **shipping a modified version
+under the "LabFox" name or logo requires prior permission.** Forks must use a different name and icon.
 
-자세한 내용: [TRADEMARK.md](TRADEMARK.md)
+Full details: [TRADEMARK.md](TRADEMARK.md)
 
-## 고지
+## Notice
 
-LabFox는 **비공식 서드파티 클라이언트**이며 GitLab Inc. 또는 GitHub, Inc.와
-제휴·후원·인증 관계가 없다.
-"GitLab"은 GitLab Inc.의, "GitHub"은 GitHub, Inc.의 상표다.
+LabFox is an **unofficial third-party client** and is not affiliated with, endorsed by,
+or certified by GitLab Inc. or GitHub, Inc.
+"GitLab" is a trademark of GitLab Inc.; "GitHub" is a trademark of GitHub, Inc.

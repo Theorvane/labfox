@@ -1,25 +1,25 @@
-## 변경 사항
+## What changed
 
-<!-- 무엇을 왜 바꿨는가. 무엇을 바꿨는지는 diff가 말해준다. -->
+<!-- What you changed and why. The diff already tells what was changed. -->
 
 Closes #
 
-## 확인
+## Checklist
 
 - [ ] `dart format .`
-- [ ] `flutter analyze` 경고 없음
-- [ ] `flutter test` 통과
-- [ ] 모델 변경 시 `build_runner` 실행 및 생성물 커밋
-- [ ] Mobile(<600) / Desktop(>1000) 양쪽 레이아웃 확인
-- [ ] Light / Dark 테마 확인
-- [ ] 토큰·인증 정보가 로그나 코드에 노출되지 않음
-- [ ] 새 의존성이 있다면 라이선스 확인 (GPL/LGPL/AGPL 금지)
-- [ ] 커밋에 `Signed-off-by` 포함 (`git commit -s`)
+- [ ] `flutter analyze` reports no warnings
+- [ ] `flutter test` passes
+- [ ] When models change, ran `build_runner` and committed the generated files
+- [ ] Checked both Mobile(<600) and Desktop(>1000) layouts
+- [ ] Checked Light / Dark themes
+- [ ] No tokens or credentials exposed in logs or code
+- [ ] If there are new dependencies, licenses checked (GPL/LGPL/AGPL forbidden)
+- [ ] Commits include `Signed-off-by` (`git commit -s`)
 
-## 스크린샷
+## Screenshots
 
-<!-- UI 변경이 있으면 첨부. 없으면 삭제. -->
+<!-- Attach if there are UI changes. Delete if not. -->
 
-## 참고
+## References
 
-<!-- GitLab API 문서, 관련 PR -->
+<!-- GitLab API documentation, related PRs -->

@@ -1,8 +1,8 @@
 # GitLab API Reference
 
-**공식 문서가 최종 Source of Truth.** 참고 구현(OctoLab, LabCoat)과 다르면 공식 문서를 따른다.
+**The official documentation is the final Source of Truth.** When a reference implementation (OctoLab, LabCoat) disagrees with it, follow the official documentation.
 
-| 주제 | 링크 |
+| Topic | Link |
 |---|---|
 | API Overview | https://docs.gitlab.com/api/ |
 | REST API | https://docs.gitlab.com/api/rest/ |
@@ -14,26 +14,26 @@
 ## Base URL
 
 ```
-사용자 입력   https://git.company.com
+User input    https://git.company.com
     ↓
 REST          https://git.company.com/api/v4
 GraphQL       https://git.company.com/api/graphql
 ```
 
-`gitlab.com`은 기본값일 뿐이며 하드코딩하지 않는다. GitLab.com과 self-hosted를 동등하게 다룬다.
+`gitlab.com` is nothing more than a default — do not hardcode it. Treat GitLab.com and self-hosted instances as equals.
 
-## 인증
+## Authentication
 
-- **PAT** — 개발 초기 기본. `PRIVATE-TOKEN: <token>` 또는 `Authorization: Bearer <token>`.
-- **OAuth 2.0** — 정식 제품 기본. Access / Refresh Token을 secure storage에 보관하고 만료 시 갱신.
+- **PAT** — the default for early development. `PRIVATE-TOKEN: <token>` or `Authorization: Bearer <token>`.
+- **OAuth 2.0** — the default for the shipping product. Keep the Access / Refresh Tokens in secure storage and refresh them on expiry.
 
-토큰은 로그에 남기지 않는다 (`AGENTS.md` §7).
+Never let tokens reach the logs (`AGENTS.md` §7).
 
-## 리소스 매핑
+## Resource Mapping
 
-`packages/gitlab_api/lib/src/` 하위 폴더 = 리소스 그룹.
+Subfolders under `packages/gitlab_api/lib/src/` = resource groups.
 
-| 서브 클라이언트 | 주요 경로 |
+| Sub-client | Main paths |
 |---|---|
 | `auth` | `/oauth/token` |
 | `users` | `/user`, `/users/:id` |
@@ -50,31 +50,31 @@ GraphQL       https://git.company.com/api/graphql
 | `todos` | `/todos`, `/todos/:id/mark_as_done` |
 | `search` | `/search`, `/projects/:id/search` |
 
-경로와 파라미터는 사용 시점에 공식 문서로 확인한다. 위 표는 폴더 구성을 위한 요약이다.
+Verify paths and parameters against the official documentation at the point of use. The table above is a summary for laying out the folders.
 
 ## Pagination
 
-- offset: `page`, `per_page` + 응답 헤더 `X-Next-Page`, `X-Total-Pages`, `X-Total`.
-- keyset: 대규모 컬렉션에서 권장. `Link` 헤더의 `rel="next"` 를 따라간다.
-- 전체 개수를 항상 주지는 않는다. 총 페이지 수를 가정한 UI를 만들지 않는다.
+- offset: `page`, `per_page` plus the `X-Next-Page`, `X-Total-Pages`, `X-Total` response headers.
+- keyset: recommended for large collections. Follow `rel="next"` in the `Link` header.
+- The total count is not always returned. Do not build UI that assumes a known total page count.
 
 ## Job Log
 
-`/projects/:id/jobs/:job_id/trace`는 **ANSI escape가 포함된 plain text**를 준다.
-JSON이 아니다. ANSI 색상 렌더링, 라인 wrap, 증분 로딩을 고려해 파싱한다.
+`/projects/:id/jobs/:job_id/trace` returns **plain text containing ANSI escapes**.
+It is not JSON. Parse it with ANSI color rendering, line wrapping, and incremental loading in mind.
 
 ## Diff
 
-MR 변경사항은 `/projects/:id/merge_requests/:iid/changes` (또는 `/diffs`).
-큰 diff는 잘려 오거나 `overflow` 플래그가 붙는다. 잘림을 UI에 표시한다.
+MR changes come from `/projects/:id/merge_requests/:iid/changes` (or `/diffs`).
+Large diffs arrive truncated or carry an `overflow` flag. Surface the truncation in the UI.
 
 ## REST vs GraphQL
 
-기본은 REST. 한 화면에서 여러 리소스를 한 번에 가져오는 편이 명확히 유리할 때만
-(예: MR 상세 + 승인 상태 + 파이프라인 + 토론) GraphQL을 선택적으로 쓴다.
-두 방식을 같은 화면에서 혼용해 상태가 갈라지지 않게 한다.
+REST by default. Reach for GraphQL selectively only when fetching several resources at once for a single screen is clearly better
+(for example MR detail + approval state + pipelines + discussions).
+Do not mix the two on the same screen and let state diverge.
 
-## 용어 매핑 (GitHub → LabFox)
+## Terminology Mapping (GitHub → LabFox)
 
 | GitHub | LabFox / GitLab |
 |---|---|
@@ -85,7 +85,7 @@ MR 변경사항은 `/projects/:id/merge_requests/:iid/changes` (또는 `/diffs`)
 | Code Review | MR Review |
 | Organization | Group |
 
-## 참고 구현 / UX 레퍼런스
+## Reference Implementations / UX References
 
-저장소 목록과 라이선스 주의사항은 `.agents/docs/references.md` 참고.
-어떤 구현과 공식 문서가 다르면 **공식 문서를 따른다.**
+See `.agents/docs/references.md` for the repository list and license caveats.
+When an implementation disagrees with the official documentation, **follow the official documentation.**

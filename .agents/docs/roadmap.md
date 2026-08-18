@@ -1,26 +1,26 @@
 # Roadmap
 
-## 최초 Vertical Slice
+## First Vertical Slice
 
-전체 API를 먼저 구현하지 않는다. 아래 한 줄기를 먼저 끝낸다.
+Don't implement the entire API up front. Finish this one thread first.
 
 ```
 PAT Login → Home → Projects → Project → Merge Requests → MR Detail → Diff
 ```
 
-여기까지 되면 API 아키텍처 · 인증 · 라우팅 · 상태관리 · UI · Markdown · Diff · 반응형이
-사실상 전부 검증된다. 이후 기능은 이 뼈대를 반복 적용하는 일이다.
+Once that works, the API architecture, authentication, routing, state management, UI, Markdown, diff, and
+responsive layout are effectively all validated. Everything after that is applying the same skeleton repeatedly.
 
-## 단계
+## Phases
 
 ### M0 — Foundation
-Flutter 프로젝트 및 monorepo 스캐폴딩, Riverpod / Dio / go_router,
-freezed + json_serializable, Drift, Secure Storage, Theme, 반응형 레이아웃,
-`gitlab_api` 클라이언트 골격.
+Flutter project and monorepo scaffolding, Riverpod / Dio / go_router,
+freezed + json_serializable, Drift, Secure Storage, Theme, responsive layout,
+`gitlab_api` client skeleton.
 
 ### M1 — Repository
 PAT Login, Projects, Project Overview, Repository Browser, File Viewer,
-README 렌더링, Branches, Commits.
+README rendering, Branches, Commits.
 
 ### M2 — Collaboration
 Issues, Issue Detail, Comments, Merge Requests, MR Detail, Diff, Discussion,
@@ -30,11 +30,11 @@ Approve, Merge.
 Pipeline, Pipeline Detail, Stages, Jobs, Job Log, Retry, Cancel, Manual Job.
 
 ### M4 — Product
-OAuth, Self-hosted, Multi Account, Inbox(To-do), Search, Local Cache, Offline, Deep Links.
+OAuth, Self-hosted, Multi Account, Inbox (To-do), Search, Local Cache, Offline, Deep Links.
 
-## 1.0 범위
+## 1.0 Scope
 
-**포함**
+**Included**
 
 - Account — GitLab.com, Self-hosted, PAT, OAuth, Multi Account
 - Project — Projects, Favorites, Repository, Files, Branches, Commits
@@ -43,20 +43,20 @@ OAuth, Self-hosted, Multi Account, Inbox(To-do), Search, Local Cache, Offline, D
 - Productivity — To-do Inbox, Search, Recent, Favorites
 - Platform — Android, iOS, Windows, macOS
 
-**제외 (1.0에서 구현하지 않는다)**
+**Excluded (not implemented in 1.0)**
 
 Wiki · Packages · Container Registry · Infrastructure · Kubernetes ·
 Security Dashboard · Analytics · Admin Area · Runner Administration
 
-## 이후 확장
+## Later Expansion
 
-- Desktop Integration — VS Code / Cursor / Android Studio / IntelliJ / Terminal / Explorer / Finder 에서 열기
-- AI — Job Log 실패 원인 분석, MR 변경사항 요약
-  → **1.0 핵심 기능 완성 이후에 착수한다.**
+- Desktop Integration — open in VS Code / Cursor / Android Studio / IntelliJ / Terminal / Explorer / Finder
+- AI — analyze Job Log failure causes, summarize MR changes
+  → **Start only after the 1.0 core features are complete.**
 
-## 정보 구조
+## Information Architecture
 
-웹 GitLab의 기능 중심 메뉴를 그대로 옮기지 않고, 사용자 작업 중심으로 재구성한다.
+Don't port web GitLab's feature-centric menus verbatim; restructure them around user tasks.
 
 ```
 Home
@@ -68,5 +68,5 @@ Home
 └── To-do
 ```
 
-Mobile 네비게이션: Bottom Navigation — `Home · Inbox · Search · Me`
+Mobile navigation: Bottom Navigation — `Home · Inbox · Search · Me`
 Desktop: Navigation Rail + Multi-pane + Command Palette (⌘K / Ctrl+K)

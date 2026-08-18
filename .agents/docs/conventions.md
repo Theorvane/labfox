@@ -1,14 +1,14 @@
 # Conventions
 
-## 파일 / 네이밍
+## Files / Naming
 
-- 파일 `snake_case.dart`, 클래스 `PascalCase`, 멤버 `lowerCamelCase`.
-- 화면 위젯은 `*_screen.dart` / `*Screen`. 재사용 위젯은 `*_tile.dart`, `*_view.dart`.
-- Controller는 `*_controller.dart` / `*Controller`.
-- Repository는 `*_repository.dart` / `*Repository`.
-- 모델은 `packages/gitlab_models`. API DTO와 화면 모델이 다르면 DTO는 `*Dto` 접미사를 붙인다.
+- Files `snake_case.dart`, classes `PascalCase`, members `lowerCamelCase`.
+- Screen widgets are `*_screen.dart` / `*Screen`. Reusable widgets are `*_tile.dart`, `*_view.dart`.
+- Controllers are `*_controller.dart` / `*Controller`.
+- Repositories are `*_repository.dart` / `*Repository`.
+- Models live in `packages/gitlab_models`. When the API DTO differs from the screen model, suffix the DTO with `*Dto`.
 
-## Feature 폴더
+## Feature Folders
 
 ```
 features/merge_requests/
@@ -21,7 +21,7 @@ features/merge_requests/
     └── widgets/
 ```
 
-`domain/` 을 억지로 만들지 않는다. 모델은 `gitlab_models`에 둔다.
+Do not force a `domain/` folder. Models belong in `gitlab_models`.
 
 ## Freezed / JSON
 
@@ -42,45 +42,45 @@ class MergeRequest with _$MergeRequest {
 }
 ```
 
-- 수동 `fromJson` 작성 금지.
-- 생성 후 `dart run build_runner build --delete-conflicting-outputs`.
-- `*.freezed.dart` / `*.g.dart` 직접 편집 금지.
-- GitLab 응답에는 예고 없이 필드가 추가된다. 알 수 없는 필드는 무시하고, 없을 수 있는 필드는 nullable로 둔다.
+- Do not hand-write `fromJson`.
+- After adding one, run `dart run build_runner build --delete-conflicting-outputs`.
+- Do not edit `*.freezed.dart` / `*.g.dart` directly.
+- GitLab responses gain fields without warning. Ignore unknown fields, and make fields that may be absent nullable.
 
 ## id vs iid
 
-| | 의미 | 예 |
+| | Meaning | Example |
 |---|---|---|
-| `id` | GitLab 전역 식별자 | 12345 |
-| `iid` | 프로젝트 내부 번호, **화면에 보이는 값** | `!142`, `#282` |
+| `id` | GitLab-wide identifier | 12345 |
+| `iid` | Number internal to the project, **the value shown on screen** | `!142`, `#282` |
 
-API 경로는 대부분 `/projects/:id/merge_requests/:iid` 형태다.
-파라미터 이름을 `id`로 뭉개지 말고 `projectId` / `iid`로 명시한다.
+Most API paths take the form `/projects/:id/merge_requests/:iid`.
+Do not lump parameter names together as `id`; spell them out as `projectId` / `iid`.
 
 ## Riverpod
 
-- 기본은 `AsyncNotifier`. 파라미터가 있으면 `family`.
-- `ref.watch`는 build 안에서만. 콜백에서는 `ref.read`.
-- 목록 → 상세로 이동할 때 목록 항목을 그대로 넘기지 말고, 상세 provider가 스스로 로드하게 한다
-  (딥링크·창 복원에서 동일하게 동작해야 한다).
-- 쓰기 후에는 관련 provider를 `invalidate`한다.
+- `AsyncNotifier` by default. Use `family` when there are parameters.
+- `ref.watch` only inside build. Use `ref.read` in callbacks.
+- When navigating from list to detail, do not pass the list item straight through; let the detail provider load it itself
+  (deep links and window restoration have to behave the same way).
+- After a write, `invalidate` the related providers.
 
-## 에러 처리
+## Error Handling
 
-Repository에서 도메인 예외로 변환한다.
+Convert to domain exceptions in the Repository.
 
-| HTTP | 처리 |
+| HTTP | Handling |
 |---|---|
-| 401 | 토큰 만료/무효 → 재인증 유도 |
-| 403 | 권한 없음 → 기능 비활성 안내 |
-| 404 | 리소스 없음 또는 비공개 → 구분해 안내 |
-| 429 | Rate limit → `Retry-After` 존중 |
-| 5xx | 인스턴스 오류 → 재시도 제공 |
+| 401 | Token expired/invalid → prompt re-authentication |
+| 403 | Not permitted → tell the user the feature is unavailable |
+| 404 | Resource missing or private → distinguish the two in the message |
+| 429 | Rate limit → respect `Retry-After` |
+| 5xx | Instance error → offer a retry |
 
-Self-hosted 인스턴스는 사설 인증서 / 프록시 / 네트워크 미도달 케이스가 흔하다.
-연결 실패와 인증 실패를 반드시 구분해 메시지를 낸다.
+Self-hosted instances commonly hit private certificates, proxies, and unreachable networks.
+Always distinguish connection failures from authentication failures in the message.
 
-## 커밋 전
+## Before Committing
 
 ```
 dart format .

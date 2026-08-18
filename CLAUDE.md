@@ -2,75 +2,82 @@
 
 @AGENTS.md
 
-위 `AGENTS.md`가 이 저장소의 공통 규칙이며 **Source of Truth**다.
-규칙을 바꿔야 하면 `AGENTS.md`를 수정한다. 이 파일에는 Claude Code 전용 내용만 둔다.
+`AGENTS.md` above holds this repository's shared rules and is the **source of truth**.
+To change a rule, edit `AGENTS.md`. Keep this file limited to Claude Code specifics.
 
 ---
 
-## 스킬
+## Language
 
-프로젝트 스킬은 `.claude/skills/`가 아니라 **`.agents/skills/`** 에 보관한다.
-`.claude/skills`는 `.agents/skills`를 가리키는 심볼릭 링크이며, 실제 파일은 모두 `.agents/` 아래에 있다.
-스킬을 추가할 때는 `.agents/skills/<name>/SKILL.md`로 만든다.
+**Everything written into this repository is English** — code, comments, docs, commit messages,
+issues, and PRs. See the language policy at the top of `AGENTS.md`.
 
-| Skill | 사용 시점 |
+The user may talk to you in Korean or any other language. Reply in whatever language they use,
+but **what you write to disk, to git, and to GitHub is always English.**
+
+## Skills
+
+Project skills live in **`.agents/skills/`**, not `.claude/skills/`.
+`.claude/skills` is a symlink to `.agents/skills`; the real files are all under `.agents/`.
+To add a skill, create `.agents/skills/<name>/SKILL.md`.
+
+| Skill | When to use |
 |---|---|
-| `gitlab-api-endpoint` | `packages/gitlab_api`에 GitLab 엔드포인트를 추가/수정할 때 |
-| `feature-slice` | `apps/labfox/lib/features/`에 새 화면/기능을 추가할 때 |
-| `design-system-component` | `packages/design_system`에 공용 위젯을 추가할 때 |
-| `responsive-screen` | 화면을 Mobile / Tablet / Desktop로 분기할 때 |
+| `gitlab-api-endpoint` | Adding or changing a GitLab endpoint in `packages/gitlab_api` |
+| `feature-slice` | Adding a new screen or feature under `apps/labfox/lib/features/` |
+| `design-system-component` | Adding a shared widget to `packages/design_system` |
+| `responsive-screen` | Branching a screen across mobile / tablet / desktop |
 
-## 참고 문서
+## Reference docs
 
-세부 규칙은 필요할 때만 읽는다 (기본 컨텍스트에 올리지 않는다).
+Read these only when relevant — do not load them into context by default.
 
-- `.agents/docs/architecture.md` — 레이어별 책임, 데이터 흐름, 캐시 전략
-- `.agents/docs/conventions.md` — 네이밍, 파일 배치, freezed/Riverpod 작성 규칙
-- `.agents/docs/api-reference.md` — GitLab 엔드포인트 매핑, 인증, 페이지네이션, 용어 대응
-- `.agents/docs/roadmap.md` — M0~M4, Vertical Slice, 1.0 범위
-- `.agents/docs/workflow.md` — Issue → Branch → PR 절차, gh 명령, 권한 경계
-- `.agents/docs/references.md` — 참고 저장소/문서 링크, 참고 우선순위, 라이선스 주의사항
+- `.agents/docs/architecture.md` — layer responsibilities, data flow, caching strategy
+- `.agents/docs/conventions.md` — naming, file placement, freezed/Riverpod rules
+- `.agents/docs/api-reference.md` — GitLab endpoint map, auth, pagination, terminology
+- `.agents/docs/roadmap.md` — M0–M4, vertical slice, 1.0 scope
+- `.agents/docs/workflow.md` — Issue → Branch → PR procedure, `gh` commands, permission boundaries
+- `.agents/docs/references.md` — reference repos and docs, priority order, license warnings
 
-## 작업 흐름
+## Workflow
 
-origin은 **GitHub** (`labfox-app/labfox`)다. CLI는 **`gh`**.
+The origin remote is **GitHub** (`labfox-app/labfox`). The CLI is **`gh`**.
 
 ```
-Issue → Branch → 커밋(-s) → Push → PR → Merge(사용자)
+Issue → Branch → Commit (-s) → Push → PR → Merge (maintainer)
 ```
 
-⚠️ LabFox는 GitLab 클라이언트지만 개발은 GitHub에서 한다.
-**앱 도메인 용어는 Merge Request, 개발 절차는 Pull Request.** 섞지 않는다.
+⚠️ LabFox is a GitLab client but is developed on GitHub.
+**App domain vocabulary is Merge Request; the development process is Pull Request.** Do not mix them.
 
-확인 없이 진행해도 되는 것: Issue 생성, 브랜치 생성, 커밋, push, PR 생성.
-하지 않는 것: `main` 직접 push, force push, **PR merge**, Issue/PR/브랜치 삭제.
+Fine without asking: creating issues, creating branches, committing, pushing, opening PRs.
+Never: pushing directly to `main`, force pushing, **merging a PR**, deleting issues/PRs/branches.
 
-절차와 명령: `.agents/docs/workflow.md` · 요약: `AGENTS.md` §11
+## Subagents
 
-## 서브에이전트
+**Use of the Agent tool is permitted.** You do not need to ask each time.
 
-**Agent 도구 사용이 허용돼 있다.** 매번 확인받지 않아도 된다.
+Good fits:
 
-적합한 작업:
+- Surveying reference repositories (OctoLab, LabCoat, …) — read-only and high volume
+- Checking several GitLab API endpoints in parallel
+- Implementing independent feature slices
+- Broad code exploration (`Explore`)
+- PR review / code inspection
 
-- 참고 저장소(OctoLab, LabCoat 등) 조사 — 읽기 전용이고 양이 많다
-- GitLab API 문서 여러 엔드포인트 동시 확인
-- 서로 독립적인 feature slice 구현
-- 넓은 범위의 코드 탐색 (`Explore`)
-- PR 리뷰 / 코드 점검
+Rules:
 
-지킬 것:
+- Tell the subagent in its prompt to **read and follow `AGENTS.md`** — especially the language
+  policy, the license rules (§8), the `id`/`iid` distinction, and the 1.0 scope (§9).
+- Never run parallel agents that touch the same files. Isolate with `isolation: "worktree"`
+  or run them sequentially.
+- Do not delegate pushing or merging to a subagent.
+- Do not take a subagent's output at face value. **Verify API paths and licenses yourself.**
+- Launch independent work concurrently in a single message.
 
-- 위임 프롬프트에 **`AGENTS.md`를 읽고 따르라**고 명시한다.
-  특히 라이선스 규칙(§8), `id`/`iid` 구분, 1.0 범위(§9).
-- 같은 파일을 건드리는 작업은 병렬로 돌리지 않는다. `isolation: "worktree"`로 격리하거나 순차 진행.
-- 서브에이전트에게 push·merge를 맡기지 않는다.
-- 결과를 그대로 신뢰하지 않는다. **API 경로와 라이선스는 직접 확인한다.**
-- 독립적인 작업은 한 메시지에서 동시에 띄운다.
+## Habits
 
-## 작업 습관
-
-- 코드를 쓰기 전에 같은 계층의 기존 파일을 먼저 읽고 패턴을 맞춘다.
-- 새 의존성 추가는 먼저 제안하고 승인받는다 (`AGENTS.md` §4).
-- 모델을 건드렸으면 `build_runner` 실행까지 포함해야 작업 완료다.
-- 완료 보고 시 `flutter analyze` / `flutter test` 결과를 그대로 전달한다. 실패는 실패로 보고한다.
+- Read neighboring files at the same layer before writing code, and match their patterns.
+- Propose new dependencies and get approval first (`AGENTS.md` §4).
+- Touching a model is not done until `build_runner` has been run.
+- Report `flutter analyze` / `flutter test` output as it is. A failure is reported as a failure.

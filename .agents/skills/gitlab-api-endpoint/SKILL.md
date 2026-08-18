@@ -1,39 +1,39 @@
 ---
 name: gitlab-api-endpoint
-description: packages/gitlab_api 에 GitLab REST 엔드포인트를 추가하거나 수정할 때. 새 리소스 호출, DTO 추가, 페이지네이션이나 에러 처리 변경이 필요한 경우 사용한다.
+description: When adding or modifying a GitLab REST endpoint in packages/gitlab_api. Use it when you need to call a new resource, add a DTO, or change pagination or error handling.
 ---
 
-# GitLab 엔드포인트 추가
+# Adding a GitLab endpoint
 
-## 1. 공식 문서 확인 (건너뛰지 않는다)
+## 1. Check the official docs (do not skip)
 
-https://docs.gitlab.com/api/ 에서 실제 경로 · 파라미터 · 응답 형태를 확인한다.
-참고 저장소(OctoLab, LabCoat)의 구현과 다르면 **공식 문서를 따른다**.
-기억이나 추측으로 경로를 쓰지 않는다.
+Confirm the real path, parameters, and response shape at https://docs.gitlab.com/api/.
+If the reference repositories (OctoLab, LabCoat) disagree with them, **follow the official docs**.
+Never write a path from memory or guesswork.
 
-확인할 것:
-- 경로에 쓰이는 게 `id`인지 `iid`인지
-- 필수/선택 쿼리 파라미터
-- 페이지네이션 방식 (offset / keyset)
-- 응답이 JSON인지 plain text인지 (job trace는 text다)
+Things to confirm:
+- Whether the path uses `id` or `iid`
+- Required/optional query parameters
+- Pagination style (offset / keyset)
+- Whether the response is JSON or plain text (job trace is text)
 
-## 2. 배치
+## 2. Placement
 
-리소스 그룹별 폴더에 넣는다.
+Put it in the folder for its resource group.
 
 ```
 packages/gitlab_api/lib/src/<resource>/
-├── <resource>_api.dart      서브 클라이언트
-└── (필요시) 요청 파라미터 클래스
+├── <resource>_api.dart      sub-client
+└── (if needed) request parameter classes
 ```
 
-`GitLabClient`에 접근자를 노출한다: `gitlab.mergeRequests.get(...)`
+Expose an accessor on `GitLabClient`: `gitlab.mergeRequests.get(...)`
 
-## 3. 작성 규칙
+## 3. Authoring rules
 
 ```dart
 Future<MergeRequest> get({
-  required Object projectId,   // int 또는 "group/project" (URL 인코딩)
+  required Object projectId,   // int or "group/project" (URL-encoded)
   required int iid,
 }) async {
   final res = await _dio.get('/projects/${_enc(projectId)}/merge_requests/$iid');
@@ -41,47 +41,47 @@ Future<MergeRequest> get({
 }
 ```
 
-- `packages/flutter`를 import 하지 않는다. 순수 Dart 유지.
-- projectId는 숫자 ID와 `group/project` 경로 둘 다 받는다. 경로형은 **URL 인코딩 필수**.
-- baseUrl은 주입받은 값을 쓴다. `gitlab.com` 하드코딩 금지.
-- 토큰은 Dio interceptor에서 붙인다. 메서드마다 헤더를 만들지 않는다.
+- Do not import `packages/flutter`. Keep it pure Dart.
+- projectId accepts both a numeric ID and a `group/project` path. Path form **must be URL-encoded**.
+- Use the injected baseUrl. Never hardcode `gitlab.com`.
+- The token is attached by a Dio interceptor. Do not build headers per method.
 
-## 4. 모델
+## 4. Models
 
-`packages/gitlab_models`에 freezed + json_serializable로 추가한다.
-snake_case 필드는 `@JsonKey(name: ...)`로 매핑하고, 없을 수 있는 필드는 nullable로 둔다.
+Add them to `packages/gitlab_models` with freezed + json_serializable.
+Map snake_case fields with `@JsonKey(name: ...)`, and make possibly-absent fields nullable.
 
 ```
 dart run build_runner build --delete-conflicting-outputs
 ```
 
-## 5. 페이지네이션
+## 5. Pagination
 
-목록 엔드포인트는 페이지 메타데이터를 함께 반환한다.
+List endpoints return page metadata alongside the data.
 
 ```dart
 Future<Paginated<Project>> list({int page = 1, int perPage = 20});
 ```
 
-응답 헤더 `X-Next-Page` / `X-Total-Pages`를 읽어 담는다.
-헤더가 없을 수 있으므로(대규모 컬렉션) 총 개수를 전제한 API를 만들지 않는다.
+Read the `X-Next-Page` / `X-Total-Pages` response headers and carry them through.
+Those headers may be missing (large collections), so do not design an API that assumes a total count.
 
-## 6. 에러
+## 6. Errors
 
-raw `DioException`을 밖으로 내보내지 않는다.
-401 / 403 / 404 / 429 / 5xx 를 도메인 예외로 변환한다 (`.agents/docs/conventions.md` 참고).
-연결 실패(self-hosted 미도달, 인증서 오류)와 인증 실패를 구분한다.
+Do not let a raw `DioException` escape.
+Convert 401 / 403 / 404 / 429 / 5xx into domain exceptions (see `.agents/docs/conventions.md`).
+Distinguish connection failures (unreachable self-hosted instance, certificate errors) from authentication failures.
 
-## 7. 테스트
+## 7. Tests
 
-`gitlab_api`는 Flutter 비의존이므로 순수 Dart 테스트로 검증한다.
-실제 응답 JSON 샘플을 fixture로 두고 파싱 테스트를 붙인다. 실제 토큰은 넣지 않는다.
+`gitlab_api` does not depend on Flutter, so verify it with pure Dart tests.
+Keep real response JSON samples as fixtures and add parsing tests against them. Never include real tokens.
 
-## 완료 조건
+## Definition of done
 
-- [ ] 공식 문서로 경로/파라미터 확인
-- [ ] 서브 클라이언트 메서드 추가 + `GitLabClient` 노출
-- [ ] freezed 모델 + build_runner 실행
-- [ ] 페이지네이션/에러 처리
-- [ ] 파싱 테스트
-- [ ] `dart format .` / `flutter analyze` 통과
+- [ ] Path/parameters confirmed against the official docs
+- [ ] Sub-client method added + exposed on `GitLabClient`
+- [ ] freezed model + build_runner run
+- [ ] Pagination/error handling
+- [ ] Parsing test
+- [ ] `dart format .` / `flutter analyze` pass

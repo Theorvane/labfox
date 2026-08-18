@@ -1,22 +1,22 @@
 ---
-name: 작업 (Task)
-about: 기능 구현, 개선, 리팩토링
+name: Task
+about: Feature implementation, improvement, refactoring
 labels: ''
 ---
 
-## 배경
+## Background
 
-<!-- 왜 필요한가. 어떤 사용자 흐름에 기여하는가. -->
+<!-- Why is this needed? Which user flow does it contribute to? -->
 
-## 할 일
+## Tasks
 
 - [ ]
 - [ ]
 
-## 범위
+## Scope
 
-<!-- 이 Issue에 포함되지 않는 것을 명시한다. -->
+<!-- State what is not included in this Issue. -->
 
-## 참고
+## References
 
-<!-- GitLab API 문서 링크, 관련 Issue/PR, 참고 구현 -->
+<!-- GitLab API documentation links, related Issues/PRs, reference implementations -->
