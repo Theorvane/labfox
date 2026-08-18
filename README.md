@@ -12,7 +12,7 @@ with GitLab's Merge Requests, CI/CD, and self-hosted support.**
   <img alt="Platforms" src="https://img.shields.io/badge/platform-Android%20%7C%20iOS%20%7C%20Windows%20%7C%20macOS-lightgrey.svg">
 </p>
 
-> 🚧 Early development. There is no runnable build yet.
+> 🚧 Early development. The monorepo is scaffolded; feature work starts at M1.
 
 ---
 

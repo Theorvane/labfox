@@ -161,7 +161,7 @@ Those are hard for maintainers to reproduce, so they need extra detail from the 
 feat/12-mr-diff-viewer
 fix/28-self-hosted-cert-error
 docs/31-api-reference
-chore/35-melos-bootstrap
+chore/35-upgrade-flutter
 ```
 
 - type: `feat` · `fix` · `docs` · `refactor` · `test` · `chore`

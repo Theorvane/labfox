@@ -1,0 +1,17 @@
+name: labfox_workspace
+description: >-
+  LabFox monorepo root. Holds no code itself; it exists to declare the pub
+  workspace so every package resolves against one shared lockfile.
+publish_to: none
+
+environment:
+  sdk: ^3.10.0
+
+# Native pub workspaces (Dart 3.6+) instead of melos: one resolution, one
+# lockfile, no extra tooling to install before a contributor can build.
+workspace:
+  - apps/labfox
+  - packages/design_system
+  - packages/gitlab_api
+  - packages/gitlab_models
+  - packages/secure_storage
