@@ -57,6 +57,10 @@ pubspec_overrides.yaml
 *.pem
 secrets.json
 
+# Python (icon generation tooling)
+__pycache__/
+*.pyc
+
 # Editors
 .idea/
 *.iml
