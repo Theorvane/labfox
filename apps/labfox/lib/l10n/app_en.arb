@@ -185,5 +185,55 @@
   "commitError": "Could not load this commit.",
   "@commitError": {
     "description": "Shown when a commit fails to load"
+  },
+  "projectOverviewIssues": "Issues",
+  "@projectOverviewIssues": {
+    "description": "Overview link that opens the issues list"
+  },
+  "issuesTitle": "Issues",
+  "@issuesTitle": {
+    "description": "Title of the issues list screen"
+  },
+  "issuesFilterOpen": "Open",
+  "@issuesFilterOpen": {
+    "description": "Label for the open-issues filter"
+  },
+  "issuesFilterClosed": "Closed",
+  "@issuesFilterClosed": {
+    "description": "Label for the closed-issues filter"
+  },
+  "issuesError": "Could not load issues.",
+  "@issuesError": {
+    "description": "Shown when the issues list fails"
+  },
+  "issuesEmpty": "No issues here.",
+  "@issuesEmpty": {
+    "description": "Shown when the issues list is empty"
+  },
+  "issueError": "Could not load this issue.",
+  "@issueError": {
+    "description": "Shown when an issue fails to load"
+  },
+  "issueStateOpen": "Open",
+  "@issueStateOpen": {
+    "description": "Issue state badge, open"
+  },
+  "issueStateClosed": "Closed",
+  "@issueStateClosed": {
+    "description": "Issue state badge, closed"
+  },
+  "issueNoDescription": "No description provided.",
+  "@issueNoDescription": {
+    "description": "Shown when an issue has no description"
+  },
+  "issueOpenedBy": "opened by {username}",
+  "@issueOpenedBy": {
+    "description": "Attribution line on an issue",
+    "placeholders": {
+      "username": {
+        "type": "String",
+        "example": "jungwon"
+      }
+    }
   }
 }

@@ -144,4 +144,39 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get commitError => '无法加载此提交。';
+
+  @override
+  String get projectOverviewIssues => '议题';
+
+  @override
+  String get issuesTitle => '议题';
+
+  @override
+  String get issuesFilterOpen => '打开';
+
+  @override
+  String get issuesFilterClosed => '已关闭';
+
+  @override
+  String get issuesError => '无法加载议题。';
+
+  @override
+  String get issuesEmpty => '这里没有议题。';
+
+  @override
+  String get issueError => '无法加载此议题。';
+
+  @override
+  String get issueStateOpen => '打开';
+
+  @override
+  String get issueStateClosed => '已关闭';
+
+  @override
+  String get issueNoDescription => '未提供描述。';
+
+  @override
+  String issueOpenedBy(String username) {
+    return '由 $username 创建';
+  }
 }

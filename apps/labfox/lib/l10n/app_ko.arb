@@ -44,5 +44,16 @@
   "commitsError": "커밋을 불러올 수 없습니다.",
   "commitsEmpty": "이 브랜치에는 아직 커밋이 없습니다.",
   "commitTitle": "커밋",
-  "commitError": "이 커밋을 불러올 수 없습니다."
+  "commitError": "이 커밋을 불러올 수 없습니다.",
+  "projectOverviewIssues": "이슈",
+  "issuesTitle": "이슈",
+  "issuesFilterOpen": "열림",
+  "issuesFilterClosed": "닫힘",
+  "issuesError": "이슈를 불러올 수 없습니다.",
+  "issuesEmpty": "이슈가 없습니다.",
+  "issueError": "이 이슈를 불러올 수 없습니다.",
+  "issueStateOpen": "열림",
+  "issueStateClosed": "닫힘",
+  "issueNoDescription": "설명이 없습니다.",
+  "issueOpenedBy": "{username} 님이 열었습니다"
 }

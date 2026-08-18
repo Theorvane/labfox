@@ -8,6 +8,8 @@ import '../features/branches/presentation/branches_screen.dart';
 import '../features/commits/presentation/commit_detail_screen.dart';
 import '../features/commits/presentation/commits_screen.dart';
 import '../features/home/presentation/home_screen.dart';
+import '../features/issues/presentation/issue_detail_screen.dart';
+import '../features/issues/presentation/issues_screen.dart';
 import '../features/project_overview/presentation/project_overview_screen.dart';
 import '../features/projects/presentation/projects_screen.dart';
 import '../features/repository/presentation/file_viewer_screen.dart';
@@ -41,6 +43,9 @@ abstract final class Routes {
   static String commits(int id, String ref) =>
       '/projects/$id/commits?ref=${Uri.encodeQueryComponent(ref)}';
   static String commit(int id, String sha) => '/projects/$id/commit/$sha';
+  static String issues(int id) => '/projects/$id/issues';
+  // The user-facing issue number is the iid, not the global id.
+  static String issue(int id, int iid) => '/projects/$id/issues/$iid';
 }
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -131,6 +136,19 @@ final routerProvider = Provider<GoRouter>((ref) {
                 builder: (context, state) => CommitDetailScreen(
                   projectId: int.parse(state.pathParameters['id']!),
                   sha: state.pathParameters['sha']!,
+                ),
+              ),
+              GoRoute(
+                path: 'issues',
+                builder: (context, state) => IssuesScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+              ),
+              GoRoute(
+                path: 'issues/:iid',
+                builder: (context, state) => IssueDetailScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                  iid: int.parse(state.pathParameters['iid']!),
                 ),
               ),
             ],

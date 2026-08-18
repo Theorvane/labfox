@@ -44,5 +44,16 @@
   "commitsError": "无法加载提交。",
   "commitsEmpty": "此分支还没有提交。",
   "commitTitle": "提交",
-  "commitError": "无法加载此提交。"
+  "commitError": "无法加载此提交。",
+  "projectOverviewIssues": "议题",
+  "issuesTitle": "议题",
+  "issuesFilterOpen": "打开",
+  "issuesFilterClosed": "已关闭",
+  "issuesError": "无法加载议题。",
+  "issuesEmpty": "这里没有议题。",
+  "issueError": "无法加载此议题。",
+  "issueStateOpen": "打开",
+  "issueStateClosed": "已关闭",
+  "issueNoDescription": "未提供描述。",
+  "issueOpenedBy": "由 {username} 创建"
 }

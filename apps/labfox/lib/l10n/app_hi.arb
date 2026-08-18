@@ -44,5 +44,16 @@
   "commitsError": "कमिट लोड नहीं हो सके।",
   "commitsEmpty": "इस ब्रांच पर अभी कोई कमिट नहीं है।",
   "commitTitle": "कमिट",
-  "commitError": "यह कमिट लोड नहीं हो सका।"
+  "commitError": "यह कमिट लोड नहीं हो सका।",
+  "projectOverviewIssues": "इशू",
+  "issuesTitle": "इशू",
+  "issuesFilterOpen": "खुले",
+  "issuesFilterClosed": "बंद",
+  "issuesError": "इशू लोड नहीं हो सके।",
+  "issuesEmpty": "यहाँ कोई इशू नहीं है।",
+  "issueError": "यह इशू लोड नहीं हो सका।",
+  "issueStateOpen": "खुला",
+  "issueStateClosed": "बंद",
+  "issueNoDescription": "कोई विवरण नहीं दिया गया।",
+  "issueOpenedBy": "{username} द्वारा खोला गया"
 }

@@ -150,4 +150,39 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get commitError => 'यह कमिट लोड नहीं हो सका।';
+
+  @override
+  String get projectOverviewIssues => 'इशू';
+
+  @override
+  String get issuesTitle => 'इशू';
+
+  @override
+  String get issuesFilterOpen => 'खुले';
+
+  @override
+  String get issuesFilterClosed => 'बंद';
+
+  @override
+  String get issuesError => 'इशू लोड नहीं हो सके।';
+
+  @override
+  String get issuesEmpty => 'यहाँ कोई इशू नहीं है।';
+
+  @override
+  String get issueError => 'यह इशू लोड नहीं हो सका।';
+
+  @override
+  String get issueStateOpen => 'खुला';
+
+  @override
+  String get issueStateClosed => 'बंद';
+
+  @override
+  String get issueNoDescription => 'कोई विवरण नहीं दिया गया।';
+
+  @override
+  String issueOpenedBy(String username) {
+    return '$username द्वारा खोला गया';
+  }
 }
