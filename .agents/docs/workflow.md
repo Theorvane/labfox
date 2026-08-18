@@ -20,7 +20,8 @@ https://github.com/labfox-app/labfox.git
 >
 > App domain terminology stays **Merge Request**. Only the development process uses PR.
 
-The `gitlab` remote is the previous host (a personal self-hosted GitLab instance) and remains as a backup.
+GitHub is the only remote. The project previously lived on a personal self-hosted GitLab instance;
+that remote is gone, so `origin` is the single source of truth.
 For day-to-day work, use only `origin` (GitHub).
 This is a public repository, so **never leave the personal instance address in docs, issues, or commit messages.**
 
