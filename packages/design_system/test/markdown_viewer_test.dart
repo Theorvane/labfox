@@ -60,6 +60,17 @@ void main() {
     expect(find.byType(WidgetSpan), findsNothing);
   });
 
+  testWidgets('a block-level raw HTML tag renders no widget span', (
+    tester,
+  ) async {
+    // Guards the whitelist: a raw HTML block must fall through to text, never a
+    // WidgetSpan or a live element. If someone relaxes the renderer whitelist,
+    // this fails.
+    await _pump(tester, '<div onclick="x()">danger</div>\n\ncontent');
+    expect(find.byType(WidgetSpan), findsNothing);
+    expect(_allText(tester), contains('content'));
+  });
+
   testWidgets('a link is tappable and reports its href', (tester) async {
     String? tapped;
     await _pump(

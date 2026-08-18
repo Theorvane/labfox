@@ -6,12 +6,16 @@ import '../tokens/spacing.dart';
 
 /// Renders a safe subset of Markdown.
 ///
-/// It walks the parsed AST and builds widgets for the elements a README uses:
-/// headings, paragraphs, lists, code, emphasis and links. Two safety choices
-/// are deliberate:
+/// It walks the parsed AST and builds widgets only for a whitelist of elements
+/// a README uses: headings, paragraphs, lists, code, emphasis and links. Two
+/// safety properties follow from that, both covered by tests:
 ///
-/// - **Raw HTML is never executed.** The parser's inline HTML is disabled, so a
-///   `<script>` in the source becomes literal text, never a live widget.
+/// - **Raw HTML is never executed.** The parser emits raw HTML as plain text
+///   nodes, and the renderer draws every text node as a [TextSpan] and never a
+///   [WidgetSpan]. A `<script>` in the source is shown as literal characters;
+///   nothing from the markdown becomes a live widget. The guarantee comes from
+///   this renderer's whitelist, not from any parser setting — do not relax the
+///   whitelist assuming the parser sanitizes HTML, because it does not.
 /// - **Links are the only interactive element.** A tap reports the href through
 ///   [onTapLink]; the viewer never navigates or opens anything itself, leaving
 ///   that decision to the caller.
@@ -45,8 +49,10 @@ class _MarkdownViewerState extends State<MarkdownViewer> {
     }
     _recognizers.clear();
 
-    // enableTagfilter strips dangerous raw HTML; inline HTML is not turned into
-    // widgets, so nothing from the source can execute.
+    // encodeHtml: false keeps raw HTML unescaped in the text node, so it shows
+    // as `<script>` rather than `&lt;script&gt;`. It does NOT sanitize anything:
+    // safety is the renderer's whitelist below, which turns raw HTML text into a
+    // plain TextSpan, never a widget.
     final document = md.Document(
       extensionSet: md.ExtensionSet.gitHubFlavored,
       encodeHtml: false,
