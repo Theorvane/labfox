@@ -48,7 +48,9 @@ You may do the following without separate permission.
 - Any expression that gives the impression that LabFox sponsors, certifies, or is affiliated with you
 - Producing and selling merchandise (goods)
 
-Inquiries: **sloki9637@gmail.com**
+Inquiries: open a [GitHub issue](https://github.com/labfox-app/labfox/issues) with the `question`
+label and describe the intended use. Permission requests are not confidential, so a public issue is
+the right place for them.
 
 ---
 

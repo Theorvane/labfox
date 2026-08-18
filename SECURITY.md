@@ -17,11 +17,15 @@ yet, so most reports at this stage concern the source code rather than a shipped
 
 ## Reporting a Vulnerability
 
-Email **sloki9637@gmail.com**.
+Report privately through **GitHub private vulnerability reporting**:
 
-There is no other private reporting channel at the moment. GitHub private security advisories are
-not enabled on this repository; they may be enabled later, and this document will be updated if
-that happens. Until then, email is the only private channel.
+> [Report a vulnerability](https://github.com/labfox-app/labfox/security/advisories/new)
+
+Or from the repository: **Security** tab → **Report a vulnerability**.
+
+This opens a draft security advisory visible only to you and the maintainers. It is the only
+private reporting channel for this project — there is no security mailing address. Do not attempt
+to reach maintainers privately through public issues, pull request comments, or social media.
 
 **Do not open a public issue or pull request that contains:**
 
@@ -31,7 +35,7 @@ that happens. Until then, email is the only private channel.
 - private source code, diffs, job logs, or API responses taken from a real instance
 - exploit steps or proof-of-concept code for an unfixed issue
 
-If you have already posted any of the above publicly, say so in your email so the exposure can be
+If you have already posted any of the above publicly, say so in your report so the exposure can be
 handled first. Assume a leaked token is compromised and revoke it in GitLab immediately.
 
 A useful report includes:
