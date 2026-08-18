@@ -24,4 +24,11 @@ jobs:
       - uses: actions/labeler@v5
         with:
           configuration-path: .github/labeler.yml
-          sync-labels: true
+          # Must stay false. With sync-labels enabled, labeler strips every
+          # label it does not find in its own config — including the type
+          # label (feat, fix, ...) that triage.yml derives from the title.
+          # Observed on #6: triage added `feat` at :26 and labeler removed it
+          # at :27. The cost is that an area label can go stale when a pull
+          # request stops touching those paths, which is easy to notice and
+          # fix by hand; a label silently disappearing is not.
+          sync-labels: false
