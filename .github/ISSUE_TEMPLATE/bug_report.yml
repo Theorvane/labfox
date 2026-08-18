@@ -24,7 +24,7 @@ body:
         `gitlab.example.com`. A public issue cannot be un-published.
 
         🔒 If you think you found a **security vulnerability**, do **not** open an issue here.
-        Follow [SECURITY.md](https://github.com/labfox-app/labfox/blob/dev/SECURITY.md) instead.
+        Follow [SECURITY.md](https://github.com/theorvane/labfox/blob/dev/SECURITY.md) instead.
 
   - type: textarea
     id: what-happened

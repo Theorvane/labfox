@@ -5,7 +5,7 @@
 origin is **GitHub**.
 
 ```
-https://github.com/labfox-app/labfox.git
+https://github.com/theorvane/labfox.git
 ```
 
 | | |

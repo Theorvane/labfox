@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Sync LabFox issue labels. Idempotent: creates or updates.
 set -euo pipefail
-R="${LABELS_REPO:-labfox-app/labfox}"
+R="${LABELS_REPO:-theorvane/labfox}"
 failed=0
 
 # --force makes create act as upsert. Without an explicit failure branch a

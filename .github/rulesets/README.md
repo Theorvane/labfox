@@ -11,26 +11,26 @@ the protection rules are reviewable and reproducible instead of living only in t
 Upgrade to GitHub Pro or make this repository public to enable this feature.
 ```
 
-`labfox-app/labfox` is currently private. Apply these the moment the repository goes public
+`theorvane/labfox` is currently private. Apply these the moment the repository goes public
 (or the organization moves to a paid plan).
 
 ## Applying
 
 ```bash
-gh api -X POST repos/labfox-app/labfox/rulesets --input .github/rulesets/dev.json
-gh api -X POST repos/labfox-app/labfox/rulesets --input .github/rulesets/main-release.json
+gh api -X POST repos/theorvane/labfox/rulesets --input .github/rulesets/dev.json
+gh api -X POST repos/theorvane/labfox/rulesets --input .github/rulesets/main-release.json
 ```
 
 Verify:
 
 ```bash
-gh api repos/labfox-app/labfox/rulesets --jq '.[] | "\(.name) \(.enforcement)"'
+gh api repos/theorvane/labfox/rulesets --jq '.[] | "\(.name) \(.enforcement)"'
 ```
 
 Updating an existing ruleset instead of creating a duplicate:
 
 ```bash
-gh api -X PUT repos/labfox-app/labfox/rulesets/<id> --input .github/rulesets/dev.json
+gh api -X PUT repos/theorvane/labfox/rulesets/<id> --input .github/rulesets/dev.json
 ```
 
 ## What they enforce

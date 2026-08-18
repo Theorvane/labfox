@@ -49,7 +49,7 @@ often fast**. When a feature is proposed, first decide whether it serves the flo
 LabFox follows an **open core** model.
 
 ```
-Source code            Apache-2.0 open source (GitHub: labfox-app/labfox)
+Source code            Apache-2.0 open source (GitHub: theorvane/labfox)
 Desktop (Win/macOS)    Free
 Mobile (Android/iOS)   Paid on the App Store / Play Store
 ```
@@ -317,7 +317,7 @@ How to write it: `.agents/skills/responsive-screen/SKILL.md`
 
 ## 11. Workflow — Issue → Branch → PR
 
-The origin remote is **GitHub** (`labfox-app/labfox`). The CLI is `gh`.
+The origin remote is **GitHub** (`theorvane/labfox`). The CLI is `gh`.
 
 > ⚠️ **Watch the vocabulary.** LabFox is a *GitLab client* developed *on GitHub*.
 > - The domain the app works with → **Merge Request**, `iid`, `/api/v4` (GitLab)
