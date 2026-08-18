@@ -55,5 +55,18 @@
   "issueStateOpen": "打开",
   "issueStateClosed": "已关闭",
   "issueNoDescription": "未提供描述。",
-  "issueOpenedBy": "由 {username} 创建"
+  "issueOpenedBy": "由 {username} 创建",
+  "projectOverviewMergeRequests": "合并请求",
+  "mergeRequestsTitle": "合并请求",
+  "mrFilterOpen": "打开",
+  "mrFilterMerged": "已合并",
+  "mrFilterClosed": "已关闭",
+  "mergeRequestsError": "无法加载合并请求。",
+  "mergeRequestsEmpty": "这里没有合并请求。",
+  "mergeRequestError": "无法加载此合并请求。",
+  "mergeRequestNoDescription": "未提供描述。",
+  "mrStateOpen": "打开",
+  "mrStateMerged": "已合并",
+  "mrStateClosed": "已关闭",
+  "mrDraft": "草稿"
 }

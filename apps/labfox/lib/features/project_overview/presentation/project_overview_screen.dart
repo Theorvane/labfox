@@ -55,6 +55,19 @@ class ProjectOverviewScreen extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: LabFoxSpacing.md),
+              Card(
+                margin: EdgeInsets.zero,
+                child: ListTile(
+                  leading: const Icon(Icons.merge_outlined),
+                  title: Text(
+                    AppLocalizations.of(context).projectOverviewMergeRequests,
+                  ),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () =>
+                      context.go(Routes.mergeRequests(data.project.id)),
+                ),
+              ),
+              const SizedBox(height: LabFoxSpacing.md),
               if (data.project.defaultBranch != null)
                 Card(
                   margin: EdgeInsets.zero,

@@ -185,4 +185,43 @@ class AppLocalizationsHi extends AppLocalizations {
   String issueOpenedBy(String username) {
     return '$username द्वारा खोला गया';
   }
+
+  @override
+  String get projectOverviewMergeRequests => 'मर्ज रिक्वेस्ट';
+
+  @override
+  String get mergeRequestsTitle => 'मर्ज रिक्वेस्ट';
+
+  @override
+  String get mrFilterOpen => 'खुले';
+
+  @override
+  String get mrFilterMerged => 'मर्ज किए गए';
+
+  @override
+  String get mrFilterClosed => 'बंद';
+
+  @override
+  String get mergeRequestsError => 'मर्ज रिक्वेस्ट लोड नहीं हो सकीं।';
+
+  @override
+  String get mergeRequestsEmpty => 'यहाँ कोई मर्ज रिक्वेस्ट नहीं है।';
+
+  @override
+  String get mergeRequestError => 'यह मर्ज रिक्वेस्ट लोड नहीं हो सकी।';
+
+  @override
+  String get mergeRequestNoDescription => 'कोई विवरण नहीं दिया गया।';
+
+  @override
+  String get mrStateOpen => 'खुला';
+
+  @override
+  String get mrStateMerged => 'मर्ज किया गया';
+
+  @override
+  String get mrStateClosed => 'बंद';
+
+  @override
+  String get mrDraft => 'ड्राफ़्ट';
 }

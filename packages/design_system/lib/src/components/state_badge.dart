@@ -3,19 +3,31 @@ import 'package:flutter/material.dart';
 import '../tokens/colors.dart';
 import '../tokens/spacing.dart';
 
-/// An open/closed badge for an issue or merge request.
+/// The lifecycle state of an issue or merge request.
+///
+/// Issues use [open] and [closed]; merge requests add [merged]. Kept in one
+/// enum so a single badge serves both.
+enum EntityState { open, closed, merged }
+
+/// A state badge for an issue or merge request.
 ///
 /// Pairs an icon with the label so state survives greyscale and colour
-/// blindness — never colour alone.
-class IssueStateBadge extends StatelessWidget {
-  const IssueStateBadge({required this.isOpen, required this.label, super.key});
+/// blindness — never colour alone. Merged is purple, matching GitLab, so it is
+/// not mistaken for a plain close.
+class StateBadge extends StatelessWidget {
+  const StateBadge({required this.state, required this.label, super.key});
 
-  final bool isOpen;
+  final EntityState state;
   final String label;
 
   @override
   Widget build(BuildContext context) {
-    final color = isOpen ? LabFoxColors.success : LabFoxColors.failure;
+    final (icon, color) = switch (state) {
+      EntityState.open => (Icons.error_outline, LabFoxColors.success),
+      EntityState.closed => (Icons.cancel_outlined, LabFoxColors.failure),
+      EntityState.merged => (Icons.merge, const Color(0xFF6E49CB)),
+    };
+
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: LabFoxSpacing.sm,
@@ -28,11 +40,7 @@ class IssueStateBadge extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            isOpen ? Icons.error_outline : Icons.check_circle_outline,
-            size: 14,
-            color: color,
-          ),
+          Icon(icon, size: 14, color: color),
           const SizedBox(width: LabFoxSpacing.xs),
           Text(
             label,

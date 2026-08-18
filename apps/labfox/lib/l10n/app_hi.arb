@@ -55,5 +55,18 @@
   "issueStateOpen": "खुला",
   "issueStateClosed": "बंद",
   "issueNoDescription": "कोई विवरण नहीं दिया गया।",
-  "issueOpenedBy": "{username} द्वारा खोला गया"
+  "issueOpenedBy": "{username} द्वारा खोला गया",
+  "projectOverviewMergeRequests": "मर्ज रिक्वेस्ट",
+  "mergeRequestsTitle": "मर्ज रिक्वेस्ट",
+  "mrFilterOpen": "खुले",
+  "mrFilterMerged": "मर्ज किए गए",
+  "mrFilterClosed": "बंद",
+  "mergeRequestsError": "मर्ज रिक्वेस्ट लोड नहीं हो सकीं।",
+  "mergeRequestsEmpty": "यहाँ कोई मर्ज रिक्वेस्ट नहीं है।",
+  "mergeRequestError": "यह मर्ज रिक्वेस्ट लोड नहीं हो सकी।",
+  "mergeRequestNoDescription": "कोई विवरण नहीं दिया गया।",
+  "mrStateOpen": "खुला",
+  "mrStateMerged": "मर्ज किया गया",
+  "mrStateClosed": "बंद",
+  "mrDraft": "ड्राफ़्ट"
 }

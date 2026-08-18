@@ -439,6 +439,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'opened by {username}'**
   String issueOpenedBy(String username);
+
+  /// Overview link that opens the merge requests list
+  ///
+  /// In en, this message translates to:
+  /// **'Merge requests'**
+  String get projectOverviewMergeRequests;
+
+  /// Title of the merge requests list screen
+  ///
+  /// In en, this message translates to:
+  /// **'Merge requests'**
+  String get mergeRequestsTitle;
+
+  /// Merge requests filter, open
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get mrFilterOpen;
+
+  /// Merge requests filter, merged
+  ///
+  /// In en, this message translates to:
+  /// **'Merged'**
+  String get mrFilterMerged;
+
+  /// Merge requests filter, closed
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get mrFilterClosed;
+
+  /// Shown when the MR list fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load merge requests.'**
+  String get mergeRequestsError;
+
+  /// Shown when the MR list is empty
+  ///
+  /// In en, this message translates to:
+  /// **'No merge requests here.'**
+  String get mergeRequestsEmpty;
+
+  /// Shown when an MR fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this merge request.'**
+  String get mergeRequestError;
+
+  /// Shown when an MR has no description
+  ///
+  /// In en, this message translates to:
+  /// **'No description provided.'**
+  String get mergeRequestNoDescription;
+
+  /// MR state badge, open
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get mrStateOpen;
+
+  /// MR state badge, merged
+  ///
+  /// In en, this message translates to:
+  /// **'Merged'**
+  String get mrStateMerged;
+
+  /// MR state badge, closed
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get mrStateClosed;
+
+  /// Label marking a draft MR
+  ///
+  /// In en, this message translates to:
+  /// **'Draft'**
+  String get mrDraft;
 }
 
 class _AppLocalizationsDelegate

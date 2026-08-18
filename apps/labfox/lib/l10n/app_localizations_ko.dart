@@ -181,4 +181,43 @@ class AppLocalizationsKo extends AppLocalizations {
   String issueOpenedBy(String username) {
     return '$username 님이 열었습니다';
   }
+
+  @override
+  String get projectOverviewMergeRequests => '병합 요청';
+
+  @override
+  String get mergeRequestsTitle => '병합 요청';
+
+  @override
+  String get mrFilterOpen => '열림';
+
+  @override
+  String get mrFilterMerged => '병합됨';
+
+  @override
+  String get mrFilterClosed => '닫힘';
+
+  @override
+  String get mergeRequestsError => '병합 요청을 불러올 수 없습니다.';
+
+  @override
+  String get mergeRequestsEmpty => '병합 요청이 없습니다.';
+
+  @override
+  String get mergeRequestError => '이 병합 요청을 불러올 수 없습니다.';
+
+  @override
+  String get mergeRequestNoDescription => '설명이 없습니다.';
+
+  @override
+  String get mrStateOpen => '열림';
+
+  @override
+  String get mrStateMerged => '병합됨';
+
+  @override
+  String get mrStateClosed => '닫힘';
+
+  @override
+  String get mrDraft => '초안';
 }

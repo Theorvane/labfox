@@ -10,6 +10,8 @@ import '../features/commits/presentation/commits_screen.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/issues/presentation/issue_detail_screen.dart';
 import '../features/issues/presentation/issues_screen.dart';
+import '../features/merge_requests/presentation/merge_request_detail_screen.dart';
+import '../features/merge_requests/presentation/merge_requests_screen.dart';
 import '../features/project_overview/presentation/project_overview_screen.dart';
 import '../features/projects/presentation/projects_screen.dart';
 import '../features/repository/presentation/file_viewer_screen.dart';
@@ -46,6 +48,10 @@ abstract final class Routes {
   static String issues(int id) => '/projects/$id/issues';
   // The user-facing issue number is the iid, not the global id.
   static String issue(int id, int iid) => '/projects/$id/issues/$iid';
+  static String mergeRequests(int id) => '/projects/$id/merge_requests';
+  // The user-facing MR number is the iid, not the global id.
+  static String mergeRequest(int id, int iid) =>
+      '/projects/$id/merge_requests/$iid';
 }
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -147,6 +153,19 @@ final routerProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: 'issues/:iid',
                 builder: (context, state) => IssueDetailScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                  iid: int.parse(state.pathParameters['iid']!),
+                ),
+              ),
+              GoRoute(
+                path: 'merge_requests',
+                builder: (context, state) => MergeRequestsScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+              ),
+              GoRoute(
+                path: 'merge_requests/:iid',
+                builder: (context, state) => MergeRequestDetailScreen(
                   projectId: int.parse(state.pathParameters['id']!),
                   iid: int.parse(state.pathParameters['iid']!),
                 ),

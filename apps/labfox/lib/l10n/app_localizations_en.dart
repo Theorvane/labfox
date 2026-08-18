@@ -184,4 +184,43 @@ class AppLocalizationsEn extends AppLocalizations {
   String issueOpenedBy(String username) {
     return 'opened by $username';
   }
+
+  @override
+  String get projectOverviewMergeRequests => 'Merge requests';
+
+  @override
+  String get mergeRequestsTitle => 'Merge requests';
+
+  @override
+  String get mrFilterOpen => 'Open';
+
+  @override
+  String get mrFilterMerged => 'Merged';
+
+  @override
+  String get mrFilterClosed => 'Closed';
+
+  @override
+  String get mergeRequestsError => 'Could not load merge requests.';
+
+  @override
+  String get mergeRequestsEmpty => 'No merge requests here.';
+
+  @override
+  String get mergeRequestError => 'Could not load this merge request.';
+
+  @override
+  String get mergeRequestNoDescription => 'No description provided.';
+
+  @override
+  String get mrStateOpen => 'Open';
+
+  @override
+  String get mrStateMerged => 'Merged';
+
+  @override
+  String get mrStateClosed => 'Closed';
+
+  @override
+  String get mrDraft => 'Draft';
 }
