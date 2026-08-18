@@ -69,6 +69,14 @@ LicenseRegistry.addLicense(() async* {
 | Component | Version | License | Source |
 |---|---|---|---|
 | Flutter SDK | — | BSD-3-Clause | https://github.com/flutter/flutter |
+| flutter_riverpod | ^2.6.1 | MIT | https://github.com/rrousselGit/riverpod |
+| dio | ^5.7.0 | MIT | https://github.com/cfug/dio |
+| go_router | ^14.6.0 | BSD-3-Clause | https://github.com/flutter/packages |
+| freezed / freezed_annotation | ^3.0.0 | MIT | https://github.com/rrousselGit/freezed |
+| json_serializable / json_annotation | ^6.8.0 / ^4.9.0 | BSD-3-Clause | https://github.com/google/json_serializable.dart |
+| flutter_secure_storage | ^9.2.2 | BSD-3-Clause | https://github.com/juliansteenbakker/flutter_secure_storage |
+| shared_preferences | ^2.3.3 | BSD-3-Clause | https://github.com/flutter/packages |
+| intl | any | BSD-3-Clause | https://github.com/dart-lang/i18n |
 
 *(To be filled in with the actual dependencies after scaffolding)*
 

@@ -1,29 +1,42 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/responsive.dart';
+import '../../../core/auth/auth_controller.dart';
 import '../../../l10n/app_localizations.dart';
 
 /// Where the user's work starts.
 ///
-/// A placeholder until M1 lands authentication: the shell exists so routing,
-/// theming, localisation and the responsive split are all exercised end to end.
-class HomeScreen extends StatelessWidget {
+/// For this slice it confirms who is signed in and offers sign-out. Issues,
+/// merge requests and pipelines land in later M1 and M2 pull requests.
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final account = ref.watch(currentAccountProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.homeTitle)),
+      appBar: AppBar(
+        title: Text(l10n.homeTitle),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            tooltip: l10n.signOut,
+            onPressed: () =>
+                ref.read(authControllerProvider.notifier).signOut(),
+          ),
+        ],
+      ),
       body: ResponsiveLayout(
-        mobile: (context) => const _EmptyState(),
-        desktop: (context) => const Row(
+        mobile: (context) => _Body(username: account?.user.username),
+        desktop: (context) => Row(
           children: [
-            SizedBox(width: 260, child: _NavigationPlaceholder()),
-            VerticalDivider(width: 1),
-            Expanded(child: _EmptyState()),
+            const SizedBox(width: 260, child: _NavigationPlaceholder()),
+            const VerticalDivider(width: 1),
+            Expanded(child: _Body(username: account?.user.username)),
           ],
         ),
       ),
@@ -31,8 +44,10 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class _EmptyState extends StatelessWidget {
-  const _EmptyState();
+class _Body extends StatelessWidget {
+  const _Body({this.username});
+
+  final String? username;
 
   @override
   Widget build(BuildContext context) {
@@ -44,15 +59,16 @@ class _EmptyState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              l10n.homeEmptyState,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
+            if (username != null)
+              Text(
+                l10n.homeSignedInAs(username!),
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
             const SizedBox(height: LabFoxSpacing.md),
-            const StateIndicator(
-              state: LabFoxState.pending,
-              label: 'No account connected',
+            Text(
+              l10n.homeEmptyWork,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
         ),

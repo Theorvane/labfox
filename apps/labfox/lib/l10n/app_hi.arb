@@ -1,0 +1,21 @@
+{
+  "@@locale": "hi",
+  "appTitle": "LabFox",
+  "homeTitle": "होम",
+  "homeSignedInAs": "{username} के रूप में साइन इन",
+  "homeEmptyWork": "आपके इशू, मर्ज रिक्वेस्ट और पाइपलाइन यहाँ दिखाई देंगे।",
+  "signOut": "साइन आउट",
+  "signInTitle": "GitLab खाता कनेक्ट करें",
+  "signInInstanceLabel": "GitLab इंस्टेंस URL",
+  "signInInstanceRequired": "अपना GitLab इंस्टेंस URL दर्ज करें।",
+  "signInInstanceInvalid": "एक मान्य https URL दर्ज करें, उदाहरण के लिए https://gitlab.com",
+  "signInTokenLabel": "पर्सनल एक्सेस टोकन",
+  "signInTokenHelp": "api और read_user स्कोप आवश्यक हैं।",
+  "signInTokenToggle": "टोकन दिखाएँ या छिपाएँ",
+  "signInTokenRequired": "पर्सनल एक्सेस टोकन दर्ज करें।",
+  "signInSubmit": "साइन इन",
+  "signInErrorToken": "टोकन अस्वीकृत हो गया। जाँचें कि यह सही है और समाप्त नहीं हुआ है।",
+  "signInErrorScope": "टोकन में आवश्यक स्कोप नहीं है। इसे api और read_user चाहिए।",
+  "signInErrorUnreachable": "उस इंस्टेंस तक नहीं पहुँच सके। URL, अपना नेटवर्क और प्रमाणपत्र भरोसे की जाँच करें।",
+  "signInErrorGeneric": "साइन इन विफल रहा। कृपया पुनः प्रयास करें।"
+}

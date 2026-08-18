@@ -1,0 +1,21 @@
+{
+  "@@locale": "ko",
+  "appTitle": "LabFox",
+  "homeTitle": "홈",
+  "homeSignedInAs": "{username} 님으로 로그인됨",
+  "homeEmptyWork": "이슈, 병합 요청, 파이프라인이 여기에 표시됩니다.",
+  "signOut": "로그아웃",
+  "signInTitle": "GitLab 계정 연결",
+  "signInInstanceLabel": "GitLab 인스턴스 URL",
+  "signInInstanceRequired": "GitLab 인스턴스 URL을 입력하세요.",
+  "signInInstanceInvalid": "올바른 https URL을 입력하세요. 예: https://gitlab.com",
+  "signInTokenLabel": "Personal Access Token",
+  "signInTokenHelp": "api 및 read_user 스코프가 필요합니다.",
+  "signInTokenToggle": "토큰 표시 또는 숨기기",
+  "signInTokenRequired": "Personal Access Token을 입력하세요.",
+  "signInSubmit": "로그인",
+  "signInErrorToken": "토큰이 거부되었습니다. 올바른지, 만료되지 않았는지 확인하세요.",
+  "signInErrorScope": "토큰에 필요한 스코프가 없습니다. api와 read_user가 필요합니다.",
+  "signInErrorUnreachable": "해당 인스턴스에 연결할 수 없습니다. URL, 네트워크, 인증서 신뢰 여부를 확인하세요.",
+  "signInErrorGeneric": "로그인에 실패했습니다. 다시 시도하세요."
+}

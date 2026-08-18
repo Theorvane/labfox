@@ -1,0 +1,21 @@
+{
+  "@@locale": "zh",
+  "appTitle": "LabFox",
+  "homeTitle": "主页",
+  "homeSignedInAs": "已登录为 {username}",
+  "homeEmptyWork": "您的议题、合并请求和流水线将显示在这里。",
+  "signOut": "退出登录",
+  "signInTitle": "连接 GitLab 账户",
+  "signInInstanceLabel": "GitLab 实例 URL",
+  "signInInstanceRequired": "请输入您的 GitLab 实例 URL。",
+  "signInInstanceInvalid": "请输入有效的 https URL，例如 https://gitlab.com",
+  "signInTokenLabel": "个人访问令牌",
+  "signInTokenHelp": "需要 api 和 read_user 权限范围。",
+  "signInTokenToggle": "显示或隐藏令牌",
+  "signInTokenRequired": "请输入个人访问令牌。",
+  "signInSubmit": "登录",
+  "signInErrorToken": "令牌被拒绝。请检查它是否正确且未过期。",
+  "signInErrorScope": "令牌缺少必需的权限范围。需要 api 和 read_user。",
+  "signInErrorUnreachable": "无法连接到该实例。请检查 URL、网络以及证书是否受信任。",
+  "signInErrorGeneric": "登录失败。请重试。"
+}

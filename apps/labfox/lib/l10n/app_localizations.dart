@@ -6,6 +6,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_en.dart';
+import 'app_localizations_hi.dart';
+import 'app_localizations_ja.dart';
+import 'app_localizations_ko.dart';
+import 'app_localizations_zh.dart';
 
 // ignore_for_file: type=lint
 
@@ -92,7 +96,13 @@ abstract class AppLocalizations {
       ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('en')];
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('en'),
+    Locale('hi'),
+    Locale('ja'),
+    Locale('ko'),
+    Locale('zh'),
+  ];
 
   /// The application name, shown in the task switcher and app bar
   ///
@@ -106,11 +116,101 @@ abstract class AppLocalizations {
   /// **'Home'**
   String get homeTitle;
 
-  /// Shown on the home screen before any account is connected
+  /// Shown on the home screen with the signed-in user's username
   ///
   /// In en, this message translates to:
-  /// **'Sign in to a GitLab instance to get started.'**
-  String get homeEmptyState;
+  /// **'Signed in as {username}'**
+  String homeSignedInAs(String username);
+
+  /// Placeholder on the home screen before feature work lands
+  ///
+  /// In en, this message translates to:
+  /// **'Your issues, merge requests and pipelines will appear here.'**
+  String get homeEmptyWork;
+
+  /// Label for the sign-out action
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get signOut;
+
+  /// Heading on the sign-in screen
+  ///
+  /// In en, this message translates to:
+  /// **'Connect a GitLab account'**
+  String get signInTitle;
+
+  /// Label for the instance URL field
+  ///
+  /// In en, this message translates to:
+  /// **'GitLab instance URL'**
+  String get signInInstanceLabel;
+
+  /// Validation when the instance URL is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your GitLab instance URL.'**
+  String get signInInstanceRequired;
+
+  /// Validation when the instance URL is not a valid https URL
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid https URL, for example https://gitlab.com.'**
+  String get signInInstanceInvalid;
+
+  /// Label for the token field
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Access Token'**
+  String get signInTokenLabel;
+
+  /// Helper text under the token field
+  ///
+  /// In en, this message translates to:
+  /// **'Needs the api and read_user scopes.'**
+  String get signInTokenHelp;
+
+  /// Tooltip for the token visibility toggle
+  ///
+  /// In en, this message translates to:
+  /// **'Show or hide the token'**
+  String get signInTokenToggle;
+
+  /// Validation when the token is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a Personal Access Token.'**
+  String get signInTokenRequired;
+
+  /// Label for the sign-in button
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get signInSubmit;
+
+  /// Shown when the instance returns 401
+  ///
+  /// In en, this message translates to:
+  /// **'The token was rejected. Check that it is correct and has not expired.'**
+  String get signInErrorToken;
+
+  /// Shown when the instance returns 403
+  ///
+  /// In en, this message translates to:
+  /// **'The token is missing a required scope. It needs api and read_user.'**
+  String get signInErrorScope;
+
+  /// Shown when the instance cannot be reached
+  ///
+  /// In en, this message translates to:
+  /// **'Could not reach that instance. Check the URL, your network, and whether the certificate is trusted.'**
+  String get signInErrorUnreachable;
+
+  /// Fallback sign-in error
+  ///
+  /// In en, this message translates to:
+  /// **'Sign-in failed. Please try again.'**
+  String get signInErrorGeneric;
 }
 
 class _AppLocalizationsDelegate
@@ -124,7 +224,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      <String>['en'].contains(locale.languageCode);
+      <String>['en', 'hi', 'ja', 'ko', 'zh'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -135,6 +235,14 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   switch (locale.languageCode) {
     case 'en':
       return AppLocalizationsEn();
+    case 'hi':
+      return AppLocalizationsHi();
+    case 'ja':
+      return AppLocalizationsJa();
+    case 'ko':
+      return AppLocalizationsKo();
+    case 'zh':
+      return AppLocalizationsZh();
   }
 
   throw FlutterError(

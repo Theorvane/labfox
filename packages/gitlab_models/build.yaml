@@ -1,0 +1,10 @@
+# Account nests a User, so json_serializable must call the nested toJson()
+# rather than embedding the object. Without explicit_to_json the round-trip
+# fails: toJson() leaves a User instance in the map and fromJson() then tries
+# to cast it to a Map. A test covers exactly this.
+targets:
+  $default:
+    builders:
+      json_serializable:
+        options:
+          explicit_to_json: true

@@ -65,6 +65,23 @@ jobs:
           # LICENSE is verbatim upstream text that contributors never edit.
           EXCLUDED = {"LICENSE"}
 
+          # Translation resources are the one place non-English text is correct:
+          # the English-only rule governs code, comments, docs and commits, and
+          # AGENTS.md explicitly exempts localized UI strings. Skip the non-English
+          # ARB files and the generated per-locale Dart, but NOT app_en.arb (the
+          # source of truth, which must stay English) and NOT the app-wide
+          # generated delegate.
+          def is_translation(path):
+              if path.endswith(".arb"):
+                  return not path.endswith("app_en.arb")
+              # app_localizations_ko.dart, _ja.dart, ... but not the base file.
+              name = path.rsplit("/", 1)[-1]
+              return (
+                  name.startswith("app_localizations_")
+                  and name.endswith(".dart")
+                  and name != "app_localizations_en.dart"
+              )
+
           # git ls-files keeps untracked scratch files out of the check.
           files = subprocess.run(
               ["git", "ls-files", "-z"],
@@ -77,7 +94,7 @@ jobs:
           scanned = 0
 
           for path in files:
-              if not path or path in EXCLUDED:
+              if not path or path in EXCLUDED or is_translation(path):
                   continue
               try:
                   with open(path, "rb") as handle:
