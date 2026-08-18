@@ -45,6 +45,11 @@ avatar through its REST API. Both are uploaded through the web interface:
 - Organization avatar: organization **Settings** -> **Profile** -> upload
   `brand/generated/icon-512.png`
 
+## Regenerating
+
+The generator is deterministic: running it against an unchanged source produces
+byte-identical output, so a re-run never shows up as a diff.
+
 ## Licensing
 
 The LabFox mark is **not** covered by the Apache-2.0 license that applies to
