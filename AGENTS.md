@@ -162,6 +162,7 @@ Details: `.agents/docs/architecture.md`
 | Local DB | Drift + SQLite |
 | Secrets | flutter_secure_storage |
 | Localization | flutter_localizations + intl (ARB) |
+| Monorepo | native pub workspace (no melos) |
 
 Do not introduce a different state management or networking library on your own.
 Propose it and get approval first.
@@ -384,8 +385,9 @@ gh pr create --fill --base dev
 2. Run `build_runner` after changing a model.
 3. When touching an area that has no scaffolding yet, confirm the scope instead of inventing it.
 
-> The repository is still in its initial state — `apps/` and `packages/` have not been scaffolded.
-> The Flutter commands above assume M0 is complete.
+> The workspace is a native pub workspace, not melos: `flutter pub get` at the root resolves
+> every package against one lockfile. `flutter test` has to run per package, because the root
+> has no `test/` directory of its own.
 
 Details: `.agents/docs/workflow.md`
 

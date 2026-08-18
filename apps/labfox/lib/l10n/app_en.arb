@@ -1,0 +1,15 @@
+{
+  "@@locale": "en",
+  "appTitle": "LabFox",
+  "@appTitle": {
+    "description": "The application name, shown in the task switcher and app bar"
+  },
+  "homeTitle": "Home",
+  "@homeTitle": {
+    "description": "Title of the home screen"
+  },
+  "homeEmptyState": "Sign in to a GitLab instance to get started.",
+  "@homeEmptyState": {
+    "description": "Shown on the home screen before any account is connected"
+  }
+}
