@@ -109,6 +109,28 @@ bash .github/labels.sh
 The script is idempotent — it creates missing labels and updates existing ones.
 Edit the script rather than the GitHub UI, so the taxonomy stays reviewable.
 
+### Automation
+
+| Trigger | What happens | Where |
+|---|---|---|
+| Pull request opened / updated | `area:*` labels from changed paths | `.github/labeler.yml` |
+| Pull request opened / retitled | type label (`feat`, `fix`, …) from the Conventional Commit title | `.github/workflows/triage.yml` |
+| Pull request opened | author set as assignee | `.github/workflows/triage.yml` |
+| Pull request opened | reviewers requested | `.github/CODEOWNERS` |
+| Issue opened / reopened | `status:needs-triage` added, maintainer assigned | `.github/workflows/triage.yml` |
+
+Notes:
+
+- Type labels come from the **title**, not the changed files — the kind of change is not a
+  function of which paths were touched. A title that is not a Conventional Commit gets no type
+  label and does not fail the run.
+- Both workflows use `pull_request_target` so labels also apply to pull requests from forks.
+  Neither one checks out or executes contributor code, which is what makes that safe.
+- Assignment is best effort. Outside contributors cannot be assignees until they are
+  collaborators, so the step logs and continues instead of failing.
+- `CODEOWNERS` requests review but does not require it — `require_code_owner_review` is `false`
+  in the rulesets.
+
 Structured prefixes so filters stay useful as the tracker grows.
 
 | Prefix | Labels |

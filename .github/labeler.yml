@@ -1,0 +1,53 @@
+# Path-based labels applied by .github/workflows/labeler.yml (actions/labeler).
+# Type labels (feat, fix, ...) come from the pull request title instead — see
+# .github/workflows/triage.yml — because the change type is not a function of
+# which files were touched.
+
+"area:api":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "packages/gitlab_api/**"
+          - "packages/gitlab_models/**"
+
+"area:design-system":
+  - changed-files:
+      - any-glob-to-any-file: "packages/design_system/**"
+
+"area:ui":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "apps/labfox/lib/features/**"
+          - "apps/labfox/lib/app/**"
+
+"area:ci":
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/workflows/**"
+          - ".github/labeler.yml"
+          - ".github/labels.sh"
+          - ".github/rulesets/**"
+
+"area:docs":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.md"
+          - ".agents/**"
+
+"area:security":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "packages/secure_storage/**"
+          - "apps/labfox/lib/core/auth/**"
+          - "SECURITY.md"
+
+"area:mobile":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "apps/labfox/android/**"
+          - "apps/labfox/ios/**"
+
+"area:desktop":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "apps/labfox/windows/**"
+          - "apps/labfox/macos/**"

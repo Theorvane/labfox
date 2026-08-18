@@ -1,0 +1,15 @@
+# Default reviewers for every path.
+# GitHub skips the pull request author automatically, so whichever account did
+# not open the pull request gets the review request.
+*                           @sjungwon03 @sjungwon03-ai
+
+# Anything that changes how the project is governed, licensed, or released
+# deserves a human look even when the rest is routine.
+/LICENSE                    @sjungwon03
+/NOTICE                     @sjungwon03
+/TRADEMARK.md               @sjungwon03
+/THIRD_PARTY_NOTICES.md     @sjungwon03
+/SECURITY.md                @sjungwon03
+/CODE_OF_CONDUCT.md         @sjungwon03
+/.github/rulesets/          @sjungwon03
+/.github/workflows/         @sjungwon03
