@@ -81,4 +81,13 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get retry => '重试';
+
+  @override
+  String get projectOverviewTitle => '项目';
+
+  @override
+  String get projectOverviewError => '无法加载此项目。';
+
+  @override
+  String get projectOverviewNoReadme => '此项目没有 README。';
 }

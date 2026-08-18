@@ -18,6 +18,7 @@ abstract class Project with _$Project {
     // Always shown as a number in the UI, so absent means zero, not unknown.
     @JsonKey(name: 'star_count') @Default(0) int starCount,
     String? visibility,
+    @JsonKey(name: 'default_branch') String? defaultBranch,
     @JsonKey(name: 'avatar_url') String? avatarUrl,
     @JsonKey(name: 'last_activity_at') DateTime? lastActivityAt,
   }) = _Project;

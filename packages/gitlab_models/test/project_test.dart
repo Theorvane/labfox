@@ -13,6 +13,7 @@ void main() {
         'visibility': 'private',
         'last_activity_at': '2026-08-18T02:00:00.000Z',
         'avatar_url': 'https://gitlab.example.com/avatar.png',
+        'default_branch': 'main',
       });
 
       expect(project.id, 278964);
@@ -21,6 +22,16 @@ void main() {
       expect(project.starCount, 12);
       expect(project.visibility, 'private');
       expect(project.lastActivityAt, DateTime.utc(2026, 8, 18, 2));
+      expect(project.defaultBranch, 'main');
+    });
+
+    test('default branch is null for an empty repository', () {
+      final project = Project.fromJson(const {
+        'id': 1,
+        'name': 'empty',
+        'path_with_namespace': 'me/empty',
+      });
+      expect(project.defaultBranch, isNull);
     });
 
     test('leaves optional fields null when GitLab omits them', () {

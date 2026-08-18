@@ -1,0 +1,260 @@
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:markdown/markdown.dart' as md;
+
+import '../tokens/spacing.dart';
+
+/// Renders a safe subset of Markdown.
+///
+/// It walks the parsed AST and builds widgets for the elements a README uses:
+/// headings, paragraphs, lists, code, emphasis and links. Two safety choices
+/// are deliberate:
+///
+/// - **Raw HTML is never executed.** The parser's inline HTML is disabled, so a
+///   `<script>` in the source becomes literal text, never a live widget.
+/// - **Links are the only interactive element.** A tap reports the href through
+///   [onTapLink]; the viewer never navigates or opens anything itself, leaving
+///   that decision to the caller.
+class MarkdownViewer extends StatefulWidget {
+  const MarkdownViewer({required this.data, this.onTapLink, super.key});
+
+  final String data;
+
+  /// Called with the href when a link is tapped. Null makes links inert.
+  final void Function(String href)? onTapLink;
+
+  @override
+  State<MarkdownViewer> createState() => _MarkdownViewerState();
+}
+
+class _MarkdownViewerState extends State<MarkdownViewer> {
+  final List<TapGestureRecognizer> _recognizers = [];
+
+  @override
+  void dispose() {
+    for (final r in _recognizers) {
+      r.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    for (final r in _recognizers) {
+      r.dispose();
+    }
+    _recognizers.clear();
+
+    // enableTagfilter strips dangerous raw HTML; inline HTML is not turned into
+    // widgets, so nothing from the source can execute.
+    final document = md.Document(
+      extensionSet: md.ExtensionSet.gitHubFlavored,
+      encodeHtml: false,
+    );
+    final nodes = document.parse(widget.data);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: nodes.map(_block).toList(growable: false),
+    );
+  }
+
+  Widget _block(md.Node node) {
+    final theme = Theme.of(context);
+    if (node is md.Text) {
+      return _paragraph(node.text, theme.textTheme.bodyMedium);
+    }
+    if (node is! md.Element) {
+      return const SizedBox.shrink();
+    }
+
+    switch (node.tag) {
+      case 'h1':
+        return _paragraph(node.textContent, theme.textTheme.headlineSmall);
+      case 'h2':
+        return _paragraph(node.textContent, theme.textTheme.titleLarge);
+      case 'h3':
+        return _paragraph(node.textContent, theme.textTheme.titleMedium);
+      case 'h4':
+      case 'h5':
+      case 'h6':
+        return _paragraph(node.textContent, theme.textTheme.titleSmall);
+      case 'pre':
+        return _codeBlock(node.textContent, theme);
+      case 'ul':
+      case 'ol':
+        return _list(node, theme, ordered: node.tag == 'ol');
+      case 'blockquote':
+        return Padding(
+          padding: const EdgeInsets.only(
+            left: LabFoxSpacing.md,
+            bottom: LabFoxSpacing.sm,
+          ),
+          child: Container(
+            padding: const EdgeInsets.only(left: LabFoxSpacing.md),
+            decoration: BoxDecoration(
+              border: Border(
+                left: BorderSide(
+                  color: theme.colorScheme.outlineVariant,
+                  width: 3,
+                ),
+              ),
+            ),
+            child: RichText(
+              text: _inline(
+                node.children ?? const [],
+                theme.textTheme.bodyMedium,
+              ),
+            ),
+          ),
+        );
+      case 'hr':
+        return const Divider(height: LabFoxSpacing.lg);
+      case 'p':
+      default:
+        return Padding(
+          padding: const EdgeInsets.only(bottom: LabFoxSpacing.sm),
+          child: RichText(
+            text: _inline(
+              node.children ?? const [],
+              theme.textTheme.bodyMedium,
+            ),
+          ),
+        );
+    }
+  }
+
+  Widget _paragraph(String text, TextStyle? style) => Padding(
+    padding: const EdgeInsets.only(bottom: LabFoxSpacing.sm),
+    child: Text(text, style: style),
+  );
+
+  Widget _codeBlock(String text, ThemeData theme) => Container(
+    width: double.infinity,
+    margin: const EdgeInsets.only(bottom: LabFoxSpacing.sm),
+    padding: const EdgeInsets.all(LabFoxSpacing.sm),
+    decoration: BoxDecoration(
+      color: theme.colorScheme.surfaceContainerHighest,
+      borderRadius: BorderRadius.circular(6),
+    ),
+    child: Text(
+      text.trimRight(),
+      style: TextStyle(
+        fontFamily: 'monospace',
+        fontSize: theme.textTheme.bodySmall?.fontSize,
+      ),
+    ),
+  );
+
+  Widget _list(md.Element node, ThemeData theme, {required bool ordered}) {
+    final items = node.children?.whereType<md.Element>().toList() ?? const [];
+    return Padding(
+      padding: const EdgeInsets.only(bottom: LabFoxSpacing.sm),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          for (var i = 0; i < items.length; i++)
+            Padding(
+              padding: const EdgeInsets.only(bottom: LabFoxSpacing.xs),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: LabFoxSpacing.sm),
+                    child: Text(
+                      ordered ? '${i + 1}.' : '•',
+                      style: theme.textTheme.bodyMedium,
+                    ),
+                  ),
+                  Expanded(
+                    child: RichText(
+                      text: _inline(
+                        items[i].children ?? const [],
+                        theme.textTheme.bodyMedium,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  /// Builds an inline span tree, the only place a link recognizer is created.
+  TextSpan _inline(
+    List<md.Node> nodes,
+    TextStyle? base, {
+    TextStyle? override,
+  }) {
+    final style = override ?? base;
+    return TextSpan(
+      style: style,
+      children: nodes
+          .map((node) {
+            if (node is md.Text) {
+              return TextSpan(text: _unescape(node.text));
+            }
+            if (node is md.Element) {
+              switch (node.tag) {
+                case 'strong':
+                  return _inline(
+                    node.children ?? const [],
+                    base,
+                    override: (style ?? const TextStyle()).copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                case 'em':
+                  return _inline(
+                    node.children ?? const [],
+                    base,
+                    override: (style ?? const TextStyle()).copyWith(
+                      fontStyle: FontStyle.italic,
+                    ),
+                  );
+                case 'code':
+                  return TextSpan(
+                    text: node.textContent,
+                    style: (style ?? const TextStyle()).copyWith(
+                      fontFamily: 'monospace',
+                    ),
+                  );
+                case 'a':
+                  return _link(node, style);
+                default:
+                  return _inline(
+                    node.children ?? const [],
+                    base,
+                    override: style,
+                  );
+              }
+            }
+            return const TextSpan();
+          })
+          .toList(growable: false),
+    );
+  }
+
+  TextSpan _link(md.Element node, TextStyle? style) {
+    final href = node.attributes['href'];
+    final linkStyle = (style ?? const TextStyle()).copyWith(
+      color: Theme.of(context).colorScheme.primary,
+      decoration: TextDecoration.underline,
+    );
+    TapGestureRecognizer? recognizer;
+    if (href != null && widget.onTapLink != null) {
+      recognizer = TapGestureRecognizer()
+        ..onTap = () => widget.onTapLink!(href);
+      _recognizers.add(recognizer);
+    }
+    return TextSpan(
+      text: node.textContent,
+      style: linkStyle,
+      recognizer: recognizer,
+    );
+  }
+
+  String _unescape(String text) => text;
+}

@@ -1,6 +1,7 @@
 /// The LabFox Design System.
 library;
 
+export 'src/components/markdown_viewer.dart';
 export 'src/components/project_tile.dart';
 export 'src/components/state_indicator.dart';
 export 'src/theme/labfox_theme.dart';

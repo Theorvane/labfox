@@ -77,6 +77,7 @@ LicenseRegistry.addLicense(() async* {
 | flutter_secure_storage | ^9.2.2 | BSD-3-Clause | https://github.com/juliansteenbakker/flutter_secure_storage |
 | shared_preferences | ^2.3.3 | BSD-3-Clause | https://github.com/flutter/packages |
 | intl | any | BSD-3-Clause | https://github.com/dart-lang/i18n |
+| markdown | ^7.3.1 | BSD-3-Clause | https://github.com/dart-lang/markdown |
 
 *(To be filled in with the actual dependencies after scaffolding)*
 

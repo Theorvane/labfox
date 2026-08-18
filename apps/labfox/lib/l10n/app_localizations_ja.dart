@@ -83,4 +83,13 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get retry => '再試行';
+
+  @override
+  String get projectOverviewTitle => 'プロジェクト';
+
+  @override
+  String get projectOverviewError => 'このプロジェクトを読み込めませんでした。';
+
+  @override
+  String get projectOverviewNoReadme => 'このプロジェクトには README がありません。';
 }

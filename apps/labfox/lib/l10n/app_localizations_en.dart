@@ -86,4 +86,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get retry => 'Retry';
+
+  @override
+  String get projectOverviewTitle => 'Project';
+
+  @override
+  String get projectOverviewError => 'Could not load this project.';
+
+  @override
+  String get projectOverviewNoReadme => 'This project has no README.';
 }

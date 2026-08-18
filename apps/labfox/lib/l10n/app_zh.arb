@@ -23,5 +23,8 @@
   "projectsTitle": "项目",
   "projectsEmpty": "您还不是任何项目的成员。",
   "projectsError": "无法加载您的项目。",
-  "retry": "重试"
+  "retry": "重试",
+  "projectOverviewTitle": "项目",
+  "projectOverviewError": "无法加载此项目。",
+  "projectOverviewNoReadme": "此项目没有 README。"
 }
