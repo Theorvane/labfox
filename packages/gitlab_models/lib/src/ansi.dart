@@ -120,8 +120,14 @@ List<AnsiSpan> parseAnsi(String input) {
       case >= 90 && <= 97:
         color = _bright[code - 90];
       case 38 || 48:
-        // Extended colour: consume its parameters so they do not print.
-        // 38;5;n (256) or 38;2;r;g;b (truecolor).
+        // Extended colour: consume its parameters so they do not print —
+        // 38;5;n (256) or 38;2;r;g;b (truecolor). LabFox does not render these,
+        // so an extended *foreground* (38) degrades to the default colour rather
+        // than leaving the previous one in effect; a *background* (48) is
+        // ignored entirely and must not touch the foreground.
+        if (code == 38) {
+          color = AnsiColor.defaultColor;
+        }
         if (i + 1 < codes.length && codes[i + 1] == '5') {
           i += 2;
         } else if (i + 1 < codes.length && codes[i + 1] == '2') {

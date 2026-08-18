@@ -31,11 +31,23 @@ void main() {
       expect(spans.single.color, AnsiColor.brightRed);
     });
 
-    test('consumes a 256-colour code without leaking its digits', () {
-      // 38;5;n is extended colour; unsupported here, but its params must not
-      // print as text.
-      final spans = parseAnsi('\x1b[38;5;196mx\x1b[0m');
-      expect(spans.map((s) => s.text).join(), 'x');
+    test(
+      'an unsupported extended foreground degrades to the default colour',
+      () {
+        // 38;5;n is extended colour; its params must not print, AND it must not
+        // leave the previous colour in effect. red then 256 -> plain is default.
+        final spans = parseAnsi('\x1b[31mred\x1b[38;5;196mplain');
+        expect(spans.map((s) => s.text).toList(), ['red', 'plain']);
+        expect(spans[0].color, AnsiColor.red);
+        expect(spans[1].color, AnsiColor.defaultColor);
+      },
+    );
+
+    test('a background colour code does not change the foreground', () {
+      // 48;5;n sets a background LabFox ignores; the foreground must survive.
+      final spans = parseAnsi('\x1b[32mgreen\x1b[48;5;196mstill');
+      expect(spans[1].text, 'still');
+      expect(spans[1].color, AnsiColor.green);
     });
 
     test('strips a non-SGR escape (erase line) instead of printing it', () {
