@@ -7,6 +7,7 @@ import 'package:gitlab_models/gitlab_models.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/router.dart';
+import '../../../core/ui/work_meta.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/search_repository.dart';
 import 'controllers/search_controllers.dart';
@@ -151,12 +152,23 @@ class _ResultTile extends StatelessWidget {
         onTap: () => context.go(Routes.projectOverview(item.id)),
       );
     }
+    final status = LabFoxStatusColors.of(context);
     if (item is Issue) {
       final projectId = item.projectId;
-      return ListTile(
-        leading: const Icon(Icons.adjust),
-        title: Text(item.title, maxLines: 2, overflow: TextOverflow.ellipsis),
-        subtitle: Text('#${item.iid}'),
+      final colors = item.isOpen ? status.open : status.closed;
+      return WorkTile(
+        icon: item.isOpen ? Icons.adjust : Icons.check_circle_outline,
+        iconColor: colors.foreground,
+        title: item.title,
+        metadata: [
+          StatusPill(
+            label: item.isOpen ? 'Open' : 'Closed',
+            colors: colors,
+            dot: true,
+          ),
+          MetaText('#${item.iid}'),
+          LabelDots(item.labels),
+        ],
         onTap: projectId == null
             ? null
             : () => context.go(Routes.issue(projectId, item.iid)),
@@ -164,16 +176,38 @@ class _ResultTile extends StatelessWidget {
     }
     if (item is MergeRequest) {
       final projectId = item.projectId;
-      return ListTile(
-        leading: const Icon(Icons.merge_outlined),
-        title: Text(item.title, maxLines: 2, overflow: TextOverflow.ellipsis),
-        subtitle: Text('!${item.iid}'),
+      final (icon, colors, label) = _mrStatus(item, status);
+      return WorkTile(
+        icon: icon,
+        iconColor: colors.foreground,
+        title: item.title,
+        metadata: [
+          StatusPill(label: label, colors: colors, dot: true),
+          MetaText('!${item.iid}'),
+          LabelDots(item.labels),
+        ],
         onTap: projectId == null
             ? null
             : () => context.go(Routes.mergeRequest(projectId, item.iid)),
       );
     }
     return const SizedBox.shrink();
+  }
+
+  static (IconData, StatusColor, String) _mrStatus(
+    MergeRequest mr,
+    LabFoxStatusColors s,
+  ) {
+    if (mr.isDraft) {
+      return (Icons.merge_outlined, s.pending, 'Draft');
+    }
+    if (mr.isMerged) {
+      return (Icons.merge, s.merged, 'Merged');
+    }
+    if (mr.isClosed) {
+      return (Icons.close, s.closed, 'Closed');
+    }
+    return (Icons.merge_outlined, s.open, 'Open');
   }
 }
 
