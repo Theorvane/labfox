@@ -54,7 +54,7 @@ MergeRequest _mr(int iid, String title, {String state = 'opened'}) =>
     );
 
 void main() {
-  testWidgets('lists open MRs with iid and branches', (tester) async {
+  testWidgets('lists open MRs with their iid and state', (tester) async {
     await _pump(tester, {
       MergeRequestState.opened: AsyncData([_mr(142, 'Add OAuth')]),
     });
@@ -62,7 +62,8 @@ void main() {
 
     expect(find.text('Add OAuth'), findsOneWidget);
     expect(find.textContaining('!142'), findsOneWidget);
-    expect(find.textContaining('feature/x → develop'), findsOneWidget);
+    // 'Open' appears both as the filter and the row's status pill.
+    expect(find.text('Open'), findsWidgets);
   });
 
   testWidgets('switching to Merged loads merged MRs', (tester) async {
@@ -82,12 +83,13 @@ void main() {
     expect(find.text('open mr'), findsNothing);
   });
 
-  testWidgets('shows a draft prefix', (tester) async {
+  testWidgets('marks a draft with a Draft pill', (tester) async {
     final draft = _mr(5, 'wip').copyWith(draft: true);
     await _pump(tester, {
       MergeRequestState.opened: AsyncData([draft]),
     });
     await tester.pumpAndSettle();
-    expect(find.textContaining('Draft: wip'), findsOneWidget);
+    expect(find.text('wip'), findsOneWidget);
+    expect(find.text('Draft'), findsOneWidget);
   });
 }
