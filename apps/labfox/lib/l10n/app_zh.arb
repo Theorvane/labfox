@@ -155,5 +155,12 @@
   "signInOAuthNeedsClientId": "请输入该实例的 OAuth 客户端 ID。",
   "settingsTitle": "设置",
   "settingsAccounts": "账户",
-  "settingsLicenses": "开源许可"
+  "settingsLicenses": "开源许可",
+  "navHome": "主页",
+  "navInbox": "收件箱",
+  "navSearch": "搜索",
+  "navMe": "我",
+  "meTitle": "我",
+  "meSettings": "设置",
+  "meAccounts": "切换账户"
 }

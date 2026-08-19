@@ -486,5 +486,26 @@ class AppLocalizationsKo extends AppLocalizations {
   String get settingsLicenses => '오픈소스 라이선스';
 
   @override
+  String get navHome => '홈';
+
+  @override
+  String get navInbox => '받은함';
+
+  @override
+  String get navSearch => '검색';
+
+  @override
+  String get navMe => '내 정보';
+
+  @override
+  String get meTitle => '내 정보';
+
+  @override
+  String get meSettings => '설정';
+
+  @override
+  String get meAccounts => '계정 전환';
+
+  @override
   String get homeRecents => '최근';
 }

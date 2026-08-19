@@ -501,5 +501,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsLicenses => 'Open source licenses';
 
   @override
+  String get navHome => 'Home';
+
+  @override
+  String get navInbox => 'Inbox';
+
+  @override
+  String get navSearch => 'Search';
+
+  @override
+  String get navMe => 'Me';
+
+  @override
+  String get meTitle => 'Me';
+
+  @override
+  String get meSettings => 'Settings';
+
+  @override
+  String get meAccounts => 'Switch account';
+
+  @override
   String get homeRecents => 'Recent';
 }

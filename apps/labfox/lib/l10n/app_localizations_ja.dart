@@ -485,5 +485,26 @@ class AppLocalizationsJa extends AppLocalizations {
   String get settingsLicenses => 'オープンソースライセンス';
 
   @override
+  String get navHome => 'ホーム';
+
+  @override
+  String get navInbox => '受信箱';
+
+  @override
+  String get navSearch => '検索';
+
+  @override
+  String get navMe => 'マイページ';
+
+  @override
+  String get meTitle => 'マイページ';
+
+  @override
+  String get meSettings => '設定';
+
+  @override
+  String get meAccounts => 'アカウント切り替え';
+
+  @override
   String get homeRecents => '最近';
 }

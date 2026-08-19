@@ -646,6 +646,34 @@
   "@settingsLicenses": {
     "description": "Settings entry that opens the open-source license page"
   },
+  "navHome": "Home",
+  "@navHome": {
+    "description": "Bottom navigation / rail label for the home destination"
+  },
+  "navInbox": "Inbox",
+  "@navInbox": {
+    "description": "Bottom navigation / rail label for the inbox destination"
+  },
+  "navSearch": "Search",
+  "@navSearch": {
+    "description": "Bottom navigation / rail label for the search destination"
+  },
+  "navMe": "Me",
+  "@navMe": {
+    "description": "Bottom navigation / rail label for the profile destination"
+  },
+  "meTitle": "Me",
+  "@meTitle": {
+    "description": "Title of the profile (Me) screen"
+  },
+  "meSettings": "Settings",
+  "@meSettings": {
+    "description": "Profile entry that opens settings"
+  },
+  "meAccounts": "Switch account",
+  "@meAccounts": {
+    "description": "Profile entry that opens the account switcher"
+  },
   "homeRecents": "Recent",
   "@homeRecents": {
     "description": "Home section title for recently opened projects"

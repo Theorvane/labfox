@@ -1034,6 +1034,48 @@ abstract class AppLocalizations {
   /// **'Open source licenses'**
   String get settingsLicenses;
 
+  /// Bottom navigation / rail label for the home destination
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get navHome;
+
+  /// Bottom navigation / rail label for the inbox destination
+  ///
+  /// In en, this message translates to:
+  /// **'Inbox'**
+  String get navInbox;
+
+  /// Bottom navigation / rail label for the search destination
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get navSearch;
+
+  /// Bottom navigation / rail label for the profile destination
+  ///
+  /// In en, this message translates to:
+  /// **'Me'**
+  String get navMe;
+
+  /// Title of the profile (Me) screen
+  ///
+  /// In en, this message translates to:
+  /// **'Me'**
+  String get meTitle;
+
+  /// Profile entry that opens settings
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get meSettings;
+
+  /// Profile entry that opens the account switcher
+  ///
+  /// In en, this message translates to:
+  /// **'Switch account'**
+  String get meAccounts;
+
   /// Home section title for recently opened projects
   ///
   /// In en, this message translates to:

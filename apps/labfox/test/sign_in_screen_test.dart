@@ -132,7 +132,8 @@ void main() {
     await tester.tap(find.widgetWithText(FilledButton, 'Sign in'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Home'), findsOneWidget);
+    // 'Home' now appears in both the app bar and the navigation shell.
+    expect(find.text('Home'), findsWidgets);
     expect(find.text('Signed in as jungwon'), findsOneWidget);
   });
 
@@ -168,7 +169,8 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Home'), findsOneWidget);
+    // 'Home' now appears in both the app bar and the navigation shell.
+    expect(find.text('Home'), findsWidgets);
     expect(find.text('Signed in as jungwon'), findsOneWidget);
   });
 }

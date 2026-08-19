@@ -155,5 +155,12 @@
   "signInOAuthNeedsClientId": "이 인스턴스의 OAuth 클라이언트 ID를 입력하세요.",
   "settingsTitle": "설정",
   "settingsAccounts": "계정",
-  "settingsLicenses": "오픈소스 라이선스"
+  "settingsLicenses": "오픈소스 라이선스",
+  "navHome": "홈",
+  "navInbox": "받은함",
+  "navSearch": "검색",
+  "navMe": "내 정보",
+  "meTitle": "내 정보",
+  "meSettings": "설정",
+  "meAccounts": "계정 전환"
 }

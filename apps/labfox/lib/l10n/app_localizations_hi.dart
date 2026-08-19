@@ -501,5 +501,26 @@ class AppLocalizationsHi extends AppLocalizations {
   String get settingsLicenses => 'ओपन सोर्स लाइसेंस';
 
   @override
+  String get navHome => 'होम';
+
+  @override
+  String get navInbox => 'इनबॉक्स';
+
+  @override
+  String get navSearch => 'खोज';
+
+  @override
+  String get navMe => 'मैं';
+
+  @override
+  String get meTitle => 'मैं';
+
+  @override
+  String get meSettings => 'सेटिंग्स';
+
+  @override
+  String get meAccounts => 'खाता बदलें';
+
+  @override
   String get homeRecents => 'हाल ही में';
 }
