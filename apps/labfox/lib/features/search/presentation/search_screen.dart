@@ -167,7 +167,7 @@ class _ResultTile extends StatelessWidget {
             dot: true,
           ),
           MetaText('#${item.iid}'),
-          LabelDots(item.labels),
+          LabelChips(item.labels),
         ],
         onTap: projectId == null
             ? null
@@ -184,7 +184,7 @@ class _ResultTile extends StatelessWidget {
         metadata: [
           StatusPill(label: label, colors: colors, dot: true),
           MetaText('!${item.iid}'),
-          LabelDots(item.labels),
+          LabelChips(item.labels),
         ],
         onTap: projectId == null
             ? null

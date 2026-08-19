@@ -48,10 +48,11 @@ class CommentCount extends StatelessWidget {
   }
 }
 
-/// A short run of label colour dots, capped at [max]. A quiet stand-in for full
-/// label chips in a dense row; the detail screen shows the named labels.
-class LabelDots extends StatelessWidget {
-  const LabelDots(this.labels, {this.max = 3, super.key});
+/// Full colour label chips — the label name on its own colour, the way GitLab
+/// and GitHub render labels — capped at [max] with a `+N` overflow so a heavily
+/// labelled row stays bounded. The chips wrap within a row's metadata [Wrap].
+class LabelChips extends StatelessWidget {
+  const LabelChips(this.labels, {this.max = 3, super.key});
 
   final List<Label> labels;
   final int max;
@@ -61,33 +62,65 @@ class LabelDots extends StatelessWidget {
     if (labels.isEmpty) {
       return const SizedBox.shrink();
     }
-    final fallback = Theme.of(context).hintColor;
-    return Row(
-      mainAxisSize: MainAxisSize.min,
+    final shown = labels.take(max).toList(growable: false);
+    final extra = labels.length - shown.length;
+
+    return Wrap(
+      spacing: 4,
+      runSpacing: 4,
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
-        for (final label in labels.take(max))
-          Container(
-            width: 8,
-            height: 8,
-            margin: const EdgeInsets.only(right: 4),
-            decoration: BoxDecoration(
-              color: _hex(label.color) ?? fallback,
-              shape: BoxShape.circle,
-            ),
-          ),
+        for (final label in shown) _Chip(label: label),
+        if (extra > 0) MetaText('+$extra'),
       ],
     );
   }
+}
 
-  static Color? _hex(String? value) {
-    if (value == null) {
-      return null;
-    }
-    var hex = value.replaceAll('#', '').trim();
-    if (hex.length == 6) {
-      hex = 'FF$hex';
-    }
-    final parsed = int.tryParse(hex, radix: 16);
-    return parsed == null ? null : Color(parsed);
+class _Chip extends StatelessWidget {
+  const _Chip({required this.label});
+
+  final Label label;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final background =
+        _hexColor(label.color) ?? theme.colorScheme.surfaceContainerHighest;
+    // Prefer the colour GitLab supplies; otherwise pick black/white for contrast
+    // against the background so the name stays readable on any label colour.
+    final foreground =
+        _hexColor(label.textColor) ??
+        (background.computeLuminance() > 0.5 ? Colors.black : Colors.white);
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Text(
+        label.name,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: theme.textTheme.labelSmall?.copyWith(
+          color: foreground,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
   }
+}
+
+/// Parses a `#rrggbb` (or `rrggbb`) hex string to a [Color], or null.
+Color? _hexColor(String? value) {
+  if (value == null) {
+    return null;
+  }
+  var hex = value.replaceAll('#', '').trim();
+  if (hex.length == 6) {
+    hex = 'FF$hex';
+  }
+  final parsed = int.tryParse(hex, radix: 16);
+  return parsed == null ? null : Color(parsed);
 }

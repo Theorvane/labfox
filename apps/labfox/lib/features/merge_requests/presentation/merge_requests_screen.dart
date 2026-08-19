@@ -121,7 +121,7 @@ class _MergeRequestTile extends StatelessWidget {
         StatusPill(label: label, colors: colors, dot: true),
         MetaText('!${mr.iid}'),
         if (mr.author != null) MetaText(mr.author!.username),
-        LabelDots(mr.labels),
+        LabelChips(mr.labels),
         CommentCount(mr.commentCount),
       ],
       onTap: onTap,

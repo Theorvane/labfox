@@ -189,7 +189,7 @@ class HomeWorkFeed extends ConsumerWidget {
           metadata: [
             StatusPill(label: label, colors: colors, dot: true),
             MetaText('!${mr.iid}'),
-            LabelDots(mr.labels),
+            LabelChips(mr.labels),
           ],
           onTap: projectId == null
               ? null
@@ -216,7 +216,7 @@ class HomeWorkFeed extends ConsumerWidget {
               dot: true,
             ),
             MetaText('#${issue.iid}'),
-            LabelDots(issue.labels),
+            LabelChips(issue.labels),
           ],
           onTap: projectId == null
               ? null

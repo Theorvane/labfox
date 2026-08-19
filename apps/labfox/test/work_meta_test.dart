@@ -1,0 +1,55 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:gitlab_models/gitlab_models.dart';
+import 'package:labfox/core/ui/work_meta.dart';
+
+Future<void> _pump(WidgetTester tester, Widget child) async {
+  await tester.pumpWidget(
+    MaterialApp(
+      home: Scaffold(body: Center(child: child)),
+    ),
+  );
+}
+
+void main() {
+  group('LabelChips', () {
+    testWidgets('renders each label name as a chip', (tester) async {
+      await _pump(
+        tester,
+        const LabelChips([
+          Label(name: 'bug', color: '#d73a4a', textColor: '#ffffff'),
+          Label(name: 'design', color: '#5319e7', textColor: '#ffffff'),
+        ]),
+      );
+
+      expect(find.text('bug'), findsOneWidget);
+      expect(find.text('design'), findsOneWidget);
+    });
+
+    testWidgets('caps the visible chips and shows a +N overflow', (
+      tester,
+    ) async {
+      await _pump(
+        tester,
+        const LabelChips([
+          Label(name: 'a'),
+          Label(name: 'b'),
+          Label(name: 'c'),
+          Label(name: 'd'),
+          Label(name: 'e'),
+        ], max: 3),
+      );
+
+      expect(find.text('a'), findsOneWidget);
+      expect(find.text('c'), findsOneWidget);
+      // The fourth and fifth collapse into a count.
+      expect(find.text('d'), findsNothing);
+      expect(find.text('+2'), findsOneWidget);
+    });
+
+    testWidgets('renders nothing when there are no labels', (tester) async {
+      await _pump(tester, const LabelChips([]));
+      expect(find.byType(Text), findsNothing);
+    });
+  });
+}
