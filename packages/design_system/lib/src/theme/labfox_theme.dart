@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../tokens/colors.dart';
 import '../tokens/spacing.dart';
+import '../tokens/status_colors.dart';
 
 /// Light and dark themes.
 ///
@@ -22,6 +23,11 @@ abstract final class LabFoxTheme {
       colorScheme: scheme,
       scaffoldBackgroundColor: scheme.surface,
       visualDensity: VisualDensity.standard,
+      extensions: [
+        brightness == Brightness.dark
+            ? LabFoxStatusColors.dark
+            : LabFoxStatusColors.light,
+      ],
       appBarTheme: AppBarTheme(
         backgroundColor: scheme.surface,
         surfaceTintColor: Colors.transparent,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../tokens/colors.dart';
 import '../tokens/spacing.dart';
+import '../tokens/status_colors.dart';
 
 /// What a pipeline, job or merge request is currently doing.
 enum LabFoxState { success, failure, running, pending, warning }
@@ -28,12 +28,19 @@ class StateIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final status = LabFoxStatusColors.of(context);
     final (icon, color) = switch (state) {
-      LabFoxState.success => (Icons.check_circle_outline, LabFoxColors.success),
-      LabFoxState.failure => (Icons.cancel_outlined, LabFoxColors.failure),
-      LabFoxState.running => (Icons.play_circle_outline, LabFoxColors.running),
-      LabFoxState.pending => (Icons.circle_outlined, LabFoxColors.pending),
-      LabFoxState.warning => (Icons.error_outline, LabFoxColors.warning),
+      LabFoxState.success => (
+        Icons.check_circle_outline,
+        status.open.foreground,
+      ),
+      LabFoxState.failure => (Icons.cancel_outlined, status.closed.foreground),
+      LabFoxState.running => (
+        Icons.play_circle_outline,
+        status.running.foreground,
+      ),
+      LabFoxState.pending => (Icons.circle_outlined, status.pending.foreground),
+      LabFoxState.warning => (Icons.error_outline, status.warning.foreground),
     };
 
     return Semantics(
