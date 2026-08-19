@@ -19,10 +19,17 @@ final gitLabClientProvider = FutureProvider<GitLabClient?>((ref) async {
   if (token == null) {
     return null;
   }
+  final isOAuth = account.authMethod == AuthMethod.oauth;
   final client = GitLabClient(
     baseUrl: account.instanceUrl,
     token: token,
-    bearer: account.authMethod == AuthMethod.oauth,
+    bearer: isOAuth,
+    // On a 401, an OAuth session refreshes its token and retries once; the
+    // server, not the stored expiry, is the authority on validity.
+    onUnauthorized: isOAuth
+        ? () =>
+              ref.read(authRepositoryProvider).refreshOAuthAccessToken(account)
+        : null,
   );
   ref.onDispose(client.close);
   return client;

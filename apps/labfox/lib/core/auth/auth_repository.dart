@@ -212,6 +212,39 @@ class AuthRepository {
     return token.accessToken;
   }
 
+  /// Forces an OAuth token refresh, ignoring local expiry, and returns the new
+  /// access token (or null when it cannot be refreshed).
+  ///
+  /// Used when the server rejects a token the client still believed valid — the
+  /// server is the authority, so a 401 triggers this rather than trusting the
+  /// stored expiry.
+  Future<String?> refreshOAuthAccessToken(Account account) async {
+    if (account.authMethod != AuthMethod.oauth) {
+      return null;
+    }
+    final raw = await _credentialStore.readToken(
+      instanceUrl: account.instanceUrl,
+      userId: account.user.id,
+      kind: _oauthKind,
+    );
+    if (raw == null) {
+      return null;
+    }
+    final token = OAuthToken.fromJson(json.decode(raw) as Map<String, dynamic>);
+    final refreshToken = token.refreshToken;
+    final clientId = account.oauthClientId;
+    if (refreshToken == null || clientId == null) {
+      return null;
+    }
+    final fresh = await _oauthApi.refresh(
+      instanceUrl: account.instanceUrl,
+      clientId: clientId,
+      refreshToken: refreshToken,
+    );
+    await _writeOAuthToken(account, fresh);
+    return fresh.accessToken;
+  }
+
   /// Removes an account: clears its token and drops it from the store. If it was
   /// active, the store falls back to another account or to signed out.
   Future<void> signOut(Account account) async {
