@@ -5,26 +5,67 @@ import 'package:gitlab_models/gitlab_models.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/router.dart';
+import '../../../core/storage/local_projects_providers.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/project_overview.dart';
 import 'controllers/project_overview_controller.dart';
 
 /// A project's overview: identity, README, and links into its sections.
-class ProjectOverviewScreen extends ConsumerWidget {
+class ProjectOverviewScreen extends ConsumerStatefulWidget {
   const ProjectOverviewScreen({required this.projectId, super.key});
 
   final int projectId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ProjectOverviewScreen> createState() =>
+      _ProjectOverviewScreenState();
+}
+
+class _ProjectOverviewScreenState extends ConsumerState<ProjectOverviewScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Record the project as recently opened once it has loaded. Fires
+    // immediately so an already-cached project still counts, and recording is
+    // idempotent (it just moves the project to the front).
+    ref.listenManual(projectOverviewControllerProvider(widget.projectId), (
+      _,
+      next,
+    ) {
+      final project = next.valueOrNull?.project;
+      if (project != null) {
+        ref.read(recentProjectsProvider.notifier).record(project);
+      }
+    }, fireImmediately: true);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final projectId = widget.projectId;
     final l10n = AppLocalizations.of(context);
     final overview = ref.watch(projectOverviewControllerProvider(projectId));
 
+    final project = overview.valueOrNull?.project;
+    final isFavorite = ref.watch(
+      favoriteProjectsProvider.select(
+        (favorites) => favorites.any((p) => p.id == projectId),
+      ),
+    );
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          overview.valueOrNull?.project.name ?? l10n.projectOverviewTitle,
-        ),
+        title: Text(project?.name ?? l10n.projectOverviewTitle),
+        actions: [
+          if (project != null)
+            IconButton(
+              icon: Icon(isFavorite ? Icons.star : Icons.star_border),
+              tooltip: isFavorite
+                  ? l10n.projectRemoveFavorite
+                  : l10n.projectAddFavorite,
+              onPressed: () =>
+                  ref.read(favoriteProjectsProvider.notifier).toggle(project),
+            ),
+        ],
       ),
       body: overview.when(
         loading: () => const Center(child: CircularProgressIndicator()),

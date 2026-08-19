@@ -967,6 +967,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Load more'**
   String get searchLoadMore;
+
+  /// Tooltip for favoriting a project
+  ///
+  /// In en, this message translates to:
+  /// **'Add to favorites'**
+  String get projectAddFavorite;
+
+  /// Tooltip for unfavoriting a project
+  ///
+  /// In en, this message translates to:
+  /// **'Remove from favorites'**
+  String get projectRemoveFavorite;
+
+  /// Home section title for favorited projects
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites'**
+  String get homeFavorites;
+
+  /// Home section title for recently opened projects
+  ///
+  /// In en, this message translates to:
+  /// **'Recent'**
+  String get homeRecents;
 }
 
 class _AppLocalizationsDelegate

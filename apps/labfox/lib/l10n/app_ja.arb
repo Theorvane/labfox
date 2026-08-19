@@ -143,5 +143,9 @@
   "searchInitial": "検索語を入力してください。",
   "searchEmpty": "結果が見つかりませんでした。",
   "searchError": "検索を完了できませんでした。",
-  "searchLoadMore": "さらに読み込む"
+  "searchLoadMore": "さらに読み込む",
+  "projectAddFavorite": "お気に入りに追加",
+  "projectRemoveFavorite": "お気に入りから削除",
+  "homeFavorites": "お気に入り",
+  "homeRecents": "最近"
 }

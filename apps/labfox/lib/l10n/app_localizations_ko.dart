@@ -451,4 +451,16 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get searchLoadMore => '더 보기';
+
+  @override
+  String get projectAddFavorite => '즐겨찾기에 추가';
+
+  @override
+  String get projectRemoveFavorite => '즐겨찾기에서 제거';
+
+  @override
+  String get homeFavorites => '즐겨찾기';
+
+  @override
+  String get homeRecents => '최근';
 }

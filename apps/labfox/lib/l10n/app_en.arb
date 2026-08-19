@@ -601,5 +601,21 @@
   "searchLoadMore": "Load more",
   "@searchLoadMore": {
     "description": "Button that loads the next page of search results"
+  },
+  "projectAddFavorite": "Add to favorites",
+  "@projectAddFavorite": {
+    "description": "Tooltip for favoriting a project"
+  },
+  "projectRemoveFavorite": "Remove from favorites",
+  "@projectRemoveFavorite": {
+    "description": "Tooltip for unfavoriting a project"
+  },
+  "homeFavorites": "Favorites",
+  "@homeFavorites": {
+    "description": "Home section title for favorited projects"
+  },
+  "homeRecents": "Recent",
+  "@homeRecents": {
+    "description": "Home section title for recently opened projects"
   }
 }

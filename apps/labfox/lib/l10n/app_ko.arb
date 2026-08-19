@@ -143,5 +143,9 @@
   "searchInitial": "검색어를 입력하세요.",
   "searchEmpty": "검색 결과가 없습니다.",
   "searchError": "검색을 완료할 수 없습니다.",
-  "searchLoadMore": "더 보기"
+  "searchLoadMore": "더 보기",
+  "projectAddFavorite": "즐겨찾기에 추가",
+  "projectRemoveFavorite": "즐겨찾기에서 제거",
+  "homeFavorites": "즐겨찾기",
+  "homeRecents": "최근"
 }

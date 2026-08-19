@@ -450,4 +450,16 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get searchLoadMore => 'さらに読み込む';
+
+  @override
+  String get projectAddFavorite => 'お気に入りに追加';
+
+  @override
+  String get projectRemoveFavorite => 'お気に入りから削除';
+
+  @override
+  String get homeFavorites => 'お気に入り';
+
+  @override
+  String get homeRecents => '最近';
 }
