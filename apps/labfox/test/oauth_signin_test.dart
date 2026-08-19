@@ -4,6 +4,7 @@ import 'package:gitlab_models/gitlab_models.dart';
 import 'package:labfox/core/auth/account_store.dart';
 import 'package:labfox/core/auth/auth_repository.dart';
 import 'package:labfox/core/auth/authorization_launcher.dart';
+import 'package:labfox/core/auth/oauth_redirect.dart';
 import 'package:secure_storage/secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,13 +18,15 @@ class _FakeLauncher implements AuthorizationLauncher {
   final bool tamperState;
   final String? error;
   Uri? seenUrl;
+  OAuthRedirect? seenRedirect;
 
   @override
   Future<Uri> authorize({
     required Uri url,
-    required String callbackScheme,
+    required OAuthRedirect redirect,
   }) async {
     seenUrl = url;
+    seenRedirect = redirect;
     final state = url.queryParameters['state']!;
     final query = <String, String>{};
     if (error != null) {
@@ -49,20 +52,31 @@ void main() {
     credentialStore = CredentialStore();
   });
 
+  String? exchangeRedirectUri;
+
   AuthRepository buildRepo({
     required AuthorizationLauncher launcher,
     int Function()? now,
     int initialCreatedAt = 1000,
     int initialExpiresIn = 7200,
+    OAuthRedirect redirect = const OAuthRedirect(
+      redirectUri: 'labfox://oauth-callback',
+      callbackScheme: 'labfox',
+    ),
   }) {
     return AuthRepository(
       accountStore: accountStore,
       credentialStore: credentialStore,
       authorizationLauncher: launcher,
+      oauthRedirect: redirect,
       nowEpochSeconds: now,
       oauthApi: OAuthApi(
         fakeDio((options) {
           final grant = (options.data as Map)['grant_type'];
+          if (grant == 'authorization_code') {
+            exchangeRedirectUri =
+                (options.data as Map)['redirect_uri'] as String;
+          }
           if (grant == 'refresh_token') {
             return (
               status: 200,
@@ -168,5 +182,32 @@ void main() {
     // The refreshed token is persisted, so the next read does not refresh again.
     now = 9100;
     expect(await repo.tokenFor(account), 'access-refreshed');
+  });
+
+  test('threads a desktop loopback redirect through the flow', () async {
+    final launcher = _FakeLauncher();
+    final desktop = resolveOAuthRedirect(
+      isDesktopLoopback: true,
+      loopbackPort: 8620,
+    );
+    final repo = buildRepo(
+      launcher: launcher,
+      now: () => 2000,
+      redirect: desktop,
+    );
+
+    await repo.signInWithOAuth(
+      instanceUrl: 'https://gitlab.com',
+      clientId: 'app-1',
+    );
+
+    // The loopback redirect reaches the authorize URL, the browser launch, and
+    // the token exchange.
+    expect(
+      launcher.seenUrl!.queryParameters['redirect_uri'],
+      'http://localhost:8620',
+    );
+    expect(launcher.seenRedirect!.useWebview, isFalse);
+    expect(exchangeRedirectUri, 'http://localhost:8620');
   });
 }
