@@ -58,6 +58,45 @@ class IssuesApi {
     }
   }
 
+  /// Lists issues assigned to the authenticated user across every project,
+  /// open by default and most recently updated first.
+  ///
+  /// This is the account-scoped global `/issues` endpoint, not a project path,
+  /// so results span projects; each issue keeps its `project_id` for routing.
+  Future<Paginated<Issue>> listAssignedToMe({
+    IssueState state = IssueState.opened,
+    int page = 1,
+    int perPage = 20,
+  }) async {
+    try {
+      final response = await _dio.get<dynamic>(
+        '/issues',
+        queryParameters: {
+          'scope': 'assigned_to_me',
+          if (state != IssueState.all) 'state': state.value,
+          'order_by': 'updated_at',
+          'with_labels_details': true,
+          'page': page,
+          'per_page': perPage,
+        },
+      );
+      if (response.statusCode != 200) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'listing assigned issues',
+        );
+      }
+      final issues = (response.data as List<dynamic>? ?? const [])
+          .cast<Map<String, dynamic>>()
+          .map(Issue.fromJson)
+          .toList(growable: false);
+      return Paginated.fromHeaders(issues, response.headers.map);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'listing assigned issues');
+    }
+  }
+
   /// A single issue by its `iid` — the per-project number a user sees, never
   /// the global `id`.
   Future<Issue> get(Object projectId, {required int iid}) async {

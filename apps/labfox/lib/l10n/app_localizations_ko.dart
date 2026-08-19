@@ -23,6 +23,21 @@ class AppLocalizationsKo extends AppLocalizations {
   String get homeEmptyWork => '이슈, 병합 요청, 파이프라인이 여기에 표시됩니다.';
 
   @override
+  String get homeReviewRequests => 'Review requests';
+
+  @override
+  String get homeAssignedMergeRequests => 'Assigned merge requests';
+
+  @override
+  String get homeAssignedIssues => 'Assigned issues';
+
+  @override
+  String get homeWorkAllClear => 'You\'re all caught up.';
+
+  @override
+  String get homeWorkError => 'Couldn\'t load your work.';
+
+  @override
   String get signOut => '로그아웃';
 
   @override

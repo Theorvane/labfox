@@ -60,6 +60,83 @@ class MergeRequestsApi {
     }
   }
 
+  /// Lists merge requests assigned to the authenticated user across every
+  /// project, open by default and most recently updated first.
+  ///
+  /// Account-scoped global `/merge_requests`, not a project path; each MR keeps
+  /// its `project_id` for routing.
+  Future<Paginated<MergeRequest>> listAssignedToMe({
+    MergeRequestState state = MergeRequestState.opened,
+    int page = 1,
+    int perPage = 20,
+  }) {
+    return _listGlobal(
+      queryParameters: {'scope': 'assigned_to_me'},
+      state: state,
+      page: page,
+      perPage: perPage,
+      context: 'listing assigned merge requests',
+    );
+  }
+
+  /// Lists open merge requests for which [reviewerUsername] is a requested
+  /// reviewer, across every project, most recently updated first.
+  ///
+  /// A scope cannot express "review requested of me", so this filters by
+  /// `reviewer_username` on the global endpoint.
+  Future<Paginated<MergeRequest>> listForReview(
+    String reviewerUsername, {
+    MergeRequestState state = MergeRequestState.opened,
+    int page = 1,
+    int perPage = 20,
+  }) {
+    return _listGlobal(
+      queryParameters: {'reviewer_username': reviewerUsername},
+      state: state,
+      page: page,
+      perPage: perPage,
+      context: 'listing merge requests to review',
+    );
+  }
+
+  /// Shared body for the account-scoped `/merge_requests` listings, which
+  /// differ only by their filter ([queryParameters]).
+  Future<Paginated<MergeRequest>> _listGlobal({
+    required Map<String, dynamic> queryParameters,
+    required MergeRequestState state,
+    required int page,
+    required int perPage,
+    required String context,
+  }) async {
+    try {
+      final response = await _dio.get<dynamic>(
+        '/merge_requests',
+        queryParameters: {
+          ...queryParameters,
+          if (state != MergeRequestState.all) 'state': state.value,
+          'order_by': 'updated_at',
+          'with_labels_details': true,
+          'page': page,
+          'per_page': perPage,
+        },
+      );
+      if (response.statusCode != 200) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: context,
+        );
+      }
+      final mrs = (response.data as List<dynamic>? ?? const [])
+          .cast<Map<String, dynamic>>()
+          .map(MergeRequest.fromJson)
+          .toList(growable: false);
+      return Paginated.fromHeaders(mrs, response.headers.map);
+    } on DioException catch (error) {
+      throw mapError(error, context: context);
+    }
+  }
+
   /// A single merge request by its `iid`.
   Future<MergeRequest> get(Object projectId, {required int iid}) async {
     try {

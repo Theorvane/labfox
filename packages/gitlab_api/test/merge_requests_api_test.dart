@@ -89,6 +89,71 @@ void main() {
       );
     });
   });
+
+  group('MergeRequestsApi.listAssignedToMe', () {
+    test('lists open MRs assigned to the current user', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (
+          status: 200,
+          headers: const {},
+          body: [
+            {
+              'id': 1,
+              'iid': 7,
+              'title': 'mine',
+              'state': 'opened',
+              'source_branch': 'a',
+              'target_branch': 'main',
+              'project_id': 42,
+            },
+          ],
+        );
+      });
+
+      final page = await client.mergeRequests.listAssignedToMe();
+
+      expect(captured.path, '/merge_requests');
+      expect(captured.queryParameters['scope'], 'assigned_to_me');
+      expect(captured.queryParameters['state'], 'opened');
+      expect(captured.queryParameters['with_labels_details'], true);
+      expect(page.items.single.projectId, 42);
+    });
+  });
+
+  group('MergeRequestsApi.listForReview', () {
+    test('lists open MRs where the given user is a reviewer', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (
+          status: 200,
+          headers: const {},
+          body: [
+            {
+              'id': 2,
+              'iid': 9,
+              'title': 'please review',
+              'state': 'opened',
+              'source_branch': 'b',
+              'target_branch': 'main',
+              'project_id': 7,
+            },
+          ],
+        );
+      });
+
+      final page = await client.mergeRequests.listForReview('octocat');
+
+      expect(captured.path, '/merge_requests');
+      // Filter by reviewer username, not a scope: a scope cannot express it.
+      expect(captured.queryParameters['reviewer_username'], 'octocat');
+      expect(captured.queryParameters['state'], 'opened');
+      expect(captured.queryParameters['with_labels_details'], true);
+      expect(page.items.single.iid, 9);
+    });
+  });
 }
 
 GitLabClient _client(

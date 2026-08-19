@@ -22,6 +22,26 @@
   "@homeEmptyWork": {
     "description": "Placeholder on the home screen before feature work lands"
   },
+  "homeReviewRequests": "Review requests",
+  "@homeReviewRequests": {
+    "description": "Home section heading for merge requests awaiting the user's review"
+  },
+  "homeAssignedMergeRequests": "Assigned merge requests",
+  "@homeAssignedMergeRequests": {
+    "description": "Home section heading for merge requests assigned to the user"
+  },
+  "homeAssignedIssues": "Assigned issues",
+  "@homeAssignedIssues": {
+    "description": "Home section heading for issues assigned to the user"
+  },
+  "homeWorkAllClear": "You're all caught up.",
+  "@homeWorkAllClear": {
+    "description": "Shown on the home feed when the user has no review requests or assigned work"
+  },
+  "homeWorkError": "Couldn't load your work.",
+  "@homeWorkError": {
+    "description": "Shown when the home work feed fails to load"
+  },
   "signOut": "Sign out",
   "@signOut": {
     "description": "Label for the sign-out action"

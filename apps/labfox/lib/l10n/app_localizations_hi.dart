@@ -24,6 +24,21 @@ class AppLocalizationsHi extends AppLocalizations {
       'आपके इशू, मर्ज रिक्वेस्ट और पाइपलाइन यहाँ दिखाई देंगे।';
 
   @override
+  String get homeReviewRequests => 'Review requests';
+
+  @override
+  String get homeAssignedMergeRequests => 'Assigned merge requests';
+
+  @override
+  String get homeAssignedIssues => 'Assigned issues';
+
+  @override
+  String get homeWorkAllClear => 'You\'re all caught up.';
+
+  @override
+  String get homeWorkError => 'Couldn\'t load your work.';
+
+  @override
   String get signOut => 'साइन आउट';
 
   @override

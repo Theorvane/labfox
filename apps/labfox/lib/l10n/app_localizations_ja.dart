@@ -23,6 +23,21 @@ class AppLocalizationsJa extends AppLocalizations {
   String get homeEmptyWork => '課題、マージリクエスト、パイプラインがここに表示されます。';
 
   @override
+  String get homeReviewRequests => 'Review requests';
+
+  @override
+  String get homeAssignedMergeRequests => 'Assigned merge requests';
+
+  @override
+  String get homeAssignedIssues => 'Assigned issues';
+
+  @override
+  String get homeWorkAllClear => 'You\'re all caught up.';
+
+  @override
+  String get homeWorkError => 'Couldn\'t load your work.';
+
+  @override
   String get signOut => 'サインアウト';
 
   @override
