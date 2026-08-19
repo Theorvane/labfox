@@ -6,6 +6,7 @@ import 'package:gitlab_models/gitlab_models.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/router.dart';
+import '../../../core/ui/work_meta.dart';
 import '../../../l10n/app_localizations.dart';
 import 'controllers/issues_controllers.dart';
 
@@ -101,27 +102,19 @@ class _IssueTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return ListTile(
-      title: Text(issue.title, maxLines: 2, overflow: TextOverflow.ellipsis),
-      subtitle: Padding(
-        padding: const EdgeInsets.only(top: LabFoxSpacing.xs),
-        child: Row(
-          children: [
-            Text('#${issue.iid}', style: theme.textTheme.bodySmall),
-            if (issue.commentCount > 0) ...[
-              const SizedBox(width: LabFoxSpacing.md),
-              Icon(
-                Icons.mode_comment_outlined,
-                size: 14,
-                color: theme.hintColor,
-              ),
-              const SizedBox(width: LabFoxSpacing.xs),
-              Text('${issue.commentCount}', style: theme.textTheme.bodySmall),
-            ],
-          ],
-        ),
-      ),
+    final status = LabFoxStatusColors.of(context);
+    final open = issue.isOpen;
+    final colors = open ? status.open : status.closed;
+    return WorkTile(
+      icon: open ? Icons.adjust : Icons.check_circle_outline,
+      iconColor: colors.foreground,
+      title: issue.title,
+      metadata: [
+        StatusPill(label: open ? 'Open' : 'Closed', colors: colors, dot: true),
+        MetaText('#${issue.iid}'),
+        LabelDots(issue.labels),
+        CommentCount(issue.commentCount),
+      ],
       onTap: onTap,
     );
   }

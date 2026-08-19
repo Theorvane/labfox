@@ -6,6 +6,7 @@ import 'package:gitlab_models/gitlab_models.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/router.dart';
+import '../../../core/ui/work_meta.dart';
 import '../../../l10n/app_localizations.dart';
 import 'controllers/merge_requests_controllers.dart';
 
@@ -110,23 +111,36 @@ class _MergeRequestTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return ListTile(
-      title: Text(
-        mr.isDraft ? 'Draft: ${mr.title}' : mr.title,
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-      ),
-      subtitle: Padding(
-        padding: const EdgeInsets.only(top: LabFoxSpacing.xs),
-        child: Text(
-          '!${mr.iid} · ${mr.sourceBranch} → ${mr.targetBranch}',
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: theme.textTheme.bodySmall,
-        ),
-      ),
+    final status = LabFoxStatusColors.of(context);
+    final (icon, colors, label) = _status(mr, status);
+    return WorkTile(
+      icon: icon,
+      iconColor: colors.foreground,
+      title: mr.title,
+      metadata: [
+        StatusPill(label: label, colors: colors, dot: true),
+        MetaText('!${mr.iid}'),
+        if (mr.author != null) MetaText(mr.author!.username),
+        LabelDots(mr.labels),
+        CommentCount(mr.commentCount),
+      ],
       onTap: onTap,
     );
+  }
+
+  static (IconData, StatusColor, String) _status(
+    MergeRequest mr,
+    LabFoxStatusColors s,
+  ) {
+    if (mr.isDraft) {
+      return (Icons.merge_outlined, s.pending, 'Draft');
+    }
+    if (mr.isMerged) {
+      return (Icons.merge, s.merged, 'Merged');
+    }
+    if (mr.isClosed) {
+      return (Icons.close, s.closed, 'Closed');
+    }
+    return (Icons.merge_outlined, s.open, 'Open');
   }
 }
