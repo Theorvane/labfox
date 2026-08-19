@@ -63,8 +63,9 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Android login error'), findsOneWidget);
-    expect(find.text('#282'), findsOneWidget);
-    expect(find.byType(StateBadge), findsOneWidget);
+    // '#282' appears in the app bar and the header.
+    expect(find.text('#282'), findsWidgets);
+    expect(find.byType(StatusPill), findsOneWidget);
     expect(find.byType(GitLabLabel), findsNWidgets(2));
     expect(find.byType(MarkdownViewer), findsOneWidget);
   });
