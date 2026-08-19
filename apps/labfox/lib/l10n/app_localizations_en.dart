@@ -24,6 +24,21 @@ class AppLocalizationsEn extends AppLocalizations {
       'Your issues, merge requests and pipelines will appear here.';
 
   @override
+  String get homeReviewRequests => 'Review requests';
+
+  @override
+  String get homeAssignedMergeRequests => 'Assigned merge requests';
+
+  @override
+  String get homeAssignedIssues => 'Assigned issues';
+
+  @override
+  String get homeWorkAllClear => 'You\'re all caught up.';
+
+  @override
+  String get homeWorkError => 'Couldn\'t load your work.';
+
+  @override
   String get signOut => 'Sign out';
 
   @override

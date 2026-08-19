@@ -128,6 +128,36 @@ abstract class AppLocalizations {
   /// **'Your issues, merge requests and pipelines will appear here.'**
   String get homeEmptyWork;
 
+  /// Home section heading for merge requests awaiting the user's review
+  ///
+  /// In en, this message translates to:
+  /// **'Review requests'**
+  String get homeReviewRequests;
+
+  /// Home section heading for merge requests assigned to the user
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned merge requests'**
+  String get homeAssignedMergeRequests;
+
+  /// Home section heading for issues assigned to the user
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned issues'**
+  String get homeAssignedIssues;
+
+  /// Shown on the home feed when the user has no review requests or assigned work
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re all caught up.'**
+  String get homeWorkAllClear;
+
+  /// Shown when the home work feed fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load your work.'**
+  String get homeWorkError;
+
   /// Label for the sign-out action
   ///
   /// In en, this message translates to:

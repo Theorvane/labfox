@@ -81,6 +81,38 @@ void main() {
       );
     });
   });
+
+  group('IssuesApi.listAssignedToMe', () {
+    test('lists open issues assigned to the current user', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (
+          status: 200,
+          headers: const {},
+          body: [
+            {
+              'id': 1,
+              'iid': 5,
+              'title': 'assigned one',
+              'state': 'opened',
+              'project_id': 42,
+            },
+          ],
+        );
+      });
+
+      final page = await client.issues.listAssignedToMe();
+
+      // The account-scoped global endpoint, not a project path.
+      expect(captured.path, '/issues');
+      expect(captured.queryParameters['scope'], 'assigned_to_me');
+      expect(captured.queryParameters['state'], 'opened');
+      expect(captured.queryParameters['with_labels_details'], true);
+      // The project id is kept so the row can route to the right project.
+      expect(page.items.single.projectId, 42);
+    });
+  });
 }
 
 GitLabClient _client(

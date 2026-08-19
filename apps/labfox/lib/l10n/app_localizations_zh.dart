@@ -23,6 +23,21 @@ class AppLocalizationsZh extends AppLocalizations {
   String get homeEmptyWork => '您的议题、合并请求和流水线将显示在这里。';
 
   @override
+  String get homeReviewRequests => 'Review requests';
+
+  @override
+  String get homeAssignedMergeRequests => 'Assigned merge requests';
+
+  @override
+  String get homeAssignedIssues => 'Assigned issues';
+
+  @override
+  String get homeWorkAllClear => 'You\'re all caught up.';
+
+  @override
+  String get homeWorkError => 'Couldn\'t load your work.';
+
+  @override
   String get signOut => '退出登录';
 
   @override
