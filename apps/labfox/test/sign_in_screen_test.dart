@@ -50,6 +50,9 @@ class _StubAuthRepository implements AuthRepository {
   }
 
   @override
+  Future<String?> refreshOAuthAccessToken(Account account) async => null;
+
+  @override
   Future<void> signOut([Account? account]) async => _active = null;
 
   @override

@@ -184,6 +184,22 @@ void main() {
     expect(await repo.tokenFor(account), 'access-refreshed');
   });
 
+  test('refreshOAuthAccessToken forces a refresh regardless of expiry', () async {
+    // Sign in with a token that still looks valid locally, then force a refresh
+    // as a 401 handler would — the server rejected it despite the local expiry.
+    final repo = buildRepo(launcher: _FakeLauncher(), now: () => 2000);
+    final account = await repo.signInWithOAuth(
+      instanceUrl: 'https://gitlab.com',
+      clientId: 'app-1',
+    );
+
+    final fresh = await repo.refreshOAuthAccessToken(account);
+
+    expect(fresh, 'access-refreshed');
+    // Persisted, so the next read returns the refreshed token without expiry.
+    expect(await repo.tokenFor(account), 'access-refreshed');
+  });
+
   test('threads a desktop loopback redirect through the flow', () async {
     final launcher = _FakeLauncher();
     final desktop = resolveOAuthRedirect(

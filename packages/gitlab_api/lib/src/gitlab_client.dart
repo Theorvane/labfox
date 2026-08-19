@@ -25,6 +25,7 @@ class GitLabClient {
     required String baseUrl,
     required String token,
     bool bearer = false,
+    Future<String?> Function()? onUnauthorized,
     Dio? dio,
   }) : _dio = dio ?? Dio() {
     _dio.options
@@ -37,6 +38,10 @@ class GitLabClient {
       // GitLab returns 4xx as a normal response so error bodies can be read
       // and turned into domain exceptions rather than raw transport errors.
       ..validateStatus = (status) => status != null && status < 500;
+
+    if (bearer && onUnauthorized != null) {
+      _installRefreshRetry(onUnauthorized);
+    }
 
     users = UsersApi(_dio);
     projects = ProjectsApi(_dio);
@@ -51,6 +56,58 @@ class GitLabClient {
   }
 
   final Dio _dio;
+
+  /// Shared across concurrent 401s so the token is refreshed once, not once per
+  /// in-flight request.
+  Future<String?>? _refreshInFlight;
+
+  /// On a 401 for a Bearer client, refreshes the token once and retries the
+  /// request with it. A request that used a token another request has already
+  /// refreshed skips the refresh and just retries with the current one.
+  void _installRefreshRetry(Future<String?> Function() onUnauthorized) {
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onResponse: (response, handler) async {
+          final request = response.requestOptions;
+          if (response.statusCode != 401 ||
+              request.extra['labfox_retried'] == true) {
+            return handler.next(response);
+          }
+
+          final usedAuth = request.headers['Authorization'];
+          final currentAuth = _dio.options.headers['Authorization'];
+          String? retryAuth;
+          if (usedAuth == currentAuth) {
+            // This request used the live token, so a refresh is genuinely
+            // needed. Concurrent 401s share the one in-flight refresh.
+            final fresh = await (_refreshInFlight ??= onUnauthorized());
+            _refreshInFlight = null;
+            if (fresh == null) {
+              return handler.next(response);
+            }
+            retryAuth = 'Bearer $fresh';
+            _dio.options.headers['Authorization'] = retryAuth;
+          } else {
+            // Another request already refreshed; retry with the newer token
+            // rather than refreshing again.
+            retryAuth = currentAuth as String?;
+            if (retryAuth == null) {
+              return handler.next(response);
+            }
+          }
+
+          try {
+            request.extra['labfox_retried'] = true;
+            request.headers['Authorization'] = retryAuth;
+            final retried = await _dio.fetch<dynamic>(request);
+            return handler.resolve(retried);
+          } catch (_) {
+            return handler.next(response);
+          }
+        },
+      ),
+    );
+  }
 
   late final UsersApi users;
   late final ProjectsApi projects;
