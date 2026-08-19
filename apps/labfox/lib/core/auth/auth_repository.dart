@@ -9,6 +9,7 @@ import 'package:secure_storage/secure_storage.dart';
 import 'account_store.dart';
 import 'authorization_launcher.dart';
 import 'oauth_config.dart';
+import 'oauth_redirect.dart';
 
 /// The client factory signature. [bearer] selects OAuth (`Authorization:
 /// Bearer`) over a PAT (`PRIVATE-TOKEN`).
@@ -29,6 +30,10 @@ class AuthRepository {
     required CredentialStore credentialStore,
     OAuthApi? oauthApi,
     AuthorizationLauncher authorizationLauncher = const WebAuthLauncher(),
+    OAuthRedirect oauthRedirect = const OAuthRedirect(
+      redirectUri: OAuthConfig.redirectUri,
+      callbackScheme: OAuthConfig.callbackScheme,
+    ),
     ClientFactory? clientFactory,
     int Function()? nowEpochSeconds,
     Random? random,
@@ -36,6 +41,7 @@ class AuthRepository {
        _credentialStore = credentialStore,
        _oauthApi = oauthApi ?? OAuthApi(Dio()),
        _launcher = authorizationLauncher,
+       _redirect = oauthRedirect,
        _clientFactory = clientFactory ?? _defaultClientFactory,
        _now = nowEpochSeconds ?? _systemNow,
        _random = random ?? Random.secure();
@@ -44,6 +50,7 @@ class AuthRepository {
   final CredentialStore _credentialStore;
   final OAuthApi _oauthApi;
   final AuthorizationLauncher _launcher;
+  final OAuthRedirect _redirect;
   final ClientFactory _clientFactory;
   final int Function() _now;
   final Random _random;
@@ -115,16 +122,13 @@ class AuthRepository {
     final url = OAuthApi.authorizationUrl(
       instanceUrl: instanceUrl,
       clientId: clientId,
-      redirectUri: OAuthConfig.redirectUri,
+      redirectUri: _redirect.redirectUri,
       state: state,
       codeChallenge: pkce.challenge,
       scope: OAuthConfig.scope,
     );
 
-    final redirect = await _launcher.authorize(
-      url: url,
-      callbackScheme: OAuthConfig.callbackScheme,
-    );
+    final redirect = await _launcher.authorize(url: url, redirect: _redirect);
     final params = redirect.queryParameters;
     if (params['error'] != null) {
       throw const GitLabAuthException('Authorization was denied.');
@@ -143,7 +147,7 @@ class AuthRepository {
       instanceUrl: instanceUrl,
       clientId: clientId,
       code: code,
-      redirectUri: OAuthConfig.redirectUri,
+      redirectUri: _redirect.redirectUri,
       codeVerifier: pkce.verifier,
     );
 

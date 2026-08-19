@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:secure_storage/secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'account_store.dart';
 import 'auth_repository.dart';
+import 'oauth_redirect.dart';
 
 /// Overridden in `main` once SharedPreferences has loaded, and in tests with a
 /// fake. Reading it before that throws, which is deliberate: nothing should run
@@ -21,8 +24,14 @@ final accountStoreProvider = Provider<AccountStore>((ref) {
 });
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
+  // Windows and Linux capture the OAuth redirect with a localhost loopback
+  // server; mobile and macOS use the custom scheme.
+  final redirect = resolveOAuthRedirect(
+    isDesktopLoopback: Platform.isWindows || Platform.isLinux,
+  );
   return AuthRepository(
     accountStore: ref.watch(accountStoreProvider),
     credentialStore: ref.watch(credentialStoreProvider),
+    oauthRedirect: redirect,
   );
 });

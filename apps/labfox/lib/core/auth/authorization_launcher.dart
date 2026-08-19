@@ -1,5 +1,7 @@
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 
+import 'oauth_redirect.dart';
+
 /// Opens the OAuth authorization URL in the system browser and returns the
 /// redirect the browser is sent back to.
 ///
@@ -7,22 +9,25 @@ import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 /// browser: a fake launcher echoes back a redirect with the expected code and
 /// state.
 abstract interface class AuthorizationLauncher {
-  Future<Uri> authorize({required Uri url, required String callbackScheme});
+  Future<Uri> authorize({required Uri url, required OAuthRedirect redirect});
 }
 
-/// The real launcher, backed by `flutter_web_auth_2`. It opens an in-app secure
-/// browser tab and completes when the page redirects to [callbackScheme].
+/// The real launcher, backed by `flutter_web_auth_2`. On mobile and macOS it
+/// opens an in-app secure browser tab keyed to the custom scheme; on Windows
+/// and Linux it runs a localhost loopback server ([OAuthRedirect.useWebview]
+/// is false) so no webview runtime is required.
 class WebAuthLauncher implements AuthorizationLauncher {
   const WebAuthLauncher();
 
   @override
   Future<Uri> authorize({
     required Uri url,
-    required String callbackScheme,
+    required OAuthRedirect redirect,
   }) async {
     final result = await FlutterWebAuth2.authenticate(
       url: url.toString(),
-      callbackUrlScheme: callbackScheme,
+      callbackUrlScheme: redirect.callbackScheme,
+      options: FlutterWebAuth2Options(useWebview: redirect.useWebview),
     );
     return Uri.parse(result);
   }
