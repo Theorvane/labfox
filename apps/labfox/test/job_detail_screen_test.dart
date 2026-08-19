@@ -29,7 +29,9 @@ Future<void> _pump(
 }
 
 void main() {
-  testWidgets('shows the job status and renders the log', (tester) async {
+  testWidgets('shows the job status header and renders the log', (
+    tester,
+  ) async {
     await _pump(
       tester,
       job: const Job(
@@ -41,8 +43,12 @@ void main() {
       trace: 'Running\n\x1b[31mAssertionError\x1b[0m\nBUILD FAILED',
     );
 
-    // Status header (CiStatusIcon) is present.
-    expect(find.byType(CiStatusIcon), findsOneWidget);
+    // The status header spells out the state and names the stage.
+    expect(find.text('Failed'), findsOneWidget);
+    expect(find.byIcon(Icons.cancel_outlined), findsOneWidget);
+    expect(find.text('test'), findsOneWidget);
+    // The job name reads as the header title (and the app bar).
+    expect(find.text('unit-test'), findsWidgets);
     // The log renders through AnsiLogView.
     expect(find.byType(AnsiLogView), findsOneWidget);
   });
