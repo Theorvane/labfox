@@ -147,5 +147,10 @@
   "projectAddFavorite": "पसंदीदा में जोड़ें",
   "projectRemoveFavorite": "पसंदीदा से हटाएं",
   "homeFavorites": "पसंदीदा",
-  "homeRecents": "हाल ही में"
+  "homeRecents": "हाल ही में",
+  "signInOr": "या",
+  "signInOAuthButton": "GitLab से साइन इन करें",
+  "signInClientIdLabel": "OAuth क्लाइंट ID",
+  "signInClientIdHelp": "केवल self-hosted इंस्टेंस पर OAuth के लिए आवश्यक।",
+  "signInOAuthNeedsClientId": "इस इंस्टेंस के लिए OAuth क्लाइंट ID दर्ज करें।"
 }

@@ -5,6 +5,10 @@ import 'user.dart';
 part 'account.freezed.dart';
 part 'account.g.dart';
 
+/// How an account authenticates: a personal access token entered by hand, or an
+/// OAuth session obtained through the browser flow.
+enum AuthMethod { pat, oauth }
+
 /// A signed-in GitLab account: which instance, and who.
 ///
 /// An account is identified by (instance URL, user id). The same username can
@@ -16,8 +20,15 @@ part 'account.g.dart';
 /// carrying a secret into it.
 @freezed
 abstract class Account with _$Account {
-  const factory Account({required String instanceUrl, required User user}) =
-      _Account;
+  const factory Account({
+    required String instanceUrl,
+    required User user,
+    // Defaulted so accounts persisted before OAuth existed read back as PAT.
+    @Default(AuthMethod.pat) AuthMethod authMethod,
+    // The OAuth application id, kept for token refresh. Not a secret, so it may
+    // live in ordinary account metadata; null for PAT accounts.
+    @JsonKey(name: 'oauth_client_id') String? oauthClientId,
+  }) = _Account;
 
   const Account._();
 

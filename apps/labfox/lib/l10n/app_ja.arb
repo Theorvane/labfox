@@ -147,5 +147,10 @@
   "projectAddFavorite": "お気に入りに追加",
   "projectRemoveFavorite": "お気に入りから削除",
   "homeFavorites": "お気に入り",
-  "homeRecents": "最近"
+  "homeRecents": "最近",
+  "signInOr": "または",
+  "signInOAuthButton": "GitLab でサインイン",
+  "signInClientIdLabel": "OAuth クライアント ID",
+  "signInClientIdHelp": "self-hosted インスタンスで OAuth を使う場合のみ必要です。",
+  "signInOAuthNeedsClientId": "このインスタンスの OAuth クライアント ID を入力してください。"
 }

@@ -147,5 +147,10 @@
   "projectAddFavorite": "添加到收藏",
   "projectRemoveFavorite": "从收藏中移除",
   "homeFavorites": "收藏",
-  "homeRecents": "最近"
+  "homeRecents": "最近",
+  "signInOr": "或",
+  "signInOAuthButton": "使用 GitLab 登录",
+  "signInClientIdLabel": "OAuth 客户端 ID",
+  "signInClientIdHelp": "仅在自托管实例上使用 OAuth 时需要。",
+  "signInOAuthNeedsClientId": "请输入该实例的 OAuth 客户端 ID。"
 }

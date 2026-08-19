@@ -15,7 +15,10 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Account {
 
- String get instanceUrl; User get user;
+ String get instanceUrl; User get user;// Defaulted so accounts persisted before OAuth existed read back as PAT.
+ AuthMethod get authMethod;// The OAuth application id, kept for token refresh. Not a secret, so it may
+// live in ordinary account metadata; null for PAT accounts.
+@JsonKey(name: 'oauth_client_id') String? get oauthClientId;
 /// Create a copy of Account
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +31,16 @@ $AccountCopyWith<Account> get copyWith => _$AccountCopyWithImpl<Account>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Account&&(identical(other.instanceUrl, instanceUrl) || other.instanceUrl == instanceUrl)&&(identical(other.user, user) || other.user == user));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Account&&(identical(other.instanceUrl, instanceUrl) || other.instanceUrl == instanceUrl)&&(identical(other.user, user) || other.user == user)&&(identical(other.authMethod, authMethod) || other.authMethod == authMethod)&&(identical(other.oauthClientId, oauthClientId) || other.oauthClientId == oauthClientId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,instanceUrl,user);
+int get hashCode => Object.hash(runtimeType,instanceUrl,user,authMethod,oauthClientId);
 
 @override
 String toString() {
-  return 'Account(instanceUrl: $instanceUrl, user: $user)';
+  return 'Account(instanceUrl: $instanceUrl, user: $user, authMethod: $authMethod, oauthClientId: $oauthClientId)';
 }
 
 
@@ -48,7 +51,7 @@ abstract mixin class $AccountCopyWith<$Res>  {
   factory $AccountCopyWith(Account value, $Res Function(Account) _then) = _$AccountCopyWithImpl;
 @useResult
 $Res call({
- String instanceUrl, User user
+ String instanceUrl, User user, AuthMethod authMethod,@JsonKey(name: 'oauth_client_id') String? oauthClientId
 });
 
 
@@ -65,11 +68,13 @@ class _$AccountCopyWithImpl<$Res>
 
 /// Create a copy of Account
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? instanceUrl = null,Object? user = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? instanceUrl = null,Object? user = null,Object? authMethod = null,Object? oauthClientId = freezed,}) {
   return _then(_self.copyWith(
 instanceUrl: null == instanceUrl ? _self.instanceUrl : instanceUrl // ignore: cast_nullable_to_non_nullable
 as String,user: null == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
-as User,
+as User,authMethod: null == authMethod ? _self.authMethod : authMethod // ignore: cast_nullable_to_non_nullable
+as AuthMethod,oauthClientId: freezed == oauthClientId ? _self.oauthClientId : oauthClientId // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 /// Create a copy of Account
@@ -163,10 +168,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String instanceUrl,  User user)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String instanceUrl,  User user,  AuthMethod authMethod, @JsonKey(name: 'oauth_client_id')  String? oauthClientId)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Account() when $default != null:
-return $default(_that.instanceUrl,_that.user);case _:
+return $default(_that.instanceUrl,_that.user,_that.authMethod,_that.oauthClientId);case _:
   return orElse();
 
 }
@@ -184,10 +189,10 @@ return $default(_that.instanceUrl,_that.user);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String instanceUrl,  User user)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String instanceUrl,  User user,  AuthMethod authMethod, @JsonKey(name: 'oauth_client_id')  String? oauthClientId)  $default,) {final _that = this;
 switch (_that) {
 case _Account():
-return $default(_that.instanceUrl,_that.user);case _:
+return $default(_that.instanceUrl,_that.user,_that.authMethod,_that.oauthClientId);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -204,10 +209,10 @@ return $default(_that.instanceUrl,_that.user);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String instanceUrl,  User user)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String instanceUrl,  User user,  AuthMethod authMethod, @JsonKey(name: 'oauth_client_id')  String? oauthClientId)?  $default,) {final _that = this;
 switch (_that) {
 case _Account() when $default != null:
-return $default(_that.instanceUrl,_that.user);case _:
+return $default(_that.instanceUrl,_that.user,_that.authMethod,_that.oauthClientId);case _:
   return null;
 
 }
@@ -219,11 +224,16 @@ return $default(_that.instanceUrl,_that.user);case _:
 @JsonSerializable()
 
 class _Account extends Account {
-  const _Account({required this.instanceUrl, required this.user}): super._();
+  const _Account({required this.instanceUrl, required this.user, this.authMethod = AuthMethod.pat, @JsonKey(name: 'oauth_client_id') this.oauthClientId}): super._();
   factory _Account.fromJson(Map<String, dynamic> json) => _$AccountFromJson(json);
 
 @override final  String instanceUrl;
 @override final  User user;
+// Defaulted so accounts persisted before OAuth existed read back as PAT.
+@override@JsonKey() final  AuthMethod authMethod;
+// The OAuth application id, kept for token refresh. Not a secret, so it may
+// live in ordinary account metadata; null for PAT accounts.
+@override@JsonKey(name: 'oauth_client_id') final  String? oauthClientId;
 
 /// Create a copy of Account
 /// with the given fields replaced by the non-null parameter values.
@@ -238,16 +248,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Account&&(identical(other.instanceUrl, instanceUrl) || other.instanceUrl == instanceUrl)&&(identical(other.user, user) || other.user == user));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Account&&(identical(other.instanceUrl, instanceUrl) || other.instanceUrl == instanceUrl)&&(identical(other.user, user) || other.user == user)&&(identical(other.authMethod, authMethod) || other.authMethod == authMethod)&&(identical(other.oauthClientId, oauthClientId) || other.oauthClientId == oauthClientId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,instanceUrl,user);
+int get hashCode => Object.hash(runtimeType,instanceUrl,user,authMethod,oauthClientId);
 
 @override
 String toString() {
-  return 'Account(instanceUrl: $instanceUrl, user: $user)';
+  return 'Account(instanceUrl: $instanceUrl, user: $user, authMethod: $authMethod, oauthClientId: $oauthClientId)';
 }
 
 
@@ -258,7 +268,7 @@ abstract mixin class _$AccountCopyWith<$Res> implements $AccountCopyWith<$Res> {
   factory _$AccountCopyWith(_Account value, $Res Function(_Account) _then) = __$AccountCopyWithImpl;
 @override @useResult
 $Res call({
- String instanceUrl, User user
+ String instanceUrl, User user, AuthMethod authMethod,@JsonKey(name: 'oauth_client_id') String? oauthClientId
 });
 
 
@@ -275,11 +285,13 @@ class __$AccountCopyWithImpl<$Res>
 
 /// Create a copy of Account
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? instanceUrl = null,Object? user = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? instanceUrl = null,Object? user = null,Object? authMethod = null,Object? oauthClientId = freezed,}) {
   return _then(_Account(
 instanceUrl: null == instanceUrl ? _self.instanceUrl : instanceUrl // ignore: cast_nullable_to_non_nullable
 as String,user: null == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
-as User,
+as User,authMethod: null == authMethod ? _self.authMethod : authMethod // ignore: cast_nullable_to_non_nullable
+as AuthMethod,oauthClientId: freezed == oauthClientId ? _self.oauthClientId : oauthClientId // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

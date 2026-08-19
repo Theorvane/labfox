@@ -9,6 +9,7 @@ environment:
 resolution: workspace
 
 dependencies:
+  crypto: ^3.0.0
   dio: ^5.7.0
   gitlab_models:
     path: ../gitlab_models

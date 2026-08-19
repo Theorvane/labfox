@@ -54,6 +54,21 @@ class AppLocalizationsJa extends AppLocalizations {
   String get signInSubmit => 'サインイン';
 
   @override
+  String get signInOr => 'または';
+
+  @override
+  String get signInOAuthButton => 'GitLab でサインイン';
+
+  @override
+  String get signInClientIdLabel => 'OAuth クライアント ID';
+
+  @override
+  String get signInClientIdHelp => 'self-hosted インスタンスで OAuth を使う場合のみ必要です。';
+
+  @override
+  String get signInOAuthNeedsClientId => 'このインスタンスの OAuth クライアント ID を入力してください。';
+
+  @override
   String get signInErrorToken => 'トークンが拒否されました。正しいか、有効期限が切れていないか確認してください。';
 
   @override

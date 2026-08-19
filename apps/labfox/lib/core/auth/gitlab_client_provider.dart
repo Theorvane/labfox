@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_api/gitlab_api.dart';
+import 'package:gitlab_models/gitlab_models.dart';
 
 import 'auth_controller.dart';
 import 'auth_providers.dart';
@@ -18,7 +19,11 @@ final gitLabClientProvider = FutureProvider<GitLabClient?>((ref) async {
   if (token == null) {
     return null;
   }
-  final client = GitLabClient(baseUrl: account.instanceUrl, token: token);
+  final client = GitLabClient(
+    baseUrl: account.instanceUrl,
+    token: token,
+    bearer: account.authMethod == AuthMethod.oauth,
+  );
   ref.onDispose(client.close);
   return client;
 });
