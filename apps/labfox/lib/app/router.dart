@@ -19,12 +19,14 @@ import '../features/merge_requests/presentation/merge_request_detail_screen.dart
 import '../features/merge_requests/presentation/merge_requests_screen.dart';
 import '../features/pipelines/presentation/pipeline_detail_screen.dart';
 import '../features/pipelines/presentation/pipelines_screen.dart';
+import '../features/profile/presentation/me_screen.dart';
 import '../features/project_overview/presentation/project_overview_screen.dart';
 import '../features/projects/presentation/projects_screen.dart';
 import '../features/repository/presentation/file_viewer_screen.dart';
 import '../features/repository/presentation/repository_browser_screen.dart';
 import '../features/search/presentation/search_screen.dart';
 import '../features/settings/presentation/settings_screen.dart';
+import '../features/shell/presentation/app_shell.dart';
 
 /// Route paths.
 ///
@@ -39,6 +41,7 @@ abstract final class Routes {
   static const String addAccount = '/sign-in?add=1';
   static const String inbox = '/inbox';
   static const String search = '/search';
+  static const String me = '/me';
   static const String settings = '/settings';
   static const String projects = '/projects';
 
@@ -108,9 +111,26 @@ final routerProvider = Provider<GoRouter>((ref) {
       return null;
     },
     routes: [
+      // Primary destinations, wrapped in the responsive navigation shell.
       GoRoute(
         path: Routes.home,
-        builder: (context, state) => const HomeScreen(),
+        builder: (context, state) =>
+            const AppShell(currentIndex: 0, child: HomeScreen()),
+      ),
+      GoRoute(
+        path: Routes.inbox,
+        builder: (context, state) =>
+            const AppShell(currentIndex: 1, child: InboxScreen()),
+      ),
+      GoRoute(
+        path: Routes.search,
+        builder: (context, state) =>
+            const AppShell(currentIndex: 2, child: SearchScreen()),
+      ),
+      GoRoute(
+        path: Routes.me,
+        builder: (context, state) =>
+            const AppShell(currentIndex: 3, child: MeScreen()),
       ),
       GoRoute(
         path: Routes.signIn,
@@ -119,14 +139,6 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.accounts,
         builder: (context, state) => const AccountsScreen(),
-      ),
-      GoRoute(
-        path: Routes.inbox,
-        builder: (context, state) => const InboxScreen(),
-      ),
-      GoRoute(
-        path: Routes.search,
-        builder: (context, state) => const SearchScreen(),
       ),
       GoRoute(
         path: Routes.settings,

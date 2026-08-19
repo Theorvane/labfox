@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../app/responsive.dart';
 import '../../../app/router.dart';
 import '../../../core/auth/auth_controller.dart';
 import '../../../core/storage/local_projects_providers.dart';
@@ -11,8 +10,8 @@ import '../../../l10n/app_localizations.dart';
 
 /// Where the user's work starts.
 ///
-/// For this slice it confirms who is signed in and offers sign-out. Issues,
-/// merge requests and pipelines land in later M1 and M2 pull requests.
+/// The primary destinations (Inbox, Search, Me) live in the navigation shell;
+/// this screen shows the projects entry and the favorite / recent shortcuts.
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
@@ -22,31 +21,8 @@ class HomeScreen extends ConsumerWidget {
     final account = ref.watch(currentAccountProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.homeTitle),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.account_circle_outlined),
-            tooltip: l10n.homeSwitchAccount,
-            onPressed: () => context.go(Routes.accounts),
-          ),
-          IconButton(
-            icon: const Icon(Icons.settings_outlined),
-            tooltip: l10n.settingsTitle,
-            onPressed: () => context.go(Routes.settings),
-          ),
-        ],
-      ),
-      body: ResponsiveLayout(
-        mobile: (context) => _Body(username: account?.user.username),
-        desktop: (context) => Row(
-          children: [
-            const SizedBox(width: 260, child: _NavigationPlaceholder()),
-            const VerticalDivider(width: 1),
-            Expanded(child: _Body(username: account?.user.username)),
-          ],
-        ),
-      ),
+      appBar: AppBar(title: Text(l10n.homeTitle)),
+      body: _Body(username: account?.user.username),
     );
   }
 }
@@ -144,44 +120,13 @@ class _MyWork extends StatelessWidget {
       constraints: const BoxConstraints(maxWidth: 420),
       child: Card(
         margin: EdgeInsets.zero,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: const Icon(Icons.inbox_outlined),
-              title: Text(l10n.homeInbox),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => context.go(Routes.inbox),
-            ),
-            const Divider(height: 1),
-            ListTile(
-              leading: const Icon(Icons.search),
-              title: Text(l10n.homeSearch),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => context.go(Routes.search),
-            ),
-            const Divider(height: 1),
-            ListTile(
-              leading: const Icon(Icons.folder_outlined),
-              title: Text(l10n.homeProjects),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => context.go(Routes.projects),
-            ),
-          ],
+        child: ListTile(
+          leading: const Icon(Icons.folder_outlined),
+          title: Text(l10n.homeProjects),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => context.go(Routes.projects),
         ),
       ),
-    );
-  }
-}
-
-class _NavigationPlaceholder extends StatelessWidget {
-  const _NavigationPlaceholder();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(LabFoxSpacing.md),
-      child: Align(alignment: Alignment.topLeft, child: Text('Navigation')),
     );
   }
 }

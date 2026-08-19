@@ -482,5 +482,26 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsLicenses => '开源许可';
 
   @override
+  String get navHome => '主页';
+
+  @override
+  String get navInbox => '收件箱';
+
+  @override
+  String get navSearch => '搜索';
+
+  @override
+  String get navMe => '我';
+
+  @override
+  String get meTitle => '我';
+
+  @override
+  String get meSettings => '设置';
+
+  @override
+  String get meAccounts => '切换账户';
+
+  @override
   String get homeRecents => '最近';
 }

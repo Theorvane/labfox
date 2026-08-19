@@ -155,5 +155,12 @@
   "signInOAuthNeedsClientId": "このインスタンスの OAuth クライアント ID を入力してください。",
   "settingsTitle": "設定",
   "settingsAccounts": "アカウント",
-  "settingsLicenses": "オープンソースライセンス"
+  "settingsLicenses": "オープンソースライセンス",
+  "navHome": "ホーム",
+  "navInbox": "受信箱",
+  "navSearch": "検索",
+  "navMe": "マイページ",
+  "meTitle": "マイページ",
+  "meSettings": "設定",
+  "meAccounts": "アカウント切り替え"
 }

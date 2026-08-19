@@ -155,5 +155,12 @@
   "signInOAuthNeedsClientId": "इस इंस्टेंस के लिए OAuth क्लाइंट ID दर्ज करें।",
   "settingsTitle": "सेटिंग्स",
   "settingsAccounts": "खाते",
-  "settingsLicenses": "ओपन सोर्स लाइसेंस"
+  "settingsLicenses": "ओपन सोर्स लाइसेंस",
+  "navHome": "होम",
+  "navInbox": "इनबॉक्स",
+  "navSearch": "खोज",
+  "navMe": "मैं",
+  "meTitle": "मैं",
+  "meSettings": "सेटिंग्स",
+  "meAccounts": "खाता बदलें"
 }
