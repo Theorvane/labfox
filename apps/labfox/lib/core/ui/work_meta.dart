@@ -1,6 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
+/// A short relative time like `now`, `5m`, `3h`, `7d`, `2w`, `4mo`, `1y`.
+///
+/// [now] is injectable so the format is testable without a real clock. A time
+/// in the future clamps to `now` rather than showing a negative age.
+String timeAgo(DateTime time, {DateTime? now}) {
+  final current = now ?? DateTime.now();
+  final diff = current.difference(time);
+  if (diff.inSeconds < 60) {
+    return 'now';
+  }
+  if (diff.inMinutes < 60) {
+    return '${diff.inMinutes}m';
+  }
+  if (diff.inHours < 24) {
+    return '${diff.inHours}h';
+  }
+  if (diff.inDays < 7) {
+    return '${diff.inDays}d';
+  }
+  if (diff.inDays < 30) {
+    return '${diff.inDays ~/ 7}w';
+  }
+  if (diff.inDays < 365) {
+    return '${diff.inDays ~/ 30}mo';
+  }
+  return '${diff.inDays ~/ 365}y';
+}
+
 /// Muted, tabular metadata text for a work row — an IID, an author, a date.
 class MetaText extends StatelessWidget {
   const MetaText(this.text, {super.key});

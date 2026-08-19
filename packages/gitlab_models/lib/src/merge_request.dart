@@ -33,6 +33,7 @@ abstract class MergeRequest with _$MergeRequest {
     @JsonKey(name: 'user_notes_count') @Default(0) int commentCount,
     @JsonKey(name: 'web_url') String? webUrl,
     @JsonKey(name: 'created_at') DateTime? createdAt,
+    @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _MergeRequest;
 
   const MergeRequest._();

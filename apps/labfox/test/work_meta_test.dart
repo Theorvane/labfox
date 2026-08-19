@@ -12,6 +12,30 @@ Future<void> _pump(WidgetTester tester, Widget child) async {
 }
 
 void main() {
+  group('timeAgo', () {
+    final now = DateTime(2026, 8, 20, 12);
+
+    test('formats sub-minute, minute, hour and day ages', () {
+      expect(
+        timeAgo(now.subtract(const Duration(seconds: 30)), now: now),
+        'now',
+      );
+      expect(timeAgo(now.subtract(const Duration(minutes: 5)), now: now), '5m');
+      expect(timeAgo(now.subtract(const Duration(hours: 3)), now: now), '3h');
+      expect(timeAgo(now.subtract(const Duration(days: 6)), now: now), '6d');
+    });
+
+    test('formats week, month and year ages', () {
+      expect(timeAgo(now.subtract(const Duration(days: 14)), now: now), '2w');
+      expect(timeAgo(now.subtract(const Duration(days: 60)), now: now), '2mo');
+      expect(timeAgo(now.subtract(const Duration(days: 400)), now: now), '1y');
+    });
+
+    test('clamps a future time to now', () {
+      expect(timeAgo(now.add(const Duration(hours: 1)), now: now), 'now');
+    });
+  });
+
   group('LabelChips', () {
     testWidgets('renders each label name as a chip', (tester) async {
       await _pump(

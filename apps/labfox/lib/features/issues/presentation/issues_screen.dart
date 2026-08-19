@@ -112,6 +112,7 @@ class _IssueTile extends StatelessWidget {
       metadata: [
         StatusPill(label: open ? 'Open' : 'Closed', colors: colors, dot: true),
         MetaText('#${issue.iid}'),
+        if (issue.updatedAt != null) MetaText(timeAgo(issue.updatedAt!)),
         LabelChips(issue.labels),
         CommentCount(issue.commentCount),
       ],

@@ -57,6 +57,23 @@ void main() {
     expect(find.text('#282'), findsOneWidget);
   });
 
+  testWidgets('shows a relative updated time on the row', (tester) async {
+    await _pump(tester, {
+      IssueState.opened: AsyncData([
+        Issue(
+          id: 1,
+          iid: 5,
+          title: 'recent',
+          state: 'opened',
+          updatedAt: DateTime.now().subtract(const Duration(hours: 3)),
+        ),
+      ]),
+    });
+    await tester.pumpAndSettle();
+
+    expect(find.text('3h'), findsOneWidget);
+  });
+
   testWidgets('switching the filter to Closed loads closed issues', (
     tester,
   ) async {
