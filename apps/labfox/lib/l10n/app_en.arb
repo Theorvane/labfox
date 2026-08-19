@@ -634,6 +634,18 @@
   "@homeFavorites": {
     "description": "Home section title for favorited projects"
   },
+  "settingsTitle": "Settings",
+  "@settingsTitle": {
+    "description": "Title of the settings screen"
+  },
+  "settingsAccounts": "Accounts",
+  "@settingsAccounts": {
+    "description": "Settings entry that opens the account switcher"
+  },
+  "settingsLicenses": "Open source licenses",
+  "@settingsLicenses": {
+    "description": "Settings entry that opens the open-source license page"
+  },
   "homeRecents": "Recent",
   "@homeRecents": {
     "description": "Home section title for recently opened projects"

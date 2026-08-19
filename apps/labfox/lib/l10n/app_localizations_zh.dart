@@ -473,5 +473,14 @@ class AppLocalizationsZh extends AppLocalizations {
   String get homeFavorites => '收藏';
 
   @override
+  String get settingsTitle => '设置';
+
+  @override
+  String get settingsAccounts => '账户';
+
+  @override
+  String get settingsLicenses => '开源许可';
+
+  @override
   String get homeRecents => '最近';
 }

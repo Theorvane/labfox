@@ -24,6 +24,7 @@ import '../features/projects/presentation/projects_screen.dart';
 import '../features/repository/presentation/file_viewer_screen.dart';
 import '../features/repository/presentation/repository_browser_screen.dart';
 import '../features/search/presentation/search_screen.dart';
+import '../features/settings/presentation/settings_screen.dart';
 
 /// Route paths.
 ///
@@ -38,6 +39,7 @@ abstract final class Routes {
   static const String addAccount = '/sign-in?add=1';
   static const String inbox = '/inbox';
   static const String search = '/search';
+  static const String settings = '/settings';
   static const String projects = '/projects';
 
   static String projectOverview(int id) => '/projects/$id';
@@ -125,6 +127,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.search,
         builder: (context, state) => const SearchScreen(),
+      ),
+      GoRoute(
+        path: Routes.settings,
+        builder: (context, state) => const SettingsScreen(),
       ),
       GoRoute(
         path: Routes.projects,

@@ -1016,6 +1016,24 @@ abstract class AppLocalizations {
   /// **'Favorites'**
   String get homeFavorites;
 
+  /// Title of the settings screen
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTitle;
+
+  /// Settings entry that opens the account switcher
+  ///
+  /// In en, this message translates to:
+  /// **'Accounts'**
+  String get settingsAccounts;
+
+  /// Settings entry that opens the open-source license page
+  ///
+  /// In en, this message translates to:
+  /// **'Open source licenses'**
+  String get settingsLicenses;
+
   /// Home section title for recently opened projects
   ///
   /// In en, this message translates to:

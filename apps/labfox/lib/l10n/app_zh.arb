@@ -152,5 +152,8 @@
   "signInOAuthButton": "使用 GitLab 登录",
   "signInClientIdLabel": "OAuth 客户端 ID",
   "signInClientIdHelp": "仅在自托管实例上使用 OAuth 时需要。",
-  "signInOAuthNeedsClientId": "请输入该实例的 OAuth 客户端 ID。"
+  "signInOAuthNeedsClientId": "请输入该实例的 OAuth 客户端 ID。",
+  "settingsTitle": "设置",
+  "settingsAccounts": "账户",
+  "settingsLicenses": "开源许可"
 }

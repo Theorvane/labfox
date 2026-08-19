@@ -477,5 +477,14 @@ class AppLocalizationsKo extends AppLocalizations {
   String get homeFavorites => '즐겨찾기';
 
   @override
+  String get settingsTitle => '설정';
+
+  @override
+  String get settingsAccounts => '계정';
+
+  @override
+  String get settingsLicenses => '오픈소스 라이선스';
+
+  @override
   String get homeRecents => '최근';
 }
