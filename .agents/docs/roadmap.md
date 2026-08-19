@@ -15,7 +15,7 @@ responsive layout are effectively all validated. Everything after that is applyi
 
 ### M0 — Foundation
 Flutter project and monorepo scaffolding, Riverpod / Dio / go_router,
-freezed + json_serializable, Drift, Secure Storage, Theme, responsive layout,
+freezed + json_serializable, Secure Storage, Theme, responsive layout,
 `gitlab_api` client skeleton.
 
 ### M1 — Repository

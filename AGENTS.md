@@ -143,8 +143,9 @@ Rules:
 - **Do not create UseCase classes.** Controllers call repositories directly.
 - Widgets never touch `GitLabClient` or `Dio` directly. Always go through a controller.
 - `packages/gitlab_api` must not import `package:flutter`. Keep it pure Dart.
-- Repositories own the cache (Drift) ↔ network (GitLabClient) combination.
-  Controllers do not know where data came from.
+- Repositories own the data source and hide it from controllers, which do not
+  know where data came from. Today this is network-only (`GitLabClient`); a
+  local cache (Drift) is a planned post-1.0 layer, not yet implemented.
 
 Details: `.agents/docs/architecture.md`
 
@@ -159,7 +160,7 @@ Details: `.agents/docs/architecture.md`
 | Network | Dio |
 | Routing | go_router |
 | Models | freezed + json_serializable |
-| Local DB | Drift + SQLite |
+| Local DB | Drift + SQLite (planned, post-1.0; not yet added) |
 | Secrets | flutter_secure_storage |
 | Localization | flutter_localizations + intl (ARB) |
 | Monorepo | native pub workspace (no melos) |
