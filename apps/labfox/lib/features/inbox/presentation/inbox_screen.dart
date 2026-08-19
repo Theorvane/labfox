@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../app/router.dart';
+import '../../../core/ui/work_meta.dart';
 import '../../../l10n/app_localizations.dart';
 import 'controllers/inbox_controllers.dart';
 
@@ -118,32 +119,24 @@ class _TodoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
+    final status = LabFoxStatusColors.of(context);
+    final colors = _reasonColors(todo.actionName, status);
     final canOpen =
         todo.project?.id != null &&
         todo.target?.iid != null &&
         (todo.targetType == 'Issue' || todo.targetType == 'MergeRequest');
 
-    final subtitleParts = <String>[
-      _actionLabel(l10n, todo.actionName),
-      if (todo.project != null) todo.project!.pathWithNamespace,
-      if (todo.createdAt != null)
-        DateFormat.yMMMd().format(todo.createdAt!.toLocal()),
-    ];
-
-    return ListTile(
-      leading: Icon(_iconFor(todo.targetType), color: theme.hintColor),
-      title: Text(todo.title, maxLines: 2, overflow: TextOverflow.ellipsis),
-      subtitle: Padding(
-        padding: const EdgeInsets.only(top: LabFoxSpacing.xs),
-        child: Text(
-          subtitleParts.join(' · '),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: theme.textTheme.bodySmall,
-        ),
-      ),
+    return WorkTile(
+      icon: _iconFor(todo.targetType),
+      iconColor: colors.foreground,
+      title: todo.title,
+      metadata: [
+        StatusPill(label: _actionLabel(l10n, todo.actionName), colors: colors),
+        if (todo.project != null) MetaText(todo.project!.pathWithNamespace),
+        if (todo.createdAt != null)
+          MetaText(DateFormat.yMMMd().format(todo.createdAt!.toLocal())),
+      ],
       trailing: IconButton(
         icon: const Icon(Icons.check),
         tooltip: l10n.inboxMarkDone,
@@ -151,6 +144,17 @@ class _TodoTile extends StatelessWidget {
       ),
       onTap: canOpen ? onTap : null,
     );
+  }
+
+  /// The reason's colour: failures read red, an approval request blue, a
+  /// mention violet, everything else (assigned, added) green.
+  static StatusColor _reasonColors(String action, LabFoxStatusColors s) {
+    return switch (action) {
+      'build_failed' || 'unmergeable' => s.closed,
+      'approval_required' => s.running,
+      'mentioned' || 'directly_addressed' => s.merged,
+      _ => s.open,
+    };
   }
 
   static IconData _iconFor(String? targetType) {
