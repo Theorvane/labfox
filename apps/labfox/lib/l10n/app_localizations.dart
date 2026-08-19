@@ -686,6 +686,36 @@ abstract class AppLocalizations {
   /// **'Merge'**
   String get mrMerge;
 
+  /// Title of the sheet that lets the user pick how to merge
+  ///
+  /// In en, this message translates to:
+  /// **'Merge method'**
+  String get mrMergeMethodTitle;
+
+  /// Merge method that keeps every commit and adds a merge commit
+  ///
+  /// In en, this message translates to:
+  /// **'Merge commit'**
+  String get mrMergeCommit;
+
+  /// Merge method that squashes all commits into one
+  ///
+  /// In en, this message translates to:
+  /// **'Squash and merge'**
+  String get mrMergeSquash;
+
+  /// Shown when GitLab reports the merge request can be merged
+  ///
+  /// In en, this message translates to:
+  /// **'Ready to merge'**
+  String get mrReadyToMerge;
+
+  /// Shown when GitLab reports the merge request is not mergeable
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot be merged yet'**
+  String get mrCannotMergeNow;
+
   /// Merge confirmation dialog title
   ///
   /// In en, this message translates to:

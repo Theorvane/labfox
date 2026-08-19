@@ -25,24 +25,29 @@ class _StubActions extends MrActionsController {
   Future<void> unapprove() async => ran.add('unapprove');
 
   @override
-  Future<void> merge() async {
-    ran.add('merge');
+  Future<void> merge({bool squash = false}) async {
+    ran.add(squash ? 'squash' : 'merge');
     if (rejectMerge != null) {
       throw rejectMerge!;
     }
   }
 }
 
-MergeRequest _mr() => const MergeRequest(
+MergeRequest _mr({String? mergeStatus}) => MergeRequest(
   id: 1,
   iid: 142,
   title: 'Add OAuth',
   state: 'opened',
   sourceBranch: 'a',
   targetBranch: 'b',
+  mergeStatus: mergeStatus,
 );
 
-Future<_StubActions> _pump(WidgetTester tester, {Object? rejectMerge}) async {
+Future<_StubActions> _pump(
+  WidgetTester tester, {
+  Object? rejectMerge,
+  String? mergeStatus,
+}) async {
   final stub = _StubActions(rejectMerge: rejectMerge);
   await tester.pumpWidget(
     ProviderScope(
@@ -54,7 +59,9 @@ Future<_StubActions> _pump(WidgetTester tester, {Object? rejectMerge}) async {
       child: MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: Scaffold(body: MrActions(mr: _mr(), projectId: 1)),
+        home: Scaffold(
+          body: MrActions(mr: _mr(mergeStatus: mergeStatus), projectId: 1),
+        ),
       ),
     ),
   );
@@ -70,29 +77,49 @@ void main() {
     expect(stub.ran, ['approve']);
   });
 
-  testWidgets('merge is guarded by a confirmation dialog', (tester) async {
+  testWidgets('merge opens a method chooser then a confirmation', (
+    tester,
+  ) async {
     final stub = await _pump(tester);
 
-    // Tapping merge opens the dialog but does not merge yet.
+    // Tapping merge offers the method choice, without merging yet.
     await tester.tap(find.text('Merge'));
+    await tester.pumpAndSettle();
+    expect(find.text('Merge commit'), findsOneWidget);
+    expect(find.text('Squash and merge'), findsOneWidget);
+    expect(stub.ran, isEmpty);
+
+    // Picking a method asks for confirmation before merging.
+    await tester.tap(find.text('Merge commit'));
     await tester.pumpAndSettle();
     expect(find.text('Merge this merge request?'), findsOneWidget);
     expect(stub.ran, isEmpty);
 
-    // Cancel: still no merge.
-    await tester.tap(find.text('Cancel'));
-    await tester.pumpAndSettle();
-    expect(stub.ran, isEmpty);
-  });
-
-  testWidgets('confirming the dialog merges', (tester) async {
-    final stub = await _pump(tester);
-    await tester.tap(find.text('Merge'));
-    await tester.pumpAndSettle();
-    // The dialog's Merge button confirms (the second 'Merge' in the tree).
+    // The dialog's confirm button (the last 'Merge' FilledButton in the tree).
     await tester.tap(find.text('Merge').last);
     await tester.pumpAndSettle();
     expect(stub.ran, ['merge']);
+  });
+
+  testWidgets('squash and merge passes squash through', (tester) async {
+    final stub = await _pump(tester);
+    await tester.tap(find.text('Merge'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Squash and merge'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Merge').last);
+    await tester.pumpAndSettle();
+    expect(stub.ran, ['squash']);
+  });
+
+  testWidgets('shows a ready-to-merge status line', (tester) async {
+    await _pump(tester, mergeStatus: 'can_be_merged');
+    expect(find.text('Ready to merge'), findsOneWidget);
+  });
+
+  testWidgets('shows a cannot-merge status line', (tester) async {
+    await _pump(tester, mergeStatus: 'cannot_be_merged');
+    expect(find.text('Cannot be merged yet'), findsOneWidget);
   });
 
   testWidgets('a not-mergeable result shows a message', (tester) async {
@@ -101,6 +128,8 @@ void main() {
       rejectMerge: const GitLabNotMergeableException('no', statusCode: 405),
     );
     await tester.tap(find.text('Merge'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Merge commit'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Merge').last);
     await tester.pumpAndSettle();

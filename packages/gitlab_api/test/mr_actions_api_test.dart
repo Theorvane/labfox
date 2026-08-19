@@ -85,7 +85,31 @@ void main() {
 
       expect(captured.method, 'PUT');
       expect(captured.path, '/projects/42/merge_requests/142/merge');
+      // A plain merge does not ask GitLab to squash.
+      expect(captured.queryParameters.containsKey('squash'), isFalse);
       expect(mr.isMerged, isTrue);
+    });
+
+    test('passes squash=true when squashing', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (
+          status: 200,
+          body: {
+            'id': 1,
+            'iid': 142,
+            'title': 'x',
+            'state': 'merged',
+            'source_branch': 'a',
+            'target_branch': 'b',
+          },
+        );
+      });
+
+      await client.mergeRequests.merge(42, iid: 142, squash: true);
+
+      expect(captured.queryParameters['squash'], true);
     });
 
     test(

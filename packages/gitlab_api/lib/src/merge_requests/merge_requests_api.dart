@@ -237,13 +237,20 @@ class MergeRequestsApi {
 
   /// Merges a merge request and returns the updated (merged) resource.
   ///
+  /// When [squash] is true, GitLab squashes the commits into one on merge.
+  ///
   /// A 405/406/409 means the request is not mergeable in its current state —
   /// distinct from a 403 (no permission) — so it maps to its own exception the
   /// UI can explain.
-  Future<MergeRequest> merge(Object projectId, {required int iid}) async {
+  Future<MergeRequest> merge(
+    Object projectId, {
+    required int iid,
+    bool squash = false,
+  }) async {
     try {
       final response = await _dio.put<Map<String, dynamic>>(
         '/projects/${_enc(projectId)}/merge_requests/$iid/merge',
+        queryParameters: {if (squash) 'squash': true},
       );
       final status = response.statusCode ?? 0;
       if (status == 405 || status == 406 || status == 409) {

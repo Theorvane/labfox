@@ -304,6 +304,21 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mrMerge => '合并';
 
   @override
+  String get mrMergeMethodTitle => 'Merge method';
+
+  @override
+  String get mrMergeCommit => 'Merge commit';
+
+  @override
+  String get mrMergeSquash => 'Squash and merge';
+
+  @override
+  String get mrReadyToMerge => 'Ready to merge';
+
+  @override
+  String get mrCannotMergeNow => 'Cannot be merged yet';
+
+  @override
   String get mrMergeConfirmTitle => '要合并此合并请求吗？';
 
   @override

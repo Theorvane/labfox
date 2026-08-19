@@ -313,6 +313,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mrMerge => 'Merge';
 
   @override
+  String get mrMergeMethodTitle => 'Merge method';
+
+  @override
+  String get mrMergeCommit => 'Merge commit';
+
+  @override
+  String get mrMergeSquash => 'Squash and merge';
+
+  @override
+  String get mrReadyToMerge => 'Ready to merge';
+
+  @override
+  String get mrCannotMergeNow => 'Cannot be merged yet';
+
+  @override
   String get mrMergeConfirmTitle => 'Merge this merge request?';
 
   @override

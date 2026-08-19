@@ -400,6 +400,26 @@
   "@mrMerge": {
     "description": "Button to merge a merge request"
   },
+  "mrMergeMethodTitle": "Merge method",
+  "@mrMergeMethodTitle": {
+    "description": "Title of the sheet that lets the user pick how to merge"
+  },
+  "mrMergeCommit": "Merge commit",
+  "@mrMergeCommit": {
+    "description": "Merge method that keeps every commit and adds a merge commit"
+  },
+  "mrMergeSquash": "Squash and merge",
+  "@mrMergeSquash": {
+    "description": "Merge method that squashes all commits into one"
+  },
+  "mrReadyToMerge": "Ready to merge",
+  "@mrReadyToMerge": {
+    "description": "Shown when GitLab reports the merge request can be merged"
+  },
+  "mrCannotMergeNow": "Cannot be merged yet",
+  "@mrCannotMergeNow": {
+    "description": "Shown when GitLab reports the merge request is not mergeable"
+  },
   "mrMergeConfirmTitle": "Merge this merge request?",
   "@mrMergeConfirmTitle": {
     "description": "Merge confirmation dialog title"

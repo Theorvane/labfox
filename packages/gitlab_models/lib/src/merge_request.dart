@@ -47,4 +47,13 @@ abstract class MergeRequest with _$MergeRequest {
 
   /// True for a draft (work-in-progress) merge request.
   bool get isDraft => draft;
+
+  /// Whether GitLab reports the merge request as mergeable right now, from its
+  /// `merge_status`. Null when the instance did not report a status, so the UI
+  /// can stay quiet rather than claim either way.
+  bool? get isMergeable => switch (mergeStatus) {
+    null => null,
+    'can_be_merged' => true,
+    _ => false,
+  };
 }

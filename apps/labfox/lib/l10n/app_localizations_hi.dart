@@ -315,6 +315,21 @@ class AppLocalizationsHi extends AppLocalizations {
   String get mrMerge => 'मर्ज करें';
 
   @override
+  String get mrMergeMethodTitle => 'Merge method';
+
+  @override
+  String get mrMergeCommit => 'Merge commit';
+
+  @override
+  String get mrMergeSquash => 'Squash and merge';
+
+  @override
+  String get mrReadyToMerge => 'Ready to merge';
+
+  @override
+  String get mrCannotMergeNow => 'Cannot be merged yet';
+
+  @override
   String get mrMergeConfirmTitle => 'इस मर्ज रिक्वेस्ट को मर्ज करें?';
 
   @override
