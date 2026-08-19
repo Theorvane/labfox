@@ -4,8 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_api/gitlab_api.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 import '../../../app/router.dart';
+import '../../../core/ui/ci_visual.dart';
+import '../../../core/ui/work_meta.dart';
 import '../../../l10n/app_localizations.dart';
 import 'controllers/pipelines_controllers.dart';
 
@@ -38,36 +41,36 @@ class PipelineDetailScreen extends ConsumerWidget {
           ref.invalidate(pipelineJobsControllerProvider(pipelineRef));
         },
         child: ListView(
-          padding: const EdgeInsets.all(LabFoxSpacing.md),
+          padding: const EdgeInsets.symmetric(vertical: LabFoxSpacing.md),
           children: [
             detail.when(
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, _) => Text(l10n.pipelineError),
-              data: (p) => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      CiStatusIcon(status: p.ciStatus, label: p.status),
-                      const SizedBox(width: LabFoxSpacing.md),
-                      if (p.ref != null)
-                        Text(
-                          p.ref!,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                    ],
-                  ),
-                  _PipelineActions(pipelineRef: pipelineRef, pipeline: p),
-                ],
+              error: (error, _) => Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: LabFoxSpacing.md,
+                ),
+                child: Text(l10n.pipelineError),
               ),
+              data: (p) =>
+                  _PipelineHeader(pipelineRef: pipelineRef, pipeline: p),
             ),
             const Divider(height: LabFoxSpacing.xl),
             jobs.when(
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, _) => Text(l10n.pipelineJobsError),
+              error: (error, _) => Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: LabFoxSpacing.md,
+                ),
+                child: Text(l10n.pipelineJobsError),
+              ),
               data: (all) {
                 if (all.isEmpty) {
-                  return Text(l10n.pipelineNoJobs);
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: LabFoxSpacing.md,
+                    ),
+                    child: Text(l10n.pipelineNoJobs),
+                  );
                 }
                 final byStage = groupJobsByStage(all);
                 return Column(
@@ -90,6 +93,80 @@ class PipelineDetailScreen extends ConsumerWidget {
   }
 }
 
+/// The status header of a pipeline: a large CI glyph, the branch it ran on,
+/// a status pill and identifying metadata, with the retry/cancel actions below.
+class _PipelineHeader extends StatelessWidget {
+  const _PipelineHeader({required this.pipelineRef, required this.pipeline});
+
+  final PipelineRef pipelineRef;
+  final Pipeline pipeline;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final status = LabFoxStatusColors.of(context);
+    final (icon, colors) = ciVisual(pipeline.ciStatus, status);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: LabFoxSpacing.md),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 2),
+                child: Icon(icon, size: 28, color: colors.foreground),
+              ),
+              const SizedBox(width: LabFoxSpacing.md),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      pipeline.ref ?? 'Pipeline #${pipeline.id}',
+                      style: theme.textTheme.titleLarge,
+                    ),
+                    const SizedBox(height: LabFoxSpacing.xs),
+                    DefaultTextStyle.merge(
+                      style: theme.textTheme.bodySmall!,
+                      child: Wrap(
+                        spacing: LabFoxSpacing.sm,
+                        runSpacing: LabFoxSpacing.xs,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          StatusPill(
+                            label: ciLabel(pipeline.status),
+                            colors: colors,
+                            dot: true,
+                          ),
+                          MetaText('#${pipeline.id}'),
+                          if (pipeline.shortSha != null)
+                            MetaText(pipeline.shortSha!),
+                          if (pipeline.createdAt != null)
+                            MetaText(
+                              DateFormat.yMMMd().add_jm().format(
+                                pipeline.createdAt!.toLocal(),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          _PipelineActions(pipelineRef: pipelineRef, pipeline: pipeline),
+        ],
+      ),
+    );
+  }
+}
+
+/// One stage's jobs under a light stage header, each job a [WorkTile] with its
+/// own CI glyph and status pill so a run reads the same as the pipelines list.
 class _Stage extends StatelessWidget {
   const _Stage({
     required this.projectId,
@@ -103,35 +180,54 @@ class _Stage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final status = LabFoxStatusColors.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.only(
+            left: LabFoxSpacing.md,
+            right: LabFoxSpacing.md,
             top: LabFoxSpacing.md,
             bottom: LabFoxSpacing.xs,
           ),
-          child: Text(
-            stage.isEmpty ? '—' : stage,
-            style: Theme.of(context).textTheme.labelLarge,
+          child: Row(
+            children: [
+              Text(
+                stage.isEmpty ? '—' : stage,
+                style: theme.textTheme.labelLarge,
+              ),
+              const SizedBox(width: LabFoxSpacing.sm),
+              Text(
+                '${jobs.length}',
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.hintColor,
+                ),
+              ),
+            ],
           ),
         ),
         for (final job in jobs)
-          InkWell(
-            onTap: () => context.go(Routes.job(projectId, job.id)),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: LabFoxSpacing.sm),
-              child: Row(
-                children: [
-                  CiStatusIcon(status: job.ciStatus),
-                  const SizedBox(width: LabFoxSpacing.sm),
-                  Expanded(
-                    child: Text(job.name, overflow: TextOverflow.ellipsis),
+          Builder(
+            builder: (context) {
+              final (icon, colors) = ciVisual(job.ciStatus, status);
+              return WorkTile(
+                icon: icon,
+                iconColor: colors.foreground,
+                title: job.name,
+                metadata: [
+                  StatusPill(
+                    label: ciLabel(job.status),
+                    colors: colors,
+                    dot: true,
                   ),
-                  const Icon(Icons.chevron_right, size: 18),
                 ],
-              ),
-            ),
+                trailing: const Icon(Icons.chevron_right, size: 18),
+                onTap: () => context.go(Routes.job(projectId, job.id)),
+              );
+            },
           ),
       ],
     );
