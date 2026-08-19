@@ -74,6 +74,10 @@ void main() {
     expect(find.text('youthpick/backend'), findsOneWidget);
     expect(find.text('private'), findsOneWidget);
     expect(find.byType(MarkdownViewer), findsOneWidget);
+    // The section shortcuts render as category tiles.
+    expect(find.text('Issues'), findsOneWidget);
+    expect(find.text('Merge requests'), findsOneWidget);
+    expect(find.text('Pipelines'), findsOneWidget);
   });
 
   testWidgets('shows a no-README message, not a blank, when there is none', (

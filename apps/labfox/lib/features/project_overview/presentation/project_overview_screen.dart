@@ -84,94 +84,130 @@ class _ProjectOverviewScreenState extends ConsumerState<ProjectOverviewScreen> {
             children: [
               _Header(project: data.project),
               const SizedBox(height: LabFoxSpacing.md),
-              Card(
-                margin: EdgeInsets.zero,
-                child: ListTile(
-                  leading: const Icon(Icons.error_outline),
-                  title: Text(
-                    AppLocalizations.of(context).projectOverviewIssues,
-                  ),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () => context.go(Routes.issues(data.project.id)),
-                ),
-              ),
-              const SizedBox(height: LabFoxSpacing.md),
-              Card(
-                margin: EdgeInsets.zero,
-                child: ListTile(
-                  leading: const Icon(Icons.merge_outlined),
-                  title: Text(
-                    AppLocalizations.of(context).projectOverviewMergeRequests,
-                  ),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () =>
-                      context.go(Routes.mergeRequests(data.project.id)),
-                ),
-              ),
-              const SizedBox(height: LabFoxSpacing.md),
-              Card(
-                margin: EdgeInsets.zero,
-                child: ListTile(
-                  leading: const Icon(Icons.rocket_launch_outlined),
-                  title: Text(
-                    AppLocalizations.of(context).projectOverviewPipelines,
-                  ),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () => context.go(Routes.pipelines(data.project.id)),
-                ),
-              ),
-              const SizedBox(height: LabFoxSpacing.md),
-              if (data.project.defaultBranch != null)
-                Card(
-                  margin: EdgeInsets.zero,
-                  child: Column(
-                    children: [
-                      ListTile(
-                        leading: const Icon(Icons.folder_copy_outlined),
-                        title: Text(
-                          AppLocalizations.of(
-                            context,
-                          ).projectOverviewRepository,
-                        ),
-                        trailing: const Icon(Icons.chevron_right),
-                        onTap: () => context.go(
-                          Routes.repository(
-                            data.project.id,
-                            data.project.defaultBranch!,
-                          ),
-                        ),
-                      ),
-                      const Divider(height: 1),
-                      ListTile(
-                        leading: const Icon(Icons.account_tree_outlined),
-                        title: Text(
-                          AppLocalizations.of(context).projectOverviewBranches,
-                        ),
-                        trailing: const Icon(Icons.chevron_right),
-                        onTap: () =>
-                            context.go(Routes.branches(data.project.id)),
-                      ),
-                      const Divider(height: 1),
-                      ListTile(
-                        leading: const Icon(Icons.history),
-                        title: Text(
-                          AppLocalizations.of(context).projectOverviewCommits,
-                        ),
-                        trailing: const Icon(Icons.chevron_right),
-                        onTap: () => context.go(
-                          Routes.commits(
-                            data.project.id,
-                            data.project.defaultBranch!,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+              _Categories(project: data.project),
               const SizedBox(height: LabFoxSpacing.lg),
               _Readme(overview: data),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The project's sections as one card of colour-tiled shortcuts — the launcher
+/// pattern GitHub Mobile uses for a repository, kept in LabFox's own tokens.
+class _Categories extends StatelessWidget {
+  const _Categories({required this.project});
+
+  final Project project;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final status = LabFoxStatusColors.of(context);
+    final branch = project.defaultBranch;
+
+    return Card(
+      margin: EdgeInsets.zero,
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _CategoryTile(
+            icon: Icons.error_outline,
+            color: status.open.foreground,
+            label: l10n.projectOverviewIssues,
+            onTap: () => context.go(Routes.issues(project.id)),
+          ),
+          const Divider(height: 1),
+          _CategoryTile(
+            icon: Icons.merge_outlined,
+            color: status.merged.foreground,
+            label: l10n.projectOverviewMergeRequests,
+            onTap: () => context.go(Routes.mergeRequests(project.id)),
+          ),
+          const Divider(height: 1),
+          _CategoryTile(
+            icon: Icons.rocket_launch_outlined,
+            color: status.running.foreground,
+            label: l10n.projectOverviewPipelines,
+            onTap: () => context.go(Routes.pipelines(project.id)),
+          ),
+          if (branch != null) ...[
+            const Divider(height: 1),
+            _CategoryTile(
+              icon: Icons.folder_copy_outlined,
+              color: status.pending.foreground,
+              label: l10n.projectOverviewRepository,
+              onTap: () => context.go(Routes.repository(project.id, branch)),
+            ),
+            const Divider(height: 1),
+            _CategoryTile(
+              icon: Icons.account_tree_outlined,
+              color: status.pending.foreground,
+              label: l10n.projectOverviewBranches,
+              onTap: () => context.go(Routes.branches(project.id)),
+            ),
+            const Divider(height: 1),
+            _CategoryTile(
+              icon: Icons.history,
+              color: status.pending.foreground,
+              label: l10n.projectOverviewCommits,
+              onTap: () => context.go(Routes.commits(project.id, branch)),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _CategoryTile extends StatelessWidget {
+  const _CategoryTile({
+    required this.icon,
+    required this.color,
+    required this.label,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final Color color;
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: LabFoxSpacing.md,
+          vertical: LabFoxSpacing.sm + 2,
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(9),
+              ),
+              child: Icon(icon, size: 20, color: Colors.white),
+            ),
+            const SizedBox(width: LabFoxSpacing.md),
+            Expanded(
+              child: Text(
+                label,
+                style: theme.textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            Icon(Icons.chevron_right, color: theme.hintColor),
+          ],
         ),
       ),
     );
