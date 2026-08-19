@@ -152,5 +152,8 @@
   "signInOAuthButton": "GitLab으로 로그인",
   "signInClientIdLabel": "OAuth 클라이언트 ID",
   "signInClientIdHelp": "self-hosted 인스턴스에서 OAuth를 쓸 때만 필요합니다.",
-  "signInOAuthNeedsClientId": "이 인스턴스의 OAuth 클라이언트 ID를 입력하세요."
+  "signInOAuthNeedsClientId": "이 인스턴스의 OAuth 클라이언트 ID를 입력하세요.",
+  "settingsTitle": "설정",
+  "settingsAccounts": "계정",
+  "settingsLicenses": "오픈소스 라이선스"
 }

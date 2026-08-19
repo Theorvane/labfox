@@ -492,5 +492,14 @@ class AppLocalizationsHi extends AppLocalizations {
   String get homeFavorites => 'पसंदीदा';
 
   @override
+  String get settingsTitle => 'सेटिंग्स';
+
+  @override
+  String get settingsAccounts => 'खाते';
+
+  @override
+  String get settingsLicenses => 'ओपन सोर्स लाइसेंस';
+
+  @override
   String get homeRecents => 'हाल ही में';
 }

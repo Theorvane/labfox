@@ -152,5 +152,8 @@
   "signInOAuthButton": "GitLab でサインイン",
   "signInClientIdLabel": "OAuth クライアント ID",
   "signInClientIdHelp": "self-hosted インスタンスで OAuth を使う場合のみ必要です。",
-  "signInOAuthNeedsClientId": "このインスタンスの OAuth クライアント ID を入力してください。"
+  "signInOAuthNeedsClientId": "このインスタンスの OAuth クライアント ID を入力してください。",
+  "settingsTitle": "設定",
+  "settingsAccounts": "アカウント",
+  "settingsLicenses": "オープンソースライセンス"
 }

@@ -476,5 +476,14 @@ class AppLocalizationsJa extends AppLocalizations {
   String get homeFavorites => 'お気に入り';
 
   @override
+  String get settingsTitle => '設定';
+
+  @override
+  String get settingsAccounts => 'アカウント';
+
+  @override
+  String get settingsLicenses => 'オープンソースライセンス';
+
+  @override
   String get homeRecents => '最近';
 }

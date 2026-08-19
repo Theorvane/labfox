@@ -152,5 +152,8 @@
   "signInOAuthButton": "GitLab से साइन इन करें",
   "signInClientIdLabel": "OAuth क्लाइंट ID",
   "signInClientIdHelp": "केवल self-hosted इंस्टेंस पर OAuth के लिए आवश्यक।",
-  "signInOAuthNeedsClientId": "इस इंस्टेंस के लिए OAuth क्लाइंट ID दर्ज करें।"
+  "signInOAuthNeedsClientId": "इस इंस्टेंस के लिए OAuth क्लाइंट ID दर्ज करें।",
+  "settingsTitle": "सेटिंग्स",
+  "settingsAccounts": "खाते",
+  "settingsLicenses": "ओपन सोर्स लाइसेंस"
 }

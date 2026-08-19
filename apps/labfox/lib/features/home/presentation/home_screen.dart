@@ -30,6 +30,11 @@ class HomeScreen extends ConsumerWidget {
             tooltip: l10n.homeSwitchAccount,
             onPressed: () => context.go(Routes.accounts),
           ),
+          IconButton(
+            icon: const Icon(Icons.settings_outlined),
+            tooltip: l10n.settingsTitle,
+            onPressed: () => context.go(Routes.settings),
+          ),
         ],
       ),
       body: ResponsiveLayout(
