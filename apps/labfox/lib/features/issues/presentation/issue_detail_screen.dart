@@ -2,7 +2,9 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_api/gitlab_api.dart';
+import 'package:gitlab_models/gitlab_models.dart';
 
+import '../../../core/ui/work_meta.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../comments/presentation/widgets/comment_thread.dart';
 import 'controllers/issues_controllers.dart';
@@ -50,28 +52,7 @@ class IssueDetailScreen extends ConsumerWidget {
         data: (data) => ListView(
           padding: const EdgeInsets.all(LabFoxSpacing.md),
           children: [
-            Text(data.title, style: Theme.of(context).textTheme.headlineSmall),
-            const SizedBox(height: LabFoxSpacing.sm),
-            Row(
-              children: [
-                StateBadge(
-                  state: data.isOpen ? EntityState.open : EntityState.closed,
-                  label: data.isOpen
-                      ? l10n.issueStateOpen
-                      : l10n.issueStateClosed,
-                ),
-                if (data.author != null) ...[
-                  const SizedBox(width: LabFoxSpacing.md),
-                  Flexible(
-                    child: Text(
-                      l10n.issueOpenedBy(data.author!.username),
-                      style: Theme.of(context).textTheme.bodySmall,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              ],
-            ),
+            _IssueHeader(issue: data),
             if (data.labels.isNotEmpty) ...[
               const SizedBox(height: LabFoxSpacing.md),
               Wrap(
@@ -100,6 +81,64 @@ class IssueDetailScreen extends ConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _IssueHeader extends StatelessWidget {
+  const _IssueHeader({required this.issue});
+
+  final Issue issue;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
+    final status = LabFoxStatusColors.of(context);
+    final open = issue.isOpen;
+    final colors = open ? status.open : status.closed;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          issue.title,
+          style: theme.textTheme.titleLarge?.copyWith(height: 1.2),
+        ),
+        const SizedBox(height: LabFoxSpacing.sm),
+        Wrap(
+          spacing: LabFoxSpacing.sm,
+          runSpacing: LabFoxSpacing.xs,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            StatusPill(
+              label: open ? l10n.issueStateOpen : l10n.issueStateClosed,
+              colors: colors,
+              dot: true,
+            ),
+            MetaText('#${issue.iid}'),
+            if (issue.author != null) ...[
+              CircleAvatar(
+                radius: 9,
+                backgroundColor: status.merged.foreground,
+                backgroundImage: issue.author!.avatarUrl == null
+                    ? null
+                    : NetworkImage(issue.author!.avatarUrl!),
+                child: issue.author!.avatarUrl == null
+                    ? Text(
+                        issue.author!.name.characters.first.toUpperCase(),
+                        style: const TextStyle(
+                          fontSize: 9,
+                          color: Colors.white,
+                        ),
+                      )
+                    : null,
+              ),
+              MetaText(issue.author!.username),
+            ],
+          ],
+        ),
+      ],
     );
   }
 }
