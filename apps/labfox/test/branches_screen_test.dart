@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -52,6 +53,9 @@ void main() {
     expect(find.text('main'), findsOneWidget);
     expect(find.text('dev'), findsOneWidget);
     expect(find.textContaining('Default branch'), findsOneWidget);
+    // Rows use the shared WorkTile shape, and the protected branch shows a lock.
+    expect(find.byType(WorkTile), findsNWidgets(2));
+    expect(find.byIcon(Icons.lock_outline), findsOneWidget);
   });
 
   testWidgets('shows an empty message when there are no branches', (

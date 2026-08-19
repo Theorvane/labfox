@@ -5,6 +5,7 @@ import 'package:gitlab_models/gitlab_models.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/router.dart';
+import '../../../core/ui/work_meta.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../commits/presentation/controllers/history_controllers.dart';
 
@@ -61,18 +62,16 @@ class BranchesScreen extends ConsumerWidget {
     AppLocalizations l10n,
     Branch branch,
   ) {
-    return ListTile(
-      leading: const Icon(Icons.account_tree_outlined),
-      title: Text(branch.name, maxLines: 1, overflow: TextOverflow.ellipsis),
-      subtitle: branch.isDefault
-          ? Text(
-              l10n.branchDefault,
-              style: Theme.of(context).textTheme.bodySmall,
-            )
-          : null,
-      trailing: branch.isProtected
-          ? const Icon(Icons.lock_outline, size: 16)
-          : null,
+    final theme = Theme.of(context);
+    return WorkTile(
+      icon: Icons.account_tree_outlined,
+      title: branch.name,
+      metadata: [
+        if (branch.isDefault) MetaText(l10n.branchDefault),
+        if (branch.isProtected)
+          Icon(Icons.lock_outline, size: 14, color: theme.hintColor),
+      ],
+      trailing: const Icon(Icons.chevron_right),
       onTap: () => context.go(Routes.repository(projectId, branch.name)),
     );
   }
