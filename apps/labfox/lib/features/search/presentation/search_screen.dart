@@ -167,6 +167,7 @@ class _ResultTile extends StatelessWidget {
             dot: true,
           ),
           MetaText('#${item.iid}'),
+          if (item.updatedAt != null) MetaText(timeAgo(item.updatedAt!)),
           LabelChips(item.labels),
         ],
         onTap: projectId == null
@@ -184,6 +185,7 @@ class _ResultTile extends StatelessWidget {
         metadata: [
           StatusPill(label: label, colors: colors, dot: true),
           MetaText('!${item.iid}'),
+          if (item.updatedAt != null) MetaText(timeAgo(item.updatedAt!)),
           LabelChips(item.labels),
         ],
         onTap: projectId == null
