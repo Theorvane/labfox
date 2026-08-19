@@ -66,17 +66,21 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Add OAuth authentication'), findsOneWidget);
-    expect(find.textContaining('feature/oauth → develop'), findsOneWidget);
-    expect(find.byType(StateBadge), findsOneWidget);
+    expect(find.text('Open'), findsOneWidget);
+    // '!142' appears in the app bar and the header.
+    expect(find.textContaining('!142'), findsWidgets);
+    // Source and target branches render in the branch chip.
+    expect(find.text('feature/oauth'), findsOneWidget);
+    expect(find.text('develop'), findsOneWidget);
     expect(find.byType(GitLabLabel), findsOneWidget);
     expect(find.byType(MarkdownViewer), findsOneWidget);
   });
 
-  testWidgets('a merged MR shows the merged badge, not closed', (tester) async {
+  testWidgets('a merged MR shows the Merged state, not closed', (tester) async {
     await _pump(tester, AsyncData(_mr(state: 'merged')));
     await tester.pumpAndSettle();
 
-    expect(find.byIcon(Icons.merge), findsOneWidget);
-    expect(find.byIcon(Icons.cancel_outlined), findsNothing);
+    expect(find.text('Merged'), findsOneWidget);
+    expect(find.text('Closed'), findsNothing);
   });
 }

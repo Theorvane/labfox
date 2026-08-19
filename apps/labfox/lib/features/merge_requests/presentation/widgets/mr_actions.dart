@@ -32,6 +32,7 @@ class MrActions extends ConsumerWidget {
     }
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         approvals.maybeWhen(
