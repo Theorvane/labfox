@@ -55,6 +55,9 @@ void main() {
 
     expect(find.text('feat: add sign-in'), findsOneWidget);
     expect(find.textContaining('abc123de'), findsOneWidget);
+    // A commit glyph leads the row, and the author is its own metadata field.
+    expect(find.byIcon(Icons.commit), findsOneWidget);
+    expect(find.text('Jungwon'), findsOneWidget);
   });
 
   testWidgets('shows an empty message for a branch with no commits', (

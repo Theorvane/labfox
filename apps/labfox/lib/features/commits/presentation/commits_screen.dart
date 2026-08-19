@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../app/router.dart';
+import '../../../core/ui/work_meta.dart';
 import '../../../l10n/app_localizations.dart';
 import 'controllers/history_controllers.dart';
 
@@ -57,19 +58,15 @@ class _CommitTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final subtitleParts = [
-      commit.shortId,
-      if (commit.authorName != null) commit.authorName!,
-      if (commit.authoredDate != null)
-        DateFormat.yMMMd().format(commit.authoredDate!.toLocal()),
-    ];
-    return ListTile(
-      title: Text(commit.title, maxLines: 2, overflow: TextOverflow.ellipsis),
-      subtitle: Text(
-        subtitleParts.join(' · '),
-        style: theme.textTheme.bodySmall,
-      ),
+    return WorkTile(
+      icon: Icons.commit,
+      title: commit.title,
+      metadata: [
+        MetaText(commit.shortId),
+        if (commit.authorName != null) MetaText(commit.authorName!),
+        if (commit.authoredDate != null)
+          MetaText(DateFormat.yMMMd().format(commit.authoredDate!.toLocal())),
+      ],
       trailing: const Icon(Icons.chevron_right),
       onTap: onTap,
     );
