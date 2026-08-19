@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../tokens/colors.dart';
 import '../tokens/spacing.dart';
+import '../tokens/status_colors.dart';
 
 /// The lifecycle state of an issue or merge request.
 ///
@@ -22,10 +22,11 @@ class StateBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final (icon, color) = switch (state) {
-      EntityState.open => (Icons.error_outline, LabFoxColors.success),
-      EntityState.closed => (Icons.cancel_outlined, LabFoxColors.failure),
-      EntityState.merged => (Icons.merge, const Color(0xFF6E49CB)),
+    final status = LabFoxStatusColors.of(context);
+    final (icon, colors) = switch (state) {
+      EntityState.open => (Icons.error_outline, status.open),
+      EntityState.closed => (Icons.cancel_outlined, status.closed),
+      EntityState.merged => (Icons.merge, status.merged),
     };
 
     return Container(
@@ -34,18 +35,18 @@ class StateBadge extends StatelessWidget {
         vertical: 2,
       ),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.12),
+        color: colors.container,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 14, color: color),
+          Icon(icon, size: 14, color: colors.foreground),
           const SizedBox(width: LabFoxSpacing.xs),
           Text(
             label,
             style: TextStyle(
-              color: color,
+              color: colors.foreground,
               fontSize: 12,
               fontWeight: FontWeight.w600,
             ),
