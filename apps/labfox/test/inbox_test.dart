@@ -105,6 +105,8 @@ void main() {
       await _pump(tester, _FakeRepo([_todo(1, 'Fix login'), _todo(2, 'Ship')]));
       expect(find.text('Fix login'), findsOneWidget);
       expect(find.text('Ship'), findsOneWidget);
+      // The row eyebrow combines the repo path with the target number.
+      expect(find.text('g/p #1'), findsOneWidget);
     });
 
     testWidgets('shows an empty state when there is nothing to do', (

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 
 import '../../../app/router.dart';
 import '../../../core/ui/work_meta.dart';
@@ -133,9 +132,8 @@ class _TodoTile extends StatelessWidget {
       title: todo.title,
       metadata: [
         StatusPill(label: _actionLabel(l10n, todo.actionName), colors: colors),
-        if (todo.project != null) MetaText(todo.project!.pathWithNamespace),
-        if (todo.createdAt != null)
-          MetaText(DateFormat.yMMMd().format(todo.createdAt!.toLocal())),
+        if (todo.project != null) MetaText(_targetRef(todo)),
+        if (todo.createdAt != null) MetaText(timeAgo(todo.createdAt!)),
       ],
       trailing: IconButton(
         icon: const Icon(Icons.check),
@@ -144,6 +142,18 @@ class _TodoTile extends StatelessWidget {
       ),
       onTap: canOpen ? onTap : null,
     );
+  }
+
+  /// The row eyebrow: the repo path, plus the target's number when it has one
+  /// (`owner/repo #88` for an issue, `!88` for a merge request).
+  static String _targetRef(Todo todo) {
+    final path = todo.project!.pathWithNamespace;
+    final iid = todo.target?.iid;
+    if (iid == null) {
+      return path;
+    }
+    final sigil = todo.targetType == 'MergeRequest' ? '!' : '#';
+    return '$path $sigil$iid';
   }
 
   /// The reason's colour: failures read red, an approval request blue, a
