@@ -3,10 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/app.dart';
+import 'app/licenses.dart';
 import 'core/auth/auth_providers.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Register LabFox's own license so the in-app license page is complete.
+  registerAppLicenses();
 
   // Load persistence before the first frame so the session is known when the
   // router first evaluates its redirect; otherwise a returning user sees the

@@ -37,3 +37,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+  assets:
+    # LabFox's own Apache-2.0 license. Registered with LicenseRegistry so the
+    # in-app license page shows it alongside the auto-collected dependency
+    # licenses (the app is not a pub package, so it is not collected).
+    - assets/LICENSE
