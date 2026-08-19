@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -50,10 +49,11 @@ void main() {
     );
     await tester.pumpAndSettle();
 
+    expect(find.text('main'), findsOneWidget);
     expect(find.textContaining('#944'), findsOneWidget);
-    expect(find.byType(CiStatusIcon), findsOneWidget);
-    // Failed pipeline shows the failed icon.
-    expect(find.byIcon(Icons.cancel), findsOneWidget);
+    // Failed pipeline shows the Failed status pill and the failed glyph.
+    expect(find.text('Failed'), findsOneWidget);
+    expect(find.byIcon(Icons.cancel_outlined), findsOneWidget);
   });
 
   testWidgets('shows an empty message when there are no pipelines', (

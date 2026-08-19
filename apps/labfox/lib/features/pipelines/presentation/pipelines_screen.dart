@@ -6,6 +6,8 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../app/router.dart';
+import '../../../core/ui/ci_visual.dart';
+import '../../../core/ui/work_meta.dart';
 import '../../../l10n/app_localizations.dart';
 import 'controllers/pipelines_controllers.dart';
 
@@ -68,20 +70,25 @@ class _PipelineTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final subtitle = [
-      '#${pipeline.id}',
-      if (pipeline.ref != null) pipeline.ref!,
-      if (pipeline.createdAt != null)
-        DateFormat.yMMMd().format(pipeline.createdAt!.toLocal()),
-    ].join(' · ');
+    final status = LabFoxStatusColors.of(context);
+    final (icon, colors) = ciVisual(pipeline.ciStatus, status);
 
-    return ListTile(
-      leading: CiStatusIcon(status: pipeline.ciStatus),
-      title: Text(pipeline.status, style: theme.textTheme.titleSmall),
-      subtitle: Text(subtitle, style: theme.textTheme.bodySmall),
+    return WorkTile(
+      icon: icon,
+      iconColor: colors.foreground,
+      title: pipeline.ref ?? 'Pipeline #${pipeline.id}',
+      metadata: [
+        StatusPill(label: ciLabel(pipeline.status), colors: colors, dot: true),
+        MetaText('#${pipeline.id}'),
+        if (pipeline.sha != null) MetaText(_shortSha(pipeline.sha!)),
+        if (pipeline.createdAt != null)
+          MetaText(DateFormat.yMMMd().format(pipeline.createdAt!.toLocal())),
+      ],
       trailing: const Icon(Icons.chevron_right),
       onTap: onTap,
     );
   }
+
+  static String _shortSha(String sha) =>
+      sha.length <= 8 ? sha : sha.substring(0, 8);
 }
