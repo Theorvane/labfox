@@ -26,6 +26,9 @@ class MrActionsRepository {
   Future<void> unapprove({required int projectId, required int iid}) =>
       _client.mergeRequests.unapprove(projectId, iid: iid);
 
-  Future<MergeRequest> merge({required int projectId, required int iid}) =>
-      _client.mergeRequests.merge(projectId, iid: iid);
+  Future<MergeRequest> merge({
+    required int projectId,
+    required int iid,
+    bool squash = false,
+  }) => _client.mergeRequests.merge(projectId, iid: iid, squash: squash);
 }

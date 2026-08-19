@@ -307,6 +307,21 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mrMerge => '병합';
 
   @override
+  String get mrMergeMethodTitle => 'Merge method';
+
+  @override
+  String get mrMergeCommit => 'Merge commit';
+
+  @override
+  String get mrMergeSquash => 'Squash and merge';
+
+  @override
+  String get mrReadyToMerge => 'Ready to merge';
+
+  @override
+  String get mrCannotMergeNow => 'Cannot be merged yet';
+
+  @override
   String get mrMergeConfirmTitle => '이 병합 요청을 병합할까요?';
 
   @override

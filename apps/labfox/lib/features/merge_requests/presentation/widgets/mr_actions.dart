@@ -41,6 +41,10 @@ class MrActions extends ConsumerWidget {
               : _ApprovalSummary(approvals: a),
           orElse: () => const SizedBox.shrink(),
         ),
+        if (mr.isMergeable != null) ...[
+          const SizedBox(height: LabFoxSpacing.xs),
+          _MergeabilityLine(mergeable: mr.isMergeable!),
+        ],
         const SizedBox(height: LabFoxSpacing.sm),
         Row(
           children: [
@@ -56,9 +60,7 @@ class MrActions extends ConsumerWidget {
             const SizedBox(width: LabFoxSpacing.sm),
             Expanded(
               child: FilledButton.icon(
-                onPressed: busy
-                    ? null
-                    : () => _confirmMerge(context, ref, mrRef),
+                onPressed: busy ? null : () => _startMerge(context, ref, mrRef),
                 icon: const Icon(Icons.merge, size: 18),
                 label: Text(l10n.mrMerge),
               ),
@@ -70,6 +72,54 @@ class MrActions extends ConsumerWidget {
           const Center(child: CircularProgressIndicator()),
         ],
       ],
+    );
+  }
+
+  /// Merge is a two-step choice: pick the method, then confirm — because a
+  /// squash rewrites history and a merge is irreversible either way.
+  Future<void> _startMerge(
+    BuildContext context,
+    WidgetRef ref,
+    MergeRequestRef mrRef,
+  ) async {
+    final squash = await _pickMergeMethod(context);
+    if (squash == null || !context.mounted) {
+      return;
+    }
+    await _confirmMerge(context, ref, mrRef, squash: squash);
+  }
+
+  /// Offers the merge methods in a sheet. Returns true for squash, false for a
+  /// plain merge commit, or null if the user dismissed the sheet.
+  Future<bool?> _pickMergeMethod(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return showModalBottomSheet<bool>(
+      context: context,
+      builder: (context) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(LabFoxSpacing.md),
+              child: Text(
+                l10n.mrMergeMethodTitle,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.merge),
+              title: Text(l10n.mrMergeCommit),
+              onTap: () => Navigator.of(context).pop(false),
+            ),
+            ListTile(
+              leading: const Icon(Icons.compress),
+              title: Text(l10n.mrMergeSquash),
+              onTap: () => Navigator.of(context).pop(true),
+            ),
+            const SizedBox(height: LabFoxSpacing.sm),
+          ],
+        ),
+      ),
     );
   }
 
@@ -102,8 +152,9 @@ class MrActions extends ConsumerWidget {
   Future<void> _confirmMerge(
     BuildContext context,
     WidgetRef ref,
-    MergeRequestRef mrRef,
-  ) async {
+    MergeRequestRef mrRef, {
+    required bool squash,
+  }) async {
     final l10n = AppLocalizations.of(context);
     final confirmed = await showDialog<bool>(
       context: context,
@@ -126,7 +177,9 @@ class MrActions extends ConsumerWidget {
       return;
     }
     try {
-      await ref.read(mrActionsControllerProvider(mrRef).notifier).merge();
+      await ref
+          .read(mrActionsControllerProvider(mrRef).notifier)
+          .merge(squash: squash);
     } on GitLabException catch (error) {
       if (context.mounted) {
         _showError(context, _messageFor(error, l10n));
@@ -147,6 +200,37 @@ class MrActions extends ConsumerWidget {
       GitLabAuthException() => l10n.mrActionForbidden,
       _ => l10n.mrActionError,
     };
+  }
+}
+
+/// A one-line mergeability status from GitLab's `merge_status`, so the user
+/// knows whether the merge will go through before they tap.
+class _MergeabilityLine extends StatelessWidget {
+  const _MergeabilityLine({required this.mergeable});
+
+  final bool mergeable;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final status = LabFoxStatusColors.of(context);
+    final colors = mergeable ? status.open : status.warning;
+    return Row(
+      children: [
+        Icon(
+          mergeable ? Icons.check_circle_outline : Icons.error_outline,
+          size: 16,
+          color: colors.foreground,
+        ),
+        const SizedBox(width: LabFoxSpacing.xs),
+        Text(
+          mergeable ? l10n.mrReadyToMerge : l10n.mrCannotMergeNow,
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: colors.foreground),
+        ),
+      ],
+    );
   }
 }
 
