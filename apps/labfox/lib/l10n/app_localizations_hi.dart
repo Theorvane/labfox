@@ -55,6 +55,23 @@ class AppLocalizationsHi extends AppLocalizations {
   String get signInSubmit => 'साइन इन';
 
   @override
+  String get signInOr => 'या';
+
+  @override
+  String get signInOAuthButton => 'GitLab से साइन इन करें';
+
+  @override
+  String get signInClientIdLabel => 'OAuth क्लाइंट ID';
+
+  @override
+  String get signInClientIdHelp =>
+      'केवल self-hosted इंस्टेंस पर OAuth के लिए आवश्यक।';
+
+  @override
+  String get signInOAuthNeedsClientId =>
+      'इस इंस्टेंस के लिए OAuth क्लाइंट ID दर्ज करें।';
+
+  @override
   String get signInErrorToken =>
       'टोकन अस्वीकृत हो गया। जाँचें कि यह सही है और समाप्त नहीं हुआ है।';
 

@@ -62,6 +62,26 @@
   "@signInSubmit": {
     "description": "Label for the sign-in button"
   },
+  "signInOr": "or",
+  "@signInOr": {
+    "description": "Divider between the token and OAuth sign-in options"
+  },
+  "signInOAuthButton": "Sign in with GitLab",
+  "@signInOAuthButton": {
+    "description": "Button that starts the OAuth browser sign-in"
+  },
+  "signInClientIdLabel": "OAuth client ID",
+  "@signInClientIdLabel": {
+    "description": "Label for the OAuth client id field"
+  },
+  "signInClientIdHelp": "Only for OAuth on a self-hosted instance.",
+  "@signInClientIdHelp": {
+    "description": "Helper text for the OAuth client id field"
+  },
+  "signInOAuthNeedsClientId": "Enter an OAuth client ID for this instance.",
+  "@signInOAuthNeedsClientId": {
+    "description": "Shown when OAuth is started without a usable client id"
+  },
   "signInErrorToken": "The token was rejected. Check that it is correct and has not expired.",
   "@signInErrorToken": {
     "description": "Shown when the instance returns 401"

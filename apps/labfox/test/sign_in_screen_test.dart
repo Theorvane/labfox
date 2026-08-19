@@ -33,6 +33,23 @@ class _StubAuthRepository implements AuthRepository {
   }
 
   @override
+  Future<Account> signInWithOAuth({
+    required String instanceUrl,
+    required String clientId,
+  }) async {
+    if (clientId != 'good-client') {
+      throw const GitLabAuthException('denied', statusCode: 401);
+    }
+    _active = Account(
+      instanceUrl: instanceUrl,
+      user: const User(id: 1, username: 'jungwon', name: 'Jungwon'),
+      authMethod: AuthMethod.oauth,
+      oauthClientId: clientId,
+    );
+    return _active!;
+  }
+
+  @override
   Future<void> signOut([Account? account]) async => _active = null;
 
   @override
@@ -110,6 +127,42 @@ void main() {
     );
     await tester.enterText(find.byType(TextFormField).at(1), 'glpat-valid');
     await tester.tap(find.widgetWithText(FilledButton, 'Sign in'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Home'), findsOneWidget);
+    expect(find.text('Signed in as jungwon'), findsOneWidget);
+  });
+
+  testWidgets('OAuth without a client id asks for one', (tester) async {
+    await _pump(tester, _StubAuthRepository());
+
+    // gitlab.com with no built-in client id (none is set in tests) and no
+    // entered id cannot start OAuth.
+    await tester.tap(
+      find.widgetWithText(OutlinedButton, 'Sign in with GitLab'),
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text('Enter an OAuth client ID for this instance.'),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('OAuth with a client id lands on the home screen', (
+    tester,
+  ) async {
+    await _pump(tester, _StubAuthRepository());
+
+    await tester.enterText(
+      find.byType(TextFormField).at(0),
+      'https://gitlab.com',
+    );
+    // The third field is the OAuth client id.
+    await tester.enterText(find.byType(TextFormField).at(2), 'good-client');
+    await tester.tap(
+      find.widgetWithText(OutlinedButton, 'Sign in with GitLab'),
+    );
     await tester.pumpAndSettle();
 
     expect(find.text('Home'), findsOneWidget);

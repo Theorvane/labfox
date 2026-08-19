@@ -54,6 +54,21 @@ class AppLocalizationsKo extends AppLocalizations {
   String get signInSubmit => '로그인';
 
   @override
+  String get signInOr => '또는';
+
+  @override
+  String get signInOAuthButton => 'GitLab으로 로그인';
+
+  @override
+  String get signInClientIdLabel => 'OAuth 클라이언트 ID';
+
+  @override
+  String get signInClientIdHelp => 'self-hosted 인스턴스에서 OAuth를 쓸 때만 필요합니다.';
+
+  @override
+  String get signInOAuthNeedsClientId => '이 인스턴스의 OAuth 클라이언트 ID를 입력하세요.';
+
+  @override
   String get signInErrorToken => '토큰이 거부되었습니다. 올바른지, 만료되지 않았는지 확인하세요.';
 
   @override

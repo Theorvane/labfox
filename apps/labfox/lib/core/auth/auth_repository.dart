@@ -1,8 +1,23 @@
+import 'dart:convert';
+import 'dart:math';
+
+import 'package:dio/dio.dart';
 import 'package:gitlab_api/gitlab_api.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 import 'package:secure_storage/secure_storage.dart';
 
 import 'account_store.dart';
+import 'authorization_launcher.dart';
+import 'oauth_config.dart';
+
+/// The client factory signature. [bearer] selects OAuth (`Authorization:
+/// Bearer`) over a PAT (`PRIVATE-TOKEN`).
+typedef ClientFactory =
+    GitLabClient Function({
+      required String baseUrl,
+      required String token,
+      bool bearer,
+    });
 
 /// Signs accounts in and out, and owns where the token and account metadata go.
 ///
@@ -12,21 +27,41 @@ class AuthRepository {
   AuthRepository({
     required AccountStore accountStore,
     required CredentialStore credentialStore,
-    GitLabClient Function({required String baseUrl, required String token})?
-    clientFactory,
+    OAuthApi? oauthApi,
+    AuthorizationLauncher authorizationLauncher = const WebAuthLauncher(),
+    ClientFactory? clientFactory,
+    int Function()? nowEpochSeconds,
+    Random? random,
   }) : _accountStore = accountStore,
        _credentialStore = credentialStore,
-       _clientFactory = clientFactory ?? _defaultClientFactory;
+       _oauthApi = oauthApi ?? OAuthApi(Dio()),
+       _launcher = authorizationLauncher,
+       _clientFactory = clientFactory ?? _defaultClientFactory,
+       _now = nowEpochSeconds ?? _systemNow,
+       _random = random ?? Random.secure();
 
   final AccountStore _accountStore;
   final CredentialStore _credentialStore;
-  final GitLabClient Function({required String baseUrl, required String token})
-  _clientFactory;
+  final OAuthApi _oauthApi;
+  final AuthorizationLauncher _launcher;
+  final ClientFactory _clientFactory;
+  final int Function() _now;
+  final Random _random;
+
+  /// The credential kind for the OAuth token set. The whole [OAuthToken] JSON
+  /// (access, refresh, and expiry) is stored here; the refresh token is secret,
+  /// so it stays in secure storage with the rest.
+  static const _oauthKind = 'oauth_access';
+
+  static const _patKind = 'pat';
+
+  static int _systemNow() => DateTime.now().millisecondsSinceEpoch ~/ 1000;
 
   static GitLabClient _defaultClientFactory({
     required String baseUrl,
     required String token,
-  }) => GitLabClient(baseUrl: baseUrl, token: token);
+    bool bearer = false,
+  }) => GitLabClient(baseUrl: baseUrl, token: token, bearer: bearer);
 
   /// The active account, or null.
   Account? currentAccount() => _accountStore.readActive();
@@ -54,7 +89,7 @@ class AuthRepository {
       await _credentialStore.writeToken(
         instanceUrl: instanceUrl,
         userId: user.id,
-        kind: 'pat',
+        kind: _patKind,
         token: token,
       );
       await _accountStore.add(account);
@@ -65,12 +100,112 @@ class AuthRepository {
     }
   }
 
-  Future<String?> tokenFor(Account account) {
-    return _credentialStore.readToken(
+  /// Runs the OAuth Authorization Code + PKCE flow, then persists the session.
+  ///
+  /// The browser is opened through [AuthorizationLauncher]; the CSRF `state` and
+  /// PKCE verifier are checked before the code is exchanged. Nothing is written
+  /// until `GET /user` confirms the token, so a cancelled or tampered flow
+  /// leaves no account behind.
+  Future<Account> signInWithOAuth({
+    required String instanceUrl,
+    required String clientId,
+  }) async {
+    final pkce = Pkce.generate(random: _random);
+    final state = _newState();
+    final url = OAuthApi.authorizationUrl(
+      instanceUrl: instanceUrl,
+      clientId: clientId,
+      redirectUri: OAuthConfig.redirectUri,
+      state: state,
+      codeChallenge: pkce.challenge,
+      scope: OAuthConfig.scope,
+    );
+
+    final redirect = await _launcher.authorize(
+      url: url,
+      callbackScheme: OAuthConfig.callbackScheme,
+    );
+    final params = redirect.queryParameters;
+    if (params['error'] != null) {
+      throw const GitLabAuthException('Authorization was denied.');
+    }
+    if (params['state'] != state) {
+      throw const GitLabAuthException(
+        'The sign-in response failed a security check.',
+      );
+    }
+    final code = params['code'];
+    if (code == null || code.isEmpty) {
+      throw const GitLabAuthException('No authorization code was returned.');
+    }
+
+    final token = await _oauthApi.exchangeCode(
+      instanceUrl: instanceUrl,
+      clientId: clientId,
+      code: code,
+      redirectUri: OAuthConfig.redirectUri,
+      codeVerifier: pkce.verifier,
+    );
+
+    final client = _clientFactory(
+      baseUrl: instanceUrl,
+      token: token.accessToken,
+      bearer: true,
+    );
+    try {
+      final user = await client.users.current();
+      final account = Account(
+        instanceUrl: instanceUrl,
+        user: user,
+        authMethod: AuthMethod.oauth,
+        oauthClientId: clientId,
+      );
+
+      await _writeOAuthToken(account, token);
+      await _accountStore.add(account);
+
+      return account;
+    } finally {
+      client.close();
+    }
+  }
+
+  /// The access token to authenticate [account]'s requests.
+  ///
+  /// For OAuth accounts the stored token is refreshed first when it is expired
+  /// (or within a minute of it), so a request does not fail mid-flight on a
+  /// stale token.
+  Future<String?> tokenFor(Account account) async {
+    if (account.authMethod == AuthMethod.pat) {
+      return _credentialStore.readToken(
+        instanceUrl: account.instanceUrl,
+        userId: account.user.id,
+        kind: _patKind,
+      );
+    }
+
+    final raw = await _credentialStore.readToken(
       instanceUrl: account.instanceUrl,
       userId: account.user.id,
-      kind: 'pat',
+      kind: _oauthKind,
     );
+    if (raw == null) {
+      return null;
+    }
+    var token = OAuthToken.fromJson(json.decode(raw) as Map<String, dynamic>);
+    final refreshToken = token.refreshToken;
+    final clientId = account.oauthClientId;
+    if (token.isExpiredAt(_now(), leewaySeconds: 60) &&
+        refreshToken != null &&
+        clientId != null) {
+      token = await _oauthApi.refresh(
+        instanceUrl: account.instanceUrl,
+        clientId: clientId,
+        refreshToken: refreshToken,
+      );
+      await _writeOAuthToken(account, token);
+    }
+    return token.accessToken;
   }
 
   /// Removes an account: clears its token and drops it from the store. If it was
@@ -81,5 +216,19 @@ class AuthRepository {
       userId: account.user.id,
     );
     await _accountStore.remove(account);
+  }
+
+  Future<void> _writeOAuthToken(Account account, OAuthToken token) {
+    return _credentialStore.writeToken(
+      instanceUrl: account.instanceUrl,
+      userId: account.user.id,
+      kind: _oauthKind,
+      token: json.encode(token.toJson()),
+    );
+  }
+
+  String _newState() {
+    final bytes = List<int>.generate(16, (_) => _random.nextInt(256));
+    return base64Url.encode(bytes).replaceAll('=', '');
   }
 }

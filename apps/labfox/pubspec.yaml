@@ -17,6 +17,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.6.1
+  flutter_web_auth_2: ^4.0.0
   gitlab_api:
     path: ../../packages/gitlab_api
   gitlab_models:

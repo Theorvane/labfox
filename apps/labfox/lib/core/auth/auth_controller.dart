@@ -31,6 +31,23 @@ class AuthController extends AsyncNotifier<AuthState> {
     });
   }
 
+  /// Runs the OAuth browser flow and, on success, moves the app to signed in.
+  ///
+  /// Like [signIn], a failure (cancelled, denied, or tampered) sets the error
+  /// state and leaves the current session untouched.
+  Future<void> signInWithOAuth({
+    required String instanceUrl,
+    required String clientId,
+  }) async {
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() async {
+      final account = await ref
+          .read(authRepositoryProvider)
+          .signInWithOAuth(instanceUrl: instanceUrl, clientId: clientId);
+      return SignedIn(account);
+    });
+  }
+
   /// All connected accounts, for the switcher UI.
   List<Account> accounts() => ref.read(authRepositoryProvider).accounts();
 

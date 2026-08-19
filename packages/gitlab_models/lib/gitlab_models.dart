@@ -16,6 +16,7 @@ export 'src/label.dart';
 export 'src/merge_request.dart';
 export 'src/merge_request_approvals.dart';
 export 'src/note.dart';
+export 'src/oauth_token.dart';
 export 'src/pipeline.dart';
 export 'src/project.dart';
 export 'src/repository_entry.dart';

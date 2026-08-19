@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:dio/dio.dart';
 import 'package:gitlab_api/gitlab_api.dart';
 import 'package:test/test.dart';
 
@@ -120,4 +124,70 @@ void main() {
       expect(page.hasMore, isFalse);
     });
   });
+
+  group('GitLabClient auth header', () {
+    test('sends a PAT in the PRIVATE-TOKEN header by default', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return {'id': 1, 'username': 'u', 'name': 'U'};
+      });
+
+      await client.users.current();
+
+      expect(captured.headers['PRIVATE-TOKEN'], 'glpat-x');
+      expect(captured.headers.containsKey('Authorization'), isFalse);
+    });
+
+    test('sends an OAuth token as a Bearer Authorization header', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return {'id': 1, 'username': 'u', 'name': 'U'};
+      }, bearer: true);
+
+      await client.users.current();
+
+      expect(captured.headers['Authorization'], 'Bearer glpat-x');
+      expect(captured.headers.containsKey('PRIVATE-TOKEN'), isFalse);
+    });
+  });
+}
+
+GitLabClient _client(
+  Object? Function(RequestOptions) handler, {
+  bool bearer = false,
+}) {
+  final dio = Dio(BaseOptions(validateStatus: (s) => s != null && s < 500));
+  dio.httpClientAdapter = _Adapter(handler);
+  return GitLabClient(
+    baseUrl: 'https://gitlab.com',
+    token: 'glpat-x',
+    bearer: bearer,
+    dio: dio,
+  );
+}
+
+class _Adapter implements HttpClientAdapter {
+  _Adapter(this.handler);
+  final Object? Function(RequestOptions) handler;
+
+  @override
+  Future<ResponseBody> fetch(
+    RequestOptions options,
+    Stream<Uint8List>? requestStream,
+    Future<void>? cancelFuture,
+  ) async {
+    final body = handler(options);
+    return ResponseBody.fromString(
+      body == null ? '' : json.encode(body),
+      200,
+      headers: {
+        Headers.contentTypeHeader: [Headers.jsonContentType],
+      },
+    );
+  }
+
+  @override
+  void close({bool force = false}) {}
 }

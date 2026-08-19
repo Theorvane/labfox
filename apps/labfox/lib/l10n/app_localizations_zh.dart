@@ -53,6 +53,21 @@ class AppLocalizationsZh extends AppLocalizations {
   String get signInSubmit => '登录';
 
   @override
+  String get signInOr => '或';
+
+  @override
+  String get signInOAuthButton => '使用 GitLab 登录';
+
+  @override
+  String get signInClientIdLabel => 'OAuth 客户端 ID';
+
+  @override
+  String get signInClientIdHelp => '仅在自托管实例上使用 OAuth 时需要。';
+
+  @override
+  String get signInOAuthNeedsClientId => '请输入该实例的 OAuth 客户端 ID。';
+
+  @override
   String get signInErrorToken => '令牌被拒绝。请检查它是否正确且未过期。';
 
   @override

@@ -18,13 +18,22 @@ import 'users/users_api.dart';
 /// accounts means building a new client, never mutating this one, so a request
 /// in flight cannot end up authenticated as somebody else.
 class GitLabClient {
-  GitLabClient({required String baseUrl, required String token, Dio? dio})
-    : _dio = dio ?? Dio() {
+  /// [bearer] selects how the token is sent: a personal access token goes in
+  /// the `PRIVATE-TOKEN` header, an OAuth access token as `Authorization:
+  /// Bearer`. The rest of the client is identical.
+  GitLabClient({
+    required String baseUrl,
+    required String token,
+    bool bearer = false,
+    Dio? dio,
+  }) : _dio = dio ?? Dio() {
     _dio.options
       ..baseUrl = apiBaseUrl(baseUrl)
       ..connectTimeout = const Duration(seconds: 15)
       ..receiveTimeout = const Duration(seconds: 30)
-      ..headers['PRIVATE-TOKEN'] = token
+      ..headers[bearer ? 'Authorization' : 'PRIVATE-TOKEN'] = bearer
+          ? 'Bearer $token'
+          : token
       // GitLab returns 4xx as a normal response so error bodies can be read
       // and turned into domain exceptions rather than raw transport errors.
       ..validateStatus = (status) => status != null && status < 500;

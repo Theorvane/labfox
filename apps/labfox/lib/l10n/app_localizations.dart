@@ -188,6 +188,36 @@ abstract class AppLocalizations {
   /// **'Sign in'**
   String get signInSubmit;
 
+  /// Divider between the token and OAuth sign-in options
+  ///
+  /// In en, this message translates to:
+  /// **'or'**
+  String get signInOr;
+
+  /// Button that starts the OAuth browser sign-in
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with GitLab'**
+  String get signInOAuthButton;
+
+  /// Label for the OAuth client id field
+  ///
+  /// In en, this message translates to:
+  /// **'OAuth client ID'**
+  String get signInClientIdLabel;
+
+  /// Helper text for the OAuth client id field
+  ///
+  /// In en, this message translates to:
+  /// **'Only for OAuth on a self-hosted instance.'**
+  String get signInClientIdHelp;
+
+  /// Shown when OAuth is started without a usable client id
+  ///
+  /// In en, this message translates to:
+  /// **'Enter an OAuth client ID for this instance.'**
+  String get signInOAuthNeedsClientId;
+
   /// Shown when the instance returns 401
   ///
   /// In en, this message translates to:

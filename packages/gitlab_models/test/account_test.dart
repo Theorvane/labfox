@@ -48,5 +48,17 @@ void main() {
       const account = Account(instanceUrl: 'https://gitlab.com', user: user);
       expect(account.toJson().keys, isNot(contains('token')));
     });
+
+    test('defaults to PAT and round-trips the auth method', () {
+      const pat = Account(instanceUrl: 'https://gitlab.com', user: user);
+      expect(pat.authMethod, AuthMethod.pat);
+
+      const oauth = Account(
+        instanceUrl: 'https://gitlab.com',
+        user: user,
+        authMethod: AuthMethod.oauth,
+      );
+      expect(Account.fromJson(oauth.toJson()).authMethod, AuthMethod.oauth);
+    });
   });
 }

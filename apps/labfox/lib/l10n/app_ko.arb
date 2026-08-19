@@ -147,5 +147,10 @@
   "projectAddFavorite": "즐겨찾기에 추가",
   "projectRemoveFavorite": "즐겨찾기에서 제거",
   "homeFavorites": "즐겨찾기",
-  "homeRecents": "최근"
+  "homeRecents": "최근",
+  "signInOr": "또는",
+  "signInOAuthButton": "GitLab으로 로그인",
+  "signInClientIdLabel": "OAuth 클라이언트 ID",
+  "signInClientIdHelp": "self-hosted 인스턴스에서 OAuth를 쓸 때만 필요합니다.",
+  "signInOAuthNeedsClientId": "이 인스턴스의 OAuth 클라이언트 ID를 입력하세요."
 }

@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../../../app/router.dart';
 import '../../../core/auth/auth_controller.dart';
 import '../../../core/auth/auth_state.dart';
+import '../../../core/auth/oauth_config.dart';
 import '../../../l10n/app_localizations.dart';
 
 /// Connects an account with an instance URL and a Personal Access Token.
@@ -24,19 +25,62 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
   final _instanceController = TextEditingController(text: 'https://gitlab.com');
   final _tokenController = TextEditingController();
+  final _clientIdController = TextEditingController();
   bool _obscureToken = true;
+  String? _localError;
 
   @override
   void dispose() {
     _instanceController.dispose();
     _tokenController.dispose();
+    _clientIdController.dispose();
     super.dispose();
+  }
+
+  /// The OAuth client id to use for [instanceUrl]: an id the user entered wins,
+  /// otherwise the built-in gitlab.com id when the instance is gitlab.com.
+  String? _clientIdFor(String instanceUrl) {
+    final entered = _clientIdController.text.trim();
+    if (entered.isNotEmpty) {
+      return entered;
+    }
+    final host = Uri.tryParse(instanceUrl)?.host;
+    if (host == 'gitlab.com' && OAuthConfig.hasGitlabComClientId) {
+      return OAuthConfig.gitlabComClientId;
+    }
+    return null;
+  }
+
+  Future<void> _submitOAuth() async {
+    final l10n = AppLocalizations.of(context);
+    final instance = _instanceController.text.trim();
+    final instanceError = _validateInstance(instance, l10n);
+    if (instanceError != null) {
+      setState(() => _localError = instanceError);
+      return;
+    }
+    final clientId = _clientIdFor(instance);
+    if (clientId == null) {
+      setState(() => _localError = l10n.signInOAuthNeedsClientId);
+      return;
+    }
+    setState(() => _localError = null);
+    await ref
+        .read(authControllerProvider.notifier)
+        .signInWithOAuth(instanceUrl: instance, clientId: clientId);
+    if (!mounted || !context.mounted) {
+      return;
+    }
+    if (ref.read(authControllerProvider).valueOrNull is SignedIn) {
+      context.go(Routes.home);
+    }
   }
 
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
+    setState(() => _localError = null);
     await ref
         .read(authControllerProvider.notifier)
         .signIn(
@@ -61,6 +105,9 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     final error = authState.hasError
         ? _messageFor(authState.error!, l10n)
         : null;
+    // A local pre-flight message (e.g. a missing client id) takes precedence
+    // over the last request's error.
+    final displayError = _localError ?? error;
 
     return Scaffold(
       body: Center(
@@ -121,10 +168,22 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         ? l10n.signInTokenRequired
                         : null,
                   ),
-                  if (error != null) ...[
+                  const SizedBox(height: LabFoxSpacing.md),
+                  TextFormField(
+                    controller: _clientIdController,
+                    enabled: !isLoading,
+                    autocorrect: false,
+                    enableSuggestions: false,
+                    decoration: InputDecoration(
+                      labelText: l10n.signInClientIdLabel,
+                      helperText: l10n.signInClientIdHelp,
+                      border: const OutlineInputBorder(),
+                    ),
+                  ),
+                  if (displayError != null) ...[
                     const SizedBox(height: LabFoxSpacing.md),
                     Text(
-                      error,
+                      displayError,
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.error,
                       ),
@@ -140,6 +199,25 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                             child: CircularProgressIndicator(strokeWidth: 2),
                           )
                         : Text(l10n.signInSubmit),
+                  ),
+                  const SizedBox(height: LabFoxSpacing.md),
+                  Row(
+                    children: [
+                      const Expanded(child: Divider()),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: LabFoxSpacing.sm,
+                        ),
+                        child: Text(l10n.signInOr),
+                      ),
+                      const Expanded(child: Divider()),
+                    ],
+                  ),
+                  const SizedBox(height: LabFoxSpacing.md),
+                  OutlinedButton.icon(
+                    onPressed: isLoading ? null : _submitOAuth,
+                    icon: const Icon(Icons.open_in_browser),
+                    label: Text(l10n.signInOAuthButton),
                   ),
                 ],
               ),

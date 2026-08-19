@@ -28,21 +28,27 @@ void main() {
     return AuthRepository(
       accountStore: accountStore,
       credentialStore: credentialStore,
-      clientFactory: ({required String baseUrl, required String token}) {
-        return GitLabClient(
-          baseUrl: baseUrl,
-          token: token,
-          dio: fakeDio((options) {
-            if (token != goodToken) {
-              return (status: 401, body: {'message': '401 Unauthorized'});
-            }
-            return (
-              status: 200,
-              body: {'id': 42, 'username': 'jungwon', 'name': 'Jungwon'},
+      clientFactory:
+          ({
+            required String baseUrl,
+            required String token,
+            bool bearer = false,
+          }) {
+            return GitLabClient(
+              baseUrl: baseUrl,
+              token: token,
+              bearer: bearer,
+              dio: fakeDio((options) {
+                if (token != goodToken) {
+                  return (status: 401, body: {'message': '401 Unauthorized'});
+                }
+                return (
+                  status: 200,
+                  body: {'id': 42, 'username': 'jungwon', 'name': 'Jungwon'},
+                );
+              }),
             );
-          }),
-        );
-      },
+          },
     );
   }
 
