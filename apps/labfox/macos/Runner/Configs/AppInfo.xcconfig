@@ -8,7 +8,7 @@
 PRODUCT_NAME = labfox
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = app.labfox.labfox
+PRODUCT_BUNDLE_IDENTIFIER = com.sloki9637.labfox
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2026 app.labfox. All rights reserved.
