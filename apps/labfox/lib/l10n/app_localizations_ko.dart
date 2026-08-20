@@ -664,6 +664,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get settingsAccounts => '계정';
 
   @override
+  String get settingsPrivacyPolicy => 'Privacy policy';
+
+  @override
   String get settingsLicenses => '오픈소스 라이선스';
 
   @override

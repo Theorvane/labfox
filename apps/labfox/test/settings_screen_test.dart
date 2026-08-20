@@ -20,6 +20,11 @@ void main() {
     expect(find.text('Open source licenses'), findsOneWidget);
   });
 
+  testWidgets('lists the privacy policy entry', (tester) async {
+    await _pump(tester);
+    expect(find.text('Privacy policy'), findsOneWidget);
+  });
+
   testWidgets('opens the license page, satisfying the notice obligation', (
     tester,
   ) async {

@@ -679,6 +679,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsAccounts => 'Accounts';
 
   @override
+  String get settingsPrivacyPolicy => 'Privacy policy';
+
+  @override
   String get settingsLicenses => 'Open source licenses';
 
   @override

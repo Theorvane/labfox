@@ -1388,6 +1388,12 @@ abstract class AppLocalizations {
   /// **'Accounts'**
   String get settingsAccounts;
 
+  /// Settings entry that opens the bundled privacy policy
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get settingsPrivacyPolicy;
+
   /// Settings entry that opens the open-source license page
   ///
   /// In en, this message translates to:

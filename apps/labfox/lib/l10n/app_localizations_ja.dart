@@ -663,6 +663,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get settingsAccounts => 'アカウント';
 
   @override
+  String get settingsPrivacyPolicy => 'Privacy policy';
+
+  @override
   String get settingsLicenses => 'オープンソースライセンス';
 
   @override

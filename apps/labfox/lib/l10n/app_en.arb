@@ -826,6 +826,10 @@
   "@settingsAccounts": {
     "description": "Settings entry that opens the account switcher"
   },
+  "settingsPrivacyPolicy": "Privacy policy",
+  "@settingsPrivacyPolicy": {
+    "description": "Settings entry that opens the bundled privacy policy"
+  },
   "settingsLicenses": "Open source licenses",
   "@settingsLicenses": {
     "description": "Settings entry that opens the open-source license page"

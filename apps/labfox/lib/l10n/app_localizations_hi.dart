@@ -679,6 +679,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get settingsAccounts => 'खाते';
 
   @override
+  String get settingsPrivacyPolicy => 'Privacy policy';
+
+  @override
   String get settingsLicenses => 'ओपन सोर्स लाइसेंस';
 
   @override

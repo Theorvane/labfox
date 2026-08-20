@@ -660,6 +660,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsAccounts => '账户';
 
   @override
+  String get settingsPrivacyPolicy => 'Privacy policy';
+
+  @override
   String get settingsLicenses => '开源许可';
 
   @override

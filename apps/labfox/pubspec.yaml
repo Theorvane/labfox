@@ -43,3 +43,6 @@ flutter:
     # in-app license page shows it alongside the auto-collected dependency
     # licenses (the app is not a pub package, so it is not collected).
     - assets/LICENSE
+    # The privacy policy, rendered in Settings > Privacy policy. Synced copy
+    # of /PRIVACY.md at the repository root.
+    - assets/PRIVACY.md

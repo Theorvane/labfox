@@ -37,6 +37,13 @@ class SettingsScreen extends StatelessWidget {
           ),
           const Divider(height: 1),
           ListTile(
+            leading: const Icon(LabFoxIcons.private),
+            title: Text(l10n.settingsPrivacyPolicy),
+            trailing: const Icon(LabFoxIcons.chevron),
+            onTap: () => context.go(Routes.privacy),
+          ),
+          const Divider(height: 1),
+          ListTile(
             leading: const Icon(LabFoxIcons.document),
             title: Text(l10n.settingsLicenses),
             trailing: const Icon(LabFoxIcons.chevron),
