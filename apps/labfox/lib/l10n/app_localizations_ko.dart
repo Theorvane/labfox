@@ -664,6 +664,27 @@ class AppLocalizationsKo extends AppLocalizations {
   String get settingsAccounts => '계정';
 
   @override
+  String get settingsAppearance => 'Appearance';
+
+  @override
+  String get settingsThemeSystem => 'System';
+
+  @override
+  String get settingsThemeLight => 'Light';
+
+  @override
+  String get settingsThemeDark => 'Dark';
+
+  @override
+  String get settingsAbout => 'About';
+
+  @override
+  String get settingsVersion => 'Version';
+
+  @override
+  String get meShareProfile => 'Share profile';
+
+  @override
   String get settingsLicenses => '오픈소스 라이선스';
 
   @override

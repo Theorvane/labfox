@@ -826,6 +826,34 @@
   "@settingsAccounts": {
     "description": "Settings entry that opens the account switcher"
   },
+  "settingsAppearance": "Appearance",
+  "@settingsAppearance": {
+    "description": "Settings section for the theme choice"
+  },
+  "settingsThemeSystem": "System",
+  "@settingsThemeSystem": {
+    "description": "Theme option that follows the device"
+  },
+  "settingsThemeLight": "Light",
+  "@settingsThemeLight": {
+    "description": "Theme option forcing the light theme"
+  },
+  "settingsThemeDark": "Dark",
+  "@settingsThemeDark": {
+    "description": "Theme option forcing the dark theme"
+  },
+  "settingsAbout": "About",
+  "@settingsAbout": {
+    "description": "Settings section for app information"
+  },
+  "settingsVersion": "Version",
+  "@settingsVersion": {
+    "description": "Row showing the installed app version"
+  },
+  "meShareProfile": "Share profile",
+  "@meShareProfile": {
+    "description": "Me action that shares the user's GitLab profile link"
+  },
   "settingsLicenses": "Open source licenses",
   "@settingsLicenses": {
     "description": "Settings entry that opens the open-source license page"

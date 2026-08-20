@@ -1388,6 +1388,48 @@ abstract class AppLocalizations {
   /// **'Accounts'**
   String get settingsAccounts;
 
+  /// Settings section for the theme choice
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get settingsAppearance;
+
+  /// Theme option that follows the device
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get settingsThemeSystem;
+
+  /// Theme option forcing the light theme
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get settingsThemeLight;
+
+  /// Theme option forcing the dark theme
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get settingsThemeDark;
+
+  /// Settings section for app information
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get settingsAbout;
+
+  /// Row showing the installed app version
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get settingsVersion;
+
+  /// Me action that shares the user's GitLab profile link
+  ///
+  /// In en, this message translates to:
+  /// **'Share profile'**
+  String get meShareProfile;
+
   /// Settings entry that opens the open-source license page
   ///
   /// In en, this message translates to:
