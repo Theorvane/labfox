@@ -14,6 +14,7 @@ import '../features/home/presentation/home_screen.dart';
 import '../features/inbox/presentation/inbox_screen.dart';
 import '../features/issues/presentation/issue_detail_screen.dart';
 import '../features/issues/presentation/issues_screen.dart';
+import '../features/issues/presentation/new_issue_screen.dart';
 import '../features/jobs/presentation/job_detail_screen.dart';
 import '../features/merge_requests/presentation/merge_request_detail_screen.dart';
 import '../features/merge_requests/presentation/merge_requests_screen.dart';
@@ -64,6 +65,7 @@ abstract final class Routes {
       '/projects/$id/commits?ref=${Uri.encodeQueryComponent(ref)}';
   static String commit(int id, String sha) => '/projects/$id/commit/$sha';
   static String issues(int id) => '/projects/$id/issues';
+  static String newIssue(int id) => '/projects/$id/issues/new';
   // The user-facing issue number is the iid, not the global id.
   static String issue(int id, int iid) => '/projects/$id/issues/$iid';
   static String mergeRequests(int id) => '/projects/$id/merge_requests';
@@ -215,6 +217,12 @@ final routerProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: 'issues',
                 builder: (context, state) => IssuesScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+              ),
+              GoRoute(
+                path: 'issues/new',
+                builder: (context, state) => NewIssueScreen(
                   projectId: int.parse(state.pathParameters['id']!),
                 ),
               ),

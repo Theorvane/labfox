@@ -344,6 +344,48 @@ abstract class AppLocalizations {
   /// **'Retry'**
   String get retry;
 
+  /// Title of the create-issue screen
+  ///
+  /// In en, this message translates to:
+  /// **'New issue'**
+  String get newIssueTitle;
+
+  /// Label for the issue title field
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get newIssueTitleLabel;
+
+  /// Validation when the issue title is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a title.'**
+  String get newIssueTitleRequired;
+
+  /// Label for the issue description field
+  ///
+  /// In en, this message translates to:
+  /// **'Description (optional)'**
+  String get newIssueDescriptionLabel;
+
+  /// Button that creates the issue
+  ///
+  /// In en, this message translates to:
+  /// **'Create issue'**
+  String get newIssueSubmit;
+
+  /// Shown when creating an issue fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not create the issue. Please try again.'**
+  String get newIssueError;
+
+  /// Tooltip for the create-issue action on the issues list
+  ///
+  /// In en, this message translates to:
+  /// **'New issue'**
+  String get newIssueButton;
+
   /// Fallback title for the project overview screen
   ///
   /// In en, this message translates to:

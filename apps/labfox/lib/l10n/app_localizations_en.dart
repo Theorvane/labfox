@@ -137,6 +137,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get retry => 'Retry';
 
   @override
+  String get newIssueTitle => 'New issue';
+
+  @override
+  String get newIssueTitleLabel => 'Title';
+
+  @override
+  String get newIssueTitleRequired => 'Enter a title.';
+
+  @override
+  String get newIssueDescriptionLabel => 'Description (optional)';
+
+  @override
+  String get newIssueSubmit => 'Create issue';
+
+  @override
+  String get newIssueError => 'Could not create the issue. Please try again.';
+
+  @override
+  String get newIssueButton => 'New issue';
+
+  @override
   String get projectOverviewTitle => 'Project';
 
   @override

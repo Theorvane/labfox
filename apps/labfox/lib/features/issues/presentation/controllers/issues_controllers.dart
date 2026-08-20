@@ -75,3 +75,40 @@ final issueControllerProvider =
     AsyncNotifierProvider.family<IssueController, Issue, IssueRef>(
       IssueController.new,
     );
+
+/// Creates a new issue, then invalidates the open-issues list so it appears on
+/// return. Exposes an [AsyncValue] so the form can show progress and errors.
+class NewIssueController extends AutoDisposeAsyncNotifier<void> {
+  @override
+  void build() {}
+
+  Future<Issue> submit({
+    required int projectId,
+    required String title,
+    String? description,
+  }) async {
+    final repo = await ref.read(issuesRepositoryProvider.future);
+    if (repo == null) {
+      throw StateError('No authenticated account');
+    }
+    state = const AsyncLoading();
+    try {
+      final issue = await repo.create(
+        projectId: projectId,
+        title: title,
+        description: description,
+      );
+      state = const AsyncData(null);
+      ref.invalidate(issuesControllerProvider);
+      return issue;
+    } catch (error, stack) {
+      state = AsyncError(error, stack);
+      rethrow;
+    }
+  }
+}
+
+final newIssueControllerProvider =
+    AutoDisposeAsyncNotifierProvider<NewIssueController, void>(
+      NewIssueController.new,
+    );

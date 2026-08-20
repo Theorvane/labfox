@@ -18,4 +18,16 @@ class IssuesRepository {
   Future<Issue> get({required int projectId, required int iid}) {
     return _client.issues.get(projectId, iid: iid);
   }
+
+  Future<Issue> create({
+    required int projectId,
+    required String title,
+    String? description,
+  }) {
+    return _client.issues.create(
+      projectId,
+      title: title,
+      description: description,
+    );
+  }
 }
