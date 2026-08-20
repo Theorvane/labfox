@@ -111,7 +111,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               ),
               data: (page) {
                 if (page.items.isEmpty) {
-                  return Center(child: Text(l10n.searchEmpty));
+                  return EmptyState(
+                    icon: Icons.search_off,
+                    title: l10n.searchEmpty,
+                  );
                 }
                 return ListView.separated(
                   itemCount: page.items.length + (page.hasMore ? 1 : 0),

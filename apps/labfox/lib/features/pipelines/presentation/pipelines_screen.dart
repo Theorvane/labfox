@@ -45,7 +45,10 @@ class PipelinesScreen extends ConsumerWidget {
         ),
         data: (items) {
           if (items.isEmpty) {
-            return Center(child: Text(l10n.pipelinesEmpty));
+            return EmptyState(
+              icon: Icons.rocket_launch_outlined,
+              title: l10n.pipelinesEmpty,
+            );
           }
           return ListView.separated(
             itemCount: items.length,

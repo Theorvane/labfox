@@ -77,7 +77,7 @@ class _IssuesScreenState extends ConsumerState<IssuesScreen> {
         ),
         data: (items) {
           if (items.isEmpty) {
-            return Center(child: Text(l10n.issuesEmpty));
+            return EmptyState(icon: Icons.adjust, title: l10n.issuesEmpty);
           }
           return ListView.separated(
             itemCount: items.length,

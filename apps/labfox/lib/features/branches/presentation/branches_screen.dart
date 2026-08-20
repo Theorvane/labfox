@@ -44,7 +44,10 @@ class BranchesScreen extends ConsumerWidget {
         ),
         data: (items) {
           if (items.isEmpty) {
-            return Center(child: Text(l10n.branchesEmpty));
+            return EmptyState(
+              icon: Icons.account_tree_outlined,
+              title: l10n.branchesEmpty,
+            );
           }
           return ListView.separated(
             itemCount: items.length,
