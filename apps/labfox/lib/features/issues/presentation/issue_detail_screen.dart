@@ -151,26 +151,11 @@ class _IssueHeader extends StatelessWidget {
             StatusPill(
               label: open ? l10n.issueStateOpen : l10n.issueStateClosed,
               colors: colors,
-              icon: open ? Icons.adjust : Icons.check_circle_outline,
+              icon: open ? LabFoxIcons.issueOpen : LabFoxIcons.issueClosed,
               filled: true,
             ),
             if (issue.author != null) ...[
-              CircleAvatar(
-                radius: 9,
-                backgroundColor: status.merged.foreground,
-                backgroundImage: issue.author!.avatarUrl == null
-                    ? null
-                    : NetworkImage(issue.author!.avatarUrl!),
-                child: issue.author!.avatarUrl == null
-                    ? Text(
-                        issue.author!.name.characters.first.toUpperCase(),
-                        style: const TextStyle(
-                          fontSize: 9,
-                          color: Colors.white,
-                        ),
-                      )
-                    : null,
-              ),
+              UserAvatar(user: issue.author!),
               MetaText(issue.author!.username),
             ],
           ],

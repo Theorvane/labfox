@@ -66,7 +66,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                   textInputAction: TextInputAction.search,
                   onChanged: _onChanged,
                   decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.search),
+                    prefixIcon: const Icon(LabFoxIcons.search),
                     hintText: l10n.searchHint,
                     border: const OutlineInputBorder(),
                     isDense: true,
@@ -112,7 +112,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               data: (page) {
                 if (page.items.isEmpty) {
                   return EmptyState(
-                    icon: Icons.search_off,
+                    icon: LabFoxIcons.searchOff,
                     title: l10n.searchEmpty,
                   );
                 }
@@ -162,7 +162,7 @@ class _ResultTile extends StatelessWidget {
       final projectId = item.projectId;
       final colors = item.isOpen ? status.open : status.closed;
       return WorkTile(
-        icon: item.isOpen ? Icons.adjust : Icons.check_circle_outline,
+        icon: item.isOpen ? LabFoxIcons.issueOpen : LabFoxIcons.issueClosed,
         iconColor: colors.foreground,
         title: item.title,
         metadata: [
@@ -214,15 +214,15 @@ class _ResultTile extends StatelessWidget {
     LabFoxStatusColors s,
   ) {
     if (mr.isDraft) {
-      return (Icons.merge_outlined, s.pending, 'Draft');
+      return (LabFoxIcons.mergeRequest, s.pending, 'Draft');
     }
     if (mr.isMerged) {
-      return (Icons.merge, s.merged, 'Merged');
+      return (LabFoxIcons.merged, s.merged, 'Merged');
     }
     if (mr.isClosed) {
-      return (Icons.close, s.closed, 'Closed');
+      return (LabFoxIcons.close, s.closed, 'Closed');
     }
-    return (Icons.merge_outlined, s.open, 'Open');
+    return (LabFoxIcons.mergeRequest, s.open, 'Open');
   }
 }
 

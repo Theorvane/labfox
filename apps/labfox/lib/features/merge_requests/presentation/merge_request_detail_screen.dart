@@ -73,7 +73,7 @@ class MergeRequestDetailScreen extends ConsumerWidget {
             OutlinedButton.icon(
               onPressed: () =>
                   context.go(Routes.mergeRequestChanges(projectId, iid)),
-              icon: const Icon(Icons.difference_outlined, size: 18),
+              icon: const Icon(LabFoxIcons.diff, size: 18),
               label: Text(l10n.mrViewChanges),
             ),
             if (data.labels.isNotEmpty) ...[
@@ -200,7 +200,7 @@ class _Header extends StatelessWidget {
           children: [
             StatusPill(label: label, colors: colors, icon: icon, filled: true),
             if (mr.author != null) ...[
-              _Avatar(user: mr.author!),
+              UserAvatar(user: mr.author!),
               MetaText(mr.author!.username),
             ],
           ],
@@ -215,37 +215,15 @@ class _Header extends StatelessWidget {
     AppLocalizations l10n,
   ) {
     if (mr.isDraft) {
-      return (s.pending, l10n.mrDraft, Icons.merge_outlined);
+      return (s.pending, l10n.mrDraft, LabFoxIcons.mergeRequest);
     }
     if (mr.isMerged) {
-      return (s.merged, l10n.mrStateMerged, Icons.merge);
+      return (s.merged, l10n.mrStateMerged, LabFoxIcons.merged);
     }
     if (mr.isClosed) {
-      return (s.closed, l10n.mrStateClosed, Icons.close);
+      return (s.closed, l10n.mrStateClosed, LabFoxIcons.close);
     }
-    return (s.open, l10n.mrStateOpen, Icons.merge_outlined);
-  }
-}
-
-class _Avatar extends StatelessWidget {
-  const _Avatar({required this.user});
-
-  final User user;
-
-  @override
-  Widget build(BuildContext context) {
-    final url = user.avatarUrl;
-    return CircleAvatar(
-      radius: 9,
-      backgroundColor: LabFoxStatusColors.of(context).merged.foreground,
-      backgroundImage: url == null ? null : NetworkImage(url),
-      child: url == null
-          ? Text(
-              user.name.characters.first.toUpperCase(),
-              style: const TextStyle(fontSize: 9, color: Colors.white),
-            )
-          : null,
-    );
+    return (s.open, l10n.mrStateOpen, LabFoxIcons.mergeRequest);
   }
 }
 
@@ -270,7 +248,7 @@ class _BranchChip extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: theme.colorScheme.surfaceContainerHighest,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(LabFoxRadius.sm),
         ),
         child: Text(name, style: mono, overflow: TextOverflow.ellipsis),
       ),
@@ -286,7 +264,7 @@ class _BranchChip extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: LabFoxSpacing.sm),
           child: Icon(
             Icons.arrow_forward,
-            size: 14,
+            size: LabFoxIconSize.xs,
             color: theme.colorScheme.primary,
           ),
         ),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../tokens/icon_size.dart';
+import '../tokens/icons.dart';
+import '../tokens/radius.dart';
 import '../tokens/spacing.dart';
 
 /// A dropdown filter chip: a stadium chip showing the selected value with a
@@ -50,7 +53,7 @@ class FilterMenuChip<T> extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: theme.colorScheme.surfaceContainerHighest,
-          borderRadius: BorderRadius.circular(999),
+          borderRadius: BorderRadius.circular(LabFoxRadius.pill),
           border: Border.all(color: theme.colorScheme.outlineVariant),
         ),
         child: Row(
@@ -63,8 +66,8 @@ class FilterMenuChip<T> extends StatelessWidget {
               ),
             ),
             Icon(
-              Icons.arrow_drop_down,
-              size: 20,
+              LabFoxIcons.dropdown,
+              size: LabFoxIconSize.md,
               color: theme.colorScheme.onSurfaceVariant,
             ),
           ],

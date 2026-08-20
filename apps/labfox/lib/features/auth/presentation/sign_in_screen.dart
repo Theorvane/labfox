@@ -216,7 +216,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   const SizedBox(height: LabFoxSpacing.md),
                   OutlinedButton.icon(
                     onPressed: isLoading ? null : _submitOAuth,
-                    icon: const Icon(Icons.open_in_browser),
+                    icon: const Icon(LabFoxIcons.openInBrowser),
                     label: Text(l10n.signInOAuthButton),
                   ),
                 ],

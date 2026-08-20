@@ -70,18 +70,18 @@ class _MergeRequestsScreenState extends ConsumerState<MergeRequestsScreen> {
         actions: [
           if (_searching)
             IconButton(
-              icon: const Icon(Icons.close),
+              icon: const Icon(LabFoxIcons.close),
               tooltip: l10n.listSearchClose,
               onPressed: _closeSearch,
             )
           else ...[
             IconButton(
-              icon: const Icon(Icons.search),
+              icon: const Icon(LabFoxIcons.search),
               tooltip: l10n.searchTitle,
               onPressed: () => setState(() => _searching = true),
             ),
             IconButton(
-              icon: const Icon(Icons.add),
+              icon: const Icon(LabFoxIcons.add),
               tooltip: l10n.newMrButton,
               onPressed: () =>
                   context.go(Routes.newMergeRequest(widget.projectId)),
@@ -138,7 +138,7 @@ class _MergeRequestsScreenState extends ConsumerState<MergeRequestsScreen> {
         data: (items) {
           if (items.isEmpty) {
             return EmptyState(
-              icon: Icons.merge_outlined,
+              icon: LabFoxIcons.mergeRequest,
               title: l10n.mergeRequestsEmpty,
             );
           }
@@ -200,14 +200,14 @@ class _MergeRequestTile extends StatelessWidget {
     LabFoxStatusColors s,
   ) {
     if (mr.isDraft) {
-      return (Icons.merge_outlined, s.pending, 'Draft');
+      return (LabFoxIcons.mergeRequest, s.pending, 'Draft');
     }
     if (mr.isMerged) {
-      return (Icons.merge, s.merged, 'Merged');
+      return (LabFoxIcons.merged, s.merged, 'Merged');
     }
     if (mr.isClosed) {
-      return (Icons.close, s.closed, 'Closed');
+      return (LabFoxIcons.close, s.closed, 'Closed');
     }
-    return (Icons.merge_outlined, s.open, 'Open');
+    return (LabFoxIcons.mergeRequest, s.open, 'Open');
   }
 }

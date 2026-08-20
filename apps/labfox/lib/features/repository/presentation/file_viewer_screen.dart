@@ -41,7 +41,7 @@ class FileViewerScreen extends ConsumerWidget {
         actions: [
           if (copyable)
             IconButton(
-              icon: const Icon(Icons.copy_all_outlined),
+              icon: const Icon(LabFoxIcons.copy),
               tooltip: l10n.fileCopy,
               onPressed: () async {
                 await Clipboard.setData(ClipboardData(text: loaded.text!));

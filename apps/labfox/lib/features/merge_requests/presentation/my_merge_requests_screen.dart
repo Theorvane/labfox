@@ -105,7 +105,7 @@ class _MyMergeRequestsScreenState extends ConsumerState<MyMergeRequestsScreen> {
         data: (items) {
           if (items.isEmpty) {
             return EmptyState(
-              icon: Icons.merge_outlined,
+              icon: LabFoxIcons.mergeRequest,
               title: l10n.mergeRequestsEmpty,
             );
           }
@@ -156,14 +156,14 @@ class _MyMergeRequestsScreenState extends ConsumerState<MyMergeRequestsScreen> {
     LabFoxStatusColors s,
   ) {
     if (mr.isDraft) {
-      return (Icons.merge_outlined, s.pending, 'Draft');
+      return (LabFoxIcons.mergeRequest, s.pending, 'Draft');
     }
     if (mr.isMerged) {
-      return (Icons.merge, s.merged, 'Merged');
+      return (LabFoxIcons.merged, s.merged, 'Merged');
     }
     if (mr.isClosed) {
-      return (Icons.close, s.closed, 'Closed');
+      return (LabFoxIcons.close, s.closed, 'Closed');
     }
-    return (Icons.merge_outlined, s.open, 'Open');
+    return (LabFoxIcons.mergeRequest, s.open, 'Open');
   }
 }

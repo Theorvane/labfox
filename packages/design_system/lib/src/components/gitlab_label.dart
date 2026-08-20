@@ -2,7 +2,9 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../tokens/radius.dart';
 import '../tokens/spacing.dart';
+import '../tokens/typography.dart';
 
 /// A GitLab label chip.
 ///
@@ -30,15 +32,13 @@ class GitLabLabel extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: background,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(LabFoxRadius.pill),
       ),
       child: Text(
         name,
-        style: TextStyle(
-          color: foreground,
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-        ),
+        style: LabFoxTextRoles.of(
+          context,
+        ).chipLabel.copyWith(color: foreground),
       ),
     );
   }

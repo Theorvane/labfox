@@ -93,7 +93,10 @@ class _MyIssuesScreenState extends ConsumerState<MyIssuesScreen> {
         ),
         data: (items) {
           if (items.isEmpty) {
-            return EmptyState(icon: Icons.adjust, title: l10n.issuesEmpty);
+            return EmptyState(
+              icon: LabFoxIcons.issueOpen,
+              title: l10n.issuesEmpty,
+            );
           }
           return RefreshIndicator(
             onRefresh: () =>
@@ -116,7 +119,7 @@ class _MyIssuesScreenState extends ConsumerState<MyIssuesScreen> {
     final projectId = issue.projectId;
     final path = repoPathFromWebUrl(issue.webUrl);
     return WorkTile(
-      icon: open ? Icons.adjust : Icons.check_circle_outline,
+      icon: open ? LabFoxIcons.issueOpen : LabFoxIcons.issueClosed,
       iconColor: colors.foreground,
       title: issue.title,
       metadata: [

@@ -21,9 +21,13 @@ class AppShell extends StatelessWidget {
 
   static const _destinations = [
     (route: Routes.home, icon: Icons.home_outlined, selected: Icons.home),
-    (route: Routes.inbox, icon: Icons.inbox_outlined, selected: Icons.inbox),
-    (route: Routes.search, icon: Icons.search, selected: Icons.search),
-    (route: Routes.me, icon: Icons.person_outline, selected: Icons.person),
+    (route: Routes.inbox, icon: LabFoxIcons.inbox, selected: Icons.inbox),
+    (
+      route: Routes.search,
+      icon: LabFoxIcons.search,
+      selected: LabFoxIcons.search,
+    ),
+    (route: Routes.me, icon: LabFoxIcons.person, selected: Icons.person),
   ];
 
   List<String> _labels(AppLocalizations l10n) => [

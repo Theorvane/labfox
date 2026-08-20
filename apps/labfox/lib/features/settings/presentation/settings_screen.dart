@@ -30,28 +30,28 @@ class SettingsScreen extends StatelessWidget {
       body: ListView(
         children: [
           ListTile(
-            leading: const Icon(Icons.account_circle_outlined),
+            leading: const Icon(LabFoxIcons.account),
             title: Text(l10n.settingsAccounts),
-            trailing: const Icon(Icons.chevron_right),
+            trailing: const Icon(LabFoxIcons.chevron),
             onTap: () => context.go(Routes.accounts),
           ),
           const Divider(height: 1),
           ListTile(
-            leading: const Icon(Icons.description_outlined),
+            leading: const Icon(LabFoxIcons.document),
             title: Text(l10n.settingsLicenses),
-            trailing: const Icon(Icons.chevron_right),
+            trailing: const Icon(LabFoxIcons.chevron),
             onTap: () => showLicensePage(
               context: context,
               applicationName: _applicationName,
               applicationLegalese: _legalese,
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.all(LabFoxSpacing.lg),
+          Padding(
+            padding: const EdgeInsets.all(LabFoxSpacing.lg),
             child: Text(
               _legalese,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12),
+              style: LabFoxTextRoles.of(context).meta,
             ),
           ),
         ],

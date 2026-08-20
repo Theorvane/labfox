@@ -6,7 +6,7 @@ import 'package:gitlab_models/gitlab_models.dart';
 /// status tokens so pipeline and job rows read the same as issue and MR rows.
 (IconData, StatusColor) ciVisual(CiStatus status, LabFoxStatusColors colors) {
   return switch (status) {
-    CiStatus.success => (Icons.check_circle_outline, colors.open),
+    CiStatus.success => (LabFoxIcons.issueClosed, colors.open),
     CiStatus.failed => (Icons.cancel_outlined, colors.closed),
     CiStatus.running => (Icons.autorenew, colors.running),
     CiStatus.pending => (Icons.schedule, colors.pending),

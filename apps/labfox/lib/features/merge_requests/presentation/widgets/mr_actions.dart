@@ -53,7 +53,7 @@ class MrActions extends ConsumerWidget {
                 onPressed: busy
                     ? null
                     : () => _toggleApproval(context, ref, mrRef, approvals),
-                icon: const Icon(Icons.thumb_up_outlined, size: 18),
+                icon: const Icon(LabFoxIcons.approval, size: 18),
                 label: Text(_approveLabel(l10n, approvals)),
               ),
             ),
@@ -61,7 +61,7 @@ class MrActions extends ConsumerWidget {
             Expanded(
               child: FilledButton.icon(
                 onPressed: busy ? null : () => _startMerge(context, ref, mrRef),
-                icon: const Icon(Icons.merge, size: 18),
+                icon: const Icon(LabFoxIcons.merged, size: 18),
                 label: Text(l10n.mrMerge),
               ),
             ),
@@ -107,7 +107,7 @@ class MrActions extends ConsumerWidget {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.merge),
+              leading: const Icon(LabFoxIcons.merged),
               title: Text(l10n.mrMergeCommit),
               onTap: () => Navigator.of(context).pop(false),
             ),
@@ -218,8 +218,8 @@ class _MergeabilityLine extends StatelessWidget {
     return Row(
       children: [
         Icon(
-          mergeable ? Icons.check_circle_outline : Icons.error_outline,
-          size: 16,
+          mergeable ? LabFoxIcons.issueClosed : Icons.error_outline,
+          size: LabFoxIconSize.sm,
           color: colors.foreground,
         ),
         const SizedBox(width: LabFoxSpacing.xs),
@@ -247,9 +247,9 @@ class _ApprovalSummary extends StatelessWidget {
       children: [
         Icon(
           approvals.approvedCount >= approvals.approvalsRequired
-              ? Icons.check_circle_outline
+              ? LabFoxIcons.issueClosed
               : Icons.pending_outlined,
-          size: 16,
+          size: LabFoxIconSize.sm,
           color: LabFoxColors.pending,
         ),
         const SizedBox(width: LabFoxSpacing.xs),

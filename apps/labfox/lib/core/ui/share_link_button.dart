@@ -1,3 +1,4 @@
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -19,7 +20,7 @@ class ShareLinkButton extends StatelessWidget {
     }
     final l10n = AppLocalizations.of(context);
     return IconButton(
-      icon: const Icon(Icons.ios_share),
+      icon: const Icon(LabFoxIcons.share),
       tooltip: l10n.shareLink,
       onPressed: () =>
           SharePlus.instance.share(ShareParams(uri: Uri.parse(link))),

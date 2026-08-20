@@ -121,7 +121,11 @@ class _PipelineHeader extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 2),
-                child: Icon(icon, size: 28, color: colors.foreground),
+                child: Icon(
+                  icon,
+                  size: LabFoxIconSize.lg,
+                  color: colors.foreground,
+                ),
               ),
               const SizedBox(width: LabFoxSpacing.md),
               Expanded(
@@ -207,7 +211,7 @@ class _Stage extends StatelessWidget {
               Text(
                 '${jobs.length}',
                 style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.hintColor,
+                  color: theme.colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -228,7 +232,7 @@ class _Stage extends StatelessWidget {
                     dot: true,
                   ),
                 ],
-                trailing: const Icon(Icons.chevron_right, size: 18),
+                trailing: const Icon(LabFoxIcons.chevron, size: 18),
                 onTap: () => context.go(Routes.job(projectId, job.id)),
               );
             },
@@ -258,7 +262,7 @@ class _PipelineActions extends ConsumerWidget {
       if (pipeline.canRetry)
         OutlinedButton.icon(
           onPressed: busy ? null : () => _run(context, l10n, notifier.retry),
-          icon: const Icon(Icons.refresh, size: 18),
+          icon: const Icon(LabFoxIcons.refresh, size: 18),
           label: Text(l10n.pipelineActionRetry),
         ),
       if (pipeline.canCancel)
