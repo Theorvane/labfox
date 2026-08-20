@@ -68,18 +68,18 @@ class _IssuesScreenState extends ConsumerState<IssuesScreen> {
         actions: [
           if (_searching)
             IconButton(
-              icon: const Icon(Icons.close),
+              icon: const Icon(LabFoxIcons.close),
               tooltip: l10n.listSearchClose,
               onPressed: _closeSearch,
             )
           else ...[
             IconButton(
-              icon: const Icon(Icons.search),
+              icon: const Icon(LabFoxIcons.search),
               tooltip: l10n.searchTitle,
               onPressed: () => setState(() => _searching = true),
             ),
             IconButton(
-              icon: const Icon(Icons.add),
+              icon: const Icon(LabFoxIcons.add),
               tooltip: l10n.newIssueButton,
               onPressed: () => context.go(Routes.newIssue(widget.projectId)),
             ),
@@ -129,7 +129,10 @@ class _IssuesScreenState extends ConsumerState<IssuesScreen> {
         ),
         data: (items) {
           if (items.isEmpty) {
-            return EmptyState(icon: Icons.adjust, title: l10n.issuesEmpty);
+            return EmptyState(
+              icon: LabFoxIcons.issueOpen,
+              title: l10n.issuesEmpty,
+            );
           }
           return RefreshIndicator(
             onRefresh: () =>
@@ -163,7 +166,7 @@ class _IssueTile extends StatelessWidget {
     final open = issue.isOpen;
     final colors = open ? status.open : status.closed;
     return WorkTile(
-      icon: open ? Icons.adjust : Icons.check_circle_outline,
+      icon: open ? LabFoxIcons.issueOpen : LabFoxIcons.issueClosed,
       iconColor: colors.foreground,
       title: issue.title,
       metadata: [

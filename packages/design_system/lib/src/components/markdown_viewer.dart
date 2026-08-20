@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:markdown/markdown.dart' as md;
 
+import '../tokens/radius.dart';
 import '../tokens/spacing.dart';
 
 /// Renders a safe subset of Markdown.
@@ -141,7 +142,7 @@ class _MarkdownViewerState extends State<MarkdownViewer> {
     padding: const EdgeInsets.all(LabFoxSpacing.sm),
     decoration: BoxDecoration(
       color: theme.colorScheme.surfaceContainerHighest,
-      borderRadius: BorderRadius.circular(6),
+      borderRadius: BorderRadius.circular(LabFoxRadius.xs),
     ),
     child: Text(
       text.trimRight(),

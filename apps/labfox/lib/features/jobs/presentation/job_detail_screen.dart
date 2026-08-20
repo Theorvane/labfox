@@ -35,7 +35,7 @@ class JobDetailScreen extends ConsumerWidget {
         actions: [
           ShareLinkButton(url: detail.valueOrNull?.webUrl),
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(LabFoxIcons.refresh),
             tooltip: l10n.jobRefresh,
             onPressed: () {
               ref.invalidate(jobDetailProvider(jobRef));
@@ -101,7 +101,7 @@ class _JobHeader extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 2),
-          child: Icon(icon, size: 26, color: colors.foreground),
+          child: Icon(icon, size: LabFoxIconSize.lg, color: colors.foreground),
         ),
         const SizedBox(width: LabFoxSpacing.md),
         Expanded(
@@ -176,7 +176,7 @@ class _JobActionBar extends ConsumerWidget {
     final buttons = <Widget>[
       if (job.canRetry)
         _ActionButton(
-          icon: Icons.refresh,
+          icon: LabFoxIcons.refresh,
           label: l10n.jobActionRetry,
           busy: busy,
           run: notifier.retry,

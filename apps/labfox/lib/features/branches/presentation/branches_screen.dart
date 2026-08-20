@@ -33,7 +33,7 @@ class BranchesScreen extends ConsumerWidget {
         title: Text(l10n.branchesTitle),
         actions: [
           IconButton(
-            icon: const Icon(Icons.add),
+            icon: const Icon(LabFoxIcons.add),
             tooltip: l10n.newBranchButton,
             onPressed: defaultBranch == null
                 ? null
@@ -64,7 +64,7 @@ class BranchesScreen extends ConsumerWidget {
         data: (items) {
           if (items.isEmpty) {
             return EmptyState(
-              icon: Icons.account_tree_outlined,
+              icon: LabFoxIcons.branch,
               title: l10n.branchesEmpty,
             );
           }
@@ -90,14 +90,18 @@ class BranchesScreen extends ConsumerWidget {
   ) {
     final theme = Theme.of(context);
     return WorkTile(
-      icon: Icons.account_tree_outlined,
+      icon: LabFoxIcons.branch,
       title: branch.name,
       metadata: [
         if (branch.isDefault) MetaText(l10n.branchDefault),
         if (branch.isProtected)
-          Icon(Icons.lock_outline, size: 14, color: theme.hintColor),
+          Icon(
+            LabFoxIcons.private,
+            size: LabFoxIconSize.xs,
+            color: theme.colorScheme.onSurfaceVariant,
+          ),
       ],
-      trailing: const Icon(Icons.chevron_right),
+      trailing: const Icon(LabFoxIcons.chevron),
       onTap: () => context.go(Routes.repository(projectId, branch.name)),
     );
   }

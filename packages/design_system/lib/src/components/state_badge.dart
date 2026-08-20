@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../tokens/icon_size.dart';
+import '../tokens/radius.dart';
 import '../tokens/spacing.dart';
 import '../tokens/status_colors.dart';
+import '../tokens/typography.dart';
 
 /// The lifecycle state of an issue or merge request.
 ///
@@ -36,20 +39,18 @@ class StateBadge extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: colors.container,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(LabFoxRadius.pill),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 14, color: colors.foreground),
+          Icon(icon, size: LabFoxIconSize.xs, color: colors.foreground),
           const SizedBox(width: LabFoxSpacing.xs),
           Text(
             label,
-            style: TextStyle(
-              color: colors.foreground,
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-            ),
+            style: LabFoxTextRoles.of(
+              context,
+            ).chipLabel.copyWith(color: colors.foreground),
           ),
         ],
       ),

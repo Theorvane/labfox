@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../tokens/icon_size.dart';
+import '../tokens/radius.dart';
 import '../tokens/spacing.dart';
+import '../tokens/typography.dart';
 
 /// A flat launcher row: a filled colour tile with an icon, a label, and an
 /// optional trailing count — the shortcut shape the Home "My work" section and
@@ -30,7 +33,7 @@ class LauncherTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final roles = LabFoxTextRoles.of(context);
     return InkWell(
       onTap: onTap,
       child: ConstrainedBox(
@@ -49,26 +52,13 @@ class LauncherTile extends StatelessWidget {
                 height: 34,
                 decoration: BoxDecoration(
                   color: color,
-                  borderRadius: BorderRadius.circular(9),
+                  borderRadius: BorderRadius.circular(LabFoxRadius.sm),
                 ),
-                child: Icon(icon, size: 19, color: Colors.white),
+                child: Icon(icon, size: LabFoxIconSize.md, color: Colors.white),
               ),
               const SizedBox(width: LabFoxSpacing.md),
-              Expanded(
-                child: Text(
-                  label,
-                  style: theme.textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              if (count != null)
-                Text(
-                  '$count',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.hintColor,
-                  ),
-                ),
+              Expanded(child: Text(label, style: roles.rowTitle)),
+              if (count != null) Text('$count', style: roles.meta),
             ],
           ),
         ),

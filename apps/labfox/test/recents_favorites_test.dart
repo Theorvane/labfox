@@ -170,12 +170,15 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.byIcon(Icons.star_border), findsOneWidget);
+      expect(
+        find.widgetWithIcon(IconButton, Icons.star_border),
+        findsOneWidget,
+      );
 
-      await tester.tap(find.byIcon(Icons.star_border));
+      await tester.tap(find.widgetWithIcon(IconButton, Icons.star_border));
       await tester.pumpAndSettle();
 
-      expect(find.byIcon(Icons.star), findsOneWidget);
+      expect(find.widgetWithIcon(IconButton, Icons.star), findsOneWidget);
     });
 
     testWidgets('opening the project records it as recent', (tester) async {

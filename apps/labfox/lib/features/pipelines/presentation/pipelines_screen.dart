@@ -46,7 +46,7 @@ class PipelinesScreen extends ConsumerWidget {
         data: (items) {
           if (items.isEmpty) {
             return EmptyState(
-              icon: Icons.rocket_launch_outlined,
+              icon: LabFoxIcons.pipeline,
               title: l10n.pipelinesEmpty,
             );
           }
@@ -91,7 +91,7 @@ class _PipelineTile extends StatelessWidget {
         if (pipeline.createdAt != null)
           MetaText(DateFormat.yMMMd().format(pipeline.createdAt!.toLocal())),
       ],
-      trailing: const Icon(Icons.chevron_right),
+      trailing: const Icon(LabFoxIcons.chevron),
       onTap: onTap,
     );
   }

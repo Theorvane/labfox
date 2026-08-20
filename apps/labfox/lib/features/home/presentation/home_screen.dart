@@ -27,7 +27,7 @@ class HomeScreen extends ConsumerWidget {
         title: Text(l10n.homeTitle),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search),
+            icon: const Icon(LabFoxIcons.search),
             tooltip: l10n.searchTitle,
             onPressed: () => context.go(Routes.search),
           ),
@@ -76,30 +76,30 @@ class _MyWork extends ConsumerWidget {
           padding: const EdgeInsets.symmetric(horizontal: LabFoxSpacing.md),
           child: Text(
             l10n.homeMyWork,
-            style: Theme.of(context).textTheme.titleSmall,
+            style: LabFoxTextRoles.of(context).sectionHeader,
           ),
         ),
         const SizedBox(height: LabFoxSpacing.xs),
         LauncherTile(
-          icon: Icons.adjust,
+          icon: LabFoxIcons.issueOpen,
           color: status.open.foreground,
           label: l10n.issuesTitle,
           onTap: () => context.go(Routes.myIssues),
         ),
         LauncherTile(
-          icon: Icons.merge_outlined,
+          icon: LabFoxIcons.mergeRequest,
           color: status.merged.foreground,
           label: l10n.mergeRequestsTitle,
           onTap: () => context.go(Routes.myMergeRequests),
         ),
         LauncherTile(
-          icon: Icons.folder_outlined,
+          icon: LabFoxIcons.project,
           color: status.running.foreground,
           label: l10n.homeProjects,
           onTap: () => context.go(Routes.projects),
         ),
         LauncherTile(
-          icon: Icons.inbox_outlined,
+          icon: LabFoxIcons.inbox,
           color: status.warning.foreground,
           label: l10n.homeInbox,
           onTap: () => context.go(Routes.inbox),
@@ -135,7 +135,7 @@ class _ProjectSection extends ConsumerWidget {
             padding: const EdgeInsets.only(bottom: LabFoxSpacing.sm),
             child: Text(
               favorites ? l10n.homeFavorites : l10n.homeRecents,
-              style: Theme.of(context).textTheme.titleSmall,
+              style: LabFoxTextRoles.of(context).sectionHeader,
             ),
           ),
           Card(

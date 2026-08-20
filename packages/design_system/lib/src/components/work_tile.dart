@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../tokens/icon_size.dart';
 import '../tokens/spacing.dart';
+import '../tokens/typography.dart';
 
 /// A dense list row for a unit of work — an issue, merge request, to-do, or
 /// search hit.
@@ -36,6 +38,7 @@ class WorkTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final roles = LabFoxTextRoles.of(context);
 
     return InkWell(
       onTap: onTap,
@@ -49,7 +52,11 @@ class WorkTile extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 1, right: LabFoxSpacing.sm),
-              child: Icon(icon, size: 20, color: iconColor ?? theme.hintColor),
+              child: Icon(
+                icon,
+                size: LabFoxIconSize.md,
+                color: iconColor ?? theme.colorScheme.onSurfaceVariant,
+              ),
             ),
             Expanded(
               child: Column(
@@ -59,16 +66,13 @@ class WorkTile extends StatelessWidget {
                     title,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      height: 1.3,
-                    ),
+                    style: roles.rowTitle,
                   ),
                   if (metadata.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(top: LabFoxSpacing.xs),
                       child: DefaultTextStyle.merge(
-                        style: theme.textTheme.bodySmall!,
+                        style: roles.meta,
                         child: Wrap(
                           spacing: LabFoxSpacing.sm,
                           runSpacing: LabFoxSpacing.xs,

@@ -71,7 +71,7 @@ class CommitDetailScreen extends ConsumerWidget {
             const SizedBox(height: LabFoxSpacing.md),
             OutlinedButton.icon(
               onPressed: () => context.go(Routes.commitChanges(projectId, sha)),
-              icon: const Icon(Icons.difference_outlined, size: 18),
+              icon: const Icon(LabFoxIcons.diff, size: 18),
               label: Text(AppLocalizations.of(context).commitViewChanges),
             ),
             if (c.stats != null) ...[

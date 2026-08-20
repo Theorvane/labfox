@@ -40,12 +40,12 @@ class RepositoryBrowserScreen extends ConsumerWidget {
           // labels which ref is being browsed.
           TextButton.icon(
             onPressed: () => context.go(Routes.branches(projectId)),
-            icon: const Icon(Icons.account_tree_outlined, size: 16),
+            icon: const Icon(LabFoxIcons.branch, size: 16),
             label: Text(ref, overflow: TextOverflow.ellipsis),
           ),
           IconButton(
             tooltip: l10n.commitsTitle,
-            icon: const Icon(Icons.history),
+            icon: const Icon(LabFoxIcons.history),
             onPressed: () => context.go(Routes.commits(projectId, ref)),
           ),
         ],
@@ -86,13 +86,11 @@ class RepositoryBrowserScreen extends ConsumerWidget {
   Widget _entryTile(BuildContext context, RepositoryEntry entry) {
     return ListTile(
       leading: Icon(
-        entry.isDirectory
-            ? Icons.folder_outlined
-            : Icons.insert_drive_file_outlined,
+        entry.isDirectory ? LabFoxIcons.project : LabFoxIcons.file,
         color: entry.isDirectory ? LabFoxColors.orange : LabFoxColors.pending,
       ),
       title: Text(entry.name, maxLines: 1, overflow: TextOverflow.ellipsis),
-      trailing: entry.isDirectory ? const Icon(Icons.chevron_right) : null,
+      trailing: entry.isDirectory ? const Icon(LabFoxIcons.chevron) : null,
       onTap: () {
         if (entry.isDirectory) {
           context.go(Routes.repositoryPath(projectId, ref, entry.path));

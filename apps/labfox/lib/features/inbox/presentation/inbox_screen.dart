@@ -37,7 +37,7 @@ class _InboxScreenState extends ConsumerState<InboxScreen> {
         actions: [
           if (_pending && (todos.valueOrNull?.isNotEmpty ?? false))
             IconButton(
-              icon: const Icon(Icons.done_all),
+              icon: const Icon(LabFoxIcons.doneAll),
               tooltip: l10n.inboxMarkAllDone,
               onPressed: () => _markAllDone(context),
             ),
@@ -186,7 +186,7 @@ class _TodoTile extends StatelessWidget {
       trailing: onMarkDone == null
           ? null
           : IconButton(
-              icon: const Icon(Icons.check),
+              icon: const Icon(LabFoxIcons.check),
               tooltip: l10n.inboxMarkDone,
               onPressed: onMarkDone,
             ),
@@ -220,13 +220,13 @@ class _TodoTile extends StatelessWidget {
   static IconData _iconFor(String? targetType) {
     switch (targetType) {
       case 'Issue':
-        return Icons.adjust;
+        return LabFoxIcons.issueOpen;
       case 'MergeRequest':
-        return Icons.merge_outlined;
+        return LabFoxIcons.mergeRequest;
       case 'Commit':
-        return Icons.commit;
+        return LabFoxIcons.commit;
       default:
-        return Icons.notifications_outlined;
+        return LabFoxIcons.notification;
     }
   }
 
@@ -262,7 +262,10 @@ class _DismissBackground extends StatelessWidget {
       color: theme.colorScheme.primaryContainer,
       alignment: Alignment.centerRight,
       padding: const EdgeInsets.symmetric(horizontal: LabFoxSpacing.lg),
-      child: Icon(Icons.check, color: theme.colorScheme.onPrimaryContainer),
+      child: Icon(
+        LabFoxIcons.check,
+        color: theme.colorScheme.onPrimaryContainer,
+      ),
     );
   }
 }
@@ -280,10 +283,14 @@ class _EmptyState extends StatelessWidget {
     return ListView(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 96),
+          padding: const EdgeInsets.only(top: LabFoxSpacing.xxl * 2),
           child: Column(
             children: [
-              Icon(Icons.done_all, size: 48, color: theme.hintColor),
+              Icon(
+                LabFoxIcons.doneAll,
+                size: LabFoxIconSize.xl,
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
               const SizedBox(height: LabFoxSpacing.md),
               Text(message, style: theme.textTheme.bodyMedium),
             ],
@@ -309,7 +316,7 @@ class _ErrorState extends StatelessWidget {
           padding: const EdgeInsets.all(LabFoxSpacing.lg),
           child: Column(
             children: [
-              const SizedBox(height: 72),
+              const SizedBox(height: LabFoxSpacing.xxl + LabFoxSpacing.lg),
               Text(message, textAlign: TextAlign.center),
               const SizedBox(height: LabFoxSpacing.md),
               FilledButton(onPressed: onRetry, child: Text(l10n.retry)),

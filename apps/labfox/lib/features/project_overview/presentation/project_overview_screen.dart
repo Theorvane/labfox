@@ -59,7 +59,9 @@ class _ProjectOverviewScreenState extends ConsumerState<ProjectOverviewScreen> {
         actions: [
           if (project != null)
             IconButton(
-              icon: Icon(isFavorite ? Icons.star : Icons.star_border),
+              icon: Icon(
+                isFavorite ? LabFoxIcons.star : LabFoxIcons.starBorder,
+              ),
               tooltip: isFavorite
                   ? l10n.projectRemoveFavorite
                   : l10n.projectAddFavorite,
@@ -133,20 +135,20 @@ class _Categories extends StatelessWidget {
           onTap: () => context.go(Routes.issues(project.id)),
         ),
         LauncherTile(
-          icon: Icons.merge_outlined,
+          icon: LabFoxIcons.mergeRequest,
           color: status.merged.foreground,
           label: l10n.projectOverviewMergeRequests,
           onTap: () => context.go(Routes.mergeRequests(project.id)),
         ),
         LauncherTile(
-          icon: Icons.rocket_launch_outlined,
+          icon: LabFoxIcons.pipeline,
           color: status.running.foreground,
           label: l10n.projectOverviewPipelines,
           onTap: () => context.go(Routes.pipelines(project.id)),
         ),
         if (branch != null)
           LauncherTile(
-            icon: Icons.history,
+            icon: LabFoxIcons.history,
             color: status.pending.foreground,
             label: l10n.projectOverviewCommits,
             onTap: () => context.go(Routes.commits(project.id, branch)),
@@ -184,18 +186,18 @@ class _CodeSection extends StatelessWidget {
           ),
           child: Text(
             l10n.projectOverviewCode,
-            style: Theme.of(context).textTheme.titleSmall,
+            style: LabFoxTextRoles.of(context).sectionHeader,
           ),
         ),
         const SizedBox(height: LabFoxSpacing.xs),
         LauncherTile(
-          icon: Icons.account_tree_outlined,
+          icon: LabFoxIcons.branch,
           color: status.pending.foreground,
           label: branch,
           onTap: () => context.go(Routes.branches(project.id)),
         ),
         LauncherTile(
-          icon: Icons.code,
+          icon: LabFoxIcons.code,
           color: status.pending.foreground,
           label: l10n.projectOverviewBrowseCode,
           onTap: () => context.go(Routes.repository(project.id, branch)),
@@ -225,9 +227,9 @@ class _Header extends StatelessWidget {
             if (project.visibility != null) ...[
               Icon(
                 project.visibility == 'private'
-                    ? Icons.lock_outline
-                    : Icons.public,
-                size: 16,
+                    ? LabFoxIcons.private
+                    : LabFoxIcons.public,
+                size: LabFoxIconSize.sm,
                 color: LabFoxColors.pending,
               ),
               const SizedBox(width: LabFoxSpacing.xs),
@@ -235,8 +237,8 @@ class _Header extends StatelessWidget {
               const SizedBox(width: LabFoxSpacing.md),
             ],
             const Icon(
-              Icons.star_outline,
-              size: 16,
+              LabFoxIcons.starBorder,
+              size: LabFoxIconSize.sm,
               color: LabFoxColors.pending,
             ),
             const SizedBox(width: LabFoxSpacing.xs),
@@ -244,8 +246,8 @@ class _Header extends StatelessWidget {
             if (project.forksCount != null) ...[
               const SizedBox(width: LabFoxSpacing.md),
               const Icon(
-                Icons.call_split,
-                size: 16,
+                LabFoxIcons.fork,
+                size: LabFoxIconSize.sm,
                 color: LabFoxColors.pending,
               ),
               const SizedBox(width: LabFoxSpacing.xs),

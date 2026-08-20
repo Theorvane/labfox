@@ -1,3 +1,4 @@
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
@@ -56,15 +57,13 @@ class MetaText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Text(
       text,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: theme.textTheme.bodySmall?.copyWith(
-        color: theme.hintColor,
-        fontFeatures: const [FontFeature.tabularFigures()],
-      ),
+      style: LabFoxTextRoles.of(
+        context,
+      ).meta.copyWith(fontFeatures: const [FontFeature.tabularFigures()]),
     );
   }
 }
@@ -80,16 +79,17 @@ class CommentCount extends StatelessWidget {
     if (count <= 0) {
       return const SizedBox.shrink();
     }
-    final theme = Theme.of(context);
+    final roles = LabFoxTextRoles.of(context);
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(Icons.mode_comment_outlined, size: 13, color: theme.hintColor),
-        const SizedBox(width: 3),
-        Text(
-          '$count',
-          style: theme.textTheme.bodySmall?.copyWith(color: theme.hintColor),
+        Icon(
+          LabFoxIcons.comment,
+          size: LabFoxIconSize.xs,
+          color: roles.meta.color,
         ),
+        const SizedBox(width: 3),
+        Text('$count', style: roles.meta),
       ],
     );
   }
@@ -144,16 +144,15 @@ class _Chip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
         color: background,
-        borderRadius: BorderRadius.circular(999),
+        borderRadius: BorderRadius.circular(LabFoxRadius.pill),
       ),
       child: Text(
         label.name,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: theme.textTheme.labelSmall?.copyWith(
-          color: foreground,
-          fontWeight: FontWeight.w600,
-        ),
+        style: LabFoxTextRoles.of(
+          context,
+        ).chipLabel.copyWith(color: foreground),
       ),
     );
   }

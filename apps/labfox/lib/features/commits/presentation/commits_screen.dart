@@ -33,7 +33,10 @@ class CommitsScreen extends ConsumerWidget {
         ),
         data: (items) {
           if (items.isEmpty) {
-            return EmptyState(icon: Icons.commit, title: l10n.commitsEmpty);
+            return EmptyState(
+              icon: LabFoxIcons.commit,
+              title: l10n.commitsEmpty,
+            );
           }
           return RefreshIndicator(
             onRefresh: () =>
@@ -63,7 +66,7 @@ class _CommitTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WorkTile(
-      icon: Icons.commit,
+      icon: LabFoxIcons.commit,
       title: commit.title,
       metadata: [
         MetaText(commit.shortId),
@@ -71,7 +74,7 @@ class _CommitTile extends StatelessWidget {
         if (commit.authoredDate != null)
           MetaText(DateFormat.yMMMd().format(commit.authoredDate!.toLocal())),
       ],
-      trailing: const Icon(Icons.chevron_right),
+      trailing: const Icon(LabFoxIcons.chevron),
       onTap: onTap,
     );
   }

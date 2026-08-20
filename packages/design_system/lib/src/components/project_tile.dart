@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../tokens/colors.dart';
+import '../tokens/icon_size.dart';
+import '../tokens/icons.dart';
+import '../tokens/radius.dart';
 import '../tokens/spacing.dart';
+import '../tokens/typography.dart';
 
 /// A project in a list, shaped like a repository card: a leading avatar, the
 /// name, its path and description, and a footer of stars and visibility.
@@ -36,7 +39,7 @@ class ProjectTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final roles = LabFoxTextRoles.of(context);
     final hasDescription =
         description != null && description!.trim().isNotEmpty;
 
@@ -60,17 +63,13 @@ class ProjectTile extends StatelessWidget {
                     name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: roles.rowTitle,
                   ),
                   Text(
                     path,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.hintColor,
-                    ),
+                    style: roles.meta,
                   ),
                   if (hasDescription)
                     Padding(
@@ -79,7 +78,7 @@ class ProjectTile extends StatelessWidget {
                         description!,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.bodySmall,
+                        style: roles.body.copyWith(fontSize: 13),
                       ),
                     ),
                   _Footer(starCount: starCount, visibility: visibility),
@@ -110,7 +109,7 @@ class _Avatar extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: theme.colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(9),
+        borderRadius: BorderRadius.circular(LabFoxRadius.sm),
         image: avatarUrl == null
             ? null
             : DecorationImage(
@@ -123,7 +122,7 @@ class _Avatar extends StatelessWidget {
               initial,
               style: theme.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.w700,
-                color: theme.hintColor,
+                color: theme.colorScheme.onSurfaceVariant,
               ),
             )
           : null,
@@ -139,17 +138,16 @@ class _Footer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final items = <Widget>[
       if (starCount > 0)
-        _FooterItem(icon: Icons.star_outline, label: '$starCount'),
+        _FooterItem(icon: LabFoxIcons.starBorder, label: '$starCount'),
       if (visibility != null)
         _FooterItem(
           icon: visibility == 'private'
-              ? Icons.lock_outline
+              ? LabFoxIcons.private
               : (visibility == 'internal'
                     ? Icons.shield_outlined
-                    : Icons.public),
+                    : LabFoxIcons.public),
           label: visibility!,
         ),
     ];
@@ -159,7 +157,7 @@ class _Footer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: LabFoxSpacing.xs),
       child: DefaultTextStyle.merge(
-        style: theme.textTheme.labelMedium!.copyWith(color: theme.hintColor),
+        style: LabFoxTextRoles.of(context).meta,
         child: Wrap(spacing: LabFoxSpacing.md, children: items),
       ),
     );
@@ -177,7 +175,11 @@ class _FooterItem extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 15, color: LabFoxColors.pending),
+        Icon(
+          icon,
+          size: LabFoxIconSize.sm,
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
+        ),
         const SizedBox(width: LabFoxSpacing.xs),
         Text(label),
       ],

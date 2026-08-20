@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../tokens/colors.dart';
+import '../tokens/radius.dart';
 import '../tokens/spacing.dart';
 import '../tokens/status_colors.dart';
 
@@ -96,7 +97,7 @@ abstract final class LabFoxTheme {
         color: scheme.surface,
         surfaceTintColor: Colors.transparent,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(LabFoxRadius.lg),
           side: BorderSide(color: scheme.outlineVariant),
         ),
       ),
@@ -108,7 +109,7 @@ abstract final class LabFoxTheme {
         style: FilledButton.styleFrom(
           minimumSize: const Size(0, LabFoxSpacing.minTouchTarget),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(LabFoxRadius.md),
           ),
           textStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
         ),
@@ -118,7 +119,7 @@ abstract final class LabFoxTheme {
           minimumSize: const Size(0, LabFoxSpacing.minTouchTarget),
           side: BorderSide(color: scheme.outline),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(LabFoxRadius.md),
           ),
           textStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
         ),
@@ -127,15 +128,15 @@ abstract final class LabFoxTheme {
         filled: true,
         fillColor: scheme.surfaceContainerHighest,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(LabFoxRadius.md),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(LabFoxRadius.md),
           borderSide: BorderSide(color: scheme.outlineVariant),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(LabFoxRadius.md),
           borderSide: BorderSide(color: scheme.primary, width: 1.6),
         ),
       ),

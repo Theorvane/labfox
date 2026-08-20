@@ -64,12 +64,18 @@ class _FileDiffCard extends StatelessWidget {
           padding: const EdgeInsets.all(LabFoxSpacing.sm),
           child: Row(
             children: [
-              Icon(_icon(), size: 16, color: scheme.onSurfaceVariant),
+              Icon(
+                _icon(),
+                size: LabFoxIconSize.sm,
+                color: scheme.onSurfaceVariant,
+              ),
               const SizedBox(width: LabFoxSpacing.sm),
               Expanded(
                 child: Text(
                   file.displayPath,
-                  style: const TextStyle(fontFamily: 'monospace', fontSize: 13),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(fontFamily: 'monospace'),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
@@ -88,7 +94,7 @@ class _FileDiffCard extends StatelessWidget {
 
   IconData _icon() {
     if (file.isNew) {
-      return Icons.add;
+      return LabFoxIcons.add;
     }
     if (file.isDeleted) {
       return Icons.remove;
@@ -96,6 +102,6 @@ class _FileDiffCard extends StatelessWidget {
     if (file.isRenamed) {
       return Icons.drive_file_rename_outline;
     }
-    return Icons.edit_outlined;
+    return LabFoxIcons.edit;
   }
 }

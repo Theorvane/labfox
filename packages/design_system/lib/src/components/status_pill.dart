@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../tokens/icon_size.dart';
+import '../tokens/radius.dart';
 import '../tokens/spacing.dart';
 import '../tokens/status_colors.dart';
+import '../tokens/typography.dart';
 
 /// A soft status chip — a rounded pill filled with a status container colour,
 /// its label (and optional dot or icon) in the matching foreground.
@@ -45,7 +48,7 @@ class StatusPill extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: background,
-        borderRadius: BorderRadius.circular(999),
+        borderRadius: BorderRadius.circular(LabFoxRadius.pill),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -58,7 +61,7 @@ class StatusPill extends StatelessWidget {
             if (icon != null)
               Padding(
                 padding: const EdgeInsets.only(right: 4),
-                child: Icon(icon, size: 12, color: foreground),
+                child: Icon(icon, size: LabFoxIconSize.xs, color: foreground),
               )
             else if (dot)
               Padding(
@@ -73,11 +76,9 @@ class StatusPill extends StatelessWidget {
               ),
             Text(
               label,
-              style: TextStyle(
-                color: foreground,
-                fontSize: 11.5,
-                fontWeight: FontWeight.w600,
-              ),
+              style: LabFoxTextRoles.of(
+                context,
+              ).chipLabel.copyWith(color: foreground),
             ),
           ],
         ),

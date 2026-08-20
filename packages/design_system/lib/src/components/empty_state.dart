@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../tokens/icon_size.dart';
 import '../tokens/spacing.dart';
+import '../tokens/typography.dart';
 
 /// A centred empty-list placeholder: a muted glyph, a bold headline, and an
 /// optional supporting line and action.
@@ -32,30 +34,27 @@ class EmptyState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final roles = LabFoxTextRoles.of(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(LabFoxSpacing.xl),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: 40, color: theme.hintColor),
+            Icon(
+              icon,
+              size: LabFoxIconSize.xl,
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
             const SizedBox(height: LabFoxSpacing.md),
             Text(
               title,
               textAlign: TextAlign.center,
-              style: theme.textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
+              style: roles.sectionHeader,
             ),
             if (message != null) ...[
               const SizedBox(height: LabFoxSpacing.xs),
-              Text(
-                message!,
-                textAlign: TextAlign.center,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.hintColor,
-                ),
-              ),
+              Text(message!, textAlign: TextAlign.center, style: roles.meta),
             ],
             if (action != null) ...[
               const SizedBox(height: LabFoxSpacing.md),

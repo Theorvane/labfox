@@ -30,7 +30,7 @@ class AccountsScreen extends ConsumerWidget {
               leading: Icon(
                 account.id == active?.id
                     ? Icons.check_circle
-                    : Icons.account_circle_outlined,
+                    : LabFoxIcons.account,
                 color: account.id == active?.id
                     ? LabFoxColors.success
                     : LabFoxColors.pending,
@@ -38,7 +38,7 @@ class AccountsScreen extends ConsumerWidget {
               title: Text(account.user.username),
               subtitle: Text(Uri.parse(account.instanceUrl).host),
               trailing: IconButton(
-                icon: const Icon(Icons.logout),
+                icon: const Icon(LabFoxIcons.signOut),
                 tooltip: l10n.accountRemove,
                 onPressed: () => notifier.signOut(account),
               ),
@@ -48,7 +48,7 @@ class AccountsScreen extends ConsumerWidget {
             ),
           const Divider(),
           ListTile(
-            leading: const Icon(Icons.add),
+            leading: const Icon(LabFoxIcons.add),
             title: Text(l10n.accountAdd),
             onTap: () => context.go(Routes.addAccount),
           ),
