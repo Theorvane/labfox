@@ -298,6 +298,22 @@
   "@branchesEmpty": {
     "description": "Shown for a repository with no branches"
   },
+  "newBranchTitle": "New branch",
+  "@newBranchTitle": {"description": "Title of the create-branch dialog"},
+  "newBranchNameLabel": "Branch name",
+  "@newBranchNameLabel": {"description": "Label for the new branch name field"},
+  "newBranchFromLabel": "Create from",
+  "@newBranchFromLabel": {"description": "Label for the source ref field"},
+  "newBranchNameRequired": "Enter a branch name.",
+  "@newBranchNameRequired": {"description": "Validation when the branch name is empty"},
+  "newBranchFromRequired": "Enter a source branch or ref.",
+  "@newBranchFromRequired": {"description": "Validation when the source ref is empty"},
+  "newBranchCreate": "Create branch",
+  "@newBranchCreate": {"description": "Button that creates the branch"},
+  "newBranchError": "Could not create the branch. Please try again.",
+  "@newBranchError": {"description": "Shown when creating a branch fails"},
+  "newBranchButton": "New branch",
+  "@newBranchButton": {"description": "Tooltip for the create-branch action"},
   "branchDefault": "Default branch",
   "@branchDefault": {
     "description": "Label marking the default branch"

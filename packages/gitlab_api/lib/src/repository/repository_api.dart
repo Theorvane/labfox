@@ -112,6 +112,35 @@ class RepositoryApi {
     }
   }
 
+  /// Creates a branch [name] from [ref] and returns it.
+  ///
+  /// `POST /projects/:id/repository/branches` — `branch` and `ref` are query
+  /// parameters per the GitLab docs.
+  Future<Branch> createBranch(
+    Object projectId, {
+    required String name,
+    required String ref,
+  }) async {
+    try {
+      final response = await _dio.post<Map<String, dynamic>>(
+        '/projects/${_enc(projectId)}/repository/branches',
+        queryParameters: {'branch': name, 'ref': ref},
+      );
+      final data = response.data;
+      final status = response.statusCode ?? 0;
+      if ((status != 201 && status != 200) || data == null) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'creating the branch',
+        );
+      }
+      return Branch.fromJson(data);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'creating the branch');
+    }
+  }
+
   /// Lists commits on a ref, most recent first.
   Future<Paginated<Commit>> commits(
     Object projectId, {
