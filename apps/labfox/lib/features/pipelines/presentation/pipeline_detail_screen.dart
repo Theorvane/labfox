@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 
 import '../../../app/router.dart';
 import '../../../core/ui/ci_visual.dart';
+import '../../../core/ui/copy_link_button.dart';
 import '../../../core/ui/work_meta.dart';
 import '../../../l10n/app_localizations.dart';
 import 'controllers/pipelines_controllers.dart';
@@ -34,7 +35,10 @@ class PipelineDetailScreen extends ConsumerWidget {
     final jobs = ref.watch(pipelineJobsControllerProvider(pipelineRef));
 
     return Scaffold(
-      appBar: AppBar(title: Text('#$pipelineId')),
+      appBar: AppBar(
+        title: Text('#$pipelineId'),
+        actions: [CopyLinkButton(url: detail.valueOrNull?.webUrl)],
+      ),
       body: RefreshIndicator(
         onRefresh: () async {
           ref.invalidate(pipelineDetailProvider(pipelineRef));

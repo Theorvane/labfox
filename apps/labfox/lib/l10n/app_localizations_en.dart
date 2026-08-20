@@ -116,6 +116,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get projectsError => 'Could not load your projects.';
 
   @override
+  String get copyLink => 'Copy link';
+
+  @override
+  String get linkCopied => 'Link copied';
+
+  @override
   String get retry => 'Retry';
 
   @override
