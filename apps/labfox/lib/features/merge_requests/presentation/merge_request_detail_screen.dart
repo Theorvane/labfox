@@ -112,9 +112,13 @@ class _Header extends StatelessWidget {
     final status = LabFoxStatusColors.of(context);
     final (colors, label) = _status(mr, status, l10n);
 
+    final path = repoPathFromWebUrl(mr.webUrl);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        MetaText(path == null ? '!${mr.iid}' : '$path !${mr.iid}'),
+        const SizedBox(height: LabFoxSpacing.xs),
         Text(
           mr.title,
           style: theme.textTheme.titleLarge?.copyWith(height: 1.2),
@@ -126,7 +130,6 @@ class _Header extends StatelessWidget {
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             StatusPill(label: label, colors: colors, dot: true),
-            MetaText('!${mr.iid}'),
             if (mr.author != null) ...[
               _Avatar(user: mr.author!),
               MetaText(mr.author!.username),

@@ -98,9 +98,13 @@ class _IssueHeader extends StatelessWidget {
     final open = issue.isOpen;
     final colors = open ? status.open : status.closed;
 
+    final path = repoPathFromWebUrl(issue.webUrl);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        MetaText(path == null ? '#${issue.iid}' : '$path #${issue.iid}'),
+        const SizedBox(height: LabFoxSpacing.xs),
         Text(
           issue.title,
           style: theme.textTheme.titleLarge?.copyWith(height: 1.2),
@@ -116,7 +120,6 @@ class _IssueHeader extends StatelessWidget {
               colors: colors,
               dot: true,
             ),
-            MetaText('#${issue.iid}'),
             if (issue.author != null) ...[
               CircleAvatar(
                 radius: 9,
