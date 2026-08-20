@@ -62,13 +62,13 @@ void main() {
     tester,
   ) async {
     await _pump(tester, {
-      IssueState.opened: AsyncData([
+      IssueState.opened: const AsyncData([
         Issue(
           id: 1,
           iid: 5,
           title: 'assigned',
           state: 'opened',
-          assignees: const [User(id: 2, username: 'ari', name: 'Ari')],
+          assignees: [User(id: 2, username: 'ari', name: 'Ari')],
         ),
       ]),
     });
