@@ -127,6 +127,7 @@ class _MergeRequestTile extends StatelessWidget {
         if (mr.author != null) MetaText(mr.author!.username),
         LabelChips(mr.labels),
         CommentCount(mr.commentCount),
+        if (mr.assignees.isNotEmpty) UserAvatar(user: mr.assignees.first),
       ],
       onTap: onTap,
     );
