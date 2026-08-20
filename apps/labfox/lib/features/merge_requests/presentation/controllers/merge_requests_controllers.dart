@@ -87,3 +87,44 @@ final mergeRequestControllerProvider =
       MergeRequest,
       MergeRequestRef
     >(MergeRequestController.new);
+
+/// Creates a new merge request, then invalidates the open-MR list so it appears
+/// on return. Exposes an [AsyncValue] so the form can show progress and errors.
+class NewMergeRequestController extends AutoDisposeAsyncNotifier<void> {
+  @override
+  void build() {}
+
+  Future<MergeRequest> submit({
+    required int projectId,
+    required String sourceBranch,
+    required String targetBranch,
+    required String title,
+    String? description,
+  }) async {
+    final repo = await ref.read(mergeRequestsRepositoryProvider.future);
+    if (repo == null) {
+      throw StateError('No authenticated account');
+    }
+    state = const AsyncLoading();
+    try {
+      final mr = await repo.create(
+        projectId: projectId,
+        sourceBranch: sourceBranch,
+        targetBranch: targetBranch,
+        title: title,
+        description: description,
+      );
+      state = const AsyncData(null);
+      ref.invalidate(mergeRequestsControllerProvider);
+      return mr;
+    } catch (error, stack) {
+      state = AsyncError(error, stack);
+      rethrow;
+    }
+  }
+}
+
+final newMergeRequestControllerProvider =
+    AutoDisposeAsyncNotifierProvider<NewMergeRequestController, void>(
+      NewMergeRequestController.new,
+    );

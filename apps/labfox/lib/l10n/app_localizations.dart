@@ -386,6 +386,66 @@ abstract class AppLocalizations {
   /// **'New issue'**
   String get newIssueButton;
 
+  /// Title of the create-MR screen
+  ///
+  /// In en, this message translates to:
+  /// **'New merge request'**
+  String get newMrTitle;
+
+  /// Label for the source branch field
+  ///
+  /// In en, this message translates to:
+  /// **'Source branch'**
+  String get newMrSourceLabel;
+
+  /// Label for the target branch field
+  ///
+  /// In en, this message translates to:
+  /// **'Target branch'**
+  String get newMrTargetLabel;
+
+  /// Label for the MR title field
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get newMrTitleLabel;
+
+  /// Label for the MR description field
+  ///
+  /// In en, this message translates to:
+  /// **'Description (optional)'**
+  String get newMrDescriptionLabel;
+
+  /// Validation when a branch is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a branch.'**
+  String get newMrBranchRequired;
+
+  /// Validation when the MR title is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a title.'**
+  String get newMrTitleRequired;
+
+  /// Button that creates the merge request
+  ///
+  /// In en, this message translates to:
+  /// **'Create merge request'**
+  String get newMrSubmit;
+
+  /// Shown when creating an MR fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not create the merge request. Please try again.'**
+  String get newMrError;
+
+  /// Tooltip for the create-MR action on the MR list
+  ///
+  /// In en, this message translates to:
+  /// **'New merge request'**
+  String get newMrButton;
+
   /// Fallback title for the project overview screen
   ///
   /// In en, this message translates to:

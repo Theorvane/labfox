@@ -137,6 +137,43 @@ class MergeRequestsApi {
     }
   }
 
+  /// Opens a merge request from [sourceBranch] into [targetBranch].
+  ///
+  /// `POST /projects/:id/merge_requests` — source, target and title are
+  /// required; an empty description is omitted.
+  Future<MergeRequest> create(
+    Object projectId, {
+    required String sourceBranch,
+    required String targetBranch,
+    required String title,
+    String? description,
+  }) async {
+    try {
+      final response = await _dio.post<Map<String, dynamic>>(
+        '/projects/${_enc(projectId)}/merge_requests',
+        data: {
+          'source_branch': sourceBranch,
+          'target_branch': targetBranch,
+          'title': title,
+          if (description != null && description.isNotEmpty)
+            'description': description,
+        },
+      );
+      final data = response.data;
+      final status = response.statusCode ?? 0;
+      if ((status != 201 && status != 200) || data == null) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'creating the merge request',
+        );
+      }
+      return MergeRequest.fromJson(data);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'creating the merge request');
+    }
+  }
+
   /// A single merge request by its `iid`.
   Future<MergeRequest> get(Object projectId, {required int iid}) async {
     try {

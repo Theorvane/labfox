@@ -90,6 +90,45 @@ void main() {
     });
   });
 
+  group('MergeRequestsApi.create', () {
+    test('POSTs source, target, title and returns the new MR', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (
+          status: 201,
+          headers: const {},
+          body: {
+            'id': 1,
+            'iid': 9,
+            'title': 'Add OAuth',
+            'state': 'opened',
+            'source_branch': 'feat/oauth',
+            'target_branch': 'main',
+          },
+        );
+      });
+
+      final mr = await client.mergeRequests.create(
+        7,
+        sourceBranch: 'feat/oauth',
+        targetBranch: 'main',
+        title: 'Add OAuth',
+        description: 'flow',
+      );
+
+      expect(captured.method, 'POST');
+      expect(captured.path, '/projects/7/merge_requests');
+      expect(captured.data, {
+        'source_branch': 'feat/oauth',
+        'target_branch': 'main',
+        'title': 'Add OAuth',
+        'description': 'flow',
+      });
+      expect(mr.iid, 9);
+    });
+  });
+
   group('MergeRequestsApi.listAssignedToMe', () {
     test('lists open MRs assigned to the current user', () async {
       late RequestOptions captured;

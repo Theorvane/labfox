@@ -194,6 +194,26 @@
   "@newIssueButton": {
     "description": "Tooltip for the create-issue action on the issues list"
   },
+  "newMrTitle": "New merge request",
+  "@newMrTitle": {"description": "Title of the create-MR screen"},
+  "newMrSourceLabel": "Source branch",
+  "@newMrSourceLabel": {"description": "Label for the source branch field"},
+  "newMrTargetLabel": "Target branch",
+  "@newMrTargetLabel": {"description": "Label for the target branch field"},
+  "newMrTitleLabel": "Title",
+  "@newMrTitleLabel": {"description": "Label for the MR title field"},
+  "newMrDescriptionLabel": "Description (optional)",
+  "@newMrDescriptionLabel": {"description": "Label for the MR description field"},
+  "newMrBranchRequired": "Enter a branch.",
+  "@newMrBranchRequired": {"description": "Validation when a branch is empty"},
+  "newMrTitleRequired": "Enter a title.",
+  "@newMrTitleRequired": {"description": "Validation when the MR title is empty"},
+  "newMrSubmit": "Create merge request",
+  "@newMrSubmit": {"description": "Button that creates the merge request"},
+  "newMrError": "Could not create the merge request. Please try again.",
+  "@newMrError": {"description": "Shown when creating an MR fails"},
+  "newMrButton": "New merge request",
+  "@newMrButton": {"description": "Tooltip for the create-MR action on the MR list"},
   "projectOverviewTitle": "Project",
   "@projectOverviewTitle": {
     "description": "Fallback title for the project overview screen"

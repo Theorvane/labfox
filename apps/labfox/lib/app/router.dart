@@ -18,6 +18,7 @@ import '../features/issues/presentation/new_issue_screen.dart';
 import '../features/jobs/presentation/job_detail_screen.dart';
 import '../features/merge_requests/presentation/merge_request_detail_screen.dart';
 import '../features/merge_requests/presentation/merge_requests_screen.dart';
+import '../features/merge_requests/presentation/new_merge_request_screen.dart';
 import '../features/pipelines/presentation/pipeline_detail_screen.dart';
 import '../features/pipelines/presentation/pipelines_screen.dart';
 import '../features/profile/presentation/me_screen.dart';
@@ -69,6 +70,7 @@ abstract final class Routes {
   // The user-facing issue number is the iid, not the global id.
   static String issue(int id, int iid) => '/projects/$id/issues/$iid';
   static String mergeRequests(int id) => '/projects/$id/merge_requests';
+  static String newMergeRequest(int id) => '/projects/$id/merge_requests/new';
   // The user-facing MR number is the iid, not the global id.
   static String mergeRequest(int id, int iid) =>
       '/projects/$id/merge_requests/$iid';
@@ -236,6 +238,12 @@ final routerProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: 'merge_requests',
                 builder: (context, state) => MergeRequestsScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+              ),
+              GoRoute(
+                path: 'merge_requests/new',
+                builder: (context, state) => NewMergeRequestScreen(
                   projectId: int.parse(state.pathParameters['id']!),
                 ),
               ),

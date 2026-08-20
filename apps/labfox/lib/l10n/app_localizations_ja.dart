@@ -154,6 +154,37 @@ class AppLocalizationsJa extends AppLocalizations {
   String get newIssueButton => 'New issue';
 
   @override
+  String get newMrTitle => 'New merge request';
+
+  @override
+  String get newMrSourceLabel => 'Source branch';
+
+  @override
+  String get newMrTargetLabel => 'Target branch';
+
+  @override
+  String get newMrTitleLabel => 'Title';
+
+  @override
+  String get newMrDescriptionLabel => 'Description (optional)';
+
+  @override
+  String get newMrBranchRequired => 'Enter a branch.';
+
+  @override
+  String get newMrTitleRequired => 'Enter a title.';
+
+  @override
+  String get newMrSubmit => 'Create merge request';
+
+  @override
+  String get newMrError =>
+      'Could not create the merge request. Please try again.';
+
+  @override
+  String get newMrButton => 'New merge request';
+
+  @override
   String get projectOverviewTitle => 'プロジェクト';
 
   @override
