@@ -48,6 +48,7 @@ MergeRequest _mr({String state = 'opened', List<Label> labels = const []}) =>
       sourceBranch: 'feature/oauth',
       targetBranch: 'develop',
       description: 'Adds the OAuth flow.',
+      webUrl: 'https://gitlab.com/acme/backend/-/merge_requests/142',
       labels: labels,
     );
 
@@ -69,6 +70,8 @@ void main() {
     expect(find.text('Open'), findsOneWidget);
     // '!142' appears in the app bar and the header.
     expect(find.textContaining('!142'), findsWidgets);
+    // The header eyebrow shows the repo path with the iid.
+    expect(find.text('acme/backend !142'), findsOneWidget);
     // Source and target branches render in the branch chip.
     expect(find.text('feature/oauth'), findsOneWidget);
     expect(find.text('develop'), findsOneWidget);

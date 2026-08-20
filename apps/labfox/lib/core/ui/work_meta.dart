@@ -1,6 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
+/// The `group/project` path from a GitLab `web_url`, or null when it cannot be
+/// read — used as the eyebrow above a merge request or issue title.
+///
+/// A GitLab web URL looks like `https://host/group/sub/project/-/issues/282`;
+/// the project path is everything before the `/-/` marker.
+String? repoPathFromWebUrl(String? webUrl) {
+  if (webUrl == null) {
+    return null;
+  }
+  final uri = Uri.tryParse(webUrl);
+  if (uri == null) {
+    return null;
+  }
+  final marker = uri.path.indexOf('/-/');
+  final path = marker >= 0 ? uri.path.substring(0, marker) : uri.path;
+  final trimmed = path.replaceAll(RegExp(r'^/+|/+$'), '');
+  return trimmed.isEmpty ? null : trimmed;
+}
+
 /// A short relative time like `now`, `5m`, `3h`, `7d`, `2w`, `4mo`, `1y`.
 ///
 /// [now] is injectable so the format is testable without a real clock. A time

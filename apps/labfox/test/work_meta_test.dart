@@ -36,6 +36,23 @@ void main() {
     });
   });
 
+  group('repoPathFromWebUrl', () {
+    test('extracts the project path before the /-/ marker', () {
+      expect(
+        repoPathFromWebUrl(
+          'https://gitlab.com/group/proj/-/merge_requests/142',
+        ),
+        'group/proj',
+      );
+      expect(repoPathFromWebUrl('https://git.co/a/b/c/-/issues/9'), 'a/b/c');
+    });
+
+    test('returns null for null or unparseable input', () {
+      expect(repoPathFromWebUrl(null), isNull);
+      expect(repoPathFromWebUrl('https://gitlab.com/'), isNull);
+    });
+  });
+
   group('LabelChips', () {
     testWidgets('renders each label name as a chip', (tester) async {
       await _pump(
