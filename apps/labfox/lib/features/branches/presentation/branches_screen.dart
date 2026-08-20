@@ -49,11 +49,15 @@ class BranchesScreen extends ConsumerWidget {
               title: l10n.branchesEmpty,
             );
           }
-          return ListView.separated(
-            itemCount: items.length,
-            separatorBuilder: (context, index) => const Divider(height: 1),
-            itemBuilder: (context, index) =>
-                _branchTile(context, l10n, items[index]),
+          return RefreshIndicator(
+            onRefresh: () =>
+                widgetRef.refresh(branchesControllerProvider(projectId).future),
+            child: ListView.separated(
+              itemCount: items.length,
+              separatorBuilder: (context, index) => const Divider(height: 1),
+              itemBuilder: (context, index) =>
+                  _branchTile(context, l10n, items[index]),
+            ),
           );
         },
       ),

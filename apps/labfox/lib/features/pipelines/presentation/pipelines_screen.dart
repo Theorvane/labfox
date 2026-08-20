@@ -50,13 +50,17 @@ class PipelinesScreen extends ConsumerWidget {
               title: l10n.pipelinesEmpty,
             );
           }
-          return ListView.separated(
-            itemCount: items.length,
-            separatorBuilder: (context, index) => const Divider(height: 1),
-            itemBuilder: (context, index) => _PipelineTile(
-              pipeline: items[index],
-              onTap: () =>
-                  context.go(Routes.pipeline(projectId, items[index].id)),
+          return RefreshIndicator(
+            onRefresh: () =>
+                ref.refresh(pipelinesControllerProvider(projectId).future),
+            child: ListView.separated(
+              itemCount: items.length,
+              separatorBuilder: (context, index) => const Divider(height: 1),
+              itemBuilder: (context, index) => _PipelineTile(
+                pipeline: items[index],
+                onTap: () =>
+                    context.go(Routes.pipeline(projectId, items[index].id)),
+              ),
             ),
           );
         },
