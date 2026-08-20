@@ -73,29 +73,28 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: LabFoxSpacing.md,
-                  right: LabFoxSpacing.md,
-                  bottom: LabFoxSpacing.sm,
-                ),
-                child: SegmentedButton<SearchScope>(
-                  segments: [
-                    ButtonSegment(
-                      value: SearchScope.projects,
-                      label: Text(l10n.searchScopeProjects),
-                    ),
-                    ButtonSegment(
-                      value: SearchScope.issues,
-                      label: Text(l10n.searchScopeIssues),
-                    ),
-                    ButtonSegment(
-                      value: SearchScope.mergeRequests,
-                      label: Text(l10n.searchScopeMergeRequests),
-                    ),
-                  ],
-                  selected: {_scope},
-                  onSelectionChanged: (s) => setState(() => _scope = s.first),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: LabFoxSpacing.md,
+                    right: LabFoxSpacing.md,
+                    bottom: LabFoxSpacing.sm,
+                  ),
+                  child: FilterMenuChip<SearchScope>(
+                    selected: _scope,
+                    options: const [
+                      SearchScope.projects,
+                      SearchScope.issues,
+                      SearchScope.mergeRequests,
+                    ],
+                    labelOf: (scope) => switch (scope) {
+                      SearchScope.projects => l10n.searchScopeProjects,
+                      SearchScope.issues => l10n.searchScopeIssues,
+                      _ => l10n.searchScopeMergeRequests,
+                    },
+                    onSelected: (scope) => setState(() => _scope = scope),
+                  ),
                 ),
               ),
             ],

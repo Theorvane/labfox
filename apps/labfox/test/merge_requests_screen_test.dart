@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -97,6 +98,9 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('open mr'), findsOneWidget);
 
+    // The filter is a dropdown chip: open its menu, then pick Merged.
+    await tester.tap(find.byType(FilterMenuChip<MergeRequestState>));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Merged'));
     await tester.pumpAndSettle();
 

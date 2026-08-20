@@ -30,33 +30,34 @@ class _IssuesScreenState extends ConsumerState<IssuesScreen> {
     final issues = ref.watch(issuesControllerProvider(query));
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        tooltip: l10n.newIssueButton,
-        onPressed: () => context.go(Routes.newIssue(widget.projectId)),
-        child: const Icon(Icons.add),
-      ),
       appBar: AppBar(
         title: Text(l10n.issuesTitle),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            tooltip: l10n.newIssueButton,
+            onPressed: () => context.go(Routes.newIssue(widget.projectId)),
+          ),
+        ],
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(48),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: LabFoxSpacing.md,
-              vertical: LabFoxSpacing.sm,
-            ),
-            child: SegmentedButton<IssueState>(
-              segments: [
-                ButtonSegment(
-                  value: IssueState.opened,
-                  label: Text(l10n.issuesFilterOpen),
-                ),
-                ButtonSegment(
-                  value: IssueState.closed,
-                  label: Text(l10n.issuesFilterClosed),
-                ),
-              ],
-              selected: {_state},
-              onSelectionChanged: (s) => setState(() => _state = s.first),
+          preferredSize: const Size.fromHeight(52),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: LabFoxSpacing.md,
+                right: LabFoxSpacing.md,
+                bottom: LabFoxSpacing.sm,
+              ),
+              child: FilterMenuChip<IssueState>(
+                selected: _state,
+                options: const [IssueState.opened, IssueState.closed],
+                labelOf: (state) => switch (state) {
+                  IssueState.opened => l10n.issuesFilterOpen,
+                  _ => l10n.issuesFilterClosed,
+                },
+                onSelected: (state) => setState(() => _state = state),
+              ),
             ),
           ),
         ),
