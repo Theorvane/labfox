@@ -119,6 +119,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shareLink => 'Share';
 
   @override
+  String get mrClose => 'Close';
+
+  @override
+  String get mrReopen => 'Reopen';
+
+  @override
+  String get mrRebase => 'Rebase';
+
+  @override
+  String get mrMarkDraft => 'Mark as draft';
+
+  @override
+  String get mrMarkReady => 'Mark as ready';
+
+  @override
   String get mrBlockerConflicts => 'Conflicts';
 
   @override

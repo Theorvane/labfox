@@ -129,6 +129,109 @@ void main() {
     });
   });
 
+  group('MergeRequestsApi state edits', () {
+    test('setOpen PUTs the close state_event', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (
+          status: 200,
+          headers: const {},
+          body: {
+            'id': 1,
+            'iid': 5,
+            'title': 'x',
+            'state': 'closed',
+            'source_branch': 'a',
+            'target_branch': 'b',
+          },
+        );
+      });
+
+      await client.mergeRequests.setOpen(7, iid: 5, open: false);
+
+      expect(captured.method, 'PUT');
+      expect(captured.path, '/projects/7/merge_requests/5');
+      expect(captured.data, {'state_event': 'close'});
+    });
+
+    test('setDraft adds a Draft: prefix to the title', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (
+          status: 200,
+          headers: const {},
+          body: {
+            'id': 1,
+            'iid': 5,
+            'title': 'Draft: Add OAuth',
+            'state': 'opened',
+            'source_branch': 'a',
+            'target_branch': 'b',
+          },
+        );
+      });
+
+      await client.mergeRequests.setDraft(
+        7,
+        iid: 5,
+        draft: true,
+        title: 'Add OAuth',
+      );
+
+      expect(captured.data, {'title': 'Draft: Add OAuth'});
+    });
+
+    test(
+      'setDraft strips an existing Draft: prefix when marking ready',
+      () async {
+        late RequestOptions captured;
+        final client = _client((o) {
+          captured = o;
+          return (
+            status: 200,
+            headers: const {},
+            body: {
+              'id': 1,
+              'iid': 5,
+              'title': 'Add OAuth',
+              'state': 'opened',
+              'source_branch': 'a',
+              'target_branch': 'b',
+            },
+          );
+        });
+
+        await client.mergeRequests.setDraft(
+          7,
+          iid: 5,
+          draft: false,
+          title: 'Draft: Add OAuth',
+        );
+
+        expect(captured.data, {'title': 'Add OAuth'});
+      },
+    );
+
+    test('rebase PUTs to the rebase path', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (
+          status: 202,
+          headers: const {},
+          body: {'rebase_in_progress': true},
+        );
+      });
+
+      await client.mergeRequests.rebase(7, iid: 5);
+
+      expect(captured.method, 'PUT');
+      expect(captured.path, '/projects/7/merge_requests/5/rebase');
+    });
+  });
+
   group('MergeRequestsApi.listAssignedToMe', () {
     test('lists open MRs assigned to the current user', () async {
       late RequestOptions captured;

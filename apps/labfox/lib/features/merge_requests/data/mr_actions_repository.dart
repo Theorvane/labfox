@@ -31,4 +31,25 @@ class MrActionsRepository {
     required int iid,
     bool squash = false,
   }) => _client.mergeRequests.merge(projectId, iid: iid, squash: squash);
+
+  Future<MergeRequest> setOpen({
+    required int projectId,
+    required int iid,
+    required bool open,
+  }) => _client.mergeRequests.setOpen(projectId, iid: iid, open: open);
+
+  Future<MergeRequest> setDraft({
+    required int projectId,
+    required int iid,
+    required bool draft,
+    required String title,
+  }) => _client.mergeRequests.setDraft(
+    projectId,
+    iid: iid,
+    draft: draft,
+    title: title,
+  );
+
+  Future<void> rebase({required int projectId, required int iid}) =>
+      _client.mergeRequests.rebase(projectId, iid: iid);
 }

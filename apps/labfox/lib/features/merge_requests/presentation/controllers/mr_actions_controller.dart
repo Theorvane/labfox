@@ -48,6 +48,22 @@ class MrActionsController extends FamilyAsyncNotifier<void, MergeRequestRef> {
         repo.merge(projectId: arg.projectId, iid: arg.iid, squash: squash),
   );
 
+  Future<void> setOpen(bool open) => _run(
+    (repo) => repo.setOpen(projectId: arg.projectId, iid: arg.iid, open: open),
+  );
+
+  Future<void> setDraft({required bool draft, required String title}) => _run(
+    (repo) => repo.setDraft(
+      projectId: arg.projectId,
+      iid: arg.iid,
+      draft: draft,
+      title: title,
+    ),
+  );
+
+  Future<void> rebase() =>
+      _run((repo) => repo.rebase(projectId: arg.projectId, iid: arg.iid));
+
   /// Sets a loading state around the action so the UI can disable buttons, runs
   /// it, refreshes, and rethrows a domain exception for the caller to surface.
   Future<void> _run(
