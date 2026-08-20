@@ -10,9 +10,8 @@ import '../../../l10n/app_localizations.dart';
 import '../../comments/presentation/widgets/comment_thread.dart';
 import 'controllers/issues_controllers.dart';
 
-/// One issue: title, state, author, labels, and the rendered description.
-///
-/// Read-only for this slice; comments, state changes and label editing follow.
+/// One issue: title, state, author, labels, the rendered description, and its
+/// comment thread. The overflow menu closes or reopens the issue.
 class IssueDetailScreen extends ConsumerWidget {
   const IssueDetailScreen({
     required this.projectId,
@@ -32,7 +31,19 @@ class IssueDetailScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('#$iid'),
-        actions: [ShareLinkButton(url: issue.valueOrNull?.webUrl)],
+        actions: [
+          ShareLinkButton(url: issue.valueOrNull?.webUrl),
+          if (issue.valueOrNull case final data?)
+            PopupMenuButton<bool>(
+              onSelected: (open) => _setOpen(context, ref, issueRef, open),
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  value: !data.isOpen,
+                  child: Text(data.isOpen ? l10n.issueClose : l10n.issueReopen),
+                ),
+              ],
+            ),
+        ],
       ),
       body: issue.when(
         loading: () => const Center(child: CircularProgressIndicator()),
@@ -86,6 +97,24 @@ class IssueDetailScreen extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _setOpen(
+    BuildContext context,
+    WidgetRef ref,
+    IssueRef issueRef,
+    bool open,
+  ) async {
+    final l10n = AppLocalizations.of(context);
+    try {
+      await ref.read(issueControllerProvider(issueRef).notifier).setOpen(open);
+    } on GitLabException {
+      if (context.mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l10n.issueStateError)));
+      }
+    }
   }
 }
 

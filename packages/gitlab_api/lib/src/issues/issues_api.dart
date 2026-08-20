@@ -130,6 +130,34 @@ class IssuesApi {
     }
   }
 
+  /// Closes or reopens an issue and returns the updated resource.
+  ///
+  /// `PUT /projects/:id/issues/:iid` with `state_event` — `close` or `reopen`,
+  /// the state transitions GitLab exposes.
+  Future<Issue> setOpen(
+    Object projectId, {
+    required int iid,
+    required bool open,
+  }) async {
+    try {
+      final response = await _dio.put<Map<String, dynamic>>(
+        '/projects/${_enc(projectId)}/issues/$iid',
+        data: {'state_event': open ? 'reopen' : 'close'},
+      );
+      final data = response.data;
+      if (response.statusCode != 200 || data == null) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'updating the issue',
+        );
+      }
+      return Issue.fromJson(data);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'updating the issue');
+    }
+  }
+
   /// A single issue by its `iid` — the per-project number a user sees, never
   /// the global `id`.
   Future<Issue> get(Object projectId, {required int iid}) async {

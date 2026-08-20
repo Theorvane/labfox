@@ -386,6 +386,24 @@ abstract class AppLocalizations {
   /// **'New issue'**
   String get newIssueButton;
 
+  /// Menu action that closes the issue
+  ///
+  /// In en, this message translates to:
+  /// **'Close issue'**
+  String get issueClose;
+
+  /// Menu action that reopens the issue
+  ///
+  /// In en, this message translates to:
+  /// **'Reopen issue'**
+  String get issueReopen;
+
+  /// Shown when closing or reopening an issue fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not update the issue. Please try again.'**
+  String get issueStateError;
+
   /// Title of the create-MR screen
   ///
   /// In en, this message translates to:

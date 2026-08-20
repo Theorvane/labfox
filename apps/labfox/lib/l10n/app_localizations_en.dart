@@ -158,6 +158,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get newIssueButton => 'New issue';
 
   @override
+  String get issueClose => 'Close issue';
+
+  @override
+  String get issueReopen => 'Reopen issue';
+
+  @override
+  String get issueStateError => 'Could not update the issue. Please try again.';
+
+  @override
   String get newMrTitle => 'New merge request';
 
   @override

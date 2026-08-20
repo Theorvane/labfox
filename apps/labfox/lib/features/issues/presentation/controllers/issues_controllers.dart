@@ -59,7 +59,7 @@ class IssueRef {
   int get hashCode => Object.hash(projectId, iid);
 }
 
-/// Loads one issue's detail.
+/// Loads one issue's detail and toggles its open/closed state.
 class IssueController extends FamilyAsyncNotifier<Issue, IssueRef> {
   @override
   Future<Issue> build(IssueRef arg) async {
@@ -68,6 +68,22 @@ class IssueController extends FamilyAsyncNotifier<Issue, IssueRef> {
       throw StateError('No authenticated account');
     }
     return repo.get(projectId: arg.projectId, iid: arg.iid);
+  }
+
+  /// Closes or reopens the issue, reflects the returned state, and invalidates
+  /// the project's issue lists so they pick up the change on return.
+  Future<void> setOpen(bool open) async {
+    final repo = await ref.read(issuesRepositoryProvider.future);
+    if (repo == null) {
+      throw StateError('No authenticated account');
+    }
+    final updated = await repo.setOpen(
+      projectId: arg.projectId,
+      iid: arg.iid,
+      open: open,
+    );
+    state = AsyncData(updated);
+    ref.invalidate(issuesControllerProvider);
   }
 }
 

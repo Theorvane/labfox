@@ -123,6 +123,43 @@ void main() {
     });
   });
 
+  group('IssuesApi.setOpen', () {
+    test('PUTs state_event=close and returns the updated issue', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (
+          status: 200,
+          headers: const {},
+          body: {'id': 1, 'iid': 5, 'title': 'x', 'state': 'closed'},
+        );
+      });
+
+      final issue = await client.issues.setOpen(7, iid: 5, open: false);
+
+      expect(captured.method, 'PUT');
+      expect(captured.path, '/projects/7/issues/5');
+      expect(captured.data, {'state_event': 'close'});
+      expect(issue.isOpen, isFalse);
+    });
+
+    test('PUTs state_event=reopen when opening', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (
+          status: 200,
+          headers: const {},
+          body: {'id': 1, 'iid': 5, 'title': 'x', 'state': 'opened'},
+        );
+      });
+
+      await client.issues.setOpen(7, iid: 5, open: true);
+
+      expect(captured.data, {'state_event': 'reopen'});
+    });
+  });
+
   group('IssuesApi.listAssignedToMe', () {
     test('lists open issues assigned to the current user', () async {
       late RequestOptions captured;
