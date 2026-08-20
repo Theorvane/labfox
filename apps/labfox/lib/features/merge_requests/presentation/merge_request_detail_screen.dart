@@ -11,6 +11,7 @@ import '../../../core/ui/work_meta.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../comments/presentation/widgets/comment_thread.dart';
 import 'controllers/merge_requests_controllers.dart';
+import 'controllers/mr_actions_controller.dart';
 import 'widgets/mr_actions.dart';
 
 /// One merge request: an identity header, the description and discussion, with
@@ -35,7 +36,10 @@ class MergeRequestDetailScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('!$iid'),
-        actions: [ShareLinkButton(url: mr.valueOrNull?.webUrl)],
+        actions: [
+          ShareLinkButton(url: mr.valueOrNull?.webUrl),
+          if (mr.valueOrNull case final data?) _MrMenu(mr: data, mrRef: mrRef),
+        ],
       ),
       bottomNavigationBar: open
           ? _ActionBar(mr: mr.value!, projectId: projectId)
@@ -101,6 +105,67 @@ class MergeRequestDetailScreen extends ConsumerWidget {
         ),
       ),
     );
+  }
+}
+
+enum _MrAction { close, reopen, rebase, toggleDraft }
+
+/// The overflow menu on a merge request: close/reopen, rebase, and toggle draft
+/// — the state edits GitLab exposes, offered by the MR's current state.
+class _MrMenu extends ConsumerWidget {
+  const _MrMenu({required this.mr, required this.mrRef});
+
+  final MergeRequest mr;
+  final MergeRequestRef mrRef;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final items = <PopupMenuEntry<_MrAction>>[
+      if (mr.isOpen) ...[
+        PopupMenuItem(
+          value: _MrAction.toggleDraft,
+          child: Text(mr.isDraft ? l10n.mrMarkReady : l10n.mrMarkDraft),
+        ),
+        PopupMenuItem(value: _MrAction.rebase, child: Text(l10n.mrRebase)),
+        PopupMenuItem(value: _MrAction.close, child: Text(l10n.mrClose)),
+      ] else if (mr.isClosed)
+        PopupMenuItem(value: _MrAction.reopen, child: Text(l10n.mrReopen)),
+    ];
+    if (items.isEmpty) {
+      return const SizedBox.shrink();
+    }
+    return PopupMenuButton<_MrAction>(
+      onSelected: (action) => _run(context, ref, action),
+      itemBuilder: (context) => items,
+    );
+  }
+
+  Future<void> _run(
+    BuildContext context,
+    WidgetRef ref,
+    _MrAction action,
+  ) async {
+    final l10n = AppLocalizations.of(context);
+    final notifier = ref.read(mrActionsControllerProvider(mrRef).notifier);
+    try {
+      switch (action) {
+        case _MrAction.close:
+          await notifier.setOpen(false);
+        case _MrAction.reopen:
+          await notifier.setOpen(true);
+        case _MrAction.rebase:
+          await notifier.rebase();
+        case _MrAction.toggleDraft:
+          await notifier.setDraft(draft: !mr.isDraft, title: mr.title);
+      }
+    } on GitLabException {
+      if (context.mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l10n.mrActionError)));
+      }
+    }
   }
 }
 

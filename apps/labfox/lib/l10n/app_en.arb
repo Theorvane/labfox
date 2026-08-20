@@ -142,6 +142,16 @@
   "@shareLink": {
     "description": "Tooltip for the action that shares the item's web link"
   },
+  "mrClose": "Close",
+  "@mrClose": {"description": "Menu action that closes the merge request"},
+  "mrReopen": "Reopen",
+  "@mrReopen": {"description": "Menu action that reopens the merge request"},
+  "mrRebase": "Rebase",
+  "@mrRebase": {"description": "Menu action that rebases the merge request"},
+  "mrMarkDraft": "Mark as draft",
+  "@mrMarkDraft": {"description": "Menu action that marks the MR as a draft"},
+  "mrMarkReady": "Mark as ready",
+  "@mrMarkReady": {"description": "Menu action that marks a draft MR as ready"},
   "mrBlockerConflicts": "Conflicts",
   "@mrBlockerConflicts": {
     "description": "Row chip when a merge request has merge conflicts"

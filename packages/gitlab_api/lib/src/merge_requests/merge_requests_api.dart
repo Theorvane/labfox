@@ -174,6 +174,71 @@ class MergeRequestsApi {
     }
   }
 
+  /// Closes or reopens a merge request. `PUT` with `state_event`.
+  Future<MergeRequest> setOpen(
+    Object projectId, {
+    required int iid,
+    required bool open,
+  }) => _update(projectId, iid, {'state_event': open ? 'reopen' : 'close'});
+
+  /// Marks a merge request draft or ready by adding/removing the `Draft: `
+  /// title prefix GitLab recognises. [title] is the current title.
+  Future<MergeRequest> setDraft(
+    Object projectId, {
+    required int iid,
+    required bool draft,
+    required String title,
+  }) {
+    final stripped = title.replaceFirst(RegExp(r'^(Draft:|WIP:)\s*'), '');
+    return _update(projectId, iid, {
+      'title': draft ? 'Draft: $stripped' : stripped,
+    });
+  }
+
+  Future<MergeRequest> _update(
+    Object projectId,
+    int iid,
+    Map<String, dynamic> data,
+  ) async {
+    try {
+      final response = await _dio.put<Map<String, dynamic>>(
+        '/projects/${_enc(projectId)}/merge_requests/$iid',
+        data: data,
+      );
+      final body = response.data;
+      if (response.statusCode != 200 || body == null) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'updating the merge request',
+        );
+      }
+      return MergeRequest.fromJson(body);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'updating the merge request');
+    }
+  }
+
+  /// Rebases a merge request's source branch onto its target. `PUT .../rebase`
+  /// returns 202 and rebases asynchronously.
+  Future<void> rebase(Object projectId, {required int iid}) async {
+    try {
+      final response = await _dio.put<dynamic>(
+        '/projects/${_enc(projectId)}/merge_requests/$iid/rebase',
+      );
+      final status = response.statusCode ?? 0;
+      if (status < 200 || status >= 300) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'rebasing the merge request',
+        );
+      }
+    } on DioException catch (error) {
+      throw mapError(error, context: 'rebasing the merge request');
+    }
+  }
+
   /// A single merge request by its `iid`.
   Future<MergeRequest> get(Object projectId, {required int iid}) async {
     try {

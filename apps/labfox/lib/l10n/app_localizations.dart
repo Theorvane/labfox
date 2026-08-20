@@ -308,6 +308,36 @@ abstract class AppLocalizations {
   /// **'Share'**
   String get shareLink;
 
+  /// Menu action that closes the merge request
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get mrClose;
+
+  /// Menu action that reopens the merge request
+  ///
+  /// In en, this message translates to:
+  /// **'Reopen'**
+  String get mrReopen;
+
+  /// Menu action that rebases the merge request
+  ///
+  /// In en, this message translates to:
+  /// **'Rebase'**
+  String get mrRebase;
+
+  /// Menu action that marks the MR as a draft
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as draft'**
+  String get mrMarkDraft;
+
+  /// Menu action that marks a draft MR as ready
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as ready'**
+  String get mrMarkReady;
+
   /// Row chip when a merge request has merge conflicts
   ///
   /// In en, this message translates to:
