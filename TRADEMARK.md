@@ -12,7 +12,7 @@ This document explains that boundary in concrete terms.
 
 ## 1. What is covered
 
-The following belong to the copyright holder (sloki9637) and are not subject to the Apache-2.0 license.
+The following belong to the copyright holder (sloki9637, https://www.sloki9637.com) and are not subject to the Apache-2.0 license.
 
 - The name **LabFox** (including spelling variants: LabFox, Lab Fox, labfox)
 - The LabFox logo and icon
