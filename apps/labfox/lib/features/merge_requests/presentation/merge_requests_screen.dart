@@ -85,7 +85,10 @@ class _MergeRequestsScreenState extends ConsumerState<MergeRequestsScreen> {
         ),
         data: (items) {
           if (items.isEmpty) {
-            return Center(child: Text(l10n.mergeRequestsEmpty));
+            return EmptyState(
+              icon: Icons.merge_outlined,
+              title: l10n.mergeRequestsEmpty,
+            );
           }
           return ListView.separated(
             itemCount: items.length,

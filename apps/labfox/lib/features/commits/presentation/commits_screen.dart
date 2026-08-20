@@ -33,7 +33,7 @@ class CommitsScreen extends ConsumerWidget {
         ),
         data: (items) {
           if (items.isEmpty) {
-            return Center(child: Text(l10n.commitsEmpty));
+            return EmptyState(icon: Icons.commit, title: l10n.commitsEmpty);
           }
           return ListView.separated(
             itemCount: items.length,
