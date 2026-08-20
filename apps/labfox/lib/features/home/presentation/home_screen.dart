@@ -53,9 +53,9 @@ class _Body extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             const SizedBox(height: LabFoxSpacing.lg),
-            const HomeWorkFeed(),
-            const SizedBox(height: LabFoxSpacing.lg),
             const _MyWork(),
+            const SizedBox(height: LabFoxSpacing.lg),
+            const HomeWorkFeed(),
             const _ProjectSection(favorites: true),
             const _ProjectSection(favorites: false),
           ],
@@ -324,21 +324,105 @@ class _WorkMessage extends StatelessWidget {
   }
 }
 
+/// The "My work" launcher — colour-tiled shortcuts to the account-level
+/// destinations, the way GitHub Mobile opens its home, kept in LabFox tokens.
 class _MyWork extends StatelessWidget {
   const _MyWork();
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 420),
-      child: Card(
-        margin: EdgeInsets.zero,
-        child: ListTile(
-          leading: const Icon(Icons.folder_outlined),
-          title: Text(l10n.homeProjects),
-          trailing: const Icon(Icons.chevron_right),
-          onTap: () => context.go(Routes.projects),
+    final status = LabFoxStatusColors.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: LabFoxSpacing.sm),
+          child: Text(
+            l10n.homeMyWork,
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
+        ),
+        Card(
+          margin: EdgeInsets.zero,
+          clipBehavior: Clip.antiAlias,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _QuickTile(
+                icon: Icons.folder_outlined,
+                color: status.running.foreground,
+                label: l10n.homeProjects,
+                onTap: () => context.go(Routes.projects),
+              ),
+              const Divider(height: 1),
+              _QuickTile(
+                icon: Icons.inbox_outlined,
+                color: status.merged.foreground,
+                label: l10n.homeInbox,
+                onTap: () => context.go(Routes.inbox),
+              ),
+              const Divider(height: 1),
+              _QuickTile(
+                icon: Icons.search,
+                color: status.open.foreground,
+                label: l10n.homeSearch,
+                onTap: () => context.go(Routes.search),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// A colour-tiled shortcut row: a filled icon square, a label, a chevron.
+class _QuickTile extends StatelessWidget {
+  const _QuickTile({
+    required this.icon,
+    required this.color,
+    required this.label,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final Color color;
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: LabFoxSpacing.md,
+          vertical: LabFoxSpacing.sm + 2,
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(9),
+              ),
+              child: Icon(icon, size: 20, color: Colors.white),
+            ),
+            const SizedBox(width: LabFoxSpacing.md),
+            Expanded(
+              child: Text(
+                label,
+                style: theme.textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            Icon(Icons.chevron_right, color: theme.hintColor),
+          ],
         ),
       ),
     );
