@@ -91,13 +91,17 @@ class _MergeRequestsScreenState extends ConsumerState<MergeRequestsScreen> {
               title: l10n.mergeRequestsEmpty,
             );
           }
-          return ListView.separated(
-            itemCount: items.length,
-            separatorBuilder: (context, index) => const Divider(height: 1),
-            itemBuilder: (context, index) => _MergeRequestTile(
-              mr: items[index],
-              onTap: () => context.go(
-                Routes.mergeRequest(widget.projectId, items[index].iid),
+          return RefreshIndicator(
+            onRefresh: () =>
+                ref.refresh(mergeRequestsControllerProvider(query).future),
+            child: ListView.separated(
+              itemCount: items.length,
+              separatorBuilder: (context, index) => const Divider(height: 1),
+              itemBuilder: (context, index) => _MergeRequestTile(
+                mr: items[index],
+                onTap: () => context.go(
+                  Routes.mergeRequest(widget.projectId, items[index].iid),
+                ),
               ),
             ),
           );

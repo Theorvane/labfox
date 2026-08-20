@@ -35,13 +35,17 @@ class CommitsScreen extends ConsumerWidget {
           if (items.isEmpty) {
             return EmptyState(icon: Icons.commit, title: l10n.commitsEmpty);
           }
-          return ListView.separated(
-            itemCount: items.length,
-            separatorBuilder: (context, index) => const Divider(height: 1),
-            itemBuilder: (context, index) => _CommitTile(
-              commit: items[index],
-              onTap: () =>
-                  context.go(Routes.commit(projectId, items[index].id)),
+          return RefreshIndicator(
+            onRefresh: () =>
+                widgetRef.refresh(commitsControllerProvider(arg).future),
+            child: ListView.separated(
+              itemCount: items.length,
+              separatorBuilder: (context, index) => const Divider(height: 1),
+              itemBuilder: (context, index) => _CommitTile(
+                commit: items[index],
+                onTap: () =>
+                    context.go(Routes.commit(projectId, items[index].id)),
+              ),
             ),
           );
         },

@@ -31,35 +31,38 @@ class HomeScreen extends ConsumerWidget {
   }
 }
 
-class _Body extends StatelessWidget {
+class _Body extends ConsumerWidget {
   const _Body({this.username});
 
   final String? username;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
 
-    return Align(
-      alignment: Alignment.topCenter,
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 480),
-        child: ListView(
-          padding: const EdgeInsets.all(LabFoxSpacing.lg),
-          children: [
-            if (username != null)
-              Text(
-                l10n.homeSignedInAs(username!),
-                style: Theme.of(context).textTheme.titleMedium,
-                textAlign: TextAlign.center,
-              ),
-            const SizedBox(height: LabFoxSpacing.lg),
-            const _MyWork(),
-            const SizedBox(height: LabFoxSpacing.lg),
-            const HomeWorkFeed(),
-            const _ProjectSection(favorites: true),
-            const _ProjectSection(favorites: false),
-          ],
+    return RefreshIndicator(
+      onRefresh: () => ref.refresh(homeWorkControllerProvider.future),
+      child: Align(
+        alignment: Alignment.topCenter,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 480),
+          child: ListView(
+            padding: const EdgeInsets.all(LabFoxSpacing.lg),
+            children: [
+              if (username != null)
+                Text(
+                  l10n.homeSignedInAs(username!),
+                  style: Theme.of(context).textTheme.titleMedium,
+                  textAlign: TextAlign.center,
+                ),
+              const SizedBox(height: LabFoxSpacing.lg),
+              const _MyWork(),
+              const SizedBox(height: LabFoxSpacing.lg),
+              const HomeWorkFeed(),
+              const _ProjectSection(favorites: true),
+              const _ProjectSection(favorites: false),
+            ],
+          ),
         ),
       ),
     );

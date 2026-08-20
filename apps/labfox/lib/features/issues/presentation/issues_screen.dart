@@ -79,13 +79,18 @@ class _IssuesScreenState extends ConsumerState<IssuesScreen> {
           if (items.isEmpty) {
             return EmptyState(icon: Icons.adjust, title: l10n.issuesEmpty);
           }
-          return ListView.separated(
-            itemCount: items.length,
-            separatorBuilder: (context, index) => const Divider(height: 1),
-            itemBuilder: (context, index) => _IssueTile(
-              issue: items[index],
-              onTap: () =>
-                  context.go(Routes.issue(widget.projectId, items[index].iid)),
+          return RefreshIndicator(
+            onRefresh: () =>
+                ref.refresh(issuesControllerProvider(query).future),
+            child: ListView.separated(
+              itemCount: items.length,
+              separatorBuilder: (context, index) => const Divider(height: 1),
+              itemBuilder: (context, index) => _IssueTile(
+                issue: items[index],
+                onTap: () => context.go(
+                  Routes.issue(widget.projectId, items[index].iid),
+                ),
+              ),
             ),
           );
         },
