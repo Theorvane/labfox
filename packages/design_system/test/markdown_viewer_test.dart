@@ -71,6 +71,55 @@ void main() {
     expect(_allText(tester), contains('content'));
   });
 
+  group('raw HTML degradation', () {
+    testWidgets('strips block-level tags but keeps their inner text', (
+      tester,
+    ) async {
+      await _pump(
+        tester,
+        '<p align="center"><b>LabFox</b><br>a GitLab client</p>',
+      );
+      final text = _allText(tester);
+      expect(text, contains('LabFox'));
+      expect(text, contains('a GitLab client'));
+      expect(text, isNot(contains('<')));
+    });
+
+    testWidgets('strips inline tags but keeps their text', (tester) async {
+      await _pump(tester, 'Hello <sub>tiny</sub> world');
+      final text = _allText(tester);
+      expect(text, contains('Hello'));
+      expect(text, contains('tiny'));
+      expect(text, contains('world'));
+      expect(text, isNot(contains('<')));
+    });
+
+    testWidgets('an image degrades to its alt text', (tester) async {
+      await _pump(tester, '<img src="badge.svg" alt="build passing">');
+      final text = _allText(tester);
+      expect(text, contains('build passing'));
+      expect(text, isNot(contains('<img')));
+    });
+
+    testWidgets('script and style contents are dropped entirely', (
+      tester,
+    ) async {
+      await _pump(tester, 'before\n\n<script>\nalert(1)\n</script>\n\nafter');
+      final text = _allText(tester);
+      expect(text, contains('before'));
+      expect(text, contains('after'));
+      expect(text, isNot(contains('alert(1)')));
+      expect(text, isNot(contains('<')));
+    });
+
+    testWidgets('common entities decode to their characters', (tester) async {
+      await _pump(tester, 'a &amp; b, x &lt; y');
+      final text = _allText(tester);
+      expect(text, contains('a & b'));
+      expect(text, contains('x < y'));
+    });
+  });
+
   testWidgets('a link is tappable and reports its href', (tester) async {
     String? tapped;
     await _pump(

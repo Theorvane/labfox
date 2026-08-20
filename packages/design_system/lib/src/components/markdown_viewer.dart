@@ -13,10 +13,13 @@ import '../tokens/spacing.dart';
 ///
 /// - **Raw HTML is never executed.** The parser emits raw HTML as plain text
 ///   nodes, and the renderer draws every text node as a [TextSpan] and never a
-///   [WidgetSpan]. A `<script>` in the source is shown as literal characters;
-///   nothing from the markdown becomes a live widget. The guarantee comes from
-///   this renderer's whitelist, not from any parser setting — do not relax the
-///   whitelist assuming the parser sanitizes HTML, because it does not.
+///   [WidgetSpan] — nothing from the markdown becomes a live widget. Instead
+///   of printing the tags, the renderer degrades them: tags are stripped and
+///   their inner text kept, `<br>` becomes a line break, `<img>` falls back to
+///   its alt text, and `<script>`/`<style>` are dropped with their contents.
+///   The guarantee comes from this renderer's whitelist, not from any parser
+///   setting — do not relax the whitelist assuming the parser sanitizes HTML,
+///   because it does not.
 /// - **Links are the only interactive element.** A tap reports the href through
 ///   [onTapLink]; the viewer never navigates or opens anything itself, leaving
 ///   that decision to the caller.
@@ -69,7 +72,13 @@ class _MarkdownViewerState extends State<MarkdownViewer> {
   Widget _block(md.Node node) {
     final theme = Theme.of(context);
     if (node is md.Text) {
-      return _paragraph(node.text, theme.textTheme.bodyMedium);
+      // A block-level text node is raw HTML the parser passed through.
+      // Degrade it to its readable text instead of printing the tags.
+      final text = _degradeHtml(node.text);
+      if (text.trim().isEmpty) {
+        return const SizedBox.shrink();
+      }
+      return _paragraph(text, theme.textTheme.bodyMedium);
     }
     if (node is! md.Element) {
       return const SizedBox.shrink();
@@ -201,7 +210,7 @@ class _MarkdownViewerState extends State<MarkdownViewer> {
       children: nodes
           .map((node) {
             if (node is md.Text) {
-              return TextSpan(text: _unescape(node.text));
+              return TextSpan(text: _degradeHtml(node.text));
             }
             if (node is md.Element) {
               switch (node.tag) {
@@ -263,5 +272,39 @@ class _MarkdownViewerState extends State<MarkdownViewer> {
     );
   }
 
-  String _unescape(String text) => text;
+  static final _scriptOrStyle = RegExp(
+    r'<(script|style)[^>]*>.*?</\1\s*>',
+    caseSensitive: false,
+    dotAll: true,
+  );
+  static final _lineBreak = RegExp(r'<br\s*/?>', caseSensitive: false);
+  static final _imageWithAlt = RegExp(
+    '''<img[^>]*\\balt\\s*=\\s*["']([^"']*)["'][^>]*>''',
+    caseSensitive: false,
+  );
+  static final _image = RegExp(r'<img[^>]*>', caseSensitive: false);
+  static final _tag = RegExp(r'</?[a-zA-Z][^>]*>');
+
+  /// Reduces raw HTML to its readable text. Never renders anything: tags are
+  /// stripped keeping their inner text, `<br>` becomes a newline, `<img>`
+  /// falls back to its alt text, and `<script>`/`<style>` vanish with their
+  /// contents. Entities decode last so `&lt;script&gt;` can never become a
+  /// tag. Plain text without HTML passes through untouched.
+  static String _degradeHtml(String text) {
+    if (!text.contains('<') && !text.contains('&')) {
+      return text;
+    }
+    var s = text.replaceAll(_scriptOrStyle, '');
+    s = s.replaceAll(_lineBreak, '\n');
+    s = s.replaceAllMapped(_imageWithAlt, (m) => m[1]!);
+    s = s.replaceAll(_image, '');
+    s = s.replaceAll(_tag, '');
+    return s
+        .replaceAll('&lt;', '<')
+        .replaceAll('&gt;', '>')
+        .replaceAll('&quot;', '"')
+        .replaceAll('&#39;', "'")
+        .replaceAll('&nbsp;', ' ')
+        .replaceAll('&amp;', '&');
+  }
 }
