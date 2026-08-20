@@ -14,6 +14,31 @@ enum TodoState {
   final String value;
 }
 
+/// What a todo points at, for the type filter.
+enum TodoType {
+  issue('Issue'),
+  mergeRequest('MergeRequest');
+
+  const TodoType(this.value);
+
+  final String value;
+}
+
+/// Why a todo exists, for the reason filter.
+enum TodoAction {
+  assigned('assigned'),
+  mentioned('mentioned'),
+  buildFailed('build_failed'),
+  marked('marked'),
+  approvalRequired('approval_required'),
+  unmergeable('unmergeable'),
+  directlyAddressed('directly_addressed');
+
+  const TodoAction(this.value);
+
+  final String value;
+}
+
 /// The current user's To-do list — `/todos`.
 ///
 /// These are account-scoped, not project-scoped: the endpoint always acts on
@@ -24,8 +49,12 @@ class TodosApi {
   final Dio _dio;
 
   /// Lists the current user's todos, pending by default, newest first.
+  ///
+  /// [type] and [action] narrow by target and reason; null means unfiltered.
   Future<Paginated<Todo>> list({
     TodoState state = TodoState.pending,
+    TodoType? type,
+    TodoAction? action,
     int page = 1,
     int perPage = 20,
   }) async {
@@ -34,6 +63,8 @@ class TodosApi {
         '/todos',
         queryParameters: {
           'state': state.value,
+          if (type != null) 'type': type.value,
+          if (action != null) 'action': action.value,
           'page': page,
           'per_page': perPage,
         },
@@ -62,6 +93,8 @@ class TodosApi {
   /// past the first page, so the user could neither open nor clear them.
   Future<List<Todo>> listAll({
     TodoState state = TodoState.pending,
+    TodoType? type,
+    TodoAction? action,
     int perPage = 100,
   }) async {
     try {
@@ -72,6 +105,8 @@ class TodosApi {
           '/todos',
           queryParameters: {
             'state': state.value,
+            if (type != null) 'type': type.value,
+            if (action != null) 'action': action.value,
             'page': page,
             'per_page': perPage,
           },
