@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:labfox/core/ui/link_opener.dart';
 import 'package:labfox/features/settings/presentation/settings_screen.dart';
 import 'package:labfox/l10n/app_localizations.dart';
 
-Future<void> _pump(WidgetTester tester) async {
+Future<List<Uri>> _pump(WidgetTester tester) async {
+  final opened = <Uri>[];
   await tester.pumpWidget(
-    const MaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: SettingsScreen(),
+    ProviderScope(
+      overrides: [
+        linkOpenerProvider.overrideWithValue((uri) async => opened.add(uri)),
+      ],
+      child: const MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: SettingsScreen(),
+      ),
     ),
   );
   await tester.pumpAndSettle();
+  return opened;
 }
 
 void main() {
@@ -35,5 +44,14 @@ void main() {
 
     // Flutter's LicensePage lists every pub dependency's license.
     expect(find.byType(LicensePage), findsOneWidget);
+  });
+
+  testWidgets('terms of service opens the company terms page', (tester) async {
+    final opened = await _pump(tester);
+
+    await tester.tap(find.text('Terms of service'));
+    await tester.pumpAndSettle();
+
+    expect(opened, [Uri.parse('https://www.sloki9637.com/terms')]);
   });
 }

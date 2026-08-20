@@ -830,6 +830,14 @@
   "@settingsPrivacyPolicy": {
     "description": "Settings entry that opens the bundled privacy policy"
   },
+  "settingsTerms": "Terms of service",
+  "@settingsTerms": {
+    "description": "Settings entry that opens the terms page on the company site"
+  },
+  "settingsWebsite": "Website",
+  "@settingsWebsite": {
+    "description": "Settings entry that opens the company website"
+  },
   "settingsLicenses": "Open source licenses",
   "@settingsLicenses": {
     "description": "Settings entry that opens the open-source license page"

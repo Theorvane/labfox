@@ -1394,6 +1394,18 @@ abstract class AppLocalizations {
   /// **'Privacy policy'**
   String get settingsPrivacyPolicy;
 
+  /// Settings entry that opens the terms page on the company site
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of service'**
+  String get settingsTerms;
+
+  /// Settings entry that opens the company website
+  ///
+  /// In en, this message translates to:
+  /// **'Website'**
+  String get settingsWebsite;
+
   /// Settings entry that opens the open-source license page
   ///
   /// In en, this message translates to:

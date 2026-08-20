@@ -1,8 +1,10 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/router.dart';
+import '../../../core/ui/link_opener.dart';
 import '../../../l10n/app_localizations.dart';
 
 /// App settings.
@@ -11,7 +13,7 @@ import '../../../l10n/app_localizations.dart';
 /// which LabFox is obliged to expose (see THIRD_PARTY_NOTICES.md). Flutter
 /// collects each pub dependency's license automatically, so [showLicensePage]
 /// satisfies the attribution requirement.
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
   /// The name shown on the license page.
@@ -22,8 +24,9 @@ class SettingsScreen extends StatelessWidget {
   static const _legalese = '© 2026 sjungwon03 · Apache-2.0';
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final open = ref.watch(linkOpenerProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.settingsTitle)),
@@ -41,6 +44,20 @@ class SettingsScreen extends StatelessWidget {
             title: Text(l10n.settingsPrivacyPolicy),
             trailing: const Icon(LabFoxIcons.chevron),
             onTap: () => context.go(Routes.privacy),
+          ),
+          const Divider(height: 1),
+          ListTile(
+            leading: const Icon(LabFoxIcons.document),
+            title: Text(l10n.settingsTerms),
+            trailing: const Icon(LabFoxIcons.openInBrowser),
+            onTap: () => open(Uri.parse('https://www.sloki9637.com/terms')),
+          ),
+          const Divider(height: 1),
+          ListTile(
+            leading: const Icon(LabFoxIcons.public),
+            title: Text(l10n.settingsWebsite),
+            trailing: const Icon(LabFoxIcons.openInBrowser),
+            onTap: () => open(Uri.parse('https://www.sloki9637.com')),
           ),
           const Divider(height: 1),
           ListTile(

@@ -663,6 +663,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsPrivacyPolicy => 'Privacy policy';
 
   @override
+  String get settingsTerms => 'Terms of service';
+
+  @override
+  String get settingsWebsite => 'Website';
+
+  @override
   String get settingsLicenses => '开源许可';
 
   @override

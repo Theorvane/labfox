@@ -55,4 +55,6 @@ repository. Continued use after a change means the updated policy applies.
 ## Contact
 
 - **sloki9637** — https://www.sloki9637.com
+- Published policy: https://www.sloki9637.com/privacy
+- Terms of service: https://www.sloki9637.com/terms
 - Inquiries: **inquiry@sloki9637.com**
