@@ -102,6 +102,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get signInErrorGeneric => 'साइन इन विफल रहा। कृपया पुनः प्रयास करें।';
 
   @override
+  String get scopeAssigned => 'Assigned';
+
+  @override
+  String get scopeCreated => 'Created';
+
+  @override
   String get homeMyWork => 'मेरा काम';
 
   @override

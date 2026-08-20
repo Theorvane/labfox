@@ -101,6 +101,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get signInErrorGeneric => 'Sign-in failed. Please try again.';
 
   @override
+  String get scopeAssigned => 'Assigned';
+
+  @override
+  String get scopeCreated => 'Created';
+
+  @override
   String get homeMyWork => 'My work';
 
   @override

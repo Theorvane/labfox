@@ -97,6 +97,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get signInErrorGeneric => '로그인에 실패했습니다. 다시 시도하세요.';
 
   @override
+  String get scopeAssigned => 'Assigned';
+
+  @override
+  String get scopeCreated => 'Created';
+
+  @override
   String get homeMyWork => '내 작업';
 
   @override

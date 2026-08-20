@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_api/gitlab_api.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
+import '../../../../core/auth/auth_controller.dart';
 import '../../../../core/auth/gitlab_client_provider.dart';
 import '../../data/merge_requests_repository.dart';
 
@@ -128,3 +129,56 @@ final newMergeRequestControllerProvider =
     AutoDisposeAsyncNotifierProvider<NewMergeRequestController, void>(
       NewMergeRequestController.new,
     );
+
+/// Whose merge requests the account-level list shows.
+enum MyMergeRequestScope { assigned, reviewRequests, created }
+
+/// Identifies an account-level merge request list.
+class MyMergeRequestsQuery {
+  const MyMergeRequestsQuery({required this.scope, required this.state});
+
+  final MyMergeRequestScope scope;
+  final MergeRequestState state;
+
+  @override
+  bool operator ==(Object other) =>
+      other is MyMergeRequestsQuery &&
+      other.scope == scope &&
+      other.state == state;
+
+  @override
+  int get hashCode => Object.hash(scope, state);
+}
+
+/// The current user's merge requests across every project. Review requests
+/// filter by the signed-in username, since GitLab has no scope for them.
+class MyMergeRequestsController
+    extends FamilyAsyncNotifier<List<MergeRequest>, MyMergeRequestsQuery> {
+  @override
+  Future<List<MergeRequest>> build(MyMergeRequestsQuery arg) async {
+    final repo = await ref.watch(mergeRequestsRepositoryProvider.future);
+    if (repo == null) {
+      throw StateError('No authenticated account');
+    }
+    if (arg.scope == MyMergeRequestScope.reviewRequests) {
+      final account = ref.watch(currentAccountProvider);
+      if (account == null) {
+        throw StateError('No authenticated account');
+      }
+      return repo.listForReview(account.user.username, state: arg.state);
+    }
+    return repo.listMine(
+      scope: arg.scope == MyMergeRequestScope.created
+          ? MergeRequestScope.createdByMe
+          : MergeRequestScope.assignedToMe,
+      state: arg.state,
+    );
+  }
+}
+
+final myMergeRequestsControllerProvider =
+    AsyncNotifierProvider.family<
+      MyMergeRequestsController,
+      List<MergeRequest>,
+      MyMergeRequestsQuery
+    >(MyMergeRequestsController.new);

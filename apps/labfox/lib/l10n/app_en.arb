@@ -118,6 +118,10 @@
   "@signInErrorGeneric": {
     "description": "Fallback sign-in error"
   },
+  "scopeAssigned": "Assigned",
+  "@scopeAssigned": {"description": "Account-level list scope: items assigned to the user"},
+  "scopeCreated": "Created",
+  "@scopeCreated": {"description": "Account-level list scope: items created by the user"},
   "homeMyWork": "My work",
   "@homeMyWork": {
     "description": "Section heading on the home screen"

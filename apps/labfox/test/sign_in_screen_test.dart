@@ -6,8 +6,6 @@ import 'package:gitlab_models/gitlab_models.dart';
 import 'package:labfox/app/app.dart';
 import 'package:labfox/core/auth/auth_providers.dart';
 import 'package:labfox/core/auth/auth_repository.dart';
-import 'package:labfox/features/home/data/home_work.dart';
-import 'package:labfox/features/home/presentation/controllers/home_work_controllers.dart';
 import 'package:secure_storage/secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -67,18 +65,6 @@ class _StubAuthRepository implements AuthRepository {
   Future<String?> tokenFor(Account account) async => 'glpat-valid';
 }
 
-/// Keeps the home work feed off the network once sign-in lands on home: these
-/// tests assert routing, not the feed, and the real feed would fire blocked
-/// HTTP calls in the test binding.
-class _EmptyHomeWork extends HomeWorkController {
-  @override
-  Future<HomeWork> build() async => const HomeWork(
-    reviewRequests: [],
-    assignedMergeRequests: [],
-    assignedIssues: [],
-  );
-}
-
 Future<void> _pump(WidgetTester tester, AuthRepository repo) async {
   SharedPreferences.setMockInitialValues({});
   FlutterSecureStorage.setMockInitialValues({});
@@ -89,7 +75,6 @@ Future<void> _pump(WidgetTester tester, AuthRepository repo) async {
       overrides: [
         sharedPreferencesProvider.overrideWithValue(prefs),
         authRepositoryProvider.overrideWithValue(repo),
-        homeWorkControllerProvider.overrideWith(_EmptyHomeWork.new),
       ],
       child: const LabFoxApp(),
     ),
@@ -149,7 +134,7 @@ void main() {
 
     // 'Home' now appears in both the app bar and the navigation shell.
     expect(find.text('Home'), findsWidgets);
-    expect(find.text('Signed in as jungwon'), findsOneWidget);
+    expect(find.text('My work'), findsOneWidget);
   });
 
   testWidgets('OAuth without a client id asks for one', (tester) async {
@@ -186,6 +171,6 @@ void main() {
 
     // 'Home' now appears in both the app bar and the navigation shell.
     expect(find.text('Home'), findsWidgets);
-    expect(find.text('Signed in as jungwon'), findsOneWidget);
+    expect(find.text('My work'), findsOneWidget);
   });
 }

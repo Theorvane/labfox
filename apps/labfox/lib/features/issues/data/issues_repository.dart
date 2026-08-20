@@ -15,6 +15,15 @@ class IssuesRepository {
     return page.items;
   }
 
+  /// The current user's issues across every project, by scope.
+  Future<List<Issue>> listMine({
+    required IssueScope scope,
+    required IssueState state,
+  }) async {
+    final page = await _client.issues.listMine(scope: scope, state: state);
+    return page.items;
+  }
+
   Future<Issue> get({required int projectId, required int iid}) {
     return _client.issues.get(projectId, iid: iid);
   }
