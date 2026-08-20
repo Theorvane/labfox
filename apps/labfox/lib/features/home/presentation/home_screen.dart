@@ -191,6 +191,7 @@ class HomeWorkFeed extends ConsumerWidget {
             MetaText('!${mr.iid}'),
             if (mr.updatedAt != null) MetaText(timeAgo(mr.updatedAt!)),
             LabelChips(mr.labels),
+            if (mr.assignees.isNotEmpty) UserAvatar(user: mr.assignees.first),
           ],
           onTap: projectId == null
               ? null
@@ -219,6 +220,8 @@ class HomeWorkFeed extends ConsumerWidget {
             MetaText('#${issue.iid}'),
             if (issue.updatedAt != null) MetaText(timeAgo(issue.updatedAt!)),
             LabelChips(issue.labels),
+            if (issue.assignees.isNotEmpty)
+              UserAvatar(user: issue.assignees.first),
           ],
           onTap: projectId == null
               ? null

@@ -172,6 +172,7 @@ class _ResultTile extends StatelessWidget {
           MetaText('#${item.iid}'),
           if (item.updatedAt != null) MetaText(timeAgo(item.updatedAt!)),
           LabelChips(item.labels),
+          if (item.assignees.isNotEmpty) UserAvatar(user: item.assignees.first),
         ],
         onTap: projectId == null
             ? null
@@ -190,6 +191,7 @@ class _ResultTile extends StatelessWidget {
           MetaText('!${item.iid}'),
           if (item.updatedAt != null) MetaText(timeAgo(item.updatedAt!)),
           LabelChips(item.labels),
+          if (item.assignees.isNotEmpty) UserAvatar(user: item.assignees.first),
         ],
         onTap: projectId == null
             ? null

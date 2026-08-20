@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -55,6 +56,25 @@ void main() {
 
     expect(find.text('Android login error'), findsOneWidget);
     expect(find.text('#282'), findsOneWidget);
+  });
+
+  testWidgets('shows an assignee avatar when the issue is assigned', (
+    tester,
+  ) async {
+    await _pump(tester, {
+      IssueState.opened: AsyncData([
+        Issue(
+          id: 1,
+          iid: 5,
+          title: 'assigned',
+          state: 'opened',
+          assignees: const [User(id: 2, username: 'ari', name: 'Ari')],
+        ),
+      ]),
+    });
+    await tester.pumpAndSettle();
+
+    expect(find.byType(UserAvatar), findsOneWidget);
   });
 
   testWidgets('shows a relative updated time on the row', (tester) async {

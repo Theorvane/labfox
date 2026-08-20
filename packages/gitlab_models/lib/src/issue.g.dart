@@ -16,6 +16,11 @@ _Issue _$IssueFromJson(Map<String, dynamic> json) => _Issue(
   author: json['author'] == null
       ? null
       : User.fromJson(json['author'] as Map<String, dynamic>),
+  assignees:
+      (json['assignees'] as List<dynamic>?)
+          ?.map((e) => User.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const <User>[],
   labels: json['labels'] == null
       ? const <Label>[]
       : Label.listFromJson(json['labels']),
@@ -37,6 +42,7 @@ Map<String, dynamic> _$IssueToJson(_Issue instance) => <String, dynamic>{
   'project_id': instance.projectId,
   'description': instance.description,
   'author': instance.author?.toJson(),
+  'assignees': instance.assignees.map((e) => e.toJson()).toList(),
   'labels': instance.labels.map((e) => e.toJson()).toList(),
   'web_url': instance.webUrl,
   'user_notes_count': instance.commentCount,

@@ -25,6 +25,7 @@ abstract class MergeRequest with _$MergeRequest {
     @JsonKey(name: 'project_id') int? projectId,
     String? description,
     User? author,
+    @Default(<User>[]) List<User> assignees,
     @JsonKey(fromJson: Label.listFromJson)
     @Default(<Label>[])
     List<Label> labels,

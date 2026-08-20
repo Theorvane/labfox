@@ -115,6 +115,7 @@ class _IssueTile extends StatelessWidget {
         if (issue.updatedAt != null) MetaText(timeAgo(issue.updatedAt!)),
         LabelChips(issue.labels),
         CommentCount(issue.commentCount),
+        if (issue.assignees.isNotEmpty) UserAvatar(user: issue.assignees.first),
       ],
       onTap: onTap,
     );
