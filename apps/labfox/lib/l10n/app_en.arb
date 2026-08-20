@@ -166,6 +166,34 @@
   "@retry": {
     "description": "Label for a retry button"
   },
+  "newIssueTitle": "New issue",
+  "@newIssueTitle": {
+    "description": "Title of the create-issue screen"
+  },
+  "newIssueTitleLabel": "Title",
+  "@newIssueTitleLabel": {
+    "description": "Label for the issue title field"
+  },
+  "newIssueTitleRequired": "Enter a title.",
+  "@newIssueTitleRequired": {
+    "description": "Validation when the issue title is empty"
+  },
+  "newIssueDescriptionLabel": "Description (optional)",
+  "@newIssueDescriptionLabel": {
+    "description": "Label for the issue description field"
+  },
+  "newIssueSubmit": "Create issue",
+  "@newIssueSubmit": {
+    "description": "Button that creates the issue"
+  },
+  "newIssueError": "Could not create the issue. Please try again.",
+  "@newIssueError": {
+    "description": "Shown when creating an issue fails"
+  },
+  "newIssueButton": "New issue",
+  "@newIssueButton": {
+    "description": "Tooltip for the create-issue action on the issues list"
+  },
   "projectOverviewTitle": "Project",
   "@projectOverviewTitle": {
     "description": "Fallback title for the project overview screen"

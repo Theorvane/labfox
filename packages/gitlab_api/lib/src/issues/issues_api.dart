@@ -97,6 +97,39 @@ class IssuesApi {
     }
   }
 
+  /// Creates an issue in a project and returns it.
+  ///
+  /// `POST /projects/:id/issues` — `title` is required; an empty description is
+  /// omitted rather than sent blank.
+  Future<Issue> create(
+    Object projectId, {
+    required String title,
+    String? description,
+  }) async {
+    try {
+      final response = await _dio.post<Map<String, dynamic>>(
+        '/projects/${_enc(projectId)}/issues',
+        data: {
+          'title': title,
+          if (description != null && description.isNotEmpty)
+            'description': description,
+        },
+      );
+      final data = response.data;
+      final status = response.statusCode ?? 0;
+      if ((status != 201 && status != 200) || data == null) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'creating the issue',
+        );
+      }
+      return Issue.fromJson(data);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'creating the issue');
+    }
+  }
+
   /// A single issue by its `iid` — the per-project number a user sees, never
   /// the global `id`.
   Future<Issue> get(Object projectId, {required int iid}) async {

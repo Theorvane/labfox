@@ -82,6 +82,47 @@ void main() {
     });
   });
 
+  group('IssuesApi.create', () {
+    test('POSTs the title and description and returns the new issue', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (
+          status: 201,
+          headers: const {},
+          body: {'id': 9, 'iid': 42, 'title': 'Bug', 'state': 'opened'},
+        );
+      });
+
+      final issue = await client.issues.create(
+        7,
+        title: 'Bug',
+        description: 'It broke',
+      );
+
+      expect(captured.method, 'POST');
+      expect(captured.path, '/projects/7/issues');
+      expect(captured.data, {'title': 'Bug', 'description': 'It broke'});
+      expect(issue.iid, 42);
+    });
+
+    test('omits an empty description', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (
+          status: 201,
+          headers: const {},
+          body: {'id': 1, 'iid': 5, 'title': 'x', 'state': 'opened'},
+        );
+      });
+
+      await client.issues.create(7, title: 'x');
+
+      expect((captured.data as Map).containsKey('description'), isFalse);
+    });
+  });
+
   group('IssuesApi.listAssignedToMe', () {
     test('lists open issues assigned to the current user', () async {
       late RequestOptions captured;

@@ -30,6 +30,11 @@ class _IssuesScreenState extends ConsumerState<IssuesScreen> {
     final issues = ref.watch(issuesControllerProvider(query));
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        tooltip: l10n.newIssueButton,
+        onPressed: () => context.go(Routes.newIssue(widget.projectId)),
+        child: const Icon(Icons.add),
+      ),
       appBar: AppBar(
         title: Text(l10n.issuesTitle),
         bottom: PreferredSize(
