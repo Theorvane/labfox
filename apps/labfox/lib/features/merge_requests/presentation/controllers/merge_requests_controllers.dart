@@ -17,19 +17,22 @@ class MergeRequestsQuery {
   const MergeRequestsQuery({
     required this.projectId,
     this.state = MergeRequestState.opened,
+    this.search,
   });
 
   final int projectId;
   final MergeRequestState state;
+  final String? search;
 
   @override
   bool operator ==(Object other) =>
       other is MergeRequestsQuery &&
       other.projectId == projectId &&
-      other.state == state;
+      other.state == state &&
+      other.search == search;
 
   @override
-  int get hashCode => Object.hash(projectId, state);
+  int get hashCode => Object.hash(projectId, state, search);
 }
 
 /// Lists merge requests for a query.
@@ -41,7 +44,11 @@ class MergeRequestsController
     if (repo == null) {
       throw StateError('No authenticated account');
     }
-    return repo.list(projectId: arg.projectId, state: arg.state);
+    return repo.list(
+      projectId: arg.projectId,
+      state: arg.state,
+      search: arg.search,
+    );
   }
 }
 

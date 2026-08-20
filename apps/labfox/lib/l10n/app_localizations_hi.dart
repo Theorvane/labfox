@@ -643,6 +643,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get searchLoadMore => 'और लोड करें';
 
   @override
+  String get listSearchHint => 'Search by title';
+
+  @override
+  String get listSearchClose => 'Close search';
+
+  @override
   String get projectAddFavorite => 'पसंदीदा में जोड़ें';
 
   @override

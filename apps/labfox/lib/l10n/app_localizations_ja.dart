@@ -627,6 +627,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get searchLoadMore => 'さらに読み込む';
 
   @override
+  String get listSearchHint => 'Search by title';
+
+  @override
+  String get listSearchClose => 'Close search';
+
+  @override
   String get projectAddFavorite => 'お気に入りに追加';
 
   @override

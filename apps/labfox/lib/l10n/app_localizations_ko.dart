@@ -628,6 +628,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get searchLoadMore => '더 보기';
 
   @override
+  String get listSearchHint => 'Search by title';
+
+  @override
+  String get listSearchClose => 'Close search';
+
+  @override
   String get projectAddFavorite => '즐겨찾기에 추가';
 
   @override

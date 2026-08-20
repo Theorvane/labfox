@@ -35,9 +35,12 @@ class MergeRequestsApi {
 
   /// Lists a project's merge requests, open by default, most recently updated
   /// first.
+  ///
+  /// A non-empty [search] filters by title and description server-side.
   Future<Paginated<MergeRequest>> list(
     Object projectId, {
     MergeRequestState state = MergeRequestState.opened,
+    String? search,
     int page = 1,
     int perPage = 20,
   }) async {
@@ -46,6 +49,7 @@ class MergeRequestsApi {
         '/projects/${_enc(projectId)}/merge_requests',
         queryParameters: {
           if (state != MergeRequestState.all) 'state': state.value,
+          if (search != null && search.isNotEmpty) 'search': search,
           'order_by': 'updated_at',
           // Labels as objects with colours, not bare names.
           'with_labels_details': true,

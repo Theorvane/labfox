@@ -778,6 +778,14 @@
   "@searchLoadMore": {
     "description": "Button that loads the next page of search results"
   },
+  "listSearchHint": "Search by title",
+  "@listSearchHint": {
+    "description": "Placeholder of the inline search field on list screens"
+  },
+  "listSearchClose": "Close search",
+  "@listSearchClose": {
+    "description": "Tooltip for the button that closes the inline list search"
+  },
   "projectAddFavorite": "Add to favorites",
   "@projectAddFavorite": {
     "description": "Tooltip for favoriting a project"

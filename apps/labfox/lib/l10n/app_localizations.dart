@@ -1316,6 +1316,18 @@ abstract class AppLocalizations {
   /// **'Load more'**
   String get searchLoadMore;
 
+  /// Placeholder of the inline search field on list screens
+  ///
+  /// In en, this message translates to:
+  /// **'Search by title'**
+  String get listSearchHint;
+
+  /// Tooltip for the button that closes the inline list search
+  ///
+  /// In en, this message translates to:
+  /// **'Close search'**
+  String get listSearchClose;
+
   /// Tooltip for favoriting a project
   ///
   /// In en, this message translates to:

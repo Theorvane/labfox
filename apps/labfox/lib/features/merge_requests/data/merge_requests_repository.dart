@@ -10,8 +10,13 @@ class MergeRequestsRepository {
   Future<List<MergeRequest>> list({
     required int projectId,
     required MergeRequestState state,
+    String? search,
   }) async {
-    final page = await _client.mergeRequests.list(projectId, state: state);
+    final page = await _client.mergeRequests.list(
+      projectId,
+      state: state,
+      search: search,
+    );
     return page.items;
   }
 

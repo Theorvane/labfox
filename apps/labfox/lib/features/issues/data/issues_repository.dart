@@ -10,8 +10,13 @@ class IssuesRepository {
   Future<List<Issue>> list({
     required int projectId,
     required IssueState state,
+    String? search,
   }) async {
-    final page = await _client.issues.list(projectId, state: state);
+    final page = await _client.issues.list(
+      projectId,
+      state: state,
+      search: search,
+    );
     return page.items;
   }
 

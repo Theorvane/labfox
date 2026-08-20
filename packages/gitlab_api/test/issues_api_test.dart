@@ -43,6 +43,20 @@ void main() {
 
       expect(captured.queryParameters['state'], 'closed');
     });
+
+    test('passes a search term through and omits it when absent', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (status: 200, headers: const {}, body: const []);
+      });
+
+      await client.issues.list(42, search: 'crash');
+      expect(captured.queryParameters['search'], 'crash');
+
+      await client.issues.list(42);
+      expect(captured.queryParameters.containsKey('search'), isFalse);
+    });
   });
 
   group('IssuesApi.get', () {

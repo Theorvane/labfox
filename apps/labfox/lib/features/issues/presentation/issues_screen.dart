@@ -22,22 +22,68 @@ class IssuesScreen extends ConsumerStatefulWidget {
 
 class _IssuesScreenState extends ConsumerState<IssuesScreen> {
   IssueState _state = IssueState.opened;
+  bool _searching = false;
+  String? _search;
+  final _searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _closeSearch() {
+    _searchController.clear();
+    setState(() {
+      _searching = false;
+      _search = null;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final query = IssuesQuery(projectId: widget.projectId, state: _state);
+    final query = IssuesQuery(
+      projectId: widget.projectId,
+      state: _state,
+      search: _search,
+    );
     final issues = ref.watch(issuesControllerProvider(query));
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.issuesTitle),
+        title: _searching
+            ? TextField(
+                controller: _searchController,
+                autofocus: true,
+                textInputAction: TextInputAction.search,
+                decoration: InputDecoration(
+                  hintText: l10n.listSearchHint,
+                  border: InputBorder.none,
+                ),
+                onSubmitted: (term) =>
+                    setState(() => _search = term.trim().isEmpty ? null : term),
+              )
+            : Text(l10n.issuesTitle),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.add),
-            tooltip: l10n.newIssueButton,
-            onPressed: () => context.go(Routes.newIssue(widget.projectId)),
-          ),
+          if (_searching)
+            IconButton(
+              icon: const Icon(Icons.close),
+              tooltip: l10n.listSearchClose,
+              onPressed: _closeSearch,
+            )
+          else ...[
+            IconButton(
+              icon: const Icon(Icons.search),
+              tooltip: l10n.searchTitle,
+              onPressed: () => setState(() => _searching = true),
+            ),
+            IconButton(
+              icon: const Icon(Icons.add),
+              tooltip: l10n.newIssueButton,
+              onPressed: () => context.go(Routes.newIssue(widget.projectId)),
+            ),
+          ],
         ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(52),
