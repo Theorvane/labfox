@@ -6,7 +6,7 @@ import 'package:gitlab_models/gitlab_models.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/router.dart';
-import '../../../core/ui/copy_link_button.dart';
+import '../../../core/ui/share_link_button.dart';
 import '../../../core/ui/work_meta.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../comments/presentation/widgets/comment_thread.dart';
@@ -35,7 +35,7 @@ class MergeRequestDetailScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('!$iid'),
-        actions: [CopyLinkButton(url: mr.valueOrNull?.webUrl)],
+        actions: [ShareLinkButton(url: mr.valueOrNull?.webUrl)],
       ),
       bottomNavigationBar: open
           ? _ActionBar(mr: mr.value!, projectId: projectId)

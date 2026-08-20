@@ -112,10 +112,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get projectsError => '프로젝트를 불러올 수 없습니다.';
 
   @override
-  String get copyLink => 'Copy link';
-
-  @override
-  String get linkCopied => 'Link copied';
+  String get shareLink => 'Share';
 
   @override
   String get retry => '다시 시도';

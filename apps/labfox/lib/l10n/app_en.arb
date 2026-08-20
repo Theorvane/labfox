@@ -138,13 +138,9 @@
   "@projectsError": {
     "description": "Shown when the projects list fails to load"
   },
-  "copyLink": "Copy link",
-  "@copyLink": {
-    "description": "Tooltip for the action that copies the item's web link"
-  },
-  "linkCopied": "Link copied",
-  "@linkCopied": {
-    "description": "Confirmation shown after the web link is copied to the clipboard"
+  "shareLink": "Share",
+  "@shareLink": {
+    "description": "Tooltip for the action that shares the item's web link"
   },
   "retry": "Retry",
   "@retry": {
