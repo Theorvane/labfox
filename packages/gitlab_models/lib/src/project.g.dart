@@ -15,6 +15,7 @@ _Project _$ProjectFromJson(Map<String, dynamic> json) => _Project(
   visibility: json['visibility'] as String?,
   defaultBranch: json['default_branch'] as String?,
   avatarUrl: json['avatar_url'] as String?,
+  webUrl: json['web_url'] as String?,
   lastActivityAt: json['last_activity_at'] == null
       ? null
       : DateTime.parse(json['last_activity_at'] as String),
@@ -29,5 +30,6 @@ Map<String, dynamic> _$ProjectToJson(_Project instance) => <String, dynamic>{
   'visibility': instance.visibility,
   'default_branch': instance.defaultBranch,
   'avatar_url': instance.avatarUrl,
+  'web_url': instance.webUrl,
   'last_activity_at': instance.lastActivityAt?.toIso8601String(),
 };

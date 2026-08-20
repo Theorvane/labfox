@@ -16,6 +16,7 @@ abstract class Job with _$Job {
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'started_at') DateTime? startedAt,
     @JsonKey(name: 'finished_at') DateTime? finishedAt,
+    @JsonKey(name: 'web_url') String? webUrl,
   }) = _Job;
 
   const Job._();

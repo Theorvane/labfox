@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 mixin _$Project {
 
  int get id; String get name;@JsonKey(name: 'path_with_namespace') String get pathWithNamespace; String? get description;// Always shown as a number in the UI, so absent means zero, not unknown.
-@JsonKey(name: 'star_count') int get starCount; String? get visibility;@JsonKey(name: 'default_branch') String? get defaultBranch;@JsonKey(name: 'avatar_url') String? get avatarUrl;@JsonKey(name: 'last_activity_at') DateTime? get lastActivityAt;
+@JsonKey(name: 'star_count') int get starCount; String? get visibility;@JsonKey(name: 'default_branch') String? get defaultBranch;@JsonKey(name: 'avatar_url') String? get avatarUrl;@JsonKey(name: 'web_url') String? get webUrl;@JsonKey(name: 'last_activity_at') DateTime? get lastActivityAt;
 /// Create a copy of Project
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $ProjectCopyWith<Project> get copyWith => _$ProjectCopyWithImpl<Project>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Project&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.pathWithNamespace, pathWithNamespace) || other.pathWithNamespace == pathWithNamespace)&&(identical(other.description, description) || other.description == description)&&(identical(other.starCount, starCount) || other.starCount == starCount)&&(identical(other.visibility, visibility) || other.visibility == visibility)&&(identical(other.defaultBranch, defaultBranch) || other.defaultBranch == defaultBranch)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl)&&(identical(other.lastActivityAt, lastActivityAt) || other.lastActivityAt == lastActivityAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Project&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.pathWithNamespace, pathWithNamespace) || other.pathWithNamespace == pathWithNamespace)&&(identical(other.description, description) || other.description == description)&&(identical(other.starCount, starCount) || other.starCount == starCount)&&(identical(other.visibility, visibility) || other.visibility == visibility)&&(identical(other.defaultBranch, defaultBranch) || other.defaultBranch == defaultBranch)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl)&&(identical(other.webUrl, webUrl) || other.webUrl == webUrl)&&(identical(other.lastActivityAt, lastActivityAt) || other.lastActivityAt == lastActivityAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,pathWithNamespace,description,starCount,visibility,defaultBranch,avatarUrl,lastActivityAt);
+int get hashCode => Object.hash(runtimeType,id,name,pathWithNamespace,description,starCount,visibility,defaultBranch,avatarUrl,webUrl,lastActivityAt);
 
 @override
 String toString() {
-  return 'Project(id: $id, name: $name, pathWithNamespace: $pathWithNamespace, description: $description, starCount: $starCount, visibility: $visibility, defaultBranch: $defaultBranch, avatarUrl: $avatarUrl, lastActivityAt: $lastActivityAt)';
+  return 'Project(id: $id, name: $name, pathWithNamespace: $pathWithNamespace, description: $description, starCount: $starCount, visibility: $visibility, defaultBranch: $defaultBranch, avatarUrl: $avatarUrl, webUrl: $webUrl, lastActivityAt: $lastActivityAt)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $ProjectCopyWith<$Res>  {
   factory $ProjectCopyWith(Project value, $Res Function(Project) _then) = _$ProjectCopyWithImpl;
 @useResult
 $Res call({
- int id, String name,@JsonKey(name: 'path_with_namespace') String pathWithNamespace, String? description,@JsonKey(name: 'star_count') int starCount, String? visibility,@JsonKey(name: 'default_branch') String? defaultBranch,@JsonKey(name: 'avatar_url') String? avatarUrl,@JsonKey(name: 'last_activity_at') DateTime? lastActivityAt
+ int id, String name,@JsonKey(name: 'path_with_namespace') String pathWithNamespace, String? description,@JsonKey(name: 'star_count') int starCount, String? visibility,@JsonKey(name: 'default_branch') String? defaultBranch,@JsonKey(name: 'avatar_url') String? avatarUrl,@JsonKey(name: 'web_url') String? webUrl,@JsonKey(name: 'last_activity_at') DateTime? lastActivityAt
 });
 
 
@@ -66,7 +66,7 @@ class _$ProjectCopyWithImpl<$Res>
 
 /// Create a copy of Project
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? pathWithNamespace = null,Object? description = freezed,Object? starCount = null,Object? visibility = freezed,Object? defaultBranch = freezed,Object? avatarUrl = freezed,Object? lastActivityAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? pathWithNamespace = null,Object? description = freezed,Object? starCount = null,Object? visibility = freezed,Object? defaultBranch = freezed,Object? avatarUrl = freezed,Object? webUrl = freezed,Object? lastActivityAt = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -76,6 +76,7 @@ as String?,starCount: null == starCount ? _self.starCount : starCount // ignore:
 as int,visibility: freezed == visibility ? _self.visibility : visibility // ignore: cast_nullable_to_non_nullable
 as String?,defaultBranch: freezed == defaultBranch ? _self.defaultBranch : defaultBranch // ignore: cast_nullable_to_non_nullable
 as String?,avatarUrl: freezed == avatarUrl ? _self.avatarUrl : avatarUrl // ignore: cast_nullable_to_non_nullable
+as String?,webUrl: freezed == webUrl ? _self.webUrl : webUrl // ignore: cast_nullable_to_non_nullable
 as String?,lastActivityAt: freezed == lastActivityAt ? _self.lastActivityAt : lastActivityAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
   ));
@@ -162,10 +163,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name, @JsonKey(name: 'path_with_namespace')  String pathWithNamespace,  String? description, @JsonKey(name: 'star_count')  int starCount,  String? visibility, @JsonKey(name: 'default_branch')  String? defaultBranch, @JsonKey(name: 'avatar_url')  String? avatarUrl, @JsonKey(name: 'last_activity_at')  DateTime? lastActivityAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name, @JsonKey(name: 'path_with_namespace')  String pathWithNamespace,  String? description, @JsonKey(name: 'star_count')  int starCount,  String? visibility, @JsonKey(name: 'default_branch')  String? defaultBranch, @JsonKey(name: 'avatar_url')  String? avatarUrl, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'last_activity_at')  DateTime? lastActivityAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Project() when $default != null:
-return $default(_that.id,_that.name,_that.pathWithNamespace,_that.description,_that.starCount,_that.visibility,_that.defaultBranch,_that.avatarUrl,_that.lastActivityAt);case _:
+return $default(_that.id,_that.name,_that.pathWithNamespace,_that.description,_that.starCount,_that.visibility,_that.defaultBranch,_that.avatarUrl,_that.webUrl,_that.lastActivityAt);case _:
   return orElse();
 
 }
@@ -183,10 +184,10 @@ return $default(_that.id,_that.name,_that.pathWithNamespace,_that.description,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name, @JsonKey(name: 'path_with_namespace')  String pathWithNamespace,  String? description, @JsonKey(name: 'star_count')  int starCount,  String? visibility, @JsonKey(name: 'default_branch')  String? defaultBranch, @JsonKey(name: 'avatar_url')  String? avatarUrl, @JsonKey(name: 'last_activity_at')  DateTime? lastActivityAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name, @JsonKey(name: 'path_with_namespace')  String pathWithNamespace,  String? description, @JsonKey(name: 'star_count')  int starCount,  String? visibility, @JsonKey(name: 'default_branch')  String? defaultBranch, @JsonKey(name: 'avatar_url')  String? avatarUrl, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'last_activity_at')  DateTime? lastActivityAt)  $default,) {final _that = this;
 switch (_that) {
 case _Project():
-return $default(_that.id,_that.name,_that.pathWithNamespace,_that.description,_that.starCount,_that.visibility,_that.defaultBranch,_that.avatarUrl,_that.lastActivityAt);case _:
+return $default(_that.id,_that.name,_that.pathWithNamespace,_that.description,_that.starCount,_that.visibility,_that.defaultBranch,_that.avatarUrl,_that.webUrl,_that.lastActivityAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -203,10 +204,10 @@ return $default(_that.id,_that.name,_that.pathWithNamespace,_that.description,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name, @JsonKey(name: 'path_with_namespace')  String pathWithNamespace,  String? description, @JsonKey(name: 'star_count')  int starCount,  String? visibility, @JsonKey(name: 'default_branch')  String? defaultBranch, @JsonKey(name: 'avatar_url')  String? avatarUrl, @JsonKey(name: 'last_activity_at')  DateTime? lastActivityAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name, @JsonKey(name: 'path_with_namespace')  String pathWithNamespace,  String? description, @JsonKey(name: 'star_count')  int starCount,  String? visibility, @JsonKey(name: 'default_branch')  String? defaultBranch, @JsonKey(name: 'avatar_url')  String? avatarUrl, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'last_activity_at')  DateTime? lastActivityAt)?  $default,) {final _that = this;
 switch (_that) {
 case _Project() when $default != null:
-return $default(_that.id,_that.name,_that.pathWithNamespace,_that.description,_that.starCount,_that.visibility,_that.defaultBranch,_that.avatarUrl,_that.lastActivityAt);case _:
+return $default(_that.id,_that.name,_that.pathWithNamespace,_that.description,_that.starCount,_that.visibility,_that.defaultBranch,_that.avatarUrl,_that.webUrl,_that.lastActivityAt);case _:
   return null;
 
 }
@@ -218,7 +219,7 @@ return $default(_that.id,_that.name,_that.pathWithNamespace,_that.description,_t
 @JsonSerializable()
 
 class _Project extends Project {
-  const _Project({required this.id, required this.name, @JsonKey(name: 'path_with_namespace') required this.pathWithNamespace, this.description, @JsonKey(name: 'star_count') this.starCount = 0, this.visibility, @JsonKey(name: 'default_branch') this.defaultBranch, @JsonKey(name: 'avatar_url') this.avatarUrl, @JsonKey(name: 'last_activity_at') this.lastActivityAt}): super._();
+  const _Project({required this.id, required this.name, @JsonKey(name: 'path_with_namespace') required this.pathWithNamespace, this.description, @JsonKey(name: 'star_count') this.starCount = 0, this.visibility, @JsonKey(name: 'default_branch') this.defaultBranch, @JsonKey(name: 'avatar_url') this.avatarUrl, @JsonKey(name: 'web_url') this.webUrl, @JsonKey(name: 'last_activity_at') this.lastActivityAt}): super._();
   factory _Project.fromJson(Map<String, dynamic> json) => _$ProjectFromJson(json);
 
 @override final  int id;
@@ -230,6 +231,7 @@ class _Project extends Project {
 @override final  String? visibility;
 @override@JsonKey(name: 'default_branch') final  String? defaultBranch;
 @override@JsonKey(name: 'avatar_url') final  String? avatarUrl;
+@override@JsonKey(name: 'web_url') final  String? webUrl;
 @override@JsonKey(name: 'last_activity_at') final  DateTime? lastActivityAt;
 
 /// Create a copy of Project
@@ -245,16 +247,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Project&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.pathWithNamespace, pathWithNamespace) || other.pathWithNamespace == pathWithNamespace)&&(identical(other.description, description) || other.description == description)&&(identical(other.starCount, starCount) || other.starCount == starCount)&&(identical(other.visibility, visibility) || other.visibility == visibility)&&(identical(other.defaultBranch, defaultBranch) || other.defaultBranch == defaultBranch)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl)&&(identical(other.lastActivityAt, lastActivityAt) || other.lastActivityAt == lastActivityAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Project&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.pathWithNamespace, pathWithNamespace) || other.pathWithNamespace == pathWithNamespace)&&(identical(other.description, description) || other.description == description)&&(identical(other.starCount, starCount) || other.starCount == starCount)&&(identical(other.visibility, visibility) || other.visibility == visibility)&&(identical(other.defaultBranch, defaultBranch) || other.defaultBranch == defaultBranch)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl)&&(identical(other.webUrl, webUrl) || other.webUrl == webUrl)&&(identical(other.lastActivityAt, lastActivityAt) || other.lastActivityAt == lastActivityAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,pathWithNamespace,description,starCount,visibility,defaultBranch,avatarUrl,lastActivityAt);
+int get hashCode => Object.hash(runtimeType,id,name,pathWithNamespace,description,starCount,visibility,defaultBranch,avatarUrl,webUrl,lastActivityAt);
 
 @override
 String toString() {
-  return 'Project(id: $id, name: $name, pathWithNamespace: $pathWithNamespace, description: $description, starCount: $starCount, visibility: $visibility, defaultBranch: $defaultBranch, avatarUrl: $avatarUrl, lastActivityAt: $lastActivityAt)';
+  return 'Project(id: $id, name: $name, pathWithNamespace: $pathWithNamespace, description: $description, starCount: $starCount, visibility: $visibility, defaultBranch: $defaultBranch, avatarUrl: $avatarUrl, webUrl: $webUrl, lastActivityAt: $lastActivityAt)';
 }
 
 
@@ -265,7 +267,7 @@ abstract mixin class _$ProjectCopyWith<$Res> implements $ProjectCopyWith<$Res> {
   factory _$ProjectCopyWith(_Project value, $Res Function(_Project) _then) = __$ProjectCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name,@JsonKey(name: 'path_with_namespace') String pathWithNamespace, String? description,@JsonKey(name: 'star_count') int starCount, String? visibility,@JsonKey(name: 'default_branch') String? defaultBranch,@JsonKey(name: 'avatar_url') String? avatarUrl,@JsonKey(name: 'last_activity_at') DateTime? lastActivityAt
+ int id, String name,@JsonKey(name: 'path_with_namespace') String pathWithNamespace, String? description,@JsonKey(name: 'star_count') int starCount, String? visibility,@JsonKey(name: 'default_branch') String? defaultBranch,@JsonKey(name: 'avatar_url') String? avatarUrl,@JsonKey(name: 'web_url') String? webUrl,@JsonKey(name: 'last_activity_at') DateTime? lastActivityAt
 });
 
 
@@ -282,7 +284,7 @@ class __$ProjectCopyWithImpl<$Res>
 
 /// Create a copy of Project
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? pathWithNamespace = null,Object? description = freezed,Object? starCount = null,Object? visibility = freezed,Object? defaultBranch = freezed,Object? avatarUrl = freezed,Object? lastActivityAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? pathWithNamespace = null,Object? description = freezed,Object? starCount = null,Object? visibility = freezed,Object? defaultBranch = freezed,Object? avatarUrl = freezed,Object? webUrl = freezed,Object? lastActivityAt = freezed,}) {
   return _then(_Project(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -292,6 +294,7 @@ as String?,starCount: null == starCount ? _self.starCount : starCount // ignore:
 as int,visibility: freezed == visibility ? _self.visibility : visibility // ignore: cast_nullable_to_non_nullable
 as String?,defaultBranch: freezed == defaultBranch ? _self.defaultBranch : defaultBranch // ignore: cast_nullable_to_non_nullable
 as String?,avatarUrl: freezed == avatarUrl ? _self.avatarUrl : avatarUrl // ignore: cast_nullable_to_non_nullable
+as String?,webUrl: freezed == webUrl ? _self.webUrl : webUrl // ignore: cast_nullable_to_non_nullable
 as String?,lastActivityAt: freezed == lastActivityAt ? _self.lastActivityAt : lastActivityAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
   ));

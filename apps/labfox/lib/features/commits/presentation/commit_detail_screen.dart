@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../app/router.dart';
+import '../../../core/ui/share_link_button.dart';
 import '../../../l10n/app_localizations.dart';
 import 'controllers/history_controllers.dart';
 
@@ -32,6 +33,7 @@ class CommitDetailScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(commit.valueOrNull?.shortId ?? l10n.commitTitle),
+        actions: [ShareLinkButton(url: commit.valueOrNull?.webUrl)],
       ),
       body: commit.when(
         loading: () => const Center(child: CircularProgressIndicator()),

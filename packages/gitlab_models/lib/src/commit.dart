@@ -25,6 +25,7 @@ abstract class Commit with _$Commit {
     required String title,
     String? message,
     @JsonKey(name: 'author_name') String? authorName,
+    @JsonKey(name: 'web_url') String? webUrl,
     @JsonKey(name: 'authored_date') DateTime? authoredDate,
     CommitStats? stats,
   }) = _Commit;

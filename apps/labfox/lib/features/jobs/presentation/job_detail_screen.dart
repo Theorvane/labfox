@@ -5,6 +5,7 @@ import 'package:gitlab_api/gitlab_api.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
 import '../../../core/ui/ci_visual.dart';
+import '../../../core/ui/share_link_button.dart';
 import '../../../core/ui/work_meta.dart';
 import '../../../l10n/app_localizations.dart';
 import 'controllers/job_actions_controller.dart';
@@ -32,6 +33,7 @@ class JobDetailScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(detail.valueOrNull?.name ?? l10n.jobTitle),
         actions: [
+          ShareLinkButton(url: detail.valueOrNull?.webUrl),
           IconButton(
             icon: const Icon(Icons.refresh),
             tooltip: l10n.jobRefresh,
