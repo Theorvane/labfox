@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_api/gitlab_api.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
+import '../../../../core/analytics/analytics.dart';
 import '../../../../core/auth/gitlab_client_provider.dart';
 import '../../data/inbox_repository.dart';
 
@@ -37,6 +40,7 @@ class InboxController extends FamilyAsyncNotifier<List<Todo>, TodoState> {
     );
     try {
       await repo.markDone(id);
+      unawaited(ref.read(analyticsProvider).track('todo_cleared'));
       ref.invalidate(inboxControllerProvider(TodoState.done));
     } catch (_) {
       state = AsyncData(previous);

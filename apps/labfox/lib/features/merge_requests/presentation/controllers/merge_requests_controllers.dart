@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_api/gitlab_api.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
+import '../../../../core/analytics/analytics.dart';
 import '../../../../core/auth/auth_controller.dart';
 import '../../../../core/auth/gitlab_client_provider.dart';
 import '../../data/merge_requests_repository.dart';
@@ -123,6 +126,7 @@ class NewMergeRequestController extends AutoDisposeAsyncNotifier<void> {
         description: description,
       );
       state = const AsyncData(null);
+      unawaited(ref.read(analyticsProvider).track('mr_created'));
       ref.invalidate(mergeRequestsControllerProvider);
       return mr;
     } catch (error, stack) {

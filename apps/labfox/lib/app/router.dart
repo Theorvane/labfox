@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../core/analytics/analytics.dart';
+
 import '../core/auth/auth_controller.dart';
 import '../core/auth/auth_state.dart';
 import '../features/auth/presentation/accounts_screen.dart';
@@ -94,7 +96,10 @@ final routerProvider = Provider<GoRouter>((ref) {
   // user is moved between the sign-in screen and the app.
   final authState = ref.watch(authControllerProvider);
 
-  return GoRouter(
+  final analytics = ref.watch(analyticsProvider);
+  analytics.track('app_open');
+
+  final router = GoRouter(
     initialLocation: Routes.home,
     redirect: (context, state) {
       // Only wait during the very first load, before any session value
@@ -308,4 +313,17 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
     ],
   );
+
+  // One screen_view per navigation, with numeric ids collapsed so the route
+  // never identifies a project or item.
+  String? lastPath;
+  router.routerDelegate.addListener(() {
+    final path = router.routerDelegate.currentConfiguration.uri.path;
+    if (path == lastPath) {
+      return;
+    }
+    lastPath = path;
+    analytics.track('screen_view', {'route': sanitizeRoute(path)});
+  });
+  return router;
 });
