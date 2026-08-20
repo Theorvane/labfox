@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 
 import '../../../app/router.dart';
 import '../../../core/ui/ci_visual.dart';
-import '../../../core/ui/copy_link_button.dart';
+import '../../../core/ui/share_link_button.dart';
 import '../../../core/ui/work_meta.dart';
 import '../../../l10n/app_localizations.dart';
 import 'controllers/pipelines_controllers.dart';
@@ -37,7 +37,7 @@ class PipelineDetailScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('#$pipelineId'),
-        actions: [CopyLinkButton(url: detail.valueOrNull?.webUrl)],
+        actions: [ShareLinkButton(url: detail.valueOrNull?.webUrl)],
       ),
       body: RefreshIndicator(
         onRefresh: () async {

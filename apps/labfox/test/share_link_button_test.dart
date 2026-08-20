@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:labfox/core/ui/copy_link_button.dart';
+import 'package:labfox/core/ui/share_link_button.dart';
 import 'package:labfox/l10n/app_localizations.dart';
 
 Future<void> _pump(WidgetTester tester, String? url) async {
@@ -10,7 +10,7 @@ Future<void> _pump(WidgetTester tester, String? url) async {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: Scaffold(
-        appBar: AppBar(actions: [CopyLinkButton(url: url)]),
+        appBar: AppBar(actions: [ShareLinkButton(url: url)]),
       ),
     ),
   );
@@ -18,15 +18,13 @@ Future<void> _pump(WidgetTester tester, String? url) async {
 }
 
 void main() {
-  testWidgets('copies the url and confirms with a snackbar', (tester) async {
-    final copied = <String>[];
+  testWidgets('opens the system share sheet with the url', (tester) async {
+    final calls = <MethodCall>[];
     tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
-      SystemChannels.platform,
+      const MethodChannel('dev.fluttercommunity.plus/share'),
       (call) async {
-        if (call.method == 'Clipboard.setData') {
-          copied.add((call.arguments as Map)['text'] as String);
-        }
-        return null;
+        calls.add(call);
+        return 'dev.fluttercommunity.plus/share.success';
       },
     );
 
@@ -34,8 +32,7 @@ void main() {
     await tester.tap(find.byIcon(Icons.ios_share));
     await tester.pumpAndSettle();
 
-    expect(copied.single, 'https://gitlab.com/acme/app/-/merge_requests/1');
-    expect(find.text('Link copied'), findsOneWidget);
+    expect(calls.single.method, 'share');
   });
 
   testWidgets('renders nothing without a url', (tester) async {

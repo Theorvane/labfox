@@ -302,17 +302,11 @@ abstract class AppLocalizations {
   /// **'Could not load your projects.'**
   String get projectsError;
 
-  /// Tooltip for the action that copies the item's web link
+  /// Tooltip for the action that shares the item's web link
   ///
   /// In en, this message translates to:
-  /// **'Copy link'**
-  String get copyLink;
-
-  /// Confirmation shown after the web link is copied to the clipboard
-  ///
-  /// In en, this message translates to:
-  /// **'Link copied'**
-  String get linkCopied;
+  /// **'Share'**
+  String get shareLink;
 
   /// Label for a retry button
   ///
