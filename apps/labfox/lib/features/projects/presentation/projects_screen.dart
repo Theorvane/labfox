@@ -55,6 +55,8 @@ class ProjectsScreen extends ConsumerWidget {
       path: project.pathWithNamespace,
       description: project.description,
       starCount: project.starCount,
+      avatarUrl: project.avatarUrl,
+      visibility: project.visibility,
       onTap: () => context.go(Routes.projectOverview(project.id)),
     );
   }
