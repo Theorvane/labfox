@@ -24,6 +24,23 @@ class MergeRequestsScreen extends ConsumerStatefulWidget {
 
 class _MergeRequestsScreenState extends ConsumerState<MergeRequestsScreen> {
   MergeRequestState _state = MergeRequestState.opened;
+  bool _searching = false;
+  String? _search;
+  final _searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _closeSearch() {
+    _searchController.clear();
+    setState(() {
+      _searching = false;
+      _search = null;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,19 +48,45 @@ class _MergeRequestsScreenState extends ConsumerState<MergeRequestsScreen> {
     final query = MergeRequestsQuery(
       projectId: widget.projectId,
       state: _state,
+      search: _search,
     );
     final mrs = ref.watch(mergeRequestsControllerProvider(query));
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.mergeRequestsTitle),
+        title: _searching
+            ? TextField(
+                controller: _searchController,
+                autofocus: true,
+                textInputAction: TextInputAction.search,
+                decoration: InputDecoration(
+                  hintText: l10n.listSearchHint,
+                  border: InputBorder.none,
+                ),
+                onSubmitted: (term) =>
+                    setState(() => _search = term.trim().isEmpty ? null : term),
+              )
+            : Text(l10n.mergeRequestsTitle),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.add),
-            tooltip: l10n.newMrButton,
-            onPressed: () =>
-                context.go(Routes.newMergeRequest(widget.projectId)),
-          ),
+          if (_searching)
+            IconButton(
+              icon: const Icon(Icons.close),
+              tooltip: l10n.listSearchClose,
+              onPressed: _closeSearch,
+            )
+          else ...[
+            IconButton(
+              icon: const Icon(Icons.search),
+              tooltip: l10n.searchTitle,
+              onPressed: () => setState(() => _searching = true),
+            ),
+            IconButton(
+              icon: const Icon(Icons.add),
+              tooltip: l10n.newMrButton,
+              onPressed: () =>
+                  context.go(Routes.newMergeRequest(widget.projectId)),
+            ),
+          ],
         ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(52),

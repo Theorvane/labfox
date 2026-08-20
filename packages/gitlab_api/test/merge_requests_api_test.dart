@@ -52,6 +52,20 @@ void main() {
 
       expect(captured.queryParameters['state'], 'merged');
     });
+
+    test('passes a search term through and omits it when absent', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (status: 200, headers: const {}, body: const []);
+      });
+
+      await client.mergeRequests.list(42, search: 'diff viewer');
+      expect(captured.queryParameters['search'], 'diff viewer');
+
+      await client.mergeRequests.list(42);
+      expect(captured.queryParameters.containsKey('search'), isFalse);
+    });
   });
 
   group('MergeRequestsApi.get', () {

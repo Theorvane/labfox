@@ -32,9 +32,12 @@ class IssuesApi {
   final Dio _dio;
 
   /// Lists a project's issues, open by default, most recently updated first.
+  ///
+  /// A non-empty [search] filters by title and description server-side.
   Future<Paginated<Issue>> list(
     Object projectId, {
     IssueState state = IssueState.opened,
+    String? search,
     int page = 1,
     int perPage = 20,
   }) async {
@@ -43,6 +46,7 @@ class IssuesApi {
         '/projects/${_enc(projectId)}/issues',
         queryParameters: {
           if (state != IssueState.all) 'state': state.value,
+          if (search != null && search.isNotEmpty) 'search': search,
           'order_by': 'updated_at',
           // Return each label as an object with its colour, not a bare name, so
           // the UI can render readable label chips.

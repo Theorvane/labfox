@@ -10,21 +10,28 @@ final issuesRepositoryProvider = FutureProvider<IssuesRepository?>((ref) async {
   return client == null ? null : IssuesRepository(client);
 });
 
-/// Identifies an issue list: which project, which state filter.
+/// Identifies an issue list: which project, which state filter, and an
+/// optional text search over title and description.
 class IssuesQuery {
-  const IssuesQuery({required this.projectId, this.state = IssueState.opened});
+  const IssuesQuery({
+    required this.projectId,
+    this.state = IssueState.opened,
+    this.search,
+  });
 
   final int projectId;
   final IssueState state;
+  final String? search;
 
   @override
   bool operator ==(Object other) =>
       other is IssuesQuery &&
       other.projectId == projectId &&
-      other.state == state;
+      other.state == state &&
+      other.search == search;
 
   @override
-  int get hashCode => Object.hash(projectId, state);
+  int get hashCode => Object.hash(projectId, state, search);
 }
 
 /// Lists issues for a query.
@@ -35,7 +42,11 @@ class IssuesController extends FamilyAsyncNotifier<List<Issue>, IssuesQuery> {
     if (repo == null) {
       throw StateError('No authenticated account');
     }
-    return repo.list(projectId: arg.projectId, state: arg.state);
+    return repo.list(
+      projectId: arg.projectId,
+      state: arg.state,
+      search: arg.search,
+    );
   }
 }
 

@@ -624,6 +624,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get searchLoadMore => '加载更多';
 
   @override
+  String get listSearchHint => 'Search by title';
+
+  @override
+  String get listSearchClose => 'Close search';
+
+  @override
   String get projectAddFavorite => '添加到收藏';
 
   @override

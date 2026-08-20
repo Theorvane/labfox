@@ -643,6 +643,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get searchLoadMore => 'Load more';
 
   @override
+  String get listSearchHint => 'Search by title';
+
+  @override
+  String get listSearchClose => 'Close search';
+
+  @override
   String get projectAddFavorite => 'Add to favorites';
 
   @override
