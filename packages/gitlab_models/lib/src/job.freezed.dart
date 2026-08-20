@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Job {
 
- int get id; String get name; String get status; String? get stage;@JsonKey(name: 'created_at') DateTime? get createdAt;@JsonKey(name: 'started_at') DateTime? get startedAt;@JsonKey(name: 'finished_at') DateTime? get finishedAt;
+ int get id; String get name; String get status; String? get stage;@JsonKey(name: 'created_at') DateTime? get createdAt;@JsonKey(name: 'started_at') DateTime? get startedAt;@JsonKey(name: 'finished_at') DateTime? get finishedAt;@JsonKey(name: 'web_url') String? get webUrl;
 /// Create a copy of Job
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $JobCopyWith<Job> get copyWith => _$JobCopyWithImpl<Job>(this as Job, _$identity
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Job&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.status, status) || other.status == status)&&(identical(other.stage, stage) || other.stage == stage)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.finishedAt, finishedAt) || other.finishedAt == finishedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Job&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.status, status) || other.status == status)&&(identical(other.stage, stage) || other.stage == stage)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.finishedAt, finishedAt) || other.finishedAt == finishedAt)&&(identical(other.webUrl, webUrl) || other.webUrl == webUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,status,stage,createdAt,startedAt,finishedAt);
+int get hashCode => Object.hash(runtimeType,id,name,status,stage,createdAt,startedAt,finishedAt,webUrl);
 
 @override
 String toString() {
-  return 'Job(id: $id, name: $name, status: $status, stage: $stage, createdAt: $createdAt, startedAt: $startedAt, finishedAt: $finishedAt)';
+  return 'Job(id: $id, name: $name, status: $status, stage: $stage, createdAt: $createdAt, startedAt: $startedAt, finishedAt: $finishedAt, webUrl: $webUrl)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $JobCopyWith<$Res>  {
   factory $JobCopyWith(Job value, $Res Function(Job) _then) = _$JobCopyWithImpl;
 @useResult
 $Res call({
- int id, String name, String status, String? stage,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'started_at') DateTime? startedAt,@JsonKey(name: 'finished_at') DateTime? finishedAt
+ int id, String name, String status, String? stage,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'started_at') DateTime? startedAt,@JsonKey(name: 'finished_at') DateTime? finishedAt,@JsonKey(name: 'web_url') String? webUrl
 });
 
 
@@ -65,7 +65,7 @@ class _$JobCopyWithImpl<$Res>
 
 /// Create a copy of Job
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? status = null,Object? stage = freezed,Object? createdAt = freezed,Object? startedAt = freezed,Object? finishedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? status = null,Object? stage = freezed,Object? createdAt = freezed,Object? startedAt = freezed,Object? finishedAt = freezed,Object? webUrl = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -74,7 +74,8 @@ as String,stage: freezed == stage ? _self.stage : stage // ignore: cast_nullable
 as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,startedAt: freezed == startedAt ? _self.startedAt : startedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,finishedAt: freezed == finishedAt ? _self.finishedAt : finishedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+as DateTime?,webUrl: freezed == webUrl ? _self.webUrl : webUrl // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -159,10 +160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  String status,  String? stage, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'started_at')  DateTime? startedAt, @JsonKey(name: 'finished_at')  DateTime? finishedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  String status,  String? stage, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'started_at')  DateTime? startedAt, @JsonKey(name: 'finished_at')  DateTime? finishedAt, @JsonKey(name: 'web_url')  String? webUrl)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Job() when $default != null:
-return $default(_that.id,_that.name,_that.status,_that.stage,_that.createdAt,_that.startedAt,_that.finishedAt);case _:
+return $default(_that.id,_that.name,_that.status,_that.stage,_that.createdAt,_that.startedAt,_that.finishedAt,_that.webUrl);case _:
   return orElse();
 
 }
@@ -180,10 +181,10 @@ return $default(_that.id,_that.name,_that.status,_that.stage,_that.createdAt,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  String status,  String? stage, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'started_at')  DateTime? startedAt, @JsonKey(name: 'finished_at')  DateTime? finishedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  String status,  String? stage, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'started_at')  DateTime? startedAt, @JsonKey(name: 'finished_at')  DateTime? finishedAt, @JsonKey(name: 'web_url')  String? webUrl)  $default,) {final _that = this;
 switch (_that) {
 case _Job():
-return $default(_that.id,_that.name,_that.status,_that.stage,_that.createdAt,_that.startedAt,_that.finishedAt);case _:
+return $default(_that.id,_that.name,_that.status,_that.stage,_that.createdAt,_that.startedAt,_that.finishedAt,_that.webUrl);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -200,10 +201,10 @@ return $default(_that.id,_that.name,_that.status,_that.stage,_that.createdAt,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  String status,  String? stage, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'started_at')  DateTime? startedAt, @JsonKey(name: 'finished_at')  DateTime? finishedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  String status,  String? stage, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'started_at')  DateTime? startedAt, @JsonKey(name: 'finished_at')  DateTime? finishedAt, @JsonKey(name: 'web_url')  String? webUrl)?  $default,) {final _that = this;
 switch (_that) {
 case _Job() when $default != null:
-return $default(_that.id,_that.name,_that.status,_that.stage,_that.createdAt,_that.startedAt,_that.finishedAt);case _:
+return $default(_that.id,_that.name,_that.status,_that.stage,_that.createdAt,_that.startedAt,_that.finishedAt,_that.webUrl);case _:
   return null;
 
 }
@@ -215,7 +216,7 @@ return $default(_that.id,_that.name,_that.status,_that.stage,_that.createdAt,_th
 @JsonSerializable()
 
 class _Job extends Job {
-  const _Job({required this.id, required this.name, required this.status, this.stage, @JsonKey(name: 'created_at') this.createdAt, @JsonKey(name: 'started_at') this.startedAt, @JsonKey(name: 'finished_at') this.finishedAt}): super._();
+  const _Job({required this.id, required this.name, required this.status, this.stage, @JsonKey(name: 'created_at') this.createdAt, @JsonKey(name: 'started_at') this.startedAt, @JsonKey(name: 'finished_at') this.finishedAt, @JsonKey(name: 'web_url') this.webUrl}): super._();
   factory _Job.fromJson(Map<String, dynamic> json) => _$JobFromJson(json);
 
 @override final  int id;
@@ -225,6 +226,7 @@ class _Job extends Job {
 @override@JsonKey(name: 'created_at') final  DateTime? createdAt;
 @override@JsonKey(name: 'started_at') final  DateTime? startedAt;
 @override@JsonKey(name: 'finished_at') final  DateTime? finishedAt;
+@override@JsonKey(name: 'web_url') final  String? webUrl;
 
 /// Create a copy of Job
 /// with the given fields replaced by the non-null parameter values.
@@ -239,16 +241,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Job&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.status, status) || other.status == status)&&(identical(other.stage, stage) || other.stage == stage)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.finishedAt, finishedAt) || other.finishedAt == finishedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Job&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.status, status) || other.status == status)&&(identical(other.stage, stage) || other.stage == stage)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.finishedAt, finishedAt) || other.finishedAt == finishedAt)&&(identical(other.webUrl, webUrl) || other.webUrl == webUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,status,stage,createdAt,startedAt,finishedAt);
+int get hashCode => Object.hash(runtimeType,id,name,status,stage,createdAt,startedAt,finishedAt,webUrl);
 
 @override
 String toString() {
-  return 'Job(id: $id, name: $name, status: $status, stage: $stage, createdAt: $createdAt, startedAt: $startedAt, finishedAt: $finishedAt)';
+  return 'Job(id: $id, name: $name, status: $status, stage: $stage, createdAt: $createdAt, startedAt: $startedAt, finishedAt: $finishedAt, webUrl: $webUrl)';
 }
 
 
@@ -259,7 +261,7 @@ abstract mixin class _$JobCopyWith<$Res> implements $JobCopyWith<$Res> {
   factory _$JobCopyWith(_Job value, $Res Function(_Job) _then) = __$JobCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name, String status, String? stage,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'started_at') DateTime? startedAt,@JsonKey(name: 'finished_at') DateTime? finishedAt
+ int id, String name, String status, String? stage,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'started_at') DateTime? startedAt,@JsonKey(name: 'finished_at') DateTime? finishedAt,@JsonKey(name: 'web_url') String? webUrl
 });
 
 
@@ -276,7 +278,7 @@ class __$JobCopyWithImpl<$Res>
 
 /// Create a copy of Job
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? status = null,Object? stage = freezed,Object? createdAt = freezed,Object? startedAt = freezed,Object? finishedAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? status = null,Object? stage = freezed,Object? createdAt = freezed,Object? startedAt = freezed,Object? finishedAt = freezed,Object? webUrl = freezed,}) {
   return _then(_Job(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -285,7 +287,8 @@ as String,stage: freezed == stage ? _self.stage : stage // ignore: cast_nullable
 as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,startedAt: freezed == startedAt ? _self.startedAt : startedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,finishedAt: freezed == finishedAt ? _self.finishedAt : finishedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+as DateTime?,webUrl: freezed == webUrl ? _self.webUrl : webUrl // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

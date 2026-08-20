@@ -20,6 +20,7 @@ _Job _$JobFromJson(Map<String, dynamic> json) => _Job(
   finishedAt: json['finished_at'] == null
       ? null
       : DateTime.parse(json['finished_at'] as String),
+  webUrl: json['web_url'] as String?,
 );
 
 Map<String, dynamic> _$JobToJson(_Job instance) => <String, dynamic>{
@@ -30,4 +31,5 @@ Map<String, dynamic> _$JobToJson(_Job instance) => <String, dynamic>{
   'created_at': instance.createdAt?.toIso8601String(),
   'started_at': instance.startedAt?.toIso8601String(),
   'finished_at': instance.finishedAt?.toIso8601String(),
+  'web_url': instance.webUrl,
 };

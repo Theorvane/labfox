@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../app/router.dart';
 import '../../../core/storage/local_projects_providers.dart';
+import '../../../core/ui/share_link_button.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/project_overview.dart';
 import 'controllers/project_overview_controller.dart';
@@ -65,6 +66,7 @@ class _ProjectOverviewScreenState extends ConsumerState<ProjectOverviewScreen> {
               onPressed: () =>
                   ref.read(favoriteProjectsProvider.notifier).toggle(project),
             ),
+          ShareLinkButton(url: project?.webUrl),
         ],
       ),
       body: overview.when(

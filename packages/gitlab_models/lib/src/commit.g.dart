@@ -25,6 +25,7 @@ _Commit _$CommitFromJson(Map<String, dynamic> json) => _Commit(
   title: json['title'] as String,
   message: json['message'] as String?,
   authorName: json['author_name'] as String?,
+  webUrl: json['web_url'] as String?,
   authoredDate: json['authored_date'] == null
       ? null
       : DateTime.parse(json['authored_date'] as String),
@@ -39,6 +40,7 @@ Map<String, dynamic> _$CommitToJson(_Commit instance) => <String, dynamic>{
   'title': instance.title,
   'message': instance.message,
   'author_name': instance.authorName,
+  'web_url': instance.webUrl,
   'authored_date': instance.authoredDate?.toIso8601String(),
   'stats': instance.stats?.toJson(),
 };

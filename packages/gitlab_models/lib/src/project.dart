@@ -20,6 +20,7 @@ abstract class Project with _$Project {
     String? visibility,
     @JsonKey(name: 'default_branch') String? defaultBranch,
     @JsonKey(name: 'avatar_url') String? avatarUrl,
+    @JsonKey(name: 'web_url') String? webUrl,
     @JsonKey(name: 'last_activity_at') DateTime? lastActivityAt,
   }) = _Project;
 

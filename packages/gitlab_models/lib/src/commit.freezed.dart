@@ -284,7 +284,7 @@ as int,
 /// @nodoc
 mixin _$Commit {
 
- String get id;@JsonKey(name: 'short_id') String? get rawShortId; String get title; String? get message;@JsonKey(name: 'author_name') String? get authorName;@JsonKey(name: 'authored_date') DateTime? get authoredDate; CommitStats? get stats;
+ String get id;@JsonKey(name: 'short_id') String? get rawShortId; String get title; String? get message;@JsonKey(name: 'author_name') String? get authorName;@JsonKey(name: 'web_url') String? get webUrl;@JsonKey(name: 'authored_date') DateTime? get authoredDate; CommitStats? get stats;
 /// Create a copy of Commit
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -297,16 +297,16 @@ $CommitCopyWith<Commit> get copyWith => _$CommitCopyWithImpl<Commit>(this as Com
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Commit&&(identical(other.id, id) || other.id == id)&&(identical(other.rawShortId, rawShortId) || other.rawShortId == rawShortId)&&(identical(other.title, title) || other.title == title)&&(identical(other.message, message) || other.message == message)&&(identical(other.authorName, authorName) || other.authorName == authorName)&&(identical(other.authoredDate, authoredDate) || other.authoredDate == authoredDate)&&(identical(other.stats, stats) || other.stats == stats));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Commit&&(identical(other.id, id) || other.id == id)&&(identical(other.rawShortId, rawShortId) || other.rawShortId == rawShortId)&&(identical(other.title, title) || other.title == title)&&(identical(other.message, message) || other.message == message)&&(identical(other.authorName, authorName) || other.authorName == authorName)&&(identical(other.webUrl, webUrl) || other.webUrl == webUrl)&&(identical(other.authoredDate, authoredDate) || other.authoredDate == authoredDate)&&(identical(other.stats, stats) || other.stats == stats));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,rawShortId,title,message,authorName,authoredDate,stats);
+int get hashCode => Object.hash(runtimeType,id,rawShortId,title,message,authorName,webUrl,authoredDate,stats);
 
 @override
 String toString() {
-  return 'Commit(id: $id, rawShortId: $rawShortId, title: $title, message: $message, authorName: $authorName, authoredDate: $authoredDate, stats: $stats)';
+  return 'Commit(id: $id, rawShortId: $rawShortId, title: $title, message: $message, authorName: $authorName, webUrl: $webUrl, authoredDate: $authoredDate, stats: $stats)';
 }
 
 
@@ -317,7 +317,7 @@ abstract mixin class $CommitCopyWith<$Res>  {
   factory $CommitCopyWith(Commit value, $Res Function(Commit) _then) = _$CommitCopyWithImpl;
 @useResult
 $Res call({
- String id,@JsonKey(name: 'short_id') String? rawShortId, String title, String? message,@JsonKey(name: 'author_name') String? authorName,@JsonKey(name: 'authored_date') DateTime? authoredDate, CommitStats? stats
+ String id,@JsonKey(name: 'short_id') String? rawShortId, String title, String? message,@JsonKey(name: 'author_name') String? authorName,@JsonKey(name: 'web_url') String? webUrl,@JsonKey(name: 'authored_date') DateTime? authoredDate, CommitStats? stats
 });
 
 
@@ -334,13 +334,14 @@ class _$CommitCopyWithImpl<$Res>
 
 /// Create a copy of Commit
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? rawShortId = freezed,Object? title = null,Object? message = freezed,Object? authorName = freezed,Object? authoredDate = freezed,Object? stats = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? rawShortId = freezed,Object? title = null,Object? message = freezed,Object? authorName = freezed,Object? webUrl = freezed,Object? authoredDate = freezed,Object? stats = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,rawShortId: freezed == rawShortId ? _self.rawShortId : rawShortId // ignore: cast_nullable_to_non_nullable
 as String?,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,authorName: freezed == authorName ? _self.authorName : authorName // ignore: cast_nullable_to_non_nullable
+as String?,webUrl: freezed == webUrl ? _self.webUrl : webUrl // ignore: cast_nullable_to_non_nullable
 as String?,authoredDate: freezed == authoredDate ? _self.authoredDate : authoredDate // ignore: cast_nullable_to_non_nullable
 as DateTime?,stats: freezed == stats ? _self.stats : stats // ignore: cast_nullable_to_non_nullable
 as CommitStats?,
@@ -440,10 +441,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'short_id')  String? rawShortId,  String title,  String? message, @JsonKey(name: 'author_name')  String? authorName, @JsonKey(name: 'authored_date')  DateTime? authoredDate,  CommitStats? stats)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'short_id')  String? rawShortId,  String title,  String? message, @JsonKey(name: 'author_name')  String? authorName, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'authored_date')  DateTime? authoredDate,  CommitStats? stats)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Commit() when $default != null:
-return $default(_that.id,_that.rawShortId,_that.title,_that.message,_that.authorName,_that.authoredDate,_that.stats);case _:
+return $default(_that.id,_that.rawShortId,_that.title,_that.message,_that.authorName,_that.webUrl,_that.authoredDate,_that.stats);case _:
   return orElse();
 
 }
@@ -461,10 +462,10 @@ return $default(_that.id,_that.rawShortId,_that.title,_that.message,_that.author
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'short_id')  String? rawShortId,  String title,  String? message, @JsonKey(name: 'author_name')  String? authorName, @JsonKey(name: 'authored_date')  DateTime? authoredDate,  CommitStats? stats)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'short_id')  String? rawShortId,  String title,  String? message, @JsonKey(name: 'author_name')  String? authorName, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'authored_date')  DateTime? authoredDate,  CommitStats? stats)  $default,) {final _that = this;
 switch (_that) {
 case _Commit():
-return $default(_that.id,_that.rawShortId,_that.title,_that.message,_that.authorName,_that.authoredDate,_that.stats);case _:
+return $default(_that.id,_that.rawShortId,_that.title,_that.message,_that.authorName,_that.webUrl,_that.authoredDate,_that.stats);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -481,10 +482,10 @@ return $default(_that.id,_that.rawShortId,_that.title,_that.message,_that.author
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id, @JsonKey(name: 'short_id')  String? rawShortId,  String title,  String? message, @JsonKey(name: 'author_name')  String? authorName, @JsonKey(name: 'authored_date')  DateTime? authoredDate,  CommitStats? stats)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id, @JsonKey(name: 'short_id')  String? rawShortId,  String title,  String? message, @JsonKey(name: 'author_name')  String? authorName, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'authored_date')  DateTime? authoredDate,  CommitStats? stats)?  $default,) {final _that = this;
 switch (_that) {
 case _Commit() when $default != null:
-return $default(_that.id,_that.rawShortId,_that.title,_that.message,_that.authorName,_that.authoredDate,_that.stats);case _:
+return $default(_that.id,_that.rawShortId,_that.title,_that.message,_that.authorName,_that.webUrl,_that.authoredDate,_that.stats);case _:
   return null;
 
 }
@@ -496,7 +497,7 @@ return $default(_that.id,_that.rawShortId,_that.title,_that.message,_that.author
 @JsonSerializable()
 
 class _Commit extends Commit {
-  const _Commit({required this.id, @JsonKey(name: 'short_id') this.rawShortId, required this.title, this.message, @JsonKey(name: 'author_name') this.authorName, @JsonKey(name: 'authored_date') this.authoredDate, this.stats}): super._();
+  const _Commit({required this.id, @JsonKey(name: 'short_id') this.rawShortId, required this.title, this.message, @JsonKey(name: 'author_name') this.authorName, @JsonKey(name: 'web_url') this.webUrl, @JsonKey(name: 'authored_date') this.authoredDate, this.stats}): super._();
   factory _Commit.fromJson(Map<String, dynamic> json) => _$CommitFromJson(json);
 
 @override final  String id;
@@ -504,6 +505,7 @@ class _Commit extends Commit {
 @override final  String title;
 @override final  String? message;
 @override@JsonKey(name: 'author_name') final  String? authorName;
+@override@JsonKey(name: 'web_url') final  String? webUrl;
 @override@JsonKey(name: 'authored_date') final  DateTime? authoredDate;
 @override final  CommitStats? stats;
 
@@ -520,16 +522,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Commit&&(identical(other.id, id) || other.id == id)&&(identical(other.rawShortId, rawShortId) || other.rawShortId == rawShortId)&&(identical(other.title, title) || other.title == title)&&(identical(other.message, message) || other.message == message)&&(identical(other.authorName, authorName) || other.authorName == authorName)&&(identical(other.authoredDate, authoredDate) || other.authoredDate == authoredDate)&&(identical(other.stats, stats) || other.stats == stats));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Commit&&(identical(other.id, id) || other.id == id)&&(identical(other.rawShortId, rawShortId) || other.rawShortId == rawShortId)&&(identical(other.title, title) || other.title == title)&&(identical(other.message, message) || other.message == message)&&(identical(other.authorName, authorName) || other.authorName == authorName)&&(identical(other.webUrl, webUrl) || other.webUrl == webUrl)&&(identical(other.authoredDate, authoredDate) || other.authoredDate == authoredDate)&&(identical(other.stats, stats) || other.stats == stats));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,rawShortId,title,message,authorName,authoredDate,stats);
+int get hashCode => Object.hash(runtimeType,id,rawShortId,title,message,authorName,webUrl,authoredDate,stats);
 
 @override
 String toString() {
-  return 'Commit(id: $id, rawShortId: $rawShortId, title: $title, message: $message, authorName: $authorName, authoredDate: $authoredDate, stats: $stats)';
+  return 'Commit(id: $id, rawShortId: $rawShortId, title: $title, message: $message, authorName: $authorName, webUrl: $webUrl, authoredDate: $authoredDate, stats: $stats)';
 }
 
 
@@ -540,7 +542,7 @@ abstract mixin class _$CommitCopyWith<$Res> implements $CommitCopyWith<$Res> {
   factory _$CommitCopyWith(_Commit value, $Res Function(_Commit) _then) = __$CommitCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@JsonKey(name: 'short_id') String? rawShortId, String title, String? message,@JsonKey(name: 'author_name') String? authorName,@JsonKey(name: 'authored_date') DateTime? authoredDate, CommitStats? stats
+ String id,@JsonKey(name: 'short_id') String? rawShortId, String title, String? message,@JsonKey(name: 'author_name') String? authorName,@JsonKey(name: 'web_url') String? webUrl,@JsonKey(name: 'authored_date') DateTime? authoredDate, CommitStats? stats
 });
 
 
@@ -557,13 +559,14 @@ class __$CommitCopyWithImpl<$Res>
 
 /// Create a copy of Commit
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? rawShortId = freezed,Object? title = null,Object? message = freezed,Object? authorName = freezed,Object? authoredDate = freezed,Object? stats = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? rawShortId = freezed,Object? title = null,Object? message = freezed,Object? authorName = freezed,Object? webUrl = freezed,Object? authoredDate = freezed,Object? stats = freezed,}) {
   return _then(_Commit(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,rawShortId: freezed == rawShortId ? _self.rawShortId : rawShortId // ignore: cast_nullable_to_non_nullable
 as String?,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,authorName: freezed == authorName ? _self.authorName : authorName // ignore: cast_nullable_to_non_nullable
+as String?,webUrl: freezed == webUrl ? _self.webUrl : webUrl // ignore: cast_nullable_to_non_nullable
 as String?,authoredDate: freezed == authoredDate ? _self.authoredDate : authoredDate // ignore: cast_nullable_to_non_nullable
 as DateTime?,stats: freezed == stats ? _self.stats : stats // ignore: cast_nullable_to_non_nullable
 as CommitStats?,
