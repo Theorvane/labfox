@@ -80,83 +80,31 @@ class _MyWork extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: LabFoxSpacing.xs),
-        _QuickTile(
+        LauncherTile(
           icon: Icons.adjust,
           color: status.open.foreground,
           label: l10n.issuesTitle,
           onTap: () => context.go(Routes.myIssues),
         ),
-        _QuickTile(
+        LauncherTile(
           icon: Icons.merge_outlined,
           color: status.merged.foreground,
           label: l10n.mergeRequestsTitle,
           onTap: () => context.go(Routes.myMergeRequests),
         ),
-        _QuickTile(
+        LauncherTile(
           icon: Icons.folder_outlined,
           color: status.running.foreground,
           label: l10n.homeProjects,
           onTap: () => context.go(Routes.projects),
         ),
-        _QuickTile(
+        LauncherTile(
           icon: Icons.inbox_outlined,
           color: status.warning.foreground,
           label: l10n.homeInbox,
           onTap: () => context.go(Routes.inbox),
         ),
       ],
-    );
-  }
-}
-
-/// A flat launcher row: a filled icon tile and a label, the shape GitHub
-/// Mobile's home launcher uses (no card, no chevron).
-class _QuickTile extends StatelessWidget {
-  const _QuickTile({
-    required this.icon,
-    required this.color,
-    required this.label,
-    required this.onTap,
-  });
-
-  final IconData icon;
-  final Color color;
-  final String label;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: LabFoxSpacing.md,
-          vertical: LabFoxSpacing.sm + 2,
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 34,
-              height: 34,
-              decoration: BoxDecoration(
-                color: color,
-                borderRadius: BorderRadius.circular(9),
-              ),
-              child: Icon(icon, size: 19, color: Colors.white),
-            ),
-            const SizedBox(width: LabFoxSpacing.md),
-            Expanded(
-              child: Text(
-                label,
-                style: theme.textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

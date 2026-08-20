@@ -257,6 +257,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get projectOverviewCommits => 'コミット';
 
   @override
+  String get projectOverviewCode => 'Code';
+
+  @override
+  String get projectOverviewBrowseCode => 'Browse code';
+
+  @override
   String get branchesTitle => 'ブランチ';
 
   @override

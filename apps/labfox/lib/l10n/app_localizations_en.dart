@@ -261,6 +261,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get projectOverviewCommits => 'Commits';
 
   @override
+  String get projectOverviewCode => 'Code';
+
+  @override
+  String get projectOverviewBrowseCode => 'Browse code';
+
+  @override
   String get branchesTitle => 'Branches';
 
   @override

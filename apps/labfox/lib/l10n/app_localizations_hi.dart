@@ -263,6 +263,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get projectOverviewCommits => 'कमिट';
 
   @override
+  String get projectOverviewCode => 'Code';
+
+  @override
+  String get projectOverviewBrowseCode => 'Browse code';
+
+  @override
   String get branchesTitle => 'ब्रांच';
 
   @override

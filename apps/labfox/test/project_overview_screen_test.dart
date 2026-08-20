@@ -46,16 +46,19 @@ Future<void> _pump(
   await tester.pump();
 }
 
-ProjectOverview _overview({String? readme}) => ProjectOverview(
-  project: const Project(
-    id: 1,
-    name: 'backend',
-    pathWithNamespace: 'youthpick/backend',
-    visibility: 'private',
-    starCount: 12,
-  ),
-  readme: readme,
-);
+ProjectOverview _overview({String? readme, Project? project}) =>
+    ProjectOverview(
+      project:
+          project ??
+          const Project(
+            id: 1,
+            name: 'backend',
+            pathWithNamespace: 'youthpick/backend',
+            visibility: 'private',
+            starCount: 12,
+          ),
+      readme: readme,
+    );
 
 void main() {
   testWidgets('shows a spinner while loading', (tester) async {
@@ -96,5 +99,54 @@ void main() {
 
     expect(find.textContaining('Could not load this project'), findsOneWidget);
     expect(find.widgetWithText(FilledButton, 'Retry'), findsOneWidget);
+  });
+
+  testWidgets('shows counts, the code section, and flat category rows', (
+    tester,
+  ) async {
+    await _pump(
+      tester,
+      AsyncData(
+        _overview(
+          project: const Project(
+            id: 1,
+            name: 'backend',
+            pathWithNamespace: 'youthpick/backend',
+            visibility: 'private',
+            starCount: 12,
+            defaultBranch: 'main',
+            openIssuesCount: 6,
+            forksCount: 3,
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    // The open-issue count sits on the Issues row, the fork count in the
+    // header next to the stars.
+    expect(find.text('6'), findsOneWidget);
+    expect(find.text('3'), findsOneWidget);
+    // The code section shows the default branch and a browse entry, replacing
+    // the old Repository / Branches rows.
+    expect(find.text('main'), findsOneWidget);
+    expect(find.text('Browse code'), findsOneWidget);
+    expect(find.text('Repository'), findsNothing);
+    expect(find.text('Branches'), findsNothing);
+    // Rows are flat launcher rows, not chevroned list tiles.
+    expect(find.byIcon(Icons.chevron_right), findsNothing);
+  });
+
+  testWidgets('hides counts and the code section on a reduced payload', (
+    tester,
+  ) async {
+    // No default branch (empty repo) and no counts: the rows still render,
+    // without dead entries or false zeros.
+    await _pump(tester, AsyncData(_overview()));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Issues'), findsOneWidget);
+    expect(find.text('Browse code'), findsNothing);
+    expect(find.text('0'), findsNothing);
   });
 }
