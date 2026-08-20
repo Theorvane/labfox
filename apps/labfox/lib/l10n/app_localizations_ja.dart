@@ -163,6 +163,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get fileBinary => 'バイナリファイルのためテキストとして表示できません。';
 
   @override
+  String get fileCopy => 'Copy contents';
+
+  @override
+  String get fileCopied => 'Contents copied';
+
+  @override
   String get projectOverviewBranches => 'ブランチ';
 
   @override

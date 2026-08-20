@@ -163,6 +163,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get fileBinary => '바이너리 파일이라 텍스트로 표시할 수 없습니다.';
 
   @override
+  String get fileCopy => 'Copy contents';
+
+  @override
+  String get fileCopied => 'Contents copied';
+
+  @override
   String get projectOverviewBranches => '브랜치';
 
   @override

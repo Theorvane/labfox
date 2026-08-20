@@ -161,6 +161,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get fileBinary => '这是二进制文件，无法作为文本显示。';
 
   @override
+  String get fileCopy => 'Copy contents';
+
+  @override
+  String get fileCopied => 'Contents copied';
+
+  @override
   String get projectOverviewBranches => '分支';
 
   @override

@@ -206,6 +206,14 @@
   "@fileBinary": {
     "description": "Shown for a binary file"
   },
+  "fileCopy": "Copy contents",
+  "@fileCopy": {
+    "description": "Tooltip for the action that copies the file contents"
+  },
+  "fileCopied": "Contents copied",
+  "@fileCopied": {
+    "description": "Confirmation after the file contents are copied"
+  },
   "projectOverviewBranches": "Branches",
   "@projectOverviewBranches": {
     "description": "Overview link that opens the branches list"

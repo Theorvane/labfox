@@ -167,6 +167,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get fileBinary => 'This is a binary file and cannot be shown as text.';
 
   @override
+  String get fileCopy => 'Copy contents';
+
+  @override
+  String get fileCopied => 'Contents copied';
+
+  @override
   String get projectOverviewBranches => 'Branches';
 
   @override

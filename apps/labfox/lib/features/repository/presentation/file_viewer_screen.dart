@@ -1,15 +1,16 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_api/gitlab_api.dart';
 
 import '../../../l10n/app_localizations.dart';
 import 'controllers/file_controller.dart';
 
-/// Shows one file's contents as monospace text.
+/// Shows one file's contents as monospace text, with a copy action.
 ///
 /// A binary file is not rendered as text — it would be noise — so a placeholder
-/// stands in. Syntax highlighting, copy and raw actions are follow-ups.
+/// stands in. Syntax highlighting and a raw action are follow-ups.
 class FileViewerScreen extends ConsumerWidget {
   const FileViewerScreen({
     required this.projectId,
@@ -28,9 +29,31 @@ class FileViewerScreen extends ConsumerWidget {
     final fileRef = FileRef(projectId: projectId, ref: ref, path: path);
     final file = widgetRef.watch(fileControllerProvider(fileRef));
     final name = path.split('/').last;
+    final loaded = file.valueOrNull;
+    final copyable =
+        loaded != null &&
+        !loaded.isBinary &&
+        (loaded.text?.isNotEmpty ?? false);
 
     return Scaffold(
-      appBar: AppBar(title: Text(name)),
+      appBar: AppBar(
+        title: Text(name),
+        actions: [
+          if (copyable)
+            IconButton(
+              icon: const Icon(Icons.copy_all_outlined),
+              tooltip: l10n.fileCopy,
+              onPressed: () async {
+                await Clipboard.setData(ClipboardData(text: loaded.text!));
+                if (context.mounted) {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text(l10n.fileCopied)));
+                }
+              },
+            ),
+        ],
+      ),
       body: file.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, _) => Center(
