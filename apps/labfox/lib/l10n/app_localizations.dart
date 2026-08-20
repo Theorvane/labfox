@@ -590,6 +590,18 @@ abstract class AppLocalizations {
   /// **'Commits'**
   String get projectOverviewCommits;
 
+  /// Overview section header for the branch and file entries
+  ///
+  /// In en, this message translates to:
+  /// **'Code'**
+  String get projectOverviewCode;
+
+  /// Overview link that opens the file tree of the default branch
+  ///
+  /// In en, this message translates to:
+  /// **'Browse code'**
+  String get projectOverviewBrowseCode;
+
   /// Title of the branches screen
   ///
   /// In en, this message translates to:

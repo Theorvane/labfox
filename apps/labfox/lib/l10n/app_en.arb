@@ -290,6 +290,14 @@
   "@projectOverviewCommits": {
     "description": "Overview link that opens the commits list"
   },
+  "projectOverviewCode": "Code",
+  "@projectOverviewCode": {
+    "description": "Overview section header for the branch and file entries"
+  },
+  "projectOverviewBrowseCode": "Browse code",
+  "@projectOverviewBrowseCode": {
+    "description": "Overview link that opens the file tree of the default branch"
+  },
   "branchesTitle": "Branches",
   "@branchesTitle": {
     "description": "Title of the branches screen"

@@ -257,6 +257,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get projectOverviewCommits => '커밋';
 
   @override
+  String get projectOverviewCode => 'Code';
+
+  @override
+  String get projectOverviewBrowseCode => 'Browse code';
+
+  @override
   String get branchesTitle => '브랜치';
 
   @override

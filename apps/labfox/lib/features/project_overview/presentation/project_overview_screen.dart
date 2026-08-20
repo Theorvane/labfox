@@ -82,13 +82,24 @@ class _ProjectOverviewScreenState extends ConsumerState<ProjectOverviewScreen> {
               .read(projectOverviewControllerProvider(projectId).notifier)
               .refresh(),
           child: ListView(
-            padding: const EdgeInsets.all(LabFoxSpacing.md),
+            padding: const EdgeInsets.symmetric(vertical: LabFoxSpacing.md),
             children: [
-              _Header(project: data.project),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: LabFoxSpacing.md,
+                ),
+                child: _Header(project: data.project),
+              ),
               const SizedBox(height: LabFoxSpacing.md),
               _Categories(project: data.project),
+              _CodeSection(project: data.project),
               const SizedBox(height: LabFoxSpacing.lg),
-              _Readme(overview: data),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: LabFoxSpacing.md,
+                ),
+                child: _Readme(overview: data),
+              ),
             ],
           ),
         ),
@@ -97,8 +108,9 @@ class _ProjectOverviewScreenState extends ConsumerState<ProjectOverviewScreen> {
   }
 }
 
-/// The project's sections as one card of colour-tiled shortcuts — the launcher
-/// pattern GitHub Mobile uses for a repository, kept in LabFox's own tokens.
+/// The project's sections as flat colour-tiled launcher rows — the repository
+/// shape GitHub Mobile uses, kept in LabFox's own tokens. The open-issue count
+/// rides on the Issues row when the payload carries it.
 class _Categories extends StatelessWidget {
   const _Categories({required this.project});
 
@@ -110,108 +122,85 @@ class _Categories extends StatelessWidget {
     final status = LabFoxStatusColors.of(context);
     final branch = project.defaultBranch;
 
-    return Card(
-      margin: EdgeInsets.zero,
-      clipBehavior: Clip.antiAlias,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _CategoryTile(
-            icon: Icons.error_outline,
-            color: status.open.foreground,
-            label: l10n.projectOverviewIssues,
-            onTap: () => context.go(Routes.issues(project.id)),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        LauncherTile(
+          icon: Icons.error_outline,
+          color: status.open.foreground,
+          label: l10n.projectOverviewIssues,
+          count: project.openIssuesCount,
+          onTap: () => context.go(Routes.issues(project.id)),
+        ),
+        LauncherTile(
+          icon: Icons.merge_outlined,
+          color: status.merged.foreground,
+          label: l10n.projectOverviewMergeRequests,
+          onTap: () => context.go(Routes.mergeRequests(project.id)),
+        ),
+        LauncherTile(
+          icon: Icons.rocket_launch_outlined,
+          color: status.running.foreground,
+          label: l10n.projectOverviewPipelines,
+          onTap: () => context.go(Routes.pipelines(project.id)),
+        ),
+        if (branch != null)
+          LauncherTile(
+            icon: Icons.history,
+            color: status.pending.foreground,
+            label: l10n.projectOverviewCommits,
+            onTap: () => context.go(Routes.commits(project.id, branch)),
           ),
-          const Divider(height: 1),
-          _CategoryTile(
-            icon: Icons.merge_outlined,
-            color: status.merged.foreground,
-            label: l10n.projectOverviewMergeRequests,
-            onTap: () => context.go(Routes.mergeRequests(project.id)),
-          ),
-          const Divider(height: 1),
-          _CategoryTile(
-            icon: Icons.rocket_launch_outlined,
-            color: status.running.foreground,
-            label: l10n.projectOverviewPipelines,
-            onTap: () => context.go(Routes.pipelines(project.id)),
-          ),
-          if (branch != null) ...[
-            const Divider(height: 1),
-            _CategoryTile(
-              icon: Icons.folder_copy_outlined,
-              color: status.pending.foreground,
-              label: l10n.projectOverviewRepository,
-              onTap: () => context.go(Routes.repository(project.id, branch)),
-            ),
-            const Divider(height: 1),
-            _CategoryTile(
-              icon: Icons.account_tree_outlined,
-              color: status.pending.foreground,
-              label: l10n.projectOverviewBranches,
-              onTap: () => context.go(Routes.branches(project.id)),
-            ),
-            const Divider(height: 1),
-            _CategoryTile(
-              icon: Icons.history,
-              color: status.pending.foreground,
-              label: l10n.projectOverviewCommits,
-              onTap: () => context.go(Routes.commits(project.id, branch)),
-            ),
-          ],
-        ],
-      ),
+      ],
     );
   }
 }
 
-class _CategoryTile extends StatelessWidget {
-  const _CategoryTile({
-    required this.icon,
-    required this.color,
-    required this.label,
-    required this.onTap,
-  });
+/// The code section: the current (default) branch, opening the branch list,
+/// and a browse entry into the file tree — GitHub Mobile's code block. Hidden
+/// entirely for an empty repository, which has no branch to browse.
+class _CodeSection extends StatelessWidget {
+  const _CodeSection({required this.project});
 
-  final IconData icon;
-  final Color color;
-  final String label;
-  final VoidCallback onTap;
+  final Project project;
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: LabFoxSpacing.md,
-          vertical: LabFoxSpacing.sm + 2,
+    final l10n = AppLocalizations.of(context);
+    final status = LabFoxStatusColors.of(context);
+    final branch = project.defaultBranch;
+    if (branch == null) {
+      return const SizedBox.shrink();
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(
+            left: LabFoxSpacing.md,
+            right: LabFoxSpacing.md,
+            top: LabFoxSpacing.md,
+          ),
+          child: Text(
+            l10n.projectOverviewCode,
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
         ),
-        child: Row(
-          children: [
-            Container(
-              width: 36,
-              height: 36,
-              decoration: BoxDecoration(
-                color: color,
-                borderRadius: BorderRadius.circular(9),
-              ),
-              child: Icon(icon, size: 20, color: Colors.white),
-            ),
-            const SizedBox(width: LabFoxSpacing.md),
-            Expanded(
-              child: Text(
-                label,
-                style: theme.textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-            Icon(Icons.chevron_right, color: theme.hintColor),
-          ],
+        const SizedBox(height: LabFoxSpacing.xs),
+        LauncherTile(
+          icon: Icons.account_tree_outlined,
+          color: status.pending.foreground,
+          label: branch,
+          onTap: () => context.go(Routes.branches(project.id)),
         ),
-      ),
+        LauncherTile(
+          icon: Icons.code,
+          color: status.pending.foreground,
+          label: l10n.projectOverviewBrowseCode,
+          onTap: () => context.go(Routes.repository(project.id, branch)),
+        ),
+      ],
     );
   }
 }
@@ -252,6 +241,16 @@ class _Header extends StatelessWidget {
             ),
             const SizedBox(width: LabFoxSpacing.xs),
             Text('${project.starCount}', style: theme.textTheme.labelMedium),
+            if (project.forksCount != null) ...[
+              const SizedBox(width: LabFoxSpacing.md),
+              const Icon(
+                Icons.call_split,
+                size: 16,
+                color: LabFoxColors.pending,
+              ),
+              const SizedBox(width: LabFoxSpacing.xs),
+              Text('${project.forksCount}', style: theme.textTheme.labelMedium),
+            ],
           ],
         ),
       ],
