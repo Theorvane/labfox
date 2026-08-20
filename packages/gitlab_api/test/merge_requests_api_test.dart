@@ -262,6 +262,18 @@ void main() {
       expect(captured.queryParameters['with_labels_details'], true);
       expect(page.items.single.projectId, 42);
     });
+
+    test('listMine passes the created_by_me scope', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (status: 200, headers: const {}, body: const []);
+      });
+
+      await client.mergeRequests.listMine(scope: MergeRequestScope.createdByMe);
+
+      expect(captured.queryParameters['scope'], 'created_by_me');
+    });
   });
 
   group('MergeRequestsApi.listForReview', () {

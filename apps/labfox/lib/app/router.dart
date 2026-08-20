@@ -14,10 +14,12 @@ import '../features/home/presentation/home_screen.dart';
 import '../features/inbox/presentation/inbox_screen.dart';
 import '../features/issues/presentation/issue_detail_screen.dart';
 import '../features/issues/presentation/issues_screen.dart';
+import '../features/issues/presentation/my_issues_screen.dart';
 import '../features/issues/presentation/new_issue_screen.dart';
 import '../features/jobs/presentation/job_detail_screen.dart';
 import '../features/merge_requests/presentation/merge_request_detail_screen.dart';
 import '../features/merge_requests/presentation/merge_requests_screen.dart';
+import '../features/merge_requests/presentation/my_merge_requests_screen.dart';
 import '../features/merge_requests/presentation/new_merge_request_screen.dart';
 import '../features/pipelines/presentation/pipeline_detail_screen.dart';
 import '../features/pipelines/presentation/pipelines_screen.dart';
@@ -46,6 +48,9 @@ abstract final class Routes {
   static const String me = '/me';
   static const String settings = '/settings';
   static const String projects = '/projects';
+  // Account-level lists, mirroring GitLab's /dashboard URLs.
+  static const String myIssues = '/dashboard/issues';
+  static const String myMergeRequests = '/dashboard/merge_requests';
 
   static String projectOverview(int id) => '/projects/$id';
 
@@ -147,6 +152,14 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.settings,
         builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: Routes.myIssues,
+        builder: (context, state) => const MyIssuesScreen(),
+      ),
+      GoRoute(
+        path: Routes.myMergeRequests,
+        builder: (context, state) => const MyMergeRequestsScreen(),
       ),
       GoRoute(
         path: Routes.projects,

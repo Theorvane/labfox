@@ -4,6 +4,16 @@ import 'package:gitlab_models/gitlab_models.dart';
 import '../common/paginated.dart';
 import '../gitlab_client.dart';
 
+/// Whose issues to list on the account-scoped endpoint.
+enum IssueScope {
+  assignedToMe('assigned_to_me'),
+  createdByMe('created_by_me');
+
+  const IssueScope(this.value);
+
+  final String value;
+}
+
 /// Which issues to list.
 enum IssueState {
   opened('opened'),
@@ -58,12 +68,20 @@ class IssuesApi {
     }
   }
 
-  /// Lists issues assigned to the authenticated user across every project,
-  /// open by default and most recently updated first.
+  /// Lists issues assigned to the authenticated user across every project.
+  Future<Paginated<Issue>> listAssignedToMe({
+    IssueState state = IssueState.opened,
+    int page = 1,
+    int perPage = 20,
+  }) => listMine(state: state, page: page, perPage: perPage);
+
+  /// Lists the authenticated user's issues across every project — assigned to
+  /// or created by them — open by default and most recently updated first.
   ///
   /// This is the account-scoped global `/issues` endpoint, not a project path,
   /// so results span projects; each issue keeps its `project_id` for routing.
-  Future<Paginated<Issue>> listAssignedToMe({
+  Future<Paginated<Issue>> listMine({
+    IssueScope scope = IssueScope.assignedToMe,
     IssueState state = IssueState.opened,
     int page = 1,
     int perPage = 20,
@@ -72,7 +90,7 @@ class IssuesApi {
       final response = await _dio.get<dynamic>(
         '/issues',
         queryParameters: {
-          'scope': 'assigned_to_me',
+          'scope': scope.value,
           if (state != IssueState.all) 'state': state.value,
           'order_by': 'updated_at',
           'with_labels_details': true,

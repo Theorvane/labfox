@@ -97,6 +97,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get signInErrorGeneric => 'サインインに失敗しました。もう一度お試しください。';
 
   @override
+  String get scopeAssigned => 'Assigned';
+
+  @override
+  String get scopeCreated => 'Created';
+
+  @override
   String get homeMyWork => 'マイワーク';
 
   @override

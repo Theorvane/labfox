@@ -190,6 +190,17 @@ void main() {
       // The project id is kept so the row can route to the right project.
       expect(page.items.single.projectId, 42);
     });
+    test('listMine passes the created_by_me scope', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (status: 200, headers: const {}, body: const []);
+      });
+
+      await client.issues.listMine(scope: IssueScope.createdByMe);
+
+      expect(captured.queryParameters['scope'], 'created_by_me');
+    });
   });
 }
 

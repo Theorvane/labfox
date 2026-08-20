@@ -128,3 +128,38 @@ final newIssueControllerProvider =
     AutoDisposeAsyncNotifierProvider<NewIssueController, void>(
       NewIssueController.new,
     );
+
+/// Identifies an account-level issue list: whose issues, in which state.
+class MyIssuesQuery {
+  const MyIssuesQuery({required this.scope, required this.state});
+
+  final IssueScope scope;
+  final IssueState state;
+
+  @override
+  bool operator ==(Object other) =>
+      other is MyIssuesQuery && other.scope == scope && other.state == state;
+
+  @override
+  int get hashCode => Object.hash(scope, state);
+}
+
+/// The current user's issues across every project.
+class MyIssuesController
+    extends FamilyAsyncNotifier<List<Issue>, MyIssuesQuery> {
+  @override
+  Future<List<Issue>> build(MyIssuesQuery arg) async {
+    final repo = await ref.watch(issuesRepositoryProvider.future);
+    if (repo == null) {
+      throw StateError('No authenticated account');
+    }
+    return repo.listMine(scope: arg.scope, state: arg.state);
+  }
+}
+
+final myIssuesControllerProvider =
+    AsyncNotifierProvider.family<
+      MyIssuesController,
+      List<Issue>,
+      MyIssuesQuery
+    >(MyIssuesController.new);

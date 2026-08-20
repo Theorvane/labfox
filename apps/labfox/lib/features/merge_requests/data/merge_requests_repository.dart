@@ -15,6 +15,30 @@ class MergeRequestsRepository {
     return page.items;
   }
 
+  /// The current user's merge requests across every project, by scope.
+  Future<List<MergeRequest>> listMine({
+    required MergeRequestScope scope,
+    required MergeRequestState state,
+  }) async {
+    final page = await _client.mergeRequests.listMine(
+      scope: scope,
+      state: state,
+    );
+    return page.items;
+  }
+
+  /// Open merge requests where [username] is a requested reviewer.
+  Future<List<MergeRequest>> listForReview(
+    String username, {
+    required MergeRequestState state,
+  }) async {
+    final page = await _client.mergeRequests.listForReview(
+      username,
+      state: state,
+    );
+    return page.items;
+  }
+
   Future<MergeRequest> get({required int projectId, required int iid}) {
     return _client.mergeRequests.get(projectId, iid: iid);
   }

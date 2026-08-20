@@ -272,6 +272,18 @@ abstract class AppLocalizations {
   /// **'Sign-in failed. Please try again.'**
   String get signInErrorGeneric;
 
+  /// Account-level list scope: items assigned to the user
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned'**
+  String get scopeAssigned;
+
+  /// Account-level list scope: items created by the user
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get scopeCreated;
+
   /// Section heading on the home screen
   ///
   /// In en, this message translates to:

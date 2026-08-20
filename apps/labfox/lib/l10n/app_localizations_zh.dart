@@ -95,6 +95,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get signInErrorGeneric => '登录失败。请重试。';
 
   @override
+  String get scopeAssigned => 'Assigned';
+
+  @override
+  String get scopeCreated => 'Created';
+
+  @override
   String get homeMyWork => '我的工作';
 
   @override

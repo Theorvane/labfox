@@ -17,6 +17,16 @@ enum MergeRequestState {
   final String value;
 }
 
+/// Whose merge requests to list on the account-scoped endpoint.
+enum MergeRequestScope {
+  assignedToMe('assigned_to_me'),
+  createdByMe('created_by_me');
+
+  const MergeRequestScope(this.value);
+
+  final String value;
+}
+
 /// Merge request endpoints.
 class MergeRequestsApi {
   const MergeRequestsApi(this._dio);
@@ -69,13 +79,22 @@ class MergeRequestsApi {
     MergeRequestState state = MergeRequestState.opened,
     int page = 1,
     int perPage = 20,
+  }) => listMine(state: state, page: page, perPage: perPage);
+
+  /// Lists the authenticated user's merge requests across every project —
+  /// assigned to or created by them.
+  Future<Paginated<MergeRequest>> listMine({
+    MergeRequestScope scope = MergeRequestScope.assignedToMe,
+    MergeRequestState state = MergeRequestState.opened,
+    int page = 1,
+    int perPage = 20,
   }) {
     return _listGlobal(
-      queryParameters: {'scope': 'assigned_to_me'},
+      queryParameters: {'scope': scope.value},
       state: state,
       page: page,
       perPage: perPage,
-      context: 'listing assigned merge requests',
+      context: 'listing my merge requests',
     );
   }
 
