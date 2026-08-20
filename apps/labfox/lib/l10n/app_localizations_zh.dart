@@ -255,6 +255,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get projectOverviewCommits => '提交';
 
   @override
+  String get projectOverviewCode => 'Code';
+
+  @override
+  String get projectOverviewBrowseCode => 'Browse code';
+
+  @override
   String get branchesTitle => '分支';
 
   @override

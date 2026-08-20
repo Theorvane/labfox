@@ -14,6 +14,8 @@ void main() {
         'last_activity_at': '2026-08-18T02:00:00.000Z',
         'avatar_url': 'https://gitlab.example.com/avatar.png',
         'default_branch': 'main',
+        'open_issues_count': 6,
+        'forks_count': 3,
       });
 
       expect(project.id, 278964);
@@ -23,6 +25,8 @@ void main() {
       expect(project.visibility, 'private');
       expect(project.lastActivityAt, DateTime.utc(2026, 8, 18, 2));
       expect(project.defaultBranch, 'main');
+      expect(project.openIssuesCount, 6);
+      expect(project.forksCount, 3);
     });
 
     test('default branch is null for an empty repository', () {
@@ -49,6 +53,10 @@ void main() {
       // star_count is absent in this payload; default to zero, not null, since
       // the UI always shows a count.
       expect(project.starCount, 0);
+      // Counts GitLab omits on reduced payloads stay null — unknown, not zero,
+      // so the UI can hide them instead of showing a false 0.
+      expect(project.openIssuesCount, isNull);
+      expect(project.forksCount, isNull);
     });
 
     test('ignores fields LabFox does not model', () {

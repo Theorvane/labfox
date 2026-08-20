@@ -19,6 +19,10 @@ abstract class Project with _$Project {
     @JsonKey(name: 'star_count') @Default(0) int starCount,
     String? visibility,
     @JsonKey(name: 'default_branch') String? defaultBranch,
+    // Null when GitLab omits the count on a reduced payload — unknown, not
+    // zero, so the UI hides it instead of showing a false 0.
+    @JsonKey(name: 'open_issues_count') int? openIssuesCount,
+    @JsonKey(name: 'forks_count') int? forksCount,
     @JsonKey(name: 'avatar_url') String? avatarUrl,
     @JsonKey(name: 'web_url') String? webUrl,
     @JsonKey(name: 'last_activity_at') DateTime? lastActivityAt,
