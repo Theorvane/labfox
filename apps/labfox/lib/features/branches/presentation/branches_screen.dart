@@ -21,8 +21,11 @@ class BranchesScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final branches = widgetRef.watch(branchesControllerProvider(projectId));
     final list = branches.valueOrNull;
-    final defaultBranch = (list == null || list.isEmpty)
-        ? ''
+    // The create dialog prefills its source ref with the default branch, so
+    // the action stays disabled until the list has loaded — opening it during
+    // loading would seed the field with nothing and never fill it in.
+    final String? defaultBranch = (list == null || list.isEmpty)
+        ? null
         : list.firstWhere((b) => b.isDefault, orElse: () => list.first).name;
 
     return Scaffold(
@@ -32,8 +35,9 @@ class BranchesScreen extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.add),
             tooltip: l10n.newBranchButton,
-            onPressed: () =>
-                _showCreateDialog(context, widgetRef, defaultBranch),
+            onPressed: defaultBranch == null
+                ? null
+                : () => _showCreateDialog(context, widgetRef, defaultBranch),
           ),
         ],
       ),
