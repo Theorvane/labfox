@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_api/gitlab_api.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
+import '../../../core/ui/copy_link_button.dart';
 import '../../../core/ui/work_meta.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../comments/presentation/widgets/comment_thread.dart';
@@ -29,7 +30,10 @@ class IssueDetailScreen extends ConsumerWidget {
     final issue = ref.watch(issueControllerProvider(issueRef));
 
     return Scaffold(
-      appBar: AppBar(title: Text('#$iid')),
+      appBar: AppBar(
+        title: Text('#$iid'),
+        actions: [CopyLinkButton(url: issue.valueOrNull?.webUrl)],
+      ),
       body: issue.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, _) => Center(

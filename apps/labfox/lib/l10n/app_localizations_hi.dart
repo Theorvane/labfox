@@ -117,6 +117,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get projectsError => 'आपके प्रोजेक्ट लोड नहीं हो सके।';
 
   @override
+  String get copyLink => 'Copy link';
+
+  @override
+  String get linkCopied => 'Link copied';
+
+  @override
   String get retry => 'पुनः प्रयास करें';
 
   @override

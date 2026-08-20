@@ -110,6 +110,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get projectsError => '无法加载您的项目。';
 
   @override
+  String get copyLink => 'Copy link';
+
+  @override
+  String get linkCopied => 'Link copied';
+
+  @override
   String get retry => '重试';
 
   @override
