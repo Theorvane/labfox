@@ -26,12 +26,17 @@ class BranchesScreen extends ConsumerWidget {
         : list.firstWhere((b) => b.isDefault, orElse: () => list.first).name;
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        tooltip: l10n.newBranchButton,
-        onPressed: () => _showCreateDialog(context, widgetRef, defaultBranch),
-        child: const Icon(Icons.add),
+      appBar: AppBar(
+        title: Text(l10n.branchesTitle),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            tooltip: l10n.newBranchButton,
+            onPressed: () =>
+                _showCreateDialog(context, widgetRef, defaultBranch),
+          ),
+        ],
       ),
-      appBar: AppBar(title: Text(l10n.branchesTitle)),
       body: branches.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, _) => Center(
