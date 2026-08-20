@@ -20,6 +20,7 @@ class ProjectTile extends StatelessWidget {
     this.avatarUrl,
     this.visibility,
     this.onTap,
+    this.trailing,
     super.key,
   });
 
@@ -36,6 +37,9 @@ class ProjectTile extends StatelessWidget {
   /// `private`, `internal` or `public` — shown with a matching glyph.
   final String? visibility;
   final VoidCallback? onTap;
+
+  /// An optional trailing action, e.g. a favorite toggle.
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +89,11 @@ class ProjectTile extends StatelessWidget {
                 ],
               ),
             ),
+            if (trailing != null)
+              Padding(
+                padding: const EdgeInsets.only(left: LabFoxSpacing.sm),
+                child: trailing,
+              ),
           ],
         ),
       ),

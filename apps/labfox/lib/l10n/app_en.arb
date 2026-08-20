@@ -122,6 +122,14 @@
   "@scopeAssigned": {"description": "Account-level list scope: items assigned to the user"},
   "scopeCreated": "Created",
   "@scopeCreated": {"description": "Account-level list scope: items created by the user"},
+  "homeRefresh": "Refresh",
+  "@homeRefresh": {
+    "description": "Tooltip for the home refresh action"
+  },
+  "homeFavoritesEmpty": "Star projects to pin them here.",
+  "@homeFavoritesEmpty": {
+    "description": "Hint shown in the empty favorites section"
+  },
   "homeMyWork": "My work",
   "@homeMyWork": {
     "description": "Section heading on the home screen"
