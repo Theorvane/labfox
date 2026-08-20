@@ -565,6 +565,15 @@ class AppLocalizationsKo extends AppLocalizations {
   String get inboxEmpty => '모두 처리했습니다.';
 
   @override
+  String get inboxDoneEmpty => 'Nothing marked done yet.';
+
+  @override
+  String get inboxFilterPending => 'Pending';
+
+  @override
+  String get inboxFilterDone => 'Done';
+
+  @override
   String get inboxError => '할 일 목록을 불러오지 못했습니다.';
 
   @override

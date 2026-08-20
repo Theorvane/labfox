@@ -564,6 +564,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get inboxEmpty => 'すべて完了しました。';
 
   @override
+  String get inboxDoneEmpty => 'Nothing marked done yet.';
+
+  @override
+  String get inboxFilterPending => 'Pending';
+
+  @override
+  String get inboxFilterDone => 'Done';
+
+  @override
   String get inboxError => 'To Do を読み込めませんでした。';
 
   @override

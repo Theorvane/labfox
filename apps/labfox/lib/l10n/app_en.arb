@@ -694,6 +694,18 @@
   "@inboxEmpty": {
     "description": "Shown when the to-do inbox has no pending items"
   },
+  "inboxDoneEmpty": "Nothing marked done yet.",
+  "@inboxDoneEmpty": {
+    "description": "Shown when the done view of the inbox is empty"
+  },
+  "inboxFilterPending": "Pending",
+  "@inboxFilterPending": {
+    "description": "Inbox state filter: items awaiting action"
+  },
+  "inboxFilterDone": "Done",
+  "@inboxFilterDone": {
+    "description": "Inbox state filter: items already marked done"
+  },
   "inboxError": "Your to-do items could not be loaded.",
   "@inboxError": {
     "description": "Shown when the to-do list fails to load"

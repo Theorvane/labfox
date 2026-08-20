@@ -561,6 +561,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get inboxEmpty => '全部处理完毕。';
 
   @override
+  String get inboxDoneEmpty => 'Nothing marked done yet.';
+
+  @override
+  String get inboxFilterPending => 'Pending';
+
+  @override
+  String get inboxFilterDone => 'Done';
+
+  @override
   String get inboxError => '无法加载待办事项。';
 
   @override

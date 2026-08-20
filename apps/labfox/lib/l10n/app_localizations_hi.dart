@@ -579,6 +579,15 @@ class AppLocalizationsHi extends AppLocalizations {
   String get inboxEmpty => 'आप पूरी तरह अद्यतित हैं।';
 
   @override
+  String get inboxDoneEmpty => 'Nothing marked done yet.';
+
+  @override
+  String get inboxFilterPending => 'Pending';
+
+  @override
+  String get inboxFilterDone => 'Done';
+
+  @override
   String get inboxError => 'आपकी कार्य सूची लोड नहीं हो सकी।';
 
   @override

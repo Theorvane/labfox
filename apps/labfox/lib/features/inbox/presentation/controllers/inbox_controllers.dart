@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gitlab_api/gitlab_api.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
 import '../../../../core/auth/gitlab_client_provider.dart';
@@ -9,19 +10,20 @@ final inboxRepositoryProvider = FutureProvider<InboxRepository?>((ref) async {
   return client == null ? null : InboxRepository(client);
 });
 
-/// The current user's pending to-do items.
+/// The current user's to-do items in one state — pending or done.
 ///
 /// Marking an item done removes it optimistically so the list stays responsive,
 /// and rolls the row back if the request fails — the server is the authority on
-/// what is actually cleared.
-class InboxController extends AsyncNotifier<List<Todo>> {
+/// what is actually cleared. A cleared item belongs to the done list next, so
+/// clearing invalidates it.
+class InboxController extends FamilyAsyncNotifier<List<Todo>, TodoState> {
   @override
-  Future<List<Todo>> build() async {
+  Future<List<Todo>> build(TodoState arg) async {
     final repo = await ref.watch(inboxRepositoryProvider.future);
     if (repo == null) {
       throw StateError('No authenticated account');
     }
-    return repo.pending();
+    return repo.list(state: arg);
   }
 
   Future<void> markDone(int id) async {
@@ -35,6 +37,7 @@ class InboxController extends AsyncNotifier<List<Todo>> {
     );
     try {
       await repo.markDone(id);
+      ref.invalidate(inboxControllerProvider(TodoState.done));
     } catch (_) {
       state = AsyncData(previous);
       rethrow;
@@ -50,6 +53,7 @@ class InboxController extends AsyncNotifier<List<Todo>> {
     state = const AsyncData([]);
     try {
       await repo.markAllDone();
+      ref.invalidate(inboxControllerProvider(TodoState.done));
     } catch (_) {
       state = AsyncData(previous);
       rethrow;
@@ -58,4 +62,6 @@ class InboxController extends AsyncNotifier<List<Todo>> {
 }
 
 final inboxControllerProvider =
-    AsyncNotifierProvider<InboxController, List<Todo>>(InboxController.new);
+    AsyncNotifierProvider.family<InboxController, List<Todo>, TodoState>(
+      InboxController.new,
+    );

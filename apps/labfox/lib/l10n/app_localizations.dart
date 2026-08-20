@@ -1190,6 +1190,24 @@ abstract class AppLocalizations {
   /// **'You\'re all caught up.'**
   String get inboxEmpty;
 
+  /// Shown when the done view of the inbox is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing marked done yet.'**
+  String get inboxDoneEmpty;
+
+  /// Inbox state filter: items awaiting action
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get inboxFilterPending;
+
+  /// Inbox state filter: items already marked done
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get inboxFilterDone;
+
   /// Shown when the to-do list fails to load
   ///
   /// In en, this message translates to:
