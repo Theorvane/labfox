@@ -194,6 +194,12 @@
   "@newIssueButton": {
     "description": "Tooltip for the create-issue action on the issues list"
   },
+  "issueClose": "Close issue",
+  "@issueClose": {"description": "Menu action that closes the issue"},
+  "issueReopen": "Reopen issue",
+  "@issueReopen": {"description": "Menu action that reopens the issue"},
+  "issueStateError": "Could not update the issue. Please try again.",
+  "@issueStateError": {"description": "Shown when closing or reopening an issue fails"},
   "newMrTitle": "New merge request",
   "@newMrTitle": {"description": "Title of the create-MR screen"},
   "newMrSourceLabel": "Source branch",

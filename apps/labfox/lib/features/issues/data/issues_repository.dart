@@ -30,4 +30,12 @@ class IssuesRepository {
       description: description,
     );
   }
+
+  Future<Issue> setOpen({
+    required int projectId,
+    required int iid,
+    required bool open,
+  }) {
+    return _client.issues.setOpen(projectId, iid: iid, open: open);
+  }
 }
