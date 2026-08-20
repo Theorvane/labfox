@@ -119,6 +119,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shareLink => 'Share';
 
   @override
+  String get mrBlockerConflicts => 'Conflicts';
+
+  @override
+  String get mrBlockerChecksFailed => 'Checks failed';
+
+  @override
+  String get mrBlockerCiRunning => 'CI running';
+
+  @override
+  String get mrBlockerNeedsApproval => 'Needs approval';
+
+  @override
+  String get mrBlockerUnresolved => 'Unresolved threads';
+
+  @override
   String get retry => 'Retry';
 
   @override

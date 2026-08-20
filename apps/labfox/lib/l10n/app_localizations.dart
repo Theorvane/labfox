@@ -308,6 +308,36 @@ abstract class AppLocalizations {
   /// **'Share'**
   String get shareLink;
 
+  /// Row chip when a merge request has merge conflicts
+  ///
+  /// In en, this message translates to:
+  /// **'Conflicts'**
+  String get mrBlockerConflicts;
+
+  /// Row chip when a merge request's required pipeline has not passed
+  ///
+  /// In en, this message translates to:
+  /// **'Checks failed'**
+  String get mrBlockerChecksFailed;
+
+  /// Row chip when a merge request's pipeline is still running
+  ///
+  /// In en, this message translates to:
+  /// **'CI running'**
+  String get mrBlockerCiRunning;
+
+  /// Row chip when a merge request still needs approval
+  ///
+  /// In en, this message translates to:
+  /// **'Needs approval'**
+  String get mrBlockerNeedsApproval;
+
+  /// Row chip when a merge request has unresolved discussion threads
+  ///
+  /// In en, this message translates to:
+  /// **'Unresolved threads'**
+  String get mrBlockerUnresolved;
+
   /// Label for a retry button
   ///
   /// In en, this message translates to:
