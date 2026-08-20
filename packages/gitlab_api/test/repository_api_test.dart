@@ -106,6 +106,32 @@ void main() {
       );
     });
   });
+
+  group('RepositoryApi.createBranch', () {
+    test('POSTs branch and ref and returns the new branch', () async {
+      late RequestOptions captured;
+      final client = _client((o) {
+        captured = o;
+        return (
+          status: 201,
+          headers: const {},
+          body: {'name': 'feat/x', 'default': false, 'protected': false},
+          raw: false,
+        );
+      });
+
+      final branch = await client.repository.createBranch(
+        7,
+        name: 'feat/x',
+        ref: 'main',
+      );
+
+      expect(captured.method, 'POST');
+      expect(captured.path, '/projects/7/repository/branches');
+      expect(captured.queryParameters, {'branch': 'feat/x', 'ref': 'main'});
+      expect(branch.name, 'feat/x');
+    });
+  });
 }
 
 GitLabClient _client(

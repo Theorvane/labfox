@@ -264,6 +264,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String get branchesEmpty => 'This repository has no branches.';
 
   @override
+  String get newBranchTitle => 'New branch';
+
+  @override
+  String get newBranchNameLabel => 'Branch name';
+
+  @override
+  String get newBranchFromLabel => 'Create from';
+
+  @override
+  String get newBranchNameRequired => 'Enter a branch name.';
+
+  @override
+  String get newBranchFromRequired => 'Enter a source branch or ref.';
+
+  @override
+  String get newBranchCreate => 'Create branch';
+
+  @override
+  String get newBranchError => 'Could not create the branch. Please try again.';
+
+  @override
+  String get newBranchButton => 'New branch';
+
+  @override
   String get branchDefault => 'Default branch';
 
   @override

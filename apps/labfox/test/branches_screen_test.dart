@@ -58,6 +58,43 @@ void main() {
     expect(find.byIcon(Icons.lock_outline), findsOneWidget);
   });
 
+  testWidgets('the create action is disabled while branches load', (
+    tester,
+  ) async {
+    await _pump(tester, const AsyncLoading());
+    await tester.pump();
+
+    final button = tester.widget<IconButton>(
+      find.widgetWithIcon(IconButton, Icons.add),
+    );
+    // Opening the dialog now would seed the source ref with nothing, so the
+    // action waits for the list.
+    expect(button.onPressed, isNull);
+  });
+
+  testWidgets('the create dialog prefills the default branch', (tester) async {
+    await _pump(
+      tester,
+      const AsyncData([
+        Branch(name: 'dev'),
+        Branch(name: 'main', isDefault: true),
+      ]),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pumpAndSettle();
+
+    // The source-ref field carries the default branch, not the first row.
+    expect(
+      find.descendant(
+        of: find.byType(AlertDialog),
+        matching: find.text('main'),
+      ),
+      findsOneWidget,
+    );
+  });
+
   testWidgets('shows an empty message when there are no branches', (
     tester,
   ) async {

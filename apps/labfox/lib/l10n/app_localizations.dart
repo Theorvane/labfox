@@ -596,6 +596,54 @@ abstract class AppLocalizations {
   /// **'This repository has no branches.'**
   String get branchesEmpty;
 
+  /// Title of the create-branch dialog
+  ///
+  /// In en, this message translates to:
+  /// **'New branch'**
+  String get newBranchTitle;
+
+  /// Label for the new branch name field
+  ///
+  /// In en, this message translates to:
+  /// **'Branch name'**
+  String get newBranchNameLabel;
+
+  /// Label for the source ref field
+  ///
+  /// In en, this message translates to:
+  /// **'Create from'**
+  String get newBranchFromLabel;
+
+  /// Validation when the branch name is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a branch name.'**
+  String get newBranchNameRequired;
+
+  /// Validation when the source ref is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a source branch or ref.'**
+  String get newBranchFromRequired;
+
+  /// Button that creates the branch
+  ///
+  /// In en, this message translates to:
+  /// **'Create branch'**
+  String get newBranchCreate;
+
+  /// Shown when creating a branch fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not create the branch. Please try again.'**
+  String get newBranchError;
+
+  /// Tooltip for the create-branch action
+  ///
+  /// In en, this message translates to:
+  /// **'New branch'**
+  String get newBranchButton;
+
   /// Label marking the default branch
   ///
   /// In en, this message translates to:

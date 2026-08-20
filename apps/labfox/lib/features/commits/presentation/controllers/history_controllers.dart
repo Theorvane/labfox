@@ -21,6 +21,16 @@ class BranchesController extends FamilyAsyncNotifier<List<Branch>, int> {
     }
     return repo.branches(projectId);
   }
+
+  /// Creates a branch [name] from [ref] and reloads the list so it appears.
+  Future<void> create({required String name, required String ref}) async {
+    final repo = await this.ref.read(historyRepositoryProvider.future);
+    if (repo == null) {
+      throw StateError('No authenticated account');
+    }
+    await repo.createBranch(projectId: arg, name: name, ref: ref);
+    state = await AsyncValue.guard(() => repo.branches(arg));
+  }
 }
 
 final branchesControllerProvider =

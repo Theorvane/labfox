@@ -7,6 +7,14 @@ class HistoryRepository {
 
   final GitLabClient _client;
 
+  Future<Branch> createBranch({
+    required int projectId,
+    required String name,
+    required String ref,
+  }) {
+    return _client.repository.createBranch(projectId, name: name, ref: ref);
+  }
+
   Future<List<Branch>> branches(int projectId) async {
     final page = await _client.repository.branches(projectId);
     return page.items;
