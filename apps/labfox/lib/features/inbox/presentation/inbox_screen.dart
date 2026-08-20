@@ -1,6 +1,7 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gitlab_api/gitlab_api.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,53 +11,94 @@ import '../../../l10n/app_localizations.dart';
 import 'controllers/inbox_controllers.dart';
 
 /// The current user's to-do inbox — the entry point of the core flow.
-class InboxScreen extends ConsumerWidget {
+///
+/// A state filter switches between pending items and the read-only history of
+/// items already marked done.
+class InboxScreen extends ConsumerStatefulWidget {
   const InboxScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<InboxScreen> createState() => _InboxScreenState();
+}
+
+class _InboxScreenState extends ConsumerState<InboxScreen> {
+  TodoState _state = TodoState.pending;
+
+  bool get _pending => _state == TodoState.pending;
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final todos = ref.watch(inboxControllerProvider);
+    final todos = ref.watch(inboxControllerProvider(_state));
 
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.inboxTitle),
         actions: [
-          if (todos.valueOrNull?.isNotEmpty ?? false)
+          if (_pending && (todos.valueOrNull?.isNotEmpty ?? false))
             IconButton(
               icon: const Icon(Icons.done_all),
               tooltip: l10n.inboxMarkAllDone,
-              onPressed: () => _markAllDone(context, ref),
+              onPressed: () => _markAllDone(context),
             ),
         ],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(52),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: LabFoxSpacing.md,
+                right: LabFoxSpacing.md,
+                bottom: LabFoxSpacing.sm,
+              ),
+              child: FilterMenuChip<TodoState>(
+                selected: _state,
+                options: const [TodoState.pending, TodoState.done],
+                labelOf: (state) => state == TodoState.pending
+                    ? l10n.inboxFilterPending
+                    : l10n.inboxFilterDone,
+                onSelected: (state) => setState(() => _state = state),
+              ),
+            ),
+          ),
+        ),
       ),
       body: RefreshIndicator(
-        onRefresh: () => ref.refresh(inboxControllerProvider.future),
+        onRefresh: () => ref.refresh(inboxControllerProvider(_state).future),
         child: todos.when(
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (error, _) => _ErrorState(
             message: l10n.inboxError,
-            onRetry: () => ref.invalidate(inboxControllerProvider),
+            onRetry: () => ref.invalidate(inboxControllerProvider(_state)),
           ),
           data: (items) {
             if (items.isEmpty) {
-              return _EmptyState(message: l10n.inboxEmpty);
+              return _EmptyState(
+                message: _pending ? l10n.inboxEmpty : l10n.inboxDoneEmpty,
+              );
             }
             return ListView.separated(
               itemCount: items.length,
               separatorBuilder: (context, index) => const Divider(height: 1),
               itemBuilder: (context, index) {
                 final todo = items[index];
+                final tile = _TodoTile(
+                  todo: todo,
+                  onTap: () => _openTarget(context, todo),
+                  onMarkDone: _pending
+                      ? () => _markDone(context, todo.id)
+                      : null,
+                );
+                if (!_pending) {
+                  return tile;
+                }
                 return Dismissible(
                   key: ValueKey(todo.id),
                   direction: DismissDirection.endToStart,
                   background: const _DismissBackground(),
-                  onDismissed: (_) => _markDone(context, ref, todo.id),
-                  child: _TodoTile(
-                    todo: todo,
-                    onTap: () => _openTarget(context, todo),
-                    onMarkDone: () => _markDone(context, ref, todo.id),
-                  ),
+                  onDismissed: (_) => _markDone(context, todo.id),
+                  child: tile,
                 );
               },
             );
@@ -80,10 +122,12 @@ class InboxScreen extends ConsumerWidget {
     }
   }
 
-  Future<void> _markDone(BuildContext context, WidgetRef ref, int id) async {
+  Future<void> _markDone(BuildContext context, int id) async {
     final l10n = AppLocalizations.of(context);
     try {
-      await ref.read(inboxControllerProvider.notifier).markDone(id);
+      await ref
+          .read(inboxControllerProvider(TodoState.pending).notifier)
+          .markDone(id);
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(
@@ -92,10 +136,12 @@ class InboxScreen extends ConsumerWidget {
     }
   }
 
-  Future<void> _markAllDone(BuildContext context, WidgetRef ref) async {
+  Future<void> _markAllDone(BuildContext context) async {
     final l10n = AppLocalizations.of(context);
     try {
-      await ref.read(inboxControllerProvider.notifier).markAllDone();
+      await ref
+          .read(inboxControllerProvider(TodoState.pending).notifier)
+          .markAllDone();
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(
@@ -114,7 +160,9 @@ class _TodoTile extends StatelessWidget {
 
   final Todo todo;
   final VoidCallback onTap;
-  final VoidCallback onMarkDone;
+
+  /// Clears the item; null on the read-only done view, which hides the button.
+  final VoidCallback? onMarkDone;
 
   @override
   Widget build(BuildContext context) {
@@ -135,11 +183,13 @@ class _TodoTile extends StatelessWidget {
         if (todo.project != null) MetaText(_targetRef(todo)),
         if (todo.createdAt != null) MetaText(timeAgo(todo.createdAt!)),
       ],
-      trailing: IconButton(
-        icon: const Icon(Icons.check),
-        tooltip: l10n.inboxMarkDone,
-        onPressed: onMarkDone,
-      ),
+      trailing: onMarkDone == null
+          ? null
+          : IconButton(
+              icon: const Icon(Icons.check),
+              tooltip: l10n.inboxMarkDone,
+              onPressed: onMarkDone,
+            ),
       onTap: canOpen ? onTap : null,
     );
   }

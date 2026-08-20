@@ -579,6 +579,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get inboxEmpty => 'You\'re all caught up.';
 
   @override
+  String get inboxDoneEmpty => 'Nothing marked done yet.';
+
+  @override
+  String get inboxFilterPending => 'Pending';
+
+  @override
+  String get inboxFilterDone => 'Done';
+
+  @override
   String get inboxError => 'Your to-do items could not be loaded.';
 
   @override

@@ -1,3 +1,4 @@
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -8,9 +9,9 @@ import 'package:labfox/features/inbox/presentation/controllers/inbox_controllers
 import 'package:labfox/features/inbox/presentation/inbox_screen.dart';
 import 'package:labfox/l10n/app_localizations.dart';
 
-Todo _todo(int id, String title) => Todo(
+Todo _todo(int id, String title, {String state = 'pending'}) => Todo(
   id: id,
-  state: 'pending',
+  state: state,
   actionName: 'assigned',
   targetType: 'Issue',
   body: title,
@@ -19,16 +20,21 @@ Todo _todo(int id, String title) => Todo(
 );
 
 class _FakeRepo extends InboxRepository {
-  _FakeRepo(this.todos)
+  _FakeRepo(this.todos, {this.doneTodos = const []})
     : super(GitLabClient(baseUrl: 'https://gitlab.com', token: 'glpat-x'));
 
   List<Todo> todos;
+  List<Todo> doneTodos;
   bool fail = false;
+  final List<String> stateCalls = [];
   final List<int> doneCalls = [];
   bool markedAll = false;
 
   @override
-  Future<List<Todo>> pending() async => todos;
+  Future<List<Todo>> list({required TodoState state}) async {
+    stateCalls.add(state.value);
+    return state == TodoState.pending ? todos : doneTodos;
+  }
 
   @override
   Future<void> markDone(int id) async {
@@ -66,11 +72,13 @@ void main() {
       );
       addTearDown(container.dispose);
 
-      await container.read(inboxControllerProvider.future);
-      await container.read(inboxControllerProvider.notifier).markDone(1);
+      await container.read(inboxControllerProvider(TodoState.pending).future);
+      await container
+          .read(inboxControllerProvider(TodoState.pending).notifier)
+          .markDone(1);
 
       final ids = container
-          .read(inboxControllerProvider)
+          .read(inboxControllerProvider(TodoState.pending))
           .value!
           .map((t) => t.id)
           .toList();
@@ -85,14 +93,16 @@ void main() {
       );
       addTearDown(container.dispose);
 
-      await container.read(inboxControllerProvider.future);
+      await container.read(inboxControllerProvider(TodoState.pending).future);
       await expectLater(
-        container.read(inboxControllerProvider.notifier).markDone(1),
+        container
+            .read(inboxControllerProvider(TodoState.pending).notifier)
+            .markDone(1),
         throwsA(isA<StateError>()),
       );
 
       final ids = container
-          .read(inboxControllerProvider)
+          .read(inboxControllerProvider(TodoState.pending))
           .value!
           .map((t) => t.id)
           .toList();
@@ -139,6 +149,50 @@ void main() {
         find.text('The item could not be cleared. Please try again.'),
         findsOneWidget,
       );
+    });
+
+    testWidgets('the Done filter lists cleared todos read-only', (
+      tester,
+    ) async {
+      final repo = _FakeRepo(
+        [_todo(1, 'Fix login')],
+        doneTodos: [_todo(9, 'Old review', state: 'done')],
+      );
+      await _pump(tester, repo);
+
+      await tester.tap(find.byType(FilterMenuChip<TodoState>));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Done').last);
+      await tester.pumpAndSettle();
+
+      expect(repo.stateCalls, ['pending', 'done']);
+      expect(find.text('Old review'), findsOneWidget);
+      expect(find.text('Fix login'), findsNothing);
+      // Done items cannot be cleared again: no per-row check, no swipe, no
+      // mark-all-done.
+      expect(find.byIcon(Icons.check), findsNothing);
+      expect(find.byType(Dismissible), findsNothing);
+      expect(find.byIcon(Icons.done_all), findsNothing);
+    });
+
+    testWidgets('switching back to Pending restores the actions', (
+      tester,
+    ) async {
+      final repo = _FakeRepo([_todo(1, 'Fix login')]);
+      await _pump(tester, repo);
+
+      await tester.tap(find.byType(FilterMenuChip<TodoState>));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Done').last);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byType(FilterMenuChip<TodoState>));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Pending').last);
+      await tester.pumpAndSettle();
+
+      expect(find.text('Fix login'), findsOneWidget);
+      expect(find.byIcon(Icons.check), findsOneWidget);
     });
   });
 }
