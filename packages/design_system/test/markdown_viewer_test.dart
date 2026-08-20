@@ -71,8 +71,8 @@ void main() {
     expect(_allText(tester), contains('content'));
   });
 
-  group('raw HTML degradation', () {
-    testWidgets('strips block-level tags but keeps their inner text', (
+  group('HTML rendering', () {
+    testWidgets('renders a centered bold block as styled text, not tags', (
       tester,
     ) async {
       await _pump(
@@ -85,7 +85,7 @@ void main() {
       expect(text, isNot(contains('<')));
     });
 
-    testWidgets('strips inline tags but keeps their text', (tester) async {
+    testWidgets('renders inline HTML text without tags', (tester) async {
       await _pump(tester, 'Hello <sub>tiny</sub> world');
       final text = _allText(tester);
       expect(text, contains('Hello'));
@@ -94,11 +94,60 @@ void main() {
       expect(text, isNot(contains('<')));
     });
 
-    testWidgets('an image degrades to its alt text', (tester) async {
-      await _pump(tester, '<img src="badge.svg" alt="build passing">');
+    testWidgets('an HTML img renders as an image', (tester) async {
+      await _pump(tester, '<img src="https://x.test/badge.svg" alt="badge">');
+      expect(find.byType(Image), findsOneWidget);
+    });
+
+    testWidgets('a markdown image renders as an image', (tester) async {
+      await _pump(tester, '![logo](https://x.test/logo.png)');
+      expect(find.byType(Image), findsOneWidget);
+    });
+
+    testWidgets('a details block hides its content until expanded', (
+      tester,
+    ) async {
+      await _pump(
+        tester,
+        '<details><summary>More info</summary>The hidden part</details>',
+      );
+      expect(_allText(tester), contains('More info'));
+      expect(_allText(tester), isNot(contains('The hidden part')));
+
+      await tester.tap(find.text('More info'));
+      await tester.pumpAndSettle();
+      expect(_allText(tester), contains('The hidden part'));
+    });
+
+    testWidgets('an HTML heading gets the heading style', (tester) async {
+      await _pump(tester, '<h2>Getting started</h2>');
       final text = _allText(tester);
-      expect(text, contains('build passing'));
-      expect(text, isNot(contains('<img')));
+      expect(text, contains('Getting started'));
+      expect(text, isNot(contains('<')));
+    });
+
+    testWidgets('an HTML link reports its href through onTapLink', (
+      tester,
+    ) async {
+      String? tapped;
+      await _pump(
+        tester,
+        '<p><a href="https://gitlab.com/docs">the docs</a></p>',
+        onTapLink: (href) => tapped = href,
+      );
+
+      final richText = tester.widget<RichText>(find.byType(RichText).first);
+      TextSpan? linkSpan;
+      (richText.text as TextSpan).visitChildren((span) {
+        if (span is TextSpan && span.recognizer is TapGestureRecognizer) {
+          linkSpan = span;
+          return false;
+        }
+        return true;
+      });
+      (linkSpan!.recognizer! as TapGestureRecognizer).onTap!();
+
+      expect(tapped, 'https://gitlab.com/docs');
     });
 
     testWidgets('script and style contents are dropped entirely', (
@@ -109,6 +158,17 @@ void main() {
       expect(text, contains('before'));
       expect(text, contains('after'));
       expect(text, isNot(contains('alert(1)')));
+      expect(text, isNot(contains('<')));
+    });
+
+    testWidgets('an iframe is dropped with its content', (tester) async {
+      await _pump(
+        tester,
+        '<iframe src="https://evil.test">tracking</iframe>\n\nvisible',
+      );
+      final text = _allText(tester);
+      expect(text, contains('visible'));
+      expect(text, isNot(contains('tracking')));
       expect(text, isNot(contains('<')));
     });
 

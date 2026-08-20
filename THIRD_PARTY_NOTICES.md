@@ -78,6 +78,7 @@ LicenseRegistry.addLicense(() async* {
 | shared_preferences | ^2.3.3 | BSD-3-Clause | https://github.com/flutter/packages |
 | intl | any | BSD-3-Clause | https://github.com/dart-lang/i18n |
 | markdown | ^7.3.1 | BSD-3-Clause | https://github.com/dart-lang/markdown |
+| html | ^0.15.4 | BSD-3-Clause | https://github.com/dart-lang/tools |
 | crypto | ^3.0.0 | BSD-3-Clause | https://github.com/dart-lang/crypto |
 | flutter_web_auth_2 | ^4.0.0 | MIT | https://github.com/ThexXTURBOXx/flutter_web_auth_2 |
 | share_plus | ^12.0.2 | BSD-3-Clause | https://github.com/fluttercommunity/plus_plugins |
