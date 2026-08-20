@@ -33,6 +33,22 @@ void main() {
     expect(find.text('7'), findsOneWidget);
   });
 
+  testWidgets('shows a visibility indicator and an avatar initial', (
+    tester,
+  ) async {
+    await _pump(
+      tester,
+      const ProjectTile(
+        name: 'Backend',
+        path: 'a/backend',
+        visibility: 'private',
+      ),
+    );
+    expect(find.byIcon(Icons.lock_outline), findsOneWidget);
+    // No avatar url falls back to the name initial.
+    expect(find.text('B'), findsOneWidget);
+  });
+
   testWidgets('calls onTap', (tester) async {
     var tapped = false;
     await _pump(

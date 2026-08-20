@@ -152,6 +152,8 @@ class _ResultTile extends StatelessWidget {
         path: item.pathWithNamespace,
         description: item.description,
         starCount: item.starCount,
+        avatarUrl: item.avatarUrl,
+        visibility: item.visibility,
         onTap: () => context.go(Routes.projectOverview(item.id)),
       );
     }
