@@ -32,6 +32,12 @@ class _MyIssuesScreenState extends ConsumerState<MyIssuesScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        // This route lives outside the navigation shell, so it carries its own
+        // way back; a session restored straight onto it has no stack to pop.
+        leading: BackButton(
+          onPressed: () =>
+              context.canPop() ? context.pop() : context.go(Routes.home),
+        ),
         title: Text(l10n.issuesTitle),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(52),
