@@ -506,6 +506,18 @@ abstract class AppLocalizations {
   /// **'This is a binary file and cannot be shown as text.'**
   String get fileBinary;
 
+  /// Tooltip for the action that copies the file contents
+  ///
+  /// In en, this message translates to:
+  /// **'Copy contents'**
+  String get fileCopy;
+
+  /// Confirmation after the file contents are copied
+  ///
+  /// In en, this message translates to:
+  /// **'Contents copied'**
+  String get fileCopied;
+
   /// Overview link that opens the branches list
   ///
   /// In en, this message translates to:

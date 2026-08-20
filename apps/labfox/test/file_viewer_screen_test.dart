@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gitlab_api/gitlab_api.dart';
@@ -52,6 +52,31 @@ void main() {
     await _pump(tester, AsyncData(file));
     await tester.pumpAndSettle();
     expect(find.text('final x = 1;'), findsOneWidget);
+  });
+
+  testWidgets('copies the file contents to the clipboard', (tester) async {
+    final copied = <String>[];
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      SystemChannels.platform,
+      (call) async {
+        if (call.method == 'Clipboard.setData') {
+          copied.add((call.arguments as Map)['text'] as String);
+        }
+        return null;
+      },
+    );
+
+    final file = RepositoryFile.fromBytes(
+      Uint8List.fromList('final x = 1;'.codeUnits),
+    );
+    await _pump(tester, AsyncData(file));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byIcon(Icons.copy_all_outlined));
+    await tester.pumpAndSettle();
+
+    expect(copied.single, 'final x = 1;');
+    expect(find.text('Contents copied'), findsOneWidget);
   });
 
   testWidgets('shows a placeholder for a binary file, not garbage', (

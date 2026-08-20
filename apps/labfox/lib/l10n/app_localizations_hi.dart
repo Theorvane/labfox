@@ -221,6 +221,12 @@ class AppLocalizationsHi extends AppLocalizations {
       'यह एक बाइनरी फ़ाइल है और इसे टेक्स्ट के रूप में नहीं दिखाया जा सकता।';
 
   @override
+  String get fileCopy => 'Copy contents';
+
+  @override
+  String get fileCopied => 'Contents copied';
+
+  @override
   String get projectOverviewBranches => 'ब्रांच';
 
   @override
