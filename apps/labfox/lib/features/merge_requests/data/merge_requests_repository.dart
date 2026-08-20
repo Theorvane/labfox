@@ -18,4 +18,20 @@ class MergeRequestsRepository {
   Future<MergeRequest> get({required int projectId, required int iid}) {
     return _client.mergeRequests.get(projectId, iid: iid);
   }
+
+  Future<MergeRequest> create({
+    required int projectId,
+    required String sourceBranch,
+    required String targetBranch,
+    required String title,
+    String? description,
+  }) {
+    return _client.mergeRequests.create(
+      projectId,
+      sourceBranch: sourceBranch,
+      targetBranch: targetBranch,
+      title: title,
+      description: description,
+    );
+  }
 }

@@ -35,6 +35,11 @@ class _MergeRequestsScreenState extends ConsumerState<MergeRequestsScreen> {
     final mrs = ref.watch(mergeRequestsControllerProvider(query));
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        tooltip: l10n.newMrButton,
+        onPressed: () => context.go(Routes.newMergeRequest(widget.projectId)),
+        child: const Icon(Icons.add),
+      ),
       appBar: AppBar(
         title: Text(l10n.mergeRequestsTitle),
         bottom: PreferredSize(
