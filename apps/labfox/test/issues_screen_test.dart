@@ -104,6 +104,9 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('open one'), findsOneWidget);
 
+    // The filter is a dropdown chip: open its menu, then pick Closed.
+    await tester.tap(find.byType(FilterMenuChip<IssueState>));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Closed'));
     await tester.pumpAndSettle();
 

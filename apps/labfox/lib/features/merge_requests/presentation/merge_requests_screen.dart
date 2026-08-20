@@ -35,37 +35,40 @@ class _MergeRequestsScreenState extends ConsumerState<MergeRequestsScreen> {
     final mrs = ref.watch(mergeRequestsControllerProvider(query));
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        tooltip: l10n.newMrButton,
-        onPressed: () => context.go(Routes.newMergeRequest(widget.projectId)),
-        child: const Icon(Icons.add),
-      ),
       appBar: AppBar(
         title: Text(l10n.mergeRequestsTitle),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            tooltip: l10n.newMrButton,
+            onPressed: () =>
+                context.go(Routes.newMergeRequest(widget.projectId)),
+          ),
+        ],
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(48),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: LabFoxSpacing.md,
-              vertical: LabFoxSpacing.sm,
-            ),
-            child: SegmentedButton<MergeRequestState>(
-              segments: [
-                ButtonSegment(
-                  value: MergeRequestState.opened,
-                  label: Text(l10n.mrFilterOpen),
-                ),
-                ButtonSegment(
-                  value: MergeRequestState.merged,
-                  label: Text(l10n.mrFilterMerged),
-                ),
-                ButtonSegment(
-                  value: MergeRequestState.closed,
-                  label: Text(l10n.mrFilterClosed),
-                ),
-              ],
-              selected: {_state},
-              onSelectionChanged: (s) => setState(() => _state = s.first),
+          preferredSize: const Size.fromHeight(52),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: LabFoxSpacing.md,
+                right: LabFoxSpacing.md,
+                bottom: LabFoxSpacing.sm,
+              ),
+              child: FilterMenuChip<MergeRequestState>(
+                selected: _state,
+                options: const [
+                  MergeRequestState.opened,
+                  MergeRequestState.merged,
+                  MergeRequestState.closed,
+                ],
+                labelOf: (state) => switch (state) {
+                  MergeRequestState.opened => l10n.mrFilterOpen,
+                  MergeRequestState.merged => l10n.mrFilterMerged,
+                  _ => l10n.mrFilterClosed,
+                },
+                onSelected: (state) => setState(() => _state = state),
+              ),
             ),
           ),
         ),
