@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../../../app/router.dart';
 import '../../../core/auth/auth_controller.dart';
 import '../../../core/storage/local_projects_providers.dart';
+import '../../../core/ui/mr_blocker.dart';
 import '../../../core/ui/work_meta.dart';
 import '../../../l10n/app_localizations.dart';
 import 'controllers/home_work_controllers.dart';
@@ -182,7 +183,11 @@ class HomeWorkFeed extends ConsumerWidget {
     return Builder(
       builder: (context) {
         final status = LabFoxStatusColors.of(context);
+        final l10n = AppLocalizations.of(context);
         final (icon, colors, label) = _mrStatus(mr, status);
+        final blocker = mr.isOpen && !mr.isDraft
+            ? mrBlocker(mr.detailedMergeStatus, l10n, status)
+            : null;
         final projectId = mr.projectId;
         return WorkTile(
           icon: icon,
@@ -190,6 +195,12 @@ class HomeWorkFeed extends ConsumerWidget {
           title: mr.title,
           metadata: [
             StatusPill(label: label, colors: colors, dot: true),
+            if (blocker != null)
+              StatusPill(
+                label: blocker.label,
+                colors: blocker.colors,
+                dot: true,
+              ),
             MetaText('!${mr.iid}'),
             if (mr.updatedAt != null) MetaText(timeAgo(mr.updatedAt!)),
             LabelChips(mr.labels),

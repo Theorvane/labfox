@@ -54,6 +54,27 @@ MergeRequest _mr(int iid, String title, {String state = 'opened'}) =>
     );
 
 void main() {
+  testWidgets('shows a merge-blocker chip from detailed_merge_status', (
+    tester,
+  ) async {
+    await _pump(tester, {
+      MergeRequestState.opened: const AsyncData([
+        MergeRequest(
+          id: 1,
+          iid: 7,
+          title: 'blocked',
+          state: 'opened',
+          sourceBranch: 'a',
+          targetBranch: 'main',
+          detailedMergeStatus: 'conflict',
+        ),
+      ]),
+    });
+    await tester.pumpAndSettle();
+
+    expect(find.text('Conflicts'), findsOneWidget);
+  });
+
   testWidgets('lists open MRs with their iid and state', (tester) async {
     await _pump(tester, {
       MergeRequestState.opened: AsyncData([_mr(142, 'Add OAuth')]),

@@ -7,6 +7,7 @@ import 'package:gitlab_models/gitlab_models.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/router.dart';
+import '../../../core/ui/mr_blocker.dart';
 import '../../../core/ui/work_meta.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/search_repository.dart';
@@ -184,12 +185,18 @@ class _ResultTile extends StatelessWidget {
     if (item is MergeRequest) {
       final projectId = item.projectId;
       final (icon, colors, label) = _mrStatus(item, status);
+      final l10n = AppLocalizations.of(context);
+      final blocker = item.isOpen && !item.isDraft
+          ? mrBlocker(item.detailedMergeStatus, l10n, status)
+          : null;
       return WorkTile(
         icon: icon,
         iconColor: colors.foreground,
         title: item.title,
         metadata: [
           StatusPill(label: label, colors: colors, dot: true),
+          if (blocker != null)
+            StatusPill(label: blocker.label, colors: blocker.colors, dot: true),
           MetaText('!${item.iid}'),
           if (item.updatedAt != null) MetaText(timeAgo(item.updatedAt!)),
           LabelChips(item.labels),

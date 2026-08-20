@@ -142,6 +142,26 @@
   "@shareLink": {
     "description": "Tooltip for the action that shares the item's web link"
   },
+  "mrBlockerConflicts": "Conflicts",
+  "@mrBlockerConflicts": {
+    "description": "Row chip when a merge request has merge conflicts"
+  },
+  "mrBlockerChecksFailed": "Checks failed",
+  "@mrBlockerChecksFailed": {
+    "description": "Row chip when a merge request's required pipeline has not passed"
+  },
+  "mrBlockerCiRunning": "CI running",
+  "@mrBlockerCiRunning": {
+    "description": "Row chip when a merge request's pipeline is still running"
+  },
+  "mrBlockerNeedsApproval": "Needs approval",
+  "@mrBlockerNeedsApproval": {
+    "description": "Row chip when a merge request still needs approval"
+  },
+  "mrBlockerUnresolved": "Unresolved threads",
+  "@mrBlockerUnresolved": {
+    "description": "Row chip when a merge request has unresolved discussion threads"
+  },
   "retry": "Retry",
   "@retry": {
     "description": "Label for a retry button"

@@ -29,6 +29,7 @@ _MergeRequest _$MergeRequestFromJson(Map<String, dynamic> json) =>
           : Label.listFromJson(json['labels']),
       draft: json['draft'] as bool? ?? false,
       mergeStatus: json['merge_status'] as String?,
+      detailedMergeStatus: json['detailed_merge_status'] as String?,
       commentCount: (json['user_notes_count'] as num?)?.toInt() ?? 0,
       webUrl: json['web_url'] as String?,
       createdAt: json['created_at'] == null
@@ -54,6 +55,7 @@ Map<String, dynamic> _$MergeRequestToJson(_MergeRequest instance) =>
       'labels': instance.labels.map((e) => e.toJson()).toList(),
       'draft': instance.draft,
       'merge_status': instance.mergeStatus,
+      'detailed_merge_status': instance.detailedMergeStatus,
       'user_notes_count': instance.commentCount,
       'web_url': instance.webUrl,
       'created_at': instance.createdAt?.toIso8601String(),
