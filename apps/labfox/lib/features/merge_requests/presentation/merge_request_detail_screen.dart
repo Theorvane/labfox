@@ -179,7 +179,7 @@ class _Header extends StatelessWidget {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
     final status = LabFoxStatusColors.of(context);
-    final (colors, label) = _status(mr, status, l10n);
+    final (colors, label, icon) = _status(mr, status, l10n);
 
     final path = repoPathFromWebUrl(mr.webUrl);
 
@@ -198,7 +198,7 @@ class _Header extends StatelessWidget {
           runSpacing: LabFoxSpacing.xs,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            StatusPill(label: label, colors: colors, dot: true),
+            StatusPill(label: label, colors: colors, icon: icon, filled: true),
             if (mr.author != null) ...[
               _Avatar(user: mr.author!),
               MetaText(mr.author!.username),
@@ -209,21 +209,21 @@ class _Header extends StatelessWidget {
     );
   }
 
-  static (StatusColor, String) _status(
+  static (StatusColor, String, IconData) _status(
     MergeRequest mr,
     LabFoxStatusColors s,
     AppLocalizations l10n,
   ) {
     if (mr.isDraft) {
-      return (s.pending, l10n.mrDraft);
+      return (s.pending, l10n.mrDraft, Icons.merge_outlined);
     }
     if (mr.isMerged) {
-      return (s.merged, l10n.mrStateMerged);
+      return (s.merged, l10n.mrStateMerged, Icons.merge);
     }
     if (mr.isClosed) {
-      return (s.closed, l10n.mrStateClosed);
+      return (s.closed, l10n.mrStateClosed, Icons.close);
     }
-    return (s.open, l10n.mrStateOpen);
+    return (s.open, l10n.mrStateOpen, Icons.merge_outlined);
   }
 }
 
@@ -262,33 +262,36 @@ class _BranchChip extends StatelessWidget {
       fontFamily: 'monospace',
       color: theme.colorScheme.onSurfaceVariant,
     );
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: LabFoxSpacing.md,
-        vertical: LabFoxSpacing.sm,
+    Widget chip(String name) => Flexible(
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: LabFoxSpacing.sm + 2,
+          vertical: LabFoxSpacing.xs + 2,
+        ),
+        decoration: BoxDecoration(
+          color: theme.colorScheme.surfaceContainerHighest,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Text(name, style: mono, overflow: TextOverflow.ellipsis),
       ),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Row(
-        children: [
-          Flexible(
-            child: Text(source, style: mono, overflow: TextOverflow.ellipsis),
+    );
+
+    // Source and target each get their own chip, the arrow between them —
+    // the two-chip shape a pull/merge request header conventionally uses.
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        chip(source),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: LabFoxSpacing.sm),
+          child: Icon(
+            Icons.arrow_forward,
+            size: 14,
+            color: theme.colorScheme.primary,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: LabFoxSpacing.sm),
-            child: Icon(
-              Icons.arrow_forward,
-              size: 14,
-              color: theme.colorScheme.primary,
-            ),
-          ),
-          Flexible(
-            child: Text(target, style: mono, overflow: TextOverflow.ellipsis),
-          ),
-        ],
-      ),
+        ),
+        chip(target),
+      ],
     );
   }
 }

@@ -151,7 +151,8 @@ class _IssueHeader extends StatelessWidget {
             StatusPill(
               label: open ? l10n.issueStateOpen : l10n.issueStateClosed,
               colors: colors,
-              dot: true,
+              icon: open ? Icons.adjust : Icons.check_circle_outline,
+              filled: true,
             ),
             if (issue.author != null) ...[
               CircleAvatar(

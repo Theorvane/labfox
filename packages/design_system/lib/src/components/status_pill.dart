@@ -15,6 +15,7 @@ class StatusPill extends StatelessWidget {
     required this.colors,
     this.icon,
     this.dot = false,
+    this.filled = false,
     super.key,
   });
 
@@ -30,11 +31,20 @@ class StatusPill extends StatelessWidget {
   /// A small leading dot in the foreground colour. Ignored when [icon] is set.
   final bool dot;
 
+  /// Fills the pill with the status foreground colour and renders the label in
+  /// a contrasting black or white — the emphatic form a detail header uses,
+  /// where the state is the headline rather than row metadata.
+  final bool filled;
+
   @override
   Widget build(BuildContext context) {
+    final background = filled ? colors.foreground : colors.container;
+    final foreground = filled
+        ? (background.computeLuminance() > 0.5 ? Colors.black : Colors.white)
+        : colors.foreground;
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: colors.container,
+        color: background,
         borderRadius: BorderRadius.circular(999),
       ),
       child: Padding(
@@ -48,14 +58,14 @@ class StatusPill extends StatelessWidget {
             if (icon != null)
               Padding(
                 padding: const EdgeInsets.only(right: 4),
-                child: Icon(icon, size: 12, color: colors.foreground),
+                child: Icon(icon, size: 12, color: foreground),
               )
             else if (dot)
               Padding(
                 padding: const EdgeInsets.only(right: 5),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    color: colors.foreground,
+                    color: foreground,
                     shape: BoxShape.circle,
                   ),
                   child: const SizedBox(width: 7, height: 7),
@@ -64,7 +74,7 @@ class StatusPill extends StatelessWidget {
             Text(
               label,
               style: TextStyle(
-                color: colors.foreground,
+                color: foreground,
                 fontSize: 11.5,
                 fontWeight: FontWeight.w600,
               ),
