@@ -284,6 +284,18 @@ abstract class AppLocalizations {
   /// **'Created'**
   String get scopeCreated;
 
+  /// Tooltip for the home refresh action
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get homeRefresh;
+
+  /// Hint shown in the empty favorites section
+  ///
+  /// In en, this message translates to:
+  /// **'Star projects to pin them here.'**
+  String get homeFavoritesEmpty;
+
   /// Section heading on the home screen
   ///
   /// In en, this message translates to:

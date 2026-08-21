@@ -101,6 +101,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get scopeCreated => 'Created';
 
   @override
+  String get homeRefresh => 'Refresh';
+
+  @override
+  String get homeFavoritesEmpty => 'Star projects to pin them here.';
+
+  @override
   String get homeMyWork => '我的工作';
 
   @override

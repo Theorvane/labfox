@@ -27,6 +27,14 @@ class HomeScreen extends ConsumerWidget {
         title: Text(l10n.homeTitle),
         actions: [
           IconButton(
+            icon: const Icon(LabFoxIcons.refresh),
+            tooltip: l10n.homeRefresh,
+            onPressed: () {
+              ref.invalidate(favoriteProjectsProvider);
+              ref.invalidate(recentProjectsProvider);
+            },
+          ),
+          IconButton(
             icon: const Icon(LabFoxIcons.search),
             tooltip: l10n.searchTitle,
             onPressed: () => context.go(Routes.search),
@@ -42,17 +50,24 @@ class HomeScreen extends ConsumerWidget {
             ),
         ],
       ),
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 480),
-          child: ListView(
-            padding: const EdgeInsets.symmetric(vertical: LabFoxSpacing.md),
-            children: const [
-              _MyWork(),
-              _ProjectSection(favorites: true),
-              _ProjectSection(favorites: false),
-            ],
+      body: RefreshIndicator(
+        onRefresh: () async {
+          ref.invalidate(favoriteProjectsProvider);
+          ref.invalidate(recentProjectsProvider);
+        },
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 480),
+            child: ListView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.symmetric(vertical: LabFoxSpacing.md),
+              children: const [
+                _MyWork(),
+                _ProjectSection(favorites: true),
+                _ProjectSection(favorites: false),
+              ],
+            ),
           ),
         ),
       ),
@@ -121,7 +136,8 @@ class _ProjectSection extends ConsumerWidget {
     final projects = favorites
         ? ref.watch(favoriteProjectsProvider)
         : ref.watch(recentProjectsProvider);
-    if (projects.isEmpty) {
+    // Recent hides when empty; Favorites stays so it can grow from here.
+    if (projects.isEmpty && !favorites) {
       return const SizedBox.shrink();
     }
 
@@ -131,33 +147,57 @@ class _ProjectSection extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: LabFoxSpacing.lg),
-          Padding(
-            padding: const EdgeInsets.only(bottom: LabFoxSpacing.sm),
-            child: Text(
-              favorites ? l10n.homeFavorites : l10n.homeRecents,
-              style: LabFoxTextRoles.of(context).sectionHeader,
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  favorites ? l10n.homeFavorites : l10n.homeRecents,
+                  style: LabFoxTextRoles.of(context).sectionHeader,
+                ),
+              ),
+              if (favorites)
+                IconButton(
+                  icon: const Icon(LabFoxIcons.add),
+                  tooltip: l10n.projectAddFavorite,
+                  visualDensity: VisualDensity.compact,
+                  onPressed: () => context.go(Routes.projects),
+                ),
+            ],
           ),
-          Card(
-            margin: EdgeInsets.zero,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                for (final (index, project) in projects.indexed) ...[
-                  if (index > 0) const Divider(height: 1),
-                  ProjectTile(
-                    name: project.name,
-                    path: project.pathWithNamespace,
-                    description: project.description,
-                    starCount: project.starCount,
-                    avatarUrl: project.avatarUrl,
-                    visibility: project.visibility,
-                    onTap: () => context.go(Routes.projectOverview(project.id)),
-                  ),
+          if (projects.isEmpty)
+            Card(
+              margin: EdgeInsets.zero,
+              child: ListTile(
+                leading: const Icon(LabFoxIcons.starBorder),
+                title: Text(
+                  l10n.homeFavoritesEmpty,
+                  style: LabFoxTextRoles.of(context).meta,
+                ),
+                onTap: () => context.go(Routes.projects),
+              ),
+            )
+          else
+            Card(
+              margin: EdgeInsets.zero,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  for (final (index, project) in projects.indexed) ...[
+                    if (index > 0) const Divider(height: 1),
+                    ProjectTile(
+                      name: project.name,
+                      path: project.pathWithNamespace,
+                      description: project.description,
+                      starCount: project.starCount,
+                      avatarUrl: project.avatarUrl,
+                      visibility: project.visibility,
+                      onTap: () =>
+                          context.go(Routes.projectOverview(project.id)),
+                    ),
+                  ],
                 ],
-              ],
+              ),
             ),
-          ),
         ],
       ),
     );
