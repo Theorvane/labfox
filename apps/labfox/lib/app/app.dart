@@ -2,6 +2,7 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../core/settings/app_settings_providers.dart';
 import '../l10n/app_localizations.dart';
 import 'router.dart';
 
@@ -18,8 +19,8 @@ class LabFoxApp extends ConsumerWidget {
       routerConfig: router,
       theme: LabFoxTheme.light,
       darkTheme: LabFoxTheme.dark,
-      // The device decides. LabFox never forces a brightness on the user.
-      themeMode: ThemeMode.system,
+      // The user's persisted choice; System until they pick one.
+      themeMode: ref.watch(themeModeProvider),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,

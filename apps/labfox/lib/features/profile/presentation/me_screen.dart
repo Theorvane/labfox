@@ -2,6 +2,7 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../app/router.dart';
 import '../../../core/auth/auth_controller.dart';
@@ -68,6 +69,17 @@ class MeScreen extends ConsumerWidget {
             trailing: const Icon(LabFoxIcons.chevron),
             onTap: () => context.go(Routes.settings),
           ),
+          if (account != null)
+            ListTile(
+              leading: const Icon(LabFoxIcons.share),
+              title: Text(l10n.meShareProfile),
+              onTap: () {
+                final url =
+                    account.user.webUrl ??
+                    '${account.instanceUrl}/${account.user.username}';
+                SharePlus.instance.share(ShareParams(uri: Uri.parse(url)));
+              },
+            ),
           const Divider(height: 1),
           ListTile(
             leading: const Icon(LabFoxIcons.signOut),
