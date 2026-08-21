@@ -96,8 +96,13 @@ final routerProvider = Provider<GoRouter>((ref) {
   // user is moved between the sign-in screen and the app.
   final authState = ref.watch(authControllerProvider);
 
-  final analytics = ref.watch(analyticsProvider);
-  analytics.track('app_open');
+  // Screen views only. app_open belongs to the app's lifetime, not the
+  // router's: this provider is rebuilt on every auth change, so emitting a
+  // launch event here would count sign-ins. See AppLifecycle.
+  //
+  // read, not watch: the tracker must survive this provider's rebuilds, since
+  // it is what remembers which screen the user is already on.
+  final routeTracker = ref.read(routeTrackerProvider);
 
   final router = GoRouter(
     initialLocation: Routes.home,
@@ -316,14 +321,8 @@ final routerProvider = Provider<GoRouter>((ref) {
 
   // One screen_view per navigation, with numeric ids collapsed so the route
   // never identifies a project or item.
-  String? lastPath;
   router.routerDelegate.addListener(() {
-    final path = router.routerDelegate.currentConfiguration.uri.path;
-    if (path == lastPath) {
-      return;
-    }
-    lastPath = path;
-    analytics.track('screen_view', {'route': sanitizeRoute(path)});
+    routeTracker.visit(router.routerDelegate.currentConfiguration.uri.path);
   });
   return router;
 });
