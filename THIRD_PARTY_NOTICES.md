@@ -14,7 +14,7 @@ Flutter collects dependency licenses automatically. It must be exposed in the ap
 showLicensePage(
   context: context,
   applicationName: 'LabFox',
-  applicationLegalese: '© 2026 sjungwon03',
+  applicationLegalese: '© 2026 sloki9637',
 );
 ```
 

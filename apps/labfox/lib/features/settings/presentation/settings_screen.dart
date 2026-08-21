@@ -19,7 +19,7 @@ class SettingsScreen extends StatelessWidget {
 
   /// Copyright line shown on the license page. Not localized: it is a notice,
   /// not UI copy.
-  static const _legalese = '© 2026 sjungwon03 · Apache-2.0';
+  static const _legalese = '© 2026 sloki9637 · Apache-2.0';
 
   @override
   Widget build(BuildContext context) {
