@@ -6,6 +6,7 @@ import 'package:gitlab_api/gitlab_api.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 import 'package:secure_storage/secure_storage.dart';
 
+import '../storage/local_projects_store.dart';
 import 'account_store.dart';
 import 'authorization_launcher.dart';
 import 'oauth_config.dart';
@@ -28,6 +29,7 @@ class AuthRepository {
   AuthRepository({
     required AccountStore accountStore,
     required CredentialStore credentialStore,
+    required LocalProjectsStore projectsStore,
     OAuthApi? oauthApi,
     AuthorizationLauncher authorizationLauncher = const WebAuthLauncher(),
     OAuthRedirect oauthRedirect = const OAuthRedirect(
@@ -39,6 +41,7 @@ class AuthRepository {
     Random? random,
   }) : _accountStore = accountStore,
        _credentialStore = credentialStore,
+       _projectsStore = projectsStore,
        _oauthApi = oauthApi ?? OAuthApi(Dio()),
        _launcher = authorizationLauncher,
        _redirect = oauthRedirect,
@@ -48,6 +51,7 @@ class AuthRepository {
 
   final AccountStore _accountStore;
   final CredentialStore _credentialStore;
+  final LocalProjectsStore _projectsStore;
   final OAuthApi _oauthApi;
   final AuthorizationLauncher _launcher;
   final OAuthRedirect _redirect;
@@ -252,6 +256,10 @@ class AuthRepository {
       instanceUrl: account.instanceUrl,
       userId: account.user.id,
     );
+    // Recents and favorites hold real project names, ids, and paths for this
+    // account. They are not secret, but they are the removed account's data, so
+    // they go with it rather than waiting for the next person to use the device.
+    await _projectsStore.clearAccount(account.id);
     await _accountStore.remove(account);
   }
 

@@ -5,6 +5,7 @@ import 'package:gitlab_models/gitlab_models.dart';
 import 'package:labfox/core/auth/account_store.dart';
 import 'package:labfox/core/auth/auth_providers.dart';
 import 'package:labfox/core/auth/auth_repository.dart';
+import 'package:labfox/core/storage/local_projects_store.dart';
 import 'package:labfox/features/auth/presentation/accounts_screen.dart';
 import 'package:labfox/l10n/app_localizations.dart';
 import 'package:secure_storage/secure_storage.dart';
@@ -17,7 +18,8 @@ Account _account(String host, int id, String username) => Account(
 
 Future<AccountStore> _seed(List<Account> accounts) async {
   SharedPreferences.setMockInitialValues({});
-  final store = AccountStore(await SharedPreferences.getInstance());
+  final prefs = await SharedPreferences.getInstance();
+  final store = AccountStore(prefs);
   for (final a in accounts) {
     await store.add(a);
   }
@@ -26,6 +28,7 @@ Future<AccountStore> _seed(List<Account> accounts) async {
 
 Future<void> _pump(WidgetTester tester, AccountStore store) async {
   FlutterSecureStorage.setMockInitialValues({});
+  final prefs = await SharedPreferences.getInstance();
   await tester.pumpWidget(
     ProviderScope(
       overrides: [
@@ -33,6 +36,7 @@ Future<void> _pump(WidgetTester tester, AccountStore store) async {
           AuthRepository(
             accountStore: store,
             credentialStore: CredentialStore(),
+            projectsStore: LocalProjectsStore(prefs),
           ),
         ),
       ],

@@ -47,6 +47,13 @@ class LocalProjectsStore {
     await _write(_favoritesKey(accountId), without);
   }
 
+  /// Drops everything stored for one account. Called when the account is
+  /// removed, so its projects do not outlive it on the device.
+  Future<void> clearAccount(String accountId) async {
+    await _prefs.remove(_recentsKey(accountId));
+    await _prefs.remove(_favoritesKey(accountId));
+  }
+
   List<Project> _read(String key) {
     final raw = _prefs.getStringList(key) ?? const [];
     return raw

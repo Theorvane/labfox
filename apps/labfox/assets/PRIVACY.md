@@ -37,8 +37,11 @@ OpenPanel):
 
 ## Data retention and deletion
 
-- Everything on your device (tokens, preferences, cached content) is removed
-  when you sign out of an account or uninstall the app.
+- Signing an account out removes that account's data from your device: its
+  token, its stored account details, and its recent and favorite projects.
+- App-wide preferences that belong to the device rather than to an account —
+  your theme choice, for example — are kept, so removing one account does not
+  reset the app for the others. Uninstalling removes everything.
 - Anonymous analytics events cannot be linked back to you and are retained
   only in aggregate form for product decisions.
 
