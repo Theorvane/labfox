@@ -122,6 +122,14 @@
   "@scopeAssigned": {"description": "Account-level list scope: items assigned to the user"},
   "scopeCreated": "Created",
   "@scopeCreated": {"description": "Account-level list scope: items created by the user"},
+  "homeRefresh": "Refresh",
+  "@homeRefresh": {
+    "description": "Tooltip for the home refresh action"
+  },
+  "homeFavoritesEmpty": "Star projects to pin them here.",
+  "@homeFavoritesEmpty": {
+    "description": "Hint shown in the empty favorites section"
+  },
   "homeMyWork": "My work",
   "@homeMyWork": {
     "description": "Section heading on the home screen"
@@ -714,6 +722,22 @@
   "@inboxFilterDone": {
     "description": "Inbox state filter: items already marked done"
   },
+  "inboxFilterAllTypes": "All types",
+  "@inboxFilterAllTypes": {
+    "description": "Inbox type filter: no type restriction"
+  },
+  "inboxTypeIssues": "Issues",
+  "@inboxTypeIssues": {
+    "description": "Inbox type filter: issue todos only"
+  },
+  "inboxTypeMergeRequests": "Merge requests",
+  "@inboxTypeMergeRequests": {
+    "description": "Inbox type filter: merge request todos only"
+  },
+  "inboxFilterAllReasons": "All reasons",
+  "@inboxFilterAllReasons": {
+    "description": "Inbox reason filter: no reason restriction"
+  },
   "inboxError": "Your to-do items could not be loaded.",
   "@inboxError": {
     "description": "Shown when the to-do list fails to load"
@@ -825,6 +849,34 @@
   "settingsAccounts": "Accounts",
   "@settingsAccounts": {
     "description": "Settings entry that opens the account switcher"
+  },
+  "settingsAppearance": "Appearance",
+  "@settingsAppearance": {
+    "description": "Settings section for the theme choice"
+  },
+  "settingsThemeSystem": "System",
+  "@settingsThemeSystem": {
+    "description": "Theme option that follows the device"
+  },
+  "settingsThemeLight": "Light",
+  "@settingsThemeLight": {
+    "description": "Theme option forcing the light theme"
+  },
+  "settingsThemeDark": "Dark",
+  "@settingsThemeDark": {
+    "description": "Theme option forcing the dark theme"
+  },
+  "settingsAbout": "About",
+  "@settingsAbout": {
+    "description": "Settings section for app information"
+  },
+  "settingsVersion": "Version",
+  "@settingsVersion": {
+    "description": "Row showing the installed app version"
+  },
+  "meShareProfile": "Share profile",
+  "@meShareProfile": {
+    "description": "Me action that shares the user's GitLab profile link"
   },
   "settingsLicenses": "Open source licenses",
   "@settingsLicenses": {

@@ -103,6 +103,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get scopeCreated => 'Created';
 
   @override
+  String get homeRefresh => 'Refresh';
+
+  @override
+  String get homeFavoritesEmpty => 'Star projects to pin them here.';
+
+  @override
   String get homeMyWork => 'マイワーク';
 
   @override
@@ -579,6 +585,18 @@ class AppLocalizationsJa extends AppLocalizations {
   String get inboxFilterDone => 'Done';
 
   @override
+  String get inboxFilterAllTypes => 'All types';
+
+  @override
+  String get inboxTypeIssues => 'Issues';
+
+  @override
+  String get inboxTypeMergeRequests => 'Merge requests';
+
+  @override
+  String get inboxFilterAllReasons => 'All reasons';
+
+  @override
   String get inboxError => 'To Do を読み込めませんでした。';
 
   @override
@@ -661,6 +679,27 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get settingsAccounts => 'アカウント';
+
+  @override
+  String get settingsAppearance => 'Appearance';
+
+  @override
+  String get settingsThemeSystem => 'System';
+
+  @override
+  String get settingsThemeLight => 'Light';
+
+  @override
+  String get settingsThemeDark => 'Dark';
+
+  @override
+  String get settingsAbout => 'About';
+
+  @override
+  String get settingsVersion => 'Version';
+
+  @override
+  String get meShareProfile => 'Share profile';
 
   @override
   String get settingsLicenses => 'オープンソースライセンス';

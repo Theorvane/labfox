@@ -35,5 +35,7 @@ void main() {
     expect(find.text('Settings'), findsOneWidget);
     expect(find.text('Switch account'), findsOneWidget);
     expect(find.text('Sign out'), findsOneWidget);
+    // The profile can be shared, like GitHub Mobile's Share profile.
+    expect(find.text('Share profile'), findsOneWidget);
   });
 }

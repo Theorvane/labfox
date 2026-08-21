@@ -5,6 +5,7 @@ import 'package:gitlab_models/gitlab_models.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/router.dart';
+import '../../../core/storage/local_projects_providers.dart';
 import '../../../l10n/app_localizations.dart';
 import 'controllers/projects_controller.dart';
 
@@ -41,7 +42,8 @@ class ProjectsScreen extends ConsumerWidget {
             child: ListView.separated(
               itemCount: items.length,
               separatorBuilder: (context, index) => const Divider(height: 1),
-              itemBuilder: (context, index) => _tile(context, items[index]),
+              itemBuilder: (context, index) =>
+                  _tile(context, ref, items[index]),
             ),
           );
         },
@@ -49,7 +51,13 @@ class ProjectsScreen extends ConsumerWidget {
     );
   }
 
-  Widget _tile(BuildContext context, Project project) {
+  Widget _tile(BuildContext context, WidgetRef ref, Project project) {
+    final l10n = AppLocalizations.of(context);
+    final isFavorite = ref.watch(
+      favoriteProjectsProvider.select(
+        (favorites) => favorites.any((p) => p.id == project.id),
+      ),
+    );
     return ProjectTile(
       name: project.name,
       path: project.pathWithNamespace,
@@ -57,6 +65,14 @@ class ProjectsScreen extends ConsumerWidget {
       starCount: project.starCount,
       avatarUrl: project.avatarUrl,
       visibility: project.visibility,
+      trailing: IconButton(
+        icon: Icon(isFavorite ? LabFoxIcons.star : LabFoxIcons.starBorder),
+        tooltip: isFavorite
+            ? l10n.projectRemoveFavorite
+            : l10n.projectAddFavorite,
+        onPressed: () =>
+            ref.read(favoriteProjectsProvider.notifier).toggle(project),
+      ),
       onTap: () => context.go(Routes.projectOverview(project.id)),
     );
   }

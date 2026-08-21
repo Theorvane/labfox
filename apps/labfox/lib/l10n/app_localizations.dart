@@ -284,6 +284,18 @@ abstract class AppLocalizations {
   /// **'Created'**
   String get scopeCreated;
 
+  /// Tooltip for the home refresh action
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get homeRefresh;
+
+  /// Hint shown in the empty favorites section
+  ///
+  /// In en, this message translates to:
+  /// **'Star projects to pin them here.'**
+  String get homeFavoritesEmpty;
+
   /// Section heading on the home screen
   ///
   /// In en, this message translates to:
@@ -1220,6 +1232,30 @@ abstract class AppLocalizations {
   /// **'Done'**
   String get inboxFilterDone;
 
+  /// Inbox type filter: no type restriction
+  ///
+  /// In en, this message translates to:
+  /// **'All types'**
+  String get inboxFilterAllTypes;
+
+  /// Inbox type filter: issue todos only
+  ///
+  /// In en, this message translates to:
+  /// **'Issues'**
+  String get inboxTypeIssues;
+
+  /// Inbox type filter: merge request todos only
+  ///
+  /// In en, this message translates to:
+  /// **'Merge requests'**
+  String get inboxTypeMergeRequests;
+
+  /// Inbox reason filter: no reason restriction
+  ///
+  /// In en, this message translates to:
+  /// **'All reasons'**
+  String get inboxFilterAllReasons;
+
   /// Shown when the to-do list fails to load
   ///
   /// In en, this message translates to:
@@ -1387,6 +1423,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Accounts'**
   String get settingsAccounts;
+
+  /// Settings section for the theme choice
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get settingsAppearance;
+
+  /// Theme option that follows the device
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get settingsThemeSystem;
+
+  /// Theme option forcing the light theme
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get settingsThemeLight;
+
+  /// Theme option forcing the dark theme
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get settingsThemeDark;
+
+  /// Settings section for app information
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get settingsAbout;
+
+  /// Row showing the installed app version
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get settingsVersion;
+
+  /// Me action that shares the user's GitLab profile link
+  ///
+  /// In en, this message translates to:
+  /// **'Share profile'**
+  String get meShareProfile;
 
   /// Settings entry that opens the open-source license page
   ///

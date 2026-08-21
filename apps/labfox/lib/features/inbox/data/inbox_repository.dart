@@ -7,10 +7,15 @@ class InboxRepository {
 
   final GitLabClient _client;
 
-  /// Every to-do item in [state], newest first — all pages, so a large inbox
-  /// is never silently truncated.
-  Future<List<Todo>> list({required TodoState state}) {
-    return _client.todos.listAll(state: state);
+  /// Every to-do item matching the filters, newest first — all pages, so a
+  /// large inbox is never silently truncated. Null [type]/[action] mean
+  /// unfiltered.
+  Future<List<Todo>> list({
+    required TodoState state,
+    TodoType? type,
+    TodoAction? action,
+  }) {
+    return _client.todos.listAll(state: state, type: type, action: action);
   }
 
   Future<void> markDone(int id) => _client.todos.markDone(id);

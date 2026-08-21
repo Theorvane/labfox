@@ -101,6 +101,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get scopeCreated => 'Created';
 
   @override
+  String get homeRefresh => 'Refresh';
+
+  @override
+  String get homeFavoritesEmpty => 'Star projects to pin them here.';
+
+  @override
   String get homeMyWork => '我的工作';
 
   @override
@@ -576,6 +582,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get inboxFilterDone => 'Done';
 
   @override
+  String get inboxFilterAllTypes => 'All types';
+
+  @override
+  String get inboxTypeIssues => 'Issues';
+
+  @override
+  String get inboxTypeMergeRequests => 'Merge requests';
+
+  @override
+  String get inboxFilterAllReasons => 'All reasons';
+
+  @override
   String get inboxError => '无法加载待办事项。';
 
   @override
@@ -658,6 +676,27 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsAccounts => '账户';
+
+  @override
+  String get settingsAppearance => 'Appearance';
+
+  @override
+  String get settingsThemeSystem => 'System';
+
+  @override
+  String get settingsThemeLight => 'Light';
+
+  @override
+  String get settingsThemeDark => 'Dark';
+
+  @override
+  String get settingsAbout => 'About';
+
+  @override
+  String get settingsVersion => 'Version';
+
+  @override
+  String get meShareProfile => 'Share profile';
 
   @override
   String get settingsLicenses => '开源许可';

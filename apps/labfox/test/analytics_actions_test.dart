@@ -34,9 +34,11 @@ class _FakeInbox extends InboxRepository {
   _FakeInbox() : super(GitLabClient(baseUrl: 'https://gitlab.com', token: 'x'));
 
   @override
-  Future<List<Todo>> list({required TodoState state}) async => const [
-    Todo(id: 9, state: 'pending', actionName: 'assigned'),
-  ];
+  Future<List<Todo>> list({
+    required TodoState state,
+    TodoType? type,
+    TodoAction? action,
+  }) async => const [Todo(id: 9, state: 'pending', actionName: 'assigned')];
 
   @override
   Future<void> markDone(int id) async {}
@@ -70,9 +72,9 @@ void main() {
     );
     addTearDown(container.dispose);
 
-    await container.read(inboxControllerProvider(TodoState.pending).future);
+    await container.read(inboxControllerProvider(const InboxQuery()).future);
     await container
-        .read(inboxControllerProvider(TodoState.pending).notifier)
+        .read(inboxControllerProvider(const InboxQuery()).notifier)
         .markDone(9);
 
     expect(analytics.events, contains('todo_cleared'));

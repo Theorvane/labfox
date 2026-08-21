@@ -23,13 +23,18 @@ class InboxScreen extends ConsumerStatefulWidget {
 
 class _InboxScreenState extends ConsumerState<InboxScreen> {
   TodoState _state = TodoState.pending;
+  TodoType? _type;
+  TodoAction? _action;
 
   bool get _pending => _state == TodoState.pending;
+
+  InboxQuery get _query =>
+      InboxQuery(state: _state, type: _type, action: _action);
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final todos = ref.watch(inboxControllerProvider(_state));
+    final todos = ref.watch(inboxControllerProvider(_query));
 
     return Scaffold(
       appBar: AppBar(
@@ -46,31 +51,78 @@ class _InboxScreenState extends ConsumerState<InboxScreen> {
           preferredSize: const Size.fromHeight(52),
           child: Align(
             alignment: Alignment.centerLeft,
-            child: Padding(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.only(
                 left: LabFoxSpacing.md,
                 right: LabFoxSpacing.md,
                 bottom: LabFoxSpacing.sm,
               ),
-              child: FilterMenuChip<TodoState>(
-                selected: _state,
-                options: const [TodoState.pending, TodoState.done],
-                labelOf: (state) => state == TodoState.pending
-                    ? l10n.inboxFilterPending
-                    : l10n.inboxFilterDone,
-                onSelected: (state) => setState(() => _state = state),
+              child: Row(
+                children: [
+                  FilterMenuChip<TodoState>(
+                    selected: _state,
+                    options: const [TodoState.pending, TodoState.done],
+                    labelOf: (state) => state == TodoState.pending
+                        ? l10n.inboxFilterPending
+                        : l10n.inboxFilterDone,
+                    onSelected: (state) => setState(() => _state = state),
+                  ),
+                  const SizedBox(width: LabFoxSpacing.sm),
+                  FilterMenuChip<TodoType?>(
+                    selected: _type,
+                    options: const [
+                      null,
+                      TodoType.issue,
+                      TodoType.mergeRequest,
+                    ],
+                    labelOf: (type) => switch (type) {
+                      null => l10n.inboxFilterAllTypes,
+                      TodoType.issue => l10n.inboxTypeIssues,
+                      TodoType.mergeRequest => l10n.inboxTypeMergeRequests,
+                    },
+                    onSelected: (type) => setState(() => _type = type),
+                  ),
+                  const SizedBox(width: LabFoxSpacing.sm),
+                  FilterMenuChip<TodoAction?>(
+                    selected: _action,
+                    options: const [
+                      null,
+                      TodoAction.assigned,
+                      TodoAction.mentioned,
+                      TodoAction.approvalRequired,
+                      TodoAction.buildFailed,
+                      TodoAction.marked,
+                      TodoAction.unmergeable,
+                      TodoAction.directlyAddressed,
+                    ],
+                    labelOf: (action) => switch (action) {
+                      null => l10n.inboxFilterAllReasons,
+                      TodoAction.assigned => l10n.inboxActionAssigned,
+                      TodoAction.mentioned => l10n.inboxActionMentioned,
+                      TodoAction.approvalRequired =>
+                        l10n.inboxActionApprovalRequired,
+                      TodoAction.buildFailed => l10n.inboxActionBuildFailed,
+                      TodoAction.marked => l10n.inboxActionMarked,
+                      TodoAction.unmergeable => l10n.inboxActionUnmergeable,
+                      TodoAction.directlyAddressed =>
+                        l10n.inboxActionDirectlyAddressed,
+                    },
+                    onSelected: (action) => setState(() => _action = action),
+                  ),
+                ],
               ),
             ),
           ),
         ),
       ),
       body: RefreshIndicator(
-        onRefresh: () => ref.refresh(inboxControllerProvider(_state).future),
+        onRefresh: () => ref.refresh(inboxControllerProvider(_query).future),
         child: todos.when(
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (error, _) => _ErrorState(
             message: l10n.inboxError,
-            onRetry: () => ref.invalidate(inboxControllerProvider(_state)),
+            onRetry: () => ref.invalidate(inboxControllerProvider(_query)),
           ),
           data: (items) {
             if (items.isEmpty) {
@@ -125,9 +177,7 @@ class _InboxScreenState extends ConsumerState<InboxScreen> {
   Future<void> _markDone(BuildContext context, int id) async {
     final l10n = AppLocalizations.of(context);
     try {
-      await ref
-          .read(inboxControllerProvider(TodoState.pending).notifier)
-          .markDone(id);
+      await ref.read(inboxControllerProvider(_query).notifier).markDone(id);
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(
@@ -139,9 +189,7 @@ class _InboxScreenState extends ConsumerState<InboxScreen> {
   Future<void> _markAllDone(BuildContext context) async {
     final l10n = AppLocalizations.of(context);
     try {
-      await ref
-          .read(inboxControllerProvider(TodoState.pending).notifier)
-          .markAllDone();
+      await ref.read(inboxControllerProvider(_query).notifier).markAllDone();
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(
