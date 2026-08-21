@@ -295,7 +295,16 @@ CI/CD (pipelines, jobs, job logs, retry, cancel, manual jobs),
 Productivity (to-do inbox, search, recents, favorites).
 
 **Out of scope** — Wiki, Packages, Container Registry, Infrastructure, Kubernetes,
-Security Dashboard, Analytics, Admin Area, Runner Administration, AI features.
+Security Dashboard, GitLab Analytics (Value Stream, CI/CD Analytics, Insights),
+Admin Area, Runner Administration, AI features.
+
+Every entry above is a **GitLab feature area** LabFox does not mirror. None of them
+is a statement about LabFox's own instrumentation. Anonymous product telemetry —
+how LabFox itself is used — **is in scope for 1.0**: it is what tells us which
+parts of the core flow (§1) actually get used. What it may collect is bounded by
+§7 and by the privacy policy shipped in the app (`PRIVACY.md`): no tokens, no
+usernames, no titles, no full URLs, and routes sanitized so no project or item can
+be identified.
 
 Development phases (M0–M4) and the first vertical slice: `.agents/docs/roadmap.md`
 
