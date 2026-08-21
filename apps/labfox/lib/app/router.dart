@@ -31,6 +31,7 @@ import '../features/projects/presentation/projects_screen.dart';
 import '../features/repository/presentation/file_viewer_screen.dart';
 import '../features/repository/presentation/repository_browser_screen.dart';
 import '../features/search/presentation/search_screen.dart';
+import '../features/settings/presentation/privacy_screen.dart';
 import '../features/settings/presentation/settings_screen.dart';
 import '../features/shell/presentation/app_shell.dart';
 
@@ -49,6 +50,7 @@ abstract final class Routes {
   static const String search = '/search';
   static const String me = '/me';
   static const String settings = '/settings';
+  static const String privacy = '/settings/privacy';
   static const String projects = '/projects';
   // Account-level lists, mirroring GitLab's /dashboard URLs.
   static const String myIssues = '/dashboard/issues';
@@ -162,6 +164,12 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.settings,
         builder: (context, state) => const SettingsScreen(),
+        routes: [
+          GoRoute(
+            path: 'privacy',
+            builder: (context, state) => const PrivacyScreen(),
+          ),
+        ],
       ),
       GoRoute(
         path: Routes.myIssues,

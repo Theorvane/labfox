@@ -697,6 +697,15 @@ class AppLocalizationsHi extends AppLocalizations {
   String get settingsAccounts => 'खाते';
 
   @override
+  String get settingsPrivacyPolicy => 'Privacy policy';
+
+  @override
+  String get settingsTerms => 'Terms of service';
+
+  @override
+  String get settingsWebsite => 'Website';
+
+  @override
   String get settingsAppearance => 'Appearance';
 
   @override

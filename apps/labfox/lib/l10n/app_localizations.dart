@@ -1424,6 +1424,24 @@ abstract class AppLocalizations {
   /// **'Accounts'**
   String get settingsAccounts;
 
+  /// Settings entry that opens the bundled privacy policy
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get settingsPrivacyPolicy;
+
+  /// Settings entry that opens the terms page on the company site
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of service'**
+  String get settingsTerms;
+
+  /// Settings entry that opens the company website
+  ///
+  /// In en, this message translates to:
+  /// **'Website'**
+  String get settingsWebsite;
+
   /// Settings section for the theme choice
   ///
   /// In en, this message translates to:

@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../app/router.dart';
 import '../../../core/storage/local_projects_providers.dart';
+import '../../../core/ui/link_opener.dart';
 import '../../../core/ui/share_link_button.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/project_overview.dart';
@@ -260,13 +261,13 @@ class _Header extends StatelessWidget {
   }
 }
 
-class _Readme extends StatelessWidget {
+class _Readme extends ConsumerWidget {
   const _Readme({required this.overview});
 
   final ProjectOverview overview;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final readme = overview.readme;
     if (readme == null || readme.trim().isEmpty) {
@@ -275,7 +276,16 @@ class _Readme extends StatelessWidget {
         style: Theme.of(context).textTheme.bodySmall,
       );
     }
-    return MarkdownViewer(data: readme);
+    final open = ref.watch(linkOpenerProvider);
+    return MarkdownViewer(
+      data: readme,
+      onTapLink: (href) {
+        final uri = Uri.tryParse(href);
+        if (uri != null) {
+          open(uri);
+        }
+      },
+    );
   }
 }
 

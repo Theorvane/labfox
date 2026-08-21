@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../app/router.dart';
 import '../../../core/settings/app_settings_providers.dart';
+import '../../../core/ui/link_opener.dart';
 import '../../../l10n/app_localizations.dart';
 
 /// App settings.
@@ -26,6 +27,7 @@ class SettingsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final open = ref.watch(linkOpenerProvider);
     final themeMode = ref.watch(themeModeProvider);
     final version = ref.watch(appVersionProvider);
 
@@ -73,6 +75,27 @@ class SettingsScreen extends ConsumerWidget {
               style: LabFoxTextRoles.of(context).meta,
             ),
           ),
+          ListTile(
+            leading: const Icon(LabFoxIcons.private),
+            title: Text(l10n.settingsPrivacyPolicy),
+            trailing: const Icon(LabFoxIcons.chevron),
+            onTap: () => context.go(Routes.privacy),
+          ),
+          const Divider(height: 1),
+          ListTile(
+            leading: const Icon(LabFoxIcons.document),
+            title: Text(l10n.settingsTerms),
+            trailing: const Icon(LabFoxIcons.openInBrowser),
+            onTap: () => open(Uri.parse('https://www.sloki9637.com/terms')),
+          ),
+          const Divider(height: 1),
+          ListTile(
+            leading: const Icon(LabFoxIcons.public),
+            title: Text(l10n.settingsWebsite),
+            trailing: const Icon(LabFoxIcons.openInBrowser),
+            onTap: () => open(Uri.parse('https://www.sloki9637.com')),
+          ),
+          const Divider(height: 1),
           ListTile(
             leading: const Icon(LabFoxIcons.document),
             title: Text(l10n.settingsLicenses),

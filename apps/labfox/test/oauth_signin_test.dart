@@ -5,6 +5,7 @@ import 'package:labfox/core/auth/account_store.dart';
 import 'package:labfox/core/auth/auth_repository.dart';
 import 'package:labfox/core/auth/authorization_launcher.dart';
 import 'package:labfox/core/auth/oauth_redirect.dart';
+import 'package:labfox/core/storage/local_projects_store.dart';
 import 'package:secure_storage/secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -44,11 +45,14 @@ void main() {
 
   late AccountStore accountStore;
   late CredentialStore credentialStore;
+  late LocalProjectsStore projectsStore;
 
   setUp(() async {
     SharedPreferences.setMockInitialValues({});
     FlutterSecureStorage.setMockInitialValues({});
-    accountStore = AccountStore(await SharedPreferences.getInstance());
+    final prefs = await SharedPreferences.getInstance();
+    accountStore = AccountStore(prefs);
+    projectsStore = LocalProjectsStore(prefs);
     credentialStore = CredentialStore();
   });
 
@@ -67,6 +71,7 @@ void main() {
     return AuthRepository(
       accountStore: accountStore,
       credentialStore: credentialStore,
+      projectsStore: projectsStore,
       authorizationLauncher: launcher,
       oauthRedirect: redirect,
       nowEpochSeconds: now,

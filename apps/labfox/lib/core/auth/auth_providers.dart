@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:secure_storage/secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../storage/local_projects_providers.dart';
 import 'account_store.dart';
 import 'auth_repository.dart';
 import 'oauth_redirect.dart';
@@ -32,6 +33,7 @@ final authRepositoryProvider = Provider<AuthRepository>((ref) {
   return AuthRepository(
     accountStore: ref.watch(accountStoreProvider),
     credentialStore: ref.watch(credentialStoreProvider),
+    projectsStore: ref.watch(localProjectsStoreProvider),
     oauthRedirect: redirect,
   );
 });

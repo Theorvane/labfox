@@ -29,6 +29,7 @@ dependencies:
     path: ../../packages/secure_storage
   share_plus: ^12.0.2
   shared_preferences: ^2.3.3
+  url_launcher: ^6.3.0
 
 dev_dependencies:
   build_runner: ^2.4.13
@@ -44,3 +45,6 @@ flutter:
     # in-app license page shows it alongside the auto-collected dependency
     # licenses (the app is not a pub package, so it is not collected).
     - assets/LICENSE
+    # The privacy policy, rendered in Settings > Privacy policy. Synced copy
+    # of /PRIVACY.md at the repository root.
+    - assets/PRIVACY.md

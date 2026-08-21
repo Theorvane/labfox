@@ -678,6 +678,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsAccounts => '账户';
 
   @override
+  String get settingsPrivacyPolicy => 'Privacy policy';
+
+  @override
+  String get settingsTerms => 'Terms of service';
+
+  @override
+  String get settingsWebsite => 'Website';
+
+  @override
   String get settingsAppearance => 'Appearance';
 
   @override
