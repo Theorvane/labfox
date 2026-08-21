@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_api/gitlab_api.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
+import '../../../../core/analytics/analytics.dart';
 import '../../../../core/auth/gitlab_client_provider.dart';
 import '../../data/issues_repository.dart';
 
@@ -126,6 +129,7 @@ class NewIssueController extends AutoDisposeAsyncNotifier<void> {
         description: description,
       );
       state = const AsyncData(null);
+      unawaited(ref.read(analyticsProvider).track('issue_created'));
       ref.invalidate(issuesControllerProvider);
       return issue;
     } catch (error, stack) {

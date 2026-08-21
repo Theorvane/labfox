@@ -46,7 +46,10 @@ OAuth, Self-hosted, Multi Account, Inbox (To-do), Search, Local Cache, Offline, 
 **Excluded (not implemented in 1.0)**
 
 Wiki · Packages · Container Registry · Infrastructure · Kubernetes ·
-Security Dashboard · Analytics · Admin Area · Runner Administration
+Security Dashboard · GitLab Analytics · Admin Area · Runner Administration
+
+These are GitLab feature areas, not a rule about LabFox's own instrumentation —
+anonymous product telemetry is in scope for 1.0. See `AGENTS.md` §9.
 
 ## Later Expansion
 

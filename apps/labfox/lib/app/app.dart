@@ -4,14 +4,29 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/settings/app_settings_providers.dart';
 import '../l10n/app_localizations.dart';
+import 'app_lifecycle.dart';
 import 'router.dart';
 
 /// Root widget.
-class LabFoxApp extends ConsumerWidget {
+///
+/// Stateful purely to own the launch: [initState] runs once per app start,
+/// while [build] re-runs on every auth and theme change.
+class LabFoxApp extends ConsumerStatefulWidget {
   const LabFoxApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<LabFoxApp> createState() => _LabFoxAppState();
+}
+
+class _LabFoxAppState extends ConsumerState<LabFoxApp> {
+  @override
+  void initState() {
+    super.initState();
+    ref.read(appLifecycleProvider).appOpened();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final router = ref.watch(routerProvider);
 
     return MaterialApp.router(

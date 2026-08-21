@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
+import '../../../../core/analytics/analytics.dart';
 import '../../../../core/auth/gitlab_client_provider.dart';
 import '../../data/mr_actions_repository.dart';
 import 'merge_requests_controllers.dart';
@@ -43,10 +46,10 @@ class MrActionsController extends FamilyAsyncNotifier<void, MergeRequestRef> {
   Future<void> unapprove() =>
       _run((repo) => repo.unapprove(projectId: arg.projectId, iid: arg.iid));
 
-  Future<void> merge({bool squash = false}) => _run(
-    (repo) =>
-        repo.merge(projectId: arg.projectId, iid: arg.iid, squash: squash),
-  );
+  Future<void> merge({bool squash = false}) => _run((repo) async {
+    await repo.merge(projectId: arg.projectId, iid: arg.iid, squash: squash);
+    unawaited(ref.read(analyticsProvider).track('mr_merged'));
+  });
 
   Future<void> setOpen(bool open) => _run(
     (repo) => repo.setOpen(projectId: arg.projectId, iid: arg.iid, open: open),

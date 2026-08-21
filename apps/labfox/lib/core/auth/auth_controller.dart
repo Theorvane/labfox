@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
+import '../analytics/analytics.dart';
 import 'auth_providers.dart';
 import 'auth_state.dart';
 
@@ -27,6 +30,7 @@ class AuthController extends AsyncNotifier<AuthState> {
       final account = await ref
           .read(authRepositoryProvider)
           .signInWithToken(instanceUrl: instanceUrl, token: token);
+      unawaited(ref.read(analyticsProvider).track('sign_in'));
       return SignedIn(account);
     });
   }
@@ -44,6 +48,7 @@ class AuthController extends AsyncNotifier<AuthState> {
       final account = await ref
           .read(authRepositoryProvider)
           .signInWithOAuth(instanceUrl: instanceUrl, clientId: clientId);
+      unawaited(ref.read(analyticsProvider).track('sign_in'));
       return SignedIn(account);
     });
   }
