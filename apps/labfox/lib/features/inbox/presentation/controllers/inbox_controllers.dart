@@ -10,20 +10,44 @@ final inboxRepositoryProvider = FutureProvider<InboxRepository?>((ref) async {
   return client == null ? null : InboxRepository(client);
 });
 
-/// The current user's to-do items in one state — pending or done.
+/// Identifies an inbox list: which state, and the optional type and reason
+/// filters.
+class InboxQuery {
+  const InboxQuery({this.state = TodoState.pending, this.type, this.action});
+
+  final TodoState state;
+  final TodoType? type;
+  final TodoAction? action;
+
+  /// The same filters pointed at the done list — what a cleared item joins.
+  InboxQuery get asDone =>
+      InboxQuery(state: TodoState.done, type: type, action: action);
+
+  @override
+  bool operator ==(Object other) =>
+      other is InboxQuery &&
+      other.state == state &&
+      other.type == type &&
+      other.action == action;
+
+  @override
+  int get hashCode => Object.hash(state, type, action);
+}
+
+/// The current user's to-do items for one query.
 ///
 /// Marking an item done removes it optimistically so the list stays responsive,
 /// and rolls the row back if the request fails — the server is the authority on
-/// what is actually cleared. A cleared item belongs to the done list next, so
-/// clearing invalidates it.
-class InboxController extends FamilyAsyncNotifier<List<Todo>, TodoState> {
+/// what is actually cleared. A cleared item belongs to the matching done list
+/// next, so clearing invalidates it.
+class InboxController extends FamilyAsyncNotifier<List<Todo>, InboxQuery> {
   @override
-  Future<List<Todo>> build(TodoState arg) async {
+  Future<List<Todo>> build(InboxQuery arg) async {
     final repo = await ref.watch(inboxRepositoryProvider.future);
     if (repo == null) {
       throw StateError('No authenticated account');
     }
-    return repo.list(state: arg);
+    return repo.list(state: arg.state, type: arg.type, action: arg.action);
   }
 
   Future<void> markDone(int id) async {
@@ -37,7 +61,7 @@ class InboxController extends FamilyAsyncNotifier<List<Todo>, TodoState> {
     );
     try {
       await repo.markDone(id);
-      ref.invalidate(inboxControllerProvider(TodoState.done));
+      ref.invalidate(inboxControllerProvider(arg.asDone));
     } catch (_) {
       state = AsyncData(previous);
       rethrow;
@@ -53,7 +77,7 @@ class InboxController extends FamilyAsyncNotifier<List<Todo>, TodoState> {
     state = const AsyncData([]);
     try {
       await repo.markAllDone();
-      ref.invalidate(inboxControllerProvider(TodoState.done));
+      ref.invalidate(inboxControllerProvider(arg.asDone));
     } catch (_) {
       state = AsyncData(previous);
       rethrow;
@@ -62,6 +86,6 @@ class InboxController extends FamilyAsyncNotifier<List<Todo>, TodoState> {
 }
 
 final inboxControllerProvider =
-    AsyncNotifierProvider.family<InboxController, List<Todo>, TodoState>(
+    AsyncNotifierProvider.family<InboxController, List<Todo>, InboxQuery>(
       InboxController.new,
     );

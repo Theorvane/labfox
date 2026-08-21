@@ -102,6 +102,8 @@ class _MarkdownViewerState extends State<MarkdownViewer> {
         return _paragraph(node.textContent, theme.textTheme.titleSmall);
       case 'pre':
         return _codeBlock(node.textContent, theme);
+      case 'table':
+        return _mdTable(node, theme);
       case 'ul':
       case 'ol':
         return _list(node, theme, ordered: node.tag == 'ol');
@@ -166,6 +168,91 @@ class _MarkdownViewerState extends State<MarkdownViewer> {
       ),
     ),
   );
+
+  /// A GFM table: `thead`/`tbody` rows of `th`/`td` cells from the AST.
+  Widget _mdTable(md.Element node, ThemeData theme) {
+    final rows = <TableRow>[];
+    for (final section
+        in node.children?.whereType<md.Element>() ?? const <md.Element>[]) {
+      final isHeader = section.tag == 'thead';
+      for (final tr
+          in section.children?.whereType<md.Element>() ??
+              const <md.Element>[]) {
+        rows.add(
+          _tableRow([
+            for (final cell
+                in tr.children?.whereType<md.Element>() ?? const <md.Element>[])
+              RichText(
+                text: _inline(
+                  cell.children ?? const [],
+                  theme.textTheme.bodyMedium,
+                  override: isHeader
+                      ? theme.textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        )
+                      : null,
+                ),
+              ),
+          ]),
+        );
+      }
+    }
+    return _table(rows, theme);
+  }
+
+  TableRow _tableRow(List<Widget> cells) => TableRow(
+    children: [
+      for (final cell in cells)
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: LabFoxSpacing.sm + 2,
+            vertical: LabFoxSpacing.xs + 2,
+          ),
+          child: cell,
+        ),
+    ],
+  );
+
+  /// The shared table shell: intrinsic column widths inside a horizontal
+  /// scroll view, so a wide table pans instead of overflowing the page.
+  Widget _table(List<TableRow> rows, ThemeData theme) {
+    if (rows.isEmpty) {
+      return const SizedBox.shrink();
+    }
+    // Every row must have the same cell count for Table; pad short rows.
+    final columns = rows
+        .map((row) => row.children.length)
+        .reduce((a, b) => a > b ? a : b);
+    final padded = [
+      for (final row in rows)
+        row.children.length == columns
+            ? row
+            : TableRow(
+                children: [
+                  ...row.children,
+                  for (var i = row.children.length; i < columns; i++)
+                    const SizedBox.shrink(),
+                ],
+              ),
+    ];
+    return Padding(
+      padding: const EdgeInsets.only(bottom: LabFoxSpacing.sm),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Table(
+          defaultColumnWidth: const IntrinsicColumnWidth(),
+          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+          border: TableBorder(
+            horizontalInside: BorderSide(
+              color: theme.colorScheme.outlineVariant,
+            ),
+            bottom: BorderSide(color: theme.colorScheme.outlineVariant),
+          ),
+          children: padded,
+        ),
+      ),
+    );
+  }
 
   Widget _list(md.Element node, ThemeData theme, {required bool ordered}) {
     final items = node.children?.whereType<md.Element>().toList() ?? const [];
@@ -381,6 +468,8 @@ class _MarkdownViewerState extends State<MarkdownViewer> {
         );
       case 'details':
         return _details(node, theme);
+      case 'table':
+        return _htmlTable(node, theme);
       default:
         // p, div, center, and anything unknown: a container. When it holds
         // block children, recurse; otherwise lay its inline content out as
@@ -469,6 +558,35 @@ class _MarkdownViewerState extends State<MarkdownViewer> {
         ],
       ),
     );
+  }
+
+  /// A raw HTML `<table>` through the same shell as a GFM table.
+  Widget _htmlTable(dom.Element node, ThemeData theme) {
+    final rows = <TableRow>[];
+    for (final tr in node.querySelectorAll('tr')) {
+      final cells = tr.children
+          .where((cell) => cell.localName == 'td' || cell.localName == 'th')
+          .toList(growable: false);
+      if (cells.isEmpty) {
+        continue;
+      }
+      rows.add(
+        _tableRow([
+          for (final cell in cells)
+            RichText(
+              text: TextSpan(
+                style: cell.localName == 'th'
+                    ? theme.textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      )
+                    : theme.textTheme.bodyMedium,
+                children: _htmlSpans(cell.nodes, theme.textTheme.bodyMedium),
+              ),
+            ),
+        ]),
+      );
+    }
+    return _table(rows, theme);
   }
 
   /// `<details>`: the summary as an always-visible header, the rest revealed

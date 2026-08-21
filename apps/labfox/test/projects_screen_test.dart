@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gitlab_models/gitlab_models.dart';
+import 'package:labfox/core/auth/auth_controller.dart';
+import 'package:labfox/core/auth/auth_providers.dart';
 import 'package:labfox/features/projects/presentation/controllers/projects_controller.dart';
 import 'package:labfox/features/projects/presentation/projects_screen.dart';
 import 'package:labfox/l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// A controller stub that emits a fixed AsyncValue, so each state can be tested
 /// without a client or network.
@@ -29,10 +32,19 @@ class _StubController extends ProjectsController {
 }
 
 Future<void> _pump(WidgetTester tester, AsyncValue<List<Project>> value) async {
+  SharedPreferences.setMockInitialValues({});
+  final prefs = await SharedPreferences.getInstance();
   await tester.pumpWidget(
     ProviderScope(
       overrides: [
         projectsControllerProvider.overrideWith(() => _StubController(value)),
+        sharedPreferencesProvider.overrideWithValue(prefs),
+        currentAccountProvider.overrideWithValue(
+          const Account(
+            instanceUrl: 'https://gitlab.com',
+            user: User(id: 1, username: 'jungwon', name: 'Jungwon'),
+          ),
+        ),
       ],
       child: const MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -88,5 +100,24 @@ void main() {
 
     expect(find.textContaining('Could not load'), findsOneWidget);
     expect(find.widgetWithText(FilledButton, 'Retry'), findsOneWidget);
+  });
+
+  testWidgets('a row star toggles the favorite in place', (tester) async {
+    await _pump(tester, const AsyncData(projects));
+    await tester.pumpAndSettle();
+
+    // Every row carries an outline star toggle; none is a favorite yet.
+    // (The footer's star-count glyph is not a button, so it stays excluded.)
+    expect(
+      find.widgetWithIcon(IconButton, Icons.star_border),
+      findsNWidgets(2),
+    );
+
+    await tester.tap(find.widgetWithIcon(IconButton, Icons.star_border).first);
+    await tester.pumpAndSettle();
+
+    // The first row's star fills without leaving the list.
+    expect(find.widgetWithIcon(IconButton, Icons.star), findsOneWidget);
+    expect(find.widgetWithIcon(IconButton, Icons.star_border), findsOneWidget);
   });
 }

@@ -14,7 +14,7 @@ Flutter collects dependency licenses automatically. It must be exposed in the ap
 showLicensePage(
   context: context,
   applicationName: 'LabFox',
-  applicationLegalese: '© 2026 sjungwon03',
+  applicationLegalese: '© 2026 sloki9637',
 );
 ```
 
@@ -82,6 +82,7 @@ LicenseRegistry.addLicense(() async* {
 | crypto | ^3.0.0 | BSD-3-Clause | https://github.com/dart-lang/crypto |
 | flutter_web_auth_2 | ^4.0.0 | MIT | https://github.com/ThexXTURBOXx/flutter_web_auth_2 |
 | share_plus | ^12.0.2 | BSD-3-Clause | https://github.com/fluttercommunity/plus_plugins |
+| package_info_plus | ^8.1.0 | BSD-3-Clause | https://github.com/fluttercommunity/plus_plugins |
 | url_launcher | ^6.3.0 | BSD-3-Clause | https://github.com/flutter/packages |
 
 *(To be filled in with the actual dependencies after scaffolding)*

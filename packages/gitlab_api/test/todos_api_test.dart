@@ -47,6 +47,28 @@ void main() {
       expect(captured.queryParameters['state'], 'done');
     });
 
+    test(
+      'passes type and action filters through and omits them when unset',
+      () async {
+        late RequestOptions captured;
+        final client = _client((o) {
+          captured = o;
+          return (status: 200, headers: const {}, body: const []);
+        });
+
+        await client.todos.list(
+          type: TodoType.mergeRequest,
+          action: TodoAction.approvalRequired,
+        );
+        expect(captured.queryParameters['type'], 'MergeRequest');
+        expect(captured.queryParameters['action'], 'approval_required');
+
+        await client.todos.list();
+        expect(captured.queryParameters.containsKey('type'), isFalse);
+        expect(captured.queryParameters.containsKey('action'), isFalse);
+      },
+    );
+
     test('maps a 401 to unauthorized', () async {
       final client = _client(
         (_) => (status: 401, headers: const {}, body: const {}),
@@ -89,6 +111,18 @@ void main() {
       expect(todos.map((t) => t.id), [1, 2]);
       // Pending is the default and must hold across every page.
       expect(requested, everyElement('pending'));
+    });
+
+    test('passes type and action filters through every page', () async {
+      final capturedTypes = <Object?>[];
+      final client = _client((o) {
+        capturedTypes.add(o.queryParameters['type']);
+        return (status: 200, headers: const {}, body: const []);
+      });
+
+      await client.todos.listAll(type: TodoType.issue);
+
+      expect(capturedTypes, ['Issue']);
     });
 
     test('passes the done state filter through every page', () async {

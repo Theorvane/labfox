@@ -180,6 +180,53 @@ void main() {
     });
   });
 
+  group('tables', () {
+    const gfm =
+        '| Name | Role |\n'
+        '|---|---|\n'
+        '| fox | lead |\n'
+        '| owl | dev |';
+
+    testWidgets('renders a GFM table as a real table', (tester) async {
+      await _pump(tester, gfm);
+      expect(find.byType(Table), findsOneWidget);
+      final text = _allText(tester);
+      for (final cell in ['Name', 'Role', 'fox', 'lead', 'owl', 'dev']) {
+        expect(text, contains(cell));
+      }
+    });
+
+    testWidgets('a table scrolls horizontally instead of overflowing', (
+      tester,
+    ) async {
+      await _pump(tester, gfm);
+      expect(
+        find.ancestor(
+          of: find.byType(Table),
+          matching: find.byType(SingleChildScrollView),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('inline markup inside cells keeps working', (tester) async {
+      await _pump(tester, '| A |\n|---|\n| use `flutter` now |');
+      expect(_allText(tester), contains('use flutter now'));
+    });
+
+    testWidgets('an HTML table renders as a table', (tester) async {
+      await _pump(
+        tester,
+        '<table><tr><th>Header</th></tr><tr><td>cell one</td></tr></table>',
+      );
+      expect(find.byType(Table), findsOneWidget);
+      final text = _allText(tester);
+      expect(text, contains('Header'));
+      expect(text, contains('cell one'));
+      expect(text, isNot(contains('<')));
+    });
+  });
+
   testWidgets('a link is tappable and reports its href', (tester) async {
     String? tapped;
     await _pump(

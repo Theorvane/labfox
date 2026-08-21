@@ -1,3 +1,4 @@
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -141,11 +142,30 @@ void main() {
       expect(find.text('rec'), findsOneWidget);
     });
 
-    testWidgets('hides the sections when empty', (tester) async {
+    testWidgets('empty favorites keep the section with an add affordance', (
+      tester,
+    ) async {
       await pump(tester, favorites: const [], recents: const []);
 
-      expect(find.text('Favorites'), findsNothing);
+      // Favorites stays visible so it can grow from here: a + in its header
+      // and a starter hint instead of a silent disappearance. Recent still
+      // hides when empty.
+      expect(find.text('Favorites'), findsOneWidget);
+      expect(find.widgetWithIcon(IconButton, LabFoxIcons.add), findsOneWidget);
+      expect(find.textContaining('Star projects'), findsOneWidget);
       expect(find.text('Recent'), findsNothing);
+    });
+
+    testWidgets('home offers pull-to-refresh and a refresh action', (
+      tester,
+    ) async {
+      await pump(tester, favorites: const [], recents: const []);
+
+      expect(find.byType(RefreshIndicator), findsOneWidget);
+      expect(
+        find.widgetWithIcon(IconButton, LabFoxIcons.refresh),
+        findsOneWidget,
+      );
     });
   });
 

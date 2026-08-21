@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/router.dart';
+import '../../../core/settings/app_settings_providers.dart';
 import '../../../core/ui/link_opener.dart';
 import '../../../l10n/app_localizations.dart';
 
@@ -21,12 +22,14 @@ class SettingsScreen extends ConsumerWidget {
 
   /// Copyright line shown on the license page. Not localized: it is a notice,
   /// not UI copy.
-  static const _legalese = '© 2026 sjungwon03 · Apache-2.0';
+  static const _legalese = '© 2026 sloki9637 · Apache-2.0';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final open = ref.watch(linkOpenerProvider);
+    final themeMode = ref.watch(themeModeProvider);
+    final version = ref.watch(appVersionProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.settingsTitle)),
@@ -39,6 +42,39 @@ class SettingsScreen extends ConsumerWidget {
             onTap: () => context.go(Routes.accounts),
           ),
           const Divider(height: 1),
+          _SectionHeader(l10n.settingsAppearance),
+          RadioGroup<ThemeMode>(
+            groupValue: themeMode,
+            onChanged: (value) {
+              if (value != null) {
+                ref.read(themeModeProvider.notifier).set(value);
+              }
+            },
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                for (final mode in ThemeMode.values)
+                  RadioListTile<ThemeMode>(
+                    value: mode,
+                    title: Text(switch (mode) {
+                      ThemeMode.system => l10n.settingsThemeSystem,
+                      ThemeMode.light => l10n.settingsThemeLight,
+                      ThemeMode.dark => l10n.settingsThemeDark,
+                    }),
+                  ),
+              ],
+            ),
+          ),
+          const Divider(height: 1),
+          _SectionHeader(l10n.settingsAbout),
+          ListTile(
+            leading: const Icon(LabFoxIcons.document),
+            title: Text(l10n.settingsVersion),
+            trailing: Text(
+              version.valueOrNull ?? '',
+              style: LabFoxTextRoles.of(context).meta,
+            ),
+          ),
           ListTile(
             leading: const Icon(LabFoxIcons.private),
             title: Text(l10n.settingsPrivacyPolicy),
@@ -80,6 +116,25 @@ class SettingsScreen extends ConsumerWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _SectionHeader extends StatelessWidget {
+  const _SectionHeader(this.label);
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: LabFoxSpacing.md,
+        right: LabFoxSpacing.md,
+        top: LabFoxSpacing.md,
+        bottom: LabFoxSpacing.xs,
+      ),
+      child: Text(label, style: LabFoxTextRoles.of(context).sectionHeader),
     );
   }
 }
