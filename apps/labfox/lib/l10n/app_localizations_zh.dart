@@ -582,6 +582,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get inboxFilterDone => 'Done';
 
   @override
+  String get inboxFilterAllTypes => 'All types';
+
+  @override
+  String get inboxTypeIssues => 'Issues';
+
+  @override
+  String get inboxTypeMergeRequests => 'Merge requests';
+
+  @override
+  String get inboxFilterAllReasons => 'All reasons';
+
+  @override
   String get inboxError => '无法加载待办事项。';
 
   @override

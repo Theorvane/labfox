@@ -722,6 +722,22 @@
   "@inboxFilterDone": {
     "description": "Inbox state filter: items already marked done"
   },
+  "inboxFilterAllTypes": "All types",
+  "@inboxFilterAllTypes": {
+    "description": "Inbox type filter: no type restriction"
+  },
+  "inboxTypeIssues": "Issues",
+  "@inboxTypeIssues": {
+    "description": "Inbox type filter: issue todos only"
+  },
+  "inboxTypeMergeRequests": "Merge requests",
+  "@inboxTypeMergeRequests": {
+    "description": "Inbox type filter: merge request todos only"
+  },
+  "inboxFilterAllReasons": "All reasons",
+  "@inboxFilterAllReasons": {
+    "description": "Inbox reason filter: no reason restriction"
+  },
   "inboxError": "Your to-do items could not be loaded.",
   "@inboxError": {
     "description": "Shown when the to-do list fails to load"

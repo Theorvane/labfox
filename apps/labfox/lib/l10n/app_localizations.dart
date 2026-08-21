@@ -1232,6 +1232,30 @@ abstract class AppLocalizations {
   /// **'Done'**
   String get inboxFilterDone;
 
+  /// Inbox type filter: no type restriction
+  ///
+  /// In en, this message translates to:
+  /// **'All types'**
+  String get inboxFilterAllTypes;
+
+  /// Inbox type filter: issue todos only
+  ///
+  /// In en, this message translates to:
+  /// **'Issues'**
+  String get inboxTypeIssues;
+
+  /// Inbox type filter: merge request todos only
+  ///
+  /// In en, this message translates to:
+  /// **'Merge requests'**
+  String get inboxTypeMergeRequests;
+
+  /// Inbox reason filter: no reason restriction
+  ///
+  /// In en, this message translates to:
+  /// **'All reasons'**
+  String get inboxFilterAllReasons;
+
   /// Shown when the to-do list fails to load
   ///
   /// In en, this message translates to:

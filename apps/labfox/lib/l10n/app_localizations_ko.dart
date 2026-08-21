@@ -586,6 +586,18 @@ class AppLocalizationsKo extends AppLocalizations {
   String get inboxFilterDone => 'Done';
 
   @override
+  String get inboxFilterAllTypes => 'All types';
+
+  @override
+  String get inboxTypeIssues => 'Issues';
+
+  @override
+  String get inboxTypeMergeRequests => 'Merge requests';
+
+  @override
+  String get inboxFilterAllReasons => 'All reasons';
+
+  @override
   String get inboxError => '할 일 목록을 불러오지 못했습니다.';
 
   @override

@@ -31,8 +31,14 @@ class _FakeRepo extends InboxRepository {
   bool markedAll = false;
 
   @override
-  Future<List<Todo>> list({required TodoState state}) async {
-    stateCalls.add(state.value);
+  Future<List<Todo>> list({
+    required TodoState state,
+    TodoType? type,
+    TodoAction? action,
+  }) async {
+    stateCalls.add(
+      '${state.value}/${type?.value ?? '-'}/${action?.value ?? '-'}',
+    );
     return state == TodoState.pending ? todos : doneTodos;
   }
 
@@ -72,13 +78,13 @@ void main() {
       );
       addTearDown(container.dispose);
 
-      await container.read(inboxControllerProvider(TodoState.pending).future);
+      await container.read(inboxControllerProvider(const InboxQuery()).future);
       await container
-          .read(inboxControllerProvider(TodoState.pending).notifier)
+          .read(inboxControllerProvider(const InboxQuery()).notifier)
           .markDone(1);
 
       final ids = container
-          .read(inboxControllerProvider(TodoState.pending))
+          .read(inboxControllerProvider(const InboxQuery()))
           .value!
           .map((t) => t.id)
           .toList();
@@ -93,16 +99,16 @@ void main() {
       );
       addTearDown(container.dispose);
 
-      await container.read(inboxControllerProvider(TodoState.pending).future);
+      await container.read(inboxControllerProvider(const InboxQuery()).future);
       await expectLater(
         container
-            .read(inboxControllerProvider(TodoState.pending).notifier)
+            .read(inboxControllerProvider(const InboxQuery()).notifier)
             .markDone(1),
         throwsA(isA<StateError>()),
       );
 
       final ids = container
-          .read(inboxControllerProvider(TodoState.pending))
+          .read(inboxControllerProvider(const InboxQuery()))
           .value!
           .map((t) => t.id)
           .toList();
@@ -165,7 +171,7 @@ void main() {
       await tester.tap(find.text('Done').last);
       await tester.pumpAndSettle();
 
-      expect(repo.stateCalls, ['pending', 'done']);
+      expect(repo.stateCalls, ['pending/-/-', 'done/-/-']);
       expect(find.text('Old review'), findsOneWidget);
       expect(find.text('Fix login'), findsNothing);
       // Done items cannot be cleared again: no per-row check, no swipe, no
@@ -173,6 +179,33 @@ void main() {
       expect(find.byIcon(Icons.check), findsNothing);
       expect(find.byType(Dismissible), findsNothing);
       expect(find.byIcon(Icons.done_all), findsNothing);
+    });
+
+    testWidgets('the type filter narrows the list', (tester) async {
+      final repo = _FakeRepo([_todo(1, 'Fix login')]);
+      await _pump(tester, repo);
+
+      await tester.tap(find.byType(FilterMenuChip<TodoType?>));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Issues').last);
+      await tester.pumpAndSettle();
+
+      expect(repo.stateCalls, ['pending/-/-', 'pending/Issue/-']);
+    });
+
+    testWidgets('the reason filter narrows the list', (tester) async {
+      // Three chips need more width than the default test surface.
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      final repo = _FakeRepo([_todo(1, 'Fix login')]);
+      await _pump(tester, repo);
+
+      await tester.tap(find.byType(FilterMenuChip<TodoAction?>));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Mentioned you').last);
+      await tester.pumpAndSettle();
+
+      expect(repo.stateCalls, ['pending/-/-', 'pending/-/mentioned']);
     });
 
     testWidgets('switching back to Pending restores the actions', (
