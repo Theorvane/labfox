@@ -93,10 +93,16 @@ privacy surface that `PRIVACY.md` currently keeps narrow.
 
 ### Fail open
 
-Cache the entitlement locally and **treat an unreachable store as entitled**.
-A receipt check that times out on a train must never be what stops a paying user
-from merging. Give the cache a long life — two weeks or more — and refresh it
-opportunistically rather than on the critical path.
+Cache the entitlement locally and let the **last known answer survive an
+unreachable store**. A receipt check that times out on a train must never be
+what stops a paying user from merging.
+
+The rule cuts one way only. A store that cannot be reached changes nothing: a
+subscriber keeps working offline, and someone who never paid is not upgraded
+because a network call failed. A store that answers *not subscribed* is
+believed — a lapsed subscription has to be able to lapse. Refresh
+opportunistically rather than on the critical path; the first frame should
+never wait on a store.
 
 Failing closed here is worse than any revenue it protects: it breaks the core
 flow for the people who paid for it.
