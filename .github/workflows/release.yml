@@ -1,0 +1,182 @@
+name: release
+
+# Promotion to main is the release trigger. The version in pubspec.yaml decides
+# whether this is a release at all: if v<version> is already tagged, nothing
+# runs, so an ordinary push to main cannot publish a second time.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    name: Decide and verify
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      tag: ${{ steps.version.outputs.tag }}
+      already-released: ${{ steps.version.outputs.already-released }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+
+      - id: version
+        name: Read the version and decide whether it is unreleased
+        run: |
+          set -euo pipefail
+          # `version: 1.2.3+45` — the build number is Android's versionCode and
+          # Apple's build, and does not belong in the tag.
+          VERSION="$(sed -n 's/^version: *\([^+]*\).*/\1/p' apps/labfox/pubspec.yaml | tr -d '[:space:]')"
+          test -n "$VERSION"
+          TAG="v${VERSION}"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+          if git rev-parse -q --verify "refs/tags/${TAG}" >/dev/null; then
+            echo "already-released=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::${TAG} is already tagged; skipping the release."
+          else
+            echo "already-released=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: subosito/flutter-action@v2
+        if: steps.version.outputs.already-released == 'false'
+        with:
+          channel: stable
+          flutter-version: 3.38.9
+          cache: true
+
+      # This has to verify everything a pull request does. A release gate that
+      # checks less than the branch it is releasing is worse than none: it
+      # reports success for work nothing ever ran.
+      - name: Verify the commit being released
+        if: steps.version.outputs.already-released == 'false'
+        run: |
+          set -euo pipefail
+          flutter pub get
+          dart format --set-exit-if-changed .
+          flutter analyze
+          # The root has no test directory of its own; the suite runs per
+          # package (AGENTS.md §11).
+          for dir in apps/labfox packages/*; do
+            if [ -d "$dir/test" ]; then
+              echo "--- $dir"
+              (cd "$dir" && flutter test)
+            fi
+          done
+
+  windows:
+    name: Package Windows
+    needs: check
+    if: needs.check.outputs.already-released == 'false'
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.38.9
+          cache: true
+
+      - name: Build
+        run: |
+          flutter pub get
+          cd apps/labfox
+          flutter build windows --release
+
+      # Windows is distributed as a direct download rather than through a store
+      # (.agents/docs/monetization.md §1), so the release asset is the artifact.
+      # It is unsigned: SmartScreen warns on first run until a code-signing
+      # certificate exists, which the release notes say plainly.
+      - name: Zip the build
+        shell: pwsh
+        run: |
+          $src = "apps/labfox/build/windows/x64/runner/Release"
+          if (-not (Test-Path $src)) { throw "no Windows build at $src" }
+          New-Item -ItemType Directory -Force -Path dist | Out-Null
+          Compress-Archive -Path "$src/*" -DestinationPath "dist/labfox-windows-x64.zip"
+
+      - uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4.5.0
+        with:
+          name: labfox-windows
+          path: dist/*.zip
+          if-no-files-found: error
+
+  app-store-connect:
+    needs: [check, windows]
+    if: needs.check.outputs.already-released == 'false'
+    uses: ./.github/workflows/ios-app-store-connect.yml
+    secrets: inherit
+
+  # Last, and after iOS on purpose. The two store jobs are not equally
+  # reversible: the iOS job uploads a build and submits nothing, while this one
+  # publishes to a Play track. Run in parallel, an iOS failure after Play had
+  # already published would leave the release shipped and untagged — the tag
+  # step never runs — so a later push to main re-enters the pipeline and
+  # re-uploads a versionCode Play rejects. Live, unrecorded, and stuck until
+  # someone bumps the version.
+  google-play:
+    needs: [check, windows, app-store-connect]
+    if: needs.check.outputs.already-released == 'false'
+    uses: ./.github/workflows/android-google-play.yml
+    with:
+      # Internal until the app has shipped once and the store listing is
+      # complete. Promoting to production is a maintainer decision made in the
+      # Play Console, not a side effect of merging.
+      track: internal
+      release_status: completed
+    secrets: inherit
+
+  release:
+    name: Tag and publish
+    needs: [check, windows, app-store-connect, google-play]
+    if: needs.check.outputs.already-released == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+
+      - uses: actions/download-artifact@cc203385981b70ca67e1cc392babf9cc229d5806 # v4.1.9
+        with:
+          path: artifacts
+          merge-multiple: true
+
+      - name: Tag the release
+        env:
+          TAG: ${{ needs.check.outputs.tag }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # The check job's guard only covers a fresh push to main. Re-running
+          # this job alone replays a tag push that already landed, so ask origin
+          # rather than assume.
+          if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null 2>&1; then
+            echo "$TAG is already tagged on origin; keeping the published tag."
+          else
+            git tag -a "$TAG" -m "$TAG"
+            git push origin "refs/tags/$TAG"
+          fi
+
+      - name: Publish the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.check.outputs.tag }}
+        run: |
+          set -euo pipefail
+          # Re-running after a partial upload should repair the release, not
+          # fail on the one that is already there.
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG exists; replacing its artifacts."
+            gh release upload "$TAG" artifacts/* --clobber
+          else
+            gh release create "$TAG" \
+              --title "LabFox $TAG" \
+              --generate-notes \
+              --notes "The Windows build is a direct download and is unsigned, so SmartScreen warns on first run: choose More info, then Run anyway. Android and iOS are distributed through their stores." \
+              artifacts/*
+          fi
