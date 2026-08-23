@@ -44,8 +44,21 @@ version.
 
 ## Secrets and variables
 
-Configured under the repository's `play-store` and `app-store` environments.
-None of these exist yet; the pipeline cannot run until they do.
+Configured under the repository's `play-store` and `app-store` environments,
+which already exist.
+
+`scripts/setup-release-secrets.sh` loads them. Every value goes straight from a
+local file, or from your keyboard, into `gh secret set` over stdin — nothing is
+echoed, written to a temporary file, or left in your shell history:
+
+```
+./scripts/setup-release-secrets.sh android   # reads android/key.properties
+./scripts/setup-release-secrets.sh apple     # prompts for the Apple assets
+./scripts/setup-release-secrets.sh check     # lists what is configured
+```
+
+Run it yourself. It handles secrets, so it is deliberately not something CI or
+an agent does.
 
 ### Android — `play-store`
 
