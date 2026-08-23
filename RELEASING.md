@@ -42,6 +42,25 @@ version.
 
 ---
 
+## Third-party actions are pinned
+
+Every action in `.github/workflows/` is pinned to a full commit SHA, with the
+tag it corresponded to in a trailing comment.
+
+This is not tidiness. The release jobs hold the upload keystore, its passwords,
+the Play service account, and the Apple distribution certificate. A tag is a
+mutable pointer: whoever controls an action's repository can move `v2` to
+different code, and every workflow referencing it would pick that up on the next
+run with those secrets in scope. A SHA cannot be moved.
+
+When bumping one, resolve the tag yourself rather than trusting a badge:
+
+```
+gh api repos/<owner>/<repo>/git/ref/tags/<tag> --jq '.object.sha'
+```
+
+---
+
 ## Secrets and variables
 
 Configured under the repository's `play-store` and `app-store` environments,

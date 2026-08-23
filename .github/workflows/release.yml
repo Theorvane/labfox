@@ -19,7 +19,7 @@ jobs:
       tag: ${{ steps.version.outputs.tag }}
       already-released: ${{ steps.version.outputs.already-released }}
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 0
 
@@ -41,7 +41,7 @@ jobs:
             echo "already-released=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
         if: steps.version.outputs.already-released == 'false'
         with:
           channel: stable
@@ -73,9 +73,9 @@ jobs:
     if: needs.check.outputs.already-released == 'false'
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
         with:
           channel: stable
           flutter-version: 3.38.9
@@ -136,7 +136,7 @@ jobs:
     if: needs.check.outputs.already-released == 'false'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 0
 
