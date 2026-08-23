@@ -125,13 +125,13 @@ jobs:
           test -n "$ASC_KEY_ID"
           test -n "$ASC_ISSUER_ID"
           test -n "$ASC_PRIVATE_KEY"
-          # altool only accepts --p8-file-path for --generate-jwt. For
-          # --upload-app it looks the key up by name, in ./private_keys,
-          # ~/private_keys or ~/.private_keys, so install it there instead.
-          KEY_DIR="$HOME/.private_keys"
+          # altool only accepts --p8-file-path for --generate-jwt. For an
+          # upload, point it explicitly at the directory containing the key.
+          export API_PRIVATE_KEYS_DIR="$RUNNER_TEMP/app-store-connect-api-keys"
           umask 077
-          mkdir -p "$KEY_DIR"
-          printf '%s' "$ASC_PRIVATE_KEY" > "$KEY_DIR/AuthKey_${ASC_KEY_ID}.p8"
+          mkdir -p "$API_PRIVATE_KEYS_DIR"
+          printf '%s' "$ASC_PRIVATE_KEY" > \
+            "$API_PRIVATE_KEYS_DIR/AuthKey_${ASC_KEY_ID}.p8"
           IPA="$(find "$RUNNER_TEMP/export" -name '*.ipa' -maxdepth 1 | head -1)"
           test -n "$IPA"
           xcrun altool --upload-app \
