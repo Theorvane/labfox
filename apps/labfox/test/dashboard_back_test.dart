@@ -123,4 +123,60 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('My work'), findsOneWidget);
   });
+
+  // The same defect as #149, in three more places. Every one of these routes
+  // lives outside the navigation shell, so it has no bottom bar, and each is
+  // entered with context.go, which replaces the stack rather than pushing onto
+  // it — leaving nothing for an implied back button to pop. The result is a
+  // screen with no way out at all.
+
+  testWidgets('projects has a back affordance that returns home', (
+    tester,
+  ) async {
+    await _pump(tester);
+
+    await tester.tap(find.text('Projects'));
+    await tester.pumpAndSettle();
+    expect(find.text('Projects'), findsWidgets);
+
+    expect(find.byType(BackButton), findsOneWidget);
+    await tester.tap(find.byType(BackButton));
+    await tester.pumpAndSettle();
+    expect(find.text('My work'), findsOneWidget);
+  });
+
+  testWidgets('settings has a back affordance that returns home', (
+    tester,
+  ) async {
+    await _pump(tester);
+
+    await tester.tap(find.text('Me'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byIcon(Icons.settings_outlined));
+    await tester.pumpAndSettle();
+    expect(find.text('Settings'), findsWidgets);
+
+    expect(find.byType(BackButton), findsOneWidget);
+    await tester.tap(find.byType(BackButton));
+    await tester.pumpAndSettle();
+    expect(find.text('My work'), findsOneWidget);
+  });
+
+  testWidgets('accounts has a back affordance that returns home', (
+    tester,
+  ) async {
+    await _pump(tester);
+
+    await tester.tap(find.text('Me'));
+    await tester.pumpAndSettle();
+    // The entry on Me is labelled for the action, not the destination.
+    await tester.tap(find.text('Switch account'));
+    await tester.pumpAndSettle();
+    expect(find.text('Accounts'), findsWidgets);
+
+    expect(find.byType(BackButton), findsOneWidget);
+    await tester.tap(find.byType(BackButton));
+    await tester.pumpAndSettle();
+    expect(find.text('My work'), findsOneWidget);
+  });
 }
