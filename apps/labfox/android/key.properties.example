@@ -1,0 +1,8 @@
+# Copy to android/key.properties and fill in. That file is gitignored: it holds
+# the passwords to the upload key and must never be committed.
+#
+# storeFile is an absolute path, or one relative to android/app.
+storeFile=/absolute/path/to/key.jks
+storePassword=
+keyAlias=
+keyPassword=
