@@ -71,9 +71,17 @@ jobs:
           # ARB files and the generated per-locale Dart, but NOT app_en.arb (the
           # source of truth, which must stay English) and NOT the app-wide
           # generated delegate.
+          # Store listings are the same category as ARB files: text written to be
+          # read by a user in their own language. The pattern is deliberately
+          # narrow — docs/store/listing.<locale>.md and nothing else — so it
+          # cannot become a way to smuggle non-English prose into the repository.
+          STORE_LISTING = re.compile(r"^docs/store/listing\.[a-z]{2}(-[A-Za-z]+)?\.md$")
+
           def is_translation(path):
               if path.endswith(".arb"):
                   return not path.endswith("app_en.arb")
+              if STORE_LISTING.match(path):
+                  return True
               # app_localizations_ko.dart, _ja.dart, ... but not the base file.
               name = path.rsplit("/", 1)[-1]
               return (

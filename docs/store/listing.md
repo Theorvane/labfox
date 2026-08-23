@@ -3,6 +3,10 @@
 The text for the App Store and Play Console listings, kept here so it is
 reviewed like anything else and does not live only in a console field.
 
+**English is the source.** Translations live beside it as
+`listing.<locale>.md` — currently [`listing.ko.md`](listing.ko.md). Change this
+file first, then carry the change across.
+
 Two rules it has to keep, both from `AGENTS.md`:
 
 - **Never imply endorsement.** LabFox is an unofficial client. GitLab is a
