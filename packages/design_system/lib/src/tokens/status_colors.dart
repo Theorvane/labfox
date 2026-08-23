@@ -48,7 +48,7 @@ class LabFoxStatusColors extends ThemeExtension<LabFoxStatusColors> {
   /// Open issue / merge request, and a passed pipeline.
   final StatusColor open;
 
-  /// Merged merge request — violet, never mistaken for a plain close.
+  /// Merged merge request — informational, never mistaken for a plain close.
   final StatusColor merged;
 
   /// Closed issue / merge request, and a failed pipeline.
@@ -75,7 +75,7 @@ class LabFoxStatusColors extends ThemeExtension<LabFoxStatusColors> {
       container: Color(0xFFEBF7F3),
     ),
     merged: StatusColor(
-      foreground: Color(0xFF1486A6),
+      foreground: Color(0xFF11738E),
       container: Color(0xFFEBF5F7),
     ),
     closed: StatusColor(
@@ -87,11 +87,11 @@ class LabFoxStatusColors extends ThemeExtension<LabFoxStatusColors> {
       container: Color(0xFFEBEEF7),
     ),
     pending: StatusColor(
-      foreground: Color(0xFF918A83),
+      foreground: Color(0xFF706A64),
       container: Color(0xFFF2F1F0),
     ),
     warning: StatusColor(
-      foreground: Color(0xFFD18F00),
+      foreground: Color(0xFF966200),
       container: Color(0xFFF7F3EB),
     ),
   );
