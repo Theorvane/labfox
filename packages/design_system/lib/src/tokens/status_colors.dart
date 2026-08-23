@@ -71,28 +71,28 @@ class LabFoxStatusColors extends ThemeExtension<LabFoxStatusColors> {
   // container for chips.
   static const light = LabFoxStatusColors(
     open: StatusColor(
-      foreground: Color(0xFF1A7F37),
-      container: Color(0xFFE9F6EC),
+      foreground: Color(0xFF147B54),
+      container: Color(0xFFEBF7F3),
     ),
     merged: StatusColor(
-      foreground: Color(0xFF8250DF),
-      container: Color(0xFFF1EBFC),
+      foreground: Color(0xFF1486A6),
+      container: Color(0xFFEBF5F7),
     ),
     closed: StatusColor(
-      foreground: Color(0xFFCF222E),
-      container: Color(0xFFFCEBEC),
+      foreground: Color(0xFF881625),
+      container: Color(0xFFF7EBEC),
     ),
     running: StatusColor(
-      foreground: Color(0xFF0969DA),
-      container: Color(0xFFE7F0FC),
+      foreground: Color(0xFF2D53B4),
+      container: Color(0xFFEBEEF7),
     ),
     pending: StatusColor(
-      foreground: Color(0xFF6E7781),
-      container: Color(0xFFF0F1F3),
+      foreground: Color(0xFF918A83),
+      container: Color(0xFFF2F1F0),
     ),
     warning: StatusColor(
-      foreground: Color(0xFF9A6700),
-      container: Color(0xFFFBF3E2),
+      foreground: Color(0xFFD18F00),
+      container: Color(0xFFF7F3EB),
     ),
   );
 
@@ -100,28 +100,28 @@ class LabFoxStatusColors extends ThemeExtension<LabFoxStatusColors> {
   // containers.
   static const dark = LabFoxStatusColors(
     open: StatusColor(
-      foreground: Color(0xFF3FB950),
-      container: Color(0xFF12261A),
+      foreground: Color(0xFF1EBA7F),
+      container: Color(0xFF10281F),
     ),
     merged: StatusColor(
-      foreground: Color(0xFFA371F7),
-      container: Color(0xFF211A33),
+      foreground: Color(0xFF40C3E7),
+      container: Color(0xFF102328),
     ),
     closed: StatusColor(
-      foreground: Color(0xFFF85149),
-      container: Color(0xFF2A1719),
+      foreground: Color(0xFFE03F54),
+      container: Color(0xFF281013),
     ),
     running: StatusColor(
-      foreground: Color(0xFF4C9EFF),
-      container: Color(0xFF10233D),
+      foreground: Color(0xFF708EDB),
+      container: Color(0xFF101728),
     ),
     pending: StatusColor(
-      foreground: Color(0xFF7D8590),
-      container: Color(0xFF1B1F27),
+      foreground: Color(0xFFC7C3BF),
+      container: Color(0xFF1E1C1A),
     ),
     warning: StatusColor(
-      foreground: Color(0xFFD9A441),
-      container: Color(0xFF241E12),
+      foreground: Color(0xFFFFCD62),
+      container: Color(0xFF282010),
     ),
   );
 

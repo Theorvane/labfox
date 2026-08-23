@@ -61,7 +61,7 @@ class HomeScreen extends ConsumerWidget {
             constraints: const BoxConstraints(maxWidth: 480),
             child: ListView(
               physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.symmetric(vertical: LabFoxSpacing.md),
+              padding: const EdgeInsets.only(bottom: LabFoxSpacing.md),
               children: const [
                 _MyWork(),
                 _ProjectSection(favorites: true),
@@ -75,47 +75,37 @@ class HomeScreen extends ConsumerWidget {
   }
 }
 
-/// The "My work" launcher — flat rows of colour-tiled shortcuts into the
-/// account-level destinations.
+/// The "My work" shortcuts, on the brand's navy ground.
+///
+/// A grid on navy rather than a list of colour-tiled rows on white: the row
+/// shape is what every code-hosting client uses, and this is the first screen
+/// anyone sees, so it is where the app should look like itself.
 class _MyWork extends ConsumerWidget {
   const _MyWork();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final status = LabFoxStatusColors.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: LabFoxSpacing.md),
-          child: Text(
-            l10n.homeMyWork,
-            style: LabFoxTextRoles.of(context).sectionHeader,
-          ),
-        ),
-        const SizedBox(height: LabFoxSpacing.xs),
-        LauncherTile(
+    return WorkGrid(
+      title: l10n.homeMyWork,
+      destinations: [
+        WorkDestination(
           icon: LabFoxIcons.issueOpen,
-          color: status.open.foreground,
           label: l10n.issuesTitle,
           onTap: () => context.go(Routes.myIssues),
         ),
-        LauncherTile(
+        WorkDestination(
           icon: LabFoxIcons.mergeRequest,
-          color: status.merged.foreground,
           label: l10n.mergeRequestsTitle,
           onTap: () => context.go(Routes.myMergeRequests),
         ),
-        LauncherTile(
+        WorkDestination(
           icon: LabFoxIcons.project,
-          color: status.running.foreground,
           label: l10n.homeProjects,
           onTap: () => context.go(Routes.projects),
         ),
-        LauncherTile(
+        WorkDestination(
           icon: LabFoxIcons.inbox,
-          color: status.warning.foreground,
           label: l10n.homeInbox,
           onTap: () => context.go(Routes.inbox),
         ),
