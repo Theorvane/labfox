@@ -14,7 +14,6 @@ export 'src/components/state_badge.dart';
 export 'src/components/state_indicator.dart';
 export 'src/components/status_pill.dart';
 export 'src/components/user_avatar.dart';
-export 'src/components/work_grid.dart';
 export 'src/components/work_tile.dart';
 export 'src/theme/labfox_theme.dart';
 export 'src/tokens/breakpoints.dart';

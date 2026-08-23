@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -88,6 +90,66 @@ void main() {
           );
         }
       }
+    }
+  });
+
+  test('the theme surfaces are not the neutral grey every client uses', () {
+    // The status palette moved first and this was missed: the ColorScheme still
+    // carried Primer's red, and both surfaces were cool neutral greys — the
+    // look the palette change was meant to leave behind. Light is warm paper,
+    // dark is tinted with the brand navy.
+    for (final theme in [LabFoxTheme.light, LabFoxTheme.dark]) {
+      final scheme = theme.colorScheme;
+      expect(
+        scheme.error.toARGB32(),
+        isNot(anyOf(0xFFCF222E, 0xFFF85149)),
+        reason: "the scheme's error is back on GitHub Primer's red",
+      );
+      expect(
+        scheme.surface,
+        isNot(Colors.white),
+        reason:
+            'a pure white surface is what made this read as every other '
+            'code-hosting client',
+      );
+    }
+
+    // Both surfaces lean toward the brand rather than sitting on neutral grey:
+    // the light one warm, the dark one navy.
+    final light = HSLColor.fromColor(LabFoxTheme.light.colorScheme.surface);
+    final dark = HSLColor.fromColor(LabFoxTheme.dark.colorScheme.surface);
+    expect(
+      light.saturation,
+      greaterThan(0.05),
+      reason: 'light surface is tinted',
+    );
+    expect(
+      dark.saturation,
+      greaterThan(0.05),
+      reason: 'dark surface is tinted',
+    );
+  });
+
+  test('body and secondary text stay legible on both surfaces', () {
+    // Warming a surface is exactly the change that quietly costs contrast.
+    double ratio(Color a, Color b) {
+      final la = a.computeLuminance();
+      final lb = b.computeLuminance();
+      return (math.max(la, lb) + 0.05) / (math.min(la, lb) + 0.05);
+    }
+
+    for (final theme in [LabFoxTheme.light, LabFoxTheme.dark]) {
+      final s = theme.colorScheme;
+      expect(
+        ratio(s.onSurface, s.surface),
+        greaterThanOrEqualTo(7.0),
+        reason: 'body text should clear AAA',
+      );
+      expect(
+        ratio(s.onSurfaceVariant, s.surface),
+        greaterThanOrEqualTo(4.5),
+        reason: 'secondary text should clear AA',
+      );
     }
   });
 
