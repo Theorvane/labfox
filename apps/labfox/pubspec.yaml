@@ -23,6 +23,7 @@ dependencies:
   gitlab_models:
     path: ../../packages/gitlab_models
   go_router: ^14.6.0
+  in_app_purchase: ^3.3.0
   intl: any
   package_info_plus: ^8.1.0
   secure_storage:

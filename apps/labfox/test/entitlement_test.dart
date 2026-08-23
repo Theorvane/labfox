@@ -123,4 +123,22 @@ void main() {
       expect(container.read(entitlementProvider), Entitlement.free);
     },
   );
+
+  test('a free platform never even constructs the store adapter', () {
+    final container = ProviderContainer(
+      overrides: [
+        sharedPreferencesProvider.overrideWithValue(prefs),
+        freePlatformProvider.overrideWithValue(true),
+        // Windows has no store to talk to, and the real adapter would throw
+        // there. Constructing it at all is the bug this guards against.
+        entitlementSourceProvider.overrideWith(
+          (ref) => throw StateError('the store adapter must not be built here'),
+        ),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    expect(container.read(entitlementProvider), Entitlement.subscribed);
+    expect(container.read(entitlementProvider.notifier).refresh(), completes);
+  });
 }

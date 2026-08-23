@@ -84,6 +84,10 @@ LicenseRegistry.addLicense(() async* {
 | share_plus | ^12.0.2 | BSD-3-Clause | https://github.com/fluttercommunity/plus_plugins |
 | package_info_plus | ^8.1.0 | BSD-3-Clause | https://github.com/fluttercommunity/plus_plugins |
 | url_launcher | ^6.3.0 | BSD-3-Clause | https://github.com/flutter/packages |
+| in_app_purchase | ^3.3.0 | BSD-3-Clause | https://github.com/flutter/packages |
+| in_app_purchase_android | ^0.5.0 | BSD-3-Clause | https://github.com/flutter/packages |
+| in_app_purchase_storekit | ^0.4.11 | BSD-3-Clause | https://github.com/flutter/packages |
+| in_app_purchase_platform_interface | ^1.4.1 | BSD-3-Clause | https://github.com/flutter/packages |
 
 *(To be filled in with the actual dependencies after scaffolding)*
 
