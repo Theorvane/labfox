@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../auth/auth_providers.dart';
 import 'entitlement.dart';
 import 'entitlement_store.dart';
+import 'store_entitlement_source.dart';
 
 /// Whether this build ships free with every feature.
 ///
@@ -20,18 +21,16 @@ final entitlementStoreProvider = Provider<EntitlementStore>((ref) {
   return EntitlementStore(ref.watch(sharedPreferencesProvider));
 });
 
-/// The store adapter. Overridden by the platform implementation once one
-/// exists; until then nothing subscribes and every mobile build reads free.
+/// The store adapter — StoreKit on Apple, Play Billing on Android.
+///
+/// Never constructed on a free platform: Windows has no store to talk to, and
+/// building it there would start a purchase stream for a subscription that
+/// platform does not sell.
 final entitlementSourceProvider = Provider<EntitlementSource>((ref) {
-  return const _NoSource();
+  final source = StoreEntitlementSource(LivePurchaseApi());
+  ref.onDispose(source.dispose);
+  return source;
 });
-
-class _NoSource implements EntitlementSource {
-  const _NoSource();
-
-  @override
-  Future<Entitlement> read() async => Entitlement.free;
-}
 
 /// The current entitlement, and the only thing controllers should ask.
 ///
