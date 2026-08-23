@@ -203,9 +203,11 @@ Propose it and get approval first.
 - **Translations are the one exemption from the English-only rule.** Text written to be read
   by a user in their own language may be non-English, and the CI language check skips exactly
   those files: the `app_<code>.arb` files (except `app_en.arb`), their generated
-  `app_localizations_<code>.dart`, and store listings at `docs/store/listing.<locale>.md`.
-  English is the source in every case — `app_en.arb` and `docs/store/listing.md` are written
-  first and translated from, never the reverse. Every other file stays English.
+  `app_localizations_<code>.dart`, and store copy at `docs/store/<name>.<locale>.md` —
+  listings, release notes, and anything else that ships to a store reader.
+  English is the source in every case: `app_en.arb` and the unsuffixed
+  `docs/store/<name>.md` are written first and translated from, never the reverse.
+  Every other file stays English, including any `docs/store/` file without a locale suffix.
 
 Details: `.agents/docs/conventions.md`
 
