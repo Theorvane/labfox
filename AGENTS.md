@@ -86,7 +86,6 @@ So "do not build separate UIs per platform" (§10) is not taste — it is a **bu
 | `CODE_OF_CONDUCT.md` | Contributor Covenant, enforcement contact |
 | `SECURITY.md` | Vulnerability reporting, token-handling scope |
 | `SUPPORT.md` | Where to ask questions, what maintainers do not cover |
-| `RELEASING.md` | How a release is cut, the store credentials it needs, what is still manual |
 
 - **The "LabFox" name and logo are trademarks and are not covered by the license** (Apache-2.0 §6).
   Anyone may use the code, but nobody else may ship it to a store under the same name.
