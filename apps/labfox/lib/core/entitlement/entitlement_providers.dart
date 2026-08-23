@@ -21,13 +21,17 @@ final entitlementStoreProvider = Provider<EntitlementStore>((ref) {
   return EntitlementStore(ref.watch(sharedPreferencesProvider));
 });
 
-/// The store adapter — StoreKit on Apple, Play Billing on Android.
+/// The store SDK — StoreKit on Apple, Play Billing on Android.
 ///
 /// Never constructed on a free platform: Windows has no store to talk to, and
-/// building it there would start a purchase stream for a subscription that
-/// platform does not sell.
+/// `InAppPurchase.instance` throws there.
+final purchaseApiProvider = Provider<PurchaseApi>((ref) {
+  return LivePurchaseApi();
+});
+
+/// The store adapter, reading entitlement from [purchaseApiProvider].
 final entitlementSourceProvider = Provider<EntitlementSource>((ref) {
-  final source = StoreEntitlementSource(LivePurchaseApi());
+  final source = StoreEntitlementSource(ref.watch(purchaseApiProvider));
   ref.onDispose(source.dispose);
   return source;
 });
