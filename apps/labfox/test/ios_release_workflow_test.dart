@@ -9,6 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 /// directory therefore wastes the whole run before failing authentication.
 void main() {
   final workflow = File('../../.github/workflows/ios-app-store-connect.yml');
+  final podfile = File('ios/Podfile');
 
   test('altool receives the private-key directory explicitly', () {
     expect(
@@ -34,6 +35,18 @@ void main() {
       reason:
           'The private key filename and directory must match what altool '
           'looks up for --apiKey.',
+    );
+  });
+
+  test('CocoaPods targets do not inherit the app provisioning profile', () {
+    expect(podfile.existsSync(), isTrue, reason: '${podfile.path} is missing');
+
+    expect(
+      podfile.readAsStringSync(),
+      contains("config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'"),
+      reason:
+          'Generated framework targets must not inherit the Runner app\'s '
+          'manual provisioning profile during an archive.',
     );
   });
 }
