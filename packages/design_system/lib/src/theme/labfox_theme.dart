@@ -29,25 +29,25 @@ abstract final class LabFoxTheme {
         ).copyWith(
           primary: isDark ? const Color(0xFFFF5A1F) : LabFoxColors.orange,
           onPrimary: isDark ? const Color(0xFF14100D) : Colors.white,
-          surface: isDark ? const Color(0xFF0B0D11) : Colors.white,
-          onSurface: isDark ? const Color(0xFFE9ECF0) : const Color(0xFF0F1216),
+          surface: isDark ? const Color(0xFF080D1A) : const Color(0xFFFAF9F7),
+          onSurface: isDark ? const Color(0xFFE7EAF2) : const Color(0xFF101725),
           onSurfaceVariant: isDark
-              ? const Color(0xFF98A0AC)
-              : const Color(0xFF5B636E),
+              ? const Color(0xFF96A0B4)
+              : const Color(0xFF5A6172),
           surfaceContainerHighest: isDark
-              ? const Color(0xFF181C23)
-              : const Color(0xFFF6F7F9),
+              ? const Color(0xFF151C2B)
+              : const Color(0xFFF1F0ED),
           surfaceContainerHigh: isDark
-              ? const Color(0xFF14171D)
-              : const Color(0xFFF1F2F4),
+              ? const Color(0xFF121828)
+              : const Color(0xFFECEBE7),
           surfaceContainer: isDark
-              ? const Color(0xFF111318)
-              : const Color(0xFFF6F7F9),
+              ? const Color(0xFF0E1424)
+              : const Color(0xFFF1F0ED),
           outlineVariant: isDark
-              ? const Color(0xFF242A33)
-              : const Color(0xFFE9EBEE),
-          outline: isDark ? const Color(0xFF333A44) : const Color(0xFFC7CBD1),
-          error: isDark ? const Color(0xFFF85149) : const Color(0xFFCF222E),
+              ? const Color(0xFF222A3A)
+              : const Color(0xFFE5E3DF),
+          outline: isDark ? const Color(0xFF313A4C) : const Color(0xFFC3C0BA),
+          error: isDark ? const Color(0xFFE0475C) : const Color(0xFF9E1B2C),
           onError: isDark ? const Color(0xFF14100D) : Colors.white,
         );
 
