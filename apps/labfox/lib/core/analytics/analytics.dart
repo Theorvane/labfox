@@ -52,7 +52,12 @@ class Analytics {
       await _dio.post<dynamic>(
         '${_config.endpoint}/track',
         options: Options(
-          headers: {'openpanel-client-id': _config.clientId},
+          headers: {
+            'openpanel-client-id': _config.clientId,
+            // OpenPanel validates client ingestion against a stable origin.
+            // This identifies the app, not the signed-in user.
+            'origin': 'app://labfox',
+          },
           contentType: Headers.jsonContentType,
         ),
         data: {

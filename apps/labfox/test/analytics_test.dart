@@ -47,6 +47,8 @@ void main() {
     final request = adapter.captured.single;
     expect(request.path, 'https://panel.example.test/api/track');
     expect(request.headers['openpanel-client-id'], 'client-123');
+    expect(request.headers['origin'], 'app://labfox');
+    expect(request.headers, isNot(contains('openpanel-client-secret')));
     final body = jsonDecode(jsonEncode(request.data)) as Map<String, dynamic>;
     expect(body['type'], 'track');
     expect(body['payload']['name'], 'screen_view');
