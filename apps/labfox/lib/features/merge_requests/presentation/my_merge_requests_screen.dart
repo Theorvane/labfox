@@ -141,12 +141,13 @@ class _MyMergeRequestsScreenState extends ConsumerState<MyMergeRequestsScreen> {
     return WorkTile(
       icon: icon,
       iconColor: colors.foreground,
+      contextLabel: path,
       title: mr.title,
       metadata: [
         StatusPill(label: label, colors: colors, dot: true),
         if (blocker != null)
           StatusPill(label: blocker.label, colors: blocker.colors, dot: true),
-        MetaText(path == null ? '!${mr.iid}' : '$path !${mr.iid}'),
+        MetaText('!${mr.iid}'),
         if (mr.updatedAt != null) MetaText(timeAgo(mr.updatedAt!)),
         LabelChips(mr.labels),
         CommentCount(mr.commentCount),

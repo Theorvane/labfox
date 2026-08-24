@@ -127,11 +127,11 @@ class _MyIssuesScreenState extends ConsumerState<MyIssuesScreen> {
     return WorkTile(
       icon: open ? LabFoxIcons.issueOpen : LabFoxIcons.issueClosed,
       iconColor: colors.foreground,
+      contextLabel: path,
       title: issue.title,
       metadata: [
         StatusPill(label: open ? 'Open' : 'Closed', colors: colors, dot: true),
-        // Cross-project rows carry the repo eyebrow so the origin is clear.
-        MetaText(path == null ? '#${issue.iid}' : '$path #${issue.iid}'),
+        MetaText('#${issue.iid}'),
         if (issue.updatedAt != null) MetaText(timeAgo(issue.updatedAt!)),
         LabelChips(issue.labels),
         CommentCount(issue.commentCount),

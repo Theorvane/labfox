@@ -164,6 +164,7 @@ class _ResultTile extends StatelessWidget {
       return WorkTile(
         icon: item.isOpen ? LabFoxIcons.issueOpen : LabFoxIcons.issueClosed,
         iconColor: colors.foreground,
+        contextLabel: repoPathFromWebUrl(item.webUrl),
         title: item.title,
         metadata: [
           StatusPill(
@@ -191,6 +192,7 @@ class _ResultTile extends StatelessWidget {
       return WorkTile(
         icon: icon,
         iconColor: colors.foreground,
+        contextLabel: repoPathFromWebUrl(item.webUrl),
         title: item.title,
         metadata: [
           StatusPill(label: label, colors: colors, dot: true),

@@ -33,6 +33,50 @@ void main() {
       expect(find.byIcon(Icons.chevron_right), findsOneWidget);
     });
 
+    testWidgets('shows a project context above the primary title', (
+      tester,
+    ) async {
+      await _pump(
+        tester,
+        const WorkTile(
+          icon: Icons.merge,
+          contextLabel: 'gitlab-org/gitlab',
+          title: 'Keep the primary work title easy to scan',
+        ),
+      );
+
+      final context = find.text('gitlab-org/gitlab');
+      final title = find.text('Keep the primary work title easy to scan');
+      expect(context, findsOneWidget);
+      expect(
+        tester.getTopLeft(context).dy,
+        lessThan(tester.getTopLeft(title).dy),
+      );
+    });
+
+    testWidgets('truncates project context without overflowing a phone row', (
+      tester,
+    ) async {
+      await tester.binding.setSurfaceSize(const Size(320, 640));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+
+      await _pump(
+        tester,
+        const WorkTile(
+          icon: Icons.adjust,
+          contextLabel:
+              'a-very-long-group-name/another-group/a-very-long-project-name',
+          title: 'Fix the mobile layout',
+          trailing: Icon(Icons.chevron_right),
+        ),
+      );
+
+      final context = tester.widget<Text>(find.textContaining('a-very-long'));
+      expect(context.maxLines, 1);
+      expect(context.overflow, TextOverflow.ellipsis);
+      expect(tester.takeException(), isNull);
+    });
+
     testWidgets('invokes onTap', (tester) async {
       var tapped = 0;
       await _pump(

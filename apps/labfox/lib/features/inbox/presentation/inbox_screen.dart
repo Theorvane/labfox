@@ -225,10 +225,11 @@ class _TodoTile extends StatelessWidget {
     return WorkTile(
       icon: _iconFor(todo.targetType),
       iconColor: colors.foreground,
+      contextLabel: todo.project?.pathWithNamespace,
       title: todo.title,
       metadata: [
         StatusPill(label: _actionLabel(l10n, todo.actionName), colors: colors),
-        if (todo.project != null) MetaText(_targetRef(todo)),
+        if (todo.target?.iid != null) MetaText(_targetNumber(todo)),
         if (todo.createdAt != null) MetaText(timeAgo(todo.createdAt!)),
       ],
       trailing: onMarkDone == null
@@ -242,16 +243,11 @@ class _TodoTile extends StatelessWidget {
     );
   }
 
-  /// The row eyebrow: the repo path, plus the target's number when it has one
-  /// (`owner/repo #88` for an issue, `!88` for a merge request).
-  static String _targetRef(Todo todo) {
-    final path = todo.project!.pathWithNamespace;
-    final iid = todo.target?.iid;
-    if (iid == null) {
-      return path;
-    }
+  /// The target's user-facing number; project context has its own hierarchy.
+  static String _targetNumber(Todo todo) {
+    final iid = todo.target!.iid!;
     final sigil = todo.targetType == 'MergeRequest' ? '!' : '#';
-    return '$path $sigil$iid';
+    return '$sigil$iid';
   }
 
   /// The reason's colour: failures read red, an approval request blue, a
