@@ -163,6 +163,45 @@ jobs:
             echo "found=false" >> "$GITHUB_OUTPUT"
           fi
 
+  # Release uploads run only after a main promotion and need store credentials.
+  # Exercise the same Xcode and iOS SDK on every PR without those credentials,
+  # explicitly checking out the submitted head instead of GitHub's merge ref.
+  ios-sdk:
+    name: iOS SDK validation
+    needs: detect-flutter
+    if: github.event_name == 'pull_request' && needs.detect-flutter.outputs.found == 'true'
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
+        with:
+          channel: stable
+          flutter-version: 3.38.9
+          cache: true
+
+      - name: Verify Xcode and iOS SDK
+        run: |
+          set -euo pipefail
+          xcodebuild -version
+          sdk_version="$(xcrun --sdk iphoneos --show-sdk-version)"
+          case "$sdk_version" in
+            26.*) ;;
+            *)
+              echo "Expected an iOS 26 SDK, found $sdk_version." >&2
+              exit 1
+              ;;
+          esac
+
+      - name: Resolve the workspace
+        run: flutter pub get
+
+      - name: Build unsigned iOS app
+        working-directory: apps/labfox
+        run: flutter build ios --release --no-codesign
+
   flutter:
     name: Flutter quality gate
     needs: detect-flutter
