@@ -77,16 +77,9 @@ class PipelineDetailScreen extends ConsumerWidget {
                   );
                 }
                 final byStage = groupJobsByStage(all);
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    for (final entry in byStage.entries)
-                      _Stage(
-                        projectId: projectId,
-                        stage: entry.key,
-                        jobs: entry.value,
-                      ),
-                  ],
+                return _PipelineStageFlow(
+                  projectId: projectId,
+                  stages: byStage,
                 );
               },
             ),
@@ -173,71 +166,155 @@ class _PipelineHeader extends StatelessWidget {
   }
 }
 
-/// One stage's jobs under a light stage header, each job a [WorkTile] with its
-/// own CI glyph and status pill so a run reads the same as the pipelines list.
+/// A connected, top-to-bottom stage flow that keeps execution order visible on
+/// a narrow screen without requiring a horizontally scrolling graph.
+class _PipelineStageFlow extends StatelessWidget {
+  const _PipelineStageFlow({required this.projectId, required this.stages});
+
+  final int projectId;
+  final Map<String, List<Job>> stages;
+
+  @override
+  Widget build(BuildContext context) {
+    final entries = stages.entries.toList(growable: false);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (final (index, entry) in entries.indexed)
+          _Stage(
+            projectId: projectId,
+            stage: entry.key,
+            jobs: entry.value,
+            step: index + 1,
+            hasPrevious: index > 0,
+            hasNext: index < entries.length - 1,
+          ),
+      ],
+    );
+  }
+}
+
+/// One numbered stage in the connected flow. Each job remains a [WorkTile]
+/// with its own CI glyph and status pill so status is never conveyed by the
+/// connector alone.
 class _Stage extends StatelessWidget {
   const _Stage({
     required this.projectId,
     required this.stage,
     required this.jobs,
+    required this.step,
+    required this.hasPrevious,
+    required this.hasNext,
   });
 
   final int projectId;
   final String stage;
   final List<Job> jobs;
+  final int step;
+  final bool hasPrevious;
+  final bool hasNext;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final status = LabFoxStatusColors.of(context);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            left: LabFoxSpacing.md,
-            right: LabFoxSpacing.md,
-            top: LabFoxSpacing.md,
-            bottom: LabFoxSpacing.xs,
-          ),
-          child: Row(
-            children: [
-              Text(
-                stage.isEmpty ? '—' : stage,
-                style: theme.textTheme.labelLarge,
-              ),
-              const SizedBox(width: LabFoxSpacing.sm),
-              Text(
-                '${jobs.length}',
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                ),
-              ),
-            ],
-          ),
-        ),
-        for (final job in jobs)
-          Builder(
-            builder: (context) {
-              final (icon, colors) = ciVisual(job.ciStatus, status);
-              return WorkTile(
-                icon: icon,
-                iconColor: colors.foreground,
-                title: job.name,
-                metadata: [
-                  StatusPill(
-                    label: ciLabel(job.status),
-                    colors: colors,
-                    dot: true,
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SizedBox(
+            width: LabFoxSpacing.xl,
+            child: Column(
+              children: [
+                if (hasPrevious)
+                  SizedBox(
+                    height: LabFoxSpacing.md,
+                    child: VerticalDivider(
+                      width: LabFoxSpacing.xs,
+                      color: theme.colorScheme.outlineVariant,
+                    ),
+                  )
+                else
+                  const SizedBox(height: LabFoxSpacing.md),
+                Container(
+                  width: LabFoxSpacing.lg,
+                  height: LabFoxSpacing.lg,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.surfaceContainerHighest,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: theme.colorScheme.outlineVariant),
                   ),
-                ],
-                trailing: const Icon(LabFoxIcons.chevron, size: 18),
-                onTap: () => context.go(Routes.job(projectId, job.id)),
-              );
-            },
+                  child: Text('$step', style: theme.textTheme.labelSmall),
+                ),
+                if (hasNext)
+                  Expanded(
+                    child: VerticalDivider(
+                      key: ValueKey('pipeline-stage-connector-${step - 1}'),
+                      width: LabFoxSpacing.xs,
+                      color: theme.colorScheme.outlineVariant,
+                    ),
+                  ),
+              ],
+            ),
           ),
-      ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: LabFoxSpacing.md,
+                    right: LabFoxSpacing.md,
+                    bottom: LabFoxSpacing.xs,
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          stage.isEmpty ? '—' : stage,
+                          style: theme.textTheme.labelLarge,
+                        ),
+                      ),
+                      const SizedBox(width: LabFoxSpacing.sm),
+                      Text(
+                        '${jobs.length}',
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                for (final job in jobs)
+                  Builder(
+                    builder: (context) {
+                      final (icon, colors) = ciVisual(job.ciStatus, status);
+                      return WorkTile(
+                        icon: icon,
+                        iconColor: colors.foreground,
+                        title: job.name,
+                        metadata: [
+                          StatusPill(
+                            label: ciLabel(job.status),
+                            colors: colors,
+                            dot: true,
+                          ),
+                        ],
+                        trailing: const Icon(
+                          LabFoxIcons.chevron,
+                          size: LabFoxIconSize.sm,
+                        ),
+                        onTap: () => context.go(Routes.job(projectId, job.id)),
+                      );
+                    },
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -81,4 +81,52 @@ void main() {
     expect(find.text('build'), findsOneWidget);
     expect(find.text('test'), findsOneWidget);
   });
+
+  testWidgets('stage flow renders from earliest to latest at phone width', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(320, 640));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    await _pump(
+      tester,
+      pipeline: const Pipeline(id: 944, status: 'running', ref: 'main'),
+      jobs: const [
+        Job(id: 30, name: 'release', status: 'created', stage: 'deploy'),
+        Job(id: 20, name: 'unit', status: 'success', stage: 'test'),
+        Job(id: 10, name: 'compile', status: 'success', stage: 'build'),
+      ],
+    );
+
+    expect(
+      tester.getTopLeft(find.text('build')).dy,
+      lessThan(tester.getTopLeft(find.text('test')).dy),
+    );
+    expect(
+      tester.getTopLeft(find.text('test')).dy,
+      lessThan(tester.getTopLeft(find.text('deploy')).dy),
+    );
+    expect(find.byKey(const ValueKey('pipeline-stage-connector-0')), findsOne);
+    expect(find.byKey(const ValueKey('pipeline-stage-connector-1')), findsOne);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('stage flow remains stable at desktop width', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    await _pump(
+      tester,
+      pipeline: const Pipeline(id: 944, status: 'success', ref: 'main'),
+      jobs: const [
+        Job(id: 20, name: 'unit', status: 'success', stage: 'test'),
+        Job(id: 10, name: 'compile', status: 'success', stage: 'build'),
+      ],
+    );
+
+    expect(find.text('build'), findsOneWidget);
+    expect(find.text('test'), findsOneWidget);
+    expect(find.byKey(const ValueKey('pipeline-stage-connector-0')), findsOne);
+    expect(tester.takeException(), isNull);
+  });
 }
