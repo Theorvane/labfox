@@ -119,9 +119,13 @@
     "description": "Fallback sign-in error"
   },
   "scopeAssigned": "Assigned",
-  "@scopeAssigned": {"description": "Account-level list scope: items assigned to the user"},
+  "@scopeAssigned": {
+    "description": "Account-level list scope: items assigned to the user"
+  },
   "scopeCreated": "Created",
-  "@scopeCreated": {"description": "Account-level list scope: items created by the user"},
+  "@scopeCreated": {
+    "description": "Account-level list scope: items created by the user"
+  },
   "homeRefresh": "Refresh",
   "@homeRefresh": {
     "description": "Tooltip for the home refresh action"
@@ -155,15 +159,25 @@
     "description": "Tooltip for the action that shares the item's web link"
   },
   "mrClose": "Close",
-  "@mrClose": {"description": "Menu action that closes the merge request"},
+  "@mrClose": {
+    "description": "Menu action that closes the merge request"
+  },
   "mrReopen": "Reopen",
-  "@mrReopen": {"description": "Menu action that reopens the merge request"},
+  "@mrReopen": {
+    "description": "Menu action that reopens the merge request"
+  },
   "mrRebase": "Rebase",
-  "@mrRebase": {"description": "Menu action that rebases the merge request"},
+  "@mrRebase": {
+    "description": "Menu action that rebases the merge request"
+  },
   "mrMarkDraft": "Mark as draft",
-  "@mrMarkDraft": {"description": "Menu action that marks the MR as a draft"},
+  "@mrMarkDraft": {
+    "description": "Menu action that marks the MR as a draft"
+  },
   "mrMarkReady": "Mark as ready",
-  "@mrMarkReady": {"description": "Menu action that marks a draft MR as ready"},
+  "@mrMarkReady": {
+    "description": "Menu action that marks a draft MR as ready"
+  },
   "mrBlockerConflicts": "Conflicts",
   "@mrBlockerConflicts": {
     "description": "Row chip when a merge request has merge conflicts"
@@ -217,31 +231,57 @@
     "description": "Tooltip for the create-issue action on the issues list"
   },
   "issueClose": "Close issue",
-  "@issueClose": {"description": "Menu action that closes the issue"},
+  "@issueClose": {
+    "description": "Menu action that closes the issue"
+  },
   "issueReopen": "Reopen issue",
-  "@issueReopen": {"description": "Menu action that reopens the issue"},
+  "@issueReopen": {
+    "description": "Menu action that reopens the issue"
+  },
   "issueStateError": "Could not update the issue. Please try again.",
-  "@issueStateError": {"description": "Shown when closing or reopening an issue fails"},
+  "@issueStateError": {
+    "description": "Shown when closing or reopening an issue fails"
+  },
   "newMrTitle": "New merge request",
-  "@newMrTitle": {"description": "Title of the create-MR screen"},
+  "@newMrTitle": {
+    "description": "Title of the create-MR screen"
+  },
   "newMrSourceLabel": "Source branch",
-  "@newMrSourceLabel": {"description": "Label for the source branch field"},
+  "@newMrSourceLabel": {
+    "description": "Label for the source branch field"
+  },
   "newMrTargetLabel": "Target branch",
-  "@newMrTargetLabel": {"description": "Label for the target branch field"},
+  "@newMrTargetLabel": {
+    "description": "Label for the target branch field"
+  },
   "newMrTitleLabel": "Title",
-  "@newMrTitleLabel": {"description": "Label for the MR title field"},
+  "@newMrTitleLabel": {
+    "description": "Label for the MR title field"
+  },
   "newMrDescriptionLabel": "Description (optional)",
-  "@newMrDescriptionLabel": {"description": "Label for the MR description field"},
+  "@newMrDescriptionLabel": {
+    "description": "Label for the MR description field"
+  },
   "newMrBranchRequired": "Enter a branch.",
-  "@newMrBranchRequired": {"description": "Validation when a branch is empty"},
+  "@newMrBranchRequired": {
+    "description": "Validation when a branch is empty"
+  },
   "newMrTitleRequired": "Enter a title.",
-  "@newMrTitleRequired": {"description": "Validation when the MR title is empty"},
+  "@newMrTitleRequired": {
+    "description": "Validation when the MR title is empty"
+  },
   "newMrSubmit": "Create merge request",
-  "@newMrSubmit": {"description": "Button that creates the merge request"},
+  "@newMrSubmit": {
+    "description": "Button that creates the merge request"
+  },
   "newMrError": "Could not create the merge request. Please try again.",
-  "@newMrError": {"description": "Shown when creating an MR fails"},
+  "@newMrError": {
+    "description": "Shown when creating an MR fails"
+  },
   "newMrButton": "New merge request",
-  "@newMrButton": {"description": "Tooltip for the create-MR action on the MR list"},
+  "@newMrButton": {
+    "description": "Tooltip for the create-MR action on the MR list"
+  },
   "projectOverviewTitle": "Project",
   "@projectOverviewTitle": {
     "description": "Fallback title for the project overview screen"
@@ -319,21 +359,37 @@
     "description": "Shown for a repository with no branches"
   },
   "newBranchTitle": "New branch",
-  "@newBranchTitle": {"description": "Title of the create-branch dialog"},
+  "@newBranchTitle": {
+    "description": "Title of the create-branch dialog"
+  },
   "newBranchNameLabel": "Branch name",
-  "@newBranchNameLabel": {"description": "Label for the new branch name field"},
+  "@newBranchNameLabel": {
+    "description": "Label for the new branch name field"
+  },
   "newBranchFromLabel": "Create from",
-  "@newBranchFromLabel": {"description": "Label for the source ref field"},
+  "@newBranchFromLabel": {
+    "description": "Label for the source ref field"
+  },
   "newBranchNameRequired": "Enter a branch name.",
-  "@newBranchNameRequired": {"description": "Validation when the branch name is empty"},
+  "@newBranchNameRequired": {
+    "description": "Validation when the branch name is empty"
+  },
   "newBranchFromRequired": "Enter a source branch or ref.",
-  "@newBranchFromRequired": {"description": "Validation when the source ref is empty"},
+  "@newBranchFromRequired": {
+    "description": "Validation when the source ref is empty"
+  },
   "newBranchCreate": "Create branch",
-  "@newBranchCreate": {"description": "Button that creates the branch"},
+  "@newBranchCreate": {
+    "description": "Button that creates the branch"
+  },
   "newBranchError": "Could not create the branch. Please try again.",
-  "@newBranchError": {"description": "Shown when creating a branch fails"},
+  "@newBranchError": {
+    "description": "Shown when creating a branch fails"
+  },
   "newBranchButton": "New branch",
-  "@newBranchButton": {"description": "Tooltip for the create-branch action"},
+  "@newBranchButton": {
+    "description": "Tooltip for the create-branch action"
+  },
   "branchDefault": "Default branch",
   "@branchDefault": {
     "description": "Label marking the default branch"
@@ -893,6 +949,68 @@
   "settingsLicenses": "Open source licenses",
   "@settingsLicenses": {
     "description": "Settings entry that opens the open-source license page"
+  },
+  "subscriptionTitle": "LabFox subscription",
+  "@subscriptionTitle": {
+    "description": "Title of the subscription screen"
+  },
+  "subscriptionActive": "Subscribed",
+  "@subscriptionActive": {
+    "description": "Shown when the user has an active subscription"
+  },
+  "subscriptionInactive": "Not subscribed",
+  "@subscriptionInactive": {
+    "description": "Shown when the user has no active subscription"
+  },
+  "subscriptionPitch": "Approve and merge, retry pipelines, and connect more than one account.",
+  "@subscriptionPitch": {
+    "description": "One-line summary of what the subscription unlocks"
+  },
+  "subscriptionBenefitAccounts": "Connect multiple accounts and self-hosted instances",
+  "@subscriptionBenefitAccounts": {
+    "description": "Subscription benefit: multiple accounts"
+  },
+  "subscriptionBenefitActions": "Approve, merge, retry, cancel, and run manual jobs",
+  "@subscriptionBenefitActions": {
+    "description": "Subscription benefit: write actions"
+  },
+  "subscriptionBenefitNotifications": "Push notifications for reviews and pipeline failures",
+  "@subscriptionBenefitNotifications": {
+    "description": "Subscription benefit: push notifications"
+  },
+  "subscriptionBenefitFavorites": "Unlimited favorites and saved searches",
+  "@subscriptionBenefitFavorites": {
+    "description": "Subscription benefit: productivity limits lifted"
+  },
+  "subscriptionSubscribe": "Subscribe for {price}",
+  "@subscriptionSubscribe": {
+    "description": "Purchase button, with the price as the store formats it",
+    "placeholders": {
+      "price": {
+        "type": "String",
+        "example": "US$4.99"
+      }
+    }
+  },
+  "subscriptionRestore": "Restore purchases",
+  "@subscriptionRestore": {
+    "description": "Restores an existing subscription on a new device"
+  },
+  "subscriptionUnavailable": "The store is not available right now. Try again later.",
+  "@subscriptionUnavailable": {
+    "description": "Shown when the store returns no product to sell"
+  },
+  "subscriptionError": "That did not go through. Nothing was charged.",
+  "@subscriptionError": {
+    "description": "Shown when a purchase or restore fails"
+  },
+  "subscriptionRestored": "Your subscription is active.",
+  "@subscriptionRestored": {
+    "description": "Confirms a successful restore"
+  },
+  "subscriptionNothingToRestore": "No subscription found for this store account.",
+  "@subscriptionNothingToRestore": {
+    "description": "Shown when a restore finds nothing to restore"
   },
   "navHome": "Home",
   "@navHome": {
