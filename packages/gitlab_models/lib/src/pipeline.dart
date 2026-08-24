@@ -13,6 +13,10 @@ abstract class Pipeline with _$Pipeline {
     required String status,
     String? ref,
     String? sha,
+
+    /// Why the pipeline ran: `push`, `schedule`, `merge_request_event`, and
+    /// others GitLab adds over time. Null on instances that omit it.
+    String? source,
     @JsonKey(name: 'web_url') String? webUrl,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
@@ -24,6 +28,26 @@ abstract class Pipeline with _$Pipeline {
       _$PipelineFromJson(json);
 
   CiStatus get ciStatus => CiStatus.parse(status);
+
+  /// [source] as something to show a person.
+  ///
+  /// GitLab sends snake_case tokens like `merge_request_event`. Printing those
+  /// beside human text reads as a leaked internal, and the trailing `_event` is
+  /// noise, so both are stripped. An unmapped source still degrades to readable
+  /// words rather than to a blank.
+  String? get sourceLabel {
+    final value = source;
+    if (value == null || value.isEmpty) {
+      return null;
+    }
+    if (value == 'schedule') {
+      return 'scheduled';
+    }
+    final trimmed = value.endsWith('_event')
+        ? value.substring(0, value.length - '_event'.length)
+        : value;
+    return trimmed.replaceAll('_', ' ');
+  }
 
   /// The short SHA a user sees, or null when the pipeline has no commit.
   String? get shortSha {

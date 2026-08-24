@@ -11,6 +11,7 @@ _Pipeline _$PipelineFromJson(Map<String, dynamic> json) => _Pipeline(
   status: json['status'] as String,
   ref: json['ref'] as String?,
   sha: json['sha'] as String?,
+  source: json['source'] as String?,
   webUrl: json['web_url'] as String?,
   createdAt: json['created_at'] == null
       ? null
@@ -25,6 +26,7 @@ Map<String, dynamic> _$PipelineToJson(_Pipeline instance) => <String, dynamic>{
   'status': instance.status,
   'ref': instance.ref,
   'sha': instance.sha,
+  'source': instance.source,
   'web_url': instance.webUrl,
   'created_at': instance.createdAt?.toIso8601String(),
   'updated_at': instance.updatedAt?.toIso8601String(),

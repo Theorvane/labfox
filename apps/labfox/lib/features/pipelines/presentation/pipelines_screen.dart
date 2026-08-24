@@ -87,6 +87,11 @@ class _PipelineTile extends StatelessWidget {
       metadata: [
         StatusPill(label: ciLabel(pipeline.status), colors: colors, dot: true),
         MetaText('#${pipeline.id}'),
+        // Why it ran. Two pipelines on the same ref with the same status are
+        // indistinguishable until you know one was scheduled and the other
+        // came from a push; gitlab.com tags it for that reason, and it is
+        // already in the list response.
+        if (pipeline.sourceLabel != null) MetaText(pipeline.sourceLabel!),
         if (pipeline.sha != null) MetaText(_shortSha(pipeline.sha!)),
         if (pipeline.createdAt != null)
           MetaText(DateFormat.yMMMd().format(pipeline.createdAt!.toLocal())),
