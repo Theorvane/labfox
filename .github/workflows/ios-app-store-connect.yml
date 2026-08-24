@@ -28,9 +28,9 @@ jobs:
       APPLE_DISTRIBUTION_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_DISTRIBUTION_CERTIFICATE_PASSWORD }}
       APP_STORE_PROVISIONING_PROFILE_BASE64: ${{ secrets.APP_STORE_PROVISIONING_PROFILE_BASE64 }}
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
         with:
           channel: stable
           flutter-version: 3.38.9
@@ -125,14 +125,17 @@ jobs:
           test -n "$ASC_KEY_ID"
           test -n "$ASC_ISSUER_ID"
           test -n "$ASC_PRIVATE_KEY"
-          API_KEY_PATH="$RUNNER_TEMP/AuthKey_${ASC_KEY_ID}.p8"
+          # altool only accepts --p8-file-path for --generate-jwt. For an
+          # upload, point it explicitly at the directory containing the key.
+          export API_PRIVATE_KEYS_DIR="$RUNNER_TEMP/app-store-connect-api-keys"
           umask 077
-          printf '%s' "$ASC_PRIVATE_KEY" > "$API_KEY_PATH"
+          mkdir -p "$API_PRIVATE_KEYS_DIR"
+          printf '%s' "$ASC_PRIVATE_KEY" > \
+            "$API_PRIVATE_KEYS_DIR/AuthKey_${ASC_KEY_ID}.p8"
           IPA="$(find "$RUNNER_TEMP/export" -name '*.ipa' -maxdepth 1 | head -1)"
           test -n "$IPA"
           xcrun altool --upload-app \
             -f "$IPA" \
             -t ios \
-            --api-key "$ASC_KEY_ID" \
-            --api-issuer "$ASC_ISSUER_ID" \
-            --p8-file-path "$API_KEY_PATH"
+            --apiKey "$ASC_KEY_ID" \
+            --apiIssuer "$ASC_ISSUER_ID"

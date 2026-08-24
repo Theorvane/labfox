@@ -201,7 +201,6 @@ def feature_graphic(icon_path, shot_path, out_path, size=(1024, 500)):
     out.save(out_path)
     return out_path
 
-
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--raw", required=True, help="directory of simulator captures")

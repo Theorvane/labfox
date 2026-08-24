@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/router.dart';
+import '../../../core/entitlement/entitlement_providers.dart';
 import '../../../core/settings/app_settings_providers.dart';
 import '../../../core/ui/link_opener.dart';
 import '../../../l10n/app_localizations.dart';
@@ -30,9 +31,19 @@ class SettingsScreen extends ConsumerWidget {
     final open = ref.watch(linkOpenerProvider);
     final themeMode = ref.watch(themeModeProvider);
     final version = ref.watch(appVersionProvider);
+    final entitlement = ref.watch(entitlementProvider);
+    final freePlatform = ref.watch(freePlatformProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.settingsTitle)),
+      appBar: AppBar(
+        title: Text(l10n.settingsTitle),
+        // This route lives outside the navigation shell, so it carries its own
+        // way back; entered with context.go there is no stack to pop.
+        leading: BackButton(
+          onPressed: () =>
+              context.canPop() ? context.pop() : context.go(Routes.home),
+        ),
+      ),
       body: ListView(
         children: [
           ListTile(
@@ -41,6 +52,20 @@ class SettingsScreen extends ConsumerWidget {
             trailing: const Icon(LabFoxIcons.chevron),
             onTap: () => context.go(Routes.accounts),
           ),
+          // Hidden where the app ships with every feature: an entry there
+          // would offer to sell what the user already has.
+          if (!freePlatform)
+            ListTile(
+              leading: const Icon(LabFoxIcons.star),
+              title: Text(l10n.subscriptionTitle),
+              subtitle: Text(
+                entitlement.isSubscribed
+                    ? l10n.subscriptionActive
+                    : l10n.subscriptionInactive,
+              ),
+              trailing: const Icon(LabFoxIcons.chevron),
+              onTap: () => context.go(Routes.subscription),
+            ),
           const Divider(height: 1),
           _SectionHeader(l10n.settingsAppearance),
           RadioGroup<ThemeMode>(
