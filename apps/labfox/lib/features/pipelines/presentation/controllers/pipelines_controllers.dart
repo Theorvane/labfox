@@ -77,10 +77,15 @@ final pipelineDetailProvider = FutureProvider.family<Pipeline, PipelineRef>((
   return repo.get(projectId: arg.projectId, pipelineId: arg.pipelineId);
 });
 
-/// Groups jobs by stage, preserving the order stages first appear.
+/// Groups jobs by stage in pipeline execution order.
+///
+/// GitLab returns pipeline jobs by ID descending. Job IDs are allocated when
+/// the pipeline is created, so reversing that API order restores the stage and
+/// job sequence used to build the pipeline instead of presenting it backwards.
 Map<String, List<Job>> groupJobsByStage(List<Job> jobs) {
+  final ordered = [...jobs]..sort((a, b) => a.id.compareTo(b.id));
   final groups = <String, List<Job>>{};
-  for (final job in jobs) {
+  for (final job in ordered) {
     groups.putIfAbsent(job.stage ?? '', () => []).add(job);
   }
   return groups;

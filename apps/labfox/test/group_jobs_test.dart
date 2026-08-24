@@ -4,20 +4,23 @@ import 'package:labfox/features/pipelines/presentation/controllers/pipelines_con
 
 void main() {
   group('groupJobsByStage', () {
-    test('groups jobs by stage, preserving first-seen stage order', () {
+    test('restores execution order from GitLab newest-first jobs', () {
       final jobs = [
-        const Job(id: 1, name: 'compile', status: 'success', stage: 'build'),
-        const Job(id: 2, name: 'unit', status: 'failed', stage: 'test'),
-        const Job(id: 3, name: 'lint', status: 'success', stage: 'test'),
-        const Job(id: 4, name: 'docker', status: 'success', stage: 'build'),
+        const Job(id: 30, name: 'release', status: 'created', stage: 'deploy'),
+        const Job(
+          id: 21,
+          name: 'integration',
+          status: 'success',
+          stage: 'test',
+        ),
+        const Job(id: 20, name: 'unit', status: 'failed', stage: 'test'),
+        const Job(id: 10, name: 'compile', status: 'success', stage: 'build'),
       ];
 
       final grouped = groupJobsByStage(jobs);
 
-      // build appears before test; both keep their jobs.
-      expect(grouped.keys.toList(), ['build', 'test']);
-      expect(grouped['build']!.map((j) => j.name), ['compile', 'docker']);
-      expect(grouped['test']!.map((j) => j.name), ['unit', 'lint']);
+      expect(grouped.keys.toList(), ['build', 'test', 'deploy']);
+      expect(grouped['test']!.map((j) => j.name), ['unit', 'integration']);
     });
 
     test('a job without a stage groups under an empty key', () {
