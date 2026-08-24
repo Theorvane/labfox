@@ -48,7 +48,7 @@ class LabFoxStatusColors extends ThemeExtension<LabFoxStatusColors> {
   /// Open issue / merge request, and a passed pipeline.
   final StatusColor open;
 
-  /// Merged merge request — violet, never mistaken for a plain close.
+  /// Merged merge request — informational, never mistaken for a plain close.
   final StatusColor merged;
 
   /// Closed issue / merge request, and a failed pipeline.
@@ -71,27 +71,27 @@ class LabFoxStatusColors extends ThemeExtension<LabFoxStatusColors> {
   // container for chips.
   static const light = LabFoxStatusColors(
     open: StatusColor(
-      foreground: Color(0xFF147B54),
-      container: Color(0xFFEBF7F3),
+      foreground: Color(0xFF0E593C),
+      container: Color(0xFFEBF7F2),
     ),
     merged: StatusColor(
-      foreground: Color(0xFF1486A6),
+      foreground: Color(0xFF0F637B),
       container: Color(0xFFEBF5F7),
     ),
     closed: StatusColor(
-      foreground: Color(0xFF881625),
+      foreground: Color(0xFF4F0D16),
       container: Color(0xFFF7EBEC),
     ),
     running: StatusColor(
-      foreground: Color(0xFF2D53B4),
+      foreground: Color(0xFF1E3879),
       container: Color(0xFFEBEEF7),
     ),
     pending: StatusColor(
-      foreground: Color(0xFF918A83),
+      foreground: Color(0xFF6A645E),
       container: Color(0xFFF2F1F0),
     ),
     warning: StatusColor(
-      foreground: Color(0xFFD18F00),
+      foreground: Color(0xFF916300),
       container: Color(0xFFF7F3EB),
     ),
   );
@@ -100,7 +100,7 @@ class LabFoxStatusColors extends ThemeExtension<LabFoxStatusColors> {
   // containers.
   static const dark = LabFoxStatusColors(
     open: StatusColor(
-      foreground: Color(0xFF1EBA7F),
+      foreground: Color(0xFF1FBD80),
       container: Color(0xFF10281F),
     ),
     merged: StatusColor(
@@ -108,11 +108,11 @@ class LabFoxStatusColors extends ThemeExtension<LabFoxStatusColors> {
       container: Color(0xFF102328),
     ),
     closed: StatusColor(
-      foreground: Color(0xFFE03F54),
+      foreground: Color(0xFFE24B5F),
       container: Color(0xFF281013),
     ),
     running: StatusColor(
-      foreground: Color(0xFF708EDB),
+      foreground: Color(0xFF7693DD),
       container: Color(0xFF101728),
     ),
     pending: StatusColor(

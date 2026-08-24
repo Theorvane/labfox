@@ -36,6 +36,10 @@ abstract class PurchaseApi {
   Future<void> restorePurchases();
 
   Future<void> completePurchase(PurchaseDetails purchase);
+
+  Future<ProductDetailsResponse> queryProductDetails(Set<String> ids);
+
+  Future<bool> buyNonConsumable({required PurchaseParam purchaseParam});
 }
 
 /// [PurchaseApi] backed by the plugin — StoreKit on Apple, Play Billing on
@@ -58,6 +62,16 @@ class LivePurchaseApi implements PurchaseApi {
   @override
   Future<void> completePurchase(PurchaseDetails purchase) =>
       _purchases.completePurchase(purchase);
+
+  @override
+  Future<ProductDetailsResponse> queryProductDetails(Set<String> ids) =>
+      _purchases.queryProductDetails(ids);
+
+  /// Auto-renewing subscriptions go through the non-consumable call on both
+  /// platforms; the plugin has no separate subscription entry point.
+  @override
+  Future<bool> buyNonConsumable({required PurchaseParam purchaseParam}) =>
+      _purchases.buyNonConsumable(purchaseParam: purchaseParam);
 }
 
 /// Entitlement as the store reports it.

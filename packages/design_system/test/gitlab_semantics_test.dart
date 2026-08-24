@@ -45,6 +45,18 @@ void main() {
     );
   }
 
+  double contrastRatio(Color foreground, Color background) {
+    final foregroundLuminance = foreground.computeLuminance();
+    final backgroundLuminance = background.computeLuminance();
+    final lighter = foregroundLuminance > backgroundLuminance
+        ? foregroundLuminance
+        : backgroundLuminance;
+    final darker = foregroundLuminance > backgroundLuminance
+        ? backgroundLuminance
+        : foregroundLuminance;
+    return (lighter + 0.05) / (darker + 0.05);
+  }
+
   for (final entry in {
     'light': LabFoxStatusColors.light,
     'dark': LabFoxStatusColors.dark,
@@ -91,6 +103,25 @@ void main() {
           reason:
               'hue ${hue.round()} is purple. In GitLab that means GitLab '
               'itself, not a status.',
+        );
+      }
+    });
+
+    test('$theme status pairs meet WCAG AA contrast', () {
+      for (final entry in {
+        'open': palette.open,
+        'merged': palette.merged,
+        'closed': palette.closed,
+        'running': palette.running,
+        'pending': palette.pending,
+        'warning': palette.warning,
+      }.entries) {
+        expect(
+          contrastRatio(entry.value.foreground, entry.value.container),
+          greaterThanOrEqualTo(4.5),
+          reason:
+              '${entry.key} text and icons are normal-size content and must '
+              'meet WCAG AA contrast against their container',
         );
       }
     });
