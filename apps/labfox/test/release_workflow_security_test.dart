@@ -41,4 +41,29 @@ void main() {
       contains('persist-credentials: false'),
     );
   });
+
+  test(
+    'the release job authenticates the tag push without persisting a token',
+    () {
+      final contents = releaseWorkflow.readAsStringSync();
+
+      expect(
+        contents,
+        contains(
+          '      - name: Tag the release\n'
+          '        env:\n'
+          '          TAG: \${{ needs.check.outputs.tag }}\n'
+          '          GH_TOKEN: \${{ github.token }}',
+        ),
+      );
+      expect(
+        contents,
+        contains(
+          'git -c http.https://github.com/.extraheader='
+          '"AUTHORIZATION: basic \$(printf \'x-access-token:%s\' "\$GH_TOKEN" '
+          "| base64 | tr -d '\\n')\" push origin \"refs/tags/\$TAG\"",
+        ),
+      );
+    },
+  );
 }
