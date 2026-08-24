@@ -70,11 +70,14 @@ class SubscriptionController extends AsyncNotifier<void> {
     }
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
-      await ref
+      final started = await ref
           .read(purchaseApiProvider)
           .buyNonConsumable(
             purchaseParam: PurchaseParam(productDetails: offer.product),
           );
+      if (!started) {
+        throw StateError('The store rejected the purchase request.');
+      }
       // The purchase itself arrives on the stream; re-read so entitlement
       // reflects it as soon as the store has spoken.
       await ref.read(entitlementProvider.notifier).refresh();

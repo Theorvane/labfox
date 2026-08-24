@@ -26,6 +26,7 @@ class _FakePurchaseApi implements PurchaseApi {
   Set<String> notFound = {};
   int buyCalls = 0;
   int restoreCalls = 0;
+  bool buyResult = true;
   Object? queryError;
 
   @override
@@ -54,7 +55,7 @@ class _FakePurchaseApi implements PurchaseApi {
   @override
   Future<bool> buyNonConsumable({required PurchaseParam purchaseParam}) async {
     buyCalls++;
-    return true;
+    return buyResult;
   }
 
   Future<void> dispose() => _controller.close();
@@ -140,6 +141,22 @@ void main() {
 
     expect(api.buyCalls, 1);
   });
+
+  test(
+    'a rejected purchase launch reports an error without restoring',
+    () async {
+      api.products = [_product()];
+      api.buyResult = false;
+      final container = containerWith();
+      await container.read(subscriptionOfferProvider.future);
+
+      await container.read(subscriptionControllerProvider.notifier).subscribe();
+
+      expect(api.buyCalls, 1);
+      expect(api.restoreCalls, 0);
+      expect(container.read(subscriptionControllerProvider).hasError, isTrue);
+    },
+  );
 
   test('subscribing without an offer does not call the store', () async {
     api.notFound = {subscriptionProductId};
