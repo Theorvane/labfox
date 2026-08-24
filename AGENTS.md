@@ -200,10 +200,14 @@ Propose it and get approval first.
 - Do not concatenate translated fragments to build a sentence. Use a single parameterized
   message — word order differs across languages.
 - Format dates, numbers, and relative times through `intl`, never with manual string building.
-- **Translation files are the one exemption from the English-only rule.** The `app_<code>.arb`
-  files (except `app_en.arb`) and their generated `app_localizations_<code>.dart` contain
-  non-English text by design, so the CI language check skips them. `app_en.arb` and every other
-  file stay English.
+- **Translations are the one exemption from the English-only rule.** Text written to be read
+  by a user in their own language may be non-English, and the CI language check skips exactly
+  those files: the `app_<code>.arb` files (except `app_en.arb`), their generated
+  `app_localizations_<code>.dart`, and store copy at `docs/store/<name>.<locale>.md` —
+  listings, release notes, and anything else that ships to a store reader.
+  English is the source in every case: `app_en.arb` and the unsuffixed
+  `docs/store/<name>.md` are written first and translated from, never the reverse.
+  Every other file stays English, including any `docs/store/` file without a locale suffix.
 
 Details: `.agents/docs/conventions.md`
 

@@ -71,9 +71,18 @@ jobs:
           # ARB files and the generated per-locale Dart, but NOT app_en.arb (the
           # source of truth, which must stay English) and NOT the app-wide
           # generated delegate.
+          # Store copy is the same category as ARB files: text written to be read
+          # by a user in their own language. Only docs/store/, and only a file
+          # that names its locale — docs/store/<name>.<locale>.md — so it cannot
+          # become a way to smuggle non-English prose into the repository, and
+          # the English source beside it (docs/store/<name>.md) stays checked.
+          STORE_COPY = re.compile(r"^docs/store/[a-z-]+\.[a-z]{2}(-[A-Za-z]+)?\.md$")
+
           def is_translation(path):
               if path.endswith(".arb"):
                   return not path.endswith("app_en.arb")
+              if STORE_COPY.match(path):
+                  return True
               # app_localizations_ko.dart, _ja.dart, ... but not the base file.
               name = path.rsplit("/", 1)[-1]
               return (
