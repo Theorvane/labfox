@@ -11,7 +11,11 @@ void main() {
   final workflow = File('../../.github/workflows/ios-app-store-connect.yml');
 
   test('altool receives the private-key directory explicitly', () {
-    expect(workflow.existsSync(), isTrue, reason: '${workflow.path} is missing');
+    expect(
+      workflow.existsSync(),
+      isTrue,
+      reason: '${workflow.path} is missing',
+    );
 
     final contents = workflow.readAsStringSync();
     expect(
