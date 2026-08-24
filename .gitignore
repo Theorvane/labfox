@@ -75,3 +75,6 @@ Thumbs.db
 # Coverage / logs
 coverage/
 *.log
+
+# Local agent run-continuation artifacts
+.omo/

@@ -12,7 +12,29 @@ with GitLab's Merge Requests, CI/CD, and self-hosted support.**
   <img alt="Platforms" src="https://img.shields.io/badge/platform-Android%20%7C%20iOS%20%7C%20Windows%20%7C%20macOS-lightgrey.svg">
 </p>
 
-> 🚧 Early development. There is no runnable build yet.
+> **Pre-release.** Sign-in, projects, issues, merge requests, diffs, pipelines,
+> job logs, the to-do inbox and search are built and tested. Not yet published to
+> any store — see [RELEASING.md](RELEASING.md).
+
+---
+
+## What it looks like
+
+<p align="center">
+  <img src="docs/images/home.png" width="24%" alt="Home: issues, merge requests, pipelines and favourites">
+  <img src="docs/images/review.png" width="24%" alt="Merge request with approvals and the merge button">
+  <img src="docs/images/diff.png" width="24%" alt="Diff viewer with line numbers and changed lines">
+  <img src="docs/images/job-log.png" width="24%" alt="CI job log with colour output">
+</p>
+
+The same code branches on width rather than platform, so a tablet gets a
+navigation rail and the room to show twenty merge requests at once:
+
+<p align="center">
+  <img src="docs/images/tablet.png" width="80%" alt="Merge request list on a tablet, with a navigation rail">
+</p>
+
+<sub>Screenshots show <a href="https://gitlab.com/gitlab-org/gitlab">gitlab-org/gitlab</a>, a public project.</sub>
 
 ---
 
@@ -58,7 +80,9 @@ Home
 
 ## Tech stack
 
-Flutter · Dart · Riverpod · Dio · go_router · Drift/SQLite · flutter_secure_storage
+Flutter · Dart · Riverpod · Dio · go_router · flutter_secure_storage · intl
+
+A local cache (Drift/SQLite) is planned for after 1.0; today the repositories are network-only.
 
 ```
 UI → Controller (Riverpod) → Repository → GitLab API Client → GitLab
@@ -78,13 +102,14 @@ labfox/
 
 ## Roadmap
 
-| | |
-|---|---|
-| **M0** Foundation | Scaffolding, routing, theming, responsive layout, API client skeleton |
-| **M1** Repository | PAT login, Projects, Repository Browser, File Viewer |
-| **M2** Collaboration | Issues, Merge Requests, Diff, Discussion, Approve, Merge |
-| **M3** CI/CD | Pipeline, Jobs, Job Log, Retry, Cancel, Manual Job |
-| **M4** Product | OAuth, Self-hosted, Multi Account, Inbox, Search, Offline |
+| | | |
+|---|---|---|
+| **M0** Foundation | Scaffolding, routing, theming, responsive layout, API client skeleton | ✅ |
+| **M1** Repository | PAT login, Projects, Repository Browser, File Viewer | ✅ |
+| **M2** Collaboration | Issues, Merge Requests, Diff, Discussion, Approve, Merge | ✅ |
+| **M3** CI/CD | Pipeline, Jobs, Job Log, Retry, Cancel, Manual Job | ✅ |
+| **M4** Product | OAuth, Self-hosted, Multi Account, Inbox, Search, Deep Links | ✅ |
+| **1.0** Release | Store listings, subscription, push notifications, offline cache | in progress |
 
 Details: [`.agents/docs/roadmap.md`](.agents/docs/roadmap.md)
 
@@ -130,13 +155,21 @@ The source code is released under the **Apache License 2.0**. → [LICENSE](LICE
 
 ```
 Source code            Apache-2.0 open source — anyone may use, modify, redistribute
-Desktop (Win/macOS)    Free
-Mobile (Android/iOS)   Sold on the App Store / Play Store
+Windows                Direct download, free, full features
+macOS                  Mac App Store, free, full features
+Android / iOS          Free download, subscription for the paid features
 ```
 
-Desktop is free, and mobile app sales keep development going.
-Because LabFox shares a single Flutter codebase, **improvements contributed on desktop
-land in the mobile apps as well.**
+The app is a free download everywhere. A single subscription, sold through store
+in-app purchase, unlocks the paid features on mobile — there is no LabFox account
+and no LabFox server, so entitlement comes from the store you installed from.
+
+**Desktop keeps every feature for free**, and that is a deliberate constraint rather
+than generosity: LabFox shares one Flutter codebase, so **a fix contributed on
+desktop lands in the mobile apps too.** Charging the people who send those fixes
+would tax the loop the whole model runs on.
+
+What is free and what is not: [`.agents/docs/monetization.md`](.agents/docs/monetization.md)
 
 Third-party dependency licenses: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
 

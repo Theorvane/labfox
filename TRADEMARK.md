@@ -12,7 +12,7 @@ This document explains that boundary in concrete terms.
 
 ## 1. What is covered
 
-The following belong to the copyright holder (sjungwon03) and are not subject to the Apache-2.0 license.
+The following belong to the copyright holder (sloki9637, https://www.sloki9637.com) and are not subject to the Apache-2.0 license.
 
 - The name **LabFox** (including spelling variants: LabFox, Lab Fox, labfox)
 - The LabFox logo and icon
@@ -63,7 +63,7 @@ Forks are welcome. They are a right guaranteed by Apache-2.0. You only need to o
 
 Example wording:
 
-> This project is a fork of LabFox (https://github.com/labfox-app/labfox),
+> This project is a fork of LabFox (https://github.com/theorvane/labfox),
 > licensed under Apache-2.0. It is not affiliated with or endorsed by
 > the LabFox project.
 

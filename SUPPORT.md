@@ -14,7 +14,7 @@ itself. Questions about running the app on your machine will mostly be answered 
 
 ## Asking a Question
 
-1. Search the [existing issues](https://github.com/labfox-app/labfox/issues), including closed ones.
+1. Search the [existing issues](https://github.com/theorvane/labfox/issues), including closed ones.
 2. If nothing matches, open a new issue using the provided issue forms rather than a blank issue.
    The forms ask for the information needed to act on a report.
 3. Contributor pull requests target the `dev` branch. `main` holds releases and is updated only

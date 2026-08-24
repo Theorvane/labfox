@@ -1,0 +1,1047 @@
+{
+  "@@locale": "en",
+  "appTitle": "LabFox",
+  "@appTitle": {
+    "description": "The application name, shown in the task switcher and app bar"
+  },
+  "homeTitle": "Home",
+  "@homeTitle": {
+    "description": "Title of the home screen"
+  },
+  "homeSignedInAs": "Signed in as {username}",
+  "@homeSignedInAs": {
+    "description": "Shown on the home screen with the signed-in user's username",
+    "placeholders": {
+      "username": {
+        "type": "String",
+        "example": "jungwon"
+      }
+    }
+  },
+  "homeEmptyWork": "Your issues, merge requests and pipelines will appear here.",
+  "@homeEmptyWork": {
+    "description": "Placeholder on the home screen before feature work lands"
+  },
+  "homeReviewRequests": "Review requests",
+  "@homeReviewRequests": {
+    "description": "Home section heading for merge requests awaiting the user's review"
+  },
+  "homeAssignedMergeRequests": "Assigned merge requests",
+  "@homeAssignedMergeRequests": {
+    "description": "Home section heading for merge requests assigned to the user"
+  },
+  "homeAssignedIssues": "Assigned issues",
+  "@homeAssignedIssues": {
+    "description": "Home section heading for issues assigned to the user"
+  },
+  "homeWorkAllClear": "You're all caught up.",
+  "@homeWorkAllClear": {
+    "description": "Shown on the home feed when the user has no review requests or assigned work"
+  },
+  "homeWorkError": "Couldn't load your work.",
+  "@homeWorkError": {
+    "description": "Shown when the home work feed fails to load"
+  },
+  "signOut": "Sign out",
+  "@signOut": {
+    "description": "Label for the sign-out action"
+  },
+  "signInTitle": "Connect a GitLab account",
+  "@signInTitle": {
+    "description": "Heading on the sign-in screen"
+  },
+  "signInInstanceLabel": "GitLab instance URL",
+  "@signInInstanceLabel": {
+    "description": "Label for the instance URL field"
+  },
+  "signInInstanceRequired": "Enter your GitLab instance URL.",
+  "@signInInstanceRequired": {
+    "description": "Validation when the instance URL is empty"
+  },
+  "signInInstanceInvalid": "Enter a valid https URL, for example https://gitlab.com.",
+  "@signInInstanceInvalid": {
+    "description": "Validation when the instance URL is not a valid https URL"
+  },
+  "signInTokenLabel": "Personal Access Token",
+  "@signInTokenLabel": {
+    "description": "Label for the token field"
+  },
+  "signInTokenHelp": "Needs the api and read_user scopes.",
+  "@signInTokenHelp": {
+    "description": "Helper text under the token field"
+  },
+  "signInTokenToggle": "Show or hide the token",
+  "@signInTokenToggle": {
+    "description": "Tooltip for the token visibility toggle"
+  },
+  "signInTokenRequired": "Enter a Personal Access Token.",
+  "@signInTokenRequired": {
+    "description": "Validation when the token is empty"
+  },
+  "signInSubmit": "Sign in",
+  "@signInSubmit": {
+    "description": "Label for the sign-in button"
+  },
+  "signInOr": "or",
+  "@signInOr": {
+    "description": "Divider between the token and OAuth sign-in options"
+  },
+  "signInOAuthButton": "Sign in with GitLab",
+  "@signInOAuthButton": {
+    "description": "Button that starts the OAuth browser sign-in"
+  },
+  "signInClientIdLabel": "OAuth client ID",
+  "@signInClientIdLabel": {
+    "description": "Label for the OAuth client id field"
+  },
+  "signInClientIdHelp": "Only for OAuth on a self-hosted instance.",
+  "@signInClientIdHelp": {
+    "description": "Helper text for the OAuth client id field"
+  },
+  "signInOAuthNeedsClientId": "Enter an OAuth client ID for this instance.",
+  "@signInOAuthNeedsClientId": {
+    "description": "Shown when OAuth is started without a usable client id"
+  },
+  "signInErrorToken": "The token was rejected. Check that it is correct and has not expired.",
+  "@signInErrorToken": {
+    "description": "Shown when the instance returns 401"
+  },
+  "signInErrorScope": "The token is missing a required scope. It needs api and read_user.",
+  "@signInErrorScope": {
+    "description": "Shown when the instance returns 403"
+  },
+  "signInErrorUnreachable": "Could not reach that instance. Check the URL, your network, and whether the certificate is trusted.",
+  "@signInErrorUnreachable": {
+    "description": "Shown when the instance cannot be reached"
+  },
+  "signInErrorGeneric": "Sign-in failed. Please try again.",
+  "@signInErrorGeneric": {
+    "description": "Fallback sign-in error"
+  },
+  "scopeAssigned": "Assigned",
+  "@scopeAssigned": {
+    "description": "Account-level list scope: items assigned to the user"
+  },
+  "scopeCreated": "Created",
+  "@scopeCreated": {
+    "description": "Account-level list scope: items created by the user"
+  },
+  "homeRefresh": "Refresh",
+  "@homeRefresh": {
+    "description": "Tooltip for the home refresh action"
+  },
+  "homeFavoritesEmpty": "Star projects to pin them here.",
+  "@homeFavoritesEmpty": {
+    "description": "Hint shown in the empty favorites section"
+  },
+  "homeMyWork": "My work",
+  "@homeMyWork": {
+    "description": "Section heading on the home screen"
+  },
+  "homeProjects": "Projects",
+  "@homeProjects": {
+    "description": "Home entry that opens the projects list"
+  },
+  "projectsTitle": "Projects",
+  "@projectsTitle": {
+    "description": "Title of the projects list screen"
+  },
+  "projectsEmpty": "You are not a member of any projects yet.",
+  "@projectsEmpty": {
+    "description": "Shown when the projects list is empty"
+  },
+  "projectsError": "Could not load your projects.",
+  "@projectsError": {
+    "description": "Shown when the projects list fails to load"
+  },
+  "shareLink": "Share",
+  "@shareLink": {
+    "description": "Tooltip for the action that shares the item's web link"
+  },
+  "mrClose": "Close",
+  "@mrClose": {
+    "description": "Menu action that closes the merge request"
+  },
+  "mrReopen": "Reopen",
+  "@mrReopen": {
+    "description": "Menu action that reopens the merge request"
+  },
+  "mrRebase": "Rebase",
+  "@mrRebase": {
+    "description": "Menu action that rebases the merge request"
+  },
+  "mrMarkDraft": "Mark as draft",
+  "@mrMarkDraft": {
+    "description": "Menu action that marks the MR as a draft"
+  },
+  "mrMarkReady": "Mark as ready",
+  "@mrMarkReady": {
+    "description": "Menu action that marks a draft MR as ready"
+  },
+  "mrBlockerConflicts": "Conflicts",
+  "@mrBlockerConflicts": {
+    "description": "Row chip when a merge request has merge conflicts"
+  },
+  "mrBlockerChecksFailed": "Checks failed",
+  "@mrBlockerChecksFailed": {
+    "description": "Row chip when a merge request's required pipeline has not passed"
+  },
+  "mrBlockerCiRunning": "CI running",
+  "@mrBlockerCiRunning": {
+    "description": "Row chip when a merge request's pipeline is still running"
+  },
+  "mrBlockerNeedsApproval": "Needs approval",
+  "@mrBlockerNeedsApproval": {
+    "description": "Row chip when a merge request still needs approval"
+  },
+  "mrBlockerUnresolved": "Unresolved threads",
+  "@mrBlockerUnresolved": {
+    "description": "Row chip when a merge request has unresolved discussion threads"
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "Label for a retry button"
+  },
+  "newIssueTitle": "New issue",
+  "@newIssueTitle": {
+    "description": "Title of the create-issue screen"
+  },
+  "newIssueTitleLabel": "Title",
+  "@newIssueTitleLabel": {
+    "description": "Label for the issue title field"
+  },
+  "newIssueTitleRequired": "Enter a title.",
+  "@newIssueTitleRequired": {
+    "description": "Validation when the issue title is empty"
+  },
+  "newIssueDescriptionLabel": "Description (optional)",
+  "@newIssueDescriptionLabel": {
+    "description": "Label for the issue description field"
+  },
+  "newIssueSubmit": "Create issue",
+  "@newIssueSubmit": {
+    "description": "Button that creates the issue"
+  },
+  "newIssueError": "Could not create the issue. Please try again.",
+  "@newIssueError": {
+    "description": "Shown when creating an issue fails"
+  },
+  "newIssueButton": "New issue",
+  "@newIssueButton": {
+    "description": "Tooltip for the create-issue action on the issues list"
+  },
+  "issueClose": "Close issue",
+  "@issueClose": {
+    "description": "Menu action that closes the issue"
+  },
+  "issueReopen": "Reopen issue",
+  "@issueReopen": {
+    "description": "Menu action that reopens the issue"
+  },
+  "issueStateError": "Could not update the issue. Please try again.",
+  "@issueStateError": {
+    "description": "Shown when closing or reopening an issue fails"
+  },
+  "newMrTitle": "New merge request",
+  "@newMrTitle": {
+    "description": "Title of the create-MR screen"
+  },
+  "newMrSourceLabel": "Source branch",
+  "@newMrSourceLabel": {
+    "description": "Label for the source branch field"
+  },
+  "newMrTargetLabel": "Target branch",
+  "@newMrTargetLabel": {
+    "description": "Label for the target branch field"
+  },
+  "newMrTitleLabel": "Title",
+  "@newMrTitleLabel": {
+    "description": "Label for the MR title field"
+  },
+  "newMrDescriptionLabel": "Description (optional)",
+  "@newMrDescriptionLabel": {
+    "description": "Label for the MR description field"
+  },
+  "newMrBranchRequired": "Enter a branch.",
+  "@newMrBranchRequired": {
+    "description": "Validation when a branch is empty"
+  },
+  "newMrTitleRequired": "Enter a title.",
+  "@newMrTitleRequired": {
+    "description": "Validation when the MR title is empty"
+  },
+  "newMrSubmit": "Create merge request",
+  "@newMrSubmit": {
+    "description": "Button that creates the merge request"
+  },
+  "newMrError": "Could not create the merge request. Please try again.",
+  "@newMrError": {
+    "description": "Shown when creating an MR fails"
+  },
+  "newMrButton": "New merge request",
+  "@newMrButton": {
+    "description": "Tooltip for the create-MR action on the MR list"
+  },
+  "projectOverviewTitle": "Project",
+  "@projectOverviewTitle": {
+    "description": "Fallback title for the project overview screen"
+  },
+  "projectOverviewError": "Could not load this project.",
+  "@projectOverviewError": {
+    "description": "Shown when the project overview fails"
+  },
+  "projectOverviewNoReadme": "This project has no README.",
+  "@projectOverviewNoReadme": {
+    "description": "Shown when a project has no README"
+  },
+  "projectOverviewRepository": "Repository",
+  "@projectOverviewRepository": {
+    "description": "Overview link that opens the repository browser"
+  },
+  "repositoryTitle": "Repository",
+  "@repositoryTitle": {
+    "description": "Title of the repository browser at the root"
+  },
+  "repositoryError": "Could not load this directory.",
+  "@repositoryError": {
+    "description": "Shown when a directory listing fails"
+  },
+  "repositoryEmpty": "This directory is empty.",
+  "@repositoryEmpty": {
+    "description": "Shown for an empty directory"
+  },
+  "fileError": "Could not load this file.",
+  "@fileError": {
+    "description": "Shown when a file fails to load"
+  },
+  "fileNotFound": "This file was not found.",
+  "@fileNotFound": {
+    "description": "Shown when a file does not exist"
+  },
+  "fileBinary": "This is a binary file and cannot be shown as text.",
+  "@fileBinary": {
+    "description": "Shown for a binary file"
+  },
+  "fileCopy": "Copy contents",
+  "@fileCopy": {
+    "description": "Tooltip for the action that copies the file contents"
+  },
+  "fileCopied": "Contents copied",
+  "@fileCopied": {
+    "description": "Confirmation after the file contents are copied"
+  },
+  "projectOverviewBranches": "Branches",
+  "@projectOverviewBranches": {
+    "description": "Overview link that opens the branches list"
+  },
+  "projectOverviewCommits": "Commits",
+  "@projectOverviewCommits": {
+    "description": "Overview link that opens the commits list"
+  },
+  "projectOverviewCode": "Code",
+  "@projectOverviewCode": {
+    "description": "Overview section header for the branch and file entries"
+  },
+  "projectOverviewBrowseCode": "Browse code",
+  "@projectOverviewBrowseCode": {
+    "description": "Overview link that opens the file tree of the default branch"
+  },
+  "branchesTitle": "Branches",
+  "@branchesTitle": {
+    "description": "Title of the branches screen"
+  },
+  "branchesError": "Could not load branches.",
+  "@branchesError": {
+    "description": "Shown when the branches list fails"
+  },
+  "branchesEmpty": "This repository has no branches.",
+  "@branchesEmpty": {
+    "description": "Shown for a repository with no branches"
+  },
+  "newBranchTitle": "New branch",
+  "@newBranchTitle": {
+    "description": "Title of the create-branch dialog"
+  },
+  "newBranchNameLabel": "Branch name",
+  "@newBranchNameLabel": {
+    "description": "Label for the new branch name field"
+  },
+  "newBranchFromLabel": "Create from",
+  "@newBranchFromLabel": {
+    "description": "Label for the source ref field"
+  },
+  "newBranchNameRequired": "Enter a branch name.",
+  "@newBranchNameRequired": {
+    "description": "Validation when the branch name is empty"
+  },
+  "newBranchFromRequired": "Enter a source branch or ref.",
+  "@newBranchFromRequired": {
+    "description": "Validation when the source ref is empty"
+  },
+  "newBranchCreate": "Create branch",
+  "@newBranchCreate": {
+    "description": "Button that creates the branch"
+  },
+  "newBranchError": "Could not create the branch. Please try again.",
+  "@newBranchError": {
+    "description": "Shown when creating a branch fails"
+  },
+  "newBranchButton": "New branch",
+  "@newBranchButton": {
+    "description": "Tooltip for the create-branch action"
+  },
+  "branchDefault": "Default branch",
+  "@branchDefault": {
+    "description": "Label marking the default branch"
+  },
+  "commitsTitle": "Commits",
+  "@commitsTitle": {
+    "description": "Title of the commits screen"
+  },
+  "commitsError": "Could not load commits.",
+  "@commitsError": {
+    "description": "Shown when the commits list fails"
+  },
+  "commitsEmpty": "No commits on this branch yet.",
+  "@commitsEmpty": {
+    "description": "Shown for a branch with no commits"
+  },
+  "commitTitle": "Commit",
+  "@commitTitle": {
+    "description": "Fallback title for the commit detail screen"
+  },
+  "commitError": "Could not load this commit.",
+  "@commitError": {
+    "description": "Shown when a commit fails to load"
+  },
+  "projectOverviewIssues": "Issues",
+  "@projectOverviewIssues": {
+    "description": "Overview link that opens the issues list"
+  },
+  "issuesTitle": "Issues",
+  "@issuesTitle": {
+    "description": "Title of the issues list screen"
+  },
+  "issuesFilterOpen": "Open",
+  "@issuesFilterOpen": {
+    "description": "Label for the open-issues filter"
+  },
+  "issuesFilterClosed": "Closed",
+  "@issuesFilterClosed": {
+    "description": "Label for the closed-issues filter"
+  },
+  "issuesError": "Could not load issues.",
+  "@issuesError": {
+    "description": "Shown when the issues list fails"
+  },
+  "issuesEmpty": "No issues here.",
+  "@issuesEmpty": {
+    "description": "Shown when the issues list is empty"
+  },
+  "issueError": "Could not load this issue.",
+  "@issueError": {
+    "description": "Shown when an issue fails to load"
+  },
+  "issueStateOpen": "Open",
+  "@issueStateOpen": {
+    "description": "Issue state badge, open"
+  },
+  "issueStateClosed": "Closed",
+  "@issueStateClosed": {
+    "description": "Issue state badge, closed"
+  },
+  "issueNoDescription": "No description provided.",
+  "@issueNoDescription": {
+    "description": "Shown when an issue has no description"
+  },
+  "issueOpenedBy": "opened by {username}",
+  "@issueOpenedBy": {
+    "description": "Attribution line on an issue",
+    "placeholders": {
+      "username": {
+        "type": "String",
+        "example": "jungwon"
+      }
+    }
+  },
+  "projectOverviewMergeRequests": "Merge requests",
+  "@projectOverviewMergeRequests": {
+    "description": "Overview link that opens the merge requests list"
+  },
+  "mergeRequestsTitle": "Merge requests",
+  "@mergeRequestsTitle": {
+    "description": "Title of the merge requests list screen"
+  },
+  "mrFilterOpen": "Open",
+  "@mrFilterOpen": {
+    "description": "Merge requests filter, open"
+  },
+  "mrFilterMerged": "Merged",
+  "@mrFilterMerged": {
+    "description": "Merge requests filter, merged"
+  },
+  "mrFilterClosed": "Closed",
+  "@mrFilterClosed": {
+    "description": "Merge requests filter, closed"
+  },
+  "mergeRequestsError": "Could not load merge requests.",
+  "@mergeRequestsError": {
+    "description": "Shown when the MR list fails"
+  },
+  "mergeRequestsEmpty": "No merge requests here.",
+  "@mergeRequestsEmpty": {
+    "description": "Shown when the MR list is empty"
+  },
+  "mergeRequestError": "Could not load this merge request.",
+  "@mergeRequestError": {
+    "description": "Shown when an MR fails to load"
+  },
+  "mergeRequestNoDescription": "No description provided.",
+  "@mergeRequestNoDescription": {
+    "description": "Shown when an MR has no description"
+  },
+  "mrStateOpen": "Open",
+  "@mrStateOpen": {
+    "description": "MR state badge, open"
+  },
+  "mrStateMerged": "Merged",
+  "@mrStateMerged": {
+    "description": "MR state badge, merged"
+  },
+  "mrStateClosed": "Closed",
+  "@mrStateClosed": {
+    "description": "MR state badge, closed"
+  },
+  "mrDraft": "Draft",
+  "@mrDraft": {
+    "description": "Label marking a draft MR"
+  },
+  "changesTitle": "Changes",
+  "@changesTitle": {
+    "description": "Title of the changed-files (diff) screen"
+  },
+  "changesError": "Could not load the changes.",
+  "@changesError": {
+    "description": "Shown when a diff fails to load"
+  },
+  "changesEmpty": "No changes.",
+  "@changesEmpty": {
+    "description": "Shown when there are no file changes"
+  },
+  "changesBinary": "Binary file — not shown.",
+  "@changesBinary": {
+    "description": "Shown for a binary file in a diff"
+  },
+  "commitViewChanges": "View changes",
+  "@commitViewChanges": {
+    "description": "Button on commit detail that opens the diff"
+  },
+  "mrViewChanges": "View changes",
+  "@mrViewChanges": {
+    "description": "Button on MR detail that opens the diff"
+  },
+  "changesOmitted": "Diff not shown because it is too large or collapsed.",
+  "@changesOmitted": {
+    "description": "Shown for a text file whose diff GitLab omitted (too large or collapsed)"
+  },
+  "commentsHeading": "Comments",
+  "@commentsHeading": {
+    "description": "Heading above a comment thread"
+  },
+  "commentsError": "Could not load comments.",
+  "@commentsError": {
+    "description": "Shown when comments fail to load"
+  },
+  "commentsEmpty": "No comments yet.",
+  "@commentsEmpty": {
+    "description": "Shown when there are no comments"
+  },
+  "commentComposerHint": "Write a comment…",
+  "@commentComposerHint": {
+    "description": "Placeholder in the comment composer"
+  },
+  "commentComposerSubmit": "Comment",
+  "@commentComposerSubmit": {
+    "description": "Button to post a comment"
+  },
+  "commentPostForbidden": "You do not have permission to comment here. Check that your token has the api scope.",
+  "@commentPostForbidden": {
+    "description": "Shown when posting a comment is forbidden (403)"
+  },
+  "commentPostError": "Could not post your comment. Please try again.",
+  "@commentPostError": {
+    "description": "Generic comment post error"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Generic cancel button"
+  },
+  "mrApprove": "Approve",
+  "@mrApprove": {
+    "description": "Button to approve a merge request"
+  },
+  "mrUnapprove": "Revoke approval",
+  "@mrUnapprove": {
+    "description": "Button to remove approval"
+  },
+  "mrMerge": "Merge",
+  "@mrMerge": {
+    "description": "Button to merge a merge request"
+  },
+  "mrMergeMethodTitle": "Merge method",
+  "@mrMergeMethodTitle": {
+    "description": "Title of the sheet that lets the user pick how to merge"
+  },
+  "mrMergeCommit": "Merge commit",
+  "@mrMergeCommit": {
+    "description": "Merge method that keeps every commit and adds a merge commit"
+  },
+  "mrMergeSquash": "Squash and merge",
+  "@mrMergeSquash": {
+    "description": "Merge method that squashes all commits into one"
+  },
+  "mrReadyToMerge": "Ready to merge",
+  "@mrReadyToMerge": {
+    "description": "Shown when GitLab reports the merge request can be merged"
+  },
+  "mrCannotMergeNow": "Cannot be merged yet",
+  "@mrCannotMergeNow": {
+    "description": "Shown when GitLab reports the merge request is not mergeable"
+  },
+  "mrMergeConfirmTitle": "Merge this merge request?",
+  "@mrMergeConfirmTitle": {
+    "description": "Merge confirmation dialog title"
+  },
+  "mrMergeConfirmBody": "Merging {mr} cannot be undone.",
+  "@mrMergeConfirmBody": {
+    "description": "Merge confirmation dialog body",
+    "placeholders": {
+      "mr": {
+        "type": "String",
+        "example": "!142"
+      }
+    }
+  },
+  "mrApprovalsSummary": "{approved} of {required} approvals",
+  "@mrApprovalsSummary": {
+    "description": "Approval summary line",
+    "placeholders": {
+      "approved": {
+        "type": "int"
+      },
+      "required": {
+        "type": "int"
+      }
+    }
+  },
+  "mrNotMergeable": "This merge request cannot be merged right now. It may need approval, a rebase, or a passing pipeline.",
+  "@mrNotMergeable": {
+    "description": "Shown when a merge is rejected as not mergeable"
+  },
+  "mrActionForbidden": "You do not have permission for this action. Check your token scope and role.",
+  "@mrActionForbidden": {
+    "description": "Shown when an approve/merge is forbidden"
+  },
+  "mrActionError": "The action could not be completed. Please try again.",
+  "@mrActionError": {
+    "description": "Generic MR action error"
+  },
+  "projectOverviewPipelines": "Pipelines",
+  "@projectOverviewPipelines": {
+    "description": "Overview link that opens the pipelines list"
+  },
+  "pipelinesTitle": "Pipelines",
+  "@pipelinesTitle": {
+    "description": "Title of the pipelines list screen"
+  },
+  "pipelinesError": "Could not load pipelines.",
+  "@pipelinesError": {
+    "description": "Shown when the pipelines list fails"
+  },
+  "pipelinesEmpty": "No pipelines yet.",
+  "@pipelinesEmpty": {
+    "description": "Shown when there are no pipelines"
+  },
+  "pipelineError": "Could not load this pipeline.",
+  "@pipelineError": {
+    "description": "Shown when a pipeline fails to load"
+  },
+  "pipelineJobsError": "Could not load jobs.",
+  "@pipelineJobsError": {
+    "description": "Shown when a pipeline's jobs fail to load"
+  },
+  "pipelineNoJobs": "This pipeline has no jobs.",
+  "@pipelineNoJobs": {
+    "description": "Shown when a pipeline has no jobs"
+  },
+  "jobTitle": "Job",
+  "@jobTitle": {
+    "description": "Fallback title for the job detail screen"
+  },
+  "jobError": "Could not load this job.",
+  "@jobError": {
+    "description": "Shown when a job fails to load"
+  },
+  "jobRefresh": "Refresh",
+  "@jobRefresh": {
+    "description": "Tooltip for the job refresh action"
+  },
+  "jobLogError": "Could not load the log.",
+  "@jobLogError": {
+    "description": "Shown when a job log fails to load"
+  },
+  "jobLogEmpty": "This job has no log output.",
+  "@jobLogEmpty": {
+    "description": "Shown when a job has no log"
+  },
+  "jobActionRetry": "Retry",
+  "@jobActionRetry": {
+    "description": "Button to retry a job"
+  },
+  "jobActionCancel": "Cancel",
+  "@jobActionCancel": {
+    "description": "Button to cancel a job"
+  },
+  "jobActionRun": "Run",
+  "@jobActionRun": {
+    "description": "Button to run a manual job"
+  },
+  "jobActionForbidden": "You do not have permission for this action.",
+  "@jobActionForbidden": {
+    "description": "Shown when a job action is forbidden"
+  },
+  "jobActionInvalid": "This action is not available for the job's current state.",
+  "@jobActionInvalid": {
+    "description": "Shown when a job action conflicts with status"
+  },
+  "jobActionError": "The action could not be completed. Please try again.",
+  "@jobActionError": {
+    "description": "Generic job action error"
+  },
+  "pipelineActionRetry": "Retry",
+  "@pipelineActionRetry": {
+    "description": "Button to retry a pipeline"
+  },
+  "pipelineActionCancel": "Cancel",
+  "@pipelineActionCancel": {
+    "description": "Button to cancel a pipeline"
+  },
+  "pipelineActionForbidden": "You do not have permission for this action.",
+  "@pipelineActionForbidden": {
+    "description": "Shown when a pipeline action is forbidden"
+  },
+  "pipelineActionInvalid": "This action is not available for the pipeline's current state.",
+  "@pipelineActionInvalid": {
+    "description": "Shown when a pipeline action conflicts with status"
+  },
+  "pipelineActionError": "The action could not be completed. Please try again.",
+  "@pipelineActionError": {
+    "description": "Generic pipeline action error"
+  },
+  "accountsTitle": "Accounts",
+  "@accountsTitle": {
+    "description": "Title of the accounts switcher screen"
+  },
+  "accountAdd": "Add account",
+  "@accountAdd": {
+    "description": "Button to add another account"
+  },
+  "accountRemove": "Remove account",
+  "@accountRemove": {
+    "description": "Tooltip for removing an account"
+  },
+  "homeSwitchAccount": "Accounts",
+  "@homeSwitchAccount": {
+    "description": "Home action that opens the account switcher"
+  },
+  "homeInbox": "To-do list",
+  "@homeInbox": {
+    "description": "Home entry that opens the to-do inbox"
+  },
+  "inboxTitle": "To-do list",
+  "@inboxTitle": {
+    "description": "Title of the to-do inbox screen"
+  },
+  "inboxEmpty": "You're all caught up.",
+  "@inboxEmpty": {
+    "description": "Shown when the to-do inbox has no pending items"
+  },
+  "inboxDoneEmpty": "Nothing marked done yet.",
+  "@inboxDoneEmpty": {
+    "description": "Shown when the done view of the inbox is empty"
+  },
+  "inboxFilterPending": "Pending",
+  "@inboxFilterPending": {
+    "description": "Inbox state filter: items awaiting action"
+  },
+  "inboxFilterDone": "Done",
+  "@inboxFilterDone": {
+    "description": "Inbox state filter: items already marked done"
+  },
+  "inboxFilterAllTypes": "All types",
+  "@inboxFilterAllTypes": {
+    "description": "Inbox type filter: no type restriction"
+  },
+  "inboxTypeIssues": "Issues",
+  "@inboxTypeIssues": {
+    "description": "Inbox type filter: issue todos only"
+  },
+  "inboxTypeMergeRequests": "Merge requests",
+  "@inboxTypeMergeRequests": {
+    "description": "Inbox type filter: merge request todos only"
+  },
+  "inboxFilterAllReasons": "All reasons",
+  "@inboxFilterAllReasons": {
+    "description": "Inbox reason filter: no reason restriction"
+  },
+  "inboxError": "Your to-do items could not be loaded.",
+  "@inboxError": {
+    "description": "Shown when the to-do list fails to load"
+  },
+  "inboxMarkAllDone": "Mark all as done",
+  "@inboxMarkAllDone": {
+    "description": "Action that clears every pending to-do item"
+  },
+  "inboxMarkDone": "Mark done",
+  "@inboxMarkDone": {
+    "description": "Tooltip for clearing a single to-do item"
+  },
+  "inboxMarkDoneError": "The item could not be cleared. Please try again.",
+  "@inboxMarkDoneError": {
+    "description": "Shown when marking a to-do item done fails"
+  },
+  "inboxActionAssigned": "Assigned to you",
+  "@inboxActionAssigned": {
+    "description": "To-do reason: the item was assigned to the user"
+  },
+  "inboxActionMentioned": "Mentioned you",
+  "@inboxActionMentioned": {
+    "description": "To-do reason: the user was mentioned"
+  },
+  "inboxActionBuildFailed": "Pipeline failed",
+  "@inboxActionBuildFailed": {
+    "description": "To-do reason: a pipeline the user owns failed"
+  },
+  "inboxActionMarked": "Added a to-do",
+  "@inboxActionMarked": {
+    "description": "To-do reason: the user added the item to their list"
+  },
+  "inboxActionApprovalRequired": "Approval required",
+  "@inboxActionApprovalRequired": {
+    "description": "To-do reason: the user's approval is required"
+  },
+  "inboxActionUnmergeable": "Cannot be merged",
+  "@inboxActionUnmergeable": {
+    "description": "To-do reason: the merge request cannot be merged"
+  },
+  "inboxActionDirectlyAddressed": "Directly addressed you",
+  "@inboxActionDirectlyAddressed": {
+    "description": "To-do reason: the user was directly addressed"
+  },
+  "homeSearch": "Search",
+  "@homeSearch": {
+    "description": "Home entry that opens search"
+  },
+  "searchTitle": "Search",
+  "@searchTitle": {
+    "description": "Title of the search screen"
+  },
+  "searchHint": "Search projects, issues, merge requests",
+  "@searchHint": {
+    "description": "Placeholder in the search field"
+  },
+  "searchScopeProjects": "Projects",
+  "@searchScopeProjects": {
+    "description": "Search scope: projects"
+  },
+  "searchScopeIssues": "Issues",
+  "@searchScopeIssues": {
+    "description": "Search scope: issues"
+  },
+  "searchScopeMergeRequests": "Merge requests",
+  "@searchScopeMergeRequests": {
+    "description": "Search scope: merge requests"
+  },
+  "searchInitial": "Type to search.",
+  "@searchInitial": {
+    "description": "Shown before the user has entered a search term"
+  },
+  "searchEmpty": "No results found.",
+  "@searchEmpty": {
+    "description": "Shown when a search returns nothing"
+  },
+  "searchError": "The search could not be completed.",
+  "@searchError": {
+    "description": "Shown when a search request fails"
+  },
+  "searchLoadMore": "Load more",
+  "@searchLoadMore": {
+    "description": "Button that loads the next page of search results"
+  },
+  "listSearchHint": "Search by title",
+  "@listSearchHint": {
+    "description": "Placeholder of the inline search field on list screens"
+  },
+  "listSearchClose": "Close search",
+  "@listSearchClose": {
+    "description": "Tooltip for the button that closes the inline list search"
+  },
+  "projectAddFavorite": "Add to favorites",
+  "@projectAddFavorite": {
+    "description": "Tooltip for favoriting a project"
+  },
+  "projectRemoveFavorite": "Remove from favorites",
+  "@projectRemoveFavorite": {
+    "description": "Tooltip for unfavoriting a project"
+  },
+  "homeFavorites": "Favorites",
+  "@homeFavorites": {
+    "description": "Home section title for favorited projects"
+  },
+  "settingsTitle": "Settings",
+  "@settingsTitle": {
+    "description": "Title of the settings screen"
+  },
+  "settingsAccounts": "Accounts",
+  "@settingsAccounts": {
+    "description": "Settings entry that opens the account switcher"
+  },
+  "settingsPrivacyPolicy": "Privacy policy",
+  "@settingsPrivacyPolicy": {
+    "description": "Settings entry that opens the bundled privacy policy"
+  },
+  "settingsTerms": "Terms of service",
+  "@settingsTerms": {
+    "description": "Settings entry that opens the terms page on the company site"
+  },
+  "settingsWebsite": "Website",
+  "@settingsWebsite": {
+    "description": "Settings entry that opens the company website"
+  },
+  "settingsAppearance": "Appearance",
+  "@settingsAppearance": {
+    "description": "Settings section for the theme choice"
+  },
+  "settingsThemeSystem": "System",
+  "@settingsThemeSystem": {
+    "description": "Theme option that follows the device"
+  },
+  "settingsThemeLight": "Light",
+  "@settingsThemeLight": {
+    "description": "Theme option forcing the light theme"
+  },
+  "settingsThemeDark": "Dark",
+  "@settingsThemeDark": {
+    "description": "Theme option forcing the dark theme"
+  },
+  "settingsAbout": "About",
+  "@settingsAbout": {
+    "description": "Settings section for app information"
+  },
+  "settingsVersion": "Version",
+  "@settingsVersion": {
+    "description": "Row showing the installed app version"
+  },
+  "meShareProfile": "Share profile",
+  "@meShareProfile": {
+    "description": "Me action that shares the user's GitLab profile link"
+  },
+  "settingsLicenses": "Open source licenses",
+  "@settingsLicenses": {
+    "description": "Settings entry that opens the open-source license page"
+  },
+  "subscriptionTitle": "LabFox subscription",
+  "@subscriptionTitle": {
+    "description": "Title of the subscription screen"
+  },
+  "subscriptionActive": "Subscribed",
+  "@subscriptionActive": {
+    "description": "Shown when the user has an active subscription"
+  },
+  "subscriptionInactive": "Not subscribed",
+  "@subscriptionInactive": {
+    "description": "Shown when the user has no active subscription"
+  },
+  "subscriptionPitch": "Approve and merge, retry pipelines, and connect more than one account.",
+  "@subscriptionPitch": {
+    "description": "One-line summary of what the subscription unlocks"
+  },
+  "subscriptionBenefitAccounts": "Connect multiple accounts and self-hosted instances",
+  "@subscriptionBenefitAccounts": {
+    "description": "Subscription benefit: multiple accounts"
+  },
+  "subscriptionBenefitActions": "Approve, merge, retry, cancel, and run manual jobs",
+  "@subscriptionBenefitActions": {
+    "description": "Subscription benefit: write actions"
+  },
+  "subscriptionBenefitNotifications": "Push notifications for reviews and pipeline failures",
+  "@subscriptionBenefitNotifications": {
+    "description": "Subscription benefit: push notifications"
+  },
+  "subscriptionBenefitFavorites": "Unlimited favorites and saved searches",
+  "@subscriptionBenefitFavorites": {
+    "description": "Subscription benefit: productivity limits lifted"
+  },
+  "subscriptionSubscribe": "Subscribe for {price}",
+  "@subscriptionSubscribe": {
+    "description": "Purchase button, with the price as the store formats it",
+    "placeholders": {
+      "price": {
+        "type": "String",
+        "example": "US$4.99"
+      }
+    }
+  },
+  "subscriptionRestore": "Restore purchases",
+  "@subscriptionRestore": {
+    "description": "Restores an existing subscription on a new device"
+  },
+  "subscriptionUnavailable": "The store is not available right now. Try again later.",
+  "@subscriptionUnavailable": {
+    "description": "Shown when the store returns no product to sell"
+  },
+  "subscriptionError": "That did not go through. Nothing was charged.",
+  "@subscriptionError": {
+    "description": "Shown when a purchase or restore fails"
+  },
+  "subscriptionRestored": "Your subscription is active.",
+  "@subscriptionRestored": {
+    "description": "Confirms a successful restore"
+  },
+  "subscriptionNothingToRestore": "No subscription found for this store account.",
+  "@subscriptionNothingToRestore": {
+    "description": "Shown when a restore finds nothing to restore"
+  },
+  "navHome": "Home",
+  "@navHome": {
+    "description": "Bottom navigation / rail label for the home destination"
+  },
+  "navInbox": "Inbox",
+  "@navInbox": {
+    "description": "Bottom navigation / rail label for the inbox destination"
+  },
+  "navSearch": "Search",
+  "@navSearch": {
+    "description": "Bottom navigation / rail label for the search destination"
+  },
+  "navMe": "Me",
+  "@navMe": {
+    "description": "Bottom navigation / rail label for the profile destination"
+  },
+  "meTitle": "Me",
+  "@meTitle": {
+    "description": "Title of the profile (Me) screen"
+  },
+  "meSettings": "Settings",
+  "@meSettings": {
+    "description": "Profile entry that opens settings"
+  },
+  "meAccounts": "Switch account",
+  "@meAccounts": {
+    "description": "Profile entry that opens the account switcher"
+  },
+  "homeRecents": "Recent",
+  "@homeRecents": {
+    "description": "Home section title for recently opened projects"
+  }
+}

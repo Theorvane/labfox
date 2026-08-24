@@ -13,7 +13,7 @@ Closes #
 - [ ] `flutter analyze` reports no warnings
 - [ ] `flutter test` passes
 - [ ] Re-ran `dart run build_runner build --delete-conflicting-outputs` and committed the generated files (only if models changed)
-- [ ] Manually validated the change in the app (only if applicable — LabFox is pre-scaffolding, so state N/A when there is no runnable build yet)
+- [ ] Manually validated the change in the app (describe below)
 
 ## Checklist
 
@@ -21,7 +21,7 @@ Closes #
 - [ ] Linked a GitHub issue above with `Closes #`
 - [ ] Pull request title and commits follow [Conventional Commits](https://www.conventionalcommits.org/)
 - [ ] All commits are signed off with `git commit -s` (DCO)
-- [ ] Added or updated tests, or explained below why none are needed
+- [ ] Wrote the test first (TDD): a test that fails before this change and passes after, or an explanation below why none was needed
 - [ ] Updated documentation where behavior changed
 - [ ] Checked both Mobile (<600) and Desktop (>1000) layouts
 - [ ] Checked both Light and Dark themes

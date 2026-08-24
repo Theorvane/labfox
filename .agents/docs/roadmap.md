@@ -15,7 +15,7 @@ responsive layout are effectively all validated. Everything after that is applyi
 
 ### M0 — Foundation
 Flutter project and monorepo scaffolding, Riverpod / Dio / go_router,
-freezed + json_serializable, Drift, Secure Storage, Theme, responsive layout,
+freezed + json_serializable, Secure Storage, Theme, responsive layout,
 `gitlab_api` client skeleton.
 
 ### M1 — Repository
@@ -46,7 +46,10 @@ OAuth, Self-hosted, Multi Account, Inbox (To-do), Search, Local Cache, Offline, 
 **Excluded (not implemented in 1.0)**
 
 Wiki · Packages · Container Registry · Infrastructure · Kubernetes ·
-Security Dashboard · Analytics · Admin Area · Runner Administration
+Security Dashboard · GitLab Analytics · Admin Area · Runner Administration
+
+These are GitLab feature areas, not a rule about LabFox's own instrumentation —
+anonymous product telemetry is in scope for 1.0. See `AGENTS.md` §9.
 
 ## Later Expansion
 

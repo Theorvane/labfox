@@ -15,7 +15,7 @@ LabFox ships to a global audience. **Everything in this repository is written in
 | Documentation, `README`, `AGENTS.md`, skills | English |
 | Commit messages, branch names | English |
 | Issues, Pull Requests, code review | English |
-| User-facing UI strings | English source locale, localized via ARB |
+| User-facing UI strings | English source (`app_en.arb`); translations live in other `app_<code>.arb` |
 
 This is not a style preference. Contributors and users are international; anything written in
 another language silently excludes them and has to be rewritten later.
@@ -49,10 +49,16 @@ often fast**. When a feature is proposed, first decide whether it serves the flo
 LabFox follows an **open core** model.
 
 ```
-Source code            Apache-2.0 open source (GitHub: labfox-app/labfox)
-Desktop (Win/macOS)    Free
-Mobile (Android/iOS)   Paid on the App Store / Play Store
+Source code            Apache-2.0 open source (GitHub: theorvane/labfox)
+Windows                Direct download, free, full features
+macOS                  Mac App Store, free, full features
+Android / iOS          Free download, subscription for the paid features
 ```
+
+The app is a free download everywhere; a single auto-renewing subscription is
+sold through store in-app purchase. There is no LabFox account and no LabFox
+server — entitlement comes from the store the app was installed from.
+Details, including the free/paid boundary: `.agents/docs/monetization.md`
 
 The intended improvement cycle:
 
@@ -80,6 +86,7 @@ So "do not build separate UIs per platform" (§10) is not taste — it is a **bu
 | `CODE_OF_CONDUCT.md` | Contributor Covenant, enforcement contact |
 | `SECURITY.md` | Vulnerability reporting, token-handling scope |
 | `SUPPORT.md` | Where to ask questions, what maintainers do not cover |
+| `RELEASING.md` | How a release is cut, the store credentials it needs, what is still manual |
 
 - **The "LabFox" name and logo are trademarks and are not covered by the license** (Apache-2.0 §6).
   Anyone may use the code, but nobody else may ship it to a store under the same name.
@@ -143,8 +150,9 @@ Rules:
 - **Do not create UseCase classes.** Controllers call repositories directly.
 - Widgets never touch `GitLabClient` or `Dio` directly. Always go through a controller.
 - `packages/gitlab_api` must not import `package:flutter`. Keep it pure Dart.
-- Repositories own the cache (Drift) ↔ network (GitLabClient) combination.
-  Controllers do not know where data came from.
+- Repositories own the data source and hide it from controllers, which do not
+  know where data came from. Today this is network-only (`GitLabClient`); a
+  local cache (Drift) is a planned post-1.0 layer, not yet implemented.
 
 Details: `.agents/docs/architecture.md`
 
@@ -159,9 +167,10 @@ Details: `.agents/docs/architecture.md`
 | Network | Dio |
 | Routing | go_router |
 | Models | freezed + json_serializable |
-| Local DB | Drift + SQLite |
+| Local DB | Drift + SQLite (planned, post-1.0; not yet added) |
 | Secrets | flutter_secure_storage |
 | Localization | flutter_localizations + intl (ARB) |
+| Monorepo | native pub workspace (no melos) |
 
 Do not introduce a different state management or networking library on your own.
 Propose it and get approval first.
@@ -186,12 +195,50 @@ Propose it and get approval first.
 - **No hardcoded user-facing strings.** Every string a user can read goes through the
   generated localization delegate, not a Dart literal in a widget.
 - English (`en`) is the source locale. Other locales are translated from it, never the reverse.
+- Supported locales: `en`, `ko`, `ja`, `hi`, `zh`. Add a locale by adding its `app_<code>.arb`.
 - Keys are semantic, not literal: `mergeRequestApproveButton`, not `approveText`.
 - Do not concatenate translated fragments to build a sentence. Use a single parameterized
   message — word order differs across languages.
 - Format dates, numbers, and relative times through `intl`, never with manual string building.
+- **Translations are the one exemption from the English-only rule.** Text written to be read
+  by a user in their own language may be non-English, and the CI language check skips exactly
+  those files: the `app_<code>.arb` files (except `app_en.arb`), their generated
+  `app_localizations_<code>.dart`, and store copy at `docs/store/<name>.<locale>.md` —
+  listings, release notes, and anything else that ships to a store reader.
+  English is the source in every case: `app_en.arb` and the unsuffixed
+  `docs/store/<name>.md` are written first and translated from, never the reverse.
+  Every other file stays English, including any `docs/store/` file without a locale suffix.
 
 Details: `.agents/docs/conventions.md`
+
+---
+
+## 5a. Test-driven development
+
+**Work test-first.** For any behaviour change — a new feature, a bug fix, an edge case — write a
+failing test that captures the expected behaviour before writing the code that satisfies it.
+
+The loop:
+
+1. **Red** — write a test that fails for the right reason. Run it and confirm it fails.
+2. **Green** — write the least code that makes it pass.
+3. **Refactor** — clean up with the test still green.
+
+Why this is a rule here, not a preference:
+
+- The client talks to real GitLab instances with real credentials. A wrong redirect, a leaked
+  token, a mishandled 401 — these are the failures that matter, and a test that pins the intended
+  behaviour is the cheapest place to catch them. The M1 sign-in redirect bug was caught by a
+  widget test asserting "a rejected token stays on sign-in", not by inspection.
+- Tests written after the code tend to assert what the code does, not what it should do. Writing
+  the test first forces the behaviour to be decided before the implementation can bias it.
+
+Applies to bug fixes especially: reproduce the bug as a failing test first, then fix it, so a
+regression cannot return unnoticed.
+
+Not everything needs a test first — a pure rename, a doc change, a formatting pass do not. But any
+change to how the app *behaves* does. A pull request that changes behaviour without a test that
+would have failed before it is incomplete.
 
 ---
 
@@ -259,7 +306,16 @@ CI/CD (pipelines, jobs, job logs, retry, cancel, manual jobs),
 Productivity (to-do inbox, search, recents, favorites).
 
 **Out of scope** — Wiki, Packages, Container Registry, Infrastructure, Kubernetes,
-Security Dashboard, Analytics, Admin Area, Runner Administration, AI features.
+Security Dashboard, GitLab Analytics (Value Stream, CI/CD Analytics, Insights),
+Admin Area, Runner Administration, AI features.
+
+Every entry above is a **GitLab feature area** LabFox does not mirror. None of them
+is a statement about LabFox's own instrumentation. Anonymous product telemetry —
+how LabFox itself is used — **is in scope for 1.0**: it is what tells us which
+parts of the core flow (§1) actually get used. What it may collect is bounded by
+§7 and by the privacy policy shipped in the app (`PRIVACY.md`): no tokens, no
+usernames, no titles, no full URLs, and routes sanitized so no project or item can
+be identified.
 
 Development phases (M0–M4) and the first vertical slice: `.agents/docs/roadmap.md`
 
@@ -282,7 +338,7 @@ How to write it: `.agents/skills/responsive-screen/SKILL.md`
 
 ## 11. Workflow — Issue → Branch → PR
 
-The origin remote is **GitHub** (`labfox-app/labfox`). The CLI is `gh`.
+The origin remote is **GitHub** (`theorvane/labfox`). The CLI is `gh`.
 
 > ⚠️ **Watch the vocabulary.** LabFox is a *GitLab client* developed *on GitHub*.
 > - The domain the app works with → **Merge Request**, `iid`, `/api/v4` (GitLab)
@@ -376,6 +432,9 @@ gh pr create --fill --base dev
 - **Never push directly to `dev` or `main`.** Never force push.
 - **Never open a PR against `main`.** Release promotion is a maintainer decision.
 - **Maintainers merge.** An agent does not merge a PR.
+- **The reviewer resolves review threads, not the author.** Resolving the reviewer's own threads on
+  your pull request defeats the resolution gate. The ruleset blocks merge until all threads are
+  resolved.
 - Close or delete issues and PRs only when asked.
 
 ### Everything else
@@ -384,8 +443,9 @@ gh pr create --fill --base dev
 2. Run `build_runner` after changing a model.
 3. When touching an area that has no scaffolding yet, confirm the scope instead of inventing it.
 
-> The repository is still in its initial state — `apps/` and `packages/` have not been scaffolded.
-> The Flutter commands above assume M0 is complete.
+> The workspace is a native pub workspace, not melos: `flutter pub get` at the root resolves
+> every package against one lockfile. `flutter test` has to run per package, because the root
+> has no `test/` directory of its own.
 
 Details: `.agents/docs/workflow.md`
 
@@ -417,5 +477,6 @@ Agent skills and detailed documentation live under `.agents/`, not `.claude/`.
 ```
 .agents/
 ├── skills/    per-task procedures (SKILL.md)
-└── docs/      architecture / conventions / api-reference / references / roadmap / workflow
+└── docs/      architecture / conventions / api-reference / monetization /
+                references / roadmap / workflow
 ```

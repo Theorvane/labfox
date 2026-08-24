@@ -1,0 +1,51 @@
+name: labfox
+description: A cross-platform GitLab workflow client.
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.10.0
+
+resolution: workspace
+
+dependencies:
+  design_system:
+    path: ../../packages/design_system
+  dio: ^5.7.0
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_riverpod: ^2.6.1
+  flutter_web_auth_2: ^4.0.0
+  gitlab_api:
+    path: ../../packages/gitlab_api
+  gitlab_models:
+    path: ../../packages/gitlab_models
+  go_router: ^14.6.0
+  in_app_purchase: ^3.3.0
+  intl: any
+  package_info_plus: ^8.1.0
+  secure_storage:
+    path: ../../packages/secure_storage
+  share_plus: ^12.0.2
+  shared_preferences: ^2.3.3
+  url_launcher: ^6.3.0
+
+dev_dependencies:
+  build_runner: ^2.4.13
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    # LabFox's own Apache-2.0 license. Registered with LicenseRegistry so the
+    # in-app license page shows it alongside the auto-collected dependency
+    # licenses (the app is not a pub package, so it is not collected).
+    - assets/LICENSE
+    # The privacy policy, rendered in Settings > Privacy policy. Synced copy
+    # of /PRIVACY.md at the repository root.
+    - assets/PRIVACY.md

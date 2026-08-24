@@ -1,0 +1,19 @@
+name: gitlab_api
+description: GitLab REST and GraphQL client. Pure Dart, no Flutter dependency.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ^3.10.0
+
+resolution: workspace
+
+dependencies:
+  crypto: ^3.0.0
+  dio: ^5.7.0
+  gitlab_models:
+    path: ../gitlab_models
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  test: ^1.25.0

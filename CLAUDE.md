@@ -35,13 +35,14 @@ Read these only when relevant — do not load them into context by default.
 - `.agents/docs/architecture.md` — layer responsibilities, data flow, caching strategy
 - `.agents/docs/conventions.md` — naming, file placement, freezed/Riverpod rules
 - `.agents/docs/api-reference.md` — GitLab endpoint map, auth, pagination, terminology
+- `.agents/docs/monetization.md` — per-OS distribution, free/paid boundary, store entitlement
 - `.agents/docs/roadmap.md` — M0–M4, vertical slice, 1.0 scope
 - `.agents/docs/workflow.md` — Issue → Branch → PR procedure, `gh` commands, permission boundaries
 - `.agents/docs/references.md` — reference repos and docs, priority order, license warnings
 
 ## Workflow
 
-The origin remote is **GitHub** (`labfox-app/labfox`). The CLI is **`gh`**.
+The origin remote is **GitHub** (`theorvane/labfox`). The CLI is **`gh`**.
 
 ```
 Issue → Branch → Commit (-s) → Push → PR → Merge (maintainer)
@@ -77,6 +78,9 @@ Rules:
 
 ## Habits
 
+- **Work test-first** (`AGENTS.md` §5a): write the failing test before the code, and for a bug
+  reproduce it as a failing test first. A behaviour change without a test that would have failed
+  before it is not done.
 - Read neighboring files at the same layer before writing code, and match their patterns.
 - Propose new dependencies and get approval first (`AGENTS.md` §4).
 - Touching a model is not done until `build_runner` has been run.

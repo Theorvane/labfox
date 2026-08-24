@@ -1,0 +1,807 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Hindi (`hi`).
+class AppLocalizationsHi extends AppLocalizations {
+  AppLocalizationsHi([String locale = 'hi']) : super(locale);
+
+  @override
+  String get appTitle => 'LabFox';
+
+  @override
+  String get homeTitle => 'होम';
+
+  @override
+  String homeSignedInAs(String username) {
+    return '$username के रूप में साइन इन';
+  }
+
+  @override
+  String get homeEmptyWork =>
+      'आपके इशू, मर्ज रिक्वेस्ट और पाइपलाइन यहाँ दिखाई देंगे।';
+
+  @override
+  String get homeReviewRequests => 'Review requests';
+
+  @override
+  String get homeAssignedMergeRequests => 'Assigned merge requests';
+
+  @override
+  String get homeAssignedIssues => 'Assigned issues';
+
+  @override
+  String get homeWorkAllClear => 'You\'re all caught up.';
+
+  @override
+  String get homeWorkError => 'Couldn\'t load your work.';
+
+  @override
+  String get signOut => 'साइन आउट';
+
+  @override
+  String get signInTitle => 'GitLab खाता कनेक्ट करें';
+
+  @override
+  String get signInInstanceLabel => 'GitLab इंस्टेंस URL';
+
+  @override
+  String get signInInstanceRequired => 'अपना GitLab इंस्टेंस URL दर्ज करें।';
+
+  @override
+  String get signInInstanceInvalid =>
+      'एक मान्य https URL दर्ज करें, उदाहरण के लिए https://gitlab.com';
+
+  @override
+  String get signInTokenLabel => 'पर्सनल एक्सेस टोकन';
+
+  @override
+  String get signInTokenHelp => 'api और read_user स्कोप आवश्यक हैं।';
+
+  @override
+  String get signInTokenToggle => 'टोकन दिखाएँ या छिपाएँ';
+
+  @override
+  String get signInTokenRequired => 'पर्सनल एक्सेस टोकन दर्ज करें।';
+
+  @override
+  String get signInSubmit => 'साइन इन';
+
+  @override
+  String get signInOr => 'या';
+
+  @override
+  String get signInOAuthButton => 'GitLab से साइन इन करें';
+
+  @override
+  String get signInClientIdLabel => 'OAuth क्लाइंट ID';
+
+  @override
+  String get signInClientIdHelp =>
+      'केवल self-hosted इंस्टेंस पर OAuth के लिए आवश्यक।';
+
+  @override
+  String get signInOAuthNeedsClientId =>
+      'इस इंस्टेंस के लिए OAuth क्लाइंट ID दर्ज करें।';
+
+  @override
+  String get signInErrorToken =>
+      'टोकन अस्वीकृत हो गया। जाँचें कि यह सही है और समाप्त नहीं हुआ है।';
+
+  @override
+  String get signInErrorScope =>
+      'टोकन में आवश्यक स्कोप नहीं है। इसे api और read_user चाहिए।';
+
+  @override
+  String get signInErrorUnreachable =>
+      'उस इंस्टेंस तक नहीं पहुँच सके। URL, अपना नेटवर्क और प्रमाणपत्र भरोसे की जाँच करें।';
+
+  @override
+  String get signInErrorGeneric => 'साइन इन विफल रहा। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get scopeAssigned => 'Assigned';
+
+  @override
+  String get scopeCreated => 'Created';
+
+  @override
+  String get homeRefresh => 'Refresh';
+
+  @override
+  String get homeFavoritesEmpty => 'Star projects to pin them here.';
+
+  @override
+  String get homeMyWork => 'मेरा काम';
+
+  @override
+  String get homeProjects => 'प्रोजेक्ट';
+
+  @override
+  String get projectsTitle => 'प्रोजेक्ट';
+
+  @override
+  String get projectsEmpty => 'आप अभी तक किसी प्रोजेक्ट के सदस्य नहीं हैं।';
+
+  @override
+  String get projectsError => 'आपके प्रोजेक्ट लोड नहीं हो सके।';
+
+  @override
+  String get shareLink => 'Share';
+
+  @override
+  String get mrClose => 'Close';
+
+  @override
+  String get mrReopen => 'Reopen';
+
+  @override
+  String get mrRebase => 'Rebase';
+
+  @override
+  String get mrMarkDraft => 'Mark as draft';
+
+  @override
+  String get mrMarkReady => 'Mark as ready';
+
+  @override
+  String get mrBlockerConflicts => 'Conflicts';
+
+  @override
+  String get mrBlockerChecksFailed => 'Checks failed';
+
+  @override
+  String get mrBlockerCiRunning => 'CI running';
+
+  @override
+  String get mrBlockerNeedsApproval => 'Needs approval';
+
+  @override
+  String get mrBlockerUnresolved => 'Unresolved threads';
+
+  @override
+  String get retry => 'पुनः प्रयास करें';
+
+  @override
+  String get newIssueTitle => 'New issue';
+
+  @override
+  String get newIssueTitleLabel => 'Title';
+
+  @override
+  String get newIssueTitleRequired => 'Enter a title.';
+
+  @override
+  String get newIssueDescriptionLabel => 'Description (optional)';
+
+  @override
+  String get newIssueSubmit => 'Create issue';
+
+  @override
+  String get newIssueError => 'Could not create the issue. Please try again.';
+
+  @override
+  String get newIssueButton => 'New issue';
+
+  @override
+  String get issueClose => 'Close issue';
+
+  @override
+  String get issueReopen => 'Reopen issue';
+
+  @override
+  String get issueStateError => 'Could not update the issue. Please try again.';
+
+  @override
+  String get newMrTitle => 'New merge request';
+
+  @override
+  String get newMrSourceLabel => 'Source branch';
+
+  @override
+  String get newMrTargetLabel => 'Target branch';
+
+  @override
+  String get newMrTitleLabel => 'Title';
+
+  @override
+  String get newMrDescriptionLabel => 'Description (optional)';
+
+  @override
+  String get newMrBranchRequired => 'Enter a branch.';
+
+  @override
+  String get newMrTitleRequired => 'Enter a title.';
+
+  @override
+  String get newMrSubmit => 'Create merge request';
+
+  @override
+  String get newMrError =>
+      'Could not create the merge request. Please try again.';
+
+  @override
+  String get newMrButton => 'New merge request';
+
+  @override
+  String get projectOverviewTitle => 'प्रोजेक्ट';
+
+  @override
+  String get projectOverviewError => 'यह प्रोजेक्ट लोड नहीं हो सका।';
+
+  @override
+  String get projectOverviewNoReadme => 'इस प्रोजेक्ट में कोई README नहीं है।';
+
+  @override
+  String get projectOverviewRepository => 'रिपॉज़िटरी';
+
+  @override
+  String get repositoryTitle => 'रिपॉज़िटरी';
+
+  @override
+  String get repositoryError => 'यह डायरेक्टरी लोड नहीं हो सकी।';
+
+  @override
+  String get repositoryEmpty => 'यह डायरेक्टरी खाली है।';
+
+  @override
+  String get fileError => 'यह फ़ाइल लोड नहीं हो सकी।';
+
+  @override
+  String get fileNotFound => 'यह फ़ाइल नहीं मिली।';
+
+  @override
+  String get fileBinary =>
+      'यह एक बाइनरी फ़ाइल है और इसे टेक्स्ट के रूप में नहीं दिखाया जा सकता।';
+
+  @override
+  String get fileCopy => 'Copy contents';
+
+  @override
+  String get fileCopied => 'Contents copied';
+
+  @override
+  String get projectOverviewBranches => 'ब्रांच';
+
+  @override
+  String get projectOverviewCommits => 'कमिट';
+
+  @override
+  String get projectOverviewCode => 'Code';
+
+  @override
+  String get projectOverviewBrowseCode => 'Browse code';
+
+  @override
+  String get branchesTitle => 'ब्रांच';
+
+  @override
+  String get branchesError => 'ब्रांच लोड नहीं हो सकीं।';
+
+  @override
+  String get branchesEmpty => 'इस रिपॉज़िटरी में कोई ब्रांच नहीं है।';
+
+  @override
+  String get newBranchTitle => 'New branch';
+
+  @override
+  String get newBranchNameLabel => 'Branch name';
+
+  @override
+  String get newBranchFromLabel => 'Create from';
+
+  @override
+  String get newBranchNameRequired => 'Enter a branch name.';
+
+  @override
+  String get newBranchFromRequired => 'Enter a source branch or ref.';
+
+  @override
+  String get newBranchCreate => 'Create branch';
+
+  @override
+  String get newBranchError => 'Could not create the branch. Please try again.';
+
+  @override
+  String get newBranchButton => 'New branch';
+
+  @override
+  String get branchDefault => 'डिफ़ॉल्ट ब्रांच';
+
+  @override
+  String get commitsTitle => 'कमिट';
+
+  @override
+  String get commitsError => 'कमिट लोड नहीं हो सके।';
+
+  @override
+  String get commitsEmpty => 'इस ब्रांच पर अभी कोई कमिट नहीं है।';
+
+  @override
+  String get commitTitle => 'कमिट';
+
+  @override
+  String get commitError => 'यह कमिट लोड नहीं हो सका।';
+
+  @override
+  String get projectOverviewIssues => 'इशू';
+
+  @override
+  String get issuesTitle => 'इशू';
+
+  @override
+  String get issuesFilterOpen => 'खुले';
+
+  @override
+  String get issuesFilterClosed => 'बंद';
+
+  @override
+  String get issuesError => 'इशू लोड नहीं हो सके।';
+
+  @override
+  String get issuesEmpty => 'यहाँ कोई इशू नहीं है।';
+
+  @override
+  String get issueError => 'यह इशू लोड नहीं हो सका।';
+
+  @override
+  String get issueStateOpen => 'खुला';
+
+  @override
+  String get issueStateClosed => 'बंद';
+
+  @override
+  String get issueNoDescription => 'कोई विवरण नहीं दिया गया।';
+
+  @override
+  String issueOpenedBy(String username) {
+    return '$username द्वारा खोला गया';
+  }
+
+  @override
+  String get projectOverviewMergeRequests => 'मर्ज रिक्वेस्ट';
+
+  @override
+  String get mergeRequestsTitle => 'मर्ज रिक्वेस्ट';
+
+  @override
+  String get mrFilterOpen => 'खुले';
+
+  @override
+  String get mrFilterMerged => 'मर्ज किए गए';
+
+  @override
+  String get mrFilterClosed => 'बंद';
+
+  @override
+  String get mergeRequestsError => 'मर्ज रिक्वेस्ट लोड नहीं हो सकीं।';
+
+  @override
+  String get mergeRequestsEmpty => 'यहाँ कोई मर्ज रिक्वेस्ट नहीं है।';
+
+  @override
+  String get mergeRequestError => 'यह मर्ज रिक्वेस्ट लोड नहीं हो सकी।';
+
+  @override
+  String get mergeRequestNoDescription => 'कोई विवरण नहीं दिया गया।';
+
+  @override
+  String get mrStateOpen => 'खुला';
+
+  @override
+  String get mrStateMerged => 'मर्ज किया गया';
+
+  @override
+  String get mrStateClosed => 'बंद';
+
+  @override
+  String get mrDraft => 'ड्राफ़्ट';
+
+  @override
+  String get changesTitle => 'परिवर्तन';
+
+  @override
+  String get changesError => 'परिवर्तन लोड नहीं हो सके।';
+
+  @override
+  String get changesEmpty => 'कोई परिवर्तन नहीं।';
+
+  @override
+  String get changesBinary => 'बाइनरी फ़ाइल — नहीं दिखाई गई।';
+
+  @override
+  String get commitViewChanges => 'परिवर्तन देखें';
+
+  @override
+  String get mrViewChanges => 'परिवर्तन देखें';
+
+  @override
+  String get changesOmitted =>
+      'diff बहुत बड़ा है या संक्षिप्त है, इसलिए नहीं दिखाया गया।';
+
+  @override
+  String get commentsHeading => 'टिप्पणियाँ';
+
+  @override
+  String get commentsError => 'टिप्पणियाँ लोड नहीं हो सकीं।';
+
+  @override
+  String get commentsEmpty => 'अभी तक कोई टिप्पणी नहीं।';
+
+  @override
+  String get commentComposerHint => 'एक टिप्पणी लिखें…';
+
+  @override
+  String get commentComposerSubmit => 'टिप्पणी करें';
+
+  @override
+  String get commentPostForbidden =>
+      'आपको यहाँ टिप्पणी करने की अनुमति नहीं है। जाँचें कि आपके टोकन में api स्कोप है।';
+
+  @override
+  String get commentPostError =>
+      'आपकी टिप्पणी पोस्ट नहीं हो सकी। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get cancel => 'रद्द करें';
+
+  @override
+  String get mrApprove => 'स्वीकृत करें';
+
+  @override
+  String get mrUnapprove => 'स्वीकृति वापस लें';
+
+  @override
+  String get mrMerge => 'मर्ज करें';
+
+  @override
+  String get mrMergeMethodTitle => 'Merge method';
+
+  @override
+  String get mrMergeCommit => 'Merge commit';
+
+  @override
+  String get mrMergeSquash => 'Squash and merge';
+
+  @override
+  String get mrReadyToMerge => 'Ready to merge';
+
+  @override
+  String get mrCannotMergeNow => 'Cannot be merged yet';
+
+  @override
+  String get mrMergeConfirmTitle => 'इस मर्ज रिक्वेस्ट को मर्ज करें?';
+
+  @override
+  String mrMergeConfirmBody(String mr) {
+    return '$mr को मर्ज करना पूर्ववत नहीं किया जा सकता।';
+  }
+
+  @override
+  String mrApprovalsSummary(int approved, int required) {
+    return '$required में से $approved स्वीकृतियाँ';
+  }
+
+  @override
+  String get mrNotMergeable =>
+      'अभी यह मर्ज रिक्वेस्ट मर्ज नहीं हो सकती। इसे स्वीकृति, रीबेस, या पास पाइपलाइन की ज़रूरत हो सकती है।';
+
+  @override
+  String get mrActionForbidden =>
+      'आपके पास इस क्रिया की अनुमति नहीं है। अपने टोकन स्कोप और भूमिका की जाँच करें।';
+
+  @override
+  String get mrActionError =>
+      'क्रिया पूरी नहीं हो सकी। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get projectOverviewPipelines => 'पाइपलाइन';
+
+  @override
+  String get pipelinesTitle => 'पाइपलाइन';
+
+  @override
+  String get pipelinesError => 'पाइपलाइन लोड नहीं हो सकीं।';
+
+  @override
+  String get pipelinesEmpty => 'अभी तक कोई पाइपलाइन नहीं।';
+
+  @override
+  String get pipelineError => 'यह पाइपलाइन लोड नहीं हो सकी।';
+
+  @override
+  String get pipelineJobsError => 'जॉब लोड नहीं हो सके।';
+
+  @override
+  String get pipelineNoJobs => 'इस पाइपलाइन में कोई जॉब नहीं है।';
+
+  @override
+  String get jobTitle => 'जॉब';
+
+  @override
+  String get jobError => 'यह जॉब लोड नहीं हो सकी।';
+
+  @override
+  String get jobRefresh => 'रीफ़्रेश';
+
+  @override
+  String get jobLogError => 'लॉग लोड नहीं हो सका।';
+
+  @override
+  String get jobLogEmpty => 'इस जॉब में कोई लॉग आउटपुट नहीं है।';
+
+  @override
+  String get jobActionRetry => 'पुनः प्रयास';
+
+  @override
+  String get jobActionCancel => 'रद्द करें';
+
+  @override
+  String get jobActionRun => 'चलाएँ';
+
+  @override
+  String get jobActionForbidden => 'आपके पास इस क्रिया की अनुमति नहीं है।';
+
+  @override
+  String get jobActionInvalid =>
+      'जॉब की वर्तमान स्थिति में यह क्रिया उपलब्ध नहीं है।';
+
+  @override
+  String get jobActionError =>
+      'क्रिया पूरी नहीं हो सकी। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get pipelineActionRetry => 'पुनः प्रयास';
+
+  @override
+  String get pipelineActionCancel => 'रद्द करें';
+
+  @override
+  String get pipelineActionForbidden => 'आपके पास इस क्रिया की अनुमति नहीं है।';
+
+  @override
+  String get pipelineActionInvalid =>
+      'पाइपलाइन की वर्तमान स्थिति में यह क्रिया उपलब्ध नहीं है।';
+
+  @override
+  String get pipelineActionError =>
+      'क्रिया पूरी नहीं हो सकी। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get accountsTitle => 'खाते';
+
+  @override
+  String get accountAdd => 'खाता जोड़ें';
+
+  @override
+  String get accountRemove => 'खाता हटाएँ';
+
+  @override
+  String get homeSwitchAccount => 'खाते';
+
+  @override
+  String get homeInbox => 'कार्य सूची';
+
+  @override
+  String get inboxTitle => 'कार्य सूची';
+
+  @override
+  String get inboxEmpty => 'आप पूरी तरह अद्यतित हैं।';
+
+  @override
+  String get inboxDoneEmpty => 'Nothing marked done yet.';
+
+  @override
+  String get inboxFilterPending => 'Pending';
+
+  @override
+  String get inboxFilterDone => 'Done';
+
+  @override
+  String get inboxFilterAllTypes => 'All types';
+
+  @override
+  String get inboxTypeIssues => 'Issues';
+
+  @override
+  String get inboxTypeMergeRequests => 'Merge requests';
+
+  @override
+  String get inboxFilterAllReasons => 'All reasons';
+
+  @override
+  String get inboxError => 'आपकी कार्य सूची लोड नहीं हो सकी।';
+
+  @override
+  String get inboxMarkAllDone => 'सभी को पूर्ण करें';
+
+  @override
+  String get inboxMarkDone => 'पूर्ण करें';
+
+  @override
+  String get inboxMarkDoneError =>
+      'आइटम को हटाया नहीं जा सका। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get inboxActionAssigned => 'आपको सौंपा गया';
+
+  @override
+  String get inboxActionMentioned => 'आपका उल्लेख किया';
+
+  @override
+  String get inboxActionBuildFailed => 'पाइपलाइन विफल';
+
+  @override
+  String get inboxActionMarked => 'एक कार्य जोड़ा';
+
+  @override
+  String get inboxActionApprovalRequired => 'अनुमोदन आवश्यक';
+
+  @override
+  String get inboxActionUnmergeable => 'मर्ज नहीं किया जा सकता';
+
+  @override
+  String get inboxActionDirectlyAddressed => 'आपको सीधे संबोधित किया';
+
+  @override
+  String get homeSearch => 'खोज';
+
+  @override
+  String get searchTitle => 'खोज';
+
+  @override
+  String get searchHint => 'प्रोजेक्ट, इश्यू, मर्ज अनुरोध खोजें';
+
+  @override
+  String get searchScopeProjects => 'प्रोजेक्ट';
+
+  @override
+  String get searchScopeIssues => 'इश्यू';
+
+  @override
+  String get searchScopeMergeRequests => 'मर्ज अनुरोध';
+
+  @override
+  String get searchInitial => 'खोजने के लिए टाइप करें।';
+
+  @override
+  String get searchEmpty => 'कोई परिणाम नहीं मिला।';
+
+  @override
+  String get searchError => 'खोज पूरी नहीं हो सकी।';
+
+  @override
+  String get searchLoadMore => 'और लोड करें';
+
+  @override
+  String get listSearchHint => 'Search by title';
+
+  @override
+  String get listSearchClose => 'Close search';
+
+  @override
+  String get projectAddFavorite => 'पसंदीदा में जोड़ें';
+
+  @override
+  String get projectRemoveFavorite => 'पसंदीदा से हटाएं';
+
+  @override
+  String get homeFavorites => 'पसंदीदा';
+
+  @override
+  String get settingsTitle => 'सेटिंग्स';
+
+  @override
+  String get settingsAccounts => 'खाते';
+
+  @override
+  String get settingsPrivacyPolicy => 'Privacy policy';
+
+  @override
+  String get settingsTerms => 'Terms of service';
+
+  @override
+  String get settingsWebsite => 'Website';
+
+  @override
+  String get settingsAppearance => 'Appearance';
+
+  @override
+  String get settingsThemeSystem => 'System';
+
+  @override
+  String get settingsThemeLight => 'Light';
+
+  @override
+  String get settingsThemeDark => 'Dark';
+
+  @override
+  String get settingsAbout => 'About';
+
+  @override
+  String get settingsVersion => 'Version';
+
+  @override
+  String get meShareProfile => 'Share profile';
+
+  @override
+  String get settingsLicenses => 'ओपन सोर्स लाइसेंस';
+
+  @override
+  String get subscriptionTitle => 'LabFox subscription';
+
+  @override
+  String get subscriptionActive => 'Subscribed';
+
+  @override
+  String get subscriptionInactive => 'Not subscribed';
+
+  @override
+  String get subscriptionPitch =>
+      'Approve and merge, retry pipelines, and connect more than one account.';
+
+  @override
+  String get subscriptionBenefitAccounts =>
+      'Connect multiple accounts and self-hosted instances';
+
+  @override
+  String get subscriptionBenefitActions =>
+      'Approve, merge, retry, cancel, and run manual jobs';
+
+  @override
+  String get subscriptionBenefitNotifications =>
+      'Push notifications for reviews and pipeline failures';
+
+  @override
+  String get subscriptionBenefitFavorites =>
+      'Unlimited favorites and saved searches';
+
+  @override
+  String subscriptionSubscribe(String price) {
+    return 'Subscribe for $price';
+  }
+
+  @override
+  String get subscriptionRestore => 'Restore purchases';
+
+  @override
+  String get subscriptionUnavailable =>
+      'The store is not available right now. Try again later.';
+
+  @override
+  String get subscriptionError =>
+      'That did not go through. Nothing was charged.';
+
+  @override
+  String get subscriptionRestored => 'Your subscription is active.';
+
+  @override
+  String get subscriptionNothingToRestore =>
+      'No subscription found for this store account.';
+
+  @override
+  String get navHome => 'होम';
+
+  @override
+  String get navInbox => 'इनबॉक्स';
+
+  @override
+  String get navSearch => 'खोज';
+
+  @override
+  String get navMe => 'मैं';
+
+  @override
+  String get meTitle => 'मैं';
+
+  @override
+  String get meSettings => 'सेटिंग्स';
+
+  @override
+  String get meAccounts => 'खाता बदलें';
+
+  @override
+  String get homeRecents => 'हाल ही में';
+}

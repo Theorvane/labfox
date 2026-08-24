@@ -5,7 +5,7 @@
 origin is **GitHub**.
 
 ```
-https://github.com/labfox-app/labfox.git
+https://github.com/theorvane/labfox.git
 ```
 
 | | |
@@ -49,12 +49,30 @@ Rules:
 
 ### Branch protection
 
-Ruleset definitions live in `.github/rulesets/` and are applied with `gh api`.
-They are **not active yet** — GitHub only allows rulesets on public repositories on the free plan,
-and this repository is still private. See `.github/rulesets/README.md`.
+Ruleset definitions live in `.github/rulesets/` and are **active** on `dev` and `main`. They block
+direct pushes, force pushes, and branch deletion, and every merge requires:
 
-Once applied, `dev` and `main` both block direct pushes, force pushes, and branch deletion,
-and require the CI checks to pass.
+- **CI green** — the required status checks pass.
+- **One approval** from someone other than the author. GitHub does not let you approve your own
+  pull request, so the author cannot self-merge.
+- **All review conversations resolved.** An unresolved thread keeps the pull request `BLOCKED`,
+  regardless of approval or CI. This is `required_review_thread_resolution`.
+
+The definitions under `.github/rulesets/` are the source of truth; edit them and re-apply with
+`gh api` rather than changing the rules in the web UI. See `.github/rulesets/README.md`.
+
+### Who resolves review threads
+
+**The reviewer resolves their own threads, not the author.** A thread is a question or a request;
+it is done when the person who raised it is satisfied, not when the author decides it is. The
+author replies, pushes a fix, or discusses — then the reviewer resolves and the merge unblocks.
+
+This matters because the author has the mechanical ability to resolve any thread. Doing so on your
+own pull request turns the resolution gate into a rubber stamp. Leave the reviewer's threads for
+the reviewer.
+
+An author may resolve a thread only when the reviewer explicitly says so, or for a thread the
+author opened themselves (a note to reviewers, say).
 
 ---
 
@@ -115,7 +133,7 @@ Edit the script rather than the GitHub UI, so the taxonomy stays reviewable.
 
 | Trigger | What happens | Where |
 |---|---|---|
-| Pull request opened / updated | `area:*` labels from changed paths | `.github/labeler.yml` |
+| Pull request opened / updated | `area:*` labels from changed paths | `.github/workflows/triage.yml` + `.github/labeler.yml` |
 | Pull request opened / retitled | type label (`feat`, `fix`, …) from the Conventional Commit title | `.github/workflows/triage.yml` |
 | Pull request opened | author set as assignee | `.github/workflows/triage.yml` |
 | Pull request opened | reviewers requested | `.github/CODEOWNERS` |
@@ -126,8 +144,11 @@ Notes:
 - Type labels come from the **title**, not the changed files — the kind of change is not a
   function of which paths were touched. A title that is not a Conventional Commit gets no type
   label and does not fail the run.
-- Both workflows use `pull_request_target` so labels also apply to pull requests from forks.
-  Neither one checks out or executes contributor code, which is what makes that safe.
+- All pull request steps live in one job in `.github/workflows/triage.yml`, running in order:
+  area labels, then the type label, then assignment. They were once two workflows that raced —
+  applied labels in an undefined order and could remove each other's — so they were merged.
+- The workflow uses `pull_request_target` so labels also apply to pull requests from forks.
+  It never checks out or executes contributor code, which is what makes that safe.
 - Assignment is best effort. Outside contributors cannot be assignees until they are
   collaborators, so the step logs and continues instead of failing.
 - `CODEOWNERS` requests review but does not require it — `require_code_owner_review` is `false`
@@ -161,7 +182,7 @@ Those are hard for maintainers to reproduce, so they need extra detail from the 
 feat/12-mr-diff-viewer
 fix/28-self-hosted-cert-error
 docs/31-api-reference
-chore/35-melos-bootstrap
+chore/35-upgrade-flutter
 ```
 
 - type: `feat` · `fix` · `docs` · `refactor` · `test` · `chore`
@@ -253,7 +274,7 @@ gh run list
 - The title uses the same format as the commit title: `feat(merge_requests): add unified diff viewer`
 - **CI must pass before merging.**
 - Attach screenshots for UI changes. Both mobile and desktop.
-- Resolve review comments before merging.
+- All review threads must be resolved before merging (by the reviewer — see "Who resolves review threads"). The ruleset enforces this.
 
 ### PR Size
 

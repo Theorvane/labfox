@@ -33,9 +33,13 @@ Fork freely, but use a different name and icon. ([TRADEMARK.md](TRADEMARK.md))
 ## Development setup
 
 ```bash
-flutter --version          # stable channel
-melos bootstrap            # install monorepo dependencies
+flutter --version          # 3.38.9, stable channel
+flutter pub get            # resolves the whole pub workspace at once
 ```
+
+The repository is a native pub workspace (Dart 3.6+), not a melos monorepo, so
+there is no extra tool to install: one `flutter pub get` at the root resolves
+`apps/labfox` and every package against a single lockfile.
 
 ```bash
 dart run build_runner build --delete-conflicting-outputs
@@ -144,7 +148,7 @@ There is no separate CLA to sign.
 
 ## Questions
 
-Open a [GitHub issue](https://github.com/labfox-app/labfox/issues) with the `question` label, or
+Open a [GitHub issue](https://github.com/theorvane/labfox/issues) with the `question` label, or
 comment on the issue or pull request you are working on — see [SUPPORT.md](SUPPORT.md).
 
 For anything that must stay private, email **inquiry@sloki9637.com**. Suspected vulnerabilities go
