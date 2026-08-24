@@ -13,7 +13,7 @@ concurrency:
 jobs:
   upload:
     name: Build and upload the iOS app
-    runs-on: macos-15
+    runs-on: macos-26
     environment: app-store
     env:
       # Named once: the signing check, the export options and the app itself

@@ -9,6 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 /// directory therefore wastes the whole run before failing authentication.
 void main() {
   final workflow = File('../../.github/workflows/ios-app-store-connect.yml');
+  final ciWorkflow = File('../../.github/workflows/ci.yml');
   final podfile = File('ios/Podfile');
 
   test('altool receives the private-key directory explicitly', () {
@@ -48,5 +49,38 @@ void main() {
           'Generated framework targets must not inherit the Runner app\'s '
           'manual provisioning profile during an archive.',
     );
+  });
+
+  test(
+    'archive runner provides the iOS 26 SDK required by App Store Connect',
+    () {
+      expect(
+        workflow.readAsStringSync(),
+        contains('runs-on: macos-26'),
+        reason:
+            'App Store Connect rejects archives built with the iOS 18 SDK from '
+            'the macos-15 runner.',
+      );
+    },
+  );
+
+  test('pull requests validate the iOS SDK from the exact head commit', () {
+    expect(
+      ciWorkflow.existsSync(),
+      isTrue,
+      reason: '${ciWorkflow.path} is missing',
+    );
+
+    final contents = ciWorkflow.readAsStringSync();
+    expect(contents, contains('  ios-sdk:\n'));
+    expect(contents, contains('    runs-on: macos-26'));
+    expect(
+      contents,
+      contains('ref: \${{ github.event.pull_request.head.sha }}'),
+      reason: 'The macOS check must test the PR head, not GitHub\'s merge ref.',
+    );
+    expect(contents, contains('persist-credentials: false'));
+    expect(contents, contains('xcrun --sdk iphoneos --show-sdk-version'));
+    expect(contents, contains('flutter build ios --release --no-codesign'));
   });
 }
