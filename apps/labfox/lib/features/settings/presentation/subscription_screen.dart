@@ -62,6 +62,15 @@ class SubscriptionScreen extends ConsumerWidget {
                       child: Text(l10n.subscriptionSubscribe(data.price)),
                     ),
             ),
+          if (action.hasError) ...[
+            const SizedBox(height: LabFoxSpacing.sm),
+            Text(
+              l10n.subscriptionError,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Theme.of(context).colorScheme.error,
+              ),
+            ),
+          ],
           const SizedBox(height: LabFoxSpacing.sm),
           // Apple requires this to be reachable from the UI (Review Guideline
           // 3.1.1), and it is what a user on a new device needs. Shown on both

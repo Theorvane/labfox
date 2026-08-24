@@ -17,6 +17,7 @@ class _FakePurchaseApi implements PurchaseApi {
   List<ProductDetails> products = [];
   int buyCalls = 0;
   int restoreCalls = 0;
+  bool buyResult = true;
 
   @override
   Stream<List<PurchaseDetails>> get purchaseStream => _controller.stream;
@@ -37,7 +38,7 @@ class _FakePurchaseApi implements PurchaseApi {
   @override
   Future<bool> buyNonConsumable({required PurchaseParam purchaseParam}) async {
     buyCalls++;
-    return true;
+    return buyResult;
   }
 
   Future<void> dispose() => _controller.close();
@@ -140,5 +141,30 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(api.buyCalls, 1);
+  });
+
+  testWidgets('shows an error when the store rejects the purchase launch', (
+    tester,
+  ) async {
+    api.products = [
+      ProductDetails(
+        id: subscriptionProductId,
+        title: 'LabFox',
+        description: '',
+        price: r'US$4.99',
+        rawPrice: 4.99,
+        currencyCode: 'USD',
+      ),
+    ];
+    api.buyResult = false;
+    await pump(tester);
+
+    await tester.tap(find.textContaining('Subscribe for'));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text('That did not go through. Nothing was charged.'),
+      findsOneWidget,
+    );
   });
 }
