@@ -48,7 +48,7 @@ class LabFoxStatusColors extends ThemeExtension<LabFoxStatusColors> {
   /// Open issue / merge request, and a passed pipeline.
   final StatusColor open;
 
-  /// Merged merge request — violet, never mistaken for a plain close.
+  /// Merged merge request — informational, never mistaken for a plain close.
   final StatusColor merged;
 
   /// Closed issue / merge request, and a failed pipeline.
