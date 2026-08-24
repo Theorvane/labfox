@@ -44,6 +44,16 @@ class _FakePurchaseApi implements PurchaseApi {
   Future<void> completePurchase(PurchaseDetails purchase) async =>
       completed.add(purchase);
 
+  // Not exercised here: this file covers the entitlement mapping, and the
+  // selling side is covered by subscription_controller_test.dart.
+  @override
+  Future<ProductDetailsResponse> queryProductDetails(Set<String> ids) async =>
+      ProductDetailsResponse(productDetails: const [], notFoundIDs: const []);
+
+  @override
+  Future<bool> buyNonConsumable({required PurchaseParam purchaseParam}) async =>
+      false;
+
   Future<void> dispose() => _controller.close();
 }
 

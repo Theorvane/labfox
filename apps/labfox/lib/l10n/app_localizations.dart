@@ -1490,6 +1490,90 @@ abstract class AppLocalizations {
   /// **'Open source licenses'**
   String get settingsLicenses;
 
+  /// Title of the subscription screen
+  ///
+  /// In en, this message translates to:
+  /// **'LabFox subscription'**
+  String get subscriptionTitle;
+
+  /// Shown when the user has an active subscription
+  ///
+  /// In en, this message translates to:
+  /// **'Subscribed'**
+  String get subscriptionActive;
+
+  /// Shown when the user has no active subscription
+  ///
+  /// In en, this message translates to:
+  /// **'Not subscribed'**
+  String get subscriptionInactive;
+
+  /// One-line summary of what the subscription unlocks
+  ///
+  /// In en, this message translates to:
+  /// **'Approve and merge, retry pipelines, and connect more than one account.'**
+  String get subscriptionPitch;
+
+  /// Subscription benefit: multiple accounts
+  ///
+  /// In en, this message translates to:
+  /// **'Connect multiple accounts and self-hosted instances'**
+  String get subscriptionBenefitAccounts;
+
+  /// Subscription benefit: write actions
+  ///
+  /// In en, this message translates to:
+  /// **'Approve, merge, retry, cancel, and run manual jobs'**
+  String get subscriptionBenefitActions;
+
+  /// Subscription benefit: push notifications
+  ///
+  /// In en, this message translates to:
+  /// **'Push notifications for reviews and pipeline failures'**
+  String get subscriptionBenefitNotifications;
+
+  /// Subscription benefit: productivity limits lifted
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited favorites and saved searches'**
+  String get subscriptionBenefitFavorites;
+
+  /// Purchase button, with the price as the store formats it
+  ///
+  /// In en, this message translates to:
+  /// **'Subscribe for {price}'**
+  String subscriptionSubscribe(String price);
+
+  /// Restores an existing subscription on a new device
+  ///
+  /// In en, this message translates to:
+  /// **'Restore purchases'**
+  String get subscriptionRestore;
+
+  /// Shown when the store returns no product to sell
+  ///
+  /// In en, this message translates to:
+  /// **'The store is not available right now. Try again later.'**
+  String get subscriptionUnavailable;
+
+  /// Shown when a purchase or restore fails
+  ///
+  /// In en, this message translates to:
+  /// **'That did not go through. Nothing was charged.'**
+  String get subscriptionError;
+
+  /// Confirms a successful restore
+  ///
+  /// In en, this message translates to:
+  /// **'Your subscription is active.'**
+  String get subscriptionRestored;
+
+  /// Shown when a restore finds nothing to restore
+  ///
+  /// In en, this message translates to:
+  /// **'No subscription found for this store account.'**
+  String get subscriptionNothingToRestore;
+
   /// Bottom navigation / rail label for the home destination
   ///
   /// In en, this message translates to:

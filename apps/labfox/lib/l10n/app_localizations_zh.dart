@@ -711,6 +711,58 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsLicenses => '开源许可';
 
   @override
+  String get subscriptionTitle => 'LabFox subscription';
+
+  @override
+  String get subscriptionActive => 'Subscribed';
+
+  @override
+  String get subscriptionInactive => 'Not subscribed';
+
+  @override
+  String get subscriptionPitch =>
+      'Approve and merge, retry pipelines, and connect more than one account.';
+
+  @override
+  String get subscriptionBenefitAccounts =>
+      'Connect multiple accounts and self-hosted instances';
+
+  @override
+  String get subscriptionBenefitActions =>
+      'Approve, merge, retry, cancel, and run manual jobs';
+
+  @override
+  String get subscriptionBenefitNotifications =>
+      'Push notifications for reviews and pipeline failures';
+
+  @override
+  String get subscriptionBenefitFavorites =>
+      'Unlimited favorites and saved searches';
+
+  @override
+  String subscriptionSubscribe(String price) {
+    return 'Subscribe for $price';
+  }
+
+  @override
+  String get subscriptionRestore => 'Restore purchases';
+
+  @override
+  String get subscriptionUnavailable =>
+      'The store is not available right now. Try again later.';
+
+  @override
+  String get subscriptionError =>
+      'That did not go through. Nothing was charged.';
+
+  @override
+  String get subscriptionRestored => 'Your subscription is active.';
+
+  @override
+  String get subscriptionNothingToRestore =>
+      'No subscription found for this store account.';
+
+  @override
   String get navHome => '主页';
 
   @override
