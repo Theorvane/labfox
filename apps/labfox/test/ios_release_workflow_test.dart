@@ -49,4 +49,17 @@ void main() {
           'manual provisioning profile during an archive.',
     );
   });
+
+  test(
+    'archive runner provides the iOS 26 SDK required by App Store Connect',
+    () {
+      expect(
+        workflow.readAsStringSync(),
+        contains('runs-on: macos-26'),
+        reason:
+            'App Store Connect rejects archives built with the iOS 18 SDK from '
+            'the macos-15 runner.',
+      );
+    },
+  );
 }
