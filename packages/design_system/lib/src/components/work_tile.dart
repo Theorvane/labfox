@@ -14,6 +14,7 @@ class WorkTile extends StatelessWidget {
   const WorkTile({
     required this.icon,
     required this.title,
+    this.contextLabel,
     this.iconColor,
     this.metadata = const [],
     this.trailing,
@@ -26,6 +27,12 @@ class WorkTile extends StatelessWidget {
   /// Tint for the leading glyph — usually a status foreground. Falls back to a
   /// muted colour.
   final Color? iconColor;
+
+  /// Project or namespace context shown above the primary title.
+  ///
+  /// Account-level lists use this to keep the item's origin visible without
+  /// mixing it into identifiers and status metadata.
+  final String? contextLabel;
 
   final String title;
 
@@ -45,50 +52,69 @@ class WorkTile extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: LabFoxSpacing.md,
-          vertical: LabFoxSpacing.sm + 2,
+          vertical: LabFoxSpacing.sm + LabFoxSpacing.xs,
         ),
-        child: Row(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 1, right: LabFoxSpacing.sm),
-              child: Icon(
-                icon,
-                size: LabFoxIconSize.md,
-                color: iconColor ?? theme.colorScheme.onSurfaceVariant,
-              ),
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: roles.rowTitle,
-                  ),
-                  if (metadata.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.only(top: LabFoxSpacing.xs),
-                      child: DefaultTextStyle.merge(
-                        style: roles.meta,
-                        child: Wrap(
-                          spacing: LabFoxSpacing.sm,
-                          runSpacing: LabFoxSpacing.xs,
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          children: metadata,
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-            ),
-            if (trailing != null)
+            if (contextLabel != null) ...[
               Padding(
-                padding: const EdgeInsets.only(left: LabFoxSpacing.sm),
-                child: trailing,
+                padding: const EdgeInsets.only(
+                  left: LabFoxIconSize.md + LabFoxSpacing.sm,
+                ),
+                child: Text(
+                  contextLabel!,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: roles.meta,
+                ),
               ),
+              const SizedBox(height: LabFoxSpacing.xs),
+            ],
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: LabFoxSpacing.sm),
+                  child: Icon(
+                    icon,
+                    size: LabFoxIconSize.md,
+                    color: iconColor ?? theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: roles.rowTitle,
+                      ),
+                      if (metadata.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.only(top: LabFoxSpacing.xs),
+                          child: DefaultTextStyle.merge(
+                            style: roles.meta,
+                            child: Wrap(
+                              spacing: LabFoxSpacing.sm,
+                              runSpacing: LabFoxSpacing.xs,
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: metadata,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+                if (trailing != null)
+                  Padding(
+                    padding: const EdgeInsets.only(left: LabFoxSpacing.sm),
+                    child: trailing,
+                  ),
+              ],
+            ),
           ],
         ),
       ),
