@@ -30,9 +30,7 @@ void main() {
     );
     expect(
       contents,
-      contains(
-        '"\$API_PRIVATE_KEYS_DIR/AuthKey_\${ASC_KEY_ID}.p8"',
-      ),
+      contains('"\$API_PRIVATE_KEYS_DIR/AuthKey_\${ASC_KEY_ID}.p8"'),
       reason:
           'The private key filename and directory must match what altool '
           'looks up for --apiKey.',
