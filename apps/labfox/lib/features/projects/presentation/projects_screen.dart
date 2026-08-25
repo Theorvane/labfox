@@ -19,7 +19,15 @@ class ProjectsScreen extends ConsumerWidget {
     final projects = ref.watch(projectsControllerProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.projectsTitle)),
+      appBar: AppBar(
+        title: Text(l10n.projectsTitle),
+        // This route lives outside the navigation shell, so it carries its own
+        // way back; entered with context.go there is no stack to pop.
+        leading: BackButton(
+          onPressed: () =>
+              context.canPop() ? context.pop() : context.go(Routes.home),
+        ),
+      ),
       body: projects.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, _) => _ProjectsError(

@@ -12,8 +12,7 @@ import '../../../l10n/app_localizations.dart';
 /// lists, then the favorite and recent projects.
 ///
 /// Home is a launcher, not a feed — the actionable lists (my issues, my merge
-/// requests and the to-do inbox) are one tap away and own their filters, the
-/// way
+/// requests, the to-do inbox) are one tap away and own their filters, the way
 /// GitHub Mobile structures its home.
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -109,10 +108,16 @@ class _MyWork extends ConsumerWidget {
           onTap: () => context.push(Routes.myMergeRequests),
         ),
         LauncherTile(
+          icon: LabFoxIcons.project,
+          color: status.running.foreground,
+          label: l10n.homeProjects,
+          onTap: () => context.push(Routes.projects),
+        ),
+        LauncherTile(
           icon: LabFoxIcons.inbox,
           color: status.warning.foreground,
           label: l10n.homeInbox,
-          onTap: () => context.push(Routes.inbox),
+          onTap: () => context.go(Routes.inbox),
         ),
       ],
     );

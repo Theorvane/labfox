@@ -141,6 +141,12 @@ final routerProvider = Provider<GoRouter>((ref) {
         ),
       ),
       GoRoute(
+        path: Routes.inbox,
+        pageBuilder: (context, state) => const NoTransitionPage<void>(
+          child: AppShell(currentIndex: 1, child: InboxScreen()),
+        ),
+      ),
+      GoRoute(
         path: Routes.search,
         pageBuilder: (context, state) => const NoTransitionPage<void>(
           child: AppShell(currentIndex: 2, child: SearchScreen()),
@@ -155,10 +161,6 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.signIn,
         builder: (context, state) => const SignInScreen(),
-      ),
-      GoRoute(
-        path: Routes.inbox,
-        builder: (context, state) => const InboxScreen(),
       ),
       GoRoute(
         path: Routes.accounts,
@@ -188,9 +190,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: Routes.projects,
-        pageBuilder: (context, state) => const NoTransitionPage<void>(
-          child: AppShell(currentIndex: 1, child: ProjectsScreen()),
-        ),
+        builder: (context, state) => const ProjectsScreen(),
         routes: [
           GoRoute(
             path: ':id',
