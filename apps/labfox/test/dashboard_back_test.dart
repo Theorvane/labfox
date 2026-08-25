@@ -154,9 +154,7 @@ void main() {
     expect(find.text('Me'), findsWidgets);
   });
 
-  testWidgets('settings back returns to me', (
-    tester,
-  ) async {
+  testWidgets('settings back returns to me', (tester) async {
     await _pump(tester);
 
     await tester.tap(find.text('Me'));
@@ -171,9 +169,7 @@ void main() {
     expect(find.text('Me'), findsWidgets);
   });
 
-  testWidgets('accounts back returns to me', (
-    tester,
-  ) async {
+  testWidgets('accounts back returns to me', (tester) async {
     await _pump(tester);
 
     await tester.tap(find.text('Me'));
