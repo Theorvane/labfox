@@ -124,34 +124,27 @@ void main() {
     expect(find.text('My work'), findsOneWidget);
   });
 
-  // Secondary routes live outside the navigation shell, so they must be pushed
-  // onto the stack. Otherwise Android system back exits the app.
+  testWidgets('to-do list returns to home with system back', (tester) async {
+    await _pump(tester);
 
-  testWidgets('projects has a back affordance that returns home', (
+    await tester.tap(find.text('To-do list'));
+    await tester.pumpAndSettle();
+
+    await tester.binding.handlePopRoute();
+    await tester.pumpAndSettle();
+
+    expect(find.text('My work'), findsOneWidget);
+  });
+
+  testWidgets('projects is a primary destination without a back button', (
     tester,
   ) async {
     await _pump(tester);
 
     await tester.tap(find.text('Projects'));
     await tester.pumpAndSettle();
-    expect(find.text('Projects'), findsWidgets);
 
-    expect(find.byType(BackButton), findsOneWidget);
-    await tester.tap(find.byType(BackButton));
-    await tester.pumpAndSettle();
-    expect(find.text('My work'), findsOneWidget);
-  });
-
-  testWidgets('system back returns from projects to home', (tester) async {
-    await _pump(tester);
-
-    await tester.tap(find.text('Projects'));
-    await tester.pumpAndSettle();
-
-    await tester.binding.handlePopRoute();
-    await tester.pumpAndSettle();
-
-    expect(find.text('Me'), findsWidgets);
+    expect(find.byType(BackButton), findsNothing);
   });
 
   testWidgets('settings back returns to me', (tester) async {
