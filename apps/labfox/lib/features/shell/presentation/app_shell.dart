@@ -22,9 +22,9 @@ class AppShell extends StatelessWidget {
   static const _destinations = [
     (route: Routes.home, icon: Icons.home_outlined, selected: Icons.home),
     (
-      route: Routes.settings,
-      icon: Icons.settings_outlined,
-      selected: Icons.settings,
+      route: Routes.projects,
+      icon: LabFoxIcons.project,
+      selected: LabFoxIcons.project,
     ),
     (
       route: Routes.search,
@@ -36,7 +36,7 @@ class AppShell extends StatelessWidget {
 
   List<String> _labels(AppLocalizations l10n) => [
     l10n.navHome,
-    l10n.settingsTitle,
+    l10n.homeProjects,
     l10n.navSearch,
     l10n.navMe,
   ];

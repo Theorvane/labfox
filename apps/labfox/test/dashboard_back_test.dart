@@ -136,24 +136,12 @@ void main() {
     expect(find.text('My work'), findsOneWidget);
   });
 
-  testWidgets('projects from home returns with system back', (tester) async {
-    await _pump(tester);
-
-    await tester.tap(find.text('Projects'));
-    await tester.pumpAndSettle();
-
-    await tester.binding.handlePopRoute();
-    await tester.pumpAndSettle();
-
-    expect(find.text('My work'), findsOneWidget);
-  });
-
-  testWidgets('settings is a primary destination without a back button', (
+  testWidgets('projects is a primary destination without a back button', (
     tester,
   ) async {
     await _pump(tester);
 
-    await tester.tap(find.text('Settings'));
+    await tester.tap(find.text('Projects'));
     await tester.pumpAndSettle();
 
     expect(find.byType(BackButton), findsNothing);
@@ -164,7 +152,7 @@ void main() {
 
     await tester.tap(find.text('Me'));
     await tester.pumpAndSettle();
-    await tester.tap(find.byKey(const Key('me-settings')));
+    await tester.tap(find.byIcon(Icons.settings_outlined));
     await tester.pumpAndSettle();
     expect(find.text('Settings'), findsWidgets);
 
