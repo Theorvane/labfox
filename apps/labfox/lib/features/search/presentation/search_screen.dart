@@ -154,7 +154,7 @@ class _ResultTile extends StatelessWidget {
         starCount: item.starCount,
         avatarUrl: item.avatarUrl,
         visibility: item.visibility,
-        onTap: () => context.go(Routes.projectOverview(item.id)),
+        onTap: () => context.push(Routes.projectOverview(item.id)),
       );
     }
     final status = LabFoxStatusColors.of(context);
@@ -179,7 +179,7 @@ class _ResultTile extends StatelessWidget {
         ],
         onTap: projectId == null
             ? null
-            : () => context.go(Routes.issue(projectId, item.iid)),
+            : () => context.push(Routes.issue(projectId, item.iid)),
       );
     }
     if (item is MergeRequest) {
@@ -205,7 +205,7 @@ class _ResultTile extends StatelessWidget {
         ],
         onTap: projectId == null
             ? null
-            : () => context.go(Routes.mergeRequest(projectId, item.iid)),
+            : () => context.push(Routes.mergeRequest(projectId, item.iid)),
       );
     }
     return const SizedBox.shrink();

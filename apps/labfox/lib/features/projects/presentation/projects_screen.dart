@@ -81,7 +81,7 @@ class ProjectsScreen extends ConsumerWidget {
         onPressed: () =>
             ref.read(favoriteProjectsProvider.notifier).toggle(project),
       ),
-      onTap: () => context.go(Routes.projectOverview(project.id)),
+      onTap: () => context.push(Routes.projectOverview(project.id)),
     );
   }
 }
