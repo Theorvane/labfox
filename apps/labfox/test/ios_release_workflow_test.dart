@@ -11,6 +11,8 @@ void main() {
   final workflow = File('../../.github/workflows/ios-app-store-connect.yml');
   final ciWorkflow = File('../../.github/workflows/ci.yml');
   final podfile = File('ios/Podfile');
+  final appFrameworkInfo = File('ios/Flutter/AppFrameworkInfo.plist');
+  final runnerProject = File('ios/Runner.xcodeproj/project.pbxproj');
 
   test('altool receives the private-key directory explicitly', () {
     expect(
@@ -82,5 +84,22 @@ void main() {
     expect(contents, contains('persist-credentials: false'));
     expect(contents, contains('xcrun --sdk iphoneos --show-sdk-version'));
     expect(contents, contains('flutter build ios --release --no-codesign'));
+  });
+
+  test('all iOS build settings require iOS 15 or later', () {
+    expect(
+      appFrameworkInfo.readAsStringSync(),
+      contains('<string>15.0</string>'),
+      reason:
+          'The Flutter framework metadata becomes the archive MinimumOSVersion.',
+    );
+    expect(podfile.readAsStringSync(), contains("platform :ios, '15.0'"));
+
+    final project = runnerProject.readAsStringSync();
+    expect(
+      RegExp(r'IPHONEOS_DEPLOYMENT_TARGET = 15\.0;').allMatches(project),
+      hasLength(3),
+    );
+    expect(project, isNot(contains('IPHONEOS_DEPLOYMENT_TARGET = 13.0;')));
   });
 }
