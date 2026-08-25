@@ -50,7 +50,7 @@ class SettingsScreen extends ConsumerWidget {
             leading: const Icon(LabFoxIcons.account),
             title: Text(l10n.settingsAccounts),
             trailing: const Icon(LabFoxIcons.chevron),
-            onTap: () => context.go(Routes.accounts),
+            onTap: () => context.push(Routes.accounts),
           ),
           // Hidden where the app ships with every feature: an entry there
           // would offer to sell what the user already has.
@@ -64,7 +64,7 @@ class SettingsScreen extends ConsumerWidget {
                     : l10n.subscriptionInactive,
               ),
               trailing: const Icon(LabFoxIcons.chevron),
-              onTap: () => context.go(Routes.subscription),
+              onTap: () => context.push(Routes.subscription),
             ),
           const Divider(height: 1),
           _SectionHeader(l10n.settingsAppearance),
@@ -104,7 +104,7 @@ class SettingsScreen extends ConsumerWidget {
             leading: const Icon(LabFoxIcons.private),
             title: Text(l10n.settingsPrivacyPolicy),
             trailing: const Icon(LabFoxIcons.chevron),
-            onTap: () => context.go(Routes.privacy),
+            onTap: () => context.push(Routes.privacy),
           ),
           const Divider(height: 1),
           ListTile(

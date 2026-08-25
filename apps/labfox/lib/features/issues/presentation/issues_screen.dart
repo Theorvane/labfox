@@ -81,7 +81,7 @@ class _IssuesScreenState extends ConsumerState<IssuesScreen> {
             IconButton(
               icon: const Icon(LabFoxIcons.add),
               tooltip: l10n.newIssueButton,
-              onPressed: () => context.go(Routes.newIssue(widget.projectId)),
+              onPressed: () => context.push(Routes.newIssue(widget.projectId)),
             ),
           ],
         ],
@@ -142,7 +142,7 @@ class _IssuesScreenState extends ConsumerState<IssuesScreen> {
               separatorBuilder: (context, index) => const Divider(height: 1),
               itemBuilder: (context, index) => _IssueTile(
                 issue: items[index],
-                onTap: () => context.go(
+                onTap: () => context.push(
                   Routes.issue(widget.projectId, items[index].iid),
                 ),
               ),

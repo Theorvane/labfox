@@ -59,7 +59,7 @@ class PipelinesScreen extends ConsumerWidget {
               itemBuilder: (context, index) => _PipelineTile(
                 pipeline: items[index],
                 onTap: () =>
-                    context.go(Routes.pipeline(projectId, items[index].id)),
+                    context.push(Routes.pipeline(projectId, items[index].id)),
               ),
             ),
           );

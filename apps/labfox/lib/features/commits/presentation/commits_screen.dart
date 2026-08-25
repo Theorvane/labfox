@@ -47,7 +47,7 @@ class CommitsScreen extends ConsumerWidget {
               itemBuilder: (context, index) => _CommitTile(
                 commit: items[index],
                 onTap: () =>
-                    context.go(Routes.commit(projectId, items[index].id)),
+                    context.push(Routes.commit(projectId, items[index].id)),
               ),
             ),
           );

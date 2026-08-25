@@ -102,7 +102,7 @@ class BranchesScreen extends ConsumerWidget {
           ),
       ],
       trailing: const Icon(LabFoxIcons.chevron),
-      onTap: () => context.go(Routes.repository(projectId, branch.name)),
+      onTap: () => context.push(Routes.repository(projectId, branch.name)),
     );
   }
 

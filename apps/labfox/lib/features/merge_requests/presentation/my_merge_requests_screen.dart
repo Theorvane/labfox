@@ -154,7 +154,7 @@ class _MyMergeRequestsScreenState extends ConsumerState<MyMergeRequestsScreen> {
       ],
       onTap: projectId == null
           ? null
-          : () => context.go(Routes.mergeRequest(projectId, mr.iid)),
+          : () => context.push(Routes.mergeRequest(projectId, mr.iid)),
     );
   }
 

@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../core/analytics/analytics.dart';
-
 import '../core/auth/auth_controller.dart';
 import '../core/auth/auth_state.dart';
 import '../features/auth/presentation/accounts_screen.dart';
@@ -137,23 +136,27 @@ final routerProvider = Provider<GoRouter>((ref) {
       // Primary destinations, wrapped in the responsive navigation shell.
       GoRoute(
         path: Routes.home,
-        builder: (context, state) =>
-            const AppShell(currentIndex: 0, child: HomeScreen()),
+        pageBuilder: (context, state) => const NoTransitionPage<void>(
+          child: AppShell(currentIndex: 0, child: HomeScreen()),
+        ),
       ),
       GoRoute(
         path: Routes.inbox,
-        builder: (context, state) =>
-            const AppShell(currentIndex: 1, child: InboxScreen()),
+        pageBuilder: (context, state) => const NoTransitionPage<void>(
+          child: AppShell(currentIndex: 1, child: InboxScreen()),
+        ),
       ),
       GoRoute(
         path: Routes.search,
-        builder: (context, state) =>
-            const AppShell(currentIndex: 2, child: SearchScreen()),
+        pageBuilder: (context, state) => const NoTransitionPage<void>(
+          child: AppShell(currentIndex: 2, child: SearchScreen()),
+        ),
       ),
       GoRoute(
         path: Routes.me,
-        builder: (context, state) =>
-            const AppShell(currentIndex: 3, child: MeScreen()),
+        pageBuilder: (context, state) => const NoTransitionPage<void>(
+          child: AppShell(currentIndex: 3, child: MeScreen()),
+        ),
       ),
       GoRoute(
         path: Routes.signIn,

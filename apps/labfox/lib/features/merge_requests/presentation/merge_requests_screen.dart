@@ -84,7 +84,7 @@ class _MergeRequestsScreenState extends ConsumerState<MergeRequestsScreen> {
               icon: const Icon(LabFoxIcons.add),
               tooltip: l10n.newMrButton,
               onPressed: () =>
-                  context.go(Routes.newMergeRequest(widget.projectId)),
+                  context.push(Routes.newMergeRequest(widget.projectId)),
             ),
           ],
         ],
@@ -150,7 +150,7 @@ class _MergeRequestsScreenState extends ConsumerState<MergeRequestsScreen> {
               separatorBuilder: (context, index) => const Divider(height: 1),
               itemBuilder: (context, index) => _MergeRequestTile(
                 mr: items[index],
-                onTap: () => context.go(
+                onTap: () => context.push(
                   Routes.mergeRequest(widget.projectId, items[index].iid),
                 ),
               ),

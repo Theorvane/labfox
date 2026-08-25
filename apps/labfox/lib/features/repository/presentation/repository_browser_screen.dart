@@ -39,14 +39,14 @@ class RepositoryBrowserScreen extends ConsumerWidget {
           // The current branch, tappable to pick another. At the root it also
           // labels which ref is being browsed.
           TextButton.icon(
-            onPressed: () => context.go(Routes.branches(projectId)),
+            onPressed: () => context.push(Routes.branches(projectId)),
             icon: const Icon(LabFoxIcons.branch, size: 16),
             label: Text(ref, overflow: TextOverflow.ellipsis),
           ),
           IconButton(
             tooltip: l10n.commitsTitle,
             icon: const Icon(LabFoxIcons.history),
-            onPressed: () => context.go(Routes.commits(projectId, ref)),
+            onPressed: () => context.push(Routes.commits(projectId, ref)),
           ),
         ],
       ),
@@ -93,9 +93,9 @@ class RepositoryBrowserScreen extends ConsumerWidget {
       trailing: entry.isDirectory ? const Icon(LabFoxIcons.chevron) : null,
       onTap: () {
         if (entry.isDirectory) {
-          context.go(Routes.repositoryPath(projectId, ref, entry.path));
+          context.push(Routes.repositoryPath(projectId, ref, entry.path));
         } else {
-          context.go(Routes.file(projectId, ref, entry.path));
+          context.push(Routes.file(projectId, ref, entry.path));
         }
       },
     );

@@ -124,11 +124,8 @@ void main() {
     expect(find.text('My work'), findsOneWidget);
   });
 
-  // The same defect as #149, in three more places. Every one of these routes
-  // lives outside the navigation shell, so it has no bottom bar, and each is
-  // entered with context.go, which replaces the stack rather than pushing onto
-  // it — leaving nothing for an implied back button to pop. The result is a
-  // screen with no way out at all.
+  // Secondary routes live outside the navigation shell, so they must be pushed
+  // onto the stack. Otherwise Android system back exits the app.
 
   testWidgets('projects has a back affordance that returns home', (
     tester,
@@ -145,9 +142,19 @@ void main() {
     expect(find.text('My work'), findsOneWidget);
   });
 
-  testWidgets('settings has a back affordance that returns home', (
-    tester,
-  ) async {
+  testWidgets('system back returns from projects to home', (tester) async {
+    await _pump(tester);
+
+    await tester.tap(find.text('Projects'));
+    await tester.pumpAndSettle();
+
+    await tester.binding.handlePopRoute();
+    await tester.pumpAndSettle();
+
+    expect(find.text('Me'), findsWidgets);
+  });
+
+  testWidgets('settings back returns to me', (tester) async {
     await _pump(tester);
 
     await tester.tap(find.text('Me'));
@@ -159,12 +166,10 @@ void main() {
     expect(find.byType(BackButton), findsOneWidget);
     await tester.tap(find.byType(BackButton));
     await tester.pumpAndSettle();
-    expect(find.text('My work'), findsOneWidget);
+    expect(find.text('Me'), findsWidgets);
   });
 
-  testWidgets('accounts has a back affordance that returns home', (
-    tester,
-  ) async {
+  testWidgets('accounts back returns to me', (tester) async {
     await _pump(tester);
 
     await tester.tap(find.text('Me'));
@@ -177,6 +182,6 @@ void main() {
     expect(find.byType(BackButton), findsOneWidget);
     await tester.tap(find.byType(BackButton));
     await tester.pumpAndSettle();
-    expect(find.text('My work'), findsOneWidget);
+    expect(find.text('Me'), findsWidgets);
   });
 }
