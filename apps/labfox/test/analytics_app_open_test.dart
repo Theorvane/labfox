@@ -77,7 +77,7 @@ void main() {
     },
   );
 
-  test('route changes do not emit screen_view events', () async {
+  test('screen_view dedupe survives a router rebuild', () async {
     final analytics = _RecordingAnalytics();
     final container = ProviderContainer(
       overrides: [
@@ -87,14 +87,23 @@ void main() {
     );
     addTearDown(container.dispose);
 
+    await container.read(authControllerProvider.future);
+    container.read(routerProvider);
+
+    final tracker = container.read(routeTrackerProvider);
+    tracker.visit('/inbox');
+
+    // An auth change rebuilds the router. The tracker must not be rebuilt with
+    // it, or the screen the user is already on is counted a second time.
     final auth = container.read(authControllerProvider.notifier) as _StubAuth;
     auth.emit(const SignedIn(_account));
-    final router = container.read(routerProvider);
+    container.read(routerProvider);
 
-    router.go(Routes.inbox);
-    router.go(Routes.search);
-    await Future<void>.delayed(Duration.zero);
+    final afterRebuild = container.read(routeTrackerProvider);
+    expect(identical(tracker, afterRebuild), isTrue);
 
-    expect(analytics.events.where((e) => e == 'screen_view'), isEmpty);
+    afterRebuild.visit('/inbox');
+
+    expect(analytics.events.where((e) => e == 'screen_view'), hasLength(1));
   });
 }
