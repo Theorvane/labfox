@@ -19,7 +19,13 @@ class ProjectsScreen extends ConsumerWidget {
     final projects = ref.watch(projectsControllerProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.projectsTitle)),
+      appBar: AppBar(
+        title: Text(l10n.projectsTitle),
+        leading: BackButton(
+          onPressed: () =>
+              context.canPop() ? context.pop() : context.go(Routes.home),
+        ),
+      ),
       body: projects.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, _) => _ProjectsError(

@@ -166,7 +166,9 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: Routes.settings,
-        builder: (context, state) => const SettingsScreen(),
+        pageBuilder: (context, state) => const NoTransitionPage<void>(
+          child: AppShell(currentIndex: 1, child: SettingsScreen()),
+        ),
         routes: [
           GoRoute(
             path: 'privacy',
@@ -188,9 +190,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: Routes.projects,
-        pageBuilder: (context, state) => const NoTransitionPage<void>(
-          child: AppShell(currentIndex: 1, child: ProjectsScreen()),
-        ),
+        builder: (context, state) => const ProjectsScreen(),
         routes: [
           GoRoute(
             path: ':id',

@@ -37,12 +37,9 @@ class SettingsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.settingsTitle),
-        // This route lives outside the navigation shell, so it carries its own
-        // way back; entered with context.go there is no stack to pop.
-        leading: BackButton(
-          onPressed: () =>
-              context.canPop() ? context.pop() : context.go(Routes.home),
-        ),
+        leading: context.canPop()
+            ? BackButton(onPressed: () => context.pop())
+            : null,
       ),
       body: ListView(
         children: [
