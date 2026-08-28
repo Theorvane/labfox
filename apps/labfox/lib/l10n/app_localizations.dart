@@ -308,6 +308,30 @@ abstract class AppLocalizations {
   /// **'Projects'**
   String get homeProjects;
 
+  /// Home entry that opens the groups list
+  ///
+  /// In en, this message translates to:
+  /// **'Groups'**
+  String get homeGroups;
+
+  /// Title of the groups list screen
+  ///
+  /// In en, this message translates to:
+  /// **'Groups'**
+  String get groupsTitle;
+
+  /// Shown when the groups list is empty
+  ///
+  /// In en, this message translates to:
+  /// **'You are not a member of any groups yet.'**
+  String get groupsEmpty;
+
+  /// Shown when the groups list fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load your groups.'**
+  String get groupsError;
+
   /// Title of the projects list screen
   ///
   /// In en, this message translates to:

@@ -28,7 +28,10 @@ void main() {
     expect(find.text('Issues'), findsOneWidget);
     expect(find.text('Merge requests'), findsOneWidget);
     expect(find.text('Projects'), findsOneWidget);
-    expect(find.text('To-do list'), findsOneWidget);
+    // The To-do tab already lives in the bottom navigation; the launcher
+    // points at Groups instead of duplicating it.
+    expect(find.text('Groups'), findsOneWidget);
+    expect(find.text('To-do list'), findsNothing);
     // Home is a launcher: the app bar carries search.
     expect(find.byIcon(Icons.search), findsOneWidget);
   });

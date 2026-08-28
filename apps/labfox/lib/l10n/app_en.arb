@@ -142,6 +142,22 @@
   "@homeProjects": {
     "description": "Home entry that opens the projects list"
   },
+  "homeGroups": "Groups",
+  "@homeGroups": {
+    "description": "Home entry that opens the groups list"
+  },
+  "groupsTitle": "Groups",
+  "@groupsTitle": {
+    "description": "Title of the groups list screen"
+  },
+  "groupsEmpty": "You are not a member of any groups yet.",
+  "@groupsEmpty": {
+    "description": "Shown when the groups list is empty"
+  },
+  "groupsError": "Could not load your groups.",
+  "@groupsError": {
+    "description": "Shown when the groups list fails to load"
+  },
   "projectsTitle": "Projects",
   "@projectsTitle": {
     "description": "Title of the projects list screen"
