@@ -77,9 +77,7 @@ class JobDetailScreen extends ConsumerWidget {
                 // system gesture area.
                 return SafeArea(
                   top: false,
-                  child: SingleChildScrollView(
-                    child: AnsiLogView(trace: text),
-                  ),
+                  child: SingleChildScrollView(child: AnsiLogView(trace: text)),
                 );
               },
             ),
