@@ -4,11 +4,12 @@ import 'package:gitlab_models/gitlab_models.dart';
 import '../tokens/colors.dart';
 import '../tokens/spacing.dart';
 
-/// Renders a job trace with its ANSI colours, in a monospace, scrollable view.
+/// Renders a job trace with its ANSI colours, in a monospace, selectable view.
 ///
 /// The raw text is parsed into styled spans and drawn as selectable rich text.
 /// Colours are theme-aware so the log stays legible in light and dark. Long
-/// lines scroll horizontally rather than wrap, preserving alignment.
+/// lines wrap to the screen width — the way GitHub Mobile renders job logs —
+/// so the page never grows wider than the screen.
 class AnsiLogView extends StatelessWidget {
   const AnsiLogView({required this.trace, super.key});
 
@@ -23,26 +24,23 @@ class AnsiLogView extends StatelessWidget {
       width: double.infinity,
       color: isDark ? const Color(0xFF0B1220) : const Color(0xFFF6F8FA),
       padding: const EdgeInsets.all(LabFoxSpacing.sm),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: SelectableText.rich(
-          TextSpan(
-            children: [
-              for (final span in spans)
-                TextSpan(
-                  text: span.text,
-                  style: TextStyle(
-                    color: _resolve(span.color, isDark, Theme.of(context)),
-                    fontWeight: span.bold ? FontWeight.bold : FontWeight.normal,
-                  ),
+      child: SelectableText.rich(
+        TextSpan(
+          children: [
+            for (final span in spans)
+              TextSpan(
+                text: span.text,
+                style: TextStyle(
+                  color: _resolve(span.color, isDark, Theme.of(context)),
+                  fontWeight: span.bold ? FontWeight.bold : FontWeight.normal,
                 ),
-            ],
-          ),
-          style: const TextStyle(
-            fontFamily: 'monospace',
-            fontSize: 12,
-            height: 1.4,
-          ),
+              ),
+          ],
+        ),
+        style: const TextStyle(
+          fontFamily: 'monospace',
+          fontSize: 12,
+          height: 1.4,
         ),
       ),
     );

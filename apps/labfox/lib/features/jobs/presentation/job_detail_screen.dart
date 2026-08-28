@@ -73,7 +73,12 @@ class JobDetailScreen extends ConsumerWidget {
                 if (text.trim().isEmpty) {
                   return Center(child: Text(l10n.jobLogEmpty));
                 }
-                return SingleChildScrollView(child: AnsiLogView(trace: text));
+                // The log is the last thing on screen; keep its tail above the
+                // system gesture area.
+                return SafeArea(
+                  top: false,
+                  child: SingleChildScrollView(child: AnsiLogView(trace: text)),
+                );
               },
             ),
           ),
