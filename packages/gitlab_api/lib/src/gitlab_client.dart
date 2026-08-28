@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import 'common/exceptions.dart';
+import 'groups/groups_api.dart';
 import 'issues/issues_api.dart';
 import 'jobs/jobs_api.dart';
 import 'merge_requests/merge_requests_api.dart';
@@ -44,6 +45,7 @@ class GitLabClient {
     }
 
     users = UsersApi(_dio);
+    groups = GroupsApi(_dio);
     projects = ProjectsApi(_dio);
     repository = RepositoryApi(_dio);
     issues = IssuesApi(_dio);
@@ -110,6 +112,7 @@ class GitLabClient {
   }
 
   late final UsersApi users;
+  late final GroupsApi groups;
   late final ProjectsApi projects;
   late final RepositoryApi repository;
   late final IssuesApi issues;

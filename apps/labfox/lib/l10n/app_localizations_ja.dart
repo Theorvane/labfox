@@ -115,6 +115,18 @@ class AppLocalizationsJa extends AppLocalizations {
   String get homeProjects => 'プロジェクト';
 
   @override
+  String get homeGroups => 'Groups';
+
+  @override
+  String get groupsTitle => 'Groups';
+
+  @override
+  String get groupsEmpty => 'You are not a member of any groups yet.';
+
+  @override
+  String get groupsError => 'Could not load your groups.';
+
+  @override
   String get projectsTitle => 'プロジェクト';
 
   @override
