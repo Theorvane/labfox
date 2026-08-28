@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The adaptive launcher icon Android 8+ and Play require. Both layers are
+     generated from brand/labfox-icon.png by scripts/generate-icons.py; the
+     background is the brand navy sampled from that source. -->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@color/ic_launcher_background" />
+    <foreground android:drawable="@mipmap/ic_launcher_foreground" />
+</adaptive-icon>
