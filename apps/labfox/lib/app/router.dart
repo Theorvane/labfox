@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../core/ads/ads_providers.dart';
 import '../core/analytics/analytics.dart';
 import '../core/auth/auth_controller.dart';
 import '../core/auth/auth_state.dart';
@@ -108,6 +109,7 @@ final routerProvider = Provider<GoRouter>((ref) {
   // read, not watch: the tracker must survive this provider's rebuilds, since
   // it is what remembers which screen the user is already on.
   final routeTracker = ref.read(routeTrackerProvider);
+  final interstitials = ref.read(interstitialAdsProvider);
 
   final router = GoRouter(
     initialLocation: Routes.home,
@@ -346,6 +348,11 @@ final routerProvider = Provider<GoRouter>((ref) {
   // never identifies a project or item.
   router.routerDelegate.addListener(() {
     routeTracker.visit(router.routerDelegate.currentConfiguration.uri.path);
+    // Interstitial pacing rides the same signal; the service checks the
+    // entitlement gate and its own policy before anything shows.
+    if (ref.read(adsEnabledProvider)) {
+      interstitials.onTransition();
+    }
   });
   return router;
 });

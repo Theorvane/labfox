@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:labfox/features/shell/presentation/app_shell.dart';
 import 'package:labfox/l10n/app_localizations.dart';
 
 Future<void> _pump(WidgetTester tester, double width) async {
   await tester.pumpWidget(
-    MaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: MediaQuery(
-        data: MediaQueryData(size: Size(width, 900)),
-        child: const AppShell(
-          currentIndex: 0,
-          child: Scaffold(body: Text('content')),
+    // The shell hosts the ad banner slot, which reads providers.
+    ProviderScope(
+      child: MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: MediaQuery(
+          data: MediaQueryData(size: Size(width, 900)),
+          child: const AppShell(
+            currentIndex: 0,
+            child: Scaffold(body: Text('content')),
+          ),
         ),
       ),
     ),
