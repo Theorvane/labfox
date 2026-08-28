@@ -223,11 +223,13 @@ class _MergeabilityLine extends StatelessWidget {
           color: colors.foreground,
         ),
         const SizedBox(width: LabFoxSpacing.xs),
-        Text(
-          mergeable ? l10n.mrReadyToMerge : l10n.mrCannotMergeNow,
-          style: Theme.of(
-            context,
-          ).textTheme.bodySmall?.copyWith(color: colors.foreground),
+        Expanded(
+          child: Text(
+            mergeable ? l10n.mrReadyToMerge : l10n.mrCannotMergeNow,
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall?.copyWith(color: colors.foreground),
+          ),
         ),
       ],
     );
@@ -253,12 +255,14 @@ class _ApprovalSummary extends StatelessWidget {
           color: LabFoxColors.pending,
         ),
         const SizedBox(width: LabFoxSpacing.xs),
-        Text(
-          l10n.mrApprovalsSummary(
-            approvals.approvedCount,
-            approvals.approvalsRequired,
+        Expanded(
+          child: Text(
+            l10n.mrApprovalsSummary(
+              approvals.approvedCount,
+              approvals.approvalsRequired,
+            ),
+            style: theme.textTheme.bodySmall,
           ),
-          style: theme.textTheme.bodySmall,
         ),
       ],
     );
