@@ -35,6 +35,20 @@ OpenPanel):
 - Analytics are never sold, shared with third parties, or used for
   advertising.
 
+## Advertising
+
+The free tier on Android and iOS shows ads served through **Unity LevelPlay
+(ironSource) mediation**. Subscribers and the desktop builds see no ads and the
+ad SDK does nothing for them.
+
+- To serve and measure ads, the LevelPlay SDK may process device information
+  such as the advertising identifier, under Unity's own privacy policy:
+  https://unity.com/legal/privacy-policy
+- LabFox passes it no account data — no GitLab usernames, tokens, or content.
+- On iOS you can decline tracking in the system prompt; ads still show, less
+  personalized. On Android you can reset or delete the advertising ID in
+  system settings.
+
 ## Data retention and deletion
 
 - Signing an account out removes that account's data from your device: its
