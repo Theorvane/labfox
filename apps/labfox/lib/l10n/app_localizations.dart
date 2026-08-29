@@ -1466,6 +1466,36 @@ abstract class AppLocalizations {
   /// **'Website'**
   String get settingsWebsite;
 
+  /// Settings section for background checks
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get settingsNotifications;
+
+  /// Switch that turns on periodic background checks of the to-do list
+  ///
+  /// In en, this message translates to:
+  /// **'Background to-do checks'**
+  String get settingsBackgroundChecks;
+
+  /// Explains the platform-dependent timing of background checks
+  ///
+  /// In en, this message translates to:
+  /// **'LabFox checks your to-do list in the background and notifies you about new items. Android checks about every 15 minutes; iOS decides when, so this is a background check rather than instant push.'**
+  String get settingsBackgroundChecksHelp;
+
+  /// Paywall reason shown for background notifications
+  ///
+  /// In en, this message translates to:
+  /// **'Background to-do checks are part of the subscription. The to-do inbox and manual refresh stay free.'**
+  String get paywallNotifications;
+
+  /// Shown when the system refused the notification permission
+  ///
+  /// In en, this message translates to:
+  /// **'LabFox cannot show notifications until you allow them in system settings.'**
+  String get settingsNotificationsDenied;
+
   /// Settings section for the theme choice
   ///
   /// In en, this message translates to:
@@ -1592,16 +1622,16 @@ abstract class AppLocalizations {
   /// **'Approve, merge, retry, cancel, and run manual jobs'**
   String get subscriptionBenefitActions;
 
-  /// Subscription benefit: push notifications
+  /// Subscription benefit: background to-do checks
   ///
   /// In en, this message translates to:
-  /// **'Push notifications for reviews and pipeline failures'**
+  /// **'Background checks that notify you about new to-do items'**
   String get subscriptionBenefitNotifications;
 
   /// Subscription benefit: productivity limits lifted
   ///
   /// In en, this message translates to:
-  /// **'Unlimited favorites and saved searches'**
+  /// **'Unlimited favorites, instead of the free limit of three'**
   String get subscriptionBenefitFavorites;
 
   /// Purchase button, with the price as the store formats it

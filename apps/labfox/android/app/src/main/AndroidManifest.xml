@@ -2,6 +2,9 @@
     <!-- Required by the LevelPlay ad SDK to use the advertising identifier
          on Android 13+. Ads run only for the free tier; see PRIVACY.md. -->
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+    <!-- Local notifications for the background to-do check. Android 13+ asks
+         the user before any notification is shown. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <application
         android:label="LabFox"
         android:name="${applicationName}"

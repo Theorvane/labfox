@@ -49,6 +49,19 @@ ad SDK does nothing for them.
   personalized. On Android you can reset or delete the advertising ID in
   system settings.
 
+## Background checks
+
+If you turn on background to-do checks (a subscription feature, off by
+default), LabFox asks **your own GitLab instance** for your pending to-do list
+on a schedule the operating system controls, and shows a local notification for
+anything new.
+
+- The request goes to your instance with your token, exactly like the same
+  screen in the app. Nothing is sent to sloki9637.
+- Notification text is built on your device and stays there.
+- LabFox stores only the ids of the to-dos it has already announced, so it does
+  not announce them twice. Turning the setting off stops the checks.
+
 ## Data retention and deletion
 
 - Signing an account out removes that account's data from your device: its

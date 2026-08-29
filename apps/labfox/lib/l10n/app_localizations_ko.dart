@@ -703,6 +703,24 @@ class AppLocalizationsKo extends AppLocalizations {
   String get settingsWebsite => 'Website';
 
   @override
+  String get settingsNotifications => 'Notifications';
+
+  @override
+  String get settingsBackgroundChecks => 'Background to-do checks';
+
+  @override
+  String get settingsBackgroundChecksHelp =>
+      'LabFox checks your to-do list in the background and notifies you about new items. Android checks about every 15 minutes; iOS decides when, so this is a background check rather than instant push.';
+
+  @override
+  String get paywallNotifications =>
+      'Background to-do checks are part of the subscription. The to-do inbox and manual refresh stay free.';
+
+  @override
+  String get settingsNotificationsDenied =>
+      'LabFox cannot show notifications until you allow them in system settings.';
+
+  @override
   String get settingsAppearance => 'Appearance';
 
   @override
@@ -775,11 +793,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get subscriptionBenefitNotifications =>
-      'Push notifications for reviews and pipeline failures';
+      'Background checks that notify you about new to-do items';
 
   @override
   String get subscriptionBenefitFavorites =>
-      'Unlimited favorites and saved searches';
+      'Unlimited favorites, instead of the free limit of three';
 
   @override
   String subscriptionSubscribe(String price) {

@@ -934,6 +934,26 @@
   "@settingsWebsite": {
     "description": "Settings entry that opens the company website"
   },
+  "settingsNotifications": "Notifications",
+  "@settingsNotifications": {
+    "description": "Settings section for background checks"
+  },
+  "settingsBackgroundChecks": "Background to-do checks",
+  "@settingsBackgroundChecks": {
+    "description": "Switch that turns on periodic background checks of the to-do list"
+  },
+  "settingsBackgroundChecksHelp": "LabFox checks your to-do list in the background and notifies you about new items. Android checks about every 15 minutes; iOS decides when, so this is a background check rather than instant push.",
+  "@settingsBackgroundChecksHelp": {
+    "description": "Explains the platform-dependent timing of background checks"
+  },
+  "paywallNotifications": "Background to-do checks are part of the subscription. The to-do inbox and manual refresh stay free.",
+  "@paywallNotifications": {
+    "description": "Paywall reason shown for background notifications"
+  },
+  "settingsNotificationsDenied": "LabFox cannot show notifications until you allow them in system settings.",
+  "@settingsNotificationsDenied": {
+    "description": "Shown when the system refused the notification permission"
+  },
   "settingsAppearance": "Appearance",
   "@settingsAppearance": {
     "description": "Settings section for the theme choice"
@@ -1023,11 +1043,11 @@
   "@subscriptionBenefitActions": {
     "description": "Subscription benefit: write actions"
   },
-  "subscriptionBenefitNotifications": "Push notifications for reviews and pipeline failures",
+  "subscriptionBenefitNotifications": "Background checks that notify you about new to-do items",
   "@subscriptionBenefitNotifications": {
-    "description": "Subscription benefit: push notifications"
+    "description": "Subscription benefit: background to-do checks"
   },
-  "subscriptionBenefitFavorites": "Unlimited favorites and saved searches",
+  "subscriptionBenefitFavorites": "Unlimited favorites, instead of the free limit of three",
   "@subscriptionBenefitFavorites": {
     "description": "Subscription benefit: productivity limits lifted"
   },

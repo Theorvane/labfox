@@ -2,7 +2,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'entitlement.dart';
 
-const _entitlementKey = 'entitlement';
+/// Shared with the background isolate, which reads the cached answer directly
+/// rather than starting the store SDK where no one is watching.
+const entitlementPrefsKey = 'entitlement';
 
 /// Remembers the last entitlement the store reported.
 ///
@@ -19,7 +21,7 @@ class EntitlementStore {
   /// answer. Null is not the same as [Entitlement.free]: it means "never
   /// asked", which is why it is preserved rather than defaulted here.
   Entitlement? read() {
-    return switch (_prefs.getString(_entitlementKey)) {
+    return switch (_prefs.getString(entitlementPrefsKey)) {
       'subscribed' => Entitlement.subscribed,
       'free' => Entitlement.free,
       _ => null,
@@ -27,5 +29,5 @@ class EntitlementStore {
   }
 
   Future<void> write(Entitlement entitlement) =>
-      _prefs.setString(_entitlementKey, entitlement.name);
+      _prefs.setString(entitlementPrefsKey, entitlement.name);
 }

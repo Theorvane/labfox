@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../app/router.dart';
 import '../../../core/entitlement/entitlement_providers.dart';
+import '../../../core/entitlement/paywall.dart';
+import '../../../core/notifications/notifications_providers.dart';
 import '../../../core/settings/app_settings_providers.dart';
 import '../../../core/ui/link_opener.dart';
 import '../../../l10n/app_localizations.dart';
@@ -30,6 +32,8 @@ class SettingsScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final open = ref.watch(linkOpenerProvider);
     final themeMode = ref.watch(themeModeProvider);
+    final mobile = ref.watch(mobilePlatformProvider);
+    final backgroundChecks = ref.watch(backgroundNotificationsProvider);
     final version = ref.watch(appVersionProvider);
     final entitlement = ref.watch(entitlementProvider);
     final freePlatform = ref.watch(freePlatformProvider);
@@ -67,6 +71,21 @@ class SettingsScreen extends ConsumerWidget {
               onTap: () => context.push(Routes.subscription),
             ),
           const Divider(height: 1),
+          if (mobile) ...[
+            _SectionHeader(l10n.settingsNotifications),
+            SwitchListTile(
+              value: backgroundChecks,
+              title: Text(l10n.settingsBackgroundChecks),
+              subtitle: Text(l10n.settingsBackgroundChecksHelp),
+              onChanged: (value) => runSubscribed(
+                context,
+                ref,
+                feature: PaidFeature.notifications,
+                action: () => _setBackgroundChecks(context, ref, value),
+              ),
+            ),
+            const Divider(height: 1),
+          ],
           _SectionHeader(l10n.settingsAppearance),
           RadioGroup<ThemeMode>(
             groupValue: themeMode,
@@ -143,6 +162,25 @@ class SettingsScreen extends ConsumerWidget {
       ),
     );
   }
+}
+
+/// Flips the background-check setting, and says so if the system refused the
+/// notification permission — the switch snapping back with no explanation
+/// reads as a bug.
+Future<void> _setBackgroundChecks(
+  BuildContext context,
+  WidgetRef ref,
+  bool value,
+) async {
+  await ref.read(backgroundNotificationsProvider.notifier).set(value);
+  if (!context.mounted || !value || ref.read(backgroundNotificationsProvider)) {
+    return;
+  }
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(AppLocalizations.of(context).settingsNotificationsDenied),
+    ),
+  );
 }
 
 class _SectionHeader extends StatelessWidget {
