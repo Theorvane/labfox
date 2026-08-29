@@ -306,7 +306,8 @@ class _Stage extends StatelessWidget {
                           LabFoxIcons.chevron,
                           size: LabFoxIconSize.sm,
                         ),
-                        onTap: () => context.go(Routes.job(projectId, job.id)),
+                        onTap: () =>
+                            context.push(Routes.job(projectId, job.id)),
                       );
                     },
                   ),

@@ -10,6 +10,7 @@ export 'src/branch.dart';
 export 'src/ci_status.dart';
 export 'src/commit.dart';
 export 'src/file_diff.dart';
+export 'src/group.dart';
 export 'src/issue.dart';
 export 'src/job.dart';
 export 'src/label.dart';

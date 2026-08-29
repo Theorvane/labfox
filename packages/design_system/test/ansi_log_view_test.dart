@@ -38,4 +38,24 @@ void main() {
     await _pump(tester, '');
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('long lines wrap to the screen instead of panning', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(body: AnsiLogView(trace: 'x' * 500)),
+      ),
+    );
+
+    // The log must never make the page wider than the screen; a long line
+    // wraps the way GitHub Mobile's job logs do.
+    expect(
+      find.byWidgetPredicate(
+        (w) =>
+            w is SingleChildScrollView && w.scrollDirection == Axis.horizontal,
+      ),
+      findsNothing,
+    );
+  });
 }

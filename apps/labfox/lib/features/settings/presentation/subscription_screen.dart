@@ -105,9 +105,11 @@ class _Status extends StatelessWidget {
           color: subscribed ? Theme.of(context).colorScheme.primary : null,
         ),
         const SizedBox(width: LabFoxSpacing.sm),
-        Text(
-          subscribed ? l10n.subscriptionActive : l10n.subscriptionInactive,
-          style: Theme.of(context).textTheme.titleMedium,
+        Expanded(
+          child: Text(
+            subscribed ? l10n.subscriptionActive : l10n.subscriptionInactive,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
         ),
       ],
     );

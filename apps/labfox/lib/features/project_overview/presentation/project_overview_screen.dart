@@ -133,26 +133,26 @@ class _Categories extends StatelessWidget {
           color: status.open.foreground,
           label: l10n.projectOverviewIssues,
           count: project.openIssuesCount,
-          onTap: () => context.go(Routes.issues(project.id)),
+          onTap: () => context.push(Routes.issues(project.id)),
         ),
         LauncherTile(
           icon: LabFoxIcons.mergeRequest,
           color: status.merged.foreground,
           label: l10n.projectOverviewMergeRequests,
-          onTap: () => context.go(Routes.mergeRequests(project.id)),
+          onTap: () => context.push(Routes.mergeRequests(project.id)),
         ),
         LauncherTile(
           icon: LabFoxIcons.pipeline,
           color: status.running.foreground,
           label: l10n.projectOverviewPipelines,
-          onTap: () => context.go(Routes.pipelines(project.id)),
+          onTap: () => context.push(Routes.pipelines(project.id)),
         ),
         if (branch != null)
           LauncherTile(
             icon: LabFoxIcons.history,
             color: status.pending.foreground,
             label: l10n.projectOverviewCommits,
-            onTap: () => context.go(Routes.commits(project.id, branch)),
+            onTap: () => context.push(Routes.commits(project.id, branch)),
           ),
       ],
     );
@@ -195,13 +195,13 @@ class _CodeSection extends StatelessWidget {
           icon: LabFoxIcons.branch,
           color: status.pending.foreground,
           label: branch,
-          onTap: () => context.go(Routes.branches(project.id)),
+          onTap: () => context.push(Routes.branches(project.id)),
         ),
         LauncherTile(
           icon: LabFoxIcons.code,
           color: status.pending.foreground,
           label: l10n.projectOverviewBrowseCode,
-          onTap: () => context.go(Routes.repository(project.id, branch)),
+          onTap: () => context.push(Routes.repository(project.id, branch)),
         ),
       ],
     );

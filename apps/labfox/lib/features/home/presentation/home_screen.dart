@@ -99,25 +99,27 @@ class _MyWork extends ConsumerWidget {
           icon: LabFoxIcons.issueOpen,
           color: status.open.foreground,
           label: l10n.issuesTitle,
-          onTap: () => context.go(Routes.myIssues),
+          onTap: () => context.push(Routes.myIssues),
         ),
         LauncherTile(
           icon: LabFoxIcons.mergeRequest,
           color: status.merged.foreground,
           label: l10n.mergeRequestsTitle,
-          onTap: () => context.go(Routes.myMergeRequests),
+          onTap: () => context.push(Routes.myMergeRequests),
         ),
         LauncherTile(
           icon: LabFoxIcons.project,
           color: status.running.foreground,
           label: l10n.homeProjects,
-          onTap: () => context.go(Routes.projects),
+          onTap: () => context.push(Routes.projects),
         ),
+        // The To-do tab already lives in the bottom navigation; the launcher
+        // points at Groups instead of duplicating it.
         LauncherTile(
-          icon: LabFoxIcons.inbox,
+          icon: LabFoxIcons.group,
           color: status.warning.foreground,
-          label: l10n.homeInbox,
-          onTap: () => context.go(Routes.inbox),
+          label: l10n.homeGroups,
+          onTap: () => context.push(Routes.groups),
         ),
       ],
     );
@@ -160,7 +162,7 @@ class _ProjectSection extends ConsumerWidget {
                   icon: const Icon(LabFoxIcons.add),
                   tooltip: l10n.projectAddFavorite,
                   visualDensity: VisualDensity.compact,
-                  onPressed: () => context.go(Routes.projects),
+                  onPressed: () => context.push(Routes.projects),
                 ),
             ],
           ),
@@ -173,7 +175,7 @@ class _ProjectSection extends ConsumerWidget {
                   l10n.homeFavoritesEmpty,
                   style: LabFoxTextRoles.of(context).meta,
                 ),
-                onTap: () => context.go(Routes.projects),
+                onTap: () => context.push(Routes.projects),
               ),
             )
           else
@@ -192,7 +194,7 @@ class _ProjectSection extends ConsumerWidget {
                       avatarUrl: project.avatarUrl,
                       visibility: project.visibility,
                       onTap: () =>
-                          context.go(Routes.projectOverview(project.id)),
+                          context.push(Routes.projectOverview(project.id)),
                     ),
                   ],
                 ],

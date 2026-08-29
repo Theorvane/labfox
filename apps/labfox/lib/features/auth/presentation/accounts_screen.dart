@@ -58,7 +58,7 @@ class AccountsScreen extends ConsumerWidget {
           ListTile(
             leading: const Icon(LabFoxIcons.add),
             title: Text(l10n.accountAdd),
-            onTap: () => context.go(Routes.addAccount),
+            onTap: () => context.push(Routes.addAccount),
           ),
         ],
       ),

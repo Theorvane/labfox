@@ -168,9 +168,9 @@ class _InboxScreenState extends ConsumerState<InboxScreen> {
     }
     switch (todo.targetType) {
       case 'Issue':
-        context.go(Routes.issue(projectId, iid));
+        context.push(Routes.issue(projectId, iid));
       case 'MergeRequest':
-        context.go(Routes.mergeRequest(projectId, iid));
+        context.push(Routes.mergeRequest(projectId, iid));
     }
   }
 

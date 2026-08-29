@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../core/ads/ads_providers.dart';
 import '../core/analytics/analytics.dart';
-
 import '../core/auth/auth_controller.dart';
 import '../core/auth/auth_state.dart';
 import '../features/auth/presentation/accounts_screen.dart';
@@ -12,6 +12,7 @@ import '../features/commits/presentation/commit_detail_screen.dart';
 import '../features/commits/presentation/commits_screen.dart';
 import '../features/diff/presentation/changes_screen.dart';
 import '../features/diff/presentation/controllers/diff_controllers.dart';
+import '../features/groups/presentation/groups_screen.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/inbox/presentation/inbox_screen.dart';
 import '../features/issues/presentation/issue_detail_screen.dart';
@@ -53,6 +54,7 @@ abstract final class Routes {
   static const String settings = '/settings';
   static const String privacy = '/settings/privacy';
   static const String subscription = '/settings/subscription';
+  static const String groups = '/groups';
   static const String projects = '/projects';
   // Account-level lists, mirroring GitLab's /dashboard URLs.
   static const String myIssues = '/dashboard/issues';
@@ -107,6 +109,7 @@ final routerProvider = Provider<GoRouter>((ref) {
   // read, not watch: the tracker must survive this provider's rebuilds, since
   // it is what remembers which screen the user is already on.
   final routeTracker = ref.read(routeTrackerProvider);
+  final interstitials = ref.read(interstitialAdsProvider);
 
   final router = GoRouter(
     initialLocation: Routes.home,
@@ -137,23 +140,27 @@ final routerProvider = Provider<GoRouter>((ref) {
       // Primary destinations, wrapped in the responsive navigation shell.
       GoRoute(
         path: Routes.home,
-        builder: (context, state) =>
-            const AppShell(currentIndex: 0, child: HomeScreen()),
+        pageBuilder: (context, state) => const NoTransitionPage<void>(
+          child: AppShell(currentIndex: 0, child: HomeScreen()),
+        ),
       ),
       GoRoute(
         path: Routes.inbox,
-        builder: (context, state) =>
-            const AppShell(currentIndex: 1, child: InboxScreen()),
+        pageBuilder: (context, state) => const NoTransitionPage<void>(
+          child: AppShell(currentIndex: 1, child: InboxScreen()),
+        ),
       ),
       GoRoute(
         path: Routes.search,
-        builder: (context, state) =>
-            const AppShell(currentIndex: 2, child: SearchScreen()),
+        pageBuilder: (context, state) => const NoTransitionPage<void>(
+          child: AppShell(currentIndex: 2, child: SearchScreen()),
+        ),
       ),
       GoRoute(
         path: Routes.me,
-        builder: (context, state) =>
-            const AppShell(currentIndex: 3, child: MeScreen()),
+        pageBuilder: (context, state) => const NoTransitionPage<void>(
+          child: AppShell(currentIndex: 3, child: MeScreen()),
+        ),
       ),
       GoRoute(
         path: Routes.signIn,
@@ -184,6 +191,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.myMergeRequests,
         builder: (context, state) => const MyMergeRequestsScreen(),
+      ),
+      GoRoute(
+        path: Routes.groups,
+        builder: (context, state) => const GroupsScreen(),
       ),
       GoRoute(
         path: Routes.projects,
@@ -337,6 +348,11 @@ final routerProvider = Provider<GoRouter>((ref) {
   // never identifies a project or item.
   router.routerDelegate.addListener(() {
     routeTracker.visit(router.routerDelegate.currentConfiguration.uri.path);
+    // Interstitial pacing rides the same signal; the service checks the
+    // entitlement gate and its own policy before anything shows.
+    if (ref.read(adsEnabledProvider)) {
+      interstitials.onTransition();
+    }
   });
   return router;
 });

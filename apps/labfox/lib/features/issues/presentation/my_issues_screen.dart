@@ -138,7 +138,7 @@ class _MyIssuesScreenState extends ConsumerState<MyIssuesScreen> {
       ],
       onTap: projectId == null
           ? null
-          : () => context.go(Routes.issue(projectId, issue.iid)),
+          : () => context.push(Routes.issue(projectId, issue.iid)),
     );
   }
 }

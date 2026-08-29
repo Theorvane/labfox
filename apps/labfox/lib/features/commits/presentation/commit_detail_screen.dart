@@ -70,7 +70,8 @@ class CommitDetailScreen extends ConsumerWidget {
             ),
             const SizedBox(height: LabFoxSpacing.md),
             OutlinedButton.icon(
-              onPressed: () => context.go(Routes.commitChanges(projectId, sha)),
+              onPressed: () =>
+                  context.push(Routes.commitChanges(projectId, sha)),
               icon: const Icon(LabFoxIcons.diff, size: 18),
               label: Text(AppLocalizations.of(context).commitViewChanges),
             ),

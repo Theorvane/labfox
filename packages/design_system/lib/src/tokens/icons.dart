@@ -18,6 +18,7 @@ abstract final class LabFoxIcons {
 
   // ── Repository ──────────────────────────────────────────────────────────
   static const IconData project = Icons.folder_outlined;
+  static const IconData group = Icons.people_outline;
   static const IconData repository = Icons.folder_copy_outlined;
   static const IconData branch = Icons.account_tree_outlined;
   static const IconData commit = Icons.commit;

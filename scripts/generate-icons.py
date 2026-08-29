@@ -33,6 +33,20 @@ SQUARE_SIZES = [
 
 SOCIAL_W, SOCIAL_H, SOCIAL_ICON = 1280, 640, 460
 
+# Android adaptive-icon foregrounds: a 108dp canvas per density. The source is
+# drawn at 92% so the fox lands well inside the 66dp safe zone that any
+# launcher mask must preserve; the border is the same navy as the background
+# layer, so the two layers read as one surface.
+ANDROID_RES = os.path.join("apps", "labfox", "android", "app", "src", "main", "res")
+ADAPTIVE_DENSITIES = [
+    ("mdpi", 108),
+    ("hdpi", 162),
+    ("xhdpi", 216),
+    ("xxhdpi", 324),
+    ("xxxhdpi", 432),
+]
+ADAPTIVE_INNER = 0.92
+
 
 def main():
     source = sys.argv[1] if len(sys.argv) > 1 else "brand/labfox-icon.png"
@@ -65,6 +79,19 @@ def main():
     path = os.path.join(out_dir, "social-preview.png")
     written = pnglite.write(path, SOCIAL_W, SOCIAL_H, 3, board)
     print(f"  {path:38} {SOCIAL_W}x{SOCIAL_H}  {written // 1024:>4} KB  # GitHub link card")
+
+    print()
+    for density, size in ADAPTIVE_DENSITIES:
+        inner = round(size * ADAPTIVE_INNER)
+        icon = pnglite.resize(pixels, width, height, channels, inner, inner)
+        board = pnglite.canvas(size, size, BACKGROUND)
+        pnglite.paste(board, size, icon, inner, inner, channels,
+                      (size - inner) // 2, (size - inner) // 2)
+        dir_path = os.path.join(ANDROID_RES, f"mipmap-{density}")
+        os.makedirs(dir_path, exist_ok=True)
+        path = os.path.join(dir_path, "ic_launcher_foreground.png")
+        written = pnglite.write(path, size, size, 3, board)
+        print(f"  {path:58} {size:>3}x{size:<3} {written // 1024:>4} KB  # adaptive foreground")
 
     print()
     print("Generated files are derived. Do not edit them; re-run this script instead.")

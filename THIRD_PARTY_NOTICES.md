@@ -84,6 +84,7 @@ LicenseRegistry.addLicense(() async* {
 | share_plus | ^12.0.2 | BSD-3-Clause | https://github.com/fluttercommunity/plus_plugins |
 | package_info_plus | ^8.1.0 | BSD-3-Clause | https://github.com/fluttercommunity/plus_plugins |
 | url_launcher | ^6.3.0 | BSD-3-Clause | https://github.com/flutter/packages |
+| unity_levelplay_mediation | ^9.2.0 | Proprietary — Unity Advertising Terms of Service (vendor ad SDK; approved by the maintainer, outside the permissive list by design) | https://github.com/ironsource-mobile/flutter-sdk |
 | in_app_purchase | ^3.3.0 | BSD-3-Clause | https://github.com/flutter/packages |
 | in_app_purchase_android | ^0.5.0 | BSD-3-Clause | https://github.com/flutter/packages |
 | in_app_purchase_storekit | ^0.4.11 | BSD-3-Clause | https://github.com/flutter/packages |
