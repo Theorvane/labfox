@@ -1514,6 +1514,48 @@ abstract class AppLocalizations {
   /// **'Open source licenses'**
   String get settingsLicenses;
 
+  /// Heading of the sheet offered when a free user taps a paid action
+  ///
+  /// In en, this message translates to:
+  /// **'A subscription unlocks this'**
+  String get paywallTitle;
+
+  /// Button on the paywall sheet that opens the subscription screen
+  ///
+  /// In en, this message translates to:
+  /// **'See the subscription'**
+  String get paywallSubscribe;
+
+  /// Button that dismisses the paywall sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get paywallNotNow;
+
+  /// Paywall reason shown for approve and merge
+  ///
+  /// In en, this message translates to:
+  /// **'Approving and merging are part of the subscription. Reading merge requests, diffs, and discussions stays free.'**
+  String get paywallMergeRequestActions;
+
+  /// Paywall reason shown for pipeline and job actions
+  ///
+  /// In en, this message translates to:
+  /// **'Retrying, cancelling, and running manual jobs are part of the subscription. Watching pipelines and reading job logs stays free.'**
+  String get paywallPipelineActions;
+
+  /// Paywall reason shown when adding a second account
+  ///
+  /// In en, this message translates to:
+  /// **'One account is free. Connecting more instances is part of the subscription.'**
+  String get paywallAccounts;
+
+  /// Paywall reason shown when the free favorite limit is reached
+  ///
+  /// In en, this message translates to:
+  /// **'Free keeps {count} favorites. The subscription removes the limit.'**
+  String paywallFavorites(int count);
+
   /// Title of the subscription screen
   ///
   /// In en, this message translates to:
