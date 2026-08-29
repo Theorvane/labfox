@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/analytics/analytics.dart';
 import '../../../../core/auth/gitlab_client_provider.dart';
 import '../../data/search_repository.dart';
 
@@ -38,6 +41,11 @@ class SearchController extends FamilyAsyncNotifier<SearchResults, SearchQuery> {
     if (repo == null) {
       throw StateError('No authenticated account');
     }
+    // The scope tells us which search people actually use. The term is what
+    // they typed and never leaves the device (`PRIVACY.md`).
+    unawaited(
+      ref.read(analyticsProvider).track('search', {'scope': arg.scope.name}),
+    );
     return repo.search(arg.scope, arg.text);
   }
 

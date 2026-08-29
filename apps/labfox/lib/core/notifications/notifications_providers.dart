@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../analytics/analytics.dart';
 import '../auth/auth_providers.dart';
 import 'background_notifications.dart';
 
@@ -38,13 +40,22 @@ class BackgroundNotificationsController extends Notifier<bool> {
     await prefs.setBool(backgroundNotificationsKey, enabled);
     if (!enabled) {
       await checks.disable();
+      unawaited(
+        ref.read(analyticsProvider).track('background_checks', {'on': false}),
+      );
       return;
     }
     // The switch only stays on if the system will actually deliver.
-    if (!await checks.enable()) {
+    final granted = await checks.enable();
+    if (!granted) {
       state = false;
       await prefs.setBool(backgroundNotificationsKey, false);
     }
+    // Records the refusal too: a permission people decline is worth knowing
+    // about before the feature is sold as one of the reasons to subscribe.
+    unawaited(
+      ref.read(analyticsProvider).track('background_checks', {'on': granted}),
+    );
   }
 }
 

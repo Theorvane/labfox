@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,6 +7,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/router.dart';
 import '../../l10n/app_localizations.dart';
+import '../analytics/analytics.dart';
 import 'entitlement_providers.dart';
 
 /// What a free user just tried to do.
@@ -37,6 +40,13 @@ Future<void> runSubscribed(
     await action();
     return;
   }
+  // Which gate a free user hits is what says where the subscription earns its
+  // price; the feature name is the whole property.
+  unawaited(
+    ref.read(analyticsProvider).track('paywall_shown', {
+      'feature': feature.name,
+    }),
+  );
   await showPaywall(context, feature);
 }
 

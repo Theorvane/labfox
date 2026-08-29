@@ -25,8 +25,14 @@ To understand which features matter, LabFox sends a small set of anonymous
 usage events to an analytics service operated by sloki9637 (self-hosted
 OpenPanel):
 
-- App opened, screen viewed, signed in, issue created, merge request created,
-  merge request merged, to-do cleared.
+- **What you did, not what it was about**: app opened, screen viewed, signed
+  in, signed out, account switched, search run (which scope, never the term),
+  project favorited or unfavorited, issue created, merge request created,
+  approved, unapproved, merged, closed, reopened, rebased, draft changed,
+  comment posted (on an issue or a merge request, never its text), pipeline
+  retried or cancelled, job retried, cancelled, or run manually, to-do
+  cleared, background checks turned on or off, the subscription sheet reached
+  and its outcome.
 - Screen-view events carry only a **sanitized route** — numeric identifiers
   are removed (`/projects/:id`), so no project, issue, or account can be
   identified.
