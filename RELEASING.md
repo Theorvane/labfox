@@ -109,7 +109,9 @@ The keystore itself is never committed: `.gitignore` covers `*.jks`,
 
 ## The first release is manual
 
-The pipeline cannot bootstrap either store.
+The pipeline cannot bootstrap either store. The console side — app records,
+declarations, and the subscription product — is written up in
+[`docs/store/store-setup.md`](docs/store/store-setup.md).
 
 **Google Play** will not create a subscription product for an app with no
 uploaded build, and the API access needed for
