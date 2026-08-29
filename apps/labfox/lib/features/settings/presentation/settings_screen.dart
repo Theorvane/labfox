@@ -46,17 +46,17 @@ class SettingsScreen extends ConsumerWidget {
       ),
       body: ListView(
         children: [
-          ListTile(
-            leading: const Icon(LabFoxIcons.account),
-            title: Text(l10n.settingsAccounts),
-            trailing: const Icon(LabFoxIcons.chevron),
-            onTap: () => context.push(Routes.accounts),
-          ),
-          // Hidden where the app ships with every feature: an entry there
-          // would offer to sell what the user already has.
-          if (!freePlatform)
+          // First, not buried: the subscription is the one row here a user
+          // may need to find in a hurry. Hidden where the app ships with
+          // every feature — an entry would sell what the user already has.
+          if (!freePlatform) ...[
             ListTile(
-              leading: const Icon(LabFoxIcons.star),
+              leading: Icon(
+                LabFoxIcons.star,
+                color: entitlement.isSubscribed
+                    ? LabFoxStatusColors.of(context).merged.foreground
+                    : null,
+              ),
               title: Text(l10n.subscriptionTitle),
               subtitle: Text(
                 entitlement.isSubscribed
@@ -66,6 +66,14 @@ class SettingsScreen extends ConsumerWidget {
               trailing: const Icon(LabFoxIcons.chevron),
               onTap: () => context.push(Routes.subscription),
             ),
+            const Divider(height: 1),
+          ],
+          ListTile(
+            leading: const Icon(LabFoxIcons.account),
+            title: Text(l10n.settingsAccounts),
+            trailing: const Icon(LabFoxIcons.chevron),
+            onTap: () => context.push(Routes.accounts),
+          ),
           const Divider(height: 1),
           _SectionHeader(l10n.settingsAppearance),
           RadioGroup<ThemeMode>(
