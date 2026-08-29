@@ -101,6 +101,9 @@ not paperwork.
 
 ### 4. Subscription product
 
+Field-level values, including the base plan, are in
+[`.agents/docs/billing.md`](../../.agents/docs/billing.md).
+
 **Monetize → Products → Subscriptions → Create subscription.**
 
 | Field | Value |
@@ -154,6 +157,9 @@ would break the "one Apple subscription covers iPhone, iPad, and Mac" rule the
 monetization design depends on.
 
 ### 3. Subscription product
+
+Field-level values are in
+[`.agents/docs/billing.md`](../../.agents/docs/billing.md).
 
 **Monetization → Subscriptions**: create a subscription group (one group, so
 future tiers can upgrade and downgrade within it), then an auto-renewable

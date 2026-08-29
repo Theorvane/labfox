@@ -478,5 +478,5 @@ Agent skills and detailed documentation live under `.agents/`, not `.claude/`.
 .agents/
 ├── skills/    per-task procedures (SKILL.md)
 └── docs/      architecture / conventions / api-reference / monetization /
-                references / roadmap / workflow
+                billing / references / roadmap / workflow
 ```
