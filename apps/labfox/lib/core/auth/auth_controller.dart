@@ -62,6 +62,7 @@ class AuthController extends AsyncNotifier<AuthState> {
   /// invalidates them and their data reloads for the new account.
   Future<void> switchTo(Account account) async {
     await ref.read(authRepositoryProvider).switchTo(account);
+    unawaited(ref.read(analyticsProvider).track('account_switched'));
     state = AsyncData(SignedIn(account));
   }
 
@@ -75,6 +76,7 @@ class AuthController extends AsyncNotifier<AuthState> {
       return;
     }
     await repo.signOut(target);
+    unawaited(ref.read(analyticsProvider).track('sign_out'));
     final next = repo.currentAccount();
     state = AsyncData(next == null ? const SignedOut() : SignedIn(next));
   }

@@ -934,6 +934,26 @@
   "@settingsWebsite": {
     "description": "Settings entry that opens the company website"
   },
+  "settingsNotifications": "Notifications",
+  "@settingsNotifications": {
+    "description": "Settings section for background checks"
+  },
+  "settingsBackgroundChecks": "Background to-do checks",
+  "@settingsBackgroundChecks": {
+    "description": "Switch that turns on periodic background checks of the to-do list"
+  },
+  "settingsBackgroundChecksHelp": "LabFox checks your to-do list in the background and notifies you about new items. Android checks about every 15 minutes; iOS decides when, so this is a background check rather than instant push.",
+  "@settingsBackgroundChecksHelp": {
+    "description": "Explains the platform-dependent timing of background checks"
+  },
+  "paywallNotifications": "Background to-do checks are part of the subscription. The to-do inbox and manual refresh stay free.",
+  "@paywallNotifications": {
+    "description": "Paywall reason shown for background notifications"
+  },
+  "settingsNotificationsDenied": "LabFox cannot show notifications until you allow them in system settings.",
+  "@settingsNotificationsDenied": {
+    "description": "Shown when the system refused the notification permission"
+  },
   "settingsAppearance": "Appearance",
   "@settingsAppearance": {
     "description": "Settings section for the theme choice"
@@ -966,6 +986,39 @@
   "@settingsLicenses": {
     "description": "Settings entry that opens the open-source license page"
   },
+  "paywallTitle": "A subscription unlocks this",
+  "@paywallTitle": {
+    "description": "Heading of the sheet offered when a free user taps a paid action"
+  },
+  "paywallSubscribe": "See the subscription",
+  "@paywallSubscribe": {
+    "description": "Button on the paywall sheet that opens the subscription screen"
+  },
+  "paywallNotNow": "Not now",
+  "@paywallNotNow": {
+    "description": "Button that dismisses the paywall sheet"
+  },
+  "paywallMergeRequestActions": "Approving and merging are part of the subscription. Reading merge requests, diffs, and discussions stays free.",
+  "@paywallMergeRequestActions": {
+    "description": "Paywall reason shown for approve and merge"
+  },
+  "paywallPipelineActions": "Retrying, cancelling, and running manual jobs are part of the subscription. Watching pipelines and reading job logs stays free.",
+  "@paywallPipelineActions": {
+    "description": "Paywall reason shown for pipeline and job actions"
+  },
+  "paywallAccounts": "One account is free. Connecting more instances is part of the subscription.",
+  "@paywallAccounts": {
+    "description": "Paywall reason shown when adding a second account"
+  },
+  "paywallFavorites": "Free keeps {count} favorites. The subscription removes the limit.",
+  "@paywallFavorites": {
+    "description": "Paywall reason shown when the free favorite limit is reached",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "subscriptionTitle": "LabFox subscription",
   "@subscriptionTitle": {
     "description": "Title of the subscription screen"
@@ -990,11 +1043,11 @@
   "@subscriptionBenefitActions": {
     "description": "Subscription benefit: write actions"
   },
-  "subscriptionBenefitNotifications": "Push notifications for reviews and pipeline failures",
+  "subscriptionBenefitNotifications": "Background checks that notify you about new to-do items",
   "@subscriptionBenefitNotifications": {
-    "description": "Subscription benefit: push notifications"
+    "description": "Subscription benefit: background to-do checks"
   },
-  "subscriptionBenefitFavorites": "Unlimited favorites and saved searches",
+  "subscriptionBenefitFavorites": "Unlimited favorites, instead of the free limit of three",
   "@subscriptionBenefitFavorites": {
     "description": "Subscription benefit: productivity limits lifted"
   },

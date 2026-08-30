@@ -5,6 +5,8 @@ import 'package:gitlab_models/gitlab_models.dart';
 import 'package:labfox/core/auth/account_store.dart';
 import 'package:labfox/core/auth/auth_providers.dart';
 import 'package:labfox/core/auth/auth_repository.dart';
+import 'package:labfox/core/entitlement/entitlement.dart';
+import 'package:labfox/core/entitlement/entitlement_providers.dart';
 import 'package:labfox/core/storage/local_projects_store.dart';
 import 'package:labfox/features/auth/presentation/accounts_screen.dart';
 import 'package:labfox/l10n/app_localizations.dart';
@@ -26,12 +28,24 @@ Future<AccountStore> _seed(List<Account> accounts) async {
   return store;
 }
 
-Future<void> _pump(WidgetTester tester, AccountStore store) async {
+class _FixedEntitlement extends EntitlementController {
+  _FixedEntitlement(this.value);
+  final Entitlement value;
+  @override
+  Entitlement build() => value;
+}
+
+Future<void> _pump(
+  WidgetTester tester,
+  AccountStore store, {
+  Entitlement entitlement = Entitlement.subscribed,
+}) async {
   FlutterSecureStorage.setMockInitialValues({});
   final prefs = await SharedPreferences.getInstance();
   await tester.pumpWidget(
     ProviderScope(
       overrides: [
+        entitlementProvider.overrideWith(() => _FixedEntitlement(entitlement)),
         authRepositoryProvider.overrideWithValue(
           AuthRepository(
             accountStore: store,
@@ -91,4 +105,18 @@ void main() {
     expect(store.readAccounts(), hasLength(1));
     expect(find.text('b'), findsNothing);
   });
+
+  testWidgets(
+    'a free user is offered the subscription instead of a second account',
+    (tester) async {
+      final store = await _seed([_account('gitlab.com', 1, 'jungwon')]);
+      await _pump(tester, store, entitlement: Entitlement.free);
+
+      await tester.tap(find.text('Add account'));
+      await tester.pumpAndSettle();
+
+      // One account is free; the second is the offer, not a dead row.
+      expect(find.textContaining('One account is free'), findsOneWidget);
+    },
+  );
 }

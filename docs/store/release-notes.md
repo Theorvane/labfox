@@ -20,6 +20,42 @@ the source: change this first, then carry it across.
 
 ---
 
+## 0.1.3
+
+**Play** (500 characters max):
+
+```
+What's new:
+
+• Background to-do checks. LabFox looks at your to-do list while it is closed
+  and tells you when something new needs you — a review, a failed pipeline, an
+  assignment. Part of the subscription; turn it on in Settings.
+• The subscription is easier to find, and shows its state on your profile.
+
+Android checks about every fifteen minutes; iOS decides when, so this is a
+background check rather than an instant push.
+```
+
+**App Store**:
+
+```
+What's new:
+
+• Background to-do checks. LabFox looks at your to-do list while it is closed
+  and tells you when something new needs you — a review requested, a pipeline
+  that failed, an issue assigned to you. Part of the subscription, and off
+  until you turn it on in Settings.
+• The subscription is easier to find, and your profile shows whether it is
+  active.
+
+This is a background check, not a push. There is no LabFox server that could
+send you one: your device asks your own GitLab on a schedule the operating
+system decides. Android checks about every fifteen minutes; iOS picks its own
+moments.
+```
+
+---
+
 ## 1.0.0 — first release
 
 **Play** (500 characters max):

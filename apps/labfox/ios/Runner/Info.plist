@@ -47,6 +47,17 @@
 	<true/>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>This lets ads shown to free users be less repetitive. Subscribers see no ads.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
+	</array>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<!-- The unique name the check is scheduled under in Dart. iOS refuses
+		     an identifier that is not listed here. -->
+		<string>labfox.todo_check.periodic</string>
+	</array>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>

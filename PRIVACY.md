@@ -24,8 +24,14 @@ To understand which features matter, LabFox sends a small set of anonymous
 usage events to an analytics service operated by sloki9637 (self-hosted
 OpenPanel):
 
-- App opened, screen viewed, signed in, issue created, merge request created,
-  merge request merged, to-do cleared.
+- **What you did, not what it was about**: app opened, screen viewed, signed
+  in, signed out, account switched, search run (which scope, never the term),
+  project favorited or unfavorited, issue created, merge request created,
+  approved, unapproved, merged, closed, reopened, rebased, draft changed,
+  comment posted (on an issue or a merge request, never its text), pipeline
+  retried or cancelled, job retried, cancelled, or run manually, to-do
+  cleared, background checks turned on or off, the subscription sheet reached
+  and its outcome.
 - Screen-view events carry only a **sanitized route** — numeric identifiers
   are removed (`/projects/:id`), so no project, issue, or account can be
   identified.
@@ -47,6 +53,19 @@ ad SDK does nothing for them.
 - On iOS you can decline tracking in the system prompt; ads still show, less
   personalized. On Android you can reset or delete the advertising ID in
   system settings.
+
+## Background checks
+
+If you turn on background to-do checks (a subscription feature, off by
+default), LabFox asks **your own GitLab instance** for your pending to-do list
+on a schedule the operating system controls, and shows a local notification for
+anything new.
+
+- The request goes to your instance with your token, exactly like the same
+  screen in the app. Nothing is sent to sloki9637.
+- Notification text is built on your device and stays there.
+- LabFox stores only the ids of the to-dos it has already announced, so it does
+  not announce them twice. Turning the setting off stops the checks.
 
 ## Data retention and deletion
 

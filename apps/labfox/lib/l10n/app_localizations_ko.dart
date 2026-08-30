@@ -703,6 +703,24 @@ class AppLocalizationsKo extends AppLocalizations {
   String get settingsWebsite => 'Website';
 
   @override
+  String get settingsNotifications => 'Notifications';
+
+  @override
+  String get settingsBackgroundChecks => 'Background to-do checks';
+
+  @override
+  String get settingsBackgroundChecksHelp =>
+      'LabFox checks your to-do list in the background and notifies you about new items. Android checks about every 15 minutes; iOS decides when, so this is a background check rather than instant push.';
+
+  @override
+  String get paywallNotifications =>
+      'Background to-do checks are part of the subscription. The to-do inbox and manual refresh stay free.';
+
+  @override
+  String get settingsNotificationsDenied =>
+      'LabFox cannot show notifications until you allow them in system settings.';
+
+  @override
   String get settingsAppearance => 'Appearance';
 
   @override
@@ -727,6 +745,32 @@ class AppLocalizationsKo extends AppLocalizations {
   String get settingsLicenses => '오픈소스 라이선스';
 
   @override
+  String get paywallTitle => 'A subscription unlocks this';
+
+  @override
+  String get paywallSubscribe => 'See the subscription';
+
+  @override
+  String get paywallNotNow => 'Not now';
+
+  @override
+  String get paywallMergeRequestActions =>
+      'Approving and merging are part of the subscription. Reading merge requests, diffs, and discussions stays free.';
+
+  @override
+  String get paywallPipelineActions =>
+      'Retrying, cancelling, and running manual jobs are part of the subscription. Watching pipelines and reading job logs stays free.';
+
+  @override
+  String get paywallAccounts =>
+      'One account is free. Connecting more instances is part of the subscription.';
+
+  @override
+  String paywallFavorites(int count) {
+    return 'Free keeps $count favorites. The subscription removes the limit.';
+  }
+
+  @override
   String get subscriptionTitle => 'LabFox subscription';
 
   @override
@@ -749,11 +793,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get subscriptionBenefitNotifications =>
-      'Push notifications for reviews and pipeline failures';
+      'Background checks that notify you about new to-do items';
 
   @override
   String get subscriptionBenefitFavorites =>
-      'Unlimited favorites and saved searches';
+      'Unlimited favorites, instead of the free limit of three';
 
   @override
   String subscriptionSubscribe(String price) {

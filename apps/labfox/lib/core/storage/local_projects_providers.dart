@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
+import '../analytics/analytics.dart';
 import '../auth/auth_controller.dart';
 import '../auth/auth_providers.dart';
 import 'local_projects_store.dart';
@@ -55,7 +58,14 @@ class FavoriteProjectsController extends Notifier<List<Project>> {
       return;
     }
     final store = ref.read(localProjectsStoreProvider);
+    final wasFavorite = isFavorite(project.id);
     await store.toggleFavorite(account.id, project);
+    // Which direction the toggle went, never which project it was.
+    unawaited(
+      ref
+          .read(analyticsProvider)
+          .track(wasFavorite ? 'project_unfavorited' : 'project_favorited'),
+    );
     state = store.readFavorites(account.id);
   }
 }

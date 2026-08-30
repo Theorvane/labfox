@@ -7,6 +7,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 import 'package:labfox/core/auth/auth_controller.dart';
 import 'package:labfox/core/auth/auth_providers.dart';
+import 'package:labfox/core/entitlement/entitlement.dart';
+import 'package:labfox/core/entitlement/entitlement_providers.dart';
+import 'package:labfox/core/storage/local_projects_providers.dart';
 import 'package:labfox/features/projects/presentation/controllers/projects_controller.dart';
 import 'package:labfox/features/projects/presentation/projects_screen.dart';
 import 'package:labfox/l10n/app_localizations.dart';
@@ -120,4 +123,60 @@ void main() {
     expect(find.widgetWithIcon(IconButton, Icons.star), findsOneWidget);
     expect(find.widgetWithIcon(IconButton, Icons.star_border), findsOneWidget);
   });
+
+  testWidgets('a free user at the favorite limit is offered the subscription', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          projectsControllerProvider.overrideWith(
+            () => _StubController(const AsyncData(projects)),
+          ),
+          sharedPreferencesProvider.overrideWithValue(prefs),
+          currentAccountProvider.overrideWithValue(
+            const Account(
+              instanceUrl: 'https://gitlab.com',
+              user: User(id: 1, username: 'jungwon', name: 'Jungwon'),
+            ),
+          ),
+          entitlementProvider.overrideWith(
+            () => _FixedEntitlement(Entitlement.free),
+          ),
+          favoriteProjectsProvider.overrideWith(() => _FullFavorites()),
+        ],
+        child: const MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: ProjectsScreen(),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.widgetWithIcon(IconButton, Icons.star_border).first);
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('favorites'), findsWidgets);
+    expect(find.text('Not now'), findsOneWidget);
+  });
+}
+
+class _FixedEntitlement extends EntitlementController {
+  _FixedEntitlement(this.value);
+  final Entitlement value;
+  @override
+  Entitlement build() => value;
+}
+
+/// A free tier already at its favorite ceiling.
+class _FullFavorites extends FavoriteProjectsController {
+  @override
+  List<Project> build() => const [
+    Project(id: 90, name: 'a', pathWithNamespace: 'g/a'),
+    Project(id: 91, name: 'b', pathWithNamespace: 'g/b'),
+    Project(id: 92, name: 'c', pathWithNamespace: 'g/c'),
+  ];
 }

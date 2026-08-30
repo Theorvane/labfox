@@ -36,6 +36,7 @@ Read these only when relevant — do not load them into context by default.
 - `.agents/docs/conventions.md` — naming, file placement, freezed/Riverpod rules
 - `.agents/docs/api-reference.md` — GitLab endpoint map, auth, pagination, terminology
 - `.agents/docs/monetization.md` — per-OS distribution, free/paid boundary, store entitlement
+- `.agents/docs/billing.md` — the subscription product, console values, purchase-to-entitlement flow
 - `.agents/docs/roadmap.md` — M0–M4, vertical slice, 1.0 scope
 - `.agents/docs/workflow.md` — Issue → Branch → PR procedure, `gh` commands, permission boundaries
 - `.agents/docs/references.md` — reference repos and docs, priority order, license warnings

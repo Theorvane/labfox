@@ -33,6 +33,11 @@ target 'Runner' do
   # dynamic frameworks. Every other plugin in the app builds statically too.
   use_frameworks! :linkage => :static
 
+  # The demand source behind the LevelPlay auction. The plugin brings the
+  # mediation SDK only, which can run no network on its own, so the adapter is
+  # declared here; it pulls the Unity Ads SDK it wraps.
+  pod 'IronSourceUnityAdsAdapter', '5.9.0.0'
+
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
   target 'RunnerTests' do
     inherit! :search_paths

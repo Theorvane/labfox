@@ -29,10 +29,10 @@ decision made in the Play Console, not a side effect of merging.
 | Job | What it does | Reversible? |
 |---|---|---|
 | `check` | Reads the version, skips if tagged, then runs format, analyze, and every package's tests | — |
-| `windows` | Builds and zips the Windows app | — |
+| `windows` | Builds the Windows app, then packages an installer and a zip | — |
 | `app-store-connect` | Uploads an iOS build. **Submits nothing** | yes |
 | `google-play` | Uploads to the internal track | published to testers |
-| `release` | Tags and publishes the GitHub release with the Windows zip | — |
+| `release` | Tags and publishes the GitHub release with the Windows installer and zip | — |
 
 Apple runs before Google deliberately. The two are not equally reversible, and
 if Play published and a later step then failed, the release would be shipped but
@@ -109,7 +109,9 @@ The keystore itself is never committed: `.gitignore` covers `*.jks`,
 
 ## The first release is manual
 
-The pipeline cannot bootstrap either store.
+The pipeline cannot bootstrap either store. The console side — app records,
+declarations, and the subscription product — is written up in
+[`docs/store/store-setup.md`](docs/store/store-setup.md).
 
 **Google Play** will not create a subscription product for an app with no
 uploaded build, and the API access needed for
@@ -141,5 +143,6 @@ Installer` certificate for the `.pkg`, and a Mac App Store provisioning profile.
 That is a different signing path from the iOS job and worth landing on its own.
 Until then, macOS releases are built and uploaded by hand.
 
-**Windows code signing.** The Windows zip is unsigned, so SmartScreen warns on
-first run. The release notes say so. Fixing it needs a code-signing certificate.
+**Windows code signing.** The Windows installer and zip are both unsigned, so
+SmartScreen warns on first run. The release notes say so. Fixing it needs a
+code-signing certificate.

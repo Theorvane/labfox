@@ -60,6 +60,9 @@ that the whole model depends on.
 
 ## 3. Entitlement
 
+> How the product is built and what the consoles need is in
+> [`billing.md`](billing.md).
+
 ### Apple covers iOS, iPadOS, and macOS together
 
 The iOS and macOS targets already share the bundle identifier

@@ -11,8 +11,10 @@ Two rules it has to keep, both from `AGENTS.md`:
 
 - **Never imply endorsement.** LabFox is an unofficial client. GitLab is a
   trademark of GitLab Inc. Every listing carries the disclaimer at the bottom.
-- **Do not promise what is not built.** Push notifications and offline reading
-  are on the roadmap, not in the app. They are named as *coming*, or not at all.
+- **Do not promise what is not built.** Server push and offline reading are on
+  the roadmap, not in the app. They are named as *coming*, or not at all. What
+  ships is a *background check* — the OS wakes LabFox on its own schedule and it
+  posts a local notification for new to-do items. Do not call that "push".
 
 ---
 
