@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_api/gitlab_api.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
+import '../../../../core/entitlement/paywall.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../controllers/merge_requests_controllers.dart';
 import '../controllers/mr_actions_controller.dart';
@@ -52,7 +53,13 @@ class MrActions extends ConsumerWidget {
               child: OutlinedButton.icon(
                 onPressed: busy
                     ? null
-                    : () => _toggleApproval(context, ref, mrRef, approvals),
+                    : () => runSubscribed(
+                        context,
+                        ref,
+                        feature: PaidFeature.mergeRequestActions,
+                        action: () =>
+                            _toggleApproval(context, ref, mrRef, approvals),
+                      ),
                 icon: const Icon(LabFoxIcons.approval, size: 18),
                 label: Text(_approveLabel(l10n, approvals)),
               ),
@@ -60,7 +67,14 @@ class MrActions extends ConsumerWidget {
             const SizedBox(width: LabFoxSpacing.sm),
             Expanded(
               child: FilledButton.icon(
-                onPressed: busy ? null : () => _startMerge(context, ref, mrRef),
+                onPressed: busy
+                    ? null
+                    : () => runSubscribed(
+                        context,
+                        ref,
+                        feature: PaidFeature.mergeRequestActions,
+                        action: () => _startMerge(context, ref, mrRef),
+                      ),
                 icon: const Icon(LabFoxIcons.merged, size: 18),
                 label: Text(l10n.mrMerge),
               ),

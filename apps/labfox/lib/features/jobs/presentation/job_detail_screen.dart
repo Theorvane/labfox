@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_api/gitlab_api.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
+import '../../../core/entitlement/paywall.dart';
 import '../../../core/ui/ci_visual.dart';
 import '../../../core/ui/share_link_button.dart';
 import '../../../core/ui/work_meta.dart';
@@ -211,7 +212,7 @@ class _JobActionBar extends ConsumerWidget {
   }
 }
 
-class _ActionButton extends StatelessWidget {
+class _ActionButton extends ConsumerWidget {
   const _ActionButton({
     required this.icon,
     required this.label,
@@ -225,10 +226,17 @@ class _ActionButton extends StatelessWidget {
   final Future<void> Function() run;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     return OutlinedButton.icon(
-      onPressed: busy ? null : () => _run(context, l10n),
+      onPressed: busy
+          ? null
+          : () => runSubscribed(
+              context,
+              ref,
+              feature: PaidFeature.pipelineActions,
+              action: () => _run(context, l10n),
+            ),
       icon: Icon(icon, size: 18),
       label: Text(label),
     );

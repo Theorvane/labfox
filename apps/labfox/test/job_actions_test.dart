@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gitlab_api/gitlab_api.dart';
 import 'package:gitlab_models/gitlab_models.dart';
+import 'package:labfox/core/entitlement/entitlement.dart';
+import 'package:labfox/core/entitlement/entitlement_providers.dart';
 import 'package:labfox/features/jobs/presentation/controllers/job_actions_controller.dart';
 import 'package:labfox/features/jobs/presentation/controllers/job_controllers.dart';
 import 'package:labfox/features/jobs/presentation/job_detail_screen.dart';
@@ -31,15 +33,24 @@ class _StubActions extends JobActionsController {
   }
 }
 
+class _FixedEntitlement extends EntitlementController {
+  _FixedEntitlement(this.value);
+  final Entitlement value;
+  @override
+  Entitlement build() => value;
+}
+
 Future<_StubActions> _pump(
   WidgetTester tester, {
   required Job job,
   Object? rejectWith,
+  Entitlement entitlement = Entitlement.subscribed,
 }) async {
   final stub = _StubActions(rejectWith: rejectWith);
   await tester.pumpWidget(
     ProviderScope(
       overrides: [
+        entitlementProvider.overrideWith(() => _FixedEntitlement(entitlement)),
         jobDetailProvider.overrideWith((ref, arg) async => job),
         jobTraceProvider.overrideWith((ref, arg) async => 'log'),
         jobActionsControllerProvider.overrideWith(() => stub),
@@ -102,5 +113,21 @@ void main() {
     await tester.tap(find.widgetWithText(OutlinedButton, 'Retry'));
     await tester.pumpAndSettle();
     expect(find.textContaining('do not have permission'), findsOneWidget);
+  });
+
+  testWidgets('a free user is offered the subscription instead of retrying', (
+    tester,
+  ) async {
+    final stub = await _pump(
+      tester,
+      job: const Job(id: 7001, name: 'test', status: 'failed'),
+      entitlement: Entitlement.free,
+    );
+
+    await tester.tap(find.text('Retry'));
+    await tester.pumpAndSettle();
+
+    expect(stub.ran, isEmpty);
+    expect(find.textContaining('Retrying, cancelling'), findsOneWidget);
   });
 }

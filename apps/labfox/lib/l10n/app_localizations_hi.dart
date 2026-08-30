@@ -742,6 +742,32 @@ class AppLocalizationsHi extends AppLocalizations {
   String get settingsLicenses => 'ओपन सोर्स लाइसेंस';
 
   @override
+  String get paywallTitle => 'A subscription unlocks this';
+
+  @override
+  String get paywallSubscribe => 'See the subscription';
+
+  @override
+  String get paywallNotNow => 'Not now';
+
+  @override
+  String get paywallMergeRequestActions =>
+      'Approving and merging are part of the subscription. Reading merge requests, diffs, and discussions stays free.';
+
+  @override
+  String get paywallPipelineActions =>
+      'Retrying, cancelling, and running manual jobs are part of the subscription. Watching pipelines and reading job logs stays free.';
+
+  @override
+  String get paywallAccounts =>
+      'One account is free. Connecting more instances is part of the subscription.';
+
+  @override
+  String paywallFavorites(int count) {
+    return 'Free keeps $count favorites. The subscription removes the limit.';
+  }
+
+  @override
   String get subscriptionTitle => 'LabFox subscription';
 
   @override
