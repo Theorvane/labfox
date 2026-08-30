@@ -22,7 +22,13 @@ const backgroundNotificationsKey = 'background_notifications';
 const _seenTodosKey = 'background_seen_todos';
 
 const _taskName = 'labfox.todo_check';
-const _uniqueName = 'labfox.todo_check.periodic';
+
+/// The identifier the work is scheduled under.
+///
+/// On iOS this is also the BGTaskScheduler identifier, which has to be
+/// permitted in `Info.plist` and registered in the AppDelegate — exported so a
+/// test can hold all three to the same string.
+const backgroundTaskIdentifier = 'labfox.todo_check.periodic';
 
 /// The floor Android enforces on periodic work. Asking for less does not make
 /// it run more often; it just makes the request a lie.
@@ -154,7 +160,7 @@ class WorkmanagerBackgroundChecks implements BackgroundChecks {
     }
     await Workmanager().initialize(backgroundCallbackDispatcher);
     await Workmanager().registerPeriodicTask(
-      _uniqueName,
+      backgroundTaskIdentifier,
       _taskName,
       frequency: _frequency,
       existingWorkPolicy: ExistingPeriodicWorkPolicy.replace,
@@ -187,5 +193,6 @@ class WorkmanagerBackgroundChecks implements BackgroundChecks {
   }
 
   @override
-  Future<void> disable() => Workmanager().cancelByUniqueName(_uniqueName);
+  Future<void> disable() =>
+      Workmanager().cancelByUniqueName(backgroundTaskIdentifier);
 }

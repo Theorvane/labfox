@@ -91,9 +91,11 @@ jobs:
           flutter build windows --release
 
       # Windows is distributed as a direct download rather than through a store
-      # (.agents/docs/monetization.md §1), so the release asset is the artifact.
-      # It is unsigned: SmartScreen warns on first run until a code-signing
-      # certificate exists, which the release notes say plainly.
+      # (.agents/docs/monetization.md §1), so the release page is the whole
+      # install experience. Two assets ship: an installer for the usual case,
+      # and the zip for anyone who wants a portable copy. Both are unsigned —
+      # SmartScreen warns on first run until a code-signing certificate exists,
+      # which the release notes say plainly.
       - name: Zip the build
         shell: pwsh
         run: |
@@ -102,10 +104,29 @@ jobs:
           New-Item -ItemType Directory -Force -Path dist | Out-Null
           Compress-Archive -Path "$src/*" -DestinationPath "dist/labfox-windows-x64.zip"
 
+      - name: Build the installer
+        shell: pwsh
+        env:
+          VERSION: ${{ needs.check.outputs.version }}
+        run: |
+          $ErrorActionPreference = "Stop"
+          # The runner image does not carry Inno Setup, and pinning the version
+          # keeps a compiler update from changing a release build under us.
+          choco install innosetup --version=6.2.2 --no-progress -y
+          $iscc = "C:\Program Files (x86)\Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) { throw "Inno Setup did not install at $iscc" }
+          # AppVersion comes from the release version so the installer cannot
+          # claim a version this release is not.
+          & $iscc "/DAppVersion=$env:VERSION" apps/labfox/windows/installer/labfox.iss
+          if ($LASTEXITCODE -ne 0) { throw "ISCC failed with $LASTEXITCODE" }
+          if (-not (Test-Path "dist/labfox-windows-x64-setup.exe")) {
+            throw "the installer was not produced"
+          }
+
       - uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4.5.0
         with:
           name: labfox-windows
-          path: dist/*.zip
+          path: dist/*
           if-no-files-found: error
 
   app-store-connect:
@@ -185,6 +206,6 @@ jobs:
             gh release create "$TAG" \
               --title "LabFox $TAG" \
               --generate-notes \
-              --notes "The Windows build is a direct download and is unsigned, so SmartScreen warns on first run: choose More info, then Run anyway. Android and iOS are distributed through their stores." \
+              --notes "Windows is a direct download: run the installer (labfox-windows-x64-setup.exe), or take the zip for a portable copy. Both are unsigned, so SmartScreen warns on first run: choose More info, then Run anyway. Android and iOS are distributed through their stores." \
               artifacts/*
           fi
