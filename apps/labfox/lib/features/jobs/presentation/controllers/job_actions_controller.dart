@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/analytics/analytics.dart';
 import '../../data/job_repository.dart';
 import 'job_controllers.dart';
 
@@ -9,16 +12,27 @@ class JobActionsController extends FamilyAsyncNotifier<void, JobRef> {
   @override
   Future<void> build(JobRef arg) async {}
 
-  Future<void> retry() =>
-      _run((repo) => repo.retry(projectId: arg.projectId, jobId: arg.jobId));
+  Future<void> retry() => _run(
+    (repo) => repo.retry(projectId: arg.projectId, jobId: arg.jobId),
+    'job_retried',
+  );
 
-  Future<void> cancel() =>
-      _run((repo) => repo.cancel(projectId: arg.projectId, jobId: arg.jobId));
+  Future<void> cancel() => _run(
+    (repo) => repo.cancel(projectId: arg.projectId, jobId: arg.jobId),
+    'job_cancelled',
+  );
 
-  Future<void> play() =>
-      _run((repo) => repo.play(projectId: arg.projectId, jobId: arg.jobId));
+  Future<void> play() => _run(
+    (repo) => repo.play(projectId: arg.projectId, jobId: arg.jobId),
+    'job_played',
+  );
 
-  Future<void> _run(Future<void> Function(JobRepository repo) action) async {
+  /// [event] names the action for analytics — the action only, never which
+  /// project or job it was (`PRIVACY.md`).
+  Future<void> _run(
+    Future<void> Function(JobRepository repo) action,
+    String event,
+  ) async {
     final repo = await ref.read(jobRepositoryProvider.future);
     if (repo == null) {
       throw StateError('No authenticated account');
@@ -28,6 +42,7 @@ class JobActionsController extends FamilyAsyncNotifier<void, JobRef> {
       await action(repo);
       ref.invalidate(jobDetailProvider(arg));
       ref.invalidate(jobTraceProvider(arg));
+      unawaited(ref.read(analyticsProvider).track(event));
       state = const AsyncData(null);
     } catch (error, stack) {
       state = AsyncError(error, stack);

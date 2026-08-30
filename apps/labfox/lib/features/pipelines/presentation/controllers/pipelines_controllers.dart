@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
+import '../../../../core/analytics/analytics.dart';
 import '../../../../core/auth/gitlab_client_provider.dart';
 import '../../data/pipelines_repository.dart';
 
@@ -99,14 +102,19 @@ class PipelineActionsController extends FamilyAsyncNotifier<void, PipelineRef> {
 
   Future<void> retry() => _run(
     (repo) => repo.retry(projectId: arg.projectId, pipelineId: arg.pipelineId),
+    'pipeline_retried',
   );
 
   Future<void> cancel() => _run(
     (repo) => repo.cancel(projectId: arg.projectId, pipelineId: arg.pipelineId),
+    'pipeline_cancelled',
   );
 
+  /// [event] names the action for analytics — the action only, never which
+  /// project or pipeline it was (`PRIVACY.md`).
   Future<void> _run(
     Future<void> Function(PipelinesRepository repo) action,
+    String event,
   ) async {
     final repo = await ref.read(pipelinesRepositoryProvider.future);
     if (repo == null) {
@@ -117,6 +125,7 @@ class PipelineActionsController extends FamilyAsyncNotifier<void, PipelineRef> {
       await action(repo);
       ref.invalidate(pipelineDetailProvider(arg));
       ref.invalidate(pipelineJobsControllerProvider(arg));
+      unawaited(ref.read(analyticsProvider).track(event));
       state = const AsyncData(null);
     } catch (error, stack) {
       state = AsyncError(error, stack);

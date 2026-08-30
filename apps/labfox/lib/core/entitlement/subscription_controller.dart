@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
+import '../analytics/analytics.dart';
 import 'entitlement_providers.dart';
 import 'store_entitlement_source.dart';
 
@@ -68,6 +71,7 @@ class SubscriptionController extends AsyncNotifier<void> {
     if (offer == null) {
       return;
     }
+    unawaited(ref.read(analyticsProvider).track('subscription_started'));
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
       final started = await ref
@@ -81,6 +85,13 @@ class SubscriptionController extends AsyncNotifier<void> {
       // The purchase itself arrives on the stream; re-read so entitlement
       // reflects it as soon as the store has spoken.
       await ref.read(entitlementProvider.notifier).refresh();
+      // Whether the store said yes, which is what separates an abandoned
+      // purchase sheet from a completed one.
+      unawaited(
+        ref.read(analyticsProvider).track('subscription_result', {
+          'subscribed': ref.read(entitlementProvider).isSubscribed,
+        }),
+      );
     });
   }
 
@@ -89,6 +100,7 @@ class SubscriptionController extends AsyncNotifier<void> {
   /// Apple requires this to be reachable from the UI (App Store Review
   /// Guideline 3.1.1), and it is what a user on a new device needs.
   Future<void> restore() async {
+    unawaited(ref.read(analyticsProvider).track('subscription_restored'));
     state = const AsyncLoading();
     state = await AsyncValue.guard(
       () => ref.read(entitlementProvider.notifier).refresh(),

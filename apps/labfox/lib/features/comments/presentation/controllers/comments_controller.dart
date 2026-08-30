@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gitlab_api/gitlab_api.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
+import '../../../../core/analytics/analytics.dart';
 import '../../../../core/auth/gitlab_client_provider.dart';
 import '../../data/comments_repository.dart';
 
@@ -62,6 +65,14 @@ class CommentsController extends FamilyAsyncNotifier<List<Note>, CommentsRef> {
       projectId: arg.projectId,
       iid: arg.iid,
       body: body,
+    );
+    // What kind of thing was commented on, never the comment itself.
+    unawaited(
+      ref.read(analyticsProvider).track('comment_posted', {
+        'target': arg.type == NoteableType.mergeRequest
+            ? 'merge_request'
+            : 'issue',
+      }),
     );
     state = await AsyncValue.guard(
       () => repo.list(type: arg.type, projectId: arg.projectId, iid: arg.iid),
