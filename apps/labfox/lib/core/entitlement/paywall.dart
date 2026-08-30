@@ -16,6 +16,7 @@ enum PaidFeature {
   pipelineActions,
   multipleAccounts,
   favorites,
+  notifications,
 }
 
 /// Runs [action] for a subscriber; offers the subscription to anyone else.
@@ -81,6 +82,7 @@ String _reason(AppLocalizations l10n, PaidFeature feature) => switch (feature) {
   PaidFeature.pipelineActions => l10n.paywallPipelineActions,
   PaidFeature.multipleAccounts => l10n.paywallAccounts,
   PaidFeature.favorites => l10n.paywallFavorites(freeFavoriteLimit),
+  PaidFeature.notifications => l10n.paywallNotifications,
 };
 
 /// How many projects a free user may keep as favorites.

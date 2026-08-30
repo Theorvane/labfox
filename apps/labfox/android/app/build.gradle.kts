@@ -24,6 +24,9 @@ android {
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
+        // flutter_local_notifications schedules with java.time, which only
+        // exists below API 26 through desugaring.
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -71,8 +74,9 @@ flutter {
     source = "../.."
 }
 
-
 dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+
     // LevelPlay's mediation-sdk is the auction, not a demand source. Without
     // an adapter it has no network it can instantiate and every ad unit stays
     // empty. The adapter declares no dependencies of its own, so the network

@@ -6,6 +6,9 @@
          actually deliver; without this it warns and assumes the worst. It is a
          normal permission, so nothing is asked of the user. -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Local notifications for the background to-do check. Android 13+ asks
+         the user before any notification is shown. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <application
         android:label="LabFox"
         android:name="${applicationName}"
