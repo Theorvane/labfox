@@ -1,6 +1,6 @@
 name: labfox
 description: A cross-platform GitLab workflow client.
-version: 0.1.2+4
+version: 0.1.3+5
 publish_to: none
 
 environment:
