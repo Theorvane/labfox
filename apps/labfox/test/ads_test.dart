@@ -1,11 +1,26 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:labfox/core/ads/ad_banner.dart';
 import 'package:labfox/core/ads/ads_providers.dart';
+import 'package:labfox/core/ads/banner_retry.dart';
 import 'package:labfox/core/ads/interstitial_policy.dart';
 import 'package:labfox/core/entitlement/entitlement.dart';
 import 'package:labfox/core/entitlement/entitlement_providers.dart';
+
+class _CountingPolicy extends InterstitialPolicy {
+  _CountingPolicy(this.onCall);
+
+  final void Function() onCall;
+
+  @override
+  bool onTransition() {
+    onCall();
+    return false;
+  }
+}
 
 class _FixedEntitlement extends EntitlementController {
   _FixedEntitlement(this.value);
@@ -69,12 +84,19 @@ void main() {
   });
 
   group('AdBanner', () {
-    Future<void> pump(WidgetTester tester, Entitlement entitlement) {
+    Future<void> pump(
+      WidgetTester tester,
+      Entitlement entitlement, {
+      Future<bool>? initialized,
+    }) {
       return tester.pumpWidget(
         ProviderScope(
           overrides: [
             entitlementProvider.overrideWith(
               () => _FixedEntitlement(entitlement),
+            ),
+            adsInitializerProvider.overrideWith(
+              (ref) => initialized ?? Future.value(true),
             ),
             bannerViewBuilderProvider.overrideWithValue(
               (context) => const SizedBox(
@@ -91,12 +113,172 @@ void main() {
 
     testWidgets('renders the banner slot for free users', (tester) async {
       await pump(tester, Entitlement.free);
+      await tester.pumpAndSettle();
       expect(find.byKey(const Key('stub-banner')), findsOneWidget);
     });
 
     testWidgets('renders nothing for subscribers', (tester) async {
       await pump(tester, Entitlement.subscribed);
+      await tester.pumpAndSettle();
       expect(find.byKey(const Key('stub-banner')), findsNothing);
+    });
+
+    // The banner view loads as soon as its platform view exists, so mounting
+    // it before the SDK is up spends the one load attempt on a call the SDK
+    // rejects, and the slot stays empty for the whole session.
+    testWidgets('waits for the SDK before mounting the banner', (tester) async {
+      final init = Completer<bool>();
+      await pump(tester, Entitlement.free, initialized: init.future);
+      await tester.pump();
+
+      expect(find.byKey(const Key('stub-banner')), findsNothing);
+
+      init.complete(true);
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(const Key('stub-banner')), findsOneWidget);
+    });
+
+    testWidgets('stays empty when the SDK never came up', (tester) async {
+      await pump(tester, Entitlement.free, initialized: Future.value(false));
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(const Key('stub-banner')), findsNothing);
+    });
+  });
+
+  group('adsInitializerProvider', () {
+    ProviderContainer container({
+      required List<bool> attempts,
+      required List<int> calls,
+    }) {
+      var i = 0;
+      final c = ProviderContainer(
+        overrides: [
+          entitlementProvider.overrideWith(
+            () => _FixedEntitlement(Entitlement.free),
+          ),
+          adsPlatformProvider.overrideWithValue(true),
+          adsInitBackoffProvider.overrideWithValue(const [Duration.zero]),
+          adsInitAttemptProvider.overrideWithValue(() async {
+            calls.add(++i);
+            return attempts[i - 1];
+          }),
+        ],
+      );
+      addTearDown(c.dispose);
+      return c;
+    }
+
+    // A first launch that loses DNS fails init, and nothing else ever asks:
+    // without a retry the slot is dead for the rest of the session.
+    test('retries an init that failed', () async {
+      final calls = <int>[];
+      final c = container(attempts: [false, true], calls: calls);
+
+      await expectLater(
+        c.read(adsInitializerProvider.future),
+        completion(isTrue),
+      );
+      expect(calls.length, 2);
+    });
+
+    test('gives up rather than retrying forever', () async {
+      final calls = <int>[];
+      final c = container(attempts: [false, false], calls: calls);
+
+      await expectLater(
+        c.read(adsInitializerProvider.future),
+        completion(isFalse),
+      );
+      expect(calls.length, 2);
+    });
+
+    test('does not touch the SDK for a subscriber', () async {
+      final calls = <int>[];
+      final c = ProviderContainer(
+        overrides: [
+          entitlementProvider.overrideWith(
+            () => _FixedEntitlement(Entitlement.subscribed),
+          ),
+          adsPlatformProvider.overrideWithValue(true),
+          adsInitAttemptProvider.overrideWithValue(() async {
+            calls.add(1);
+            return true;
+          }),
+        ],
+      );
+      addTearDown(c.dispose);
+
+      await expectLater(
+        c.read(adsInitializerProvider.future),
+        completion(isFalse),
+      );
+      expect(calls, isEmpty);
+    });
+  });
+
+  group('InterstitialAds', () {
+    test('shows nothing until the SDK is up', () async {
+      var transitions = 0;
+      final ads = InterstitialAds(
+        _CountingPolicy(() => transitions++),
+        isReady: () => false,
+      );
+
+      await ads.onTransition();
+
+      // The policy is never consulted, so a transition spent while the SDK was
+      // still coming up does not count toward the next ad either.
+      expect(transitions, 0);
+    });
+  });
+
+  group('BannerRetry', () {
+    test('retries a failed load with a widening gap, then gives up', () {
+      var loads = 0;
+      final scheduled = <Duration>[];
+      final retry = BannerRetry(
+        load: () async => loads++,
+        delays: const [Duration(seconds: 5), Duration(seconds: 20)],
+        schedule: (delay, run) {
+          scheduled.add(delay);
+          run();
+        },
+      );
+
+      retry.start();
+      expect(loads, 1);
+
+      retry.onFailure();
+      retry.onFailure();
+      // Bounded: the third failure schedules nothing rather than retrying for
+      // the rest of the session.
+      retry.onFailure();
+
+      expect(scheduled, const [Duration(seconds: 5), Duration(seconds: 20)]);
+      expect(loads, 3);
+    });
+
+    test('a load that succeeds gives the next failure a full budget', () {
+      var loads = 0;
+      final scheduled = <Duration>[];
+      final retry = BannerRetry(
+        load: () async => loads++,
+        delays: const [Duration(seconds: 5)],
+        schedule: (delay, run) {
+          scheduled.add(delay);
+          run();
+        },
+      );
+
+      retry.start();
+      retry.onFailure();
+      retry.onLoaded();
+      retry.onFailure();
+
+      expect(scheduled, const [Duration(seconds: 5), Duration(seconds: 5)]);
+      expect(loads, 3);
     });
   });
 }
