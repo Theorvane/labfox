@@ -22,7 +22,7 @@ import workmanager_apple
     // refresh actually runs.
     WorkmanagerPlugin.registerPeriodicTask(
       withIdentifier: AppDelegate.backgroundTaskIdentifier,
-      earliestBeginInSeconds: 15 * 60
+      earliestBeginInSeconds: NSNumber(value: 15 * 60)
     )
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
