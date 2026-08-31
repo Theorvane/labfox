@@ -105,11 +105,25 @@ A subscription unlocks the actions that finish the job:
 • Approve and merge
 • Retry, cancel, and run manual jobs
 • More than one account, including several self-hosted instances
-• Unlimited favourites and saved searches
+• Background checks that notify you about new to-do items
+• Unlimited favourites, instead of the free limit of three
 
-The subscription renews automatically until cancelled, and is managed in your
-store account. Desktop builds are free with every feature.
+LabFox Subscription: one month, renewing automatically until cancelled. Payment
+is charged to your store account at confirmation, and renews unless cancelled
+at least 24 hours before the period ends. Manage or cancel it in your store
+account settings.
+
+Terms of Use: https://www.sloki9637.com/terms
+Privacy Policy: https://www.sloki9637.com/privacy
+
+Desktop builds are free with every feature.
 ```
+
+**The last two links are not optional.** An app that sells an auto-renewable
+subscription is rejected if the product page carries no functional Terms of Use
+link — that is what happened to the 0.1.3 submission. They belong in the App
+Store description itself, and the same two links are shown in the app at the
+point of purchase (Guideline 3.1.2).
 
 ---
 
@@ -133,6 +147,11 @@ space is better spent on words nobody searching would guess.
   user's own GitLab contains.
 - **Privacy policy URL** is mandatory on both stores. `PRIVACY.md` is the text;
   it needs a public URL before submission.
+- **Terms of Use (EULA)** — LabFox uses its own terms rather than Apple's
+  standard EULA, so they go in **App Store Connect → App Information → License
+  Agreement** as a custom EULA, *and* as a link in the App Store description.
+  Apple rejects a subscription submission that has neither, without running the
+  app.
 - **Data safety (Play)** and **App Privacy (App Store)** must match `PRIVACY.md`:
   anonymous usage analytics, no advertising identifier, no data sold, and
   credentials stored only on the device.

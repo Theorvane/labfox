@@ -1640,6 +1640,24 @@ abstract class AppLocalizations {
   /// **'Subscribe for {price}'**
   String subscriptionSubscribe(String price);
 
+  /// Auto-renewal terms shown at the point of purchase, required by App Store Review Guideline 3.1.2
+  ///
+  /// In en, this message translates to:
+  /// **'The subscription renews every month until you cancel it. Cancel any time in your store account; cancelling takes effect at the end of the paid month.'**
+  String get subscriptionRenewalTerms;
+
+  /// Link to the Terms of Use (EULA) shown at the point of purchase
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Use'**
+  String get subscriptionTerms;
+
+  /// Link to the privacy policy shown at the point of purchase
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get subscriptionPrivacy;
+
   /// Restores an existing subscription on a new device
   ///
   /// In en, this message translates to:
