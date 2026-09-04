@@ -22,6 +22,20 @@ version does nothing, so the pipeline cannot ship the same version twice.
 The Play upload targets the **internal** track. Promoting to production is a
 decision made in the Play Console, not a side effect of merging.
 
+### Release notes
+
+`docs/store/release-notes.md` and its translations are the source. Every
+release needs a `## <version>` section there, in every language, or the Play
+job fails rather than publishing a release with nothing to say.
+
+- **Play** takes them automatically: `scripts/whatsnew.py` turns the section
+  into the `whatsnew-<locale>` files the upload expects, and refuses a locale
+  whose text is over Play's 500-character limit.
+- **The App Store does not.** `altool` uploads a build and touches no
+  metadata, so the **What's New** field has to be filled in App Store Connect
+  by hand, from the same file, before submitting for review. Nothing in the
+  pipeline can do it and nothing checks that it was done.
+
 ---
 
 ## What the pipeline does, in order
@@ -31,7 +45,7 @@ decision made in the Play Console, not a side effect of merging.
 | `check` | Reads the version, skips if tagged, then runs format, analyze, and every package's tests | — |
 | `windows` | Builds the Windows app, then packages an installer and a zip | — |
 | `app-store-connect` | Uploads an iOS build. **Submits nothing** | yes |
-| `google-play` | Uploads to the internal track | published to testers |
+| `google-play` | Uploads to the internal track, with the release notes from `docs/store` | published to testers |
 | `release` | Tags and publishes the GitHub release with the Windows installer and zip | — |
 
 Apple runs before Google deliberately. The two are not equally reversible, and
