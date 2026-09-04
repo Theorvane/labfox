@@ -113,21 +113,11 @@ void main() {
       );
     }
 
-    testWidgets('shows the banner slot after an ad loads', (tester) async {
-      BannerViewCallbacks? callbacks;
-      await pump(
-        tester,
-        Entitlement.free,
-        onBannerCallbacks: (value) => callbacks = value,
-      );
-      await tester.pumpAndSettle();
-
-      callbacks!.onLoaded();
-      await tester.pump();
-
-      expect(find.byKey(const Key('stub-banner')), findsOneWidget);
-    });
-
+    // The slot costs nothing until an ad arrives, and keeps its space
+    // afterwards: banners refresh on their own, and a refresh that fails
+    // leaves the creative already on screen, so collapsing would hide a live
+    // ad and pull the content out from under whoever was reading it. There is
+    // deliberately no callback that can take the space back.
     testWidgets('keeps the banner slot collapsed until an ad loads', (
       tester,
     ) async {
@@ -144,10 +134,6 @@ void main() {
       callbacks!.onLoaded();
       await tester.pump();
       expect(find.byKey(const Key('stub-banner')), findsOneWidget);
-
-      callbacks!.onFailed();
-      await tester.pump();
-      expect(find.byKey(const Key('stub-banner')), findsNothing);
     });
 
     testWidgets('renders nothing for subscribers', (tester) async {

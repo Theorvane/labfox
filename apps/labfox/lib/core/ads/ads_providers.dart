@@ -10,12 +10,15 @@ import 'ads_config.dart';
 import 'banner_retry.dart';
 import 'interstitial_policy.dart';
 
-/// Reports banner callbacks that determine whether the shell reserves space.
+/// What the banner view tells the shell.
+///
+/// Only the arrival of an ad matters: the slot starts collapsed, so there is
+/// nothing to report on a failure — and once an ad is on screen the shell
+/// keeps the space rather than pulling it away under the reader.
 class BannerViewCallbacks {
-  const BannerViewCallbacks({required this.onLoaded, required this.onFailed});
+  const BannerViewCallbacks({required this.onLoaded});
 
   final VoidCallback onLoaded;
-  final VoidCallback onFailed;
 }
 
 /// Whether this user sees ads: the free mobile tier only.
@@ -205,10 +208,8 @@ class _BannerListener with LevelPlayBannerAdViewListener {
   void onAdCollapsed(LevelPlayAdInfo adInfo) {}
 
   @override
-  void onAdDisplayFailed(LevelPlayAdInfo adInfo, LevelPlayAdError error) {
-    _callbacks.onFailed();
-    _retry.onFailure();
-  }
+  void onAdDisplayFailed(LevelPlayAdInfo adInfo, LevelPlayAdError error) =>
+      _retry.onFailure();
 
   @override
   void onAdDisplayed(LevelPlayAdInfo adInfo) => _callbacks.onLoaded();
@@ -220,10 +221,7 @@ class _BannerListener with LevelPlayBannerAdViewListener {
   void onAdLeftApplication(LevelPlayAdInfo adInfo) {}
 
   @override
-  void onAdLoadFailed(LevelPlayAdError error) {
-    _callbacks.onFailed();
-    _retry.onFailure();
-  }
+  void onAdLoadFailed(LevelPlayAdError error) => _retry.onFailure();
 
   @override
   void onAdLoaded(LevelPlayAdInfo adInfo) {

@@ -18,17 +18,18 @@ class AdBanner extends ConsumerStatefulWidget {
 }
 
 class _AdBannerState extends ConsumerState<AdBanner> {
+  /// Whether an ad has arrived. The slot takes no space until one has, so a
+  /// tier that never fills costs the user nothing.
+  ///
+  /// One-way on purpose. Banners refresh on their own, and a refresh that
+  /// fails leaves the creative already on screen; collapsing then would hide a
+  /// live ad and pull the content out from under whoever was reading it. The
+  /// jump is worse than the strip it would save.
   var _isVisible = false;
 
   void _show() {
     if (mounted && !_isVisible) {
       setState(() => _isVisible = true);
-    }
-  }
-
-  void _hide() {
-    if (mounted && _isVisible) {
-      setState(() => _isVisible = false);
     }
   }
 
@@ -47,10 +48,7 @@ class _AdBannerState extends ConsumerState<AdBanner> {
       child: Offstage(
         offstage: !_isVisible,
         child: Center(
-          child: builder(
-            context,
-            BannerViewCallbacks(onLoaded: _show, onFailed: _hide),
-          ),
+          child: builder(context, BannerViewCallbacks(onLoaded: _show)),
         ),
       ),
     );
