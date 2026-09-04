@@ -7,6 +7,7 @@ import 'package:unity_levelplay_mediation/unity_levelplay_mediation.dart';
 
 import '../entitlement/entitlement_providers.dart';
 import 'ads_config.dart';
+import 'app_active.dart';
 import 'banner_retry.dart';
 import 'interstitial_policy.dart';
 
@@ -72,8 +73,12 @@ final adsPlatformProvider = Provider<bool>((ref) {
 /// app was rejected for exactly this: the usage description was in Info.plist
 /// and nothing ever called.
 ///
+/// Returns whether the SDK may start: true once the user has answered, or on
+/// a platform that does not ask. False means the prompt could not be shown, so
+/// nothing that tracks should start.
+///
 /// A seam so the ordering can be tested off-device.
-final trackingAuthorizationProvider = Provider<Future<void> Function()>((ref) {
+final trackingAuthorizationProvider = Provider<Future<bool> Function()>((ref) {
   return _requestTrackingAuthorization;
 });
 
@@ -111,7 +116,12 @@ final adsInitializerProvider = FutureProvider<bool>((ref) async {
   // Before the SDK, not after: the permission has to precede the tracking it
   // permits. A subscriber never reaches here and so is never asked, which is
   // right — they see no ads and are not tracked.
-  await ref.watch(trackingAuthorizationProvider)();
+  //
+  // If the prompt could not be shown at all, no ads: starting the SDK anyway
+  // would track without having asked, which is the rejection this guards.
+  if (!await ref.watch(trackingAuthorizationProvider)()) {
+    return false;
+  }
 
   final attempt = ref.watch(adsInitAttemptProvider);
   final backoff = ref.watch(adsInitBackoffProvider);
@@ -130,22 +140,27 @@ final adsInitializerProvider = FutureProvider<bool>((ref) async {
 /// SDK does not keep the slot pending for the whole session.
 const _initTimeout = Duration(seconds: 30);
 
-Future<void> _requestTrackingAuthorization() async {
+Future<bool> _requestTrackingAuthorization() async {
   if (!Platform.isIOS) {
-    return;
+    return true;
+  }
+  // iOS shows the prompt only while the app is active, and returns a denial
+  // without showing anything otherwise. Waiting for the lifecycle state is
+  // what makes the difference between asking and only appearing to.
+  if (!await whenAppActive()) {
+    return false;
   }
   try {
-    // iOS answers "denied" without showing anything when the app is not yet
-    // active, so asking during the first build would read as every user
-    // refusing. Wait for a frame to be on screen first.
-    await WidgetsBinding.instance.endOfFrame;
     if (await ATTrackingManager.getTrackingAuthorizationStatus() ==
         ATTStatus.NotDetermined) {
       await ATTrackingManager.requestTrackingAuthorization();
     }
+    // Declining is an answer. The SDK starts either way and serves contextual
+    // ads to anyone who said no.
+    return true;
   } catch (_) {
-    // A refusal and a broken prompt land in the same place: the SDK starts
-    // without the identifier and serves contextual ads.
+    // The prompt could not be put on screen, so nothing was asked.
+    return false;
   }
 }
 

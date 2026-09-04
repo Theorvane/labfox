@@ -189,9 +189,10 @@ void main() {
           ),
           adsPlatformProvider.overrideWithValue(true),
           adsInitBackoffProvider.overrideWithValue(const [Duration.zero]),
-          trackingAuthorizationProvider.overrideWithValue(
-            () async => order?.add('ask'),
-          ),
+          trackingAuthorizationProvider.overrideWithValue(() async {
+            order?.add('ask');
+            return true;
+          }),
           adsInitAttemptProvider.overrideWithValue(() async {
             order?.add('init');
             calls.add(++i);
@@ -238,6 +239,32 @@ void main() {
       expect(order, ['ask', 'init']);
     });
 
+    // An app launched into the background can never show the prompt. Starting
+    // the SDK then would track someone who was never asked.
+    test('does not start the SDK when the prompt could not be shown', () async {
+      final calls = <int>[];
+      final c = ProviderContainer(
+        overrides: [
+          entitlementProvider.overrideWith(
+            () => _FixedEntitlement(Entitlement.free),
+          ),
+          adsPlatformProvider.overrideWithValue(true),
+          trackingAuthorizationProvider.overrideWithValue(() async => false),
+          adsInitAttemptProvider.overrideWithValue(() async {
+            calls.add(1);
+            return true;
+          }),
+        ],
+      );
+      addTearDown(c.dispose);
+
+      await expectLater(
+        c.read(adsInitializerProvider.future),
+        completion(isFalse),
+      );
+      expect(calls, isEmpty);
+    });
+
     test('never asks a subscriber, who is not tracked', () async {
       final asked = <String>[];
       final c = ProviderContainer(
@@ -246,9 +273,10 @@ void main() {
             () => _FixedEntitlement(Entitlement.subscribed),
           ),
           adsPlatformProvider.overrideWithValue(true),
-          trackingAuthorizationProvider.overrideWithValue(
-            () async => asked.add('ask'),
-          ),
+          trackingAuthorizationProvider.overrideWithValue(() async {
+            asked.add('ask');
+            return true;
+          }),
         ],
       );
       addTearDown(c.dispose);
@@ -266,7 +294,7 @@ void main() {
             () => _FixedEntitlement(Entitlement.subscribed),
           ),
           adsPlatformProvider.overrideWithValue(true),
-          trackingAuthorizationProvider.overrideWithValue(() async {}),
+          trackingAuthorizationProvider.overrideWithValue(() async => true),
           adsInitAttemptProvider.overrideWithValue(() async {
             calls.add(1);
             return true;
