@@ -86,6 +86,17 @@ jobs:
               ;;
           esac
 
+      # The notes are written and reviewed in docs/store; carrying them here is
+      # what keeps the release page from saying nothing, or saying something
+      # nobody reviewed. A version with no notes fails the release rather than
+      # publishing an empty one.
+      - name: Collect the release notes
+        run: |
+          set -euo pipefail
+          VERSION="$(sed -n 's/^version: *\([^+]*\).*/\1/p' apps/labfox/pubspec.yaml | tr -d '[:space:]')"
+          python3 scripts/whatsnew.py --version "$VERSION" --out dist/whatsnew
+          ls -l dist/whatsnew
+
       - name: Upload to Google Play
         uses: r0adkll/upload-google-play@935ef9c68bb393a8e6116b1575626a7f5be3a7fb # v1.1.3
         with:
@@ -94,3 +105,4 @@ jobs:
           releaseFiles: apps/labfox/build/app/outputs/bundle/release/app-release.aab
           track: ${{ inputs.track }}
           status: ${{ inputs.release_status }}
+          whatsNewDirectory: dist/whatsnew
