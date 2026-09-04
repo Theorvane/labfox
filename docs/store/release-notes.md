@@ -20,6 +20,30 @@ the source: change this first, then carry it across.
 
 ---
 
+## 0.1.6
+
+**Play** (500 characters max):
+
+```
+Fixes:
+
+• Ads now ask before using anything about your device to personalise
+  themselves. Say no and they keep showing, just less targeted. Subscribers
+  see no ads and are never asked.
+```
+
+**App Store**:
+
+```
+Fixes:
+
+• Ads now ask before using anything about your device to personalise
+  themselves, through the system tracking prompt. Say no and ads keep showing,
+  just less targeted. Subscribers see no ads at all and are never asked.
+```
+
+---
+
 ## 0.1.5
 
 **Play** (500 characters max):
