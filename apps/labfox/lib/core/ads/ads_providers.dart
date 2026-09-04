@@ -65,6 +65,18 @@ final adsPlatformProvider = Provider<bool>((ref) {
   return Platform.isAndroid || Platform.isIOS;
 });
 
+/// Asks iOS for permission to track, if it has not been asked already.
+///
+/// Guideline 5.1.2(i): an app that collects data used to track — which serving
+/// mediated ads is — has to ask through App Tracking Transparency first. The
+/// app was rejected for exactly this: the usage description was in Info.plist
+/// and nothing ever called.
+///
+/// A seam so the ordering can be tested off-device.
+final trackingAuthorizationProvider = Provider<Future<void> Function()>((ref) {
+  return _requestTrackingAuthorization;
+});
+
 /// One attempt at bringing the SDK up, reporting whether it came up.
 ///
 /// A seam so the retry loop can be tested without the platform channel.
@@ -96,6 +108,11 @@ final adsInitializerProvider = FutureProvider<bool>((ref) async {
   if (!ref.watch(adsEnabledProvider)) {
     return false;
   }
+  // Before the SDK, not after: the permission has to precede the tracking it
+  // permits. A subscriber never reaches here and so is never asked, which is
+  // right — they see no ads and are not tracked.
+  await ref.watch(trackingAuthorizationProvider)();
+
   final attempt = ref.watch(adsInitAttemptProvider);
   final backoff = ref.watch(adsInitBackoffProvider);
   for (var i = 0; i <= backoff.length; i++) {
@@ -112,6 +129,25 @@ final adsInitializerProvider = FutureProvider<bool>((ref) async {
 /// Long enough for a cold start on a slow network, short enough that a dead
 /// SDK does not keep the slot pending for the whole session.
 const _initTimeout = Duration(seconds: 30);
+
+Future<void> _requestTrackingAuthorization() async {
+  if (!Platform.isIOS) {
+    return;
+  }
+  try {
+    // iOS answers "denied" without showing anything when the app is not yet
+    // active, so asking during the first build would read as every user
+    // refusing. Wait for a frame to be on screen first.
+    await WidgetsBinding.instance.endOfFrame;
+    if (await ATTrackingManager.getTrackingAuthorizationStatus() ==
+        ATTStatus.NotDetermined) {
+      await ATTrackingManager.requestTrackingAuthorization();
+    }
+  } catch (_) {
+    // A refusal and a broken prompt land in the same place: the SDK starts
+    // without the identifier and serves contextual ads.
+  }
+}
 
 Future<bool> _initLevelPlayOnce() async {
   final ready = Completer<bool>();
