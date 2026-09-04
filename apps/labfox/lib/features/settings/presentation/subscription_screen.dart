@@ -5,13 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/entitlement/entitlement.dart';
 import '../../../core/entitlement/entitlement_providers.dart';
 import '../../../core/entitlement/subscription_controller.dart';
+import '../../../core/entitlement/subscription_links.dart';
 import '../../../core/ui/link_opener.dart';
 import '../../../l10n/app_localizations.dart';
-
-/// Where the Terms of Use and the privacy policy are published. Apple asks for
-/// a link on the product page and another at the point of purchase, and both
-/// have to resolve.
-const _siteUrl = 'https://www.sloki9637.com';
 
 /// What the subscription unlocks, and the two actions the stores require.
 ///
@@ -28,6 +24,8 @@ class SubscriptionScreen extends ConsumerWidget {
     final action = ref.watch(subscriptionControllerProvider);
     final busy = action.isLoading;
     final open = ref.watch(linkOpenerProvider);
+    final termsUrl = ref.watch(subscriptionTermsUrlProvider);
+    final privacyUrl = ref.watch(subscriptionPrivacyUrlProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.subscriptionTitle)),
@@ -103,11 +101,11 @@ class SubscriptionScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextButton(
-                onPressed: () => open(Uri.parse('$_siteUrl/terms')),
+                onPressed: () => open(Uri.parse(termsUrl)),
                 child: Text(l10n.subscriptionTerms),
               ),
               TextButton(
-                onPressed: () => open(Uri.parse('$_siteUrl/privacy')),
+                onPressed: () => open(Uri.parse(privacyUrl)),
                 child: Text(l10n.subscriptionPrivacy),
               ),
             ],
