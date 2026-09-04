@@ -7,6 +7,7 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:labfox/core/auth/auth_providers.dart';
 import 'package:labfox/core/entitlement/entitlement_providers.dart';
 import 'package:labfox/core/entitlement/store_entitlement_source.dart';
+import 'package:labfox/core/entitlement/subscription_links.dart';
 import 'package:labfox/core/ui/link_opener.dart';
 import 'package:labfox/features/settings/presentation/subscription_screen.dart';
 import 'package:labfox/l10n/app_localizations.dart';
@@ -56,7 +57,10 @@ void main() {
     addTearDown(api.dispose);
   });
 
-  Future<void> pump(WidgetTester tester) async {
+  Future<void> pump(
+    WidgetTester tester, {
+    List<Override> overrides = const [],
+  }) async {
     final prefs = await SharedPreferences.getInstance();
     await tester.pumpWidget(
       ProviderScope(
@@ -73,6 +77,7 @@ void main() {
               settle: const Duration(milliseconds: 10),
             ),
           ),
+          ...overrides,
         ],
         child: const MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -114,6 +119,25 @@ void main() {
       Uri.parse('https://www.sloki9637.com/terms'),
       Uri.parse('https://www.sloki9637.com/privacy'),
     ]);
+  });
+
+  // LabFox sells under Apple's standard EULA on the App Store, and that
+  // document governs nothing bought through Play — so the link follows the
+  // platform rather than naming one agreement everywhere.
+  testWidgets('an App Store purchase links Apple\'s standard EULA', (
+    tester,
+  ) async {
+    await pump(
+      tester,
+      overrides: [
+        subscriptionTermsUrlProvider.overrideWithValue(appleStandardEulaUrl),
+      ],
+    );
+
+    await tester.tap(find.text('Terms of Use'));
+    await tester.pumpAndSettle();
+
+    expect(opened, [Uri.parse(appleStandardEulaUrl)]);
   });
 
   testWidgets('shows the price exactly as the store formatted it', (
