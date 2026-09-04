@@ -179,6 +179,7 @@ void main() {
     ProviderContainer container({
       required List<bool> attempts,
       required List<int> calls,
+      List<String>? order,
     }) {
       var i = 0;
       final c = ProviderContainer(
@@ -188,7 +189,12 @@ void main() {
           ),
           adsPlatformProvider.overrideWithValue(true),
           adsInitBackoffProvider.overrideWithValue(const [Duration.zero]),
+          trackingAuthorizationProvider.overrideWithValue(() async {
+            order?.add('ask');
+            return true;
+          }),
           adsInitAttemptProvider.overrideWithValue(() async {
+            order?.add('init');
             calls.add(++i);
             return attempts[i - 1];
           }),
@@ -222,6 +228,64 @@ void main() {
       expect(calls.length, 2);
     });
 
+    // Guideline 5.1.2(i): permission comes before the tracking, not after it.
+    // Asking once the SDK is already up is the same rejection with extra steps.
+    test('asks for tracking permission before starting the SDK', () async {
+      final order = <String>[];
+      final c = container(attempts: [true], calls: [], order: order);
+
+      await c.read(adsInitializerProvider.future);
+
+      expect(order, ['ask', 'init']);
+    });
+
+    // An app launched into the background can never show the prompt. Starting
+    // the SDK then would track someone who was never asked.
+    test('does not start the SDK when the prompt could not be shown', () async {
+      final calls = <int>[];
+      final c = ProviderContainer(
+        overrides: [
+          entitlementProvider.overrideWith(
+            () => _FixedEntitlement(Entitlement.free),
+          ),
+          adsPlatformProvider.overrideWithValue(true),
+          trackingAuthorizationProvider.overrideWithValue(() async => false),
+          adsInitAttemptProvider.overrideWithValue(() async {
+            calls.add(1);
+            return true;
+          }),
+        ],
+      );
+      addTearDown(c.dispose);
+
+      await expectLater(
+        c.read(adsInitializerProvider.future),
+        completion(isFalse),
+      );
+      expect(calls, isEmpty);
+    });
+
+    test('never asks a subscriber, who is not tracked', () async {
+      final asked = <String>[];
+      final c = ProviderContainer(
+        overrides: [
+          entitlementProvider.overrideWith(
+            () => _FixedEntitlement(Entitlement.subscribed),
+          ),
+          adsPlatformProvider.overrideWithValue(true),
+          trackingAuthorizationProvider.overrideWithValue(() async {
+            asked.add('ask');
+            return true;
+          }),
+        ],
+      );
+      addTearDown(c.dispose);
+
+      await c.read(adsInitializerProvider.future);
+
+      expect(asked, isEmpty);
+    });
+
     test('does not touch the SDK for a subscriber', () async {
       final calls = <int>[];
       final c = ProviderContainer(
@@ -230,6 +294,7 @@ void main() {
             () => _FixedEntitlement(Entitlement.subscribed),
           ),
           adsPlatformProvider.overrideWithValue(true),
+          trackingAuthorizationProvider.overrideWithValue(() async => true),
           adsInitAttemptProvider.overrideWithValue(() async {
             calls.add(1);
             return true;

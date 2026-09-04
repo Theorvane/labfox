@@ -160,6 +160,21 @@ space is better spent on words nobody searching would guess.
   rejects a subscription submission that has neither the standard link nor a
   custom agreement, without running the app. Play has no equivalent field: its
   listing links LabFox's own terms.
-- **Data safety (Play)** and **App Privacy (App Store)** must match `PRIVACY.md`:
-  anonymous usage analytics, no advertising identifier, no data sold, and
-  credentials stored only on the device.
+- **Data safety (Play)** and **App Privacy (App Store)** must match
+  `PRIVACY.md`: anonymous usage analytics, no data sold, credentials stored
+  only on the device — and, for the free tier, an advertising identifier used
+  by the ad SDK. Saying otherwise would be wrong in the app's favour: the ads
+  are mediated, and Apple treats that as tracking.
+- **App Tracking Transparency** — because the label declares tracking, the app
+  has to ask before it starts. It does, on iOS, right after the first frame and
+  only for users who see ads; subscribers are never asked because they are not
+  tracked. Apple asks where the prompt is, so the **Review Notes** field needs
+  to say:
+
+  ```
+  The App Tracking Transparency prompt appears on first launch, immediately
+  after the first screen is drawn, for users on the free tier. It is requested
+  before the ad SDK is initialised. Subscribers see no ads, are not tracked,
+  and are never shown the prompt — to see it, review the app without
+  subscribing.
+  ```
