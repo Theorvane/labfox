@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/entitlement/entitlement.dart';
 import '../../../core/entitlement/entitlement_providers.dart';
 import '../../../core/entitlement/subscription_controller.dart';
+import '../../../core/entitlement/subscription_links.dart';
+import '../../../core/ui/link_opener.dart';
 import '../../../l10n/app_localizations.dart';
 
 /// What the subscription unlocks, and the two actions the stores require.
@@ -21,6 +23,9 @@ class SubscriptionScreen extends ConsumerWidget {
     final offer = ref.watch(subscriptionOfferProvider);
     final action = ref.watch(subscriptionControllerProvider);
     final busy = action.isLoading;
+    final open = ref.watch(linkOpenerProvider);
+    final termsUrl = ref.watch(subscriptionTermsUrlProvider);
+    final privacyUrl = ref.watch(subscriptionPrivacyUrlProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.subscriptionTitle)),
@@ -82,6 +87,28 @@ class SubscriptionScreen extends ConsumerWidget {
                       .read(subscriptionControllerProvider.notifier)
                       .restore(),
             child: Text(l10n.subscriptionRestore),
+          ),
+          const SizedBox(height: LabFoxSpacing.md),
+          // Guideline 3.1.2: the renewal terms and both links belong where the
+          // purchase is made, not only in the store listing. A submission
+          // without them is rejected before anyone opens the app.
+          Text(
+            l10n.subscriptionRenewalTerms,
+            style: LabFoxTextRoles.of(context).meta,
+          ),
+          const SizedBox(height: LabFoxSpacing.sm),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () => open(Uri.parse(termsUrl)),
+                child: Text(l10n.subscriptionTerms),
+              ),
+              TextButton(
+                onPressed: () => open(Uri.parse(privacyUrl)),
+                child: Text(l10n.subscriptionPrivacy),
+              ),
+            ],
           ),
         ],
       ),

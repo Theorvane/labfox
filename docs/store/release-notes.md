@@ -20,6 +20,40 @@ the source: change this first, then carry it across.
 
 ---
 
+## 0.1.4
+
+The 0.1.3 submission was rejected for metadata rather than for anything in the
+build, so this release carries the same features and adds what was missing.
+
+**Play** (500 characters max):
+
+```
+The subscription screen now shows what you are agreeing to: how often it
+renews, how to cancel, and links to the Terms of Use and the Privacy Policy.
+
+Everything from 0.1.3 is here too — background to-do checks, and a
+subscription you can actually find.
+```
+
+**App Store**:
+
+```
+The subscription screen now shows what you are agreeing to before you buy: how
+often it renews, how to cancel it, and links to the Terms of Use and the
+Privacy Policy.
+
+Everything from 0.1.3 is here too:
+
+• Background to-do checks. LabFox looks at your to-do list while it is closed
+  and tells you when something new needs you — a review requested, a pipeline
+  that failed, an issue assigned to you. Part of the subscription, and off
+  until you turn it on in Settings.
+• The subscription is easier to find, and your profile shows whether it is
+  active.
+```
+
+---
+
 ## 0.1.3
 
 **Play** (500 characters max):

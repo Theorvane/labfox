@@ -1061,6 +1061,18 @@
       }
     }
   },
+  "subscriptionRenewalTerms": "The subscription renews every month until you cancel it. Cancel any time in your store account; cancelling takes effect at the end of the paid month.",
+  "@subscriptionRenewalTerms": {
+    "description": "Auto-renewal terms shown at the point of purchase, required by App Store Review Guideline 3.1.2"
+  },
+  "subscriptionTerms": "Terms of Use",
+  "@subscriptionTerms": {
+    "description": "Link to the Terms of Use (EULA) shown at the point of purchase"
+  },
+  "subscriptionPrivacy": "Privacy Policy",
+  "@subscriptionPrivacy": {
+    "description": "Link to the privacy policy shown at the point of purchase"
+  },
   "subscriptionRestore": "Restore purchases",
   "@subscriptionRestore": {
     "description": "Restores an existing subscription on a new device"

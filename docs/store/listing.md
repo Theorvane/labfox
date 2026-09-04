@@ -105,11 +105,31 @@ A subscription unlocks the actions that finish the job:
 • Approve and merge
 • Retry, cancel, and run manual jobs
 • More than one account, including several self-hosted instances
-• Unlimited favourites and saved searches
+• Background checks that notify you about new to-do items
+• Unlimited favourites, instead of the free limit of three
 
-The subscription renews automatically until cancelled, and is managed in your
-store account. Desktop builds are free with every feature.
+LabFox Subscription: one month, renewing automatically until cancelled. Payment
+is charged to your store account at confirmation, and renews unless cancelled
+at least 24 hours before the period ends. Manage or cancel it in your store
+account settings.
+
+Terms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+Privacy Policy: https://www.sloki9637.com/privacy
+
+Desktop builds are free with every feature.
 ```
+
+**The last two links are not optional.** An app that sells an auto-renewable
+subscription is rejected if the product page carries no functional Terms of Use
+link — that is what happened to the 0.1.3 submission. They belong in the App
+Store description itself, and the same two links are shown in the app at the
+point of purchase (Guideline 3.1.2).
+
+**The Terms of Use link differs per store.** LabFox sells under **Apple's
+standard EULA** on the App Store, which is the URL above. That document governs
+nothing bought through Play, so the Play listing links LabFox's own terms
+(https://www.sloki9637.com/terms) instead — and the app follows the same rule
+at the point of purchase.
 
 ---
 
@@ -133,6 +153,13 @@ space is better spent on words nobody searching would guess.
   user's own GitLab contains.
 - **Privacy policy URL** is mandatory on both stores. `PRIVACY.md` is the text;
   it needs a public URL before submission.
+- **Terms of Use (EULA)** — LabFox uses **Apple's standard EULA**, so nothing
+  goes in App Store Connect's License Agreement field; instead the App Store
+  description must carry a link to
+  https://www.apple.com/legal/internet-services/itunes/dev/stdeula/. Apple
+  rejects a subscription submission that has neither the standard link nor a
+  custom agreement, without running the app. Play has no equivalent field: its
+  listing links LabFox's own terms.
 - **Data safety (Play)** and **App Privacy (App Store)** must match `PRIVACY.md`:
   anonymous usage analytics, no advertising identifier, no data sold, and
   credentials stored only on the device.
