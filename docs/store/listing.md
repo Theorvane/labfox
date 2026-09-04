@@ -113,7 +113,7 @@ is charged to your store account at confirmation, and renews unless cancelled
 at least 24 hours before the period ends. Manage or cancel it in your store
 account settings.
 
-Terms of Use: https://www.sloki9637.com/terms
+Terms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
 Privacy Policy: https://www.sloki9637.com/privacy
 
 Desktop builds are free with every feature.
@@ -124,6 +124,12 @@ subscription is rejected if the product page carries no functional Terms of Use
 link — that is what happened to the 0.1.3 submission. They belong in the App
 Store description itself, and the same two links are shown in the app at the
 point of purchase (Guideline 3.1.2).
+
+**The Terms of Use link differs per store.** LabFox sells under **Apple's
+standard EULA** on the App Store, which is the URL above. That document governs
+nothing bought through Play, so the Play listing links LabFox's own terms
+(https://www.sloki9637.com/terms) instead — and the app follows the same rule
+at the point of purchase.
 
 ---
 
@@ -147,11 +153,13 @@ space is better spent on words nobody searching would guess.
   user's own GitLab contains.
 - **Privacy policy URL** is mandatory on both stores. `PRIVACY.md` is the text;
   it needs a public URL before submission.
-- **Terms of Use (EULA)** — LabFox uses its own terms rather than Apple's
-  standard EULA, so they go in **App Store Connect → App Information → License
-  Agreement** as a custom EULA, *and* as a link in the App Store description.
-  Apple rejects a subscription submission that has neither, without running the
-  app.
+- **Terms of Use (EULA)** — LabFox uses **Apple's standard EULA**, so nothing
+  goes in App Store Connect's License Agreement field; instead the App Store
+  description must carry a link to
+  https://www.apple.com/legal/internet-services/itunes/dev/stdeula/. Apple
+  rejects a subscription submission that has neither the standard link nor a
+  custom agreement, without running the app. Play has no equivalent field: its
+  listing links LabFox's own terms.
 - **Data safety (Play)** and **App Privacy (App Store)** must match `PRIVACY.md`:
   anonymous usage analytics, no advertising identifier, no data sold, and
   credentials stored only on the device.
