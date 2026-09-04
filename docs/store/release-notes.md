@@ -20,6 +20,29 @@ the source: change this first, then carry it across.
 
 ---
 
+## 0.1.5
+
+**Play** (500 characters max):
+
+```
+Fixes:
+
+• The strip at the bottom of the screen no longer sits there empty. It takes
+  no room at all until there is something to put in it.
+```
+
+**App Store**:
+
+```
+Fixes:
+
+• The strip at the bottom of the screen no longer sits there empty. It takes
+  no room at all until there is something to put in it, and once something is
+  there it stays put instead of shifting the page under you.
+```
+
+---
+
 ## 0.1.4
 
 The 0.1.3 submission was rejected for metadata rather than for anything in the
