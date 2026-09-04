@@ -88,6 +88,7 @@ void main() {
       WidgetTester tester,
       Entitlement entitlement, {
       Future<bool>? initialized,
+      void Function(BannerViewCallbacks callbacks)? onBannerCallbacks,
     }) {
       return tester.pumpWidget(
         ProviderScope(
@@ -98,22 +99,40 @@ void main() {
             adsInitializerProvider.overrideWith(
               (ref) => initialized ?? Future.value(true),
             ),
-            bannerViewBuilderProvider.overrideWithValue(
-              (context) => const SizedBox(
+            bannerViewBuilderProvider.overrideWithValue((context, callbacks) {
+              onBannerCallbacks?.call(callbacks);
+              return const SizedBox(
                 key: Key('stub-banner'),
                 width: 320,
                 height: 50,
-              ),
-            ),
+              );
+            }),
           ],
           child: const MaterialApp(home: Scaffold(body: AdBanner())),
         ),
       );
     }
 
-    testWidgets('renders the banner slot for free users', (tester) async {
-      await pump(tester, Entitlement.free);
+    // The slot costs nothing until an ad arrives, and keeps its space
+    // afterwards: banners refresh on their own, and a refresh that fails
+    // leaves the creative already on screen, so collapsing would hide a live
+    // ad and pull the content out from under whoever was reading it. There is
+    // deliberately no callback that can take the space back.
+    testWidgets('keeps the banner slot collapsed until an ad loads', (
+      tester,
+    ) async {
+      BannerViewCallbacks? callbacks;
+      await pump(
+        tester,
+        Entitlement.free,
+        onBannerCallbacks: (value) => callbacks = value,
+      );
       await tester.pumpAndSettle();
+
+      expect(find.byKey(const Key('stub-banner')), findsNothing);
+
+      callbacks!.onLoaded();
+      await tester.pump();
       expect(find.byKey(const Key('stub-banner')), findsOneWidget);
     });
 
@@ -128,7 +147,13 @@ void main() {
     // rejects, and the slot stays empty for the whole session.
     testWidgets('waits for the SDK before mounting the banner', (tester) async {
       final init = Completer<bool>();
-      await pump(tester, Entitlement.free, initialized: init.future);
+      BannerViewCallbacks? callbacks;
+      await pump(
+        tester,
+        Entitlement.free,
+        initialized: init.future,
+        onBannerCallbacks: (value) => callbacks = value,
+      );
       await tester.pump();
 
       expect(find.byKey(const Key('stub-banner')), findsNothing);
@@ -136,6 +161,9 @@ void main() {
       init.complete(true);
       await tester.pumpAndSettle();
 
+      expect(callbacks, isNotNull);
+      callbacks!.onLoaded();
+      await tester.pump();
       expect(find.byKey(const Key('stub-banner')), findsOneWidget);
     });
 
