@@ -7,6 +7,7 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:labfox/core/auth/auth_providers.dart';
 import 'package:labfox/core/entitlement/entitlement_providers.dart';
 import 'package:labfox/core/entitlement/store_entitlement_source.dart';
+import 'package:labfox/core/ui/link_opener.dart';
 import 'package:labfox/features/settings/presentation/subscription_screen.dart';
 import 'package:labfox/l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -46,10 +47,12 @@ class _FakePurchaseApi implements PurchaseApi {
 
 void main() {
   late _FakePurchaseApi api;
+  late List<Uri> opened;
 
   setUp(() {
     SharedPreferences.setMockInitialValues({});
     api = _FakePurchaseApi();
+    opened = [];
     addTearDown(api.dispose);
   });
 
@@ -61,6 +64,7 @@ void main() {
           sharedPreferencesProvider.overrideWithValue(prefs),
           freePlatformProvider.overrideWithValue(false),
           purchaseApiProvider.overrideWithValue(api),
+          linkOpenerProvider.overrideWithValue((uri) async => opened.add(uri)),
           // The real adapter waits five seconds for a store that owns nothing
           // to answer. That timer would outlive the test, so shorten it.
           entitlementSourceProvider.overrideWith(
@@ -79,6 +83,38 @@ void main() {
     );
     await tester.pumpAndSettle();
   }
+
+  // App Store Review Guideline 3.1.2: the point of purchase must carry the
+  // renewal terms and working links to the Terms of Use and the privacy
+  // policy. A submission without them is rejected before anyone runs the app.
+  testWidgets('states the renewal terms where the purchase is made', (
+    tester,
+  ) async {
+    await pump(tester);
+
+    expect(
+      find.textContaining('renews', findRichText: true),
+      findsWidgets,
+      reason: 'The user has to be told the subscription auto-renews.',
+    );
+    expect(find.textContaining('cancel', findRichText: true), findsWidgets);
+  });
+
+  testWidgets('links to the Terms of Use and the privacy policy', (
+    tester,
+  ) async {
+    await pump(tester);
+
+    await tester.tap(find.text('Terms of Use'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Privacy Policy'));
+    await tester.pumpAndSettle();
+
+    expect(opened, [
+      Uri.parse('https://www.sloki9637.com/terms'),
+      Uri.parse('https://www.sloki9637.com/privacy'),
+    ]);
+  });
 
   testWidgets('shows the price exactly as the store formatted it', (
     tester,

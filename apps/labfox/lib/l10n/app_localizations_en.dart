@@ -820,6 +820,16 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get subscriptionRenewalTerms =>
+      'The subscription renews every month until you cancel it. Cancel any time in your store account; cancelling takes effect at the end of the paid month.';
+
+  @override
+  String get subscriptionTerms => 'Terms of Use';
+
+  @override
+  String get subscriptionPrivacy => 'Privacy Policy';
+
+  @override
   String get subscriptionRestore => 'Restore purchases';
 
   @override

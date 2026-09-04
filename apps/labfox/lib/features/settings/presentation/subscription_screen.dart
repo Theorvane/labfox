@@ -5,7 +5,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/entitlement/entitlement.dart';
 import '../../../core/entitlement/entitlement_providers.dart';
 import '../../../core/entitlement/subscription_controller.dart';
+import '../../../core/ui/link_opener.dart';
 import '../../../l10n/app_localizations.dart';
+
+/// Where the Terms of Use and the privacy policy are published. Apple asks for
+/// a link on the product page and another at the point of purchase, and both
+/// have to resolve.
+const _siteUrl = 'https://www.sloki9637.com';
 
 /// What the subscription unlocks, and the two actions the stores require.
 ///
@@ -21,6 +27,7 @@ class SubscriptionScreen extends ConsumerWidget {
     final offer = ref.watch(subscriptionOfferProvider);
     final action = ref.watch(subscriptionControllerProvider);
     final busy = action.isLoading;
+    final open = ref.watch(linkOpenerProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.subscriptionTitle)),
@@ -82,6 +89,28 @@ class SubscriptionScreen extends ConsumerWidget {
                       .read(subscriptionControllerProvider.notifier)
                       .restore(),
             child: Text(l10n.subscriptionRestore),
+          ),
+          const SizedBox(height: LabFoxSpacing.md),
+          // Guideline 3.1.2: the renewal terms and both links belong where the
+          // purchase is made, not only in the store listing. A submission
+          // without them is rejected before anyone opens the app.
+          Text(
+            l10n.subscriptionRenewalTerms,
+            style: LabFoxTextRoles.of(context).meta,
+          ),
+          const SizedBox(height: LabFoxSpacing.sm),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () => open(Uri.parse('$_siteUrl/terms')),
+                child: Text(l10n.subscriptionTerms),
+              ),
+              TextButton(
+                onPressed: () => open(Uri.parse('$_siteUrl/privacy')),
+                child: Text(l10n.subscriptionPrivacy),
+              ),
+            ],
           ),
         ],
       ),
