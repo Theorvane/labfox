@@ -10,6 +10,14 @@ import 'ads_config.dart';
 import 'banner_retry.dart';
 import 'interstitial_policy.dart';
 
+/// Reports banner callbacks that determine whether the shell reserves space.
+class BannerViewCallbacks {
+  const BannerViewCallbacks({required this.onLoaded, required this.onFailed});
+
+  final VoidCallback onLoaded;
+  final VoidCallback onFailed;
+}
+
 /// Whether this user sees ads: the free mobile tier only.
 ///
 /// Desktop builds report `subscribed` (fully featured, free), so they are
@@ -20,30 +28,29 @@ final adsEnabledProvider = Provider<bool>((ref) {
 
 /// Builds the live banner view. A seam so widget tests can render a stand-in
 /// instead of the platform view the plugin needs a real device for.
-final bannerViewBuilderProvider = Provider<Widget Function(BuildContext)>((
-  ref,
-) {
-  final key = ref.watch(_bannerKeyProvider);
-  final retry = BannerRetry(load: () async => key.currentState?.loadAd());
-  ref.onDispose(retry.cancel);
-  return (context) {
-    final size = LevelPlayAdSize.BANNER;
-    return SizedBox(
-      width: size.width.toDouble(),
-      height: size.height.toDouble(),
-      child: LevelPlayBannerAdView(
-        key: key,
-        adUnitId: AdsConfig.bannerAdUnitId,
-        adSize: size,
-        listener: _BannerListener(retry),
-        placementName: 'DefaultBanner',
-        // The view only loads when asked, and this is the first moment there
-        // is anything to ask.
-        onPlatformViewCreated: retry.start,
-      ),
-    );
-  };
-});
+final bannerViewBuilderProvider =
+    Provider<Widget Function(BuildContext, BannerViewCallbacks)>((ref) {
+      final key = ref.watch(_bannerKeyProvider);
+      final retry = BannerRetry(load: () async => key.currentState?.loadAd());
+      ref.onDispose(retry.cancel);
+      return (context, callbacks) {
+        final size = LevelPlayAdSize.BANNER;
+        return SizedBox(
+          width: size.width.toDouble(),
+          height: size.height.toDouble(),
+          child: LevelPlayBannerAdView(
+            key: key,
+            adUnitId: AdsConfig.bannerAdUnitId,
+            adSize: size,
+            listener: _BannerListener(retry, callbacks),
+            placementName: 'DefaultBanner',
+            // The view only loads when asked, and this is the first moment there
+            // is anything to ask.
+            onPlatformViewCreated: retry.start,
+          ),
+        );
+      };
+    });
 
 final _bannerKeyProvider = Provider<GlobalKey<LevelPlayBannerAdViewState>>(
   (ref) => GlobalKey<LevelPlayBannerAdViewState>(),
@@ -186,9 +193,10 @@ class _InitListener with LevelPlayInitListener {
 }
 
 class _BannerListener with LevelPlayBannerAdViewListener {
-  const _BannerListener(this._retry);
+  const _BannerListener(this._retry, this._callbacks);
 
   final BannerRetry _retry;
+  final BannerViewCallbacks _callbacks;
 
   @override
   void onAdClicked(LevelPlayAdInfo adInfo) {}
@@ -197,10 +205,13 @@ class _BannerListener with LevelPlayBannerAdViewListener {
   void onAdCollapsed(LevelPlayAdInfo adInfo) {}
 
   @override
-  void onAdDisplayFailed(LevelPlayAdInfo adInfo, LevelPlayAdError error) {}
+  void onAdDisplayFailed(LevelPlayAdInfo adInfo, LevelPlayAdError error) {
+    _callbacks.onFailed();
+    _retry.onFailure();
+  }
 
   @override
-  void onAdDisplayed(LevelPlayAdInfo adInfo) {}
+  void onAdDisplayed(LevelPlayAdInfo adInfo) => _callbacks.onLoaded();
 
   @override
   void onAdExpanded(LevelPlayAdInfo adInfo) {}
@@ -209,8 +220,14 @@ class _BannerListener with LevelPlayBannerAdViewListener {
   void onAdLeftApplication(LevelPlayAdInfo adInfo) {}
 
   @override
-  void onAdLoadFailed(LevelPlayAdError error) => _retry.onFailure();
+  void onAdLoadFailed(LevelPlayAdError error) {
+    _callbacks.onFailed();
+    _retry.onFailure();
+  }
 
   @override
-  void onAdLoaded(LevelPlayAdInfo adInfo) => _retry.onLoaded();
+  void onAdLoaded(LevelPlayAdInfo adInfo) {
+    _callbacks.onLoaded();
+    _retry.onLoaded();
+  }
 }
