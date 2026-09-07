@@ -171,10 +171,6 @@ space is better spent on words nobody searching would guess.
   tracked. Apple asks where the prompt is, so the **Review Notes** field needs
   to say:
 
-  ```
-  The App Tracking Transparency prompt appears on first launch, immediately
-  after the first screen is drawn, for users on the free tier. It is requested
-  before the ad SDK is initialised. Subscribers see no ads, are not tracked,
-  and are never shown the prompt — to see it, review the app without
-  subscribing.
-  ```
+  The full Review Notes block, which also answers the sign-in question review
+  has raised under guideline 4.8, is in [`app-review.md`](app-review.md). Paste
+  it whole rather than a paragraph of it.

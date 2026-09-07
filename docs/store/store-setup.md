@@ -219,6 +219,10 @@ In **App Review Information**, supply:
 | Play rejects the build over the app icon | No adaptive icon in the bundle | Fixed in the repository (`mipmap-anydpi-v26`); re-cut a release |
 | Subscription screen shows no price | Product id mismatch, or a base plan that was created but never activated | The product must be `labfox_subscription` **and** active |
 | Purchase cannot complete on a test device | Sideloaded build, or the account is not a license tester | Install from the internal track with a tester account |
+| App Review: no Terms of Use link for a subscription | The App Store product page carried no EULA link | LabFox sells under Apple's standard EULA; the description links it and the License Agreement field stays empty ([`listing.md`](listing.md)) |
+| App Review: tracking declared but never requested | The ATT usage description shipped without the call | Fixed in the app; the prompt is requested before the ad SDK starts, and [`app-review.md`](app-review.md) has the Review Notes that say where it is |
+| App Review: "another login service" under 4.8 | Review read GitLab sign-in as a third-party login for a LabFox account | There is no LabFox account. Reply with the client exemption — the text is in [`app-review.md`](app-review.md). **Do not add Sign in with Apple** |
+| App Review: subscription unavailable to purchase | Paid Apps Agreement, or the subscription was never submitted with the version | Work through the checklist in [`app-review.md`](app-review.md) |
 
 ---
 
@@ -229,4 +233,6 @@ In **App Review Information**, supply:
 - [`.agents/docs/monetization.md`](../../.agents/docs/monetization.md) — what the
   subscription unlocks and why entitlement is designed this way
 - [`listing.md`](listing.md) — the listing and subscription copy
+- [`app-review.md`](app-review.md) — the Review Notes to paste, and the standing
+  replies to the rejections this app has received
 - [`PRIVACY.md`](../../PRIVACY.md) — the source of truth for both privacy forms
