@@ -128,6 +128,16 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     style: Theme.of(context).textTheme.headlineSmall,
                     textAlign: TextAlign.center,
                   ),
+                  const SizedBox(height: LabFoxSpacing.sm),
+                  // Says whose account this is. A user who has landed here
+                  // needs to know why an instance URL is being asked for, and
+                  // it is the one thing about LabFox that has to be understood
+                  // before anything else on the screen makes sense.
+                  Text(
+                    l10n.signInNoAccountNote,
+                    style: LabFoxTextRoles.of(context).meta,
+                    textAlign: TextAlign.center,
+                  ),
                   const SizedBox(height: LabFoxSpacing.lg),
                   TextFormField(
                     controller: _instanceController,
