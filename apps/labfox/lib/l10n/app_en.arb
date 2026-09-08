@@ -50,6 +50,10 @@
   "@signInTitle": {
     "description": "Heading on the sign-in screen"
   },
+  "signInNoAccountNote": "LabFox has no account of its own. Connect the GitLab you already use — gitlab.com, or an instance you host yourself.",
+  "@signInNoAccountNote": {
+    "description": "Explains, on the sign-in screen, that the app has no account of its own and connects to the user's own GitLab"
+  },
   "signInInstanceLabel": "GitLab instance URL",
   "@signInInstanceLabel": {
     "description": "Label for the instance URL field"
@@ -86,9 +90,9 @@
   "@signInOr": {
     "description": "Divider between the token and OAuth sign-in options"
   },
-  "signInOAuthButton": "Sign in with GitLab",
+  "signInOAuthButton": "Authorize with your instance",
   "@signInOAuthButton": {
-    "description": "Button that starts the OAuth browser sign-in"
+    "description": "Button that starts the OAuth browser sign-in. Deliberately not \"Sign in with GitLab\": that is the grammar of a social login button, and App Review twice read it as a third-party login creating an account with the app. The button authorizes against the instance the user typed above it, which is often one they host themselves."
   },
   "signInClientIdLabel": "OAuth client ID",
   "@signInClientIdLabel": {

@@ -44,6 +44,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get signInTitle => '连接 GitLab 账户';
 
   @override
+  String get signInNoAccountNote =>
+      'LabFox 没有自己的账户。连接你已在使用的 GitLab — gitlab.com，或你自己托管的实例。';
+
+  @override
   String get signInInstanceLabel => 'GitLab 实例 URL';
 
   @override
@@ -71,7 +75,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get signInOr => '或';
 
   @override
-  String get signInOAuthButton => '使用 GitLab 登录';
+  String get signInOAuthButton => '授权你的实例';
 
   @override
   String get signInClientIdLabel => 'OAuth 客户端 ID';

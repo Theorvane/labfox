@@ -44,6 +44,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get signInTitle => 'GitLab アカウントを接続';
 
   @override
+  String get signInNoAccountNote =>
+      'LabFox に独自のアカウントはありません。お使いの GitLab に接続してください — gitlab.com、または自分でホストしているインスタンス。';
+
+  @override
   String get signInInstanceLabel => 'GitLab インスタンス URL';
 
   @override
@@ -72,7 +76,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get signInOr => 'または';
 
   @override
-  String get signInOAuthButton => 'GitLab でサインイン';
+  String get signInOAuthButton => '自分のインスタンスで認可';
 
   @override
   String get signInClientIdLabel => 'OAuth クライアント ID';

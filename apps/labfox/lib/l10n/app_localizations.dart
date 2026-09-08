@@ -170,6 +170,12 @@ abstract class AppLocalizations {
   /// **'Connect a GitLab account'**
   String get signInTitle;
 
+  /// Explains, on the sign-in screen, that the app has no account of its own and connects to the user's own GitLab
+  ///
+  /// In en, this message translates to:
+  /// **'LabFox has no account of its own. Connect the GitLab you already use — gitlab.com, or an instance you host yourself.'**
+  String get signInNoAccountNote;
+
   /// Label for the instance URL field
   ///
   /// In en, this message translates to:
@@ -224,10 +230,10 @@ abstract class AppLocalizations {
   /// **'or'**
   String get signInOr;
 
-  /// Button that starts the OAuth browser sign-in
+  /// Button that starts the OAuth browser sign-in. Deliberately not "Sign in with GitLab": that is the grammar of a social login button, and App Review twice read it as a third-party login creating an account with the app. The button authorizes against the instance the user typed above it, which is often one they host themselves.
   ///
   /// In en, this message translates to:
-  /// **'Sign in with GitLab'**
+  /// **'Authorize with your instance'**
   String get signInOAuthButton;
 
   /// Label for the OAuth client id field
