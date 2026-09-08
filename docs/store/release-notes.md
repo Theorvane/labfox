@@ -20,6 +20,31 @@ the source: change this first, then carry it across.
 
 ---
 
+## 0.1.7
+
+**Play** (500 characters max):
+
+```
+Clearer sign-in:
+
+• The screen now says what it is asking for. LabFox has no account of its own
+  — you connect the GitLab you already use, whether that is gitlab.com or a
+  server you host yourself.
+```
+
+**App Store**:
+
+```
+Clearer sign-in:
+
+• The screen now says what it is asking for. LabFox has no account of its own
+  — you connect the GitLab you already use, whether that is gitlab.com or a
+  server you host yourself. The button that opens your instance in a browser
+  now says so, instead of implying it signs you in to GitLab.com.
+```
+
+---
+
 ## 0.1.6
 
 **Play** (500 characters max):
