@@ -87,6 +87,13 @@ void main() {
     await _pump(tester, _StubAuthRepository());
 
     expect(find.text('Connect a GitLab account'), findsOneWidget);
+    // The screen says whose account it is asking for. Real users need it to
+    // understand why an instance URL is being asked for at all, and App Review
+    // has twice read this screen as a login that creates a LabFox account.
+    expect(
+      find.textContaining('LabFox has no account of its own'),
+      findsOneWidget,
+    );
   });
 
   testWidgets('rejects an empty token without calling the repository', (
@@ -143,7 +150,7 @@ void main() {
     // gitlab.com with no built-in client id (none is set in tests) and no
     // entered id cannot start OAuth.
     await tester.tap(
-      find.widgetWithText(OutlinedButton, 'Sign in with GitLab'),
+      find.widgetWithText(OutlinedButton, 'Authorize with your instance'),
     );
     await tester.pumpAndSettle();
 
@@ -165,7 +172,7 @@ void main() {
     // The third field is the OAuth client id.
     await tester.enterText(find.byType(TextFormField).at(2), 'good-client');
     await tester.tap(
-      find.widgetWithText(OutlinedButton, 'Sign in with GitLab'),
+      find.widgetWithText(OutlinedButton, 'Authorize with your instance'),
     );
     await tester.pumpAndSettle();
 
