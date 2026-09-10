@@ -102,6 +102,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     final l10n = AppLocalizations.of(context);
     final authState = ref.watch(authControllerProvider);
     final isLoading = authState.isLoading;
+    final browserAuthorization = ref.watch(browserAuthorizationProvider);
     final error = authState.hasError
         ? _messageFor(authState.error!, l10n)
         : null;
@@ -178,18 +179,20 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         ? l10n.signInTokenRequired
                         : null,
                   ),
-                  const SizedBox(height: LabFoxSpacing.md),
-                  TextFormField(
-                    controller: _clientIdController,
-                    enabled: !isLoading,
-                    autocorrect: false,
-                    enableSuggestions: false,
-                    decoration: InputDecoration(
-                      labelText: l10n.signInClientIdLabel,
-                      helperText: l10n.signInClientIdHelp,
-                      border: const OutlineInputBorder(),
+                  if (browserAuthorization) ...[
+                    const SizedBox(height: LabFoxSpacing.md),
+                    TextFormField(
+                      controller: _clientIdController,
+                      enabled: !isLoading,
+                      autocorrect: false,
+                      enableSuggestions: false,
+                      decoration: InputDecoration(
+                        labelText: l10n.signInClientIdLabel,
+                        helperText: l10n.signInClientIdHelp,
+                        border: const OutlineInputBorder(),
+                      ),
                     ),
-                  ),
+                  ],
                   if (displayError != null) ...[
                     const SizedBox(height: LabFoxSpacing.md),
                     Text(
@@ -210,25 +213,27 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                           )
                         : Text(l10n.signInSubmit),
                   ),
-                  const SizedBox(height: LabFoxSpacing.md),
-                  Row(
-                    children: [
-                      const Expanded(child: Divider()),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: LabFoxSpacing.sm,
+                  if (browserAuthorization) ...[
+                    const SizedBox(height: LabFoxSpacing.md),
+                    Row(
+                      children: [
+                        const Expanded(child: Divider()),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: LabFoxSpacing.sm,
+                          ),
+                          child: Text(l10n.signInOr),
                         ),
-                        child: Text(l10n.signInOr),
-                      ),
-                      const Expanded(child: Divider()),
-                    ],
-                  ),
-                  const SizedBox(height: LabFoxSpacing.md),
-                  OutlinedButton.icon(
-                    onPressed: isLoading ? null : _submitOAuth,
-                    icon: const Icon(LabFoxIcons.openInBrowser),
-                    label: Text(l10n.signInOAuthButton),
-                  ),
+                        const Expanded(child: Divider()),
+                      ],
+                    ),
+                    const SizedBox(height: LabFoxSpacing.md),
+                    OutlinedButton.icon(
+                      onPressed: isLoading ? null : _submitOAuth,
+                      icon: const Icon(LabFoxIcons.openInBrowser),
+                      label: Text(l10n.signInOAuthButton),
+                    ),
+                  ],
                 ],
               ),
             ),
