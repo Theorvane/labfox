@@ -6,6 +6,7 @@ import 'package:gitlab_models/gitlab_models.dart';
 import 'package:labfox/app/app.dart';
 import 'package:labfox/core/auth/auth_providers.dart';
 import 'package:labfox/core/auth/auth_repository.dart';
+import 'package:labfox/core/auth/oauth_config.dart';
 import 'package:secure_storage/secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -65,7 +66,11 @@ class _StubAuthRepository implements AuthRepository {
   Future<String?> tokenFor(Account account) async => 'glpat-valid';
 }
 
-Future<void> _pump(WidgetTester tester, AuthRepository repo) async {
+Future<void> _pump(
+  WidgetTester tester,
+  AuthRepository repo, {
+  bool browserAuthorization = true,
+}) async {
   SharedPreferences.setMockInitialValues({});
   FlutterSecureStorage.setMockInitialValues({});
   final prefs = await SharedPreferences.getInstance();
@@ -75,6 +80,7 @@ Future<void> _pump(WidgetTester tester, AuthRepository repo) async {
       overrides: [
         sharedPreferencesProvider.overrideWithValue(prefs),
         authRepositoryProvider.overrideWithValue(repo),
+        browserAuthorizationProvider.overrideWithValue(browserAuthorization),
       ],
       child: const LabFoxApp(),
     ),
@@ -94,6 +100,28 @@ void main() {
       find.textContaining('LabFox has no account of its own'),
       findsOneWidget,
     );
+  });
+
+  // App Store Review Guideline 4.8 asks an app that offers a third-party login
+  // service to offer another one beside it. LabFox has no account for such a
+  // service to establish, and the guideline exempts a client whose users sign
+  // in to their own third-party account — but review rejected the app three
+  // times over the browser button regardless, twice after being told why.
+  //
+  // On Apple's platforms the button is therefore not offered at all. What is
+  // left is a token the user issued to themselves on their own server, which
+  // is not a login service under any reading. Everywhere else the button stays.
+  testWidgets('offers no browser authorization where it is not available', (
+    tester,
+  ) async {
+    await _pump(tester, _StubAuthRepository(), browserAuthorization: false);
+
+    expect(find.text('Authorize with your instance'), findsNothing);
+    expect(find.text('OAuth client ID'), findsNothing);
+    expect(find.text('or'), findsNothing);
+    // The token is still there, and is the whole screen.
+    expect(find.text('Personal Access Token'), findsOneWidget);
+    expect(find.widgetWithText(FilledButton, 'Sign in'), findsOneWidget);
   });
 
   testWidgets('rejects an empty token without calling the repository', (

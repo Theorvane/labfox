@@ -219,6 +219,7 @@ In **App Review Information**, supply:
 | Play rejects the build over the app icon | No adaptive icon in the bundle | Fixed in the repository (`mipmap-anydpi-v26`); re-cut a release |
 | Subscription screen shows no price | Product id mismatch, or a base plan that was created but never activated | The product must be `labfox_subscription` **and** active |
 | Purchase cannot complete on a test device | Sideloaded build, or the account is not a license tester | Install from the internal track with a tester account |
+| App Review rejects under guideline 4.8, asking for Sign in with Apple | Review reads the GitLab browser button as a third-party login creating a LabFox account. There is no LabFox account, and 4.8 exempts a client whose users sign in to their own third-party account — but three submissions and two explanations did not move it | The button is not offered on iOS or macOS (`browserAuthorizationProvider`). What is left there is a personal access token the user issued to themselves, which is not a login service. Other platforms keep it |
 
 ---
 
