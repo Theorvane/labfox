@@ -20,6 +20,25 @@ the source: change this first, then carry it across.
 
 ---
 
+## 0.1.8
+
+**Play** (500 characters max):
+
+```
+• Nothing changes on Android. Sign in with a personal access token, or open
+  your instance in the browser, exactly as before.
+```
+
+**App Store**:
+
+```
+• On iPhone and iPad, connect with a personal access token from your own
+  GitLab account settings. The token is held in the device keychain and is
+  sent only to the instance you name.
+```
+
+---
+
 ## 0.1.7
 
 **Play** (500 characters max):
