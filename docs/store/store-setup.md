@@ -203,6 +203,47 @@ In **App Review Information**, supply:
   **unofficial** GitLab client not affiliated with GitLab Inc., and that the
   account has projects, issues, merge requests, and pipelines to look at.
 
+For a subscription submission, append this copy-ready text to **Review Notes**:
+
+```
+LabFox uses the Apple standard Terms of Use (EULA). The functional EULA link is
+included in the App Description for every submitted localization:
+https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+
+The Privacy Policy field and App Description link to:
+https://www.sloki9637.com/privacy
+
+The same disclosures are available in the app. Sign in with the review account,
+then open Me > Settings > LabFox subscription. The purchase screen shows the
+subscription title, the monthly duration, the localized App Store price, the
+automatic-renewal terms, and working Terms of Use and Privacy Policy buttons.
+```
+
+If App Review has already rejected the version under Guideline 3.1.2(c), update
+the App Description first, attach a screen recording that follows the in-app
+path above, and reply in Resolution Center with:
+
+```
+Hello App Review,
+
+Thank you for the clarification. We updated the App Store metadata for every
+submitted localization to include a functional link to the Apple standard Terms
+of Use (EULA):
+https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+
+The Privacy Policy remains available in the App Store Privacy Policy field and
+at https://www.sloki9637.com/privacy.
+
+The attached screen recording confirms the in-app subscription disclosures at
+Me > Settings > LabFox subscription, including the subscription title, monthly
+duration, localized price, automatic-renewal terms, Terms of Use, and Privacy
+Policy links. We have also added these details to App Review Information for
+future submissions.
+
+Best regards,
+The LabFox team
+```
+
 ### 6. Per release
 
 **[per release]** The pipeline uploads the build to App Store Connect and

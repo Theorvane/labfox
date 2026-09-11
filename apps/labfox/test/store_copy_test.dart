@@ -31,6 +31,21 @@ void main() {
     );
   }
 
+  void expectRequiredSubscriptionLinks(String label, String text) {
+    expect(
+      text,
+      contains(
+        'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/',
+      ),
+      reason: '$label must include the Apple standard EULA URL',
+    );
+    expect(
+      text,
+      contains('https://www.sloki9637.com/privacy'),
+      reason: '$label must include the privacy policy URL',
+    );
+  }
+
   group('release notes', () {
     // Play's cap is the binding one, so both languages are checked against it.
     for (final entry in const {
@@ -57,6 +72,7 @@ void main() {
       expectWithin('subtitle', blocks[1], 30);
       expectWithin('short description', blocks[2], 80);
       expectWithin('full description', blocks[3], 4000);
+      expectRequiredSubscriptionLinks('English full description', blocks[3]);
     });
 
     test('Korean fields fit', () {
@@ -65,6 +81,7 @@ void main() {
       expectWithin('subtitle', blocks[1], 30);
       expectWithin('short description', blocks[2], 80);
       expectWithin('full description', blocks[3], 4000);
+      expectRequiredSubscriptionLinks('Korean full description', blocks[3]);
     });
   });
 }
