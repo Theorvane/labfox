@@ -20,6 +20,23 @@ the source: change this first, then carry it across.
 
 ---
 
+## 0.1.9
+
+**Play** (500 characters max):
+
+```
+• Maintenance release. There are no user-facing changes on Android.
+```
+
+**App Store**:
+
+```
+• The App Store page now presents the subscription duration, renewal terms,
+  Terms of Use, and Privacy Policy together. There are no in-app changes.
+```
+
+---
+
 ## 0.1.8
 
 **Play** (500 characters max):
