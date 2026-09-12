@@ -38,10 +38,13 @@ Review merge requests, watch pipelines and read job logs on your GitLab.
 
 ---
 
-## Full description
+## App Store full description
 
-Used for both stores. Play renders limited HTML; the App Store is plain text,
-so this is written to read correctly with no markup at all.
+This is the **copy-ready App Store description**. Do not omit the subscription
+section at the end: Apple requires the functional EULA link in this field when
+the standard EULA is used. Play renders limited HTML; use the same body there,
+but replace the Apple EULA URL with the LabFox Terms URL
+(`https://www.sloki9637.com/terms`).
 
 ```
 Review a merge request on the train. Check why the pipeline went red before you
@@ -83,6 +86,22 @@ OPEN SOURCE
 LabFox is Apache-2.0 licensed. Read the code, file an issue, or send a patch:
 github.com/theorvane/labfox
 
+SUBSCRIPTION
+
+LabFox Subscription unlocks approve and merge, pipeline and job actions,
+multiple accounts, background to-do checks, and unlimited favourites.
+
+The subscription lasts one month and renews automatically until cancelled.
+The price shown before purchase comes from the App Store for your region.
+Payment is charged to your Apple Account at confirmation and renews unless
+cancelled at least 24 hours before the current period ends. Manage or cancel it
+in your App Store account settings.
+
+Terms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+Privacy Policy: https://www.sloki9637.com/privacy
+
+Desktop builds are free with every feature.
+
 —
 
 LabFox is an unofficial, third-party client. It is not affiliated with,
@@ -91,10 +110,13 @@ endorsed by, or certified by GitLab Inc. "GitLab" is a trademark of GitLab Inc.
 
 ---
 
-## Subscription copy
+## Subscription reference copy
 
-Shown where the store asks what the subscription unlocks. Keep it aligned with
-`.agents/docs/monetization.md` §2 — if the boundary moves, this moves with it.
+Use this when a store asks what the subscription unlocks. It is also the source
+for the subscription section already included in the copy-ready App Store
+description above. **Do not paste this block instead of the full description.**
+Keep it aligned with `.agents/docs/monetization.md` §2 — if the boundary moves,
+both blocks move with it.
 
 ```
 LabFox is free to download and free to use for reading: every project, issue,
