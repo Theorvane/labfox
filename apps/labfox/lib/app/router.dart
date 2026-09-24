@@ -12,6 +12,7 @@ import '../features/commits/presentation/commit_detail_screen.dart';
 import '../features/commits/presentation/commits_screen.dart';
 import '../features/diff/presentation/changes_screen.dart';
 import '../features/diff/presentation/controllers/diff_controllers.dart';
+import '../features/groups/presentation/group_detail_screen.dart';
 import '../features/groups/presentation/groups_screen.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/inbox/presentation/inbox_screen.dart';
@@ -55,6 +56,7 @@ abstract final class Routes {
   static const String privacy = '/settings/privacy';
   static const String subscription = '/settings/subscription';
   static const String groups = '/groups';
+  static String group(int id) => '/groups/$id';
   static const String projects = '/projects';
   // Account-level lists, mirroring GitLab's /dashboard URLs.
   static const String myIssues = '/dashboard/issues';
@@ -195,6 +197,14 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.groups,
         builder: (context, state) => const GroupsScreen(),
+        routes: [
+          GoRoute(
+            path: ':id',
+            builder: (context, state) => GroupDetailScreen(
+              groupId: int.parse(state.pathParameters['id']!),
+            ),
+          ),
+        ],
       ),
       GoRoute(
         path: Routes.projects,
