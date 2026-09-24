@@ -163,5 +163,9 @@
   "navMe": "マイページ",
   "meTitle": "マイページ",
   "meSettings": "設定",
-  "meAccounts": "アカウント切り替え"
+  "meAccounts": "アカウント切り替え",
+  "wikiTitle": "Wiki",
+  "wikiEmpty": "Wikiページはまだありません。",
+  "wikiListError": "Wikiページを読み込めませんでした。",
+  "wikiPageError": "このWikiページを読み込めませんでした。"
 }

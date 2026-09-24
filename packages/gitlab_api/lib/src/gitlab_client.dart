@@ -12,6 +12,7 @@ import 'repository/repository_api.dart';
 import 'search/search_api.dart';
 import 'todos/todos_api.dart';
 import 'users/users_api.dart';
+import 'wikis/wikis_api.dart';
 
 /// Entry point for every GitLab REST call.
 ///
@@ -55,6 +56,7 @@ class GitLabClient {
     jobs = JobsApi(_dio);
     todos = TodosApi(_dio);
     search = SearchApi(_dio);
+    wikis = WikisApi(_dio);
   }
 
   final Dio _dio;
@@ -122,6 +124,7 @@ class GitLabClient {
   late final JobsApi jobs;
   late final TodosApi todos;
   late final SearchApi search;
+  late final WikisApi wikis;
 
   /// Derives the REST endpoint from an instance URL.
   ///

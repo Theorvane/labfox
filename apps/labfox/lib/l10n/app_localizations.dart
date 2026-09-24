@@ -1741,6 +1741,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recent'**
   String get homeRecents;
+
+  /// Title of the project wiki page list
+  ///
+  /// In en, this message translates to:
+  /// **'Wiki'**
+  String get wikiTitle;
+
+  /// Shown when a project wiki has no pages
+  ///
+  /// In en, this message translates to:
+  /// **'No wiki pages yet.'**
+  String get wikiEmpty;
+
+  /// Shown when loading the project wiki fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load wiki pages.'**
+  String get wikiListError;
+
+  /// Shown when reading a wiki page fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this wiki page.'**
+  String get wikiPageError;
 }
 
 class _AppLocalizationsDelegate

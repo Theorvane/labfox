@@ -163,5 +163,9 @@
   "navMe": "我",
   "meTitle": "我",
   "meSettings": "设置",
-  "meAccounts": "切换账户"
+  "meAccounts": "切换账户",
+  "wikiTitle": "Wiki",
+  "wikiEmpty": "还没有 Wiki 页面。",
+  "wikiListError": "无法加载 Wiki 页面。",
+  "wikiPageError": "无法加载此 Wiki 页面。"
 }

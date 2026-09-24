@@ -163,5 +163,9 @@
   "navMe": "मैं",
   "meTitle": "मैं",
   "meSettings": "सेटिंग्स",
-  "meAccounts": "खाता बदलें"
+  "meAccounts": "खाता बदलें",
+  "wikiTitle": "विकी",
+  "wikiEmpty": "अभी कोई विकी पृष्ठ नहीं है।",
+  "wikiListError": "विकी पृष्ठ लोड नहीं हो सके।",
+  "wikiPageError": "यह विकी पृष्ठ लोड नहीं हो सका।"
 }

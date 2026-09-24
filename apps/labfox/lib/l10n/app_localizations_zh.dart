@@ -855,4 +855,16 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get homeRecents => '最近';
+
+  @override
+  String get wikiTitle => 'Wiki';
+
+  @override
+  String get wikiEmpty => '还没有 Wiki 页面。';
+
+  @override
+  String get wikiListError => '无法加载 Wiki 页面。';
+
+  @override
+  String get wikiPageError => '无法加载此 Wiki 页面。';
 }

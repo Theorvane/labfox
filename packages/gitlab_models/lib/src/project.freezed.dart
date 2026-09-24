@@ -18,7 +18,7 @@ mixin _$Project {
  int get id; String get name;@JsonKey(name: 'path_with_namespace') String get pathWithNamespace; String? get description;// Always shown as a number in the UI, so absent means zero, not unknown.
 @JsonKey(name: 'star_count') int get starCount; String? get visibility;@JsonKey(name: 'default_branch') String? get defaultBranch;// Null when GitLab omits the count on a reduced payload — unknown, not
 // zero, so the UI hides it instead of showing a false 0.
-@JsonKey(name: 'open_issues_count') int? get openIssuesCount;@JsonKey(name: 'forks_count') int? get forksCount;@JsonKey(name: 'avatar_url') String? get avatarUrl;@JsonKey(name: 'web_url') String? get webUrl;@JsonKey(name: 'last_activity_at') DateTime? get lastActivityAt;
+@JsonKey(name: 'open_issues_count') int? get openIssuesCount;@JsonKey(name: 'forks_count') int? get forksCount;@JsonKey(name: 'wiki_access_level') String? get wikiAccessLevel;@JsonKey(name: 'wiki_enabled') bool? get wikiEnabled;@JsonKey(name: 'avatar_url') String? get avatarUrl;@JsonKey(name: 'web_url') String? get webUrl;@JsonKey(name: 'last_activity_at') DateTime? get lastActivityAt;
 /// Create a copy of Project
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -31,16 +31,16 @@ $ProjectCopyWith<Project> get copyWith => _$ProjectCopyWithImpl<Project>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Project&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.pathWithNamespace, pathWithNamespace) || other.pathWithNamespace == pathWithNamespace)&&(identical(other.description, description) || other.description == description)&&(identical(other.starCount, starCount) || other.starCount == starCount)&&(identical(other.visibility, visibility) || other.visibility == visibility)&&(identical(other.defaultBranch, defaultBranch) || other.defaultBranch == defaultBranch)&&(identical(other.openIssuesCount, openIssuesCount) || other.openIssuesCount == openIssuesCount)&&(identical(other.forksCount, forksCount) || other.forksCount == forksCount)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl)&&(identical(other.webUrl, webUrl) || other.webUrl == webUrl)&&(identical(other.lastActivityAt, lastActivityAt) || other.lastActivityAt == lastActivityAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Project&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.pathWithNamespace, pathWithNamespace) || other.pathWithNamespace == pathWithNamespace)&&(identical(other.description, description) || other.description == description)&&(identical(other.starCount, starCount) || other.starCount == starCount)&&(identical(other.visibility, visibility) || other.visibility == visibility)&&(identical(other.defaultBranch, defaultBranch) || other.defaultBranch == defaultBranch)&&(identical(other.openIssuesCount, openIssuesCount) || other.openIssuesCount == openIssuesCount)&&(identical(other.forksCount, forksCount) || other.forksCount == forksCount)&&(identical(other.wikiAccessLevel, wikiAccessLevel) || other.wikiAccessLevel == wikiAccessLevel)&&(identical(other.wikiEnabled, wikiEnabled) || other.wikiEnabled == wikiEnabled)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl)&&(identical(other.webUrl, webUrl) || other.webUrl == webUrl)&&(identical(other.lastActivityAt, lastActivityAt) || other.lastActivityAt == lastActivityAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,pathWithNamespace,description,starCount,visibility,defaultBranch,openIssuesCount,forksCount,avatarUrl,webUrl,lastActivityAt);
+int get hashCode => Object.hash(runtimeType,id,name,pathWithNamespace,description,starCount,visibility,defaultBranch,openIssuesCount,forksCount,wikiAccessLevel,wikiEnabled,avatarUrl,webUrl,lastActivityAt);
 
 @override
 String toString() {
-  return 'Project(id: $id, name: $name, pathWithNamespace: $pathWithNamespace, description: $description, starCount: $starCount, visibility: $visibility, defaultBranch: $defaultBranch, openIssuesCount: $openIssuesCount, forksCount: $forksCount, avatarUrl: $avatarUrl, webUrl: $webUrl, lastActivityAt: $lastActivityAt)';
+  return 'Project(id: $id, name: $name, pathWithNamespace: $pathWithNamespace, description: $description, starCount: $starCount, visibility: $visibility, defaultBranch: $defaultBranch, openIssuesCount: $openIssuesCount, forksCount: $forksCount, wikiAccessLevel: $wikiAccessLevel, wikiEnabled: $wikiEnabled, avatarUrl: $avatarUrl, webUrl: $webUrl, lastActivityAt: $lastActivityAt)';
 }
 
 
@@ -51,7 +51,7 @@ abstract mixin class $ProjectCopyWith<$Res>  {
   factory $ProjectCopyWith(Project value, $Res Function(Project) _then) = _$ProjectCopyWithImpl;
 @useResult
 $Res call({
- int id, String name,@JsonKey(name: 'path_with_namespace') String pathWithNamespace, String? description,@JsonKey(name: 'star_count') int starCount, String? visibility,@JsonKey(name: 'default_branch') String? defaultBranch,@JsonKey(name: 'open_issues_count') int? openIssuesCount,@JsonKey(name: 'forks_count') int? forksCount,@JsonKey(name: 'avatar_url') String? avatarUrl,@JsonKey(name: 'web_url') String? webUrl,@JsonKey(name: 'last_activity_at') DateTime? lastActivityAt
+ int id, String name,@JsonKey(name: 'path_with_namespace') String pathWithNamespace, String? description,@JsonKey(name: 'star_count') int starCount, String? visibility,@JsonKey(name: 'default_branch') String? defaultBranch,@JsonKey(name: 'open_issues_count') int? openIssuesCount,@JsonKey(name: 'forks_count') int? forksCount,@JsonKey(name: 'wiki_access_level') String? wikiAccessLevel,@JsonKey(name: 'wiki_enabled') bool? wikiEnabled,@JsonKey(name: 'avatar_url') String? avatarUrl,@JsonKey(name: 'web_url') String? webUrl,@JsonKey(name: 'last_activity_at') DateTime? lastActivityAt
 });
 
 
@@ -68,7 +68,7 @@ class _$ProjectCopyWithImpl<$Res>
 
 /// Create a copy of Project
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? pathWithNamespace = null,Object? description = freezed,Object? starCount = null,Object? visibility = freezed,Object? defaultBranch = freezed,Object? openIssuesCount = freezed,Object? forksCount = freezed,Object? avatarUrl = freezed,Object? webUrl = freezed,Object? lastActivityAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? pathWithNamespace = null,Object? description = freezed,Object? starCount = null,Object? visibility = freezed,Object? defaultBranch = freezed,Object? openIssuesCount = freezed,Object? forksCount = freezed,Object? wikiAccessLevel = freezed,Object? wikiEnabled = freezed,Object? avatarUrl = freezed,Object? webUrl = freezed,Object? lastActivityAt = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -79,7 +79,9 @@ as int,visibility: freezed == visibility ? _self.visibility : visibility // igno
 as String?,defaultBranch: freezed == defaultBranch ? _self.defaultBranch : defaultBranch // ignore: cast_nullable_to_non_nullable
 as String?,openIssuesCount: freezed == openIssuesCount ? _self.openIssuesCount : openIssuesCount // ignore: cast_nullable_to_non_nullable
 as int?,forksCount: freezed == forksCount ? _self.forksCount : forksCount // ignore: cast_nullable_to_non_nullable
-as int?,avatarUrl: freezed == avatarUrl ? _self.avatarUrl : avatarUrl // ignore: cast_nullable_to_non_nullable
+as int?,wikiAccessLevel: freezed == wikiAccessLevel ? _self.wikiAccessLevel : wikiAccessLevel // ignore: cast_nullable_to_non_nullable
+as String?,wikiEnabled: freezed == wikiEnabled ? _self.wikiEnabled : wikiEnabled // ignore: cast_nullable_to_non_nullable
+as bool?,avatarUrl: freezed == avatarUrl ? _self.avatarUrl : avatarUrl // ignore: cast_nullable_to_non_nullable
 as String?,webUrl: freezed == webUrl ? _self.webUrl : webUrl // ignore: cast_nullable_to_non_nullable
 as String?,lastActivityAt: freezed == lastActivityAt ? _self.lastActivityAt : lastActivityAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
@@ -167,10 +169,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name, @JsonKey(name: 'path_with_namespace')  String pathWithNamespace,  String? description, @JsonKey(name: 'star_count')  int starCount,  String? visibility, @JsonKey(name: 'default_branch')  String? defaultBranch, @JsonKey(name: 'open_issues_count')  int? openIssuesCount, @JsonKey(name: 'forks_count')  int? forksCount, @JsonKey(name: 'avatar_url')  String? avatarUrl, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'last_activity_at')  DateTime? lastActivityAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name, @JsonKey(name: 'path_with_namespace')  String pathWithNamespace,  String? description, @JsonKey(name: 'star_count')  int starCount,  String? visibility, @JsonKey(name: 'default_branch')  String? defaultBranch, @JsonKey(name: 'open_issues_count')  int? openIssuesCount, @JsonKey(name: 'forks_count')  int? forksCount, @JsonKey(name: 'wiki_access_level')  String? wikiAccessLevel, @JsonKey(name: 'wiki_enabled')  bool? wikiEnabled, @JsonKey(name: 'avatar_url')  String? avatarUrl, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'last_activity_at')  DateTime? lastActivityAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Project() when $default != null:
-return $default(_that.id,_that.name,_that.pathWithNamespace,_that.description,_that.starCount,_that.visibility,_that.defaultBranch,_that.openIssuesCount,_that.forksCount,_that.avatarUrl,_that.webUrl,_that.lastActivityAt);case _:
+return $default(_that.id,_that.name,_that.pathWithNamespace,_that.description,_that.starCount,_that.visibility,_that.defaultBranch,_that.openIssuesCount,_that.forksCount,_that.wikiAccessLevel,_that.wikiEnabled,_that.avatarUrl,_that.webUrl,_that.lastActivityAt);case _:
   return orElse();
 
 }
@@ -188,10 +190,10 @@ return $default(_that.id,_that.name,_that.pathWithNamespace,_that.description,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name, @JsonKey(name: 'path_with_namespace')  String pathWithNamespace,  String? description, @JsonKey(name: 'star_count')  int starCount,  String? visibility, @JsonKey(name: 'default_branch')  String? defaultBranch, @JsonKey(name: 'open_issues_count')  int? openIssuesCount, @JsonKey(name: 'forks_count')  int? forksCount, @JsonKey(name: 'avatar_url')  String? avatarUrl, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'last_activity_at')  DateTime? lastActivityAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name, @JsonKey(name: 'path_with_namespace')  String pathWithNamespace,  String? description, @JsonKey(name: 'star_count')  int starCount,  String? visibility, @JsonKey(name: 'default_branch')  String? defaultBranch, @JsonKey(name: 'open_issues_count')  int? openIssuesCount, @JsonKey(name: 'forks_count')  int? forksCount, @JsonKey(name: 'wiki_access_level')  String? wikiAccessLevel, @JsonKey(name: 'wiki_enabled')  bool? wikiEnabled, @JsonKey(name: 'avatar_url')  String? avatarUrl, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'last_activity_at')  DateTime? lastActivityAt)  $default,) {final _that = this;
 switch (_that) {
 case _Project():
-return $default(_that.id,_that.name,_that.pathWithNamespace,_that.description,_that.starCount,_that.visibility,_that.defaultBranch,_that.openIssuesCount,_that.forksCount,_that.avatarUrl,_that.webUrl,_that.lastActivityAt);case _:
+return $default(_that.id,_that.name,_that.pathWithNamespace,_that.description,_that.starCount,_that.visibility,_that.defaultBranch,_that.openIssuesCount,_that.forksCount,_that.wikiAccessLevel,_that.wikiEnabled,_that.avatarUrl,_that.webUrl,_that.lastActivityAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -208,10 +210,10 @@ return $default(_that.id,_that.name,_that.pathWithNamespace,_that.description,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name, @JsonKey(name: 'path_with_namespace')  String pathWithNamespace,  String? description, @JsonKey(name: 'star_count')  int starCount,  String? visibility, @JsonKey(name: 'default_branch')  String? defaultBranch, @JsonKey(name: 'open_issues_count')  int? openIssuesCount, @JsonKey(name: 'forks_count')  int? forksCount, @JsonKey(name: 'avatar_url')  String? avatarUrl, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'last_activity_at')  DateTime? lastActivityAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name, @JsonKey(name: 'path_with_namespace')  String pathWithNamespace,  String? description, @JsonKey(name: 'star_count')  int starCount,  String? visibility, @JsonKey(name: 'default_branch')  String? defaultBranch, @JsonKey(name: 'open_issues_count')  int? openIssuesCount, @JsonKey(name: 'forks_count')  int? forksCount, @JsonKey(name: 'wiki_access_level')  String? wikiAccessLevel, @JsonKey(name: 'wiki_enabled')  bool? wikiEnabled, @JsonKey(name: 'avatar_url')  String? avatarUrl, @JsonKey(name: 'web_url')  String? webUrl, @JsonKey(name: 'last_activity_at')  DateTime? lastActivityAt)?  $default,) {final _that = this;
 switch (_that) {
 case _Project() when $default != null:
-return $default(_that.id,_that.name,_that.pathWithNamespace,_that.description,_that.starCount,_that.visibility,_that.defaultBranch,_that.openIssuesCount,_that.forksCount,_that.avatarUrl,_that.webUrl,_that.lastActivityAt);case _:
+return $default(_that.id,_that.name,_that.pathWithNamespace,_that.description,_that.starCount,_that.visibility,_that.defaultBranch,_that.openIssuesCount,_that.forksCount,_that.wikiAccessLevel,_that.wikiEnabled,_that.avatarUrl,_that.webUrl,_that.lastActivityAt);case _:
   return null;
 
 }
@@ -223,7 +225,7 @@ return $default(_that.id,_that.name,_that.pathWithNamespace,_that.description,_t
 @JsonSerializable()
 
 class _Project extends Project {
-  const _Project({required this.id, required this.name, @JsonKey(name: 'path_with_namespace') required this.pathWithNamespace, this.description, @JsonKey(name: 'star_count') this.starCount = 0, this.visibility, @JsonKey(name: 'default_branch') this.defaultBranch, @JsonKey(name: 'open_issues_count') this.openIssuesCount, @JsonKey(name: 'forks_count') this.forksCount, @JsonKey(name: 'avatar_url') this.avatarUrl, @JsonKey(name: 'web_url') this.webUrl, @JsonKey(name: 'last_activity_at') this.lastActivityAt}): super._();
+  const _Project({required this.id, required this.name, @JsonKey(name: 'path_with_namespace') required this.pathWithNamespace, this.description, @JsonKey(name: 'star_count') this.starCount = 0, this.visibility, @JsonKey(name: 'default_branch') this.defaultBranch, @JsonKey(name: 'open_issues_count') this.openIssuesCount, @JsonKey(name: 'forks_count') this.forksCount, @JsonKey(name: 'wiki_access_level') this.wikiAccessLevel, @JsonKey(name: 'wiki_enabled') this.wikiEnabled, @JsonKey(name: 'avatar_url') this.avatarUrl, @JsonKey(name: 'web_url') this.webUrl, @JsonKey(name: 'last_activity_at') this.lastActivityAt}): super._();
   factory _Project.fromJson(Map<String, dynamic> json) => _$ProjectFromJson(json);
 
 @override final  int id;
@@ -238,6 +240,8 @@ class _Project extends Project {
 // zero, so the UI hides it instead of showing a false 0.
 @override@JsonKey(name: 'open_issues_count') final  int? openIssuesCount;
 @override@JsonKey(name: 'forks_count') final  int? forksCount;
+@override@JsonKey(name: 'wiki_access_level') final  String? wikiAccessLevel;
+@override@JsonKey(name: 'wiki_enabled') final  bool? wikiEnabled;
 @override@JsonKey(name: 'avatar_url') final  String? avatarUrl;
 @override@JsonKey(name: 'web_url') final  String? webUrl;
 @override@JsonKey(name: 'last_activity_at') final  DateTime? lastActivityAt;
@@ -255,16 +259,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Project&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.pathWithNamespace, pathWithNamespace) || other.pathWithNamespace == pathWithNamespace)&&(identical(other.description, description) || other.description == description)&&(identical(other.starCount, starCount) || other.starCount == starCount)&&(identical(other.visibility, visibility) || other.visibility == visibility)&&(identical(other.defaultBranch, defaultBranch) || other.defaultBranch == defaultBranch)&&(identical(other.openIssuesCount, openIssuesCount) || other.openIssuesCount == openIssuesCount)&&(identical(other.forksCount, forksCount) || other.forksCount == forksCount)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl)&&(identical(other.webUrl, webUrl) || other.webUrl == webUrl)&&(identical(other.lastActivityAt, lastActivityAt) || other.lastActivityAt == lastActivityAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Project&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.pathWithNamespace, pathWithNamespace) || other.pathWithNamespace == pathWithNamespace)&&(identical(other.description, description) || other.description == description)&&(identical(other.starCount, starCount) || other.starCount == starCount)&&(identical(other.visibility, visibility) || other.visibility == visibility)&&(identical(other.defaultBranch, defaultBranch) || other.defaultBranch == defaultBranch)&&(identical(other.openIssuesCount, openIssuesCount) || other.openIssuesCount == openIssuesCount)&&(identical(other.forksCount, forksCount) || other.forksCount == forksCount)&&(identical(other.wikiAccessLevel, wikiAccessLevel) || other.wikiAccessLevel == wikiAccessLevel)&&(identical(other.wikiEnabled, wikiEnabled) || other.wikiEnabled == wikiEnabled)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl)&&(identical(other.webUrl, webUrl) || other.webUrl == webUrl)&&(identical(other.lastActivityAt, lastActivityAt) || other.lastActivityAt == lastActivityAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,pathWithNamespace,description,starCount,visibility,defaultBranch,openIssuesCount,forksCount,avatarUrl,webUrl,lastActivityAt);
+int get hashCode => Object.hash(runtimeType,id,name,pathWithNamespace,description,starCount,visibility,defaultBranch,openIssuesCount,forksCount,wikiAccessLevel,wikiEnabled,avatarUrl,webUrl,lastActivityAt);
 
 @override
 String toString() {
-  return 'Project(id: $id, name: $name, pathWithNamespace: $pathWithNamespace, description: $description, starCount: $starCount, visibility: $visibility, defaultBranch: $defaultBranch, openIssuesCount: $openIssuesCount, forksCount: $forksCount, avatarUrl: $avatarUrl, webUrl: $webUrl, lastActivityAt: $lastActivityAt)';
+  return 'Project(id: $id, name: $name, pathWithNamespace: $pathWithNamespace, description: $description, starCount: $starCount, visibility: $visibility, defaultBranch: $defaultBranch, openIssuesCount: $openIssuesCount, forksCount: $forksCount, wikiAccessLevel: $wikiAccessLevel, wikiEnabled: $wikiEnabled, avatarUrl: $avatarUrl, webUrl: $webUrl, lastActivityAt: $lastActivityAt)';
 }
 
 
@@ -275,7 +279,7 @@ abstract mixin class _$ProjectCopyWith<$Res> implements $ProjectCopyWith<$Res> {
   factory _$ProjectCopyWith(_Project value, $Res Function(_Project) _then) = __$ProjectCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name,@JsonKey(name: 'path_with_namespace') String pathWithNamespace, String? description,@JsonKey(name: 'star_count') int starCount, String? visibility,@JsonKey(name: 'default_branch') String? defaultBranch,@JsonKey(name: 'open_issues_count') int? openIssuesCount,@JsonKey(name: 'forks_count') int? forksCount,@JsonKey(name: 'avatar_url') String? avatarUrl,@JsonKey(name: 'web_url') String? webUrl,@JsonKey(name: 'last_activity_at') DateTime? lastActivityAt
+ int id, String name,@JsonKey(name: 'path_with_namespace') String pathWithNamespace, String? description,@JsonKey(name: 'star_count') int starCount, String? visibility,@JsonKey(name: 'default_branch') String? defaultBranch,@JsonKey(name: 'open_issues_count') int? openIssuesCount,@JsonKey(name: 'forks_count') int? forksCount,@JsonKey(name: 'wiki_access_level') String? wikiAccessLevel,@JsonKey(name: 'wiki_enabled') bool? wikiEnabled,@JsonKey(name: 'avatar_url') String? avatarUrl,@JsonKey(name: 'web_url') String? webUrl,@JsonKey(name: 'last_activity_at') DateTime? lastActivityAt
 });
 
 
@@ -292,7 +296,7 @@ class __$ProjectCopyWithImpl<$Res>
 
 /// Create a copy of Project
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? pathWithNamespace = null,Object? description = freezed,Object? starCount = null,Object? visibility = freezed,Object? defaultBranch = freezed,Object? openIssuesCount = freezed,Object? forksCount = freezed,Object? avatarUrl = freezed,Object? webUrl = freezed,Object? lastActivityAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? pathWithNamespace = null,Object? description = freezed,Object? starCount = null,Object? visibility = freezed,Object? defaultBranch = freezed,Object? openIssuesCount = freezed,Object? forksCount = freezed,Object? wikiAccessLevel = freezed,Object? wikiEnabled = freezed,Object? avatarUrl = freezed,Object? webUrl = freezed,Object? lastActivityAt = freezed,}) {
   return _then(_Project(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -303,7 +307,9 @@ as int,visibility: freezed == visibility ? _self.visibility : visibility // igno
 as String?,defaultBranch: freezed == defaultBranch ? _self.defaultBranch : defaultBranch // ignore: cast_nullable_to_non_nullable
 as String?,openIssuesCount: freezed == openIssuesCount ? _self.openIssuesCount : openIssuesCount // ignore: cast_nullable_to_non_nullable
 as int?,forksCount: freezed == forksCount ? _self.forksCount : forksCount // ignore: cast_nullable_to_non_nullable
-as int?,avatarUrl: freezed == avatarUrl ? _self.avatarUrl : avatarUrl // ignore: cast_nullable_to_non_nullable
+as int?,wikiAccessLevel: freezed == wikiAccessLevel ? _self.wikiAccessLevel : wikiAccessLevel // ignore: cast_nullable_to_non_nullable
+as String?,wikiEnabled: freezed == wikiEnabled ? _self.wikiEnabled : wikiEnabled // ignore: cast_nullable_to_non_nullable
+as bool?,avatarUrl: freezed == avatarUrl ? _self.avatarUrl : avatarUrl // ignore: cast_nullable_to_non_nullable
 as String?,webUrl: freezed == webUrl ? _self.webUrl : webUrl // ignore: cast_nullable_to_non_nullable
 as String?,lastActivityAt: freezed == lastActivityAt ? _self.lastActivityAt : lastActivityAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
