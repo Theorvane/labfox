@@ -9,6 +9,27 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get releasesTitle => 'リリース';
+
+  @override
+  String get releasesEmpty => 'リリースはまだありません。';
+
+  @override
+  String get releasesError => 'リリースを読み込めませんでした。';
+
+  @override
+  String get releaseDetailError => 'このリリースを読み込めませんでした。';
+
+  @override
+  String get releaseAssetsTitle => 'アセット';
+
+  @override
+  String get releaseLoadMore => 'さらに読み込む';
+
+  @override
+  String get releaseUpcoming => '予定';
+
+  @override
   String get appTitle => 'LabFox';
 
   @override

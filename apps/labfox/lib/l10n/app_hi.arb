@@ -1,5 +1,12 @@
 {
   "@@locale": "hi",
+  "releasesTitle": "रिलीज़",
+  "releasesEmpty": "अभी कोई रिलीज़ नहीं है।",
+  "releasesError": "रिलीज़ लोड नहीं हो सकीं।",
+  "releaseDetailError": "यह रिलीज़ लोड नहीं हो सकी।",
+  "releaseAssetsTitle": "एसेट",
+  "releaseLoadMore": "और लोड करें",
+  "releaseUpcoming": "आगामी",
   "appTitle": "LabFox",
   "homeTitle": "होम",
   "homeSignedInAs": "{username} के रूप में साइन इन",

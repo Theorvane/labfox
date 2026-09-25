@@ -1,5 +1,12 @@
 {
   "@@locale": "en",
+  "releasesTitle": "Releases",
+  "releasesEmpty": "No releases yet.",
+  "releasesError": "Could not load releases.",
+  "releaseDetailError": "Could not load this release.",
+  "releaseAssetsTitle": "Assets",
+  "releaseLoadMore": "Load more",
+  "releaseUpcoming": "Upcoming",
   "appTitle": "LabFox",
   "@appTitle": {
     "description": "The application name, shown in the task switcher and app bar"

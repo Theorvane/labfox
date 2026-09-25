@@ -27,6 +27,7 @@ abstract final class LabFoxIcons {
   static const IconData file = Icons.insert_drive_file_outlined;
   static const IconData document = Icons.description_outlined;
   static const IconData diff = Icons.difference_outlined;
+  static const IconData release = Icons.new_releases_outlined;
 
   // ── CI ──────────────────────────────────────────────────────────────────
   static const IconData pipeline = Icons.rocket_launch_outlined;

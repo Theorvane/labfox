@@ -29,6 +29,8 @@ import '../features/pipelines/presentation/pipelines_screen.dart';
 import '../features/profile/presentation/me_screen.dart';
 import '../features/project_overview/presentation/project_overview_screen.dart';
 import '../features/projects/presentation/projects_screen.dart';
+import '../features/releases/presentation/release_detail_screen.dart';
+import '../features/releases/presentation/releases_screen.dart';
 import '../features/repository/presentation/file_viewer_screen.dart';
 import '../features/repository/presentation/repository_browser_screen.dart';
 import '../features/search/presentation/search_screen.dart';
@@ -61,6 +63,9 @@ abstract final class Routes {
   static const String myMergeRequests = '/dashboard/merge_requests';
 
   static String projectOverview(int id) => '/projects/$id';
+  static String releases(int id) => '/projects/$id/releases';
+  static String release(int id, String tagName) =>
+      '/projects/$id/releases/${Uri.encodeComponent(tagName)}';
 
   // Repository browsing. The tree path and file path travel as a query
   // parameter, not a nested segment, because a repository path contains its own
@@ -207,6 +212,21 @@ final routerProvider = Provider<GoRouter>((ref) {
               return ProjectOverviewScreen(projectId: id);
             },
             routes: [
+              GoRoute(
+                path: 'releases',
+                builder: (context, state) => ReleasesScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':tagName',
+                    builder: (context, state) => ReleaseDetailScreen(
+                      projectId: int.parse(state.pathParameters['id']!),
+                      tagName: state.pathParameters['tagName']!,
+                    ),
+                  ),
+                ],
+              ),
               GoRoute(
                 path: 'tree',
                 builder: (context, state) {

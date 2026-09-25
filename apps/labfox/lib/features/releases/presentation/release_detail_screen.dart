@@ -1,0 +1,201 @@
+import 'package:design_system/design_system.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gitlab_models/gitlab_models.dart';
+import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
+
+import '../../../app/router.dart';
+import '../../../core/ui/link_opener.dart';
+import '../../../l10n/app_localizations.dart';
+import 'controllers/releases_controller.dart';
+
+/// Release notes and published assets, restorable from a project and tag.
+class ReleaseDetailScreen extends ConsumerWidget {
+  const ReleaseDetailScreen({
+    required this.projectId,
+    required this.tagName,
+    super.key,
+  });
+
+  final int projectId;
+  final String tagName;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final key = ReleaseRef(projectId: projectId, tagName: tagName);
+    final release = ref.watch(releaseDetailProvider(key));
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(release.valueOrNull?.name ?? tagName),
+        leading: BackButton(
+          onPressed: () => context.canPop()
+              ? context.pop()
+              : context.go(Routes.releases(projectId)),
+        ),
+      ),
+      body: release.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (_, _) => Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(l10n.releaseDetailError),
+              const SizedBox(height: LabFoxSpacing.md),
+              FilledButton(
+                onPressed: () => ref.invalidate(releaseDetailProvider(key)),
+                child: Text(l10n.retry),
+              ),
+            ],
+          ),
+        ),
+        data: (data) => RefreshIndicator(
+          onRefresh: () => ref.refresh(releaseDetailProvider(key).future),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final wide = constraints.maxWidth >= LabFoxBreakpoints.tablet;
+              final metadata = _Metadata(release: data);
+              final content = _Content(release: data);
+              return ListView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                children: [
+                  Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 1100),
+                      child: Padding(
+                        padding: const EdgeInsets.all(LabFoxSpacing.md),
+                        child: wide
+                            ? Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(width: 260, child: metadata),
+                                  const SizedBox(width: LabFoxSpacing.md),
+                                  Expanded(child: content),
+                                ],
+                              )
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  metadata,
+                                  const SizedBox(height: LabFoxSpacing.md),
+                                  content,
+                                ],
+                              ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _Metadata extends StatelessWidget {
+  const _Metadata({required this.release});
+  final GitLabRelease release;
+
+  @override
+  Widget build(BuildContext context) => Card.outlined(
+    margin: EdgeInsets.zero,
+    child: Padding(
+      padding: const EdgeInsets.all(LabFoxSpacing.md),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(release.name, style: Theme.of(context).textTheme.titleLarge),
+          const SizedBox(height: LabFoxSpacing.sm),
+          Text(release.tagName),
+          if (release.releasedAt != null) ...[
+            const SizedBox(height: LabFoxSpacing.sm),
+            Text(
+              DateFormat.yMMMd(
+                Localizations.localeOf(context).toString(),
+              ).format(release.releasedAt!),
+            ),
+          ],
+          if (release.upcomingRelease == true) ...[
+            const SizedBox(height: LabFoxSpacing.sm),
+            Chip(label: Text(AppLocalizations.of(context).releaseUpcoming)),
+          ],
+        ],
+      ),
+    ),
+  );
+}
+
+class _Content extends ConsumerWidget {
+  const _Content({required this.release});
+  final GitLabRelease release;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final open = ref.watch(linkOpenerProvider);
+    final links = release.assets?.links ?? const <ReleaseAssetLink>[];
+    final sources = release.assets?.sources ?? const <ReleaseSource>[];
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (release.description != null && release.description!.isNotEmpty) ...[
+          Card.outlined(
+            margin: EdgeInsets.zero,
+            child: Padding(
+              padding: const EdgeInsets.all(LabFoxSpacing.md),
+              child: MarkdownViewer(data: release.description!),
+            ),
+          ),
+          const SizedBox(height: LabFoxSpacing.md),
+        ],
+        if (links.isNotEmpty || sources.isNotEmpty)
+          Card.outlined(
+            margin: EdgeInsets.zero,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(LabFoxSpacing.md),
+                  child: Text(
+                    l10n.releaseAssetsTitle,
+                    style: LabFoxTextRoles.of(context).sectionHeader,
+                  ),
+                ),
+                for (final asset in links)
+                  _AssetTile(
+                    name: asset.name,
+                    url: asset.directAssetUrl ?? asset.url,
+                    open: open,
+                  ),
+                for (final source in sources)
+                  _AssetTile(name: source.format, url: source.url, open: open),
+              ],
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+class _AssetTile extends StatelessWidget {
+  const _AssetTile({required this.name, required this.url, required this.open});
+  final String name;
+  final String url;
+  final Future<void> Function(Uri) open;
+
+  @override
+  Widget build(BuildContext context) {
+    final uri = Uri.tryParse(url);
+    final supported =
+        uri != null && (uri.isScheme('http') || uri.isScheme('https'));
+    return ListTile(
+      leading: const Icon(LabFoxIcons.file),
+      title: Text(name),
+      trailing: const Icon(LabFoxIcons.openInBrowser),
+      onTap: supported ? () => open(uri) : null,
+    );
+  }
+}

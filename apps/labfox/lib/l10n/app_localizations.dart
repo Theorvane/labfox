@@ -104,6 +104,48 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
+  /// No description provided for @releasesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Releases'**
+  String get releasesTitle;
+
+  /// No description provided for @releasesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No releases yet.'**
+  String get releasesEmpty;
+
+  /// No description provided for @releasesError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load releases.'**
+  String get releasesError;
+
+  /// No description provided for @releaseDetailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this release.'**
+  String get releaseDetailError;
+
+  /// No description provided for @releaseAssetsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Assets'**
+  String get releaseAssetsTitle;
+
+  /// No description provided for @releaseLoadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get releaseLoadMore;
+
+  /// No description provided for @releaseUpcoming.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming'**
+  String get releaseUpcoming;
+
   /// The application name, shown in the task switcher and app bar
   ///
   /// In en, this message translates to:

@@ -16,6 +16,7 @@ export 'src/oauth/oauth_api.dart';
 export 'src/oauth/pkce.dart';
 export 'src/pipelines/pipelines_api.dart';
 export 'src/projects/projects_api.dart';
+export 'src/releases/releases_api.dart';
 export 'src/repository/repository_api.dart';
 export 'src/repository/repository_file.dart';
 export 'src/search/search_api.dart';

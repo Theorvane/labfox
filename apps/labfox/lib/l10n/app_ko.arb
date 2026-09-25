@@ -1,5 +1,12 @@
 {
   "@@locale": "ko",
+  "releasesTitle": "릴리스",
+  "releasesEmpty": "릴리스가 아직 없습니다.",
+  "releasesError": "릴리스를 불러올 수 없습니다.",
+  "releaseDetailError": "이 릴리스를 불러올 수 없습니다.",
+  "releaseAssetsTitle": "에셋",
+  "releaseLoadMore": "더 보기",
+  "releaseUpcoming": "예정",
   "appTitle": "LabFox",
   "homeTitle": "홈",
   "homeSignedInAs": "{username} 님으로 로그인됨",
