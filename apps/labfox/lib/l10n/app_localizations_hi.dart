@@ -136,6 +136,27 @@ class AppLocalizationsHi extends AppLocalizations {
   String get groupsError => 'Could not load your groups.';
 
   @override
+  String get groupDetailTitle => 'समूह';
+
+  @override
+  String get groupDetailError => 'इस समूह को लोड नहीं किया जा सका।';
+
+  @override
+  String get groupSubgroups => 'उपसमूह';
+
+  @override
+  String get groupSubgroupsEmpty => 'कोई उपसमूह नहीं है।';
+
+  @override
+  String get groupProjects => 'प्रोजेक्ट';
+
+  @override
+  String get groupProjectsEmpty => 'इस समूह में कोई प्रोजेक्ट नहीं है।';
+
+  @override
+  String get groupLoadMore => 'और लोड करें';
+
+  @override
   String get projectsTitle => 'प्रोजेक्ट';
 
   @override

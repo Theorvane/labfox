@@ -131,6 +131,27 @@ class AppLocalizationsJa extends AppLocalizations {
   String get groupsError => 'Could not load your groups.';
 
   @override
+  String get groupDetailTitle => 'グループ';
+
+  @override
+  String get groupDetailError => 'このグループを読み込めませんでした。';
+
+  @override
+  String get groupSubgroups => 'サブグループ';
+
+  @override
+  String get groupSubgroupsEmpty => 'サブグループはありません。';
+
+  @override
+  String get groupProjects => 'プロジェクト';
+
+  @override
+  String get groupProjectsEmpty => 'このグループにプロジェクトはありません。';
+
+  @override
+  String get groupLoadMore => 'さらに読み込む';
+
+  @override
   String get projectsTitle => 'プロジェクト';
 
   @override

@@ -131,6 +131,27 @@ class AppLocalizationsKo extends AppLocalizations {
   String get groupsError => 'Could not load your groups.';
 
   @override
+  String get groupDetailTitle => '그룹';
+
+  @override
+  String get groupDetailError => '이 그룹을 불러오지 못했습니다.';
+
+  @override
+  String get groupSubgroups => '하위 그룹';
+
+  @override
+  String get groupSubgroupsEmpty => '하위 그룹이 없습니다.';
+
+  @override
+  String get groupProjects => '프로젝트';
+
+  @override
+  String get groupProjectsEmpty => '이 그룹에 프로젝트가 없습니다.';
+
+  @override
+  String get groupLoadMore => '더 보기';
+
+  @override
   String get projectsTitle => '프로젝트';
 
   @override

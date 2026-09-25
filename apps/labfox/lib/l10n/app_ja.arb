@@ -167,5 +167,12 @@
   "wikiTitle": "Wiki",
   "wikiEmpty": "Wikiページはまだありません。",
   "wikiListError": "Wikiページを読み込めませんでした。",
-  "wikiPageError": "このWikiページを読み込めませんでした。"
+  "wikiPageError": "このWikiページを読み込めませんでした。",
+  "groupDetailTitle": "グループ",
+  "groupDetailError": "このグループを読み込めませんでした。",
+  "groupSubgroups": "サブグループ",
+  "groupSubgroupsEmpty": "サブグループはありません。",
+  "groupProjects": "プロジェクト",
+  "groupProjectsEmpty": "このグループにプロジェクトはありません。",
+  "groupLoadMore": "さらに読み込む"
 }

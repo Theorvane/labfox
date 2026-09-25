@@ -167,5 +167,12 @@
   "wikiTitle": "Wiki",
   "wikiEmpty": "还没有 Wiki 页面。",
   "wikiListError": "无法加载 Wiki 页面。",
-  "wikiPageError": "无法加载此 Wiki 页面。"
+  "wikiPageError": "无法加载此 Wiki 页面。",
+  "groupDetailTitle": "群组",
+  "groupDetailError": "无法加载此群组。",
+  "groupSubgroups": "子群组",
+  "groupSubgroupsEmpty": "没有子群组。",
+  "groupProjects": "项目",
+  "groupProjectsEmpty": "此群组中没有项目。",
+  "groupLoadMore": "加载更多"
 }

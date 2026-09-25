@@ -167,5 +167,12 @@
   "wikiTitle": "विकी",
   "wikiEmpty": "अभी कोई विकी पृष्ठ नहीं है।",
   "wikiListError": "विकी पृष्ठ लोड नहीं हो सके।",
-  "wikiPageError": "यह विकी पृष्ठ लोड नहीं हो सका।"
+  "wikiPageError": "यह विकी पृष्ठ लोड नहीं हो सका।",
+  "groupDetailTitle": "समूह",
+  "groupDetailError": "इस समूह को लोड नहीं किया जा सका।",
+  "groupSubgroups": "उपसमूह",
+  "groupSubgroupsEmpty": "कोई उपसमूह नहीं है।",
+  "groupProjects": "प्रोजेक्ट",
+  "groupProjectsEmpty": "इस समूह में कोई प्रोजेक्ट नहीं है।",
+  "groupLoadMore": "और लोड करें"
 }

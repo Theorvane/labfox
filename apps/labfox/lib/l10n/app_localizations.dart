@@ -338,6 +338,48 @@ abstract class AppLocalizations {
   /// **'Could not load your groups.'**
   String get groupsError;
 
+  /// Fallback title while a group detail is loading
+  ///
+  /// In en, this message translates to:
+  /// **'Group'**
+  String get groupDetailTitle;
+
+  /// Shown when a group detail or its children fail to load
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this group.'**
+  String get groupDetailError;
+
+  /// Section title for direct child groups
+  ///
+  /// In en, this message translates to:
+  /// **'Subgroups'**
+  String get groupSubgroups;
+
+  /// Shown when a group has no visible direct subgroups
+  ///
+  /// In en, this message translates to:
+  /// **'No subgroups.'**
+  String get groupSubgroupsEmpty;
+
+  /// Section title for projects directly in a group
+  ///
+  /// In en, this message translates to:
+  /// **'Projects'**
+  String get groupProjects;
+
+  /// Shown when a group has no visible direct projects
+  ///
+  /// In en, this message translates to:
+  /// **'No projects in this group.'**
+  String get groupProjectsEmpty;
+
+  /// Loads the next page of group projects or subgroups
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get groupLoadMore;
+
   /// Title of the projects list screen
   ///
   /// In en, this message translates to:
