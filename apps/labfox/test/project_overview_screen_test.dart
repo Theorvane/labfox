@@ -81,6 +81,7 @@ void main() {
     expect(find.text('Issues'), findsOneWidget);
     expect(find.text('Merge requests'), findsOneWidget);
     expect(find.text('Pipelines'), findsOneWidget);
+    expect(find.text('Package registry'), findsOneWidget);
   });
 
   testWidgets('shows a no-README message, not a blank, when there is none', (
@@ -148,5 +149,26 @@ void main() {
     expect(find.text('Issues'), findsOneWidget);
     expect(find.text('Browse code'), findsNothing);
     expect(find.text('0'), findsNothing);
+  });
+
+  testWidgets('hides the package entry when the registry is disabled', (
+    tester,
+  ) async {
+    await _pump(
+      tester,
+      AsyncData(
+        _overview(
+          project: const Project(
+            id: 1,
+            name: 'tools',
+            pathWithNamespace: 'team/tools',
+            packageRegistryAccessLevel: 'disabled',
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Package registry'), findsNothing);
   });
 }

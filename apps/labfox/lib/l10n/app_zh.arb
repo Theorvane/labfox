@@ -163,5 +163,12 @@
   "navMe": "我",
   "meTitle": "我",
   "meSettings": "设置",
-  "meAccounts": "切换账户"
+  "meAccounts": "切换账户",
+  "packageRegistryTitle": "软件包仓库",
+  "packageRegistryEmpty": "还没有软件包。",
+  "packageRegistryError": "无法加载软件包。",
+  "packageDetailError": "无法加载此软件包。",
+  "packageFiles": "文件",
+  "packageFilesEmpty": "此软件包没有文件。",
+  "packageLoadMore": "加载更多"
 }

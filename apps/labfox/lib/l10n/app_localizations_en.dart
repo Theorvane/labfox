@@ -874,4 +874,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeRecents => 'Recent';
+
+  @override
+  String get packageRegistryTitle => 'Package registry';
+
+  @override
+  String get packageRegistryEmpty => 'No packages yet.';
+
+  @override
+  String get packageRegistryError => 'Could not load packages.';
+
+  @override
+  String get packageDetailError => 'Could not load this package.';
+
+  @override
+  String get packageFiles => 'Files';
+
+  @override
+  String get packageFilesEmpty => 'This package has no files.';
+
+  @override
+  String get packageLoadMore => 'Load more';
 }

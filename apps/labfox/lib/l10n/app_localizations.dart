@@ -1741,6 +1741,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recent'**
   String get homeRecents;
+
+  /// Project package registry title and entry
+  ///
+  /// In en, this message translates to:
+  /// **'Package registry'**
+  String get packageRegistryTitle;
+
+  /// Empty project package registry
+  ///
+  /// In en, this message translates to:
+  /// **'No packages yet.'**
+  String get packageRegistryEmpty;
+
+  /// Package list loading error
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load packages.'**
+  String get packageRegistryError;
+
+  /// Package detail loading error
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this package.'**
+  String get packageDetailError;
+
+  /// Package files section title
+  ///
+  /// In en, this message translates to:
+  /// **'Files'**
+  String get packageFiles;
+
+  /// Empty package files section
+  ///
+  /// In en, this message translates to:
+  /// **'This package has no files.'**
+  String get packageFilesEmpty;
+
+  /// Load the next page of packages or package files
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get packageLoadMore;
 }
 
 class _AppLocalizationsDelegate

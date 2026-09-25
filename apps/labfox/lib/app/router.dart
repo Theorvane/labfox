@@ -24,6 +24,8 @@ import '../features/merge_requests/presentation/merge_request_detail_screen.dart
 import '../features/merge_requests/presentation/merge_requests_screen.dart';
 import '../features/merge_requests/presentation/my_merge_requests_screen.dart';
 import '../features/merge_requests/presentation/new_merge_request_screen.dart';
+import '../features/package_registry/presentation/package_detail_screen.dart';
+import '../features/package_registry/presentation/package_list_screen.dart';
 import '../features/pipelines/presentation/pipeline_detail_screen.dart';
 import '../features/pipelines/presentation/pipelines_screen.dart';
 import '../features/profile/presentation/me_screen.dart';
@@ -61,6 +63,9 @@ abstract final class Routes {
   static const String myMergeRequests = '/dashboard/merge_requests';
 
   static String projectOverview(int id) => '/projects/$id';
+  static String packages(int id) => '/projects/$id/packages';
+  static String packageDetail(int id, int packageId) =>
+      '/projects/$id/packages/$packageId';
 
   // Repository browsing. The tree path and file path travel as a query
   // parameter, not a nested segment, because a repository path contains its own
@@ -207,6 +212,21 @@ final routerProvider = Provider<GoRouter>((ref) {
               return ProjectOverviewScreen(projectId: id);
             },
             routes: [
+              GoRoute(
+                path: 'packages',
+                builder: (context, state) => PackageListScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':packageId',
+                    builder: (context, state) => PackageDetailScreen(
+                      projectId: int.parse(state.pathParameters['id']!),
+                      packageId: int.parse(state.pathParameters['packageId']!),
+                    ),
+                  ),
+                ],
+              ),
               GoRoute(
                 path: 'tree',
                 builder: (context, state) {

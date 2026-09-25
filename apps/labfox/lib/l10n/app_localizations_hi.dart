@@ -874,4 +874,25 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get homeRecents => 'हाल ही में';
+
+  @override
+  String get packageRegistryTitle => 'पैकेज रजिस्ट्री';
+
+  @override
+  String get packageRegistryEmpty => 'अभी कोई पैकेज नहीं है।';
+
+  @override
+  String get packageRegistryError => 'पैकेज लोड नहीं हो सके।';
+
+  @override
+  String get packageDetailError => 'यह पैकेज लोड नहीं हो सका।';
+
+  @override
+  String get packageFiles => 'फ़ाइलें';
+
+  @override
+  String get packageFilesEmpty => 'इस पैकेज में कोई फ़ाइल नहीं है।';
+
+  @override
+  String get packageLoadMore => 'और लोड करें';
 }

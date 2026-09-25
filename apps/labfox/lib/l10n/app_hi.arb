@@ -163,5 +163,12 @@
   "navMe": "मैं",
   "meTitle": "मैं",
   "meSettings": "सेटिंग्स",
-  "meAccounts": "खाता बदलें"
+  "meAccounts": "खाता बदलें",
+  "packageRegistryTitle": "पैकेज रजिस्ट्री",
+  "packageRegistryEmpty": "अभी कोई पैकेज नहीं है।",
+  "packageRegistryError": "पैकेज लोड नहीं हो सके।",
+  "packageDetailError": "यह पैकेज लोड नहीं हो सका।",
+  "packageFiles": "फ़ाइलें",
+  "packageFilesEmpty": "इस पैकेज में कोई फ़ाइल नहीं है।",
+  "packageLoadMore": "और लोड करें"
 }
