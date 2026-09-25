@@ -1165,5 +1165,19 @@
   "homeRecents": "Recent",
   "@homeRecents": {
     "description": "Home section title for recently opened projects"
-  }
+  },
+  "packageRegistryTitle": "Package registry",
+  "@packageRegistryTitle": {"description": "Project package registry title and entry"},
+  "packageRegistryEmpty": "No packages yet.",
+  "@packageRegistryEmpty": {"description": "Empty project package registry"},
+  "packageRegistryError": "Could not load packages.",
+  "@packageRegistryError": {"description": "Package list loading error"},
+  "packageDetailError": "Could not load this package.",
+  "@packageDetailError": {"description": "Package detail loading error"},
+  "packageFiles": "Files",
+  "@packageFiles": {"description": "Package files section title"},
+  "packageFilesEmpty": "This package has no files.",
+  "@packageFilesEmpty": {"description": "Empty package files section"},
+  "packageLoadMore": "Load more",
+  "@packageLoadMore": {"description": "Load the next page of packages or package files"}
 }
