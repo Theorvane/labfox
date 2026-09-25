@@ -27,3 +27,4 @@ export 'src/repository_entry.dart';
 export 'src/todo.dart';
 export 'src/unified_diff.dart';
 export 'src/user.dart';
+export 'src/wiki_page.dart';

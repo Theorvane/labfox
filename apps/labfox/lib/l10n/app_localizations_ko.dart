@@ -909,6 +909,18 @@ class AppLocalizationsKo extends AppLocalizations {
   String get homeRecents => '최근';
 
   @override
+  String get wikiTitle => '위키';
+
+  @override
+  String get wikiEmpty => '아직 위키 페이지가 없습니다.';
+
+  @override
+  String get wikiListError => '위키 페이지를 불러올 수 없습니다.';
+
+  @override
+  String get wikiPageError => '이 위키 페이지를 불러올 수 없습니다.';
+
+  @override
   String get packageRegistryTitle => '패키지 레지스트리';
 
   @override

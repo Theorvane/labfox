@@ -25,6 +25,8 @@ abstract class Project with _$Project {
     // zero, so the UI hides it instead of showing a false 0.
     @JsonKey(name: 'open_issues_count') int? openIssuesCount,
     @JsonKey(name: 'forks_count') int? forksCount,
+    @JsonKey(name: 'wiki_access_level') String? wikiAccessLevel,
+    @JsonKey(name: 'wiki_enabled') bool? wikiEnabled,
     @JsonKey(name: 'avatar_url') String? avatarUrl,
     @JsonKey(name: 'web_url') String? webUrl,
     @JsonKey(name: 'last_activity_at') DateTime? lastActivityAt,
