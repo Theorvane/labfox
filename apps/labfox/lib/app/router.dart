@@ -24,6 +24,7 @@ import '../features/issues/presentation/issues_screen.dart';
 import '../features/issues/presentation/my_issues_screen.dart';
 import '../features/issues/presentation/new_issue_screen.dart';
 import '../features/jobs/presentation/job_detail_screen.dart';
+import '../features/members/presentation/project_members_screen.dart';
 import '../features/merge_requests/presentation/merge_request_detail_screen.dart';
 import '../features/merge_requests/presentation/merge_requests_screen.dart';
 import '../features/merge_requests/presentation/my_merge_requests_screen.dart';
@@ -76,6 +77,7 @@ abstract final class Routes {
   static String projectLabels(int id) => '/projects/$id/labels';
   static String projectLabel(int id, int labelId) =>
       '/projects/$id/labels/$labelId';
+  static String projectMembers(int id) => '/projects/$id/members';
   static String containerRegistry(int id) => '/projects/$id/container_registry';
   static String containerRepository(int id, int repositoryId) =>
       '/projects/$id/container_registry/$repositoryId';
@@ -244,6 +246,12 @@ final routerProvider = Provider<GoRouter>((ref) {
               return ProjectOverviewScreen(projectId: id);
             },
             routes: [
+              GoRoute(
+                path: 'members',
+                builder: (context, state) => ProjectMembersScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+              ),
               GoRoute(
                 path: 'container_registry',
                 builder: (context, state) => ContainerRegistryScreen(

@@ -91,6 +91,7 @@ void main() {
     expect(find.text('Issues'), findsOneWidget);
     expect(find.text('Merge requests'), findsOneWidget);
     expect(find.text('Pipelines'), findsOneWidget);
+    expect(find.text('Members'), findsOneWidget);
     expect(find.text('Wiki'), findsOneWidget);
     expect(find.text('Package registry'), findsOneWidget);
     expect(find.text('Milestones'), findsOneWidget);
