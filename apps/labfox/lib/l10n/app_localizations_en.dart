@@ -54,6 +54,57 @@ class AppLocalizationsEn extends AppLocalizations {
   String get environmentUnknownStatus => 'Unknown status';
 
   @override
+  String get projectMembersTitle => 'Members';
+
+  @override
+  String get projectMembersSearch => 'Search members';
+
+  @override
+  String get projectMembersClearSearch => 'Clear search';
+
+  @override
+  String get projectMembersEmpty => 'No members found.';
+
+  @override
+  String get projectMembersError => 'Could not load members.';
+
+  @override
+  String get projectMembersLoadMore => 'Load more';
+
+  @override
+  String get projectMembersExpiry => 'Expires';
+
+  @override
+  String get memberRoleNoAccess => 'No access';
+
+  @override
+  String get memberRoleMinimal => 'Minimal access';
+
+  @override
+  String get memberRoleGuest => 'Guest';
+
+  @override
+  String get memberRolePlanner => 'Planner';
+
+  @override
+  String get memberRoleReporter => 'Reporter';
+
+  @override
+  String get memberRoleSecurityManager => 'Security manager';
+
+  @override
+  String get memberRoleDeveloper => 'Developer';
+
+  @override
+  String get memberRoleMaintainer => 'Maintainer';
+
+  @override
+  String get memberRoleOwner => 'Owner';
+
+  @override
+  String get memberRoleUnknown => 'Unknown role';
+
+  @override
   String get containerRegistryTitle => 'Container registry';
 
   @override
