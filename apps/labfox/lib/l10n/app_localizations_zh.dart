@@ -129,6 +129,27 @@ class AppLocalizationsZh extends AppLocalizations {
   String get groupsError => 'Could not load your groups.';
 
   @override
+  String get groupDetailTitle => '群组';
+
+  @override
+  String get groupDetailError => '无法加载此群组。';
+
+  @override
+  String get groupSubgroups => '子群组';
+
+  @override
+  String get groupSubgroupsEmpty => '没有子群组。';
+
+  @override
+  String get groupProjects => '项目';
+
+  @override
+  String get groupProjectsEmpty => '此群组中没有项目。';
+
+  @override
+  String get groupLoadMore => '加载更多';
+
+  @override
   String get projectsTitle => '项目';
 
   @override

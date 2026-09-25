@@ -163,5 +163,12 @@
   "navMe": "मैं",
   "meTitle": "मैं",
   "meSettings": "सेटिंग्स",
-  "meAccounts": "खाता बदलें"
+  "meAccounts": "खाता बदलें",
+  "groupDetailTitle": "समूह",
+  "groupDetailError": "इस समूह को लोड नहीं किया जा सका।",
+  "groupSubgroups": "उपसमूह",
+  "groupSubgroupsEmpty": "कोई उपसमूह नहीं है।",
+  "groupProjects": "प्रोजेक्ट",
+  "groupProjectsEmpty": "इस समूह में कोई प्रोजेक्ट नहीं है।",
+  "groupLoadMore": "और लोड करें"
 }
