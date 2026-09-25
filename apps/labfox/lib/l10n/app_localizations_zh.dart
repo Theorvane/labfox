@@ -854,5 +854,62 @@ class AppLocalizationsZh extends AppLocalizations {
   String get meAccounts => '切换账户';
 
   @override
+  String get projectLabelsTitle => '标签';
+
+  @override
+  String get projectLabelsError => '无法加载标签。';
+
+  @override
+  String get projectLabelsEmpty => '暂无标签';
+
+  @override
+  String get projectLabelsNoMatch => '没有匹配的标签';
+
+  @override
+  String get projectLabelSearch => '搜索标签';
+
+  @override
+  String get projectLabelNew => '新建标签';
+
+  @override
+  String get projectLabelGroup => '群组标签';
+
+  @override
+  String get projectLabelProject => '项目标签';
+
+  @override
+  String get projectLabelError => '无法加载此标签。';
+
+  @override
+  String get projectLabelOpenIssues => '未关闭的议题';
+
+  @override
+  String get projectLabelClosedIssues => '已关闭的议题';
+
+  @override
+  String get projectLabelOpenMrs => '未关闭的合并请求';
+
+  @override
+  String get projectLabelName => '名称';
+
+  @override
+  String get projectLabelColor => '颜色 (#RRGGBB)';
+
+  @override
+  String get projectLabelDescription => '描述（可选）';
+
+  @override
+  String get projectLabelRequired => '此项为必填项';
+
+  @override
+  String get projectLabelInvalidColor => '请输入类似 #5843AD 的颜色';
+
+  @override
+  String get projectLabelCreate => '创建标签';
+
+  @override
+  String get projectLabelCreateError => '无法创建标签。请检查权限和输入内容。';
+
+  @override
   String get homeRecents => '最近';
 }

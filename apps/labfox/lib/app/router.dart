@@ -27,6 +27,7 @@ import '../features/merge_requests/presentation/new_merge_request_screen.dart';
 import '../features/pipelines/presentation/pipeline_detail_screen.dart';
 import '../features/pipelines/presentation/pipelines_screen.dart';
 import '../features/profile/presentation/me_screen.dart';
+import '../features/project_labels/presentation/project_labels_screen.dart';
 import '../features/project_overview/presentation/project_overview_screen.dart';
 import '../features/projects/presentation/projects_screen.dart';
 import '../features/repository/presentation/file_viewer_screen.dart';
@@ -61,6 +62,9 @@ abstract final class Routes {
   static const String myMergeRequests = '/dashboard/merge_requests';
 
   static String projectOverview(int id) => '/projects/$id';
+  static String projectLabels(int id) => '/projects/$id/labels';
+  static String projectLabel(int id, int labelId) =>
+      '/projects/$id/labels/$labelId';
 
   // Repository browsing. The tree path and file path travel as a query
   // parameter, not a nested segment, because a repository path contains its own
@@ -219,6 +223,19 @@ final routerProvider = Provider<GoRouter>((ref) {
                     path: path,
                   );
                 },
+              ),
+              GoRoute(
+                path: 'labels',
+                builder: (context, state) => ProjectLabelsScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+              ),
+              GoRoute(
+                path: 'labels/:labelId',
+                builder: (context, state) => ProjectLabelDetailScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                  labelId: int.parse(state.pathParameters['labelId']!),
+                ),
               ),
               GoRoute(
                 path: 'file',

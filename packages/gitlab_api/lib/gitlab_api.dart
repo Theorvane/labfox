@@ -10,6 +10,7 @@ export 'src/gitlab_client.dart';
 export 'src/groups/groups_api.dart';
 export 'src/issues/issues_api.dart';
 export 'src/jobs/jobs_api.dart';
+export 'src/labels/project_labels_api.dart';
 export 'src/merge_requests/merge_requests_api.dart';
 export 'src/notes/notes_api.dart';
 export 'src/oauth/oauth_api.dart';
