@@ -51,6 +51,17 @@ void main() {
       expect(project.wikiEnabled, isFalse);
     });
 
+    test('parses package registry availability', () {
+      final project = Project.fromJson(const {
+        'id': 1,
+        'name': 'tools',
+        'path_with_namespace': 'team/tools',
+        'package_registry_access_level': 'disabled',
+      });
+
+      expect(project.packageRegistryAccessLevel, 'disabled');
+    });
+
     test('leaves optional fields null when GitLab omits them', () {
       // A minimal project payload — no description, no avatar. These must read
       // as absent, not as empty strings.
