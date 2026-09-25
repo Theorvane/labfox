@@ -104,6 +104,60 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
+  /// No description provided for @milestonesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Milestones'**
+  String get milestonesTitle;
+
+  /// No description provided for @milestonesActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get milestonesActive;
+
+  /// No description provided for @milestonesClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get milestonesClosed;
+
+  /// No description provided for @milestonesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No milestones in this state.'**
+  String get milestonesEmpty;
+
+  /// No description provided for @milestonesError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load milestones.'**
+  String get milestonesError;
+
+  /// No description provided for @milestoneDetailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this milestone.'**
+  String get milestoneDetailError;
+
+  /// No description provided for @milestoneStartDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Start date'**
+  String get milestoneStartDate;
+
+  /// No description provided for @milestoneDueDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Due date'**
+  String get milestoneDueDate;
+
+  /// No description provided for @milestoneLoadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get milestoneLoadMore;
+
   /// The application name, shown in the task switcher and app bar
   ///
   /// In en, this message translates to:

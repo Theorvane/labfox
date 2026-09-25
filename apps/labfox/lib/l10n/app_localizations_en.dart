@@ -9,6 +9,33 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get milestonesTitle => 'Milestones';
+
+  @override
+  String get milestonesActive => 'Active';
+
+  @override
+  String get milestonesClosed => 'Closed';
+
+  @override
+  String get milestonesEmpty => 'No milestones in this state.';
+
+  @override
+  String get milestonesError => 'Could not load milestones.';
+
+  @override
+  String get milestoneDetailError => 'Could not load this milestone.';
+
+  @override
+  String get milestoneStartDate => 'Start date';
+
+  @override
+  String get milestoneDueDate => 'Due date';
+
+  @override
+  String get milestoneLoadMore => 'Load more';
+
+  @override
   String get appTitle => 'LabFox';
 
   @override

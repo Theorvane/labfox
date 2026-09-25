@@ -9,6 +9,33 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get milestonesTitle => 'マイルストーン';
+
+  @override
+  String get milestonesActive => '進行中';
+
+  @override
+  String get milestonesClosed => '終了';
+
+  @override
+  String get milestonesEmpty => 'この状態のマイルストーンはありません。';
+
+  @override
+  String get milestonesError => 'マイルストーンを読み込めませんでした。';
+
+  @override
+  String get milestoneDetailError => 'このマイルストーンを読み込めませんでした。';
+
+  @override
+  String get milestoneStartDate => '開始日';
+
+  @override
+  String get milestoneDueDate => '期限';
+
+  @override
+  String get milestoneLoadMore => 'さらに読み込む';
+
+  @override
   String get appTitle => 'LabFox';
 
   @override

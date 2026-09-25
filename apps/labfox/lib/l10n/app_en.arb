@@ -1,5 +1,14 @@
 {
   "@@locale": "en",
+  "milestonesTitle": "Milestones",
+  "milestonesActive": "Active",
+  "milestonesClosed": "Closed",
+  "milestonesEmpty": "No milestones in this state.",
+  "milestonesError": "Could not load milestones.",
+  "milestoneDetailError": "Could not load this milestone.",
+  "milestoneStartDate": "Start date",
+  "milestoneDueDate": "Due date",
+  "milestoneLoadMore": "Load more",
   "appTitle": "LabFox",
   "@appTitle": {
     "description": "The application name, shown in the task switcher and app bar"
