@@ -104,6 +104,228 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
+  /// No description provided for @projectMembersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Members'**
+  String get projectMembersTitle;
+
+  /// No description provided for @projectMembersSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search members'**
+  String get projectMembersSearch;
+
+  /// No description provided for @projectMembersClearSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear search'**
+  String get projectMembersClearSearch;
+
+  /// No description provided for @projectMembersEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No members found.'**
+  String get projectMembersEmpty;
+
+  /// No description provided for @projectMembersError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load members.'**
+  String get projectMembersError;
+
+  /// No description provided for @projectMembersLoadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get projectMembersLoadMore;
+
+  /// No description provided for @projectMembersExpiry.
+  ///
+  /// In en, this message translates to:
+  /// **'Expires'**
+  String get projectMembersExpiry;
+
+  /// No description provided for @memberRoleNoAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'No access'**
+  String get memberRoleNoAccess;
+
+  /// No description provided for @memberRoleMinimal.
+  ///
+  /// In en, this message translates to:
+  /// **'Minimal access'**
+  String get memberRoleMinimal;
+
+  /// No description provided for @memberRoleGuest.
+  ///
+  /// In en, this message translates to:
+  /// **'Guest'**
+  String get memberRoleGuest;
+
+  /// No description provided for @memberRolePlanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Planner'**
+  String get memberRolePlanner;
+
+  /// No description provided for @memberRoleReporter.
+  ///
+  /// In en, this message translates to:
+  /// **'Reporter'**
+  String get memberRoleReporter;
+
+  /// No description provided for @memberRoleSecurityManager.
+  ///
+  /// In en, this message translates to:
+  /// **'Security manager'**
+  String get memberRoleSecurityManager;
+
+  /// No description provided for @memberRoleDeveloper.
+  ///
+  /// In en, this message translates to:
+  /// **'Developer'**
+  String get memberRoleDeveloper;
+
+  /// No description provided for @memberRoleMaintainer.
+  ///
+  /// In en, this message translates to:
+  /// **'Maintainer'**
+  String get memberRoleMaintainer;
+
+  /// No description provided for @memberRoleOwner.
+  ///
+  /// In en, this message translates to:
+  /// **'Owner'**
+  String get memberRoleOwner;
+
+  /// No description provided for @memberRoleUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown role'**
+  String get memberRoleUnknown;
+
+  /// No description provided for @containerRegistryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Container registry'**
+  String get containerRegistryTitle;
+
+  /// No description provided for @containerRegistryEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No container images yet.'**
+  String get containerRegistryEmpty;
+
+  /// No description provided for @containerRegistryError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load container images.'**
+  String get containerRegistryError;
+
+  /// No description provided for @containerTagsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Image tags'**
+  String get containerTagsTitle;
+
+  /// No description provided for @containerTagsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No tags yet.'**
+  String get containerTagsEmpty;
+
+  /// No description provided for @containerTagsError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load image tags.'**
+  String get containerTagsError;
+
+  /// No description provided for @containerTagError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this tag.'**
+  String get containerTagError;
+
+  /// No description provided for @containerTagDigest.
+  ///
+  /// In en, this message translates to:
+  /// **'Digest'**
+  String get containerTagDigest;
+
+  /// No description provided for @containerTagRevision.
+  ///
+  /// In en, this message translates to:
+  /// **'Revision'**
+  String get containerTagRevision;
+
+  /// No description provided for @containerTagSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Size (bytes)'**
+  String get containerTagSize;
+
+  /// No description provided for @containerLoadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get containerLoadMore;
+
+  /// No description provided for @milestonesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Milestones'**
+  String get milestonesTitle;
+
+  /// No description provided for @milestonesActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get milestonesActive;
+
+  /// No description provided for @milestonesClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get milestonesClosed;
+
+  /// No description provided for @milestonesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No milestones in this state.'**
+  String get milestonesEmpty;
+
+  /// No description provided for @milestonesError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load milestones.'**
+  String get milestonesError;
+
+  /// No description provided for @milestoneDetailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this milestone.'**
+  String get milestoneDetailError;
+
+  /// No description provided for @milestoneStartDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Start date'**
+  String get milestoneStartDate;
+
+  /// No description provided for @milestoneDueDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Due date'**
+  String get milestoneDueDate;
+
+  /// No description provided for @milestoneLoadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get milestoneLoadMore;
+
   /// The application name, shown in the task switcher and app bar
   ///
   /// In en, this message translates to:
@@ -337,6 +559,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not load your groups.'**
   String get groupsError;
+
+  /// Fallback title while a group detail is loading
+  ///
+  /// In en, this message translates to:
+  /// **'Group'**
+  String get groupDetailTitle;
+
+  /// Shown when a group detail or its children fail to load
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this group.'**
+  String get groupDetailError;
+
+  /// Section title for direct child groups
+  ///
+  /// In en, this message translates to:
+  /// **'Subgroups'**
+  String get groupSubgroups;
+
+  /// Shown when a group has no visible direct subgroups
+  ///
+  /// In en, this message translates to:
+  /// **'No subgroups.'**
+  String get groupSubgroupsEmpty;
+
+  /// Section title for projects directly in a group
+  ///
+  /// In en, this message translates to:
+  /// **'Projects'**
+  String get groupProjects;
+
+  /// Shown when a group has no visible direct projects
+  ///
+  /// In en, this message translates to:
+  /// **'No projects in this group.'**
+  String get groupProjectsEmpty;
+
+  /// Loads the next page of group projects or subgroups
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get groupLoadMore;
 
   /// Title of the projects list screen
   ///
@@ -1777,6 +2041,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recent'**
   String get homeRecents;
+
+  /// Title of the project wiki page list
+  ///
+  /// In en, this message translates to:
+  /// **'Wiki'**
+  String get wikiTitle;
+
+  /// Shown when a project wiki has no pages
+  ///
+  /// In en, this message translates to:
+  /// **'No wiki pages yet.'**
+  String get wikiEmpty;
+
+  /// Shown when loading the project wiki fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load wiki pages.'**
+  String get wikiListError;
+
+  /// Shown when reading a wiki page fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this wiki page.'**
+  String get wikiPageError;
+
+  /// Project package registry title and entry
+  ///
+  /// In en, this message translates to:
+  /// **'Package registry'**
+  String get packageRegistryTitle;
+
+  /// Empty project package registry
+  ///
+  /// In en, this message translates to:
+  /// **'No packages yet.'**
+  String get packageRegistryEmpty;
+
+  /// Package list loading error
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load packages.'**
+  String get packageRegistryError;
+
+  /// Package detail loading error
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this package.'**
+  String get packageDetailError;
+
+  /// Package files section title
+  ///
+  /// In en, this message translates to:
+  /// **'Files'**
+  String get packageFiles;
+
+  /// Empty package files section
+  ///
+  /// In en, this message translates to:
+  /// **'This package has no files.'**
+  String get packageFilesEmpty;
+
+  /// Load the next page of packages or package files
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get packageLoadMore;
 }
 
 class _AppLocalizationsDelegate

@@ -9,6 +9,117 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get projectMembersTitle => 'Members';
+
+  @override
+  String get projectMembersSearch => 'Search members';
+
+  @override
+  String get projectMembersClearSearch => 'Clear search';
+
+  @override
+  String get projectMembersEmpty => 'No members found.';
+
+  @override
+  String get projectMembersError => 'Could not load members.';
+
+  @override
+  String get projectMembersLoadMore => 'Load more';
+
+  @override
+  String get projectMembersExpiry => 'Expires';
+
+  @override
+  String get memberRoleNoAccess => 'No access';
+
+  @override
+  String get memberRoleMinimal => 'Minimal access';
+
+  @override
+  String get memberRoleGuest => 'Guest';
+
+  @override
+  String get memberRolePlanner => 'Planner';
+
+  @override
+  String get memberRoleReporter => 'Reporter';
+
+  @override
+  String get memberRoleSecurityManager => 'Security manager';
+
+  @override
+  String get memberRoleDeveloper => 'Developer';
+
+  @override
+  String get memberRoleMaintainer => 'Maintainer';
+
+  @override
+  String get memberRoleOwner => 'Owner';
+
+  @override
+  String get memberRoleUnknown => 'Unknown role';
+
+  @override
+  String get containerRegistryTitle => 'Container registry';
+
+  @override
+  String get containerRegistryEmpty => 'No container images yet.';
+
+  @override
+  String get containerRegistryError => 'Could not load container images.';
+
+  @override
+  String get containerTagsTitle => 'Image tags';
+
+  @override
+  String get containerTagsEmpty => 'No tags yet.';
+
+  @override
+  String get containerTagsError => 'Could not load image tags.';
+
+  @override
+  String get containerTagError => 'Could not load this tag.';
+
+  @override
+  String get containerTagDigest => 'Digest';
+
+  @override
+  String get containerTagRevision => 'Revision';
+
+  @override
+  String get containerTagSize => 'Size (bytes)';
+
+  @override
+  String get containerLoadMore => 'Load more';
+
+  @override
+  String get milestonesTitle => 'Milestones';
+
+  @override
+  String get milestonesActive => 'Active';
+
+  @override
+  String get milestonesClosed => 'Closed';
+
+  @override
+  String get milestonesEmpty => 'No milestones in this state.';
+
+  @override
+  String get milestonesError => 'Could not load milestones.';
+
+  @override
+  String get milestoneDetailError => 'Could not load this milestone.';
+
+  @override
+  String get milestoneStartDate => 'Start date';
+
+  @override
+  String get milestoneDueDate => 'Due date';
+
+  @override
+  String get milestoneLoadMore => 'Load more';
+
+  @override
   String get appTitle => 'LabFox';
 
   @override
@@ -133,6 +244,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get groupsError => 'Could not load your groups.';
+
+  @override
+  String get groupDetailTitle => 'Group';
+
+  @override
+  String get groupDetailError => 'Could not load this group.';
+
+  @override
+  String get groupSubgroups => 'Subgroups';
+
+  @override
+  String get groupSubgroupsEmpty => 'No subgroups.';
+
+  @override
+  String get groupProjects => 'Projects';
+
+  @override
+  String get groupProjectsEmpty => 'No projects in this group.';
+
+  @override
+  String get groupLoadMore => 'Load more';
 
   @override
   String get projectsTitle => 'Projects';
@@ -892,4 +1024,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeRecents => 'Recent';
+
+  @override
+  String get wikiTitle => 'Wiki';
+
+  @override
+  String get wikiEmpty => 'No wiki pages yet.';
+
+  @override
+  String get wikiListError => 'Could not load wiki pages.';
+
+  @override
+  String get wikiPageError => 'Could not load this wiki page.';
+
+  @override
+  String get packageRegistryTitle => 'Package registry';
+
+  @override
+  String get packageRegistryEmpty => 'No packages yet.';
+
+  @override
+  String get packageRegistryError => 'Could not load packages.';
+
+  @override
+  String get packageDetailError => 'Could not load this package.';
+
+  @override
+  String get packageFiles => 'Files';
+
+  @override
+  String get packageFilesEmpty => 'This package has no files.';
+
+  @override
+  String get packageLoadMore => 'Load more';
 }

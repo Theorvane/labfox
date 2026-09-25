@@ -309,8 +309,15 @@ Productivity (to-do inbox, search, recents, favorites).
 Security Dashboard, GitLab Analytics (Value Stream, CI/CD Analytics, Insights),
 Admin Area, Runner Administration, AI features.
 
-Every entry above is a **GitLab feature area** LabFox does not mirror. None of them
-is a statement about LabFox's own instrumentation. Anonymous product telemetry —
+**Maintainer-approved expansion (September 2026)** — The ongoing GitLab mobile-web
+parity work explicitly includes the feature areas above, including Wiki, Packages,
+Registry, and administration. Treat the list as the original 1.0 baseline, not a
+ban on the separately requested parity issues. Each slice still follows the issue,
+test, review, and `dev`-branch workflow; this approval does not waive quality gates.
+
+Every entry above is a **GitLab feature area** omitted from the original 1.0
+baseline. None of them is a statement about LabFox's own instrumentation.
+Anonymous product telemetry —
 how LabFox itself is used — **is in scope for 1.0**: it is what tells us which
 parts of the core flow (§1) actually get used. What it may collect is bounded by
 §7 and by the privacy policy shipped in the app (`PRIVACY.md`): no tokens, no
