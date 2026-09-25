@@ -1,0 +1,55 @@
+import 'package:dio/dio.dart';
+import 'package:gitlab_models/gitlab_models.dart';
+
+import '../gitlab_client.dart';
+
+/// Project wiki endpoints.
+class WikisApi {
+  const WikisApi(this._dio);
+
+  final Dio _dio;
+
+  String _path(Object projectId) =>
+      '/projects/${Uri.encodeComponent(projectId.toString())}/wikis';
+
+  /// Lists page titles and slugs without downloading all page bodies.
+  Future<List<WikiPage>> list(Object projectId) async {
+    try {
+      final response = await _dio.get<dynamic>(
+        _path(projectId),
+        queryParameters: {'with_content': false},
+      );
+      if (response.statusCode != 200) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'listing wiki pages',
+        );
+      }
+      final data = (response.data as List<dynamic>? ?? const [])
+          .cast<Map<String, dynamic>>();
+      return data.map(WikiPage.fromJson).toList(growable: false);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'listing wiki pages');
+    }
+  }
+
+  /// Reads one page, preserving a nested slug as a single URL segment.
+  Future<WikiPage> get(Object projectId, String slug) async {
+    try {
+      final response = await _dio.get<dynamic>(
+        '${_path(projectId)}/${Uri.encodeComponent(slug)}',
+      );
+      if (response.statusCode != 200 || response.data == null) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'reading a wiki page',
+        );
+      }
+      return WikiPage.fromJson(response.data as Map<String, dynamic>);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'reading a wiki page');
+    }
+  }
+}

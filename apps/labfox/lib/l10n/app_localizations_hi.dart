@@ -957,6 +957,18 @@ class AppLocalizationsHi extends AppLocalizations {
   String get homeRecents => 'हाल ही में';
 
   @override
+  String get wikiTitle => 'विकी';
+
+  @override
+  String get wikiEmpty => 'अभी कोई विकी पृष्ठ नहीं है।';
+
+  @override
+  String get wikiListError => 'विकी पृष्ठ लोड नहीं हो सके।';
+
+  @override
+  String get wikiPageError => 'यह विकी पृष्ठ लोड नहीं हो सका।';
+
+  @override
   String get packageRegistryTitle => 'पैकेज रजिस्ट्री';
 
   @override

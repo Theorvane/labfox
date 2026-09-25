@@ -47,6 +47,19 @@ void main() {
       expect(project.defaultBranch, isNull);
     });
 
+    test('parses project wiki availability', () {
+      final project = Project.fromJson(const {
+        'id': 1,
+        'name': 'docs',
+        'path_with_namespace': 'team/docs',
+        'wiki_access_level': 'disabled',
+        'wiki_enabled': false,
+      });
+
+      expect(project.wikiAccessLevel, 'disabled');
+      expect(project.wikiEnabled, isFalse);
+    });
+
     test('parses package registry availability', () {
       final project = Project.fromJson(const {
         'id': 1,

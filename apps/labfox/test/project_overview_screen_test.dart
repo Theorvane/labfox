@@ -91,6 +91,7 @@ void main() {
     expect(find.text('Issues'), findsOneWidget);
     expect(find.text('Merge requests'), findsOneWidget);
     expect(find.text('Pipelines'), findsOneWidget);
+    expect(find.text('Wiki'), findsOneWidget);
     expect(find.text('Package registry'), findsOneWidget);
     expect(find.text('Milestones'), findsOneWidget);
   });
@@ -181,6 +182,27 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Container registry'), findsNothing);
+  });
+
+  testWidgets('hides the wiki entry when the project disables it', (
+    tester,
+  ) async {
+    await _pump(
+      tester,
+      AsyncData(
+        _overview(
+          project: const Project(
+            id: 1,
+            name: 'backend',
+            pathWithNamespace: 'team/backend',
+            wikiAccessLevel: 'disabled',
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Wiki'), findsNothing);
   });
 
   testWidgets('hides the package entry when the registry is disabled', (
