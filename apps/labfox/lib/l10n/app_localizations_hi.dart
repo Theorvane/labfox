@@ -9,6 +9,57 @@ class AppLocalizationsHi extends AppLocalizations {
   AppLocalizationsHi([String locale = 'hi']) : super(locale);
 
   @override
+  String get projectMembersTitle => 'सदस्य';
+
+  @override
+  String get projectMembersSearch => 'सदस्य खोजें';
+
+  @override
+  String get projectMembersClearSearch => 'खोज साफ़ करें';
+
+  @override
+  String get projectMembersEmpty => 'कोई सदस्य नहीं मिला।';
+
+  @override
+  String get projectMembersError => 'सदस्य लोड नहीं हो सके।';
+
+  @override
+  String get projectMembersLoadMore => 'और लोड करें';
+
+  @override
+  String get projectMembersExpiry => 'समाप्ति';
+
+  @override
+  String get memberRoleNoAccess => 'कोई पहुँच नहीं';
+
+  @override
+  String get memberRoleMinimal => 'न्यूनतम पहुँच';
+
+  @override
+  String get memberRoleGuest => 'अतिथि';
+
+  @override
+  String get memberRolePlanner => 'योजनाकार';
+
+  @override
+  String get memberRoleReporter => 'रिपोर्टर';
+
+  @override
+  String get memberRoleSecurityManager => 'सुरक्षा प्रबंधक';
+
+  @override
+  String get memberRoleDeveloper => 'डेवलपर';
+
+  @override
+  String get memberRoleMaintainer => 'मेंटेनर';
+
+  @override
+  String get memberRoleOwner => 'स्वामी';
+
+  @override
+  String get memberRoleUnknown => 'अज्ञात भूमिका';
+
+  @override
   String get containerRegistryTitle => 'कंटेनर रजिस्ट्री';
 
   @override
