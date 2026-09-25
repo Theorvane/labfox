@@ -149,4 +149,25 @@ void main() {
     expect(find.text('Browse code'), findsNothing);
     expect(find.text('0'), findsNothing);
   });
+
+  testWidgets('hides container registry when GitLab disables it', (
+    tester,
+  ) async {
+    await _pump(
+      tester,
+      AsyncData(
+        _overview(
+          project: const Project(
+            id: 1,
+            name: 'backend',
+            pathWithNamespace: 'youthpick/backend',
+            containerRegistryAccessLevel: 'disabled',
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Container registry'), findsNothing);
+  });
 }

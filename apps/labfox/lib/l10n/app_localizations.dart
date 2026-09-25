@@ -104,6 +104,72 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
+  /// No description provided for @containerRegistryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Container registry'**
+  String get containerRegistryTitle;
+
+  /// No description provided for @containerRegistryEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No container images yet.'**
+  String get containerRegistryEmpty;
+
+  /// No description provided for @containerRegistryError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load container images.'**
+  String get containerRegistryError;
+
+  /// No description provided for @containerTagsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Image tags'**
+  String get containerTagsTitle;
+
+  /// No description provided for @containerTagsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No tags yet.'**
+  String get containerTagsEmpty;
+
+  /// No description provided for @containerTagsError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load image tags.'**
+  String get containerTagsError;
+
+  /// No description provided for @containerTagError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this tag.'**
+  String get containerTagError;
+
+  /// No description provided for @containerTagDigest.
+  ///
+  /// In en, this message translates to:
+  /// **'Digest'**
+  String get containerTagDigest;
+
+  /// No description provided for @containerTagRevision.
+  ///
+  /// In en, this message translates to:
+  /// **'Revision'**
+  String get containerTagRevision;
+
+  /// No description provided for @containerTagSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Size (bytes)'**
+  String get containerTagSize;
+
+  /// No description provided for @containerLoadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get containerLoadMore;
+
   /// The application name, shown in the task switcher and app bar
   ///
   /// In en, this message translates to:

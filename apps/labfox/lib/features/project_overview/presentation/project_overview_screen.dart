@@ -147,6 +147,13 @@ class _Categories extends StatelessWidget {
           label: l10n.projectOverviewPipelines,
           onTap: () => context.push(Routes.pipelines(project.id)),
         ),
+        if (project.containerRegistryAccessLevel != 'disabled')
+          LauncherTile(
+            icon: LabFoxIcons.containerRegistry,
+            color: status.pending.foreground,
+            label: l10n.containerRegistryTitle,
+            onTap: () => context.push(Routes.containerRegistry(project.id)),
+          ),
         if (branch != null)
           LauncherTile(
             icon: LabFoxIcons.history,

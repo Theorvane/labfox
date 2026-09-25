@@ -1,5 +1,16 @@
 {
   "@@locale": "en",
+  "containerRegistryTitle": "Container registry",
+  "containerRegistryEmpty": "No container images yet.",
+  "containerRegistryError": "Could not load container images.",
+  "containerTagsTitle": "Image tags",
+  "containerTagsEmpty": "No tags yet.",
+  "containerTagsError": "Could not load image tags.",
+  "containerTagError": "Could not load this tag.",
+  "containerTagDigest": "Digest",
+  "containerTagRevision": "Revision",
+  "containerTagSize": "Size (bytes)",
+  "containerLoadMore": "Load more",
   "appTitle": "LabFox",
   "@appTitle": {
     "description": "The application name, shown in the task switcher and app bar"

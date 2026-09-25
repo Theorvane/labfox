@@ -14,6 +14,8 @@ _Project _$ProjectFromJson(Map<String, dynamic> json) => _Project(
   starCount: (json['star_count'] as num?)?.toInt() ?? 0,
   visibility: json['visibility'] as String?,
   defaultBranch: json['default_branch'] as String?,
+  containerRegistryAccessLevel:
+      json['container_registry_access_level'] as String?,
   openIssuesCount: (json['open_issues_count'] as num?)?.toInt(),
   forksCount: (json['forks_count'] as num?)?.toInt(),
   avatarUrl: json['avatar_url'] as String?,
@@ -31,6 +33,7 @@ Map<String, dynamic> _$ProjectToJson(_Project instance) => <String, dynamic>{
   'star_count': instance.starCount,
   'visibility': instance.visibility,
   'default_branch': instance.defaultBranch,
+  'container_registry_access_level': instance.containerRegistryAccessLevel,
   'open_issues_count': instance.openIssuesCount,
   'forks_count': instance.forksCount,
   'avatar_url': instance.avatarUrl,

@@ -10,6 +10,9 @@ import '../features/auth/presentation/sign_in_screen.dart';
 import '../features/branches/presentation/branches_screen.dart';
 import '../features/commits/presentation/commit_detail_screen.dart';
 import '../features/commits/presentation/commits_screen.dart';
+import '../features/container_registry/presentation/container_registry_screen.dart';
+import '../features/container_registry/presentation/container_repository_screen.dart';
+import '../features/container_registry/presentation/container_tag_screen.dart';
 import '../features/diff/presentation/changes_screen.dart';
 import '../features/diff/presentation/controllers/diff_controllers.dart';
 import '../features/groups/presentation/groups_screen.dart';
@@ -61,6 +64,11 @@ abstract final class Routes {
   static const String myMergeRequests = '/dashboard/merge_requests';
 
   static String projectOverview(int id) => '/projects/$id';
+  static String containerRegistry(int id) => '/projects/$id/container_registry';
+  static String containerRepository(int id, int repositoryId) =>
+      '/projects/$id/container_registry/$repositoryId';
+  static String containerTag(int id, int repositoryId, String tagName) =>
+      '/projects/$id/container_registry/$repositoryId/tags/${Uri.encodeComponent(tagName)}';
 
   // Repository browsing. The tree path and file path travel as a query
   // parameter, not a nested segment, because a repository path contains its own
@@ -207,6 +215,35 @@ final routerProvider = Provider<GoRouter>((ref) {
               return ProjectOverviewScreen(projectId: id);
             },
             routes: [
+              GoRoute(
+                path: 'container_registry',
+                builder: (context, state) => ContainerRegistryScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':repositoryId',
+                    builder: (context, state) => ContainerRepositoryScreen(
+                      projectId: int.parse(state.pathParameters['id']!),
+                      repositoryId: int.parse(
+                        state.pathParameters['repositoryId']!,
+                      ),
+                    ),
+                    routes: [
+                      GoRoute(
+                        path: 'tags/:tagName',
+                        builder: (context, state) => ContainerTagScreen(
+                          projectId: int.parse(state.pathParameters['id']!),
+                          repositoryId: int.parse(
+                            state.pathParameters['repositoryId']!,
+                          ),
+                          tagName: state.pathParameters['tagName']!,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
               GoRoute(
                 path: 'tree',
                 builder: (context, state) {
