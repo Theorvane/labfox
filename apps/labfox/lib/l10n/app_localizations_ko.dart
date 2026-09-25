@@ -9,6 +9,51 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
+  String get environmentsTitle => '환경';
+
+  @override
+  String get environmentsAll => '전체';
+
+  @override
+  String get environmentsAvailable => '사용 가능';
+
+  @override
+  String get environmentsStopping => '중지 중';
+
+  @override
+  String get environmentsStopped => '중지됨';
+
+  @override
+  String get environmentsSearch => '환경 검색';
+
+  @override
+  String get environmentsSearchLength => '3자 이상 입력하세요.';
+
+  @override
+  String get environmentsEmpty => '환경을 찾을 수 없습니다.';
+
+  @override
+  String get environmentsError => '환경을 불러올 수 없습니다.';
+
+  @override
+  String get environmentsLoadMore => '더 보기';
+
+  @override
+  String get environmentDetailError => '이 환경을 불러올 수 없습니다.';
+
+  @override
+  String get environmentAutoStop => '자동 중지';
+
+  @override
+  String get environmentOpenUrl => '환경 열기';
+
+  @override
+  String get environmentLatestDeployment => '최근 배포';
+
+  @override
+  String get environmentUnknownStatus => '알 수 없는 상태';
+
+  @override
   String get containerRegistryTitle => '컨테이너 레지스트리';
 
   @override

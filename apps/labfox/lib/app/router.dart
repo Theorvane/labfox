@@ -15,6 +15,8 @@ import '../features/container_registry/presentation/container_repository_screen.
 import '../features/container_registry/presentation/container_tag_screen.dart';
 import '../features/diff/presentation/changes_screen.dart';
 import '../features/diff/presentation/controllers/diff_controllers.dart';
+import '../features/environments/presentation/environment_detail_screen.dart';
+import '../features/environments/presentation/environments_screen.dart';
 import '../features/groups/presentation/group_detail_screen.dart';
 import '../features/groups/presentation/groups_screen.dart';
 import '../features/home/presentation/home_screen.dart';
@@ -86,6 +88,9 @@ abstract final class Routes {
   static String milestones(int id) => '/projects/$id/milestones';
   static String milestone(int id, int milestoneId) =>
       '/projects/$id/milestones/$milestoneId';
+  static String environments(int id) => '/projects/$id/environments';
+  static String environment(int id, int environmentId) =>
+      '/projects/$id/environments/$environmentId';
 
   // Repository browsing. The tree path and file path travel as a query
   // parameter, not a nested segment, because a repository path contains its own
@@ -311,6 +316,23 @@ final routerProvider = Provider<GoRouter>((ref) {
                       projectId: int.parse(state.pathParameters['id']!),
                       milestoneId: int.parse(
                         state.pathParameters['milestoneId']!,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: 'environments',
+                builder: (context, state) => EnvironmentsScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':environmentId',
+                    builder: (context, state) => EnvironmentDetailScreen(
+                      projectId: int.parse(state.pathParameters['id']!),
+                      environmentId: int.parse(
+                        state.pathParameters['environmentId']!,
                       ),
                     ),
                   ),

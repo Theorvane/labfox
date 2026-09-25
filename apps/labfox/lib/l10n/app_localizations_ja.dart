@@ -9,6 +9,51 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get environmentsTitle => '環境';
+
+  @override
+  String get environmentsAll => 'すべて';
+
+  @override
+  String get environmentsAvailable => '利用可能';
+
+  @override
+  String get environmentsStopping => '停止中';
+
+  @override
+  String get environmentsStopped => '停止済み';
+
+  @override
+  String get environmentsSearch => '環境を検索';
+
+  @override
+  String get environmentsSearchLength => '3文字以上入力してください。';
+
+  @override
+  String get environmentsEmpty => '環境が見つかりません。';
+
+  @override
+  String get environmentsError => '環境を読み込めませんでした。';
+
+  @override
+  String get environmentsLoadMore => 'さらに表示';
+
+  @override
+  String get environmentDetailError => 'この環境を読み込めませんでした。';
+
+  @override
+  String get environmentAutoStop => '自動停止';
+
+  @override
+  String get environmentOpenUrl => '環境を開く';
+
+  @override
+  String get environmentLatestDeployment => '最新のデプロイ';
+
+  @override
+  String get environmentUnknownStatus => '不明な状態';
+
+  @override
   String get containerRegistryTitle => 'コンテナレジストリ';
 
   @override

@@ -9,6 +9,51 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
+  String get environmentsTitle => '环境';
+
+  @override
+  String get environmentsAll => '全部';
+
+  @override
+  String get environmentsAvailable => '可用';
+
+  @override
+  String get environmentsStopping => '停止中';
+
+  @override
+  String get environmentsStopped => '已停止';
+
+  @override
+  String get environmentsSearch => '搜索环境';
+
+  @override
+  String get environmentsSearchLength => '请至少输入 3 个字符。';
+
+  @override
+  String get environmentsEmpty => '未找到环境。';
+
+  @override
+  String get environmentsError => '无法加载环境。';
+
+  @override
+  String get environmentsLoadMore => '加载更多';
+
+  @override
+  String get environmentDetailError => '无法加载此环境。';
+
+  @override
+  String get environmentAutoStop => '自动停止';
+
+  @override
+  String get environmentOpenUrl => '打开环境';
+
+  @override
+  String get environmentLatestDeployment => '最新部署';
+
+  @override
+  String get environmentUnknownStatus => '未知状态';
+
+  @override
   String get containerRegistryTitle => '容器镜像仓库';
 
   @override
