@@ -1,5 +1,14 @@
 {
   "@@locale": "ja",
+  "milestonesTitle": "マイルストーン",
+  "milestonesActive": "進行中",
+  "milestonesClosed": "終了",
+  "milestonesEmpty": "この状態のマイルストーンはありません。",
+  "milestonesError": "マイルストーンを読み込めませんでした。",
+  "milestoneDetailError": "このマイルストーンを読み込めませんでした。",
+  "milestoneStartDate": "開始日",
+  "milestoneDueDate": "期限",
+  "milestoneLoadMore": "さらに読み込む",
   "appTitle": "LabFox",
   "homeTitle": "ホーム",
   "homeSignedInAs": "{username} としてサインイン中",
@@ -170,5 +179,12 @@
   "packageDetailError": "このパッケージを読み込めませんでした。",
   "packageFiles": "ファイル",
   "packageFilesEmpty": "このパッケージにはファイルがありません。",
-  "packageLoadMore": "さらに読み込む"
+  "packageLoadMore": "さらに読み込む",
+  "groupDetailTitle": "グループ",
+  "groupDetailError": "このグループを読み込めませんでした。",
+  "groupSubgroups": "サブグループ",
+  "groupSubgroupsEmpty": "サブグループはありません。",
+  "groupProjects": "プロジェクト",
+  "groupProjectsEmpty": "このグループにプロジェクトはありません。",
+  "groupLoadMore": "さらに読み込む"
 }
