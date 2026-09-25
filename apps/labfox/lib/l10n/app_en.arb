@@ -1,5 +1,14 @@
 {
   "@@locale": "en",
+  "milestonesTitle": "Milestones",
+  "milestonesActive": "Active",
+  "milestonesClosed": "Closed",
+  "milestonesEmpty": "No milestones in this state.",
+  "milestonesError": "Could not load milestones.",
+  "milestoneDetailError": "Could not load this milestone.",
+  "milestoneStartDate": "Start date",
+  "milestoneDueDate": "Due date",
+  "milestoneLoadMore": "Load more",
   "appTitle": "LabFox",
   "@appTitle": {
     "description": "The application name, shown in the task switcher and app bar"
@@ -161,6 +170,34 @@
   "groupsError": "Could not load your groups.",
   "@groupsError": {
     "description": "Shown when the groups list fails to load"
+  },
+  "groupDetailTitle": "Group",
+  "@groupDetailTitle": {
+    "description": "Fallback title while a group detail is loading"
+  },
+  "groupDetailError": "Could not load this group.",
+  "@groupDetailError": {
+    "description": "Shown when a group detail or its children fail to load"
+  },
+  "groupSubgroups": "Subgroups",
+  "@groupSubgroups": {
+    "description": "Section title for direct child groups"
+  },
+  "groupSubgroupsEmpty": "No subgroups.",
+  "@groupSubgroupsEmpty": {
+    "description": "Shown when a group has no visible direct subgroups"
+  },
+  "groupProjects": "Projects",
+  "@groupProjects": {
+    "description": "Section title for projects directly in a group"
+  },
+  "groupProjectsEmpty": "No projects in this group.",
+  "@groupProjectsEmpty": {
+    "description": "Shown when a group has no visible direct projects"
+  },
+  "groupLoadMore": "Load more",
+  "@groupLoadMore": {
+    "description": "Loads the next page of group projects or subgroups"
   },
   "projectsTitle": "Projects",
   "@projectsTitle": {

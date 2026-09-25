@@ -1,5 +1,14 @@
 {
   "@@locale": "ko",
+  "milestonesTitle": "마일스톤",
+  "milestonesActive": "진행 중",
+  "milestonesClosed": "종료됨",
+  "milestonesEmpty": "이 상태의 마일스톤이 없습니다.",
+  "milestonesError": "마일스톤을 불러올 수 없습니다.",
+  "milestoneDetailError": "이 마일스톤을 불러올 수 없습니다.",
+  "milestoneStartDate": "시작일",
+  "milestoneDueDate": "마감일",
+  "milestoneLoadMore": "더 보기",
   "appTitle": "LabFox",
   "homeTitle": "홈",
   "homeSignedInAs": "{username} 님으로 로그인됨",
@@ -182,5 +191,12 @@
   "projectLabelRequired": "필수 입력 항목입니다",
   "projectLabelInvalidColor": "#5843AD와 같은 색상을 입력하세요",
   "projectLabelCreate": "라벨 만들기",
-  "projectLabelCreateError": "라벨을 만들 수 없습니다. 권한과 입력값을 확인하세요."
+  "projectLabelCreateError": "라벨을 만들 수 없습니다. 권한과 입력값을 확인하세요.",
+  "groupDetailTitle": "그룹",
+  "groupDetailError": "이 그룹을 불러오지 못했습니다.",
+  "groupSubgroups": "하위 그룹",
+  "groupSubgroupsEmpty": "하위 그룹이 없습니다.",
+  "groupProjects": "프로젝트",
+  "groupProjectsEmpty": "이 그룹에 프로젝트가 없습니다.",
+  "groupLoadMore": "더 보기"
 }

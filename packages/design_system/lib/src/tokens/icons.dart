@@ -28,6 +28,7 @@ abstract final class LabFoxIcons {
   static const IconData document = Icons.description_outlined;
   static const IconData diff = Icons.difference_outlined;
   static const IconData label = Icons.label_outline;
+  static const IconData milestone = Icons.flag_outlined;
 
   // ── CI ──────────────────────────────────────────────────────────────────
   static const IconData pipeline = Icons.rocket_launch_outlined;
