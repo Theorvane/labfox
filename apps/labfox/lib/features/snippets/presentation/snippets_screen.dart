@@ -107,9 +107,6 @@ class _SnippetBody extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final files = snippet.files;
-    final content = files.length > 1
-        ? null
-        : ref.watch(snippetRawProvider(SnippetRef(projectId, snippet.id)));
     return Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 1000),
@@ -145,7 +142,11 @@ class _SnippetBody extends ConsumerWidget {
                 style: LabFoxTextRoles.of(context).sectionHeader,
               ),
               const SizedBox(height: LabFoxSpacing.sm),
-              _Content(content: content!),
+              _Content(
+                content: ref.watch(
+                  snippetRawProvider(SnippetRef(projectId, snippet.id)),
+                ),
+              ),
             ],
           ],
         ),
