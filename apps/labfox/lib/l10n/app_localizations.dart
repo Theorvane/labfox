@@ -170,6 +170,60 @@ abstract class AppLocalizations {
   /// **'Load more'**
   String get containerLoadMore;
 
+  /// No description provided for @milestonesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Milestones'**
+  String get milestonesTitle;
+
+  /// No description provided for @milestonesActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get milestonesActive;
+
+  /// No description provided for @milestonesClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get milestonesClosed;
+
+  /// No description provided for @milestonesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No milestones in this state.'**
+  String get milestonesEmpty;
+
+  /// No description provided for @milestonesError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load milestones.'**
+  String get milestonesError;
+
+  /// No description provided for @milestoneDetailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this milestone.'**
+  String get milestoneDetailError;
+
+  /// No description provided for @milestoneStartDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Start date'**
+  String get milestoneStartDate;
+
+  /// No description provided for @milestoneDueDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Due date'**
+  String get milestoneDueDate;
+
+  /// No description provided for @milestoneLoadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get milestoneLoadMore;
+
   /// The application name, shown in the task switcher and app bar
   ///
   /// In en, this message translates to:
@@ -403,6 +457,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not load your groups.'**
   String get groupsError;
+
+  /// Fallback title while a group detail is loading
+  ///
+  /// In en, this message translates to:
+  /// **'Group'**
+  String get groupDetailTitle;
+
+  /// Shown when a group detail or its children fail to load
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this group.'**
+  String get groupDetailError;
+
+  /// Section title for direct child groups
+  ///
+  /// In en, this message translates to:
+  /// **'Subgroups'**
+  String get groupSubgroups;
+
+  /// Shown when a group has no visible direct subgroups
+  ///
+  /// In en, this message translates to:
+  /// **'No subgroups.'**
+  String get groupSubgroupsEmpty;
+
+  /// Section title for projects directly in a group
+  ///
+  /// In en, this message translates to:
+  /// **'Projects'**
+  String get groupProjects;
+
+  /// Shown when a group has no visible direct projects
+  ///
+  /// In en, this message translates to:
+  /// **'No projects in this group.'**
+  String get groupProjectsEmpty;
+
+  /// Loads the next page of group projects or subgroups
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get groupLoadMore;
 
   /// Title of the projects list screen
   ///
@@ -1807,6 +1903,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recent'**
   String get homeRecents;
+
+  /// Project package registry title and entry
+  ///
+  /// In en, this message translates to:
+  /// **'Package registry'**
+  String get packageRegistryTitle;
+
+  /// Empty project package registry
+  ///
+  /// In en, this message translates to:
+  /// **'No packages yet.'**
+  String get packageRegistryEmpty;
+
+  /// Package list loading error
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load packages.'**
+  String get packageRegistryError;
+
+  /// Package detail loading error
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this package.'**
+  String get packageDetailError;
+
+  /// Package files section title
+  ///
+  /// In en, this message translates to:
+  /// **'Files'**
+  String get packageFiles;
+
+  /// Empty package files section
+  ///
+  /// In en, this message translates to:
+  /// **'This package has no files.'**
+  String get packageFilesEmpty;
+
+  /// Load the next page of packages or package files
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get packageLoadMore;
 }
 
 class _AppLocalizationsDelegate

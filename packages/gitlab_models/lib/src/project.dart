@@ -21,6 +21,8 @@ abstract class Project with _$Project {
     @JsonKey(name: 'default_branch') String? defaultBranch,
     @JsonKey(name: 'container_registry_access_level')
     String? containerRegistryAccessLevel,
+    @JsonKey(name: 'package_registry_access_level')
+    String? packageRegistryAccessLevel,
     // Null when GitLab omits the count on a reduced payload — unknown, not
     // zero, so the UI hides it instead of showing a false 0.
     @JsonKey(name: 'open_issues_count') int? openIssuesCount,

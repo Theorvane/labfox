@@ -42,6 +42,33 @@ class AppLocalizationsZh extends AppLocalizations {
   String get containerLoadMore => '加载更多';
 
   @override
+  String get milestonesTitle => '里程碑';
+
+  @override
+  String get milestonesActive => '进行中';
+
+  @override
+  String get milestonesClosed => '已关闭';
+
+  @override
+  String get milestonesEmpty => '此状态下没有里程碑。';
+
+  @override
+  String get milestonesError => '无法加载里程碑。';
+
+  @override
+  String get milestoneDetailError => '无法加载此里程碑。';
+
+  @override
+  String get milestoneStartDate => '开始日期';
+
+  @override
+  String get milestoneDueDate => '截止日期';
+
+  @override
+  String get milestoneLoadMore => '加载更多';
+
+  @override
   String get appTitle => 'LabFox';
 
   @override
@@ -160,6 +187,27 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get groupsError => 'Could not load your groups.';
+
+  @override
+  String get groupDetailTitle => '群组';
+
+  @override
+  String get groupDetailError => '无法加载此群组。';
+
+  @override
+  String get groupSubgroups => '子群组';
+
+  @override
+  String get groupSubgroupsEmpty => '没有子群组。';
+
+  @override
+  String get groupProjects => '项目';
+
+  @override
+  String get groupProjectsEmpty => '此群组中没有项目。';
+
+  @override
+  String get groupLoadMore => '加载更多';
 
   @override
   String get projectsTitle => '项目';
@@ -888,4 +936,25 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get homeRecents => '最近';
+
+  @override
+  String get packageRegistryTitle => '软件包仓库';
+
+  @override
+  String get packageRegistryEmpty => '还没有软件包。';
+
+  @override
+  String get packageRegistryError => '无法加载软件包。';
+
+  @override
+  String get packageDetailError => '无法加载此软件包。';
+
+  @override
+  String get packageFiles => '文件';
+
+  @override
+  String get packageFilesEmpty => '此软件包没有文件。';
+
+  @override
+  String get packageLoadMore => '加载更多';
 }
