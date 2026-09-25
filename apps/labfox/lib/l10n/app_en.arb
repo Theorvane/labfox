@@ -1,5 +1,22 @@
 {
   "@@locale": "en",
+  "projectMembersTitle": "Members",
+  "projectMembersSearch": "Search members",
+  "projectMembersClearSearch": "Clear search",
+  "projectMembersEmpty": "No members found.",
+  "projectMembersError": "Could not load members.",
+  "projectMembersLoadMore": "Load more",
+  "projectMembersExpiry": "Expires",
+  "memberRoleNoAccess": "No access",
+  "memberRoleMinimal": "Minimal access",
+  "memberRoleGuest": "Guest",
+  "memberRolePlanner": "Planner",
+  "memberRoleReporter": "Reporter",
+  "memberRoleSecurityManager": "Security manager",
+  "memberRoleDeveloper": "Developer",
+  "memberRoleMaintainer": "Maintainer",
+  "memberRoleOwner": "Owner",
+  "memberRoleUnknown": "Unknown role",
   "appTitle": "LabFox",
   "@appTitle": {
     "description": "The application name, shown in the task switcher and app bar"

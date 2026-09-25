@@ -9,6 +9,57 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
+  String get projectMembersTitle => '멤버';
+
+  @override
+  String get projectMembersSearch => '멤버 검색';
+
+  @override
+  String get projectMembersClearSearch => '검색 지우기';
+
+  @override
+  String get projectMembersEmpty => '멤버를 찾을 수 없습니다.';
+
+  @override
+  String get projectMembersError => '멤버를 불러올 수 없습니다.';
+
+  @override
+  String get projectMembersLoadMore => '더 보기';
+
+  @override
+  String get projectMembersExpiry => '만료일';
+
+  @override
+  String get memberRoleNoAccess => '접근 권한 없음';
+
+  @override
+  String get memberRoleMinimal => '최소 접근 권한';
+
+  @override
+  String get memberRoleGuest => '게스트';
+
+  @override
+  String get memberRolePlanner => '플래너';
+
+  @override
+  String get memberRoleReporter => '리포터';
+
+  @override
+  String get memberRoleSecurityManager => '보안 관리자';
+
+  @override
+  String get memberRoleDeveloper => '개발자';
+
+  @override
+  String get memberRoleMaintainer => '메인테이너';
+
+  @override
+  String get memberRoleOwner => '소유자';
+
+  @override
+  String get memberRoleUnknown => '알 수 없는 역할';
+
+  @override
   String get appTitle => 'LabFox';
 
   @override

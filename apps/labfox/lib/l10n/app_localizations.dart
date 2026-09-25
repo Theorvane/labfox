@@ -104,6 +104,108 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
+  /// No description provided for @projectMembersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Members'**
+  String get projectMembersTitle;
+
+  /// No description provided for @projectMembersSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search members'**
+  String get projectMembersSearch;
+
+  /// No description provided for @projectMembersClearSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear search'**
+  String get projectMembersClearSearch;
+
+  /// No description provided for @projectMembersEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No members found.'**
+  String get projectMembersEmpty;
+
+  /// No description provided for @projectMembersError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load members.'**
+  String get projectMembersError;
+
+  /// No description provided for @projectMembersLoadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get projectMembersLoadMore;
+
+  /// No description provided for @projectMembersExpiry.
+  ///
+  /// In en, this message translates to:
+  /// **'Expires'**
+  String get projectMembersExpiry;
+
+  /// No description provided for @memberRoleNoAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'No access'**
+  String get memberRoleNoAccess;
+
+  /// No description provided for @memberRoleMinimal.
+  ///
+  /// In en, this message translates to:
+  /// **'Minimal access'**
+  String get memberRoleMinimal;
+
+  /// No description provided for @memberRoleGuest.
+  ///
+  /// In en, this message translates to:
+  /// **'Guest'**
+  String get memberRoleGuest;
+
+  /// No description provided for @memberRolePlanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Planner'**
+  String get memberRolePlanner;
+
+  /// No description provided for @memberRoleReporter.
+  ///
+  /// In en, this message translates to:
+  /// **'Reporter'**
+  String get memberRoleReporter;
+
+  /// No description provided for @memberRoleSecurityManager.
+  ///
+  /// In en, this message translates to:
+  /// **'Security manager'**
+  String get memberRoleSecurityManager;
+
+  /// No description provided for @memberRoleDeveloper.
+  ///
+  /// In en, this message translates to:
+  /// **'Developer'**
+  String get memberRoleDeveloper;
+
+  /// No description provided for @memberRoleMaintainer.
+  ///
+  /// In en, this message translates to:
+  /// **'Maintainer'**
+  String get memberRoleMaintainer;
+
+  /// No description provided for @memberRoleOwner.
+  ///
+  /// In en, this message translates to:
+  /// **'Owner'**
+  String get memberRoleOwner;
+
+  /// No description provided for @memberRoleUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown role'**
+  String get memberRoleUnknown;
+
   /// The application name, shown in the task switcher and app bar
   ///
   /// In en, this message translates to:
