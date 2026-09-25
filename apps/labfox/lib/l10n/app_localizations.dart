@@ -1736,6 +1736,42 @@ abstract class AppLocalizations {
   /// **'Switch account'**
   String get meAccounts;
 
+  /// No description provided for @snippetsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Snippets'**
+  String get snippetsTitle;
+
+  /// No description provided for @snippetsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No snippets yet'**
+  String get snippetsEmpty;
+
+  /// No description provided for @snippetsError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load snippets.'**
+  String get snippetsError;
+
+  /// No description provided for @snippetError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load this snippet.'**
+  String get snippetError;
+
+  /// No description provided for @snippetContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Content'**
+  String get snippetContent;
+
+  /// No description provided for @snippetContentError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load snippet content.'**
+  String get snippetContentError;
+
   /// Home section title for recently opened projects
   ///
   /// In en, this message translates to:

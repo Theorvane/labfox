@@ -163,5 +163,11 @@
   "navMe": "मैं",
   "meTitle": "मैं",
   "meSettings": "सेटिंग्स",
-  "meAccounts": "खाता बदलें"
+  "meAccounts": "खाता बदलें",
+  "snippetsTitle": "स्निपेट",
+  "snippetsEmpty": "अभी कोई स्निपेट नहीं है",
+  "snippetsError": "स्निपेट लोड नहीं हो सके।",
+  "snippetError": "यह स्निपेट लोड नहीं हो सका।",
+  "snippetContent": "सामग्री",
+  "snippetContentError": "स्निपेट सामग्री लोड नहीं हो सकी।"
 }

@@ -1,0 +1,80 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gitlab_models/gitlab_models.dart';
+
+import '../../../../core/auth/gitlab_client_provider.dart';
+import '../../data/snippets_repository.dart';
+
+final snippetsRepositoryProvider = FutureProvider<SnippetsRepository?>((
+  ref,
+) async {
+  final client = await ref.watch(gitLabClientProvider.future);
+  return client == null ? null : SnippetsRepository(client);
+});
+
+Future<SnippetsRepository> _repository(Ref ref) async {
+  final repository = await ref.watch(snippetsRepositoryProvider.future);
+  if (repository == null) throw StateError('No authenticated account');
+  return repository;
+}
+
+final projectSnippetsProvider = FutureProvider.family<List<Snippet>, int>((
+  ref,
+  projectId,
+) async {
+  return (await _repository(ref)).list(projectId);
+});
+
+class SnippetRef {
+  const SnippetRef(this.projectId, this.snippetId);
+  final int projectId;
+  final int snippetId;
+
+  @override
+  bool operator ==(Object other) =>
+      other is SnippetRef &&
+      other.projectId == projectId &&
+      other.snippetId == snippetId;
+  @override
+  int get hashCode => Object.hash(projectId, snippetId);
+}
+
+final projectSnippetProvider = FutureProvider.family<Snippet, SnippetRef>((
+  ref,
+  item,
+) async {
+  return (await _repository(ref)).get(item.projectId, item.snippetId);
+});
+
+final snippetRawProvider = FutureProvider.family<String, SnippetRef>((
+  ref,
+  item,
+) async {
+  return (await _repository(ref)).raw(item.projectId, item.snippetId);
+});
+
+class SnippetFileRef {
+  const SnippetFileRef(this.projectId, this.snippetId, this.path);
+  final int projectId;
+  final int snippetId;
+  final String path;
+
+  @override
+  bool operator ==(Object other) =>
+      other is SnippetFileRef &&
+      other.projectId == projectId &&
+      other.snippetId == snippetId &&
+      other.path == path;
+  @override
+  int get hashCode => Object.hash(projectId, snippetId, path);
+}
+
+final snippetFileProvider = FutureProvider.family<String, SnippetFileRef>((
+  ref,
+  item,
+) async {
+  final snippet = await ref.watch(
+    projectSnippetProvider(SnippetRef(item.projectId, item.snippetId)).future,
+  );
+  final file = snippet.files.firstWhere((file) => file.path == item.path);
+  return (await _repository(ref)).file(item.projectId, item.snippetId, file);
+});

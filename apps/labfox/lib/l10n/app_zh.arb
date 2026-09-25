@@ -163,5 +163,11 @@
   "navMe": "我",
   "meTitle": "我",
   "meSettings": "设置",
-  "meAccounts": "切换账户"
+  "meAccounts": "切换账户",
+  "snippetsTitle": "代码片段",
+  "snippetsEmpty": "暂无代码片段",
+  "snippetsError": "无法加载代码片段。",
+  "snippetError": "无法加载此代码片段。",
+  "snippetContent": "内容",
+  "snippetContentError": "无法加载代码片段内容。"
 }

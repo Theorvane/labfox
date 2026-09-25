@@ -858,5 +858,23 @@ class AppLocalizationsKo extends AppLocalizations {
   String get meAccounts => '계정 전환';
 
   @override
+  String get snippetsTitle => '스니펫';
+
+  @override
+  String get snippetsEmpty => '스니펫이 없습니다';
+
+  @override
+  String get snippetsError => '스니펫을 불러올 수 없습니다.';
+
+  @override
+  String get snippetError => '스니펫을 불러올 수 없습니다.';
+
+  @override
+  String get snippetContent => '내용';
+
+  @override
+  String get snippetContentError => '스니펫 내용을 불러올 수 없습니다.';
+
+  @override
   String get homeRecents => '최근';
 }

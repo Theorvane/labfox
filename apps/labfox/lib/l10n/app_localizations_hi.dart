@@ -873,5 +873,23 @@ class AppLocalizationsHi extends AppLocalizations {
   String get meAccounts => 'खाता बदलें';
 
   @override
+  String get snippetsTitle => 'स्निपेट';
+
+  @override
+  String get snippetsEmpty => 'अभी कोई स्निपेट नहीं है';
+
+  @override
+  String get snippetsError => 'स्निपेट लोड नहीं हो सके।';
+
+  @override
+  String get snippetError => 'यह स्निपेट लोड नहीं हो सका।';
+
+  @override
+  String get snippetContent => 'सामग्री';
+
+  @override
+  String get snippetContentError => 'स्निपेट सामग्री लोड नहीं हो सकी।';
+
+  @override
   String get homeRecents => 'हाल ही में';
 }

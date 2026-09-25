@@ -36,6 +36,7 @@ import '../features/settings/presentation/privacy_screen.dart';
 import '../features/settings/presentation/settings_screen.dart';
 import '../features/settings/presentation/subscription_screen.dart';
 import '../features/shell/presentation/app_shell.dart';
+import '../features/snippets/presentation/snippets_screen.dart';
 
 /// Route paths.
 ///
@@ -61,6 +62,11 @@ abstract final class Routes {
   static const String myMergeRequests = '/dashboard/merge_requests';
 
   static String projectOverview(int id) => '/projects/$id';
+  static String snippets(int id) => '/projects/$id/snippets';
+  static String snippet(int id, int snippetId) =>
+      '/projects/$id/snippets/$snippetId';
+  static String snippetFile(int id, int snippetId, String path) =>
+      '/projects/$id/snippets/$snippetId/file?path=${Uri.encodeQueryComponent(path)}';
 
   // Repository browsing. The tree path and file path travel as a query
   // parameter, not a nested segment, because a repository path contains its own
@@ -219,6 +225,27 @@ final routerProvider = Provider<GoRouter>((ref) {
                     path: path,
                   );
                 },
+              ),
+              GoRoute(
+                path: 'snippets',
+                builder: (context, state) => SnippetsScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+              ),
+              GoRoute(
+                path: 'snippets/:snippetId',
+                builder: (context, state) => SnippetDetailScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                  snippetId: int.parse(state.pathParameters['snippetId']!),
+                ),
+              ),
+              GoRoute(
+                path: 'snippets/:snippetId/file',
+                builder: (context, state) => SnippetFileScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                  snippetId: int.parse(state.pathParameters['snippetId']!),
+                  path: state.uri.queryParameters['path']!,
+                ),
               ),
               GoRoute(
                 path: 'file',

@@ -1125,6 +1125,12 @@
   "@meAccounts": {
     "description": "Profile entry that opens the account switcher"
   },
+  "snippetsTitle": "Snippets",
+  "snippetsEmpty": "No snippets yet",
+  "snippetsError": "Couldn't load snippets.",
+  "snippetError": "Couldn't load this snippet.",
+  "snippetContent": "Content",
+  "snippetContentError": "Couldn't load snippet content.",
   "homeRecents": "Recent",
   "@homeRecents": {
     "description": "Home section title for recently opened projects"

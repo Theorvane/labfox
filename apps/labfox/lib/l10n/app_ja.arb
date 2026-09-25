@@ -163,5 +163,11 @@
   "navMe": "マイページ",
   "meTitle": "マイページ",
   "meSettings": "設定",
-  "meAccounts": "アカウント切り替え"
+  "meAccounts": "アカウント切り替え",
+  "snippetsTitle": "スニペット",
+  "snippetsEmpty": "スニペットはまだありません",
+  "snippetsError": "スニペットを読み込めませんでした。",
+  "snippetError": "このスニペットを読み込めませんでした。",
+  "snippetContent": "内容",
+  "snippetContentError": "スニペットの内容を読み込めませんでした。"
 }

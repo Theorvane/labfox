@@ -163,5 +163,11 @@
   "navMe": "내 정보",
   "meTitle": "내 정보",
   "meSettings": "설정",
-  "meAccounts": "계정 전환"
+  "meAccounts": "계정 전환",
+  "snippetsTitle": "스니펫",
+  "snippetsEmpty": "스니펫이 없습니다",
+  "snippetsError": "스니펫을 불러올 수 없습니다.",
+  "snippetError": "스니펫을 불러올 수 없습니다.",
+  "snippetContent": "내용",
+  "snippetContentError": "스니펫 내용을 불러올 수 없습니다."
 }

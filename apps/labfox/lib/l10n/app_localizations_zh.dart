@@ -854,5 +854,23 @@ class AppLocalizationsZh extends AppLocalizations {
   String get meAccounts => '切换账户';
 
   @override
+  String get snippetsTitle => '代码片段';
+
+  @override
+  String get snippetsEmpty => '暂无代码片段';
+
+  @override
+  String get snippetsError => '无法加载代码片段。';
+
+  @override
+  String get snippetError => '无法加载此代码片段。';
+
+  @override
+  String get snippetContent => '内容';
+
+  @override
+  String get snippetContentError => '无法加载代码片段内容。';
+
+  @override
   String get homeRecents => '最近';
 }
