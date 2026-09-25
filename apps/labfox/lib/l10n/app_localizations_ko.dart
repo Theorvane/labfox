@@ -9,6 +9,39 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
+  String get containerRegistryTitle => '컨테이너 레지스트리';
+
+  @override
+  String get containerRegistryEmpty => '컨테이너 이미지가 아직 없습니다.';
+
+  @override
+  String get containerRegistryError => '컨테이너 이미지를 불러올 수 없습니다.';
+
+  @override
+  String get containerTagsTitle => '이미지 태그';
+
+  @override
+  String get containerTagsEmpty => '태그가 아직 없습니다.';
+
+  @override
+  String get containerTagsError => '이미지 태그를 불러올 수 없습니다.';
+
+  @override
+  String get containerTagError => '이 태그를 불러올 수 없습니다.';
+
+  @override
+  String get containerTagDigest => '다이제스트';
+
+  @override
+  String get containerTagRevision => '리비전';
+
+  @override
+  String get containerTagSize => '크기(바이트)';
+
+  @override
+  String get containerLoadMore => '더 보기';
+
+  @override
   String get milestonesTitle => '마일스톤';
 
   @override

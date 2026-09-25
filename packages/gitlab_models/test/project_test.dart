@@ -2,6 +2,15 @@ import 'package:gitlab_models/gitlab_models.dart';
 import 'package:test/test.dart';
 
 void main() {
+  test('Project parses container registry availability', () {
+    final project = Project.fromJson({
+      'id': 7,
+      'name': 'app',
+      'path_with_namespace': 'team/app',
+      'container_registry_access_level': 'disabled',
+    });
+    expect(project.containerRegistryAccessLevel, 'disabled');
+  });
   group('Project', () {
     test('parses a full GitLab payload', () {
       final project = Project.fromJson(const {
