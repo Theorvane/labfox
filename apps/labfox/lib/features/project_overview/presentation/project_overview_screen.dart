@@ -193,6 +193,21 @@ class _Categories extends StatelessWidget {
           label: l10n.projectOverviewPipelines,
           onTap: () => context.push(Routes.pipelines(project.id)),
         ),
+        if (project.wikiAccessLevel != 'disabled' &&
+            project.wikiEnabled != false)
+          LauncherTile(
+            icon: LabFoxIcons.document,
+            color: status.pending.foreground,
+            label: l10n.wikiTitle,
+            onTap: () => context.push(Routes.wiki(project.id)),
+          ),
+        if (project.packageRegistryAccessLevel != 'disabled')
+          LauncherTile(
+            icon: LabFoxIcons.packageRegistry,
+            color: status.pending.foreground,
+            label: l10n.packageRegistryTitle,
+            onTap: () => context.push(Routes.packages(project.id)),
+          ),
         LauncherTile(
           icon: LabFoxIcons.label,
           color: status.pending.foreground,

@@ -1,0 +1,95 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:dio/dio.dart';
+import 'package:gitlab_api/gitlab_api.dart';
+import 'package:test/test.dart';
+
+void main() {
+  test('lists wiki pages without requesting full content', () async {
+    late RequestOptions request;
+    final client = _client((options) {
+      request = options;
+      return (
+        status: 200,
+        body: [
+          {'title': 'Home', 'slug': 'home', 'format': 'markdown'},
+        ],
+      );
+    });
+
+    final pages = await client.wikis.list('team/project');
+
+    expect(request.path, '/projects/team%2Fproject/wikis');
+    expect(request.queryParameters['with_content'], false);
+    expect(pages.single.title, 'Home');
+    expect(pages.single.content, isNull);
+  });
+
+  test('reads a nested wiki slug as one encoded path segment', () async {
+    late RequestOptions request;
+    final client = _client((options) {
+      request = options;
+      return (
+        status: 200,
+        body: {
+          'title': 'Install',
+          'slug': 'docs/install',
+          'content': '# Install',
+          'format': 'markdown',
+        },
+      );
+    });
+
+    final page = await client.wikis.get(7, 'docs/install');
+
+    expect(request.path, '/projects/7/wikis/docs%2Finstall');
+    expect(page.content, '# Install');
+  });
+
+  test('maps permission errors while reading wiki pages', () async {
+    final client = _client((_) => (status: 403, body: const {}));
+
+    await expectLater(
+      client.wikis.get(7, 'home'),
+      throwsA(isA<GitLabForbiddenException>()),
+    );
+  });
+}
+
+GitLabClient _client(
+  ({int status, Object? body}) Function(RequestOptions) handler,
+) {
+  final dio = Dio(BaseOptions(validateStatus: (s) => s != null && s < 500));
+  dio.httpClientAdapter = _Adapter(handler);
+  return GitLabClient(
+    baseUrl: 'https://example.com',
+    token: 'glpat-xxxxxxxxxxxx',
+    dio: dio,
+  );
+}
+
+class _Adapter implements HttpClientAdapter {
+  _Adapter(this.handler);
+
+  final ({int status, Object? body}) Function(RequestOptions) handler;
+
+  @override
+  Future<ResponseBody> fetch(
+    RequestOptions options,
+    Stream<Uint8List>? requestStream,
+    Future<void>? cancelFuture,
+  ) async {
+    final result = handler(options);
+    return ResponseBody.fromString(
+      jsonEncode(result.body),
+      result.status,
+      headers: {
+        Headers.contentTypeHeader: [Headers.jsonContentType],
+      },
+    );
+  }
+
+  @override
+  void close({bool force = false}) {}
+}

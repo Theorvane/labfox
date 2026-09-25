@@ -963,4 +963,37 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get homeRecents => '最近';
+
+  @override
+  String get wikiTitle => 'Wiki';
+
+  @override
+  String get wikiEmpty => 'Wikiページはまだありません。';
+
+  @override
+  String get wikiListError => 'Wikiページを読み込めませんでした。';
+
+  @override
+  String get wikiPageError => 'このWikiページを読み込めませんでした。';
+
+  @override
+  String get packageRegistryTitle => 'パッケージレジストリ';
+
+  @override
+  String get packageRegistryEmpty => 'パッケージはまだありません。';
+
+  @override
+  String get packageRegistryError => 'パッケージを読み込めませんでした。';
+
+  @override
+  String get packageDetailError => 'このパッケージを読み込めませんでした。';
+
+  @override
+  String get packageFiles => 'ファイル';
+
+  @override
+  String get packageFilesEmpty => 'このパッケージにはファイルがありません。';
+
+  @override
+  String get packageLoadMore => 'さらに読み込む';
 }

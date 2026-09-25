@@ -960,4 +960,37 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get homeRecents => '最近';
+
+  @override
+  String get wikiTitle => 'Wiki';
+
+  @override
+  String get wikiEmpty => '还没有 Wiki 页面。';
+
+  @override
+  String get wikiListError => '无法加载 Wiki 页面。';
+
+  @override
+  String get wikiPageError => '无法加载此 Wiki 页面。';
+
+  @override
+  String get packageRegistryTitle => '软件包仓库';
+
+  @override
+  String get packageRegistryEmpty => '还没有软件包。';
+
+  @override
+  String get packageRegistryError => '无法加载软件包。';
+
+  @override
+  String get packageDetailError => '无法加载此软件包。';
+
+  @override
+  String get packageFiles => '文件';
+
+  @override
+  String get packageFilesEmpty => '此软件包没有文件。';
+
+  @override
+  String get packageLoadMore => '加载更多';
 }
