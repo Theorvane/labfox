@@ -27,6 +27,8 @@ import '../features/merge_requests/presentation/my_merge_requests_screen.dart';
 import '../features/merge_requests/presentation/new_merge_request_screen.dart';
 import '../features/milestones/presentation/milestone_detail_screen.dart';
 import '../features/milestones/presentation/milestones_screen.dart';
+import '../features/package_registry/presentation/package_detail_screen.dart';
+import '../features/package_registry/presentation/package_list_screen.dart';
 import '../features/pipelines/presentation/pipeline_detail_screen.dart';
 import '../features/pipelines/presentation/pipelines_screen.dart';
 import '../features/profile/presentation/me_screen.dart';
@@ -40,6 +42,8 @@ import '../features/settings/presentation/settings_screen.dart';
 import '../features/settings/presentation/subscription_screen.dart';
 import '../features/shell/presentation/app_shell.dart';
 import '../features/tags/presentation/tags_screen.dart';
+import '../features/wiki/presentation/wiki_page_screen.dart';
+import '../features/wiki/presentation/wiki_pages_screen.dart';
 
 /// Route paths.
 ///
@@ -69,6 +73,12 @@ abstract final class Routes {
   static String tags(int id) => '/projects/$id/tags';
   static String tag(int id, String name) =>
       '/projects/$id/tags/view?name=${Uri.encodeQueryComponent(name)}';
+  static String wiki(int id) => '/projects/$id/wikis';
+  static String wikiPage(int id, String slug) =>
+      '/projects/$id/wikis/page?slug=${Uri.encodeQueryComponent(slug)}';
+  static String packages(int id) => '/projects/$id/packages';
+  static String packageDetail(int id, int packageId) =>
+      '/projects/$id/packages/$packageId';
   static String milestones(int id) => '/projects/$id/milestones';
   static String milestone(int id, int milestoneId) =>
       '/projects/$id/milestones/$milestoneId';
@@ -226,6 +236,36 @@ final routerProvider = Provider<GoRouter>((ref) {
               return ProjectOverviewScreen(projectId: id);
             },
             routes: [
+              GoRoute(
+                path: 'wikis',
+                builder: (context, state) => WikiPagesScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: 'page',
+                    builder: (context, state) => WikiPageScreen(
+                      projectId: int.parse(state.pathParameters['id']!),
+                      slug: state.uri.queryParameters['slug']!,
+                    ),
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: 'packages',
+                builder: (context, state) => PackageListScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':packageId',
+                    builder: (context, state) => PackageDetailScreen(
+                      projectId: int.parse(state.pathParameters['id']!),
+                      packageId: int.parse(state.pathParameters['packageId']!),
+                    ),
+                  ),
+                ],
+              ),
               GoRoute(
                 path: 'milestones',
                 builder: (context, state) => MilestonesScreen(
