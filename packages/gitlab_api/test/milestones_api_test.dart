@@ -1,0 +1,107 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:dio/dio.dart';
+import 'package:gitlab_api/gitlab_api.dart';
+import 'package:test/test.dart';
+
+void main() {
+  test('lists project milestones and preserves id versus iid', () async {
+    late RequestOptions request;
+    final client = _client((options) {
+      request = options;
+      return (
+        status: 200,
+        headers: {
+          'x-next-page': ['2'],
+        },
+        body: [
+          {
+            'id': 12,
+            'iid': 3,
+            'project_id': 7,
+            'title': '10.0',
+            'state': 'active',
+            'due_date': '2026-10-01',
+          },
+        ],
+      );
+    });
+
+    final page = await client.milestones.list('team/app');
+    expect(request.path, '/projects/team%2Fapp/milestones');
+    expect(request.queryParameters['page'], 1);
+    expect(page.nextPage, 2);
+    expect(page.items.single.id, 12);
+    expect(page.items.single.iid, 3);
+    expect(page.items.single.dueDate, DateTime(2026, 10, 1));
+  });
+
+  test(
+    'gets a milestone using its global id and maps forbidden access',
+    () async {
+      late RequestOptions request;
+      final client = _client((options) {
+        request = options;
+        return (
+          status: 200,
+          headers: <String, List<String>>{},
+          body: {'id': 12, 'iid': 3, 'title': '10.0', 'state': 'active'},
+        );
+      });
+      final milestone = await client.milestones.get(7, 12);
+      expect(request.path, '/projects/7/milestones/12');
+      expect(milestone.iid, 3);
+
+      final forbidden = _client(
+        (_) => (status: 403, headers: const {}, body: const {}),
+      );
+      await expectLater(
+        forbidden.milestones.list(7),
+        throwsA(isA<GitLabForbiddenException>()),
+      );
+    },
+  );
+}
+
+GitLabClient _client(
+  ({int status, Map<String, List<String>> headers, Object? body}) Function(
+    RequestOptions,
+  )
+  handler,
+) {
+  final dio = Dio(BaseOptions(validateStatus: (s) => s != null && s < 500));
+  dio.httpClientAdapter = _Adapter(handler);
+  return GitLabClient(
+    baseUrl: 'https://gitlab.example.com',
+    token: 'glpat-xxxxxxxxxxxx',
+    dio: dio,
+  );
+}
+
+class _Adapter implements HttpClientAdapter {
+  _Adapter(this.handler);
+  final ({int status, Map<String, List<String>> headers, Object? body})
+  Function(RequestOptions)
+  handler;
+
+  @override
+  Future<ResponseBody> fetch(
+    RequestOptions options,
+    Stream<Uint8List>? requestStream,
+    Future<void>? cancelFuture,
+  ) async {
+    final result = handler(options);
+    return ResponseBody.fromString(
+      jsonEncode(result.body),
+      result.status,
+      headers: {
+        Headers.contentTypeHeader: [Headers.jsonContentType],
+        ...result.headers,
+      },
+    );
+  }
+
+  @override
+  void close({bool force = false}) {}
+}
