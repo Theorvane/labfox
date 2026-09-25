@@ -87,7 +87,9 @@ void main() {
     expect(find.text('Binary'), findsOneWidget);
     expect(find.byType(ReleaseDetailScreen), findsOneWidget);
     expect(
-      tester.widget<ReleaseDetailScreen>(find.byType(ReleaseDetailScreen)).tagName,
+      tester
+          .widget<ReleaseDetailScreen>(find.byType(ReleaseDetailScreen))
+          .tagName,
       'release/1',
     );
   });
@@ -98,7 +100,9 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('places release notes beside metadata on wide screens', (tester) async {
+  testWidgets('places release notes beside metadata on wide screens', (
+    tester,
+  ) async {
     await _pump(
       tester,
       size: const Size(1200, 800),

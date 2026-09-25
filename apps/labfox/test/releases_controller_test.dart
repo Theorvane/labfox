@@ -7,10 +7,12 @@ import 'package:labfox/features/releases/presentation/controllers/releases_contr
 
 class _FakeRepository extends ReleasesRepository {
   _FakeRepository()
-    : super(GitLabClient(
-        baseUrl: 'https://gitlab.example.com',
-        token: 'glpat-xxxxxxxxxxxx',
-      ));
+    : super(
+        GitLabClient(
+          baseUrl: 'https://gitlab.example.com',
+          token: 'glpat-xxxxxxxxxxxx',
+        ),
+      );
 
   final pages = <int>[];
 
@@ -22,16 +24,20 @@ class _FakeRepository extends ReleasesRepository {
             items: [GitLabRelease(name: 'First', tagName: 'v1')],
             nextPage: 2,
           )
-        : const Paginated(items: [GitLabRelease(name: 'Second', tagName: 'v2')]);
+        : const Paginated(
+            items: [GitLabRelease(name: 'Second', tagName: 'v2')],
+          );
   }
 }
 
 void main() {
   test('appends each Release page once', () async {
     final repository = _FakeRepository();
-    final container = ProviderContainer(overrides: [
-      releasesRepositoryProvider.overrideWith((ref) async => repository),
-    ]);
+    final container = ProviderContainer(
+      overrides: [
+        releasesRepositoryProvider.overrideWith((ref) async => repository),
+      ],
+    );
     addTearDown(container.dispose);
     final provider = releaseListControllerProvider(7);
 
@@ -40,8 +46,9 @@ void main() {
     await container.read(provider.notifier).loadMore();
 
     expect(repository.pages, [1, 2]);
-    expect(container.read(provider).requireValue.items.map((item) => item.tagName), [
-      'v1', 'v2',
-    ]);
+    expect(
+      container.read(provider).requireValue.items.map((item) => item.tagName),
+      ['v1', 'v2'],
+    );
   });
 }
