@@ -975,6 +975,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeRecents => 'Recent';
 
   @override
+  String get wikiTitle => 'Wiki';
+
+  @override
+  String get wikiEmpty => 'No wiki pages yet.';
+
+  @override
+  String get wikiListError => 'Could not load wiki pages.';
+
+  @override
+  String get wikiPageError => 'Could not load this wiki page.';
+
+  @override
   String get packageRegistryTitle => 'Package registry';
 
   @override

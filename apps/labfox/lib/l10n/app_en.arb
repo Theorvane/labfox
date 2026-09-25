@@ -1183,6 +1183,22 @@
   "@homeRecents": {
     "description": "Home section title for recently opened projects"
   },
+  "wikiTitle": "Wiki",
+  "@wikiTitle": {
+    "description": "Title of the project wiki page list"
+  },
+  "wikiEmpty": "No wiki pages yet.",
+  "@wikiEmpty": {
+    "description": "Shown when a project wiki has no pages"
+  },
+  "wikiListError": "Could not load wiki pages.",
+  "@wikiListError": {
+    "description": "Shown when loading the project wiki fails"
+  },
+  "wikiPageError": "Could not load this wiki page.",
+  "@wikiPageError": {
+    "description": "Shown when reading a wiki page fails"
+  },
   "packageRegistryTitle": "Package registry",
   "@packageRegistryTitle": {"description": "Project package registry title and entry"},
   "packageRegistryEmpty": "No packages yet.",

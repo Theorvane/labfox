@@ -959,6 +959,18 @@ class AppLocalizationsJa extends AppLocalizations {
   String get homeRecents => '最近';
 
   @override
+  String get wikiTitle => 'Wiki';
+
+  @override
+  String get wikiEmpty => 'Wikiページはまだありません。';
+
+  @override
+  String get wikiListError => 'Wikiページを読み込めませんでした。';
+
+  @override
+  String get wikiPageError => 'このWikiページを読み込めませんでした。';
+
+  @override
   String get packageRegistryTitle => 'パッケージレジストリ';
 
   @override

@@ -42,6 +42,8 @@ import '../features/settings/presentation/privacy_screen.dart';
 import '../features/settings/presentation/settings_screen.dart';
 import '../features/settings/presentation/subscription_screen.dart';
 import '../features/shell/presentation/app_shell.dart';
+import '../features/wiki/presentation/wiki_page_screen.dart';
+import '../features/wiki/presentation/wiki_pages_screen.dart';
 
 /// Route paths.
 ///
@@ -69,6 +71,9 @@ abstract final class Routes {
 
   static String projectOverview(int id) => '/projects/$id';
   static String projectMembers(int id) => '/projects/$id/members';
+  static String wiki(int id) => '/projects/$id/wikis';
+  static String wikiPage(int id, String slug) =>
+      '/projects/$id/wikis/page?slug=${Uri.encodeQueryComponent(slug)}';
   static String packages(int id) => '/projects/$id/packages';
   static String packageDetail(int id, int packageId) =>
       '/projects/$id/packages/$packageId';
@@ -234,6 +239,21 @@ final routerProvider = Provider<GoRouter>((ref) {
                 builder: (context, state) => ProjectMembersScreen(
                   projectId: int.parse(state.pathParameters['id']!),
                 ),
+              ),
+              GoRoute(
+                path: 'wikis',
+                builder: (context, state) => WikiPagesScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: 'page',
+                    builder: (context, state) => WikiPageScreen(
+                      projectId: int.parse(state.pathParameters['id']!),
+                      slug: state.uri.queryParameters['slug']!,
+                    ),
+                  ),
+                ],
               ),
               GoRoute(
                 path: 'packages',
