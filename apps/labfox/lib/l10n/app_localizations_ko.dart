@@ -60,6 +60,33 @@ class AppLocalizationsKo extends AppLocalizations {
   String get memberRoleUnknown => '알 수 없는 역할';
 
   @override
+  String get milestonesTitle => '마일스톤';
+
+  @override
+  String get milestonesActive => '진행 중';
+
+  @override
+  String get milestonesClosed => '종료됨';
+
+  @override
+  String get milestonesEmpty => '이 상태의 마일스톤이 없습니다.';
+
+  @override
+  String get milestonesError => '마일스톤을 불러올 수 없습니다.';
+
+  @override
+  String get milestoneDetailError => '이 마일스톤을 불러올 수 없습니다.';
+
+  @override
+  String get milestoneStartDate => '시작일';
+
+  @override
+  String get milestoneDueDate => '마감일';
+
+  @override
+  String get milestoneLoadMore => '더 보기';
+
+  @override
   String get appTitle => 'LabFox';
 
   @override
@@ -180,6 +207,27 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get groupsError => 'Could not load your groups.';
+
+  @override
+  String get groupDetailTitle => '그룹';
+
+  @override
+  String get groupDetailError => '이 그룹을 불러오지 못했습니다.';
+
+  @override
+  String get groupSubgroups => '하위 그룹';
+
+  @override
+  String get groupSubgroupsEmpty => '하위 그룹이 없습니다.';
+
+  @override
+  String get groupProjects => '프로젝트';
+
+  @override
+  String get groupProjectsEmpty => '이 그룹에 프로젝트가 없습니다.';
+
+  @override
+  String get groupLoadMore => '더 보기';
 
   @override
   String get projectsTitle => '프로젝트';

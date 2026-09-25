@@ -12,6 +12,7 @@ export 'src/issues/issues_api.dart';
 export 'src/jobs/jobs_api.dart';
 export 'src/members/project_members_api.dart';
 export 'src/merge_requests/merge_requests_api.dart';
+export 'src/milestones/milestones_api.dart';
 export 'src/notes/notes_api.dart';
 export 'src/oauth/oauth_api.dart';
 export 'src/oauth/pkce.dart';

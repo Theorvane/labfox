@@ -60,6 +60,33 @@ class AppLocalizationsHi extends AppLocalizations {
   String get memberRoleUnknown => 'अज्ञात भूमिका';
 
   @override
+  String get milestonesTitle => 'माइलस्टोन';
+
+  @override
+  String get milestonesActive => 'सक्रिय';
+
+  @override
+  String get milestonesClosed => 'बंद';
+
+  @override
+  String get milestonesEmpty => 'इस स्थिति में कोई माइलस्टोन नहीं है।';
+
+  @override
+  String get milestonesError => 'माइलस्टोन लोड नहीं हो सके।';
+
+  @override
+  String get milestoneDetailError => 'यह माइलस्टोन लोड नहीं हो सका।';
+
+  @override
+  String get milestoneStartDate => 'शुरू होने की तारीख';
+
+  @override
+  String get milestoneDueDate => 'नियत तारीख';
+
+  @override
+  String get milestoneLoadMore => 'और लोड करें';
+
+  @override
   String get appTitle => 'LabFox';
 
   @override
@@ -185,6 +212,27 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get groupsError => 'Could not load your groups.';
+
+  @override
+  String get groupDetailTitle => 'समूह';
+
+  @override
+  String get groupDetailError => 'इस समूह को लोड नहीं किया जा सका।';
+
+  @override
+  String get groupSubgroups => 'उपसमूह';
+
+  @override
+  String get groupSubgroupsEmpty => 'कोई उपसमूह नहीं है।';
+
+  @override
+  String get groupProjects => 'प्रोजेक्ट';
+
+  @override
+  String get groupProjectsEmpty => 'इस समूह में कोई प्रोजेक्ट नहीं है।';
+
+  @override
+  String get groupLoadMore => 'और लोड करें';
 
   @override
   String get projectsTitle => 'प्रोजेक्ट';

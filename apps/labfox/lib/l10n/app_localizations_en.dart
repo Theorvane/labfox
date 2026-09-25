@@ -60,6 +60,33 @@ class AppLocalizationsEn extends AppLocalizations {
   String get memberRoleUnknown => 'Unknown role';
 
   @override
+  String get milestonesTitle => 'Milestones';
+
+  @override
+  String get milestonesActive => 'Active';
+
+  @override
+  String get milestonesClosed => 'Closed';
+
+  @override
+  String get milestonesEmpty => 'No milestones in this state.';
+
+  @override
+  String get milestonesError => 'Could not load milestones.';
+
+  @override
+  String get milestoneDetailError => 'Could not load this milestone.';
+
+  @override
+  String get milestoneStartDate => 'Start date';
+
+  @override
+  String get milestoneDueDate => 'Due date';
+
+  @override
+  String get milestoneLoadMore => 'Load more';
+
+  @override
   String get appTitle => 'LabFox';
 
   @override
@@ -184,6 +211,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get groupsError => 'Could not load your groups.';
+
+  @override
+  String get groupDetailTitle => 'Group';
+
+  @override
+  String get groupDetailError => 'Could not load this group.';
+
+  @override
+  String get groupSubgroups => 'Subgroups';
+
+  @override
+  String get groupSubgroupsEmpty => 'No subgroups.';
+
+  @override
+  String get groupProjects => 'Projects';
+
+  @override
+  String get groupProjectsEmpty => 'No projects in this group.';
+
+  @override
+  String get groupLoadMore => 'Load more';
 
   @override
   String get projectsTitle => 'Projects';
