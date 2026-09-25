@@ -9,6 +9,33 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get milestonesTitle => 'マイルストーン';
+
+  @override
+  String get milestonesActive => '進行中';
+
+  @override
+  String get milestonesClosed => '終了';
+
+  @override
+  String get milestonesEmpty => 'この状態のマイルストーンはありません。';
+
+  @override
+  String get milestonesError => 'マイルストーンを読み込めませんでした。';
+
+  @override
+  String get milestoneDetailError => 'このマイルストーンを読み込めませんでした。';
+
+  @override
+  String get milestoneStartDate => '開始日';
+
+  @override
+  String get milestoneDueDate => '期限';
+
+  @override
+  String get milestoneLoadMore => 'さらに読み込む';
+
+  @override
   String get appTitle => 'LabFox';
 
   @override
@@ -129,6 +156,27 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get groupsError => 'Could not load your groups.';
+
+  @override
+  String get groupDetailTitle => 'グループ';
+
+  @override
+  String get groupDetailError => 'このグループを読み込めませんでした。';
+
+  @override
+  String get groupSubgroups => 'サブグループ';
+
+  @override
+  String get groupSubgroupsEmpty => 'サブグループはありません。';
+
+  @override
+  String get groupProjects => 'プロジェクト';
+
+  @override
+  String get groupProjectsEmpty => 'このグループにプロジェクトはありません。';
+
+  @override
+  String get groupLoadMore => 'さらに読み込む';
 
   @override
   String get projectsTitle => 'プロジェクト';

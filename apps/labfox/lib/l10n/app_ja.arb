@@ -1,5 +1,14 @@
 {
   "@@locale": "ja",
+  "milestonesTitle": "マイルストーン",
+  "milestonesActive": "進行中",
+  "milestonesClosed": "終了",
+  "milestonesEmpty": "この状態のマイルストーンはありません。",
+  "milestonesError": "マイルストーンを読み込めませんでした。",
+  "milestoneDetailError": "このマイルストーンを読み込めませんでした。",
+  "milestoneStartDate": "開始日",
+  "milestoneDueDate": "期限",
+  "milestoneLoadMore": "さらに読み込む",
   "appTitle": "LabFox",
   "homeTitle": "ホーム",
   "homeSignedInAs": "{username} としてサインイン中",
@@ -178,5 +187,12 @@
   "tagPipelineNotice": "タグを作成するとCI/CDパイプラインが開始される場合があります。",
   "tagFieldRequired": "必須項目です",
   "tagCreate": "タグを作成",
-  "tagCreateError": "タグを作成できませんでした。権限と参照元を確認してください。"
+  "tagCreateError": "タグを作成できませんでした。権限と参照元を確認してください。",
+  "groupDetailTitle": "グループ",
+  "groupDetailError": "このグループを読み込めませんでした。",
+  "groupSubgroups": "サブグループ",
+  "groupSubgroupsEmpty": "サブグループはありません。",
+  "groupProjects": "プロジェクト",
+  "groupProjectsEmpty": "このグループにプロジェクトはありません。",
+  "groupLoadMore": "さらに読み込む"
 }

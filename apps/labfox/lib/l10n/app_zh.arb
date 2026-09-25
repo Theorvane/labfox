@@ -1,5 +1,14 @@
 {
   "@@locale": "zh",
+  "milestonesTitle": "里程碑",
+  "milestonesActive": "进行中",
+  "milestonesClosed": "已关闭",
+  "milestonesEmpty": "此状态下没有里程碑。",
+  "milestonesError": "无法加载里程碑。",
+  "milestoneDetailError": "无法加载此里程碑。",
+  "milestoneStartDate": "开始日期",
+  "milestoneDueDate": "截止日期",
+  "milestoneLoadMore": "加载更多",
   "appTitle": "LabFox",
   "homeTitle": "主页",
   "homeSignedInAs": "已登录为 {username}",
@@ -178,5 +187,12 @@
   "tagPipelineNotice": "创建标签可能会启动 CI/CD 流水线。",
   "tagFieldRequired": "此项为必填项",
   "tagCreate": "创建标签",
-  "tagCreateError": "无法创建标签。请检查权限和引用。"
+  "tagCreateError": "无法创建标签。请检查权限和引用。",
+  "groupDetailTitle": "群组",
+  "groupDetailError": "无法加载此群组。",
+  "groupSubgroups": "子群组",
+  "groupSubgroupsEmpty": "没有子群组。",
+  "groupProjects": "项目",
+  "groupProjectsEmpty": "此群组中没有项目。",
+  "groupLoadMore": "加载更多"
 }

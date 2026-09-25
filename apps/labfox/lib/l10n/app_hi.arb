@@ -1,5 +1,14 @@
 {
   "@@locale": "hi",
+  "milestonesTitle": "माइलस्टोन",
+  "milestonesActive": "सक्रिय",
+  "milestonesClosed": "बंद",
+  "milestonesEmpty": "इस स्थिति में कोई माइलस्टोन नहीं है।",
+  "milestonesError": "माइलस्टोन लोड नहीं हो सके।",
+  "milestoneDetailError": "यह माइलस्टोन लोड नहीं हो सका।",
+  "milestoneStartDate": "शुरू होने की तारीख",
+  "milestoneDueDate": "नियत तारीख",
+  "milestoneLoadMore": "और लोड करें",
   "appTitle": "LabFox",
   "homeTitle": "होम",
   "homeSignedInAs": "{username} के रूप में साइन इन",
@@ -178,5 +187,12 @@
   "tagPipelineNotice": "टैग बनाने से CI/CD पाइपलाइन शुरू हो सकती है।",
   "tagFieldRequired": "यह फ़ील्ड आवश्यक है",
   "tagCreate": "टैग बनाएं",
-  "tagCreateError": "टैग नहीं बन सका। अनुमतियाँ और रेफ़रेंस जांचें।"
+  "tagCreateError": "टैग नहीं बन सका। अनुमतियाँ और रेफ़रेंस जांचें।",
+  "groupDetailTitle": "समूह",
+  "groupDetailError": "इस समूह को लोड नहीं किया जा सका।",
+  "groupSubgroups": "उपसमूह",
+  "groupSubgroupsEmpty": "कोई उपसमूह नहीं है।",
+  "groupProjects": "प्रोजेक्ट",
+  "groupProjectsEmpty": "इस समूह में कोई प्रोजेक्ट नहीं है।",
+  "groupLoadMore": "और लोड करें"
 }
