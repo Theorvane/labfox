@@ -81,6 +81,7 @@ void main() {
     expect(find.text('Issues'), findsOneWidget);
     expect(find.text('Merge requests'), findsOneWidget);
     expect(find.text('Pipelines'), findsOneWidget);
+    expect(find.text('Milestones'), findsOneWidget);
   });
 
   testWidgets('shows a no-README message, not a blank, when there is none', (

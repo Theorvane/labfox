@@ -9,6 +9,33 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
+  String get milestonesTitle => '마일스톤';
+
+  @override
+  String get milestonesActive => '진행 중';
+
+  @override
+  String get milestonesClosed => '종료됨';
+
+  @override
+  String get milestonesEmpty => '이 상태의 마일스톤이 없습니다.';
+
+  @override
+  String get milestonesError => '마일스톤을 불러올 수 없습니다.';
+
+  @override
+  String get milestoneDetailError => '이 마일스톤을 불러올 수 없습니다.';
+
+  @override
+  String get milestoneStartDate => '시작일';
+
+  @override
+  String get milestoneDueDate => '마감일';
+
+  @override
+  String get milestoneLoadMore => '더 보기';
+
+  @override
   String get appTitle => 'LabFox';
 
   @override

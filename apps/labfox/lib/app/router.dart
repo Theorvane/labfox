@@ -24,6 +24,8 @@ import '../features/merge_requests/presentation/merge_request_detail_screen.dart
 import '../features/merge_requests/presentation/merge_requests_screen.dart';
 import '../features/merge_requests/presentation/my_merge_requests_screen.dart';
 import '../features/merge_requests/presentation/new_merge_request_screen.dart';
+import '../features/milestones/presentation/milestone_detail_screen.dart';
+import '../features/milestones/presentation/milestones_screen.dart';
 import '../features/pipelines/presentation/pipeline_detail_screen.dart';
 import '../features/pipelines/presentation/pipelines_screen.dart';
 import '../features/profile/presentation/me_screen.dart';
@@ -61,6 +63,9 @@ abstract final class Routes {
   static const String myMergeRequests = '/dashboard/merge_requests';
 
   static String projectOverview(int id) => '/projects/$id';
+  static String milestones(int id) => '/projects/$id/milestones';
+  static String milestone(int id, int milestoneId) =>
+      '/projects/$id/milestones/$milestoneId';
 
   // Repository browsing. The tree path and file path travel as a query
   // parameter, not a nested segment, because a repository path contains its own
@@ -207,6 +212,23 @@ final routerProvider = Provider<GoRouter>((ref) {
               return ProjectOverviewScreen(projectId: id);
             },
             routes: [
+              GoRoute(
+                path: 'milestones',
+                builder: (context, state) => MilestonesScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':milestoneId',
+                    builder: (context, state) => MilestoneDetailScreen(
+                      projectId: int.parse(state.pathParameters['id']!),
+                      milestoneId: int.parse(
+                        state.pathParameters['milestoneId']!,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               GoRoute(
                 path: 'tree',
                 builder: (context, state) {
