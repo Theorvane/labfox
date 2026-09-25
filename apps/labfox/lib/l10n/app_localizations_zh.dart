@@ -9,6 +9,57 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
+  String get projectMembersTitle => '成员';
+
+  @override
+  String get projectMembersSearch => '搜索成员';
+
+  @override
+  String get projectMembersClearSearch => '清除搜索';
+
+  @override
+  String get projectMembersEmpty => '未找到成员。';
+
+  @override
+  String get projectMembersError => '无法加载成员。';
+
+  @override
+  String get projectMembersLoadMore => '加载更多';
+
+  @override
+  String get projectMembersExpiry => '到期日';
+
+  @override
+  String get memberRoleNoAccess => '无访问权限';
+
+  @override
+  String get memberRoleMinimal => '最低访问权限';
+
+  @override
+  String get memberRoleGuest => '访客';
+
+  @override
+  String get memberRolePlanner => '规划者';
+
+  @override
+  String get memberRoleReporter => '报告者';
+
+  @override
+  String get memberRoleSecurityManager => '安全管理员';
+
+  @override
+  String get memberRoleDeveloper => '开发者';
+
+  @override
+  String get memberRoleMaintainer => '维护者';
+
+  @override
+  String get memberRoleOwner => '所有者';
+
+  @override
+  String get memberRoleUnknown => '未知角色';
+
+  @override
   String get containerRegistryTitle => '容器镜像仓库';
 
   @override

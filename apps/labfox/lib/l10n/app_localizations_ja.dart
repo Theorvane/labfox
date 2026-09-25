@@ -9,6 +9,57 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get projectMembersTitle => 'メンバー';
+
+  @override
+  String get projectMembersSearch => 'メンバーを検索';
+
+  @override
+  String get projectMembersClearSearch => '検索をクリア';
+
+  @override
+  String get projectMembersEmpty => 'メンバーが見つかりません。';
+
+  @override
+  String get projectMembersError => 'メンバーを読み込めませんでした。';
+
+  @override
+  String get projectMembersLoadMore => 'さらに読み込む';
+
+  @override
+  String get projectMembersExpiry => '有効期限';
+
+  @override
+  String get memberRoleNoAccess => 'アクセスなし';
+
+  @override
+  String get memberRoleMinimal => '最小アクセス';
+
+  @override
+  String get memberRoleGuest => 'ゲスト';
+
+  @override
+  String get memberRolePlanner => 'プランナー';
+
+  @override
+  String get memberRoleReporter => 'レポーター';
+
+  @override
+  String get memberRoleSecurityManager => 'セキュリティマネージャー';
+
+  @override
+  String get memberRoleDeveloper => 'デベロッパー';
+
+  @override
+  String get memberRoleMaintainer => 'メンテナー';
+
+  @override
+  String get memberRoleOwner => 'オーナー';
+
+  @override
+  String get memberRoleUnknown => '不明なロール';
+
+  @override
   String get containerRegistryTitle => 'コンテナレジストリ';
 
   @override
