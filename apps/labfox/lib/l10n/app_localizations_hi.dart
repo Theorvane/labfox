@@ -9,6 +9,39 @@ class AppLocalizationsHi extends AppLocalizations {
   AppLocalizationsHi([String locale = 'hi']) : super(locale);
 
   @override
+  String get containerRegistryTitle => 'कंटेनर रजिस्ट्री';
+
+  @override
+  String get containerRegistryEmpty => 'अभी कोई कंटेनर इमेज नहीं है।';
+
+  @override
+  String get containerRegistryError => 'कंटेनर इमेज लोड नहीं हो सकीं।';
+
+  @override
+  String get containerTagsTitle => 'इमेज टैग';
+
+  @override
+  String get containerTagsEmpty => 'अभी कोई टैग नहीं है।';
+
+  @override
+  String get containerTagsError => 'इमेज टैग लोड नहीं हो सके।';
+
+  @override
+  String get containerTagError => 'यह टैग लोड नहीं हो सका।';
+
+  @override
+  String get containerTagDigest => 'डाइजेस्ट';
+
+  @override
+  String get containerTagRevision => 'रिविज़न';
+
+  @override
+  String get containerTagSize => 'आकार (बाइट)';
+
+  @override
+  String get containerLoadMore => 'और लोड करें';
+
+  @override
   String get milestonesTitle => 'माइलस्टोन';
 
   @override

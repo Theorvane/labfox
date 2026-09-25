@@ -9,6 +9,39 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
+  String get containerRegistryTitle => '容器镜像仓库';
+
+  @override
+  String get containerRegistryEmpty => '暂无容器镜像。';
+
+  @override
+  String get containerRegistryError => '无法加载容器镜像。';
+
+  @override
+  String get containerTagsTitle => '镜像标签';
+
+  @override
+  String get containerTagsEmpty => '暂无标签。';
+
+  @override
+  String get containerTagsError => '无法加载镜像标签。';
+
+  @override
+  String get containerTagError => '无法加载此标签。';
+
+  @override
+  String get containerTagDigest => '摘要';
+
+  @override
+  String get containerTagRevision => '修订版本';
+
+  @override
+  String get containerTagSize => '大小（字节）';
+
+  @override
+  String get containerLoadMore => '加载更多';
+
+  @override
   String get milestonesTitle => '里程碑';
 
   @override
