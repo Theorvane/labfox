@@ -60,6 +60,39 @@ class AppLocalizationsJa extends AppLocalizations {
   String get memberRoleUnknown => '不明なロール';
 
   @override
+  String get containerRegistryTitle => 'コンテナレジストリ';
+
+  @override
+  String get containerRegistryEmpty => 'コンテナイメージはまだありません。';
+
+  @override
+  String get containerRegistryError => 'コンテナイメージを読み込めませんでした。';
+
+  @override
+  String get containerTagsTitle => 'イメージタグ';
+
+  @override
+  String get containerTagsEmpty => 'タグはまだありません。';
+
+  @override
+  String get containerTagsError => 'イメージタグを読み込めませんでした。';
+
+  @override
+  String get containerTagError => 'このタグを読み込めませんでした。';
+
+  @override
+  String get containerTagDigest => 'ダイジェスト';
+
+  @override
+  String get containerTagRevision => 'リビジョン';
+
+  @override
+  String get containerTagSize => 'サイズ（バイト）';
+
+  @override
+  String get containerLoadMore => 'さらに読み込む';
+
+  @override
   String get milestonesTitle => 'マイルストーン';
 
   @override
