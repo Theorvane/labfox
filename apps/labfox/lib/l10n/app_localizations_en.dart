@@ -9,6 +9,39 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get containerRegistryTitle => 'Container registry';
+
+  @override
+  String get containerRegistryEmpty => 'No container images yet.';
+
+  @override
+  String get containerRegistryError => 'Could not load container images.';
+
+  @override
+  String get containerTagsTitle => 'Image tags';
+
+  @override
+  String get containerTagsEmpty => 'No tags yet.';
+
+  @override
+  String get containerTagsError => 'Could not load image tags.';
+
+  @override
+  String get containerTagError => 'Could not load this tag.';
+
+  @override
+  String get containerTagDigest => 'Digest';
+
+  @override
+  String get containerTagRevision => 'Revision';
+
+  @override
+  String get containerTagSize => 'Size (bytes)';
+
+  @override
+  String get containerLoadMore => 'Load more';
+
+  @override
   String get milestonesTitle => 'Milestones';
 
   @override
