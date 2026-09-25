@@ -858,5 +858,50 @@ class AppLocalizationsKo extends AppLocalizations {
   String get meAccounts => '계정 전환';
 
   @override
+  String get tagsTitle => '태그';
+
+  @override
+  String get tagsEmpty => '태그가 없습니다';
+
+  @override
+  String get tagsError => '태그를 불러올 수 없습니다.';
+
+  @override
+  String get tagsNoMatch => '일치하는 태그가 없습니다';
+
+  @override
+  String get tagSearchHint => '태그 검색';
+
+  @override
+  String get tagError => '이 태그를 불러올 수 없습니다.';
+
+  @override
+  String get tagProtected => '보호된 태그';
+
+  @override
+  String get tagNew => '새 태그';
+
+  @override
+  String get tagName => '태그 이름';
+
+  @override
+  String get tagFromRef => '브랜치, 태그 또는 커밋 SHA에서 만들기';
+
+  @override
+  String get tagMessage => '메시지 (선택 사항)';
+
+  @override
+  String get tagPipelineNotice => '태그를 만들면 CI/CD 파이프라인이 시작될 수 있습니다.';
+
+  @override
+  String get tagFieldRequired => '필수 입력 항목입니다';
+
+  @override
+  String get tagCreate => '태그 만들기';
+
+  @override
+  String get tagCreateError => '태그를 만들 수 없습니다. 권한과 기준 ref를 확인하세요.';
+
+  @override
   String get homeRecents => '최근';
 }

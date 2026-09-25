@@ -13,6 +13,89 @@ class RepositoryApi {
 
   final Dio _dio;
 
+  /// Lists repository tags, most recently updated first by GitLab default.
+  Future<Paginated<RepositoryTag>> tags(
+    Object projectId, {
+    int page = 1,
+    int perPage = 20,
+    String? search,
+  }) async {
+    try {
+      final response = await _dio.get<dynamic>(
+        '/projects/${_enc(projectId)}/repository/tags',
+        queryParameters: {
+          'page': page,
+          'per_page': perPage,
+          if (search != null && search.isNotEmpty) 'search': search,
+        },
+      );
+      if (response.statusCode != 200) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'listing repository tags',
+        );
+      }
+      final items = (response.data as List<dynamic>? ?? const [])
+          .cast<Map<String, dynamic>>()
+          .map(RepositoryTag.fromJson)
+          .toList(growable: false);
+      return Paginated.fromHeaders(items, response.headers.map);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'listing repository tags');
+    }
+  }
+
+  /// Loads one tag. Names can contain slashes, so they remain one URL segment.
+  Future<RepositoryTag> tag(Object projectId, String name) async {
+    try {
+      final response = await _dio.get<dynamic>(
+        '/projects/${_enc(projectId)}/repository/tags/${Uri.encodeComponent(name)}',
+      );
+      if (response.statusCode != 200 ||
+          response.data is! Map<String, dynamic>) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'loading a repository tag',
+        );
+      }
+      return RepositoryTag.fromJson(response.data as Map<String, dynamic>);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'loading a repository tag');
+    }
+  }
+
+  /// Creates a lightweight tag, or an annotated tag when [message] is set.
+  Future<RepositoryTag> createTag(
+    Object projectId, {
+    required String name,
+    required String ref,
+    String? message,
+  }) async {
+    try {
+      final response = await _dio.post<dynamic>(
+        '/projects/${_enc(projectId)}/repository/tags',
+        queryParameters: {
+          'tag_name': name,
+          'ref': ref,
+          if (message != null && message.isNotEmpty) 'message': message,
+        },
+      );
+      if (response.statusCode != 201 ||
+          response.data is! Map<String, dynamic>) {
+        throw mapStatus(
+          response.statusCode,
+          response.headers.map,
+          context: 'creating a repository tag',
+        );
+      }
+      return RepositoryTag.fromJson(response.data as Map<String, dynamic>);
+    } on DioException catch (error) {
+      throw mapError(error, context: 'creating a repository tag');
+    }
+  }
+
   /// Lists a directory of the tree on a ref.
   ///
   /// [path] is a directory path, empty for the root. Results are sorted

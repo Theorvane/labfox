@@ -873,5 +873,51 @@ class AppLocalizationsHi extends AppLocalizations {
   String get meAccounts => 'खाता बदलें';
 
   @override
+  String get tagsTitle => 'टैग';
+
+  @override
+  String get tagsEmpty => 'अभी कोई टैग नहीं है';
+
+  @override
+  String get tagsError => 'टैग लोड नहीं हो सके।';
+
+  @override
+  String get tagsNoMatch => 'कोई मेल खाता टैग नहीं है';
+
+  @override
+  String get tagSearchHint => 'टैग खोजें';
+
+  @override
+  String get tagError => 'यह टैग लोड नहीं हो सका।';
+
+  @override
+  String get tagProtected => 'सुरक्षित टैग';
+
+  @override
+  String get tagNew => 'नया टैग';
+
+  @override
+  String get tagName => 'टैग का नाम';
+
+  @override
+  String get tagFromRef => 'ब्रांच, टैग या कमिट SHA से बनाएं';
+
+  @override
+  String get tagMessage => 'संदेश (वैकल्पिक)';
+
+  @override
+  String get tagPipelineNotice =>
+      'टैग बनाने से CI/CD पाइपलाइन शुरू हो सकती है।';
+
+  @override
+  String get tagFieldRequired => 'यह फ़ील्ड आवश्यक है';
+
+  @override
+  String get tagCreate => 'टैग बनाएं';
+
+  @override
+  String get tagCreateError => 'टैग नहीं बन सका। अनुमतियाँ और रेफ़रेंस जांचें।';
+
+  @override
   String get homeRecents => 'हाल ही में';
 }

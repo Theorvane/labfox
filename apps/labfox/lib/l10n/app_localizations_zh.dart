@@ -854,5 +854,50 @@ class AppLocalizationsZh extends AppLocalizations {
   String get meAccounts => '切换账户';
 
   @override
+  String get tagsTitle => '标签';
+
+  @override
+  String get tagsEmpty => '暂无标签';
+
+  @override
+  String get tagsError => '无法加载标签。';
+
+  @override
+  String get tagsNoMatch => '没有匹配的标签';
+
+  @override
+  String get tagSearchHint => '搜索标签';
+
+  @override
+  String get tagError => '无法加载此标签。';
+
+  @override
+  String get tagProtected => '受保护的标签';
+
+  @override
+  String get tagNew => '新建标签';
+
+  @override
+  String get tagName => '标签名称';
+
+  @override
+  String get tagFromRef => '从分支、标签或提交 SHA 创建';
+
+  @override
+  String get tagMessage => '消息（可选）';
+
+  @override
+  String get tagPipelineNotice => '创建标签可能会启动 CI/CD 流水线。';
+
+  @override
+  String get tagFieldRequired => '此项为必填项';
+
+  @override
+  String get tagCreate => '创建标签';
+
+  @override
+  String get tagCreateError => '无法创建标签。请检查权限和引用。';
+
+  @override
   String get homeRecents => '最近';
 }
