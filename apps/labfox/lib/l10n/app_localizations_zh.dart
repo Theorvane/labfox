@@ -30,6 +30,117 @@ class AppLocalizationsZh extends AppLocalizations {
   String get releaseUpcoming => '即将发布';
 
   @override
+  String get projectMembersTitle => '成员';
+
+  @override
+  String get projectMembersSearch => '搜索成员';
+
+  @override
+  String get projectMembersClearSearch => '清除搜索';
+
+  @override
+  String get projectMembersEmpty => '未找到成员。';
+
+  @override
+  String get projectMembersError => '无法加载成员。';
+
+  @override
+  String get projectMembersLoadMore => '加载更多';
+
+  @override
+  String get projectMembersExpiry => '到期日';
+
+  @override
+  String get memberRoleNoAccess => '无访问权限';
+
+  @override
+  String get memberRoleMinimal => '最低访问权限';
+
+  @override
+  String get memberRoleGuest => '访客';
+
+  @override
+  String get memberRolePlanner => '规划者';
+
+  @override
+  String get memberRoleReporter => '报告者';
+
+  @override
+  String get memberRoleSecurityManager => '安全管理员';
+
+  @override
+  String get memberRoleDeveloper => '开发者';
+
+  @override
+  String get memberRoleMaintainer => '维护者';
+
+  @override
+  String get memberRoleOwner => '所有者';
+
+  @override
+  String get memberRoleUnknown => '未知角色';
+
+  @override
+  String get containerRegistryTitle => '容器镜像仓库';
+
+  @override
+  String get containerRegistryEmpty => '暂无容器镜像。';
+
+  @override
+  String get containerRegistryError => '无法加载容器镜像。';
+
+  @override
+  String get containerTagsTitle => '镜像标签';
+
+  @override
+  String get containerTagsEmpty => '暂无标签。';
+
+  @override
+  String get containerTagsError => '无法加载镜像标签。';
+
+  @override
+  String get containerTagError => '无法加载此标签。';
+
+  @override
+  String get containerTagDigest => '摘要';
+
+  @override
+  String get containerTagRevision => '修订版本';
+
+  @override
+  String get containerTagSize => '大小（字节）';
+
+  @override
+  String get containerLoadMore => '加载更多';
+
+  @override
+  String get milestonesTitle => '里程碑';
+
+  @override
+  String get milestonesActive => '进行中';
+
+  @override
+  String get milestonesClosed => '已关闭';
+
+  @override
+  String get milestonesEmpty => '此状态下没有里程碑。';
+
+  @override
+  String get milestonesError => '无法加载里程碑。';
+
+  @override
+  String get milestoneDetailError => '无法加载此里程碑。';
+
+  @override
+  String get milestoneStartDate => '开始日期';
+
+  @override
+  String get milestoneDueDate => '截止日期';
+
+  @override
+  String get milestoneLoadMore => '加载更多';
+
+  @override
   String get appTitle => 'LabFox';
 
   @override
@@ -148,6 +259,27 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get groupsError => 'Could not load your groups.';
+
+  @override
+  String get groupDetailTitle => '群组';
+
+  @override
+  String get groupDetailError => '无法加载此群组。';
+
+  @override
+  String get groupSubgroups => '子群组';
+
+  @override
+  String get groupSubgroupsEmpty => '没有子群组。';
+
+  @override
+  String get groupProjects => '项目';
+
+  @override
+  String get groupProjectsEmpty => '此群组中没有项目。';
+
+  @override
+  String get groupLoadMore => '加载更多';
 
   @override
   String get projectsTitle => '项目';
@@ -876,4 +1008,37 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get homeRecents => '最近';
+
+  @override
+  String get wikiTitle => 'Wiki';
+
+  @override
+  String get wikiEmpty => '还没有 Wiki 页面。';
+
+  @override
+  String get wikiListError => '无法加载 Wiki 页面。';
+
+  @override
+  String get wikiPageError => '无法加载此 Wiki 页面。';
+
+  @override
+  String get packageRegistryTitle => '软件包仓库';
+
+  @override
+  String get packageRegistryEmpty => '还没有软件包。';
+
+  @override
+  String get packageRegistryError => '无法加载软件包。';
+
+  @override
+  String get packageDetailError => '无法加载此软件包。';
+
+  @override
+  String get packageFiles => '文件';
+
+  @override
+  String get packageFilesEmpty => '此软件包没有文件。';
+
+  @override
+  String get packageLoadMore => '加载更多';
 }

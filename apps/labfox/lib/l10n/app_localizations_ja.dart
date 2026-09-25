@@ -30,6 +30,117 @@ class AppLocalizationsJa extends AppLocalizations {
   String get releaseUpcoming => '予定';
 
   @override
+  String get projectMembersTitle => 'メンバー';
+
+  @override
+  String get projectMembersSearch => 'メンバーを検索';
+
+  @override
+  String get projectMembersClearSearch => '検索をクリア';
+
+  @override
+  String get projectMembersEmpty => 'メンバーが見つかりません。';
+
+  @override
+  String get projectMembersError => 'メンバーを読み込めませんでした。';
+
+  @override
+  String get projectMembersLoadMore => 'さらに読み込む';
+
+  @override
+  String get projectMembersExpiry => '有効期限';
+
+  @override
+  String get memberRoleNoAccess => 'アクセスなし';
+
+  @override
+  String get memberRoleMinimal => '最小アクセス';
+
+  @override
+  String get memberRoleGuest => 'ゲスト';
+
+  @override
+  String get memberRolePlanner => 'プランナー';
+
+  @override
+  String get memberRoleReporter => 'レポーター';
+
+  @override
+  String get memberRoleSecurityManager => 'セキュリティマネージャー';
+
+  @override
+  String get memberRoleDeveloper => 'デベロッパー';
+
+  @override
+  String get memberRoleMaintainer => 'メンテナー';
+
+  @override
+  String get memberRoleOwner => 'オーナー';
+
+  @override
+  String get memberRoleUnknown => '不明なロール';
+
+  @override
+  String get containerRegistryTitle => 'コンテナレジストリ';
+
+  @override
+  String get containerRegistryEmpty => 'コンテナイメージはまだありません。';
+
+  @override
+  String get containerRegistryError => 'コンテナイメージを読み込めませんでした。';
+
+  @override
+  String get containerTagsTitle => 'イメージタグ';
+
+  @override
+  String get containerTagsEmpty => 'タグはまだありません。';
+
+  @override
+  String get containerTagsError => 'イメージタグを読み込めませんでした。';
+
+  @override
+  String get containerTagError => 'このタグを読み込めませんでした。';
+
+  @override
+  String get containerTagDigest => 'ダイジェスト';
+
+  @override
+  String get containerTagRevision => 'リビジョン';
+
+  @override
+  String get containerTagSize => 'サイズ（バイト）';
+
+  @override
+  String get containerLoadMore => 'さらに読み込む';
+
+  @override
+  String get milestonesTitle => 'マイルストーン';
+
+  @override
+  String get milestonesActive => '進行中';
+
+  @override
+  String get milestonesClosed => '終了';
+
+  @override
+  String get milestonesEmpty => 'この状態のマイルストーンはありません。';
+
+  @override
+  String get milestonesError => 'マイルストーンを読み込めませんでした。';
+
+  @override
+  String get milestoneDetailError => 'このマイルストーンを読み込めませんでした。';
+
+  @override
+  String get milestoneStartDate => '開始日';
+
+  @override
+  String get milestoneDueDate => '期限';
+
+  @override
+  String get milestoneLoadMore => 'さらに読み込む';
+
+  @override
   String get appTitle => 'LabFox';
 
   @override
@@ -150,6 +261,27 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get groupsError => 'Could not load your groups.';
+
+  @override
+  String get groupDetailTitle => 'グループ';
+
+  @override
+  String get groupDetailError => 'このグループを読み込めませんでした。';
+
+  @override
+  String get groupSubgroups => 'サブグループ';
+
+  @override
+  String get groupSubgroupsEmpty => 'サブグループはありません。';
+
+  @override
+  String get groupProjects => 'プロジェクト';
+
+  @override
+  String get groupProjectsEmpty => 'このグループにプロジェクトはありません。';
+
+  @override
+  String get groupLoadMore => 'さらに読み込む';
 
   @override
   String get projectsTitle => 'プロジェクト';
@@ -879,4 +1011,37 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get homeRecents => '最近';
+
+  @override
+  String get wikiTitle => 'Wiki';
+
+  @override
+  String get wikiEmpty => 'Wikiページはまだありません。';
+
+  @override
+  String get wikiListError => 'Wikiページを読み込めませんでした。';
+
+  @override
+  String get wikiPageError => 'このWikiページを読み込めませんでした。';
+
+  @override
+  String get packageRegistryTitle => 'パッケージレジストリ';
+
+  @override
+  String get packageRegistryEmpty => 'パッケージはまだありません。';
+
+  @override
+  String get packageRegistryError => 'パッケージを読み込めませんでした。';
+
+  @override
+  String get packageDetailError => 'このパッケージを読み込めませんでした。';
+
+  @override
+  String get packageFiles => 'ファイル';
+
+  @override
+  String get packageFilesEmpty => 'このパッケージにはファイルがありません。';
+
+  @override
+  String get packageLoadMore => 'さらに読み込む';
 }

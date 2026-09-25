@@ -30,6 +30,117 @@ class AppLocalizationsHi extends AppLocalizations {
   String get releaseUpcoming => 'आगामी';
 
   @override
+  String get projectMembersTitle => 'सदस्य';
+
+  @override
+  String get projectMembersSearch => 'सदस्य खोजें';
+
+  @override
+  String get projectMembersClearSearch => 'खोज साफ़ करें';
+
+  @override
+  String get projectMembersEmpty => 'कोई सदस्य नहीं मिला।';
+
+  @override
+  String get projectMembersError => 'सदस्य लोड नहीं हो सके।';
+
+  @override
+  String get projectMembersLoadMore => 'और लोड करें';
+
+  @override
+  String get projectMembersExpiry => 'समाप्ति';
+
+  @override
+  String get memberRoleNoAccess => 'कोई पहुँच नहीं';
+
+  @override
+  String get memberRoleMinimal => 'न्यूनतम पहुँच';
+
+  @override
+  String get memberRoleGuest => 'अतिथि';
+
+  @override
+  String get memberRolePlanner => 'योजनाकार';
+
+  @override
+  String get memberRoleReporter => 'रिपोर्टर';
+
+  @override
+  String get memberRoleSecurityManager => 'सुरक्षा प्रबंधक';
+
+  @override
+  String get memberRoleDeveloper => 'डेवलपर';
+
+  @override
+  String get memberRoleMaintainer => 'मेंटेनर';
+
+  @override
+  String get memberRoleOwner => 'स्वामी';
+
+  @override
+  String get memberRoleUnknown => 'अज्ञात भूमिका';
+
+  @override
+  String get containerRegistryTitle => 'कंटेनर रजिस्ट्री';
+
+  @override
+  String get containerRegistryEmpty => 'अभी कोई कंटेनर इमेज नहीं है।';
+
+  @override
+  String get containerRegistryError => 'कंटेनर इमेज लोड नहीं हो सकीं।';
+
+  @override
+  String get containerTagsTitle => 'इमेज टैग';
+
+  @override
+  String get containerTagsEmpty => 'अभी कोई टैग नहीं है।';
+
+  @override
+  String get containerTagsError => 'इमेज टैग लोड नहीं हो सके।';
+
+  @override
+  String get containerTagError => 'यह टैग लोड नहीं हो सका।';
+
+  @override
+  String get containerTagDigest => 'डाइजेस्ट';
+
+  @override
+  String get containerTagRevision => 'रिविज़न';
+
+  @override
+  String get containerTagSize => 'आकार (बाइट)';
+
+  @override
+  String get containerLoadMore => 'और लोड करें';
+
+  @override
+  String get milestonesTitle => 'माइलस्टोन';
+
+  @override
+  String get milestonesActive => 'सक्रिय';
+
+  @override
+  String get milestonesClosed => 'बंद';
+
+  @override
+  String get milestonesEmpty => 'इस स्थिति में कोई माइलस्टोन नहीं है।';
+
+  @override
+  String get milestonesError => 'माइलस्टोन लोड नहीं हो सके।';
+
+  @override
+  String get milestoneDetailError => 'यह माइलस्टोन लोड नहीं हो सका।';
+
+  @override
+  String get milestoneStartDate => 'शुरू होने की तारीख';
+
+  @override
+  String get milestoneDueDate => 'नियत तारीख';
+
+  @override
+  String get milestoneLoadMore => 'और लोड करें';
+
+  @override
   String get appTitle => 'LabFox';
 
   @override
@@ -155,6 +266,27 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get groupsError => 'Could not load your groups.';
+
+  @override
+  String get groupDetailTitle => 'समूह';
+
+  @override
+  String get groupDetailError => 'इस समूह को लोड नहीं किया जा सका।';
+
+  @override
+  String get groupSubgroups => 'उपसमूह';
+
+  @override
+  String get groupSubgroupsEmpty => 'कोई उपसमूह नहीं है।';
+
+  @override
+  String get groupProjects => 'प्रोजेक्ट';
+
+  @override
+  String get groupProjectsEmpty => 'इस समूह में कोई प्रोजेक्ट नहीं है।';
+
+  @override
+  String get groupLoadMore => 'और लोड करें';
 
   @override
   String get projectsTitle => 'प्रोजेक्ट';
@@ -895,4 +1027,37 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get homeRecents => 'हाल ही में';
+
+  @override
+  String get wikiTitle => 'विकी';
+
+  @override
+  String get wikiEmpty => 'अभी कोई विकी पृष्ठ नहीं है।';
+
+  @override
+  String get wikiListError => 'विकी पृष्ठ लोड नहीं हो सके।';
+
+  @override
+  String get wikiPageError => 'यह विकी पृष्ठ लोड नहीं हो सका।';
+
+  @override
+  String get packageRegistryTitle => 'पैकेज रजिस्ट्री';
+
+  @override
+  String get packageRegistryEmpty => 'अभी कोई पैकेज नहीं है।';
+
+  @override
+  String get packageRegistryError => 'पैकेज लोड नहीं हो सके।';
+
+  @override
+  String get packageDetailError => 'यह पैकेज लोड नहीं हो सका।';
+
+  @override
+  String get packageFiles => 'फ़ाइलें';
+
+  @override
+  String get packageFilesEmpty => 'इस पैकेज में कोई फ़ाइल नहीं है।';
+
+  @override
+  String get packageLoadMore => 'और लोड करें';
 }

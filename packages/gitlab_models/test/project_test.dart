@@ -2,6 +2,15 @@ import 'package:gitlab_models/gitlab_models.dart';
 import 'package:test/test.dart';
 
 void main() {
+  test('Project parses container registry availability', () {
+    final project = Project.fromJson({
+      'id': 7,
+      'name': 'app',
+      'path_with_namespace': 'team/app',
+      'container_registry_access_level': 'disabled',
+    });
+    expect(project.containerRegistryAccessLevel, 'disabled');
+  });
   group('Project', () {
     test('parses a full GitLab payload', () {
       final project = Project.fromJson(const {
@@ -36,6 +45,30 @@ void main() {
         'path_with_namespace': 'me/empty',
       });
       expect(project.defaultBranch, isNull);
+    });
+
+    test('parses project wiki availability', () {
+      final project = Project.fromJson(const {
+        'id': 1,
+        'name': 'docs',
+        'path_with_namespace': 'team/docs',
+        'wiki_access_level': 'disabled',
+        'wiki_enabled': false,
+      });
+
+      expect(project.wikiAccessLevel, 'disabled');
+      expect(project.wikiEnabled, isFalse);
+    });
+
+    test('parses package registry availability', () {
+      final project = Project.fromJson(const {
+        'id': 1,
+        'name': 'tools',
+        'path_with_namespace': 'team/tools',
+        'package_registry_access_level': 'disabled',
+      });
+
+      expect(project.packageRegistryAccessLevel, 'disabled');
     });
 
     test('leaves optional fields null when GitLab omits them', () {

@@ -10,8 +10,12 @@ import '../features/auth/presentation/sign_in_screen.dart';
 import '../features/branches/presentation/branches_screen.dart';
 import '../features/commits/presentation/commit_detail_screen.dart';
 import '../features/commits/presentation/commits_screen.dart';
+import '../features/container_registry/presentation/container_registry_screen.dart';
+import '../features/container_registry/presentation/container_repository_screen.dart';
+import '../features/container_registry/presentation/container_tag_screen.dart';
 import '../features/diff/presentation/changes_screen.dart';
 import '../features/diff/presentation/controllers/diff_controllers.dart';
+import '../features/groups/presentation/group_detail_screen.dart';
 import '../features/groups/presentation/groups_screen.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/inbox/presentation/inbox_screen.dart';
@@ -20,10 +24,15 @@ import '../features/issues/presentation/issues_screen.dart';
 import '../features/issues/presentation/my_issues_screen.dart';
 import '../features/issues/presentation/new_issue_screen.dart';
 import '../features/jobs/presentation/job_detail_screen.dart';
+import '../features/members/presentation/project_members_screen.dart';
 import '../features/merge_requests/presentation/merge_request_detail_screen.dart';
 import '../features/merge_requests/presentation/merge_requests_screen.dart';
 import '../features/merge_requests/presentation/my_merge_requests_screen.dart';
 import '../features/merge_requests/presentation/new_merge_request_screen.dart';
+import '../features/milestones/presentation/milestone_detail_screen.dart';
+import '../features/milestones/presentation/milestones_screen.dart';
+import '../features/package_registry/presentation/package_detail_screen.dart';
+import '../features/package_registry/presentation/package_list_screen.dart';
 import '../features/pipelines/presentation/pipeline_detail_screen.dart';
 import '../features/pipelines/presentation/pipelines_screen.dart';
 import '../features/profile/presentation/me_screen.dart';
@@ -38,6 +47,8 @@ import '../features/settings/presentation/privacy_screen.dart';
 import '../features/settings/presentation/settings_screen.dart';
 import '../features/settings/presentation/subscription_screen.dart';
 import '../features/shell/presentation/app_shell.dart';
+import '../features/wiki/presentation/wiki_page_screen.dart';
+import '../features/wiki/presentation/wiki_pages_screen.dart';
 
 /// Route paths.
 ///
@@ -57,6 +68,7 @@ abstract final class Routes {
   static const String privacy = '/settings/privacy';
   static const String subscription = '/settings/subscription';
   static const String groups = '/groups';
+  static String group(int id) => '/groups/$id';
   static const String projects = '/projects';
   // Account-level lists, mirroring GitLab's /dashboard URLs.
   static const String myIssues = '/dashboard/issues';
@@ -66,6 +78,21 @@ abstract final class Routes {
   static String releases(int id) => '/projects/$id/releases';
   static String release(int id, String tagName) =>
       '/projects/$id/releases/${Uri.encodeComponent(tagName)}';
+  static String projectMembers(int id) => '/projects/$id/members';
+  static String containerRegistry(int id) => '/projects/$id/container_registry';
+  static String containerRepository(int id, int repositoryId) =>
+      '/projects/$id/container_registry/$repositoryId';
+  static String containerTag(int id, int repositoryId, String tagName) =>
+      '/projects/$id/container_registry/$repositoryId/tags/${Uri.encodeComponent(tagName)}';
+  static String wiki(int id) => '/projects/$id/wikis';
+  static String wikiPage(int id, String slug) =>
+      '/projects/$id/wikis/page?slug=${Uri.encodeQueryComponent(slug)}';
+  static String packages(int id) => '/projects/$id/packages';
+  static String packageDetail(int id, int packageId) =>
+      '/projects/$id/packages/$packageId';
+  static String milestones(int id) => '/projects/$id/milestones';
+  static String milestone(int id, int milestoneId) =>
+      '/projects/$id/milestones/$milestoneId';
 
   // Repository browsing. The tree path and file path travel as a query
   // parameter, not a nested segment, because a repository path contains its own
@@ -200,6 +227,14 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.groups,
         builder: (context, state) => const GroupsScreen(),
+        routes: [
+          GoRoute(
+            path: ':id',
+            builder: (context, state) => GroupDetailScreen(
+              groupId: int.parse(state.pathParameters['id']!),
+            ),
+          ),
+        ],
       ),
       GoRoute(
         path: Routes.projects,
@@ -223,6 +258,88 @@ final routerProvider = Provider<GoRouter>((ref) {
                     builder: (context, state) => ReleaseDetailScreen(
                       projectId: int.parse(state.pathParameters['id']!),
                       tagName: state.pathParameters['tagName']!,
+                    ),
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: 'members',
+                builder: (context, state) => ProjectMembersScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+              ),
+              GoRoute(
+                path: 'container_registry',
+                builder: (context, state) => ContainerRegistryScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':repositoryId',
+                    builder: (context, state) => ContainerRepositoryScreen(
+                      projectId: int.parse(state.pathParameters['id']!),
+                      repositoryId: int.parse(
+                        state.pathParameters['repositoryId']!,
+                      ),
+                    ),
+                    routes: [
+                      GoRoute(
+                        path: 'tags/:tagName',
+                        builder: (context, state) => ContainerTagScreen(
+                          projectId: int.parse(state.pathParameters['id']!),
+                          repositoryId: int.parse(
+                            state.pathParameters['repositoryId']!,
+                          ),
+                          tagName: state.pathParameters['tagName']!,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: 'wikis',
+                builder: (context, state) => WikiPagesScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: 'page',
+                    builder: (context, state) => WikiPageScreen(
+                      projectId: int.parse(state.pathParameters['id']!),
+                      slug: state.uri.queryParameters['slug']!,
+                    ),
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: 'packages',
+                builder: (context, state) => PackageListScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':packageId',
+                    builder: (context, state) => PackageDetailScreen(
+                      projectId: int.parse(state.pathParameters['id']!),
+                      packageId: int.parse(state.pathParameters['packageId']!),
+                    ),
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: 'milestones',
+                builder: (context, state) => MilestonesScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':milestoneId',
+                    builder: (context, state) => MilestoneDetailScreen(
+                      projectId: int.parse(state.pathParameters['id']!),
+                      milestoneId: int.parse(
+                        state.pathParameters['milestoneId']!,
+                      ),
                     ),
                   ),
                 ],

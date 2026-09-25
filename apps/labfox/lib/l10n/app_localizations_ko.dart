@@ -30,6 +30,117 @@ class AppLocalizationsKo extends AppLocalizations {
   String get releaseUpcoming => '예정';
 
   @override
+  String get projectMembersTitle => '멤버';
+
+  @override
+  String get projectMembersSearch => '멤버 검색';
+
+  @override
+  String get projectMembersClearSearch => '검색 지우기';
+
+  @override
+  String get projectMembersEmpty => '멤버를 찾을 수 없습니다.';
+
+  @override
+  String get projectMembersError => '멤버를 불러올 수 없습니다.';
+
+  @override
+  String get projectMembersLoadMore => '더 보기';
+
+  @override
+  String get projectMembersExpiry => '만료일';
+
+  @override
+  String get memberRoleNoAccess => '접근 권한 없음';
+
+  @override
+  String get memberRoleMinimal => '최소 접근 권한';
+
+  @override
+  String get memberRoleGuest => '게스트';
+
+  @override
+  String get memberRolePlanner => '플래너';
+
+  @override
+  String get memberRoleReporter => '리포터';
+
+  @override
+  String get memberRoleSecurityManager => '보안 관리자';
+
+  @override
+  String get memberRoleDeveloper => '개발자';
+
+  @override
+  String get memberRoleMaintainer => '메인테이너';
+
+  @override
+  String get memberRoleOwner => '소유자';
+
+  @override
+  String get memberRoleUnknown => '알 수 없는 역할';
+
+  @override
+  String get containerRegistryTitle => '컨테이너 레지스트리';
+
+  @override
+  String get containerRegistryEmpty => '컨테이너 이미지가 아직 없습니다.';
+
+  @override
+  String get containerRegistryError => '컨테이너 이미지를 불러올 수 없습니다.';
+
+  @override
+  String get containerTagsTitle => '이미지 태그';
+
+  @override
+  String get containerTagsEmpty => '태그가 아직 없습니다.';
+
+  @override
+  String get containerTagsError => '이미지 태그를 불러올 수 없습니다.';
+
+  @override
+  String get containerTagError => '이 태그를 불러올 수 없습니다.';
+
+  @override
+  String get containerTagDigest => '다이제스트';
+
+  @override
+  String get containerTagRevision => '리비전';
+
+  @override
+  String get containerTagSize => '크기(바이트)';
+
+  @override
+  String get containerLoadMore => '더 보기';
+
+  @override
+  String get milestonesTitle => '마일스톤';
+
+  @override
+  String get milestonesActive => '진행 중';
+
+  @override
+  String get milestonesClosed => '종료됨';
+
+  @override
+  String get milestonesEmpty => '이 상태의 마일스톤이 없습니다.';
+
+  @override
+  String get milestonesError => '마일스톤을 불러올 수 없습니다.';
+
+  @override
+  String get milestoneDetailError => '이 마일스톤을 불러올 수 없습니다.';
+
+  @override
+  String get milestoneStartDate => '시작일';
+
+  @override
+  String get milestoneDueDate => '마감일';
+
+  @override
+  String get milestoneLoadMore => '더 보기';
+
+  @override
   String get appTitle => 'LabFox';
 
   @override
@@ -150,6 +261,27 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get groupsError => 'Could not load your groups.';
+
+  @override
+  String get groupDetailTitle => '그룹';
+
+  @override
+  String get groupDetailError => '이 그룹을 불러오지 못했습니다.';
+
+  @override
+  String get groupSubgroups => '하위 그룹';
+
+  @override
+  String get groupSubgroupsEmpty => '하위 그룹이 없습니다.';
+
+  @override
+  String get groupProjects => '프로젝트';
+
+  @override
+  String get groupProjectsEmpty => '이 그룹에 프로젝트가 없습니다.';
+
+  @override
+  String get groupLoadMore => '더 보기';
 
   @override
   String get projectsTitle => '프로젝트';
@@ -880,4 +1012,37 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get homeRecents => '최근';
+
+  @override
+  String get wikiTitle => '위키';
+
+  @override
+  String get wikiEmpty => '아직 위키 페이지가 없습니다.';
+
+  @override
+  String get wikiListError => '위키 페이지를 불러올 수 없습니다.';
+
+  @override
+  String get wikiPageError => '이 위키 페이지를 불러올 수 없습니다.';
+
+  @override
+  String get packageRegistryTitle => '패키지 레지스트리';
+
+  @override
+  String get packageRegistryEmpty => '아직 패키지가 없습니다.';
+
+  @override
+  String get packageRegistryError => '패키지를 불러올 수 없습니다.';
+
+  @override
+  String get packageDetailError => '이 패키지를 불러올 수 없습니다.';
+
+  @override
+  String get packageFiles => '파일';
+
+  @override
+  String get packageFilesEmpty => '이 패키지에는 파일이 없습니다.';
+
+  @override
+  String get packageLoadMore => '더 보기';
 }

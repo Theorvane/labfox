@@ -1,0 +1,101 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gitlab_api/gitlab_api.dart';
+import 'package:gitlab_models/gitlab_models.dart';
+
+import '../../../../core/auth/gitlab_client_provider.dart';
+import '../../data/milestones_repository.dart';
+
+final milestonesRepositoryProvider = FutureProvider<MilestonesRepository?>((
+  ref,
+) async {
+  final client = await ref.watch(gitLabClientProvider.future);
+  return client == null ? null : MilestonesRepository(client);
+});
+
+class MilestoneListRef {
+  const MilestoneListRef({required this.projectId, required this.state});
+
+  final int projectId;
+  final String state;
+
+  @override
+  bool operator ==(Object other) =>
+      other is MilestoneListRef &&
+      projectId == other.projectId &&
+      state == other.state;
+
+  @override
+  int get hashCode => Object.hash(projectId, state);
+}
+
+class MilestoneRef {
+  const MilestoneRef({required this.projectId, required this.milestoneId});
+
+  final int projectId;
+  final int milestoneId;
+
+  @override
+  bool operator ==(Object other) =>
+      other is MilestoneRef &&
+      projectId == other.projectId &&
+      milestoneId == other.milestoneId;
+
+  @override
+  int get hashCode => Object.hash(projectId, milestoneId);
+}
+
+/// Lists one milestone state and advances via response-header pagination.
+class MilestoneListController
+    extends FamilyAsyncNotifier<Paginated<GitLabMilestone>, MilestoneListRef> {
+  bool _loadingMore = false;
+
+  @override
+  Future<Paginated<GitLabMilestone>> build(MilestoneListRef arg) async {
+    final repository = await ref.watch(milestonesRepositoryProvider.future);
+    if (repository == null) throw StateError('No authenticated account');
+    return repository.list(arg.projectId, state: arg.state);
+  }
+
+  Future<void> loadMore() async {
+    if (_loadingMore) return;
+    final current = state.valueOrNull;
+    final page = current?.nextPage;
+    if (current == null || page == null) return;
+    _loadingMore = true;
+    try {
+      final repository = await ref.read(milestonesRepositoryProvider.future);
+      if (repository == null) throw StateError('No authenticated account');
+      final next = await repository.list(
+        arg.projectId,
+        state: arg.state,
+        page: page,
+      );
+      state = AsyncData(
+        Paginated(
+          items: [...current.items, ...next.items],
+          nextPage: next.nextPage,
+          total: next.total,
+          totalPages: next.totalPages,
+        ),
+      );
+    } catch (error, stackTrace) {
+      state = AsyncError(error, stackTrace);
+    } finally {
+      _loadingMore = false;
+    }
+  }
+}
+
+final milestoneListControllerProvider =
+    AsyncNotifierProvider.family<
+      MilestoneListController,
+      Paginated<GitLabMilestone>,
+      MilestoneListRef
+    >(MilestoneListController.new);
+
+final milestoneDetailProvider =
+    FutureProvider.family<GitLabMilestone, MilestoneRef>((ref, key) async {
+      final repository = await ref.watch(milestonesRepositoryProvider.future);
+      if (repository == null) throw StateError('No authenticated account');
+      return repository.get(key.projectId, key.milestoneId);
+    });

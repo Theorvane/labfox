@@ -7,6 +7,43 @@
   "releaseAssetsTitle": "Assets",
   "releaseLoadMore": "Load more",
   "releaseUpcoming": "Upcoming",
+  "projectMembersTitle": "Members",
+  "projectMembersSearch": "Search members",
+  "projectMembersClearSearch": "Clear search",
+  "projectMembersEmpty": "No members found.",
+  "projectMembersError": "Could not load members.",
+  "projectMembersLoadMore": "Load more",
+  "projectMembersExpiry": "Expires",
+  "memberRoleNoAccess": "No access",
+  "memberRoleMinimal": "Minimal access",
+  "memberRoleGuest": "Guest",
+  "memberRolePlanner": "Planner",
+  "memberRoleReporter": "Reporter",
+  "memberRoleSecurityManager": "Security manager",
+  "memberRoleDeveloper": "Developer",
+  "memberRoleMaintainer": "Maintainer",
+  "memberRoleOwner": "Owner",
+  "memberRoleUnknown": "Unknown role",
+  "containerRegistryTitle": "Container registry",
+  "containerRegistryEmpty": "No container images yet.",
+  "containerRegistryError": "Could not load container images.",
+  "containerTagsTitle": "Image tags",
+  "containerTagsEmpty": "No tags yet.",
+  "containerTagsError": "Could not load image tags.",
+  "containerTagError": "Could not load this tag.",
+  "containerTagDigest": "Digest",
+  "containerTagRevision": "Revision",
+  "containerTagSize": "Size (bytes)",
+  "containerLoadMore": "Load more",
+  "milestonesTitle": "Milestones",
+  "milestonesActive": "Active",
+  "milestonesClosed": "Closed",
+  "milestonesEmpty": "No milestones in this state.",
+  "milestonesError": "Could not load milestones.",
+  "milestoneDetailError": "Could not load this milestone.",
+  "milestoneStartDate": "Start date",
+  "milestoneDueDate": "Due date",
+  "milestoneLoadMore": "Load more",
   "appTitle": "LabFox",
   "@appTitle": {
     "description": "The application name, shown in the task switcher and app bar"
@@ -168,6 +205,34 @@
   "groupsError": "Could not load your groups.",
   "@groupsError": {
     "description": "Shown when the groups list fails to load"
+  },
+  "groupDetailTitle": "Group",
+  "@groupDetailTitle": {
+    "description": "Fallback title while a group detail is loading"
+  },
+  "groupDetailError": "Could not load this group.",
+  "@groupDetailError": {
+    "description": "Shown when a group detail or its children fail to load"
+  },
+  "groupSubgroups": "Subgroups",
+  "@groupSubgroups": {
+    "description": "Section title for direct child groups"
+  },
+  "groupSubgroupsEmpty": "No subgroups.",
+  "@groupSubgroupsEmpty": {
+    "description": "Shown when a group has no visible direct subgroups"
+  },
+  "groupProjects": "Projects",
+  "@groupProjects": {
+    "description": "Section title for projects directly in a group"
+  },
+  "groupProjectsEmpty": "No projects in this group.",
+  "@groupProjectsEmpty": {
+    "description": "Shown when a group has no visible direct projects"
+  },
+  "groupLoadMore": "Load more",
+  "@groupLoadMore": {
+    "description": "Loads the next page of group projects or subgroups"
   },
   "projectsTitle": "Projects",
   "@projectsTitle": {
@@ -1135,5 +1200,35 @@
   "homeRecents": "Recent",
   "@homeRecents": {
     "description": "Home section title for recently opened projects"
-  }
+  },
+  "wikiTitle": "Wiki",
+  "@wikiTitle": {
+    "description": "Title of the project wiki page list"
+  },
+  "wikiEmpty": "No wiki pages yet.",
+  "@wikiEmpty": {
+    "description": "Shown when a project wiki has no pages"
+  },
+  "wikiListError": "Could not load wiki pages.",
+  "@wikiListError": {
+    "description": "Shown when loading the project wiki fails"
+  },
+  "wikiPageError": "Could not load this wiki page.",
+  "@wikiPageError": {
+    "description": "Shown when reading a wiki page fails"
+  },
+  "packageRegistryTitle": "Package registry",
+  "@packageRegistryTitle": {"description": "Project package registry title and entry"},
+  "packageRegistryEmpty": "No packages yet.",
+  "@packageRegistryEmpty": {"description": "Empty project package registry"},
+  "packageRegistryError": "Could not load packages.",
+  "@packageRegistryError": {"description": "Package list loading error"},
+  "packageDetailError": "Could not load this package.",
+  "@packageDetailError": {"description": "Package detail loading error"},
+  "packageFiles": "Files",
+  "@packageFiles": {"description": "Package files section title"},
+  "packageFilesEmpty": "This package has no files.",
+  "@packageFilesEmpty": {"description": "Empty package files section"},
+  "packageLoadMore": "Load more",
+  "@packageLoadMore": {"description": "Load the next page of packages or package files"}
 }
