@@ -9,6 +9,80 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get deploymentsTitle => 'デプロイ';
+
+  @override
+  String get deploymentsAll => 'すべて';
+
+  @override
+  String get deploymentsSuccess => '成功';
+
+  @override
+  String get deploymentsFailed => '失敗';
+
+  @override
+  String get deploymentsRunning => '実行中';
+
+  @override
+  String get deploymentsCanceled => 'キャンセル';
+
+  @override
+  String get deploymentsCreated => '作成済み';
+
+  @override
+  String get deploymentsBlocked => 'ブロック';
+
+  @override
+  String get deploymentsUnknownStatus => '不明な状態';
+
+  @override
+  String get deploymentsEmpty => 'デプロイはありません。';
+
+  @override
+  String get deploymentsError => 'デプロイを読み込めませんでした。';
+
+  @override
+  String get deploymentsLoadMore => 'さらに読み込む';
+
+  @override
+  String get deploymentsEnvironmentSearch => '環境名で絞り込み';
+
+  @override
+  String get deploymentsUnknownEnvironment => '不明な環境';
+
+  @override
+  String get deploymentDetailError => 'このデプロイを読み込めませんでした。';
+
+  @override
+  String deploymentNumber(int number) {
+    return 'デプロイ #$number';
+  }
+
+  @override
+  String get deploymentEnvironment => '環境';
+
+  @override
+  String get deploymentRef => '参照';
+
+  @override
+  String get deploymentCommit => 'コミット';
+
+  @override
+  String get deploymentJob => 'ジョブ';
+
+  @override
+  String get deploymentPipeline => 'パイプライン';
+
+  @override
+  String get deploymentCreatedAt => '作成日時';
+
+  @override
+  String get deploymentUpdatedAt => '更新日時';
+
+  @override
+  String get deploymentUser => 'デプロイ担当';
+
+  @override
   String get environmentsTitle => '環境';
 
   @override

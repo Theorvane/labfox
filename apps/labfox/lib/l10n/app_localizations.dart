@@ -104,6 +104,150 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
+  /// No description provided for @deploymentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Deployments'**
+  String get deploymentsTitle;
+
+  /// No description provided for @deploymentsAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get deploymentsAll;
+
+  /// No description provided for @deploymentsSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get deploymentsSuccess;
+
+  /// No description provided for @deploymentsFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed'**
+  String get deploymentsFailed;
+
+  /// No description provided for @deploymentsRunning.
+  ///
+  /// In en, this message translates to:
+  /// **'Running'**
+  String get deploymentsRunning;
+
+  /// No description provided for @deploymentsCanceled.
+  ///
+  /// In en, this message translates to:
+  /// **'Canceled'**
+  String get deploymentsCanceled;
+
+  /// No description provided for @deploymentsCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get deploymentsCreated;
+
+  /// No description provided for @deploymentsBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Blocked'**
+  String get deploymentsBlocked;
+
+  /// No description provided for @deploymentsUnknownStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown status'**
+  String get deploymentsUnknownStatus;
+
+  /// No description provided for @deploymentsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No deployments found.'**
+  String get deploymentsEmpty;
+
+  /// No description provided for @deploymentsError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load deployments.'**
+  String get deploymentsError;
+
+  /// No description provided for @deploymentsLoadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get deploymentsLoadMore;
+
+  /// No description provided for @deploymentsEnvironmentSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter by environment name'**
+  String get deploymentsEnvironmentSearch;
+
+  /// No description provided for @deploymentsUnknownEnvironment.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown environment'**
+  String get deploymentsUnknownEnvironment;
+
+  /// No description provided for @deploymentDetailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this deployment.'**
+  String get deploymentDetailError;
+
+  /// No description provided for @deploymentNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Deployment #{number}'**
+  String deploymentNumber(int number);
+
+  /// No description provided for @deploymentEnvironment.
+  ///
+  /// In en, this message translates to:
+  /// **'Environment'**
+  String get deploymentEnvironment;
+
+  /// No description provided for @deploymentRef.
+  ///
+  /// In en, this message translates to:
+  /// **'Ref'**
+  String get deploymentRef;
+
+  /// No description provided for @deploymentCommit.
+  ///
+  /// In en, this message translates to:
+  /// **'Commit'**
+  String get deploymentCommit;
+
+  /// No description provided for @deploymentJob.
+  ///
+  /// In en, this message translates to:
+  /// **'Job'**
+  String get deploymentJob;
+
+  /// No description provided for @deploymentPipeline.
+  ///
+  /// In en, this message translates to:
+  /// **'Pipeline'**
+  String get deploymentPipeline;
+
+  /// No description provided for @deploymentCreatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get deploymentCreatedAt;
+
+  /// No description provided for @deploymentUpdatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Updated'**
+  String get deploymentUpdatedAt;
+
+  /// No description provided for @deploymentUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Deployed by'**
+  String get deploymentUser;
+
   /// No description provided for @environmentsTitle.
   ///
   /// In en, this message translates to:
