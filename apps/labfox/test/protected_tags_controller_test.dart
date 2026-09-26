@@ -31,9 +31,7 @@ void main() {
     final repository = _Repository();
     final container = ProviderContainer(
       overrides: [
-        protectedTagsRepositoryProvider.overrideWith(
-          (ref) async => repository,
-        ),
+        protectedTagsRepositoryProvider.overrideWith((ref) async => repository),
       ],
     );
     addTearDown(container.dispose);
