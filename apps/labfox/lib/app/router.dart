@@ -15,6 +15,8 @@ import '../features/container_registry/presentation/container_repository_screen.
 import '../features/container_registry/presentation/container_tag_screen.dart';
 import '../features/diff/presentation/changes_screen.dart';
 import '../features/diff/presentation/controllers/diff_controllers.dart';
+import '../features/environments/presentation/environment_detail_screen.dart';
+import '../features/environments/presentation/environments_screen.dart';
 import '../features/groups/presentation/group_detail_screen.dart';
 import '../features/groups/presentation/groups_screen.dart';
 import '../features/home/presentation/home_screen.dart';
@@ -46,6 +48,7 @@ import '../features/settings/presentation/privacy_screen.dart';
 import '../features/settings/presentation/settings_screen.dart';
 import '../features/settings/presentation/subscription_screen.dart';
 import '../features/shell/presentation/app_shell.dart';
+import '../features/snippets/presentation/snippets_screen.dart';
 import '../features/wiki/presentation/wiki_page_screen.dart';
 import '../features/wiki/presentation/wiki_pages_screen.dart';
 
@@ -77,6 +80,11 @@ abstract final class Routes {
   static String projectLabels(int id) => '/projects/$id/labels';
   static String projectLabel(int id, int labelId) =>
       '/projects/$id/labels/$labelId';
+  static String snippets(int id) => '/projects/$id/snippets';
+  static String snippet(int id, int snippetId) =>
+      '/projects/$id/snippets/$snippetId';
+  static String snippetFile(int id, int snippetId, String path) =>
+      '/projects/$id/snippets/$snippetId/file?path=${Uri.encodeQueryComponent(path)}';
   static String projectMembers(int id) => '/projects/$id/members';
   static String containerRegistry(int id) => '/projects/$id/container_registry';
   static String containerRepository(int id, int repositoryId) =>
@@ -92,6 +100,9 @@ abstract final class Routes {
   static String milestones(int id) => '/projects/$id/milestones';
   static String milestone(int id, int milestoneId) =>
       '/projects/$id/milestones/$milestoneId';
+  static String environments(int id) => '/projects/$id/environments';
+  static String environment(int id, int environmentId) =>
+      '/projects/$id/environments/$environmentId';
 
   // Repository browsing. The tree path and file path travel as a query
   // parameter, not a nested segment, because a repository path contains its own
@@ -329,6 +340,23 @@ final routerProvider = Provider<GoRouter>((ref) {
                 ],
               ),
               GoRoute(
+                path: 'environments',
+                builder: (context, state) => EnvironmentsScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':environmentId',
+                    builder: (context, state) => EnvironmentDetailScreen(
+                      projectId: int.parse(state.pathParameters['id']!),
+                      environmentId: int.parse(
+                        state.pathParameters['environmentId']!,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              GoRoute(
                 path: 'tree',
                 builder: (context, state) {
                   final id = int.parse(state.pathParameters['id']!);
@@ -352,6 +380,27 @@ final routerProvider = Provider<GoRouter>((ref) {
                 builder: (context, state) => ProjectLabelDetailScreen(
                   projectId: int.parse(state.pathParameters['id']!),
                   labelId: int.parse(state.pathParameters['labelId']!),
+                ),
+              ),
+              GoRoute(
+                path: 'snippets',
+                builder: (context, state) => SnippetsScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+              ),
+              GoRoute(
+                path: 'snippets/:snippetId',
+                builder: (context, state) => SnippetDetailScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                  snippetId: int.parse(state.pathParameters['snippetId']!),
+                ),
+              ),
+              GoRoute(
+                path: 'snippets/:snippetId/file',
+                builder: (context, state) => SnippetFileScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                  snippetId: int.parse(state.pathParameters['snippetId']!),
+                  path: state.uri.queryParameters['path']!,
                 ),
               ),
               GoRoute(

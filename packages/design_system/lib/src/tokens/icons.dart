@@ -31,6 +31,7 @@ abstract final class LabFoxIcons {
   static const IconData containerRegistry = Icons.widgets_outlined;
   static const IconData packageRegistry = Icons.inventory_2_outlined;
   static const IconData milestone = Icons.flag_outlined;
+  static const IconData environment = Icons.cloud_outlined;
 
   // ── CI ──────────────────────────────────────────────────────────────────
   static const IconData pipeline = Icons.rocket_launch_outlined;

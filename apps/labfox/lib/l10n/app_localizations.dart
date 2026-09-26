@@ -104,6 +104,96 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
+  /// No description provided for @environmentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Environments'**
+  String get environmentsTitle;
+
+  /// No description provided for @environmentsAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get environmentsAll;
+
+  /// No description provided for @environmentsAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Available'**
+  String get environmentsAvailable;
+
+  /// No description provided for @environmentsStopping.
+  ///
+  /// In en, this message translates to:
+  /// **'Stopping'**
+  String get environmentsStopping;
+
+  /// No description provided for @environmentsStopped.
+  ///
+  /// In en, this message translates to:
+  /// **'Stopped'**
+  String get environmentsStopped;
+
+  /// No description provided for @environmentsSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search environments'**
+  String get environmentsSearch;
+
+  /// No description provided for @environmentsSearchLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter at least 3 characters.'**
+  String get environmentsSearchLength;
+
+  /// No description provided for @environmentsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No environments found.'**
+  String get environmentsEmpty;
+
+  /// No description provided for @environmentsError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load environments.'**
+  String get environmentsError;
+
+  /// No description provided for @environmentsLoadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get environmentsLoadMore;
+
+  /// No description provided for @environmentDetailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this environment.'**
+  String get environmentDetailError;
+
+  /// No description provided for @environmentAutoStop.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-stop'**
+  String get environmentAutoStop;
+
+  /// No description provided for @environmentOpenUrl.
+  ///
+  /// In en, this message translates to:
+  /// **'Open environment'**
+  String get environmentOpenUrl;
+
+  /// No description provided for @environmentLatestDeployment.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest deployment'**
+  String get environmentLatestDeployment;
+
+  /// No description provided for @environmentUnknownStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown status'**
+  String get environmentUnknownStatus;
+
   /// No description provided for @projectMembersTitle.
   ///
   /// In en, this message translates to:
@@ -2113,6 +2203,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Couldn\'t create the label. Check your permissions and input.'**
   String get projectLabelCreateError;
+
+  /// No description provided for @snippetsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Snippets'**
+  String get snippetsTitle;
+
+  /// No description provided for @snippetsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No snippets yet'**
+  String get snippetsEmpty;
+
+  /// No description provided for @snippetsError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load snippets.'**
+  String get snippetsError;
+
+  /// No description provided for @snippetError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load this snippet.'**
+  String get snippetError;
+
+  /// No description provided for @snippetContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Content'**
+  String get snippetContent;
+
+  /// No description provided for @snippetContentError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load snippet content.'**
+  String get snippetContentError;
 
   /// Home section title for recently opened projects
   ///

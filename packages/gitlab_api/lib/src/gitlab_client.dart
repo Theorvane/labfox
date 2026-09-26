@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 
 import 'common/exceptions.dart';
 import 'container_registry/container_registry_api.dart';
+import 'environments/environments_api.dart';
 import 'groups/groups_api.dart';
 import 'issues/issues_api.dart';
 import 'jobs/jobs_api.dart';
@@ -15,6 +16,7 @@ import 'pipelines/pipelines_api.dart';
 import 'projects/projects_api.dart';
 import 'repository/repository_api.dart';
 import 'search/search_api.dart';
+import 'snippets/snippets_api.dart';
 import 'todos/todos_api.dart';
 import 'users/users_api.dart';
 import 'wikis/wikis_api.dart';
@@ -53,6 +55,7 @@ class GitLabClient {
     users = UsersApi(_dio);
     groups = GroupsApi(_dio);
     containerRegistry = ContainerRegistryApi(_dio);
+    environments = EnvironmentsApi(_dio);
     projects = ProjectsApi(_dio);
     repository = RepositoryApi(_dio);
     issues = IssuesApi(_dio);
@@ -66,6 +69,7 @@ class GitLabClient {
     projectLabels = ProjectLabelsApi(_dio);
     todos = TodosApi(_dio);
     search = SearchApi(_dio);
+    snippets = SnippetsApi(_dio);
     wikis = WikisApi(_dio);
   }
 
@@ -126,6 +130,7 @@ class GitLabClient {
   late final UsersApi users;
   late final GroupsApi groups;
   late final ContainerRegistryApi containerRegistry;
+  late final EnvironmentsApi environments;
   late final ProjectsApi projects;
   late final RepositoryApi repository;
   late final IssuesApi issues;
@@ -139,6 +144,7 @@ class GitLabClient {
   late final ProjectLabelsApi projectLabels;
   late final TodosApi todos;
   late final SearchApi search;
+  late final SnippetsApi snippets;
   late final WikisApi wikis;
 
   /// Derives the REST endpoint from an instance URL.
