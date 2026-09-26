@@ -3,6 +3,7 @@ import 'package:gitlab_api/gitlab_api.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
 import '../../../../core/auth/gitlab_client_provider.dart';
+import '../../data/group_milestones_repository.dart';
 import '../../data/milestones_repository.dart';
 
 final milestonesRepositoryProvider = FutureProvider<MilestonesRepository?>((
@@ -98,4 +99,104 @@ final milestoneDetailProvider =
       final repository = await ref.watch(milestonesRepositoryProvider.future);
       if (repository == null) throw StateError('No authenticated account');
       return repository.get(key.projectId, key.milestoneId);
+    });
+
+final groupMilestonesRepositoryProvider =
+    FutureProvider<GroupMilestonesRepository?>((ref) async {
+      final client = await ref.watch(gitLabClientProvider.future);
+      return client == null ? null : GroupMilestonesRepository(client);
+    });
+
+class GroupMilestoneListRef {
+  const GroupMilestoneListRef({required this.groupId, required this.state});
+
+  final int groupId;
+  final String state;
+
+  @override
+  bool operator ==(Object other) =>
+      other is GroupMilestoneListRef &&
+      groupId == other.groupId &&
+      state == other.state;
+
+  @override
+  int get hashCode => Object.hash(groupId, state);
+}
+
+class GroupMilestoneRef {
+  const GroupMilestoneRef({required this.groupId, required this.milestoneId});
+
+  final int groupId;
+  final int milestoneId;
+
+  @override
+  bool operator ==(Object other) =>
+      other is GroupMilestoneRef &&
+      groupId == other.groupId &&
+      milestoneId == other.milestoneId;
+
+  @override
+  int get hashCode => Object.hash(groupId, milestoneId);
+}
+
+class GroupMilestoneListController
+    extends
+        FamilyAsyncNotifier<Paginated<GitLabMilestone>, GroupMilestoneListRef> {
+  bool _loadingMore = false;
+
+  @override
+  Future<Paginated<GitLabMilestone>> build(GroupMilestoneListRef arg) async {
+    final repository = await ref.watch(
+      groupMilestonesRepositoryProvider.future,
+    );
+    if (repository == null) throw StateError('No authenticated account');
+    return repository.list(arg.groupId, state: arg.state);
+  }
+
+  Future<void> loadMore() async {
+    if (_loadingMore) return;
+    final current = state.valueOrNull;
+    final page = current?.nextPage;
+    if (current == null || page == null) return;
+    _loadingMore = true;
+    try {
+      final repository = await ref.read(
+        groupMilestonesRepositoryProvider.future,
+      );
+      if (repository == null) throw StateError('No authenticated account');
+      final next = await repository.list(
+        arg.groupId,
+        state: arg.state,
+        page: page,
+      );
+      state = AsyncData(
+        Paginated(
+          items: [...current.items, ...next.items],
+          nextPage: next.nextPage,
+          total: next.total,
+          totalPages: next.totalPages,
+        ),
+      );
+    } catch (error, stackTrace) {
+      state = AsyncError(error, stackTrace);
+    } finally {
+      _loadingMore = false;
+    }
+  }
+}
+
+final groupMilestoneListControllerProvider =
+    AsyncNotifierProvider.family<
+      GroupMilestoneListController,
+      Paginated<GitLabMilestone>,
+      GroupMilestoneListRef
+    >(GroupMilestoneListController.new);
+
+final groupMilestoneDetailProvider =
+    FutureProvider.family<GitLabMilestone, GroupMilestoneRef>((ref, key) async {
+      final repository = await ref.watch(
+        groupMilestonesRepositoryProvider.future,
+      );
+      if (repository == null) throw StateError('No authenticated account');
+      return repository.get(key.groupId, key.milestoneId);
     });

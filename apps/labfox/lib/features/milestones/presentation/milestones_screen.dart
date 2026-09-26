@@ -10,9 +10,13 @@ import 'controllers/milestones_controller.dart';
 
 /// Active and closed project milestones.
 class MilestonesScreen extends ConsumerStatefulWidget {
-  const MilestonesScreen({required this.projectId, super.key});
+  const MilestonesScreen({required this.projectId, super.key}) : groupId = null;
 
-  final int projectId;
+  const MilestonesScreen.group({required this.groupId, super.key})
+    : projectId = null;
+
+  final int? projectId;
+  final int? groupId;
 
   @override
   ConsumerState<MilestonesScreen> createState() => _MilestonesScreenState();
@@ -24,15 +28,28 @@ class _MilestonesScreenState extends ConsumerState<MilestonesScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final key = MilestoneListRef(projectId: widget.projectId, state: _state);
-    final milestones = ref.watch(milestoneListControllerProvider(key));
+    final projectId = widget.projectId;
+    final groupId = widget.groupId;
+    final projectKey = projectId == null
+        ? null
+        : MilestoneListRef(projectId: projectId, state: _state);
+    final groupKey = groupId == null
+        ? null
+        : GroupMilestoneListRef(groupId: groupId, state: _state);
+    final milestones = projectKey == null
+        ? ref.watch(groupMilestoneListControllerProvider(groupKey!))
+        : ref.watch(milestoneListControllerProvider(projectKey));
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.milestonesTitle),
         leading: BackButton(
           onPressed: () => context.canPop()
               ? context.pop()
-              : context.go(Routes.projectOverview(widget.projectId)),
+              : context.go(
+                  groupId == null
+                      ? Routes.projectOverview(projectId!)
+                      : Routes.group(groupId),
+                ),
         ),
       ),
       body: Column(
@@ -65,8 +82,13 @@ class _MilestonesScreenState extends ConsumerState<MilestonesScreen> {
                     Text(l10n.milestonesError),
                     const SizedBox(height: LabFoxSpacing.md),
                     FilledButton(
-                      onPressed: () =>
-                          ref.invalidate(milestoneListControllerProvider(key)),
+                      onPressed: () => projectKey == null
+                          ? ref.invalidate(
+                              groupMilestoneListControllerProvider(groupKey!),
+                            )
+                          : ref.invalidate(
+                              milestoneListControllerProvider(projectKey),
+                            ),
                       child: Text(l10n.retry),
                     ),
                   ],
@@ -75,9 +97,17 @@ class _MilestonesScreenState extends ConsumerState<MilestonesScreen> {
               data: (page) => page.items.isEmpty
                   ? Center(child: Text(l10n.milestonesEmpty))
                   : RefreshIndicator(
-                      onRefresh: () => ref.refresh(
-                        milestoneListControllerProvider(key).future,
-                      ),
+                      onRefresh: () => projectKey == null
+                          ? ref.refresh(
+                              groupMilestoneListControllerProvider(
+                                groupKey!,
+                              ).future,
+                            )
+                          : ref.refresh(
+                              milestoneListControllerProvider(
+                                projectKey,
+                              ).future,
+                            ),
                       child: ListView(
                         physics: const AlwaysScrollableScrollPhysics(),
                         children: [
@@ -109,21 +139,34 @@ class _MilestonesScreenState extends ConsumerState<MilestonesScreen> {
                                             LabFoxIcons.chevron,
                                           ),
                                           onTap: () => context.push(
-                                            Routes.milestone(
-                                              widget.projectId,
-                                              milestone.id,
-                                            ),
+                                            groupId == null
+                                                ? Routes.milestone(
+                                                    projectId!,
+                                                    milestone.id,
+                                                  )
+                                                : Routes.groupMilestone(
+                                                    groupId,
+                                                    milestone.id,
+                                                  ),
                                           ),
                                         ),
                                       if (page.hasMore)
                                         TextButton(
-                                          onPressed: () => ref
-                                              .read(
-                                                milestoneListControllerProvider(
-                                                  key,
-                                                ).notifier,
-                                              )
-                                              .loadMore(),
+                                          onPressed: () => projectKey == null
+                                              ? ref
+                                                    .read(
+                                                      groupMilestoneListControllerProvider(
+                                                        groupKey!,
+                                                      ).notifier,
+                                                    )
+                                                    .loadMore()
+                                              : ref
+                                                    .read(
+                                                      milestoneListControllerProvider(
+                                                        projectKey,
+                                                      ).notifier,
+                                                    )
+                                                    .loadMore(),
                                           child: Text(l10n.milestoneLoadMore),
                                         ),
                                     ],

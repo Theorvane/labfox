@@ -79,6 +79,9 @@ abstract final class Routes {
   static const String subscription = '/settings/subscription';
   static const String groups = '/groups';
   static String group(int id) => '/groups/$id';
+  static String groupMilestones(int id) => '/groups/$id/milestones';
+  static String groupMilestone(int id, int milestoneId) =>
+      '/groups/$id/milestones/$milestoneId';
   static String groupLabels(int id) => '/groups/$id/labels';
   static String groupLabel(int id, int labelId) =>
       '/groups/$id/labels/$labelId';
@@ -270,6 +273,23 @@ final routerProvider = Provider<GoRouter>((ref) {
               groupId: int.parse(state.pathParameters['id']!),
             ),
             routes: [
+              GoRoute(
+                path: 'milestones',
+                builder: (context, state) => MilestonesScreen.group(
+                  groupId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':milestoneId',
+                    builder: (context, state) => MilestoneDetailScreen.group(
+                      groupId: int.parse(state.pathParameters['id']!),
+                      milestoneId: int.parse(
+                        state.pathParameters['milestoneId']!,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               GoRoute(
                 path: 'labels',
                 builder: (context, state) => GroupLabelsScreen(
