@@ -1050,6 +1050,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get meAccounts => 'Switch account';
 
   @override
+  String get snippetsTitle => 'Snippets';
+
+  @override
+  String get snippetsEmpty => 'No snippets yet';
+
+  @override
+  String get snippetsError => 'Couldn\'t load snippets.';
+
+  @override
+  String get snippetError => 'Couldn\'t load this snippet.';
+
+  @override
+  String get snippetContent => 'Content';
+
+  @override
+  String get snippetContentError => 'Couldn\'t load snippet content.';
+
+  @override
   String get homeRecents => 'Recent';
 
   @override

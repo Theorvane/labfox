@@ -1034,6 +1034,24 @@ class AppLocalizationsJa extends AppLocalizations {
   String get meAccounts => 'アカウント切り替え';
 
   @override
+  String get snippetsTitle => 'スニペット';
+
+  @override
+  String get snippetsEmpty => 'スニペットはまだありません';
+
+  @override
+  String get snippetsError => 'スニペットを読み込めませんでした。';
+
+  @override
+  String get snippetError => 'このスニペットを読み込めませんでした。';
+
+  @override
+  String get snippetContent => '内容';
+
+  @override
+  String get snippetContentError => 'スニペットの内容を読み込めませんでした。';
+
+  @override
   String get homeRecents => '最近';
 
   @override
