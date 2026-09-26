@@ -144,6 +144,17 @@ class GroupDetailScreen extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             _GroupHeader(data: data),
+                            const SizedBox(height: LabFoxSpacing.md),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: OutlinedButton.icon(
+                                onPressed: () => context.push(
+                                  Routes.groupProtectedEnvironments(groupId),
+                                ),
+                                icon: const Icon(LabFoxIcons.private),
+                                label: Text(l10n.protectedEnvironmentsTitle),
+                              ),
+                            ),
                             const SizedBox(height: LabFoxSpacing.lg),
                             if (wide)
                               Row(

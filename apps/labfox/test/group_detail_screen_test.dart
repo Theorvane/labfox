@@ -58,6 +58,12 @@ Future<void> _pump(
         builder: (_, state) =>
             Scaffold(body: Text('Members of ${state.pathParameters['id']}')),
       ),
+      GoRoute(
+        path: '/groups/:id/protected_environments',
+        builder: (_, state) => Scaffold(
+          body: Text('Protected environments of ${state.pathParameters['id']}'),
+        ),
+      ),
     ],
   );
   await tester.pumpWidget(
@@ -97,6 +103,17 @@ void main() {
     expect(find.text('parent/team'), findsOneWidget);
     expect(find.text('Infra'), findsOneWidget);
     expect(find.text('App'), findsOneWidget);
+  });
+
+  testWidgets('opens group protected environments from the overview', (
+    tester,
+  ) async {
+    await _pump(tester, const AsyncData(_overview), size: const Size(390, 844));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Protected environments'));
+    await tester.pumpAndSettle();
+    expect(find.text('Protected environments of 42'), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('opens a project in the app', (tester) async {

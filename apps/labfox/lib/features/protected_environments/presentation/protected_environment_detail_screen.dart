@@ -9,29 +9,47 @@ import '../../../app/router.dart';
 import '../../../l10n/app_localizations.dart';
 import 'controllers/protected_environments_controller.dart';
 
-/// One rule, restorable from its project and environment name.
+/// One rule, restorable from its project or group and environment name.
 class ProtectedEnvironmentDetailScreen extends ConsumerWidget {
   const ProtectedEnvironmentDetailScreen({
     required this.projectId,
     required this.name,
     super.key,
-  });
+  }) : groupId = null;
 
-  final int projectId;
+  const ProtectedEnvironmentDetailScreen.group({
+    required this.groupId,
+    required this.name,
+    super.key,
+  }) : projectId = null;
+
+  final int? projectId;
+  final int? groupId;
   final String name;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final key = ProtectedEnvironmentRef(projectId: projectId, name: name);
-    final rule = ref.watch(protectedEnvironmentDetailProvider(key));
+    final projectKey = projectId == null
+        ? null
+        : ProtectedEnvironmentRef(projectId: projectId!, name: name);
+    final groupKey = groupId == null
+        ? null
+        : GroupProtectedEnvironmentRef(groupId: groupId!, name: name);
+    final rule = groupKey == null
+        ? ref.watch(protectedEnvironmentDetailProvider(projectKey!))
+        : ref.watch(groupProtectedEnvironmentDetailProvider(groupKey));
     return Scaffold(
       appBar: AppBar(
         title: Text(rule.valueOrNull?.name ?? l10n.protectedEnvironmentsTitle),
         leading: BackButton(
           onPressed: () => context.canPop()
               ? context.pop()
-              : context.go(Routes.protectedEnvironments(projectId)),
+              : context.go(
+                  groupId == null
+                      ? Routes.protectedEnvironments(projectId!)
+                      : Routes.groupProtectedEnvironments(groupId!),
+                ),
         ),
       ),
       body: rule.when(
@@ -47,16 +65,26 @@ class ProtectedEnvironmentDetailScreen extends ConsumerWidget {
               ),
               const SizedBox(height: LabFoxSpacing.md),
               FilledButton(
-                onPressed: () =>
-                    ref.invalidate(protectedEnvironmentDetailProvider(key)),
+                onPressed: () => groupKey == null
+                    ? ref.invalidate(
+                        protectedEnvironmentDetailProvider(projectKey!),
+                      )
+                    : ref.invalidate(
+                        groupProtectedEnvironmentDetailProvider(groupKey),
+                      ),
                 child: Text(l10n.retry),
               ),
             ],
           ),
         ),
         data: (data) => RefreshIndicator(
-          onRefresh: () =>
-              ref.refresh(protectedEnvironmentDetailProvider(key).future),
+          onRefresh: () => groupKey == null
+              ? ref.refresh(
+                  protectedEnvironmentDetailProvider(projectKey!).future,
+                )
+              : ref.refresh(
+                  groupProtectedEnvironmentDetailProvider(groupKey).future,
+                ),
           child: LayoutBuilder(
             builder: (context, constraints) {
               final wide = constraints.maxWidth >= LabFoxBreakpoints.tablet;

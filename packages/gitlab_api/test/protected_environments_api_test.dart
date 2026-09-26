@@ -83,6 +83,57 @@ void main() {
       throwsA(isA<GitLabForbiddenException>()),
     );
   });
+
+  test('lists group rules with pagination and reads a tier detail', () async {
+    late RequestOptions request;
+    final client = _client((options) {
+      request = options;
+      if (options.path.endsWith('/production')) {
+        return (
+          status: 200,
+          headers: <String, List<String>>{},
+          body: {
+            'name': 'production',
+            'deploy_access_levels': [
+              {'access_level_description': 'Maintainers'},
+            ],
+            'approval_rules': [
+              {
+                'group_id': 135,
+                'access_level_description': 'Security team',
+                'required_approvals': 2,
+              },
+            ],
+          },
+        );
+      }
+      return (
+        status: 200,
+        headers: {
+          'x-next-page': ['2'],
+        },
+        body: [
+          {'name': 'production', 'required_approval_count': 2},
+        ],
+      );
+    });
+
+    final page = await client.groupProtectedEnvironments.list('team/release');
+    expect(request.path, '/groups/team%2Frelease/protected_environments');
+    expect(page.nextPage, 2);
+    expect(page.items.single.requiredApprovalCount, 2);
+    final detail = await client.groupProtectedEnvironments.get(7, 'production');
+    expect(request.path, '/groups/7/protected_environments/production');
+    expect(detail.approvalRules.single.requiredApprovals, 2);
+
+    final forbidden = _client(
+      (_) => (status: 403, headers: const {}, body: const {}),
+    );
+    await expectLater(
+      forbidden.groupProtectedEnvironments.list(7),
+      throwsA(isA<GitLabForbiddenException>()),
+    );
+  });
 }
 
 GitLabClient _client(

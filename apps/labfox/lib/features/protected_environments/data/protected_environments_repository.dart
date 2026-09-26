@@ -12,4 +12,12 @@ class ProtectedEnvironmentsRepository {
 
   Future<ProtectedEnvironment> get(int projectId, String name) =>
       client.protectedEnvironments.get(projectId, name);
+
+  Future<Paginated<ProtectedEnvironment>> listGroup(
+    int groupId, {
+    int page = 1,
+  }) => client.groupProtectedEnvironments.list(groupId, page: page);
+
+  Future<ProtectedEnvironment> getGroup(int groupId, String name) =>
+      client.groupProtectedEnvironments.get(groupId, name);
 }
