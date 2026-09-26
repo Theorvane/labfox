@@ -1,5 +1,9 @@
 {
   "@@locale": "hi",
+  "groupMembersTitle": "समूह सदस्य",
+  "groupMembersSearch": "समूह सदस्यों को खोजें",
+  "groupMembersEmpty": "कोई समूह सदस्य नहीं मिला।",
+  "groupMembersError": "समूह सदस्यों को लोड नहीं किया जा सका।",
   "pipelineSchedulesTitle": "पाइपलाइन शेड्यूल",
   "pipelineSchedulesAll": "सभी",
   "pipelineSchedulesActive": "सक्रिय",

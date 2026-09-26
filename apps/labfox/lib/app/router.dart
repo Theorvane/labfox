@@ -79,6 +79,7 @@ abstract final class Routes {
   static const String subscription = '/settings/subscription';
   static const String groups = '/groups';
   static String group(int id) => '/groups/$id';
+  static String groupMembers(int id) => '/groups/$id/members';
   static const String projects = '/projects';
   // Account-level lists, mirroring GitLab's /dashboard URLs.
   static const String myIssues = '/dashboard/issues';
@@ -265,6 +266,14 @@ final routerProvider = Provider<GoRouter>((ref) {
             builder: (context, state) => GroupDetailScreen(
               groupId: int.parse(state.pathParameters['id']!),
             ),
+            routes: [
+              GoRoute(
+                path: 'members',
+                builder: (context, state) => GroupMembersScreen(
+                  groupId: int.parse(state.pathParameters['id']!),
+                ),
+              ),
+            ],
           ),
         ],
       ),

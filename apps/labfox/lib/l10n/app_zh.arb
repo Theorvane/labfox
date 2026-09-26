@@ -1,5 +1,9 @@
 {
   "@@locale": "zh",
+  "groupMembersTitle": "群组成员",
+  "groupMembersSearch": "搜索群组成员",
+  "groupMembersEmpty": "没有找到群组成员。",
+  "groupMembersError": "无法加载群组成员。",
   "pipelineSchedulesTitle": "流水线计划",
   "pipelineSchedulesAll": "全部",
   "pipelineSchedulesActive": "启用",

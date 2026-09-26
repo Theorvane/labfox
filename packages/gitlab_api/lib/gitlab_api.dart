@@ -15,6 +15,7 @@ export 'src/groups/groups_api.dart';
 export 'src/issues/issues_api.dart';
 export 'src/jobs/jobs_api.dart';
 export 'src/labels/project_labels_api.dart';
+export 'src/members/group_members_api.dart';
 export 'src/members/project_members_api.dart';
 export 'src/merge_requests/merge_requests_api.dart';
 export 'src/milestones/milestones_api.dart';

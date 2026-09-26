@@ -28,7 +28,14 @@ class GroupDetailScreen extends ConsumerWidget {
           onPressed: () =>
               context.canPop() ? context.pop() : context.go(Routes.groups),
         ),
-        actions: [ShareLinkButton(url: group?.webUrl)],
+        actions: [
+          IconButton(
+            tooltip: l10n.groupMembersTitle,
+            icon: const Icon(LabFoxIcons.person),
+            onPressed: () => context.push(Routes.groupMembers(groupId)),
+          ),
+          ShareLinkButton(url: group?.webUrl),
+        ],
       ),
       body: overview.when(
         loading: () => const Center(child: CircularProgressIndicator()),
