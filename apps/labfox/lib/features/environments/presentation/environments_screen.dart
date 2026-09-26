@@ -52,6 +52,14 @@ class _EnvironmentsScreenState extends ConsumerState<EnvironmentsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.environmentsTitle),
+        actions: [
+          IconButton(
+            icon: const Icon(LabFoxIcons.private),
+            tooltip: l10n.protectedEnvironmentsTitle,
+            onPressed: () =>
+                context.push(Routes.protectedEnvironments(widget.projectId)),
+          ),
+        ],
         leading: BackButton(
           onPressed: () => context.canPop()
               ? context.pop()

@@ -24,6 +24,35 @@ class AppLocalizationsEn extends AppLocalizations {
   String get protectedTagCreateAccess => 'Allowed to create';
 
   @override
+  String get protectedEnvironmentsTitle => 'Protected environments';
+
+  @override
+  String get protectedEnvironmentsEmpty =>
+      'No protected environment rules found.';
+
+  @override
+  String get protectedEnvironmentsError =>
+      'Could not load protected environments.';
+
+  @override
+  String get protectedEnvironmentsUnavailable =>
+      'Protected environments are unavailable or you don\'t have access.';
+
+  @override
+  String get protectedEnvironmentsLoadMore => 'Load more';
+
+  @override
+  String get protectedEnvironmentDeployAccess => 'Allowed to deploy';
+
+  @override
+  String get protectedEnvironmentApprovalRules => 'Approval rules';
+
+  @override
+  String protectedEnvironmentApprovalCount(int count) {
+    return 'Required approvals: $count';
+  }
+
+  @override
   String get protectedBranchesTitle => 'Protected branches';
 
   @override

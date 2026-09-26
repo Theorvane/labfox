@@ -4,6 +4,7 @@ import 'common/exceptions.dart';
 import 'container_registry/container_registry_api.dart';
 import 'deployments/deployments_api.dart';
 import 'environments/environments_api.dart';
+import 'environments/protected_environments_api.dart';
 import 'events/events_api.dart';
 import 'groups/groups_api.dart';
 import 'issues/issue_links_api.dart';
@@ -67,6 +68,7 @@ class GitLabClient {
     containerRegistry = ContainerRegistryApi(_dio);
     deployments = DeploymentsApi(_dio);
     environments = EnvironmentsApi(_dio);
+    protectedEnvironments = ProtectedEnvironmentsApi(_dio);
     events = EventsApi(_dio);
     projects = ProjectsApi(_dio);
     repository = RepositoryApi(_dio);
@@ -152,6 +154,7 @@ class GitLabClient {
   late final ContainerRegistryApi containerRegistry;
   late final DeploymentsApi deployments;
   late final EnvironmentsApi environments;
+  late final ProtectedEnvironmentsApi protectedEnvironments;
   late final EventsApi events;
   late final ProjectsApi projects;
   late final RepositoryApi repository;

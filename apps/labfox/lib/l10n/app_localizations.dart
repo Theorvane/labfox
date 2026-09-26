@@ -134,6 +134,54 @@ abstract class AppLocalizations {
   /// **'Allowed to create'**
   String get protectedTagCreateAccess;
 
+  /// No description provided for @protectedEnvironmentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Protected environments'**
+  String get protectedEnvironmentsTitle;
+
+  /// No description provided for @protectedEnvironmentsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No protected environment rules found.'**
+  String get protectedEnvironmentsEmpty;
+
+  /// No description provided for @protectedEnvironmentsError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load protected environments.'**
+  String get protectedEnvironmentsError;
+
+  /// No description provided for @protectedEnvironmentsUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Protected environments are unavailable or you don\'t have access.'**
+  String get protectedEnvironmentsUnavailable;
+
+  /// No description provided for @protectedEnvironmentsLoadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get protectedEnvironmentsLoadMore;
+
+  /// No description provided for @protectedEnvironmentDeployAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Allowed to deploy'**
+  String get protectedEnvironmentDeployAccess;
+
+  /// No description provided for @protectedEnvironmentApprovalRules.
+  ///
+  /// In en, this message translates to:
+  /// **'Approval rules'**
+  String get protectedEnvironmentApprovalRules;
+
+  /// No description provided for @protectedEnvironmentApprovalCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Required approvals: {count}'**
+  String protectedEnvironmentApprovalCount(int count);
+
   /// No description provided for @protectedBranchesTitle.
   ///
   /// In en, this message translates to:

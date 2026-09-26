@@ -48,6 +48,8 @@ import '../features/project_overview/presentation/project_overview_screen.dart';
 import '../features/projects/presentation/projects_screen.dart';
 import '../features/protected_branches/presentation/protected_branch_detail_screen.dart';
 import '../features/protected_branches/presentation/protected_branches_screen.dart';
+import '../features/protected_environments/presentation/protected_environment_detail_screen.dart';
+import '../features/protected_environments/presentation/protected_environments_screen.dart';
 import '../features/protected_tags/presentation/protected_tag_detail_screen.dart';
 import '../features/protected_tags/presentation/protected_tags_screen.dart';
 import '../features/releases/presentation/release_detail_screen.dart';
@@ -129,6 +131,10 @@ abstract final class Routes {
   static String environments(int id) => '/projects/$id/environments';
   static String environment(int id, int environmentId) =>
       '/projects/$id/environments/$environmentId';
+  static String protectedEnvironments(int id) =>
+      '/projects/$id/protected_environments';
+  static String protectedEnvironment(int id, String name) =>
+      '/projects/$id/protected_environments/${Uri.encodeComponent(name)}';
   static String deployments(int id, {String? environment}) =>
       '/projects/$id/deployments${environment == null ? '' : '?environment=${Uri.encodeQueryComponent(environment)}'}';
   static String deployment(int id, int deploymentId) =>
@@ -453,6 +459,22 @@ final routerProvider = Provider<GoRouter>((ref) {
                         state.pathParameters['environmentId']!,
                       ),
                     ),
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: 'protected_environments',
+                builder: (context, state) => ProtectedEnvironmentsScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':name',
+                    builder: (context, state) =>
+                        ProtectedEnvironmentDetailScreen(
+                          projectId: int.parse(state.pathParameters['id']!),
+                          name: state.pathParameters['name']!,
+                        ),
                   ),
                 ],
               ),

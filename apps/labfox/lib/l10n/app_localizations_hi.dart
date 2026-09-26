@@ -24,6 +24,34 @@ class AppLocalizationsHi extends AppLocalizations {
   String get protectedTagCreateAccess => 'बनाने की अनुमति';
 
   @override
+  String get protectedEnvironmentsTitle => 'सुरक्षित परिवेश';
+
+  @override
+  String get protectedEnvironmentsEmpty =>
+      'कोई सुरक्षित परिवेश नियम नहीं मिला।';
+
+  @override
+  String get protectedEnvironmentsError => 'सुरक्षित परिवेश लोड नहीं हो सके।';
+
+  @override
+  String get protectedEnvironmentsUnavailable =>
+      'सुरक्षित परिवेश उपलब्ध नहीं हैं या आपके पास पहुँच नहीं है।';
+
+  @override
+  String get protectedEnvironmentsLoadMore => 'और दिखाएं';
+
+  @override
+  String get protectedEnvironmentDeployAccess => 'डिप्लॉय करने की अनुमति';
+
+  @override
+  String get protectedEnvironmentApprovalRules => 'अनुमोदन नियम';
+
+  @override
+  String protectedEnvironmentApprovalCount(int count) {
+    return 'आवश्यक अनुमोदन: $count';
+  }
+
+  @override
   String get protectedBranchesTitle => 'सुरक्षित ब्रांच';
 
   @override
