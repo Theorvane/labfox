@@ -40,8 +40,9 @@ navigation rail and the room to show twenty merge requests at once:
 
 ## What we're building
 
-LabFox does not try to port every feature of GitLab's web UI.
-The goal is to **make the work developers do every day fast.**
+LabFox began as a focused workflow client: **make the work developers do every
+day fast.** A maintainer-approved expansion now tracks broader GitLab
+mobile-web coverage in the [parity inventory](docs/mobile-web-parity.md).
 
 ```
 Check notifications
@@ -113,6 +114,10 @@ labfox/
 
 Details: [`.agents/docs/roadmap.md`](.agents/docs/roadmap.md)
 
+The maintainer-approved GitLab mobile-web expansion is tracked in
+[the parity inventory](docs/mobile-web-parity.md). It distinguishes shipped
+slices from known gaps; it is not a claim of complete web parity.
+
 ## Contributing
 
 **Contributions are welcome.** Read [CONTRIBUTING.md](CONTRIBUTING.md) before you start.
@@ -147,6 +152,7 @@ gh pr create --fill --base dev
 - [`AGENTS.md`](AGENTS.md) — architecture, conventions, what's off-limits, 1.0 scope
 - [`.agents/docs/`](.agents/docs/) — detailed docs (architecture · conventions · api-reference · references · roadmap)
 - [`.agents/docs/workflow.md`](.agents/docs/workflow.md) — the Issue → Branch → PR process
+- [`docs/mobile-web-parity.md`](docs/mobile-web-parity.md) — shipped slices and remaining mobile-web work
 - [`.agents/skills/`](.agents/skills/) — playbooks for each type of task
 
 ## License
