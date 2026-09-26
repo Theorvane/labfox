@@ -9,6 +9,18 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get groupMembersTitle => 'グループメンバー';
+
+  @override
+  String get groupMembersSearch => 'グループメンバーを検索';
+
+  @override
+  String get groupMembersEmpty => 'グループメンバーが見つかりません。';
+
+  @override
+  String get groupMembersError => 'グループメンバーを読み込めませんでした。';
+
+  @override
   String get releasesTitle => 'リリース';
 
   @override

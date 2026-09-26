@@ -9,6 +9,18 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get groupMembersTitle => 'Group members';
+
+  @override
+  String get groupMembersSearch => 'Search group members';
+
+  @override
+  String get groupMembersEmpty => 'No group members found.';
+
+  @override
+  String get groupMembersError => 'Could not load group members.';
+
+  @override
   String get releasesTitle => 'Releases';
 
   @override

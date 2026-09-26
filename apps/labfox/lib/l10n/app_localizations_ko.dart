@@ -9,6 +9,18 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
+  String get groupMembersTitle => '그룹 멤버';
+
+  @override
+  String get groupMembersSearch => '그룹 멤버 검색';
+
+  @override
+  String get groupMembersEmpty => '그룹 멤버를 찾을 수 없습니다.';
+
+  @override
+  String get groupMembersError => '그룹 멤버를 불러올 수 없습니다.';
+
+  @override
   String get releasesTitle => '릴리스';
 
   @override

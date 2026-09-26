@@ -1,5 +1,9 @@
 {
   "@@locale": "ja",
+  "groupMembersTitle": "グループメンバー",
+  "groupMembersSearch": "グループメンバーを検索",
+  "groupMembersEmpty": "グループメンバーが見つかりません。",
+  "groupMembersError": "グループメンバーを読み込めませんでした。",
   "releasesTitle": "リリース",
   "releasesEmpty": "リリースはまだありません。",
   "releasesError": "リリースを読み込めませんでした。",

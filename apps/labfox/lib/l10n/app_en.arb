@@ -1,5 +1,9 @@
 {
   "@@locale": "en",
+  "groupMembersTitle": "Group members",
+  "groupMembersSearch": "Search group members",
+  "groupMembersEmpty": "No group members found.",
+  "groupMembersError": "Could not load group members.",
   "releasesTitle": "Releases",
   "releasesEmpty": "No releases yet.",
   "releasesError": "Could not load releases.",

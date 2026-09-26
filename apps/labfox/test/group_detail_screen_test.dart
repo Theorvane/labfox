@@ -48,6 +48,11 @@ Future<void> _pump(
         builder: (_, state) =>
             Scaffold(body: Text('Project ${state.pathParameters['id']}')),
       ),
+      GoRoute(
+        path: '/groups/:id/members',
+        builder: (_, state) =>
+            Scaffold(body: Text('Members of ${state.pathParameters['id']}')),
+      ),
     ],
   );
   await tester.pumpWidget(
@@ -97,6 +102,16 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Project 7'), findsOneWidget);
+  });
+
+  testWidgets('opens effective group members', (tester) async {
+    await _pump(tester, const AsyncData(_overview));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byTooltip('Group members'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Members of 42'), findsOneWidget);
   });
 
   testWidgets('opens a subgroup in the app', (tester) async {
