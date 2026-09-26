@@ -1106,6 +1106,64 @@ class AppLocalizationsHi extends AppLocalizations {
   String get meAccounts => 'खाता बदलें';
 
   @override
+  String get projectLabelsTitle => 'लेबल';
+
+  @override
+  String get projectLabelsError => 'लेबल लोड नहीं हो सके।';
+
+  @override
+  String get projectLabelsEmpty => 'अभी कोई लेबल नहीं है';
+
+  @override
+  String get projectLabelsNoMatch => 'कोई मेल खाता लेबल नहीं है';
+
+  @override
+  String get projectLabelSearch => 'लेबल खोजें';
+
+  @override
+  String get projectLabelNew => 'नया लेबल';
+
+  @override
+  String get projectLabelGroup => 'समूह लेबल';
+
+  @override
+  String get projectLabelProject => 'प्रोजेक्ट लेबल';
+
+  @override
+  String get projectLabelError => 'यह लेबल लोड नहीं हो सका।';
+
+  @override
+  String get projectLabelOpenIssues => 'खुले इश्यू';
+
+  @override
+  String get projectLabelClosedIssues => 'बंद इश्यू';
+
+  @override
+  String get projectLabelOpenMrs => 'खुले मर्ज अनुरोध';
+
+  @override
+  String get projectLabelName => 'नाम';
+
+  @override
+  String get projectLabelColor => 'रंग (#RRGGBB)';
+
+  @override
+  String get projectLabelDescription => 'विवरण (वैकल्पिक)';
+
+  @override
+  String get projectLabelRequired => 'यह फ़ील्ड आवश्यक है';
+
+  @override
+  String get projectLabelInvalidColor => '#5843AD जैसा रंग दर्ज करें';
+
+  @override
+  String get projectLabelCreate => 'लेबल बनाएं';
+
+  @override
+  String get projectLabelCreateError =>
+      'लेबल नहीं बन सका। अनुमतियाँ और इनपुट जांचें।';
+
+  @override
   String get tagsTitle => 'टैग';
 
   @override

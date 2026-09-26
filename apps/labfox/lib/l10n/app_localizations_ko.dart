@@ -1091,6 +1091,63 @@ class AppLocalizationsKo extends AppLocalizations {
   String get meAccounts => '계정 전환';
 
   @override
+  String get projectLabelsTitle => '라벨';
+
+  @override
+  String get projectLabelsError => '라벨을 불러올 수 없습니다.';
+
+  @override
+  String get projectLabelsEmpty => '라벨이 없습니다';
+
+  @override
+  String get projectLabelsNoMatch => '일치하는 라벨이 없습니다';
+
+  @override
+  String get projectLabelSearch => '라벨 검색';
+
+  @override
+  String get projectLabelNew => '새 라벨';
+
+  @override
+  String get projectLabelGroup => '그룹 라벨';
+
+  @override
+  String get projectLabelProject => '프로젝트 라벨';
+
+  @override
+  String get projectLabelError => '이 라벨을 불러올 수 없습니다.';
+
+  @override
+  String get projectLabelOpenIssues => '열린 이슈';
+
+  @override
+  String get projectLabelClosedIssues => '닫힌 이슈';
+
+  @override
+  String get projectLabelOpenMrs => '열린 머지 리퀘스트';
+
+  @override
+  String get projectLabelName => '이름';
+
+  @override
+  String get projectLabelColor => '색상 (#RRGGBB)';
+
+  @override
+  String get projectLabelDescription => '설명 (선택 사항)';
+
+  @override
+  String get projectLabelRequired => '필수 입력 항목입니다';
+
+  @override
+  String get projectLabelInvalidColor => '#5843AD와 같은 색상을 입력하세요';
+
+  @override
+  String get projectLabelCreate => '라벨 만들기';
+
+  @override
+  String get projectLabelCreateError => '라벨을 만들 수 없습니다. 권한과 입력값을 확인하세요.';
+
+  @override
   String get tagsTitle => '태그';
 
   @override

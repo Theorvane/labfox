@@ -39,6 +39,7 @@ import '../features/package_registry/presentation/package_list_screen.dart';
 import '../features/pipelines/presentation/pipeline_detail_screen.dart';
 import '../features/pipelines/presentation/pipelines_screen.dart';
 import '../features/profile/presentation/me_screen.dart';
+import '../features/project_labels/presentation/project_labels_screen.dart';
 import '../features/project_overview/presentation/project_overview_screen.dart';
 import '../features/projects/presentation/projects_screen.dart';
 import '../features/releases/presentation/release_detail_screen.dart';
@@ -81,6 +82,9 @@ abstract final class Routes {
 
   static String projectOverview(int id) => '/projects/$id';
   static String projectActivity(int id) => '/projects/$id/activity';
+  static String projectLabels(int id) => '/projects/$id/labels';
+  static String projectLabel(int id, int labelId) =>
+      '/projects/$id/labels/$labelId';
   static String releases(int id) => '/projects/$id/releases';
   static String release(int id, String tagName) =>
       '/projects/$id/releases/${Uri.encodeComponent(tagName)}';
@@ -396,6 +400,19 @@ final routerProvider = Provider<GoRouter>((ref) {
                     path: path,
                   );
                 },
+              ),
+              GoRoute(
+                path: 'labels',
+                builder: (context, state) => ProjectLabelsScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+              ),
+              GoRoute(
+                path: 'labels/:labelId',
+                builder: (context, state) => ProjectLabelDetailScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                  labelId: int.parse(state.pathParameters['labelId']!),
+                ),
               ),
               GoRoute(
                 path: 'snippets',

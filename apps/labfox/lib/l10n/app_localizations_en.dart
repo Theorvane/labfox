@@ -1106,6 +1106,64 @@ class AppLocalizationsEn extends AppLocalizations {
   String get meAccounts => 'Switch account';
 
   @override
+  String get projectLabelsTitle => 'Labels';
+
+  @override
+  String get projectLabelsError => 'Couldn\'t load labels.';
+
+  @override
+  String get projectLabelsEmpty => 'No labels yet';
+
+  @override
+  String get projectLabelsNoMatch => 'No matching labels';
+
+  @override
+  String get projectLabelSearch => 'Search labels';
+
+  @override
+  String get projectLabelNew => 'New label';
+
+  @override
+  String get projectLabelGroup => 'Group label';
+
+  @override
+  String get projectLabelProject => 'Project label';
+
+  @override
+  String get projectLabelError => 'Couldn\'t load this label.';
+
+  @override
+  String get projectLabelOpenIssues => 'Open issues';
+
+  @override
+  String get projectLabelClosedIssues => 'Closed issues';
+
+  @override
+  String get projectLabelOpenMrs => 'Open merge requests';
+
+  @override
+  String get projectLabelName => 'Name';
+
+  @override
+  String get projectLabelColor => 'Color (#RRGGBB)';
+
+  @override
+  String get projectLabelDescription => 'Description (optional)';
+
+  @override
+  String get projectLabelRequired => 'This field is required';
+
+  @override
+  String get projectLabelInvalidColor => 'Enter a color like #5843AD';
+
+  @override
+  String get projectLabelCreate => 'Create label';
+
+  @override
+  String get projectLabelCreateError =>
+      'Couldn\'t create the label. Check your permissions and input.';
+
+  @override
   String get tagsTitle => 'Tags';
 
   @override

@@ -2198,6 +2198,120 @@ abstract class AppLocalizations {
   /// **'Switch account'**
   String get meAccounts;
 
+  /// No description provided for @projectLabelsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Labels'**
+  String get projectLabelsTitle;
+
+  /// No description provided for @projectLabelsError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load labels.'**
+  String get projectLabelsError;
+
+  /// No description provided for @projectLabelsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No labels yet'**
+  String get projectLabelsEmpty;
+
+  /// No description provided for @projectLabelsNoMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'No matching labels'**
+  String get projectLabelsNoMatch;
+
+  /// No description provided for @projectLabelSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search labels'**
+  String get projectLabelSearch;
+
+  /// No description provided for @projectLabelNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New label'**
+  String get projectLabelNew;
+
+  /// No description provided for @projectLabelGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'Group label'**
+  String get projectLabelGroup;
+
+  /// No description provided for @projectLabelProject.
+  ///
+  /// In en, this message translates to:
+  /// **'Project label'**
+  String get projectLabelProject;
+
+  /// No description provided for @projectLabelError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load this label.'**
+  String get projectLabelError;
+
+  /// No description provided for @projectLabelOpenIssues.
+  ///
+  /// In en, this message translates to:
+  /// **'Open issues'**
+  String get projectLabelOpenIssues;
+
+  /// No description provided for @projectLabelClosedIssues.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed issues'**
+  String get projectLabelClosedIssues;
+
+  /// No description provided for @projectLabelOpenMrs.
+  ///
+  /// In en, this message translates to:
+  /// **'Open merge requests'**
+  String get projectLabelOpenMrs;
+
+  /// No description provided for @projectLabelName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get projectLabelName;
+
+  /// No description provided for @projectLabelColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Color (#RRGGBB)'**
+  String get projectLabelColor;
+
+  /// No description provided for @projectLabelDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Description (optional)'**
+  String get projectLabelDescription;
+
+  /// No description provided for @projectLabelRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required'**
+  String get projectLabelRequired;
+
+  /// No description provided for @projectLabelInvalidColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a color like #5843AD'**
+  String get projectLabelInvalidColor;
+
+  /// No description provided for @projectLabelCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'Create label'**
+  String get projectLabelCreate;
+
+  /// No description provided for @projectLabelCreateError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t create the label. Check your permissions and input.'**
+  String get projectLabelCreateError;
+
   /// No description provided for @tagsTitle.
   ///
   /// In en, this message translates to:
