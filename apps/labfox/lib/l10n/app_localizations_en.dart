@@ -45,6 +45,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get protectedBranchNoAccess => 'No access rules';
 
   @override
+  String get linkedIssuesTitle => 'Linked issues';
+
+  @override
+  String get linkedIssuesError => 'Could not load linked issues.';
+
+  @override
+  String get linkedIssuesLoadMore => 'Load more';
+
+  @override
+  String get linkedIssuesRelatesTo => 'Related to';
+
+  @override
+  String get linkedIssuesBlocks => 'Blocks';
+
+  @override
+  String get linkedIssuesBlockedBy => 'Blocked by';
+
+  @override
   String get groupLabelsTitle => 'Group labels';
 
   @override

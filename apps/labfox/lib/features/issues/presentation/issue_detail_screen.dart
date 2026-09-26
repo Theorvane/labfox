@@ -9,6 +9,7 @@ import '../../../core/ui/work_meta.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../comments/presentation/widgets/comment_thread.dart';
 import 'controllers/issues_controllers.dart';
+import 'widgets/linked_issues_section.dart';
 
 /// One issue: title, state, author, labels, the rendered description, and its
 /// comment thread. The overflow menu closes or reopens the issue.
@@ -88,6 +89,7 @@ class IssueDetailScreen extends ConsumerWidget {
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             const SizedBox(height: LabFoxSpacing.xl),
+            LinkedIssuesSection(projectId: projectId, iid: iid),
             CommentThread(
               type: NoteableType.issue,
               projectId: projectId,

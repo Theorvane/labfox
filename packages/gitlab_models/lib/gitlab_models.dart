@@ -17,6 +17,7 @@ export 'src/gitlab_package.dart';
 export 'src/gitlab_release.dart';
 export 'src/group.dart';
 export 'src/issue.dart';
+export 'src/issue_link.dart';
 export 'src/job.dart';
 export 'src/label.dart';
 export 'src/merge_request.dart';

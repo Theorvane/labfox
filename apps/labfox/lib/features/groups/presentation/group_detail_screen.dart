@@ -30,6 +30,11 @@ class GroupDetailScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
+            tooltip: l10n.milestonesTitle,
+            icon: const Icon(LabFoxIcons.milestone),
+            onPressed: () => context.push(Routes.groupMilestones(groupId)),
+          ),
+          IconButton(
             tooltip: l10n.groupLabelsTitle,
             icon: const Icon(LabFoxIcons.label),
             onPressed: () => context.push(Routes.groupLabels(groupId)),

@@ -15,23 +15,41 @@ class MilestoneDetailScreen extends ConsumerWidget {
     required this.projectId,
     required this.milestoneId,
     super.key,
-  });
+  }) : groupId = null;
 
-  final int projectId;
+  const MilestoneDetailScreen.group({
+    required this.groupId,
+    required this.milestoneId,
+    super.key,
+  }) : projectId = null;
+
+  final int? projectId;
+  final int? groupId;
   final int milestoneId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final key = MilestoneRef(projectId: projectId, milestoneId: milestoneId);
-    final milestone = ref.watch(milestoneDetailProvider(key));
+    final projectKey = projectId == null
+        ? null
+        : MilestoneRef(projectId: projectId!, milestoneId: milestoneId);
+    final groupKey = groupId == null
+        ? null
+        : GroupMilestoneRef(groupId: groupId!, milestoneId: milestoneId);
+    final milestone = projectKey == null
+        ? ref.watch(groupMilestoneDetailProvider(groupKey!))
+        : ref.watch(milestoneDetailProvider(projectKey));
     return Scaffold(
       appBar: AppBar(
         title: Text(milestone.valueOrNull?.title ?? l10n.milestonesTitle),
         leading: BackButton(
           onPressed: () => context.canPop()
               ? context.pop()
-              : context.go(Routes.milestones(projectId)),
+              : context.go(
+                  groupId == null
+                      ? Routes.milestones(projectId!)
+                      : Routes.groupMilestones(groupId!),
+                ),
         ),
       ),
       body: milestone.when(
@@ -43,14 +61,18 @@ class MilestoneDetailScreen extends ConsumerWidget {
               Text(l10n.milestoneDetailError),
               const SizedBox(height: LabFoxSpacing.md),
               FilledButton(
-                onPressed: () => ref.invalidate(milestoneDetailProvider(key)),
+                onPressed: () => projectKey == null
+                    ? ref.invalidate(groupMilestoneDetailProvider(groupKey!))
+                    : ref.invalidate(milestoneDetailProvider(projectKey)),
                 child: Text(l10n.retry),
               ),
             ],
           ),
         ),
         data: (data) => RefreshIndicator(
-          onRefresh: () => ref.refresh(milestoneDetailProvider(key).future),
+          onRefresh: () => projectKey == null
+              ? ref.refresh(groupMilestoneDetailProvider(groupKey!).future)
+              : ref.refresh(milestoneDetailProvider(projectKey).future),
           child: LayoutBuilder(
             builder: (context, constraints) {
               final wide = constraints.maxWidth >= LabFoxBreakpoints.tablet;

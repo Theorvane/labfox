@@ -13,6 +13,7 @@ _GitLabMilestone _$GitLabMilestoneFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
       state: json['state'] as String,
       projectId: (json['project_id'] as num?)?.toInt(),
+      groupId: (json['group_id'] as num?)?.toInt(),
       description: json['description'] as String?,
       startDate: json['start_date'] == null
           ? null
@@ -31,6 +32,7 @@ Map<String, dynamic> _$GitLabMilestoneToJson(_GitLabMilestone instance) =>
       'title': instance.title,
       'state': instance.state,
       'project_id': instance.projectId,
+      'group_id': instance.groupId,
       'description': instance.description,
       'start_date': instance.startDate?.toIso8601String(),
       'due_date': instance.dueDate?.toIso8601String(),

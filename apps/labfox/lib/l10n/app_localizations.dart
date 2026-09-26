@@ -176,6 +176,42 @@ abstract class AppLocalizations {
   /// **'No access rules'**
   String get protectedBranchNoAccess;
 
+  /// No description provided for @linkedIssuesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Linked issues'**
+  String get linkedIssuesTitle;
+
+  /// No description provided for @linkedIssuesError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load linked issues.'**
+  String get linkedIssuesError;
+
+  /// No description provided for @linkedIssuesLoadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get linkedIssuesLoadMore;
+
+  /// No description provided for @linkedIssuesRelatesTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Related to'**
+  String get linkedIssuesRelatesTo;
+
+  /// No description provided for @linkedIssuesBlocks.
+  ///
+  /// In en, this message translates to:
+  /// **'Blocks'**
+  String get linkedIssuesBlocks;
+
+  /// No description provided for @linkedIssuesBlockedBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Blocked by'**
+  String get linkedIssuesBlockedBy;
+
   /// No description provided for @groupLabelsTitle.
   ///
   /// In en, this message translates to:
