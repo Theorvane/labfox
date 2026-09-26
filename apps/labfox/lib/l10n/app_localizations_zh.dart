@@ -9,6 +9,24 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
+  String get linkedIssuesTitle => '关联议题';
+
+  @override
+  String get linkedIssuesError => '无法加载关联议题。';
+
+  @override
+  String get linkedIssuesLoadMore => '加载更多';
+
+  @override
+  String get linkedIssuesRelatesTo => '相关';
+
+  @override
+  String get linkedIssuesBlocks => '阻塞';
+
+  @override
+  String get linkedIssuesBlockedBy => '被阻塞';
+
+  @override
   String get groupLabelsTitle => '群组标签';
 
   @override

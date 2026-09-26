@@ -9,6 +9,24 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get linkedIssuesTitle => 'Linked issues';
+
+  @override
+  String get linkedIssuesError => 'Could not load linked issues.';
+
+  @override
+  String get linkedIssuesLoadMore => 'Load more';
+
+  @override
+  String get linkedIssuesRelatesTo => 'Related to';
+
+  @override
+  String get linkedIssuesBlocks => 'Blocks';
+
+  @override
+  String get linkedIssuesBlockedBy => 'Blocked by';
+
+  @override
   String get groupLabelsTitle => 'Group labels';
 
   @override

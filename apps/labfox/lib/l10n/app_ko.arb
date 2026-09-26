@@ -1,5 +1,11 @@
 {
   "@@locale": "ko",
+  "linkedIssuesTitle": "연결된 이슈",
+  "linkedIssuesError": "연결된 이슈를 불러올 수 없습니다.",
+  "linkedIssuesLoadMore": "더 보기",
+  "linkedIssuesRelatesTo": "관련됨",
+  "linkedIssuesBlocks": "차단함",
+  "linkedIssuesBlockedBy": "차단됨",
   "groupLabelsTitle": "그룹 라벨",
   "groupLabelsEmpty": "그룹 라벨이 아직 없습니다",
   "groupLabelsError": "그룹 라벨을 불러올 수 없습니다.",

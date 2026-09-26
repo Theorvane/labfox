@@ -6,6 +6,7 @@ import 'deployments/deployments_api.dart';
 import 'environments/environments_api.dart';
 import 'events/events_api.dart';
 import 'groups/groups_api.dart';
+import 'issues/issue_links_api.dart';
 import 'issues/issues_api.dart';
 import 'jobs/jobs_api.dart';
 import 'labels/group_labels_api.dart';
@@ -69,6 +70,7 @@ class GitLabClient {
     repository = RepositoryApi(_dio);
     releases = ReleasesApi(_dio);
     issues = IssuesApi(_dio);
+    issueLinks = IssueLinksApi(_dio);
     mergeRequests = MergeRequestsApi(_dio);
     groupLabels = GroupLabelsApi(_dio);
     groupMembers = GroupMembersApi(_dio);
@@ -151,6 +153,7 @@ class GitLabClient {
   late final RepositoryApi repository;
   late final ReleasesApi releases;
   late final IssuesApi issues;
+  late final IssueLinksApi issueLinks;
   late final MergeRequestsApi mergeRequests;
   late final ProjectMembersApi projectMembers;
   late final GroupMembersApi groupMembers;

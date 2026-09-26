@@ -9,6 +9,24 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
+  String get linkedIssuesTitle => '연결된 이슈';
+
+  @override
+  String get linkedIssuesError => '연결된 이슈를 불러올 수 없습니다.';
+
+  @override
+  String get linkedIssuesLoadMore => '더 보기';
+
+  @override
+  String get linkedIssuesRelatesTo => '관련됨';
+
+  @override
+  String get linkedIssuesBlocks => '차단함';
+
+  @override
+  String get linkedIssuesBlockedBy => '차단됨';
+
+  @override
   String get groupLabelsTitle => '그룹 라벨';
 
   @override

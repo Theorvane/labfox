@@ -1,5 +1,11 @@
 {
   "@@locale": "ja",
+  "linkedIssuesTitle": "関連するイシュー",
+  "linkedIssuesError": "関連するイシューを読み込めませんでした。",
+  "linkedIssuesLoadMore": "さらに表示",
+  "linkedIssuesRelatesTo": "関連あり",
+  "linkedIssuesBlocks": "ブロックする",
+  "linkedIssuesBlockedBy": "ブロックされる",
   "groupLabelsTitle": "グループラベル",
   "groupLabelsEmpty": "グループラベルはまだありません",
   "groupLabelsError": "グループラベルを読み込めませんでした。",

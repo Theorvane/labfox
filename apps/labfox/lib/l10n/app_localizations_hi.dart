@@ -9,6 +9,24 @@ class AppLocalizationsHi extends AppLocalizations {
   AppLocalizationsHi([String locale = 'hi']) : super(locale);
 
   @override
+  String get linkedIssuesTitle => 'लिंक किए गए इश्यू';
+
+  @override
+  String get linkedIssuesError => 'लिंक किए गए इश्यू लोड नहीं हो सके।';
+
+  @override
+  String get linkedIssuesLoadMore => 'और दिखाएं';
+
+  @override
+  String get linkedIssuesRelatesTo => 'संबंधित';
+
+  @override
+  String get linkedIssuesBlocks => 'ब्लॉक करता है';
+
+  @override
+  String get linkedIssuesBlockedBy => 'इसके द्वारा ब्लॉक';
+
+  @override
   String get groupLabelsTitle => 'समूह लेबल';
 
   @override
