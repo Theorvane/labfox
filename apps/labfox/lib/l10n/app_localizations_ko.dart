@@ -83,6 +83,41 @@ class AppLocalizationsKo extends AppLocalizations {
   String get deploymentUser => '배포자';
 
   @override
+  String get activityTitle => '활동';
+
+  @override
+  String get activityAll => '전체';
+
+  @override
+  String get activityIssues => '이슈';
+
+  @override
+  String get activityMergeRequests => '병합 요청';
+
+  @override
+  String get activityEmpty => '최근 활동이 없습니다.';
+
+  @override
+  String get activityError => '프로젝트 활동을 불러올 수 없습니다.';
+
+  @override
+  String get activityLoadMore => '더 보기';
+
+  @override
+  String get activityUnknownActor => '알 수 없는 사용자';
+
+  @override
+  String get activityPush => '푸시';
+
+  @override
+  String get activityEvent => '프로젝트 활동';
+
+  @override
+  String activityBy(String actor, String action) {
+    return '$actor님이 $action';
+  }
+
+  @override
   String get environmentsTitle => '환경';
 
   @override

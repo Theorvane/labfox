@@ -83,6 +83,41 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deploymentUser => 'Deployed by';
 
   @override
+  String get activityTitle => 'Activity';
+
+  @override
+  String get activityAll => 'All';
+
+  @override
+  String get activityIssues => 'Issues';
+
+  @override
+  String get activityMergeRequests => 'Merge requests';
+
+  @override
+  String get activityEmpty => 'No recent activity.';
+
+  @override
+  String get activityError => 'Could not load project activity.';
+
+  @override
+  String get activityLoadMore => 'Load more';
+
+  @override
+  String get activityUnknownActor => 'Unknown user';
+
+  @override
+  String get activityPush => 'Push';
+
+  @override
+  String get activityEvent => 'Project activity';
+
+  @override
+  String activityBy(String actor, String action) {
+    return '$actor $action';
+  }
+
+  @override
   String get environmentsTitle => 'Environments';
 
   @override
