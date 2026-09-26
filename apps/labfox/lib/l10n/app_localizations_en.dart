@@ -9,6 +9,69 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get pipelineSchedulesTitle => 'Pipeline schedules';
+
+  @override
+  String get pipelineSchedulesAll => 'All';
+
+  @override
+  String get pipelineSchedulesActive => 'Active';
+
+  @override
+  String get pipelineSchedulesInactive => 'Inactive';
+
+  @override
+  String get pipelineSchedulesEmpty => 'No pipeline schedules found.';
+
+  @override
+  String get pipelineSchedulesError => 'Could not load pipeline schedules.';
+
+  @override
+  String get pipelineSchedulesLoadMore => 'Load more';
+
+  @override
+  String get pipelineScheduleDetailError =>
+      'Could not load this pipeline schedule.';
+
+  @override
+  String pipelineScheduleNextRun(String date) {
+    return 'Next run: $date';
+  }
+
+  @override
+  String get pipelineScheduleNextRunLabel => 'Next run';
+
+  @override
+  String get pipelineScheduleRef => 'Ref';
+
+  @override
+  String get pipelineScheduleCron => 'Schedule';
+
+  @override
+  String get pipelineScheduleTimezone => 'Time zone';
+
+  @override
+  String get pipelineScheduleOwner => 'Owner';
+
+  @override
+  String get pipelineScheduleRunNow => 'Run now';
+
+  @override
+  String get pipelineScheduleRunSuccess => 'Pipeline schedule started.';
+
+  @override
+  String get pipelineScheduleRunError =>
+      'Could not run this pipeline schedule.';
+
+  @override
+  String get pipelineScheduleLastPipeline => 'Last pipeline';
+
+  @override
+  String pipelineSchedulePipelineNumber(int number) {
+    return 'Pipeline #$number';
+  }
+
+  @override
   String get activityTitle => 'Activity';
 
   @override

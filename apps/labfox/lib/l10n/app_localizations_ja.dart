@@ -9,6 +9,67 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get pipelineSchedulesTitle => 'パイプラインスケジュール';
+
+  @override
+  String get pipelineSchedulesAll => 'すべて';
+
+  @override
+  String get pipelineSchedulesActive => '有効';
+
+  @override
+  String get pipelineSchedulesInactive => '無効';
+
+  @override
+  String get pipelineSchedulesEmpty => 'パイプラインスケジュールがありません。';
+
+  @override
+  String get pipelineSchedulesError => 'パイプラインスケジュールを読み込めませんでした。';
+
+  @override
+  String get pipelineSchedulesLoadMore => 'さらに読み込む';
+
+  @override
+  String get pipelineScheduleDetailError => 'このスケジュールを読み込めませんでした。';
+
+  @override
+  String pipelineScheduleNextRun(String date) {
+    return '次の実行: $date';
+  }
+
+  @override
+  String get pipelineScheduleNextRunLabel => '次の実行';
+
+  @override
+  String get pipelineScheduleRef => '参照';
+
+  @override
+  String get pipelineScheduleCron => 'スケジュール';
+
+  @override
+  String get pipelineScheduleTimezone => 'タイムゾーン';
+
+  @override
+  String get pipelineScheduleOwner => '所有者';
+
+  @override
+  String get pipelineScheduleRunNow => '今すぐ実行';
+
+  @override
+  String get pipelineScheduleRunSuccess => 'パイプラインスケジュールを開始しました。';
+
+  @override
+  String get pipelineScheduleRunError => 'スケジュールを実行できませんでした。';
+
+  @override
+  String get pipelineScheduleLastPipeline => '前回のパイプライン';
+
+  @override
+  String pipelineSchedulePipelineNumber(int number) {
+    return 'パイプライン #$number';
+  }
+
+  @override
   String get activityTitle => 'アクティビティ';
 
   @override
