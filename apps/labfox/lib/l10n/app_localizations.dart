@@ -104,6 +104,72 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
+  /// No description provided for @activityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity'**
+  String get activityTitle;
+
+  /// No description provided for @activityAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get activityAll;
+
+  /// No description provided for @activityIssues.
+  ///
+  /// In en, this message translates to:
+  /// **'Issues'**
+  String get activityIssues;
+
+  /// No description provided for @activityMergeRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Merge requests'**
+  String get activityMergeRequests;
+
+  /// No description provided for @activityEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No recent activity.'**
+  String get activityEmpty;
+
+  /// No description provided for @activityError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load project activity.'**
+  String get activityError;
+
+  /// No description provided for @activityLoadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get activityLoadMore;
+
+  /// No description provided for @activityUnknownActor.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown user'**
+  String get activityUnknownActor;
+
+  /// No description provided for @activityPush.
+  ///
+  /// In en, this message translates to:
+  /// **'Push'**
+  String get activityPush;
+
+  /// No description provided for @activityEvent.
+  ///
+  /// In en, this message translates to:
+  /// **'Project activity'**
+  String get activityEvent;
+
+  /// No description provided for @activityBy.
+  ///
+  /// In en, this message translates to:
+  /// **'{actor} {action}'**
+  String activityBy(String actor, String action);
+
   /// No description provided for @environmentsTitle.
   ///
   /// In en, this message translates to:
