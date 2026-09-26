@@ -1,5 +1,12 @@
 {
   "@@locale": "zh",
+  "releasesTitle": "发行版",
+  "releasesEmpty": "暂无发行版。",
+  "releasesError": "无法加载发行版。",
+  "releaseDetailError": "无法加载此发行版。",
+  "releaseAssetsTitle": "资源",
+  "releaseLoadMore": "加载更多",
+  "releaseUpcoming": "即将发布",
   "activityTitle": "动态",
   "activityAll": "全部",
   "activityIssues": "议题",

@@ -42,6 +42,8 @@ import '../features/profile/presentation/me_screen.dart';
 import '../features/project_labels/presentation/project_labels_screen.dart';
 import '../features/project_overview/presentation/project_overview_screen.dart';
 import '../features/projects/presentation/projects_screen.dart';
+import '../features/releases/presentation/release_detail_screen.dart';
+import '../features/releases/presentation/releases_screen.dart';
 import '../features/repository/presentation/file_viewer_screen.dart';
 import '../features/repository/presentation/repository_browser_screen.dart';
 import '../features/search/presentation/search_screen.dart';
@@ -83,6 +85,9 @@ abstract final class Routes {
   static String projectLabels(int id) => '/projects/$id/labels';
   static String projectLabel(int id, int labelId) =>
       '/projects/$id/labels/$labelId';
+  static String releases(int id) => '/projects/$id/releases';
+  static String release(int id, String tagName) =>
+      '/projects/$id/releases/${Uri.encodeComponent(tagName)}';
   static String tags(int id) => '/projects/$id/tags';
   static String tag(int id, String name) =>
       '/projects/$id/tags/view?name=${Uri.encodeQueryComponent(name)}';
@@ -268,6 +273,21 @@ final routerProvider = Provider<GoRouter>((ref) {
                 builder: (context, state) => ProjectActivityScreen(
                   projectId: int.parse(state.pathParameters['id']!),
                 ),
+              ),
+              GoRoute(
+                path: 'releases',
+                builder: (context, state) => ReleasesScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':tagName',
+                    builder: (context, state) => ReleaseDetailScreen(
+                      projectId: int.parse(state.pathParameters['id']!),
+                      tagName: state.pathParameters['tagName']!,
+                    ),
+                  ),
+                ],
               ),
               GoRoute(
                 path: 'members',

@@ -1,5 +1,12 @@
 {
   "@@locale": "ja",
+  "releasesTitle": "リリース",
+  "releasesEmpty": "リリースはまだありません。",
+  "releasesError": "リリースを読み込めませんでした。",
+  "releaseDetailError": "このリリースを読み込めませんでした。",
+  "releaseAssetsTitle": "アセット",
+  "releaseLoadMore": "さらに読み込む",
+  "releaseUpcoming": "予定",
   "activityTitle": "アクティビティ",
   "activityAll": "すべて",
   "activityIssues": "課題",
