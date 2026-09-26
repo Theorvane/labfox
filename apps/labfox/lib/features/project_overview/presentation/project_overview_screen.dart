@@ -199,6 +199,12 @@ class _Categories extends StatelessWidget {
           label: l10n.releasesTitle,
           onTap: () => context.push(Routes.releases(project.id)),
         ),
+        LauncherTile(
+          icon: LabFoxIcons.code,
+          color: status.pending.foreground,
+          label: l10n.snippetsTitle,
+          onTap: () => context.push(Routes.snippets(project.id)),
+        ),
         if (project.containerRegistryAccessLevel != 'disabled')
           LauncherTile(
             icon: LabFoxIcons.containerRegistry,
@@ -232,6 +238,12 @@ class _Categories extends StatelessWidget {
           color: status.pending.foreground,
           label: l10n.milestonesTitle,
           onTap: () => context.push(Routes.milestones(project.id)),
+        ),
+        LauncherTile(
+          icon: LabFoxIcons.environment,
+          color: status.running.foreground,
+          label: l10n.environmentsTitle,
+          onTap: () => context.push(Routes.environments(project.id)),
         ),
         if (branch != null)
           LauncherTile(

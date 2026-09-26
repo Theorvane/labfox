@@ -30,6 +30,51 @@ class AppLocalizationsKo extends AppLocalizations {
   String get releaseUpcoming => '예정';
 
   @override
+  String get environmentsTitle => '환경';
+
+  @override
+  String get environmentsAll => '전체';
+
+  @override
+  String get environmentsAvailable => '사용 가능';
+
+  @override
+  String get environmentsStopping => '중지 중';
+
+  @override
+  String get environmentsStopped => '중지됨';
+
+  @override
+  String get environmentsSearch => '환경 검색';
+
+  @override
+  String get environmentsSearchLength => '3자 이상 입력하세요.';
+
+  @override
+  String get environmentsEmpty => '환경을 찾을 수 없습니다.';
+
+  @override
+  String get environmentsError => '환경을 불러올 수 없습니다.';
+
+  @override
+  String get environmentsLoadMore => '더 보기';
+
+  @override
+  String get environmentDetailError => '이 환경을 불러올 수 없습니다.';
+
+  @override
+  String get environmentAutoStop => '자동 중지';
+
+  @override
+  String get environmentOpenUrl => '환경 열기';
+
+  @override
+  String get environmentLatestDeployment => '최근 배포';
+
+  @override
+  String get environmentUnknownStatus => '알 수 없는 상태';
+
+  @override
   String get projectMembersTitle => '멤버';
 
   @override
@@ -1009,6 +1054,24 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get meAccounts => '계정 전환';
+
+  @override
+  String get snippetsTitle => '스니펫';
+
+  @override
+  String get snippetsEmpty => '스니펫이 없습니다';
+
+  @override
+  String get snippetsError => '스니펫을 불러올 수 없습니다.';
+
+  @override
+  String get snippetError => '스니펫을 불러올 수 없습니다.';
+
+  @override
+  String get snippetContent => '내용';
+
+  @override
+  String get snippetContentError => '스니펫 내용을 불러올 수 없습니다.';
 
   @override
   String get homeRecents => '최근';

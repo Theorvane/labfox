@@ -30,6 +30,51 @@ class AppLocalizationsEn extends AppLocalizations {
   String get releaseUpcoming => 'Upcoming';
 
   @override
+  String get environmentsTitle => 'Environments';
+
+  @override
+  String get environmentsAll => 'All';
+
+  @override
+  String get environmentsAvailable => 'Available';
+
+  @override
+  String get environmentsStopping => 'Stopping';
+
+  @override
+  String get environmentsStopped => 'Stopped';
+
+  @override
+  String get environmentsSearch => 'Search environments';
+
+  @override
+  String get environmentsSearchLength => 'Enter at least 3 characters.';
+
+  @override
+  String get environmentsEmpty => 'No environments found.';
+
+  @override
+  String get environmentsError => 'Could not load environments.';
+
+  @override
+  String get environmentsLoadMore => 'Load more';
+
+  @override
+  String get environmentDetailError => 'Could not load this environment.';
+
+  @override
+  String get environmentAutoStop => 'Auto-stop';
+
+  @override
+  String get environmentOpenUrl => 'Open environment';
+
+  @override
+  String get environmentLatestDeployment => 'Latest deployment';
+
+  @override
+  String get environmentUnknownStatus => 'Unknown status';
+
+  @override
   String get projectMembersTitle => 'Members';
 
   @override
@@ -1024,6 +1069,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get meAccounts => 'Switch account';
+
+  @override
+  String get snippetsTitle => 'Snippets';
+
+  @override
+  String get snippetsEmpty => 'No snippets yet';
+
+  @override
+  String get snippetsError => 'Couldn\'t load snippets.';
+
+  @override
+  String get snippetError => 'Couldn\'t load this snippet.';
+
+  @override
+  String get snippetContent => 'Content';
+
+  @override
+  String get snippetContentError => 'Couldn\'t load snippet content.';
 
   @override
   String get homeRecents => 'Recent';

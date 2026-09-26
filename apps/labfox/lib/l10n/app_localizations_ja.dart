@@ -30,6 +30,51 @@ class AppLocalizationsJa extends AppLocalizations {
   String get releaseUpcoming => '予定';
 
   @override
+  String get environmentsTitle => '環境';
+
+  @override
+  String get environmentsAll => 'すべて';
+
+  @override
+  String get environmentsAvailable => '利用可能';
+
+  @override
+  String get environmentsStopping => '停止中';
+
+  @override
+  String get environmentsStopped => '停止済み';
+
+  @override
+  String get environmentsSearch => '環境を検索';
+
+  @override
+  String get environmentsSearchLength => '3文字以上入力してください。';
+
+  @override
+  String get environmentsEmpty => '環境が見つかりません。';
+
+  @override
+  String get environmentsError => '環境を読み込めませんでした。';
+
+  @override
+  String get environmentsLoadMore => 'さらに表示';
+
+  @override
+  String get environmentDetailError => 'この環境を読み込めませんでした。';
+
+  @override
+  String get environmentAutoStop => '自動停止';
+
+  @override
+  String get environmentOpenUrl => '環境を開く';
+
+  @override
+  String get environmentLatestDeployment => '最新のデプロイ';
+
+  @override
+  String get environmentUnknownStatus => '不明な状態';
+
+  @override
   String get projectMembersTitle => 'メンバー';
 
   @override
@@ -1008,6 +1053,24 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get meAccounts => 'アカウント切り替え';
+
+  @override
+  String get snippetsTitle => 'スニペット';
+
+  @override
+  String get snippetsEmpty => 'スニペットはまだありません';
+
+  @override
+  String get snippetsError => 'スニペットを読み込めませんでした。';
+
+  @override
+  String get snippetError => 'このスニペットを読み込めませんでした。';
+
+  @override
+  String get snippetContent => '内容';
+
+  @override
+  String get snippetContentError => 'スニペットの内容を読み込めませんでした。';
 
   @override
   String get homeRecents => '最近';

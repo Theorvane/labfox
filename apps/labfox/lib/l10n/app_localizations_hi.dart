@@ -30,6 +30,51 @@ class AppLocalizationsHi extends AppLocalizations {
   String get releaseUpcoming => 'आगामी';
 
   @override
+  String get environmentsTitle => 'परिवेश';
+
+  @override
+  String get environmentsAll => 'सभी';
+
+  @override
+  String get environmentsAvailable => 'उपलब्ध';
+
+  @override
+  String get environmentsStopping => 'रुक रहा है';
+
+  @override
+  String get environmentsStopped => 'रुका हुआ';
+
+  @override
+  String get environmentsSearch => 'परिवेश खोजें';
+
+  @override
+  String get environmentsSearchLength => 'कम से कम 3 अक्षर दर्ज करें।';
+
+  @override
+  String get environmentsEmpty => 'कोई परिवेश नहीं मिला।';
+
+  @override
+  String get environmentsError => 'परिवेश लोड नहीं हो सके।';
+
+  @override
+  String get environmentsLoadMore => 'और देखें';
+
+  @override
+  String get environmentDetailError => 'यह परिवेश लोड नहीं हो सका।';
+
+  @override
+  String get environmentAutoStop => 'स्वचालित रोक';
+
+  @override
+  String get environmentOpenUrl => 'परिवेश खोलें';
+
+  @override
+  String get environmentLatestDeployment => 'नवीनतम डिप्लॉयमेंट';
+
+  @override
+  String get environmentUnknownStatus => 'अज्ञात स्थिति';
+
+  @override
   String get projectMembersTitle => 'सदस्य';
 
   @override
@@ -1024,6 +1069,24 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get meAccounts => 'खाता बदलें';
+
+  @override
+  String get snippetsTitle => 'स्निपेट';
+
+  @override
+  String get snippetsEmpty => 'अभी कोई स्निपेट नहीं है';
+
+  @override
+  String get snippetsError => 'स्निपेट लोड नहीं हो सके।';
+
+  @override
+  String get snippetError => 'यह स्निपेट लोड नहीं हो सका।';
+
+  @override
+  String get snippetContent => 'सामग्री';
+
+  @override
+  String get snippetContentError => 'स्निपेट सामग्री लोड नहीं हो सकी।';
 
   @override
   String get homeRecents => 'हाल ही में';
