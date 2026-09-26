@@ -26,7 +26,7 @@ work, not as a fixed denominator.
   a row. Do not calculate a GitLab parity percentage from this incomplete list.
 
 Snapshot (2026-09-27): **18 known work packages**, **1 shipped**, **1 in
-progress**, **16 queued**. This is a lower bound on remaining work,
+review**, **16 queued**. This is a lower bound on remaining work,
 **not 18 PRs** or an ETA. The shipped baseline is excluded from that count.
 
 ## Shipped baseline by workflow
@@ -55,7 +55,7 @@ issues and PRs. Keep it open until its full acceptance boundary is verified.
 | MW-02 | P1 | Project protection-rule creation, update, and removal with permission checks. | Queued | Issue needed |
 | MW-03 | P1 | Project/group settings inventory and authorized general/repository/CI changes. | Queued | Issue needed |
 | MW-04 | P1 | Member invitations, role/expiry changes, and removal for groups/projects. | Queued | Issue needed |
-| MW-05 | P0 | Issue/work-item editing, metadata, types, and validated state transitions. | In progress | [#329](https://github.com/Theorvane/labfox/issues/329) covers title and description editing only; remaining metadata and work-item actions need separate issues. |
+| MW-05 | P0 | Issue/work-item editing, metadata, types, and validated state transitions. | In review | [#329](https://github.com/Theorvane/labfox/issues/329), [PR #330](https://github.com/Theorvane/labfox/pull/330) cover title and description editing only; remaining metadata and work-item actions need separate issues. |
 | MW-06 | P1 | Boards and iterations: discover mobile-web behavior, then list/detail/mutations. | Queued | Issue needed |
 | MW-07 | P0 | Advanced MR review: audit inline discussions/suggestions and finish missing review/approval flows. | Queued | Issue needed |
 | MW-08 | P1 | CI/CD configuration: pipeline editor, variables, triggers, and schedule editing. | Queued | Issue needed |
