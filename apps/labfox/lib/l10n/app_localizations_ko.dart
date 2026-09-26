@@ -9,6 +9,42 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
+  String get protectedBranchesTitle => '보호 브랜치';
+
+  @override
+  String get protectedBranchesEmpty => '보호 브랜치 규칙이 없습니다.';
+
+  @override
+  String get protectedBranchesError => '보호 브랜치를 불러올 수 없습니다.';
+
+  @override
+  String get protectedBranchesLoadMore => '더 보기';
+
+  @override
+  String get protectedBranchPushAccess => '푸시 권한';
+
+  @override
+  String get protectedBranchMergeAccess => '병합 권한';
+
+  @override
+  String get protectedBranchForcePush => '강제 푸시';
+
+  @override
+  String get protectedBranchCodeOwnerApproval => '코드 소유자 승인';
+
+  @override
+  String get protectedBranchInherited => '그룹에서 상속됨';
+
+  @override
+  String get protectedBranchEnabled => '사용';
+
+  @override
+  String get protectedBranchDisabled => '사용 안 함';
+
+  @override
+  String get protectedBranchNoAccess => '권한 규칙 없음';
+
+  @override
   String get groupLabelsTitle => '그룹 라벨';
 
   @override

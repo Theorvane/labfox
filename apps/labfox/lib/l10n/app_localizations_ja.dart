@@ -9,6 +9,42 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get protectedBranchesTitle => '保護されたブランチ';
+
+  @override
+  String get protectedBranchesEmpty => '保護ブランチのルールがありません。';
+
+  @override
+  String get protectedBranchesError => '保護されたブランチを読み込めませんでした。';
+
+  @override
+  String get protectedBranchesLoadMore => 'さらに表示';
+
+  @override
+  String get protectedBranchPushAccess => 'プッシュ権限';
+
+  @override
+  String get protectedBranchMergeAccess => 'マージ権限';
+
+  @override
+  String get protectedBranchForcePush => '強制プッシュ';
+
+  @override
+  String get protectedBranchCodeOwnerApproval => 'コードオーナーの承認';
+
+  @override
+  String get protectedBranchInherited => 'グループから継承';
+
+  @override
+  String get protectedBranchEnabled => '有効';
+
+  @override
+  String get protectedBranchDisabled => '無効';
+
+  @override
+  String get protectedBranchNoAccess => '権限ルールなし';
+
+  @override
   String get groupLabelsTitle => 'グループラベル';
 
   @override

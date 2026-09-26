@@ -104,6 +104,78 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
+  /// No description provided for @protectedBranchesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Protected branches'**
+  String get protectedBranchesTitle;
+
+  /// No description provided for @protectedBranchesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No protected branch rules found.'**
+  String get protectedBranchesEmpty;
+
+  /// No description provided for @protectedBranchesError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load protected branches.'**
+  String get protectedBranchesError;
+
+  /// No description provided for @protectedBranchesLoadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get protectedBranchesLoadMore;
+
+  /// No description provided for @protectedBranchPushAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Allowed to push'**
+  String get protectedBranchPushAccess;
+
+  /// No description provided for @protectedBranchMergeAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Allowed to merge'**
+  String get protectedBranchMergeAccess;
+
+  /// No description provided for @protectedBranchForcePush.
+  ///
+  /// In en, this message translates to:
+  /// **'Force push'**
+  String get protectedBranchForcePush;
+
+  /// No description provided for @protectedBranchCodeOwnerApproval.
+  ///
+  /// In en, this message translates to:
+  /// **'Code owner approval'**
+  String get protectedBranchCodeOwnerApproval;
+
+  /// No description provided for @protectedBranchInherited.
+  ///
+  /// In en, this message translates to:
+  /// **'Inherited from group'**
+  String get protectedBranchInherited;
+
+  /// No description provided for @protectedBranchEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Enabled'**
+  String get protectedBranchEnabled;
+
+  /// No description provided for @protectedBranchDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Disabled'**
+  String get protectedBranchDisabled;
+
+  /// No description provided for @protectedBranchNoAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'No access rules'**
+  String get protectedBranchNoAccess;
+
   /// No description provided for @groupLabelsTitle.
   ///
   /// In en, this message translates to:

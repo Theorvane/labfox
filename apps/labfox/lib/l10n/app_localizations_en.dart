@@ -9,6 +9,42 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get protectedBranchesTitle => 'Protected branches';
+
+  @override
+  String get protectedBranchesEmpty => 'No protected branch rules found.';
+
+  @override
+  String get protectedBranchesError => 'Could not load protected branches.';
+
+  @override
+  String get protectedBranchesLoadMore => 'Load more';
+
+  @override
+  String get protectedBranchPushAccess => 'Allowed to push';
+
+  @override
+  String get protectedBranchMergeAccess => 'Allowed to merge';
+
+  @override
+  String get protectedBranchForcePush => 'Force push';
+
+  @override
+  String get protectedBranchCodeOwnerApproval => 'Code owner approval';
+
+  @override
+  String get protectedBranchInherited => 'Inherited from group';
+
+  @override
+  String get protectedBranchEnabled => 'Enabled';
+
+  @override
+  String get protectedBranchDisabled => 'Disabled';
+
+  @override
+  String get protectedBranchNoAccess => 'No access rules';
+
+  @override
   String get groupLabelsTitle => 'Group labels';
 
   @override

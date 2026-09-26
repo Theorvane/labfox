@@ -9,6 +9,42 @@ class AppLocalizationsHi extends AppLocalizations {
   AppLocalizationsHi([String locale = 'hi']) : super(locale);
 
   @override
+  String get protectedBranchesTitle => 'सुरक्षित ब्रांच';
+
+  @override
+  String get protectedBranchesEmpty => 'कोई सुरक्षित ब्रांच नियम नहीं मिला।';
+
+  @override
+  String get protectedBranchesError => 'सुरक्षित ब्रांच लोड नहीं हो सके।';
+
+  @override
+  String get protectedBranchesLoadMore => 'और दिखाएं';
+
+  @override
+  String get protectedBranchPushAccess => 'पुश की अनुमति';
+
+  @override
+  String get protectedBranchMergeAccess => 'मर्ज की अनुमति';
+
+  @override
+  String get protectedBranchForcePush => 'फोर्स पुश';
+
+  @override
+  String get protectedBranchCodeOwnerApproval => 'कोड स्वामी की स्वीकृति';
+
+  @override
+  String get protectedBranchInherited => 'समूह से विरासत में मिला';
+
+  @override
+  String get protectedBranchEnabled => 'सक्षम';
+
+  @override
+  String get protectedBranchDisabled => 'अक्षम';
+
+  @override
+  String get protectedBranchNoAccess => 'कोई अनुमति नियम नहीं';
+
+  @override
   String get groupLabelsTitle => 'समूह लेबल';
 
   @override
