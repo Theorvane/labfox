@@ -1,5 +1,8 @@
 {
   "@@locale": "ja",
+  "groupLabelsTitle": "グループラベル",
+  "groupLabelsEmpty": "グループラベルはまだありません",
+  "groupLabelsError": "グループラベルを読み込めませんでした。",
   "groupMembersTitle": "グループメンバー",
   "groupMembersSearch": "グループメンバーを検索",
   "groupMembersEmpty": "グループメンバーが見つかりません。",

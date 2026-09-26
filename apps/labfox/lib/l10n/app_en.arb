@@ -1,5 +1,8 @@
 {
   "@@locale": "en",
+  "groupLabelsTitle": "Group labels",
+  "groupLabelsEmpty": "No group labels yet",
+  "groupLabelsError": "Couldn't load group labels.",
   "groupMembersTitle": "Group members",
   "groupMembersSearch": "Search group members",
   "groupMembersEmpty": "No group members found.",

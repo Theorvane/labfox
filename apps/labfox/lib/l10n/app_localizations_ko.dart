@@ -9,6 +9,15 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
+  String get groupLabelsTitle => '그룹 라벨';
+
+  @override
+  String get groupLabelsEmpty => '그룹 라벨이 아직 없습니다';
+
+  @override
+  String get groupLabelsError => '그룹 라벨을 불러올 수 없습니다.';
+
+  @override
   String get groupMembersTitle => '그룹 멤버';
 
   @override
