@@ -5,6 +5,7 @@ import '../core/ads/ads_providers.dart';
 import '../core/analytics/analytics.dart';
 import '../core/auth/auth_controller.dart';
 import '../core/auth/auth_state.dart';
+import '../features/activity/presentation/project_activity_screen.dart';
 import '../features/auth/presentation/accounts_screen.dart';
 import '../features/auth/presentation/sign_in_screen.dart';
 import '../features/branches/presentation/branches_screen.dart';
@@ -79,6 +80,7 @@ abstract final class Routes {
   static const String myMergeRequests = '/dashboard/merge_requests';
 
   static String projectOverview(int id) => '/projects/$id';
+  static String projectActivity(int id) => '/projects/$id/activity';
   static String releases(int id) => '/projects/$id/releases';
   static String release(int id, String tagName) =>
       '/projects/$id/releases/${Uri.encodeComponent(tagName)}';
@@ -262,6 +264,12 @@ final routerProvider = Provider<GoRouter>((ref) {
               return ProjectOverviewScreen(projectId: id);
             },
             routes: [
+              GoRoute(
+                path: 'activity',
+                builder: (context, state) => ProjectActivityScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+              ),
               GoRoute(
                 path: 'releases',
                 builder: (context, state) => ReleasesScreen(

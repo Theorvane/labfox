@@ -30,6 +30,41 @@ class AppLocalizationsJa extends AppLocalizations {
   String get releaseUpcoming => '予定';
 
   @override
+  String get activityTitle => 'アクティビティ';
+
+  @override
+  String get activityAll => 'すべて';
+
+  @override
+  String get activityIssues => '課題';
+
+  @override
+  String get activityMergeRequests => 'マージリクエスト';
+
+  @override
+  String get activityEmpty => '最近のアクティビティはありません。';
+
+  @override
+  String get activityError => 'プロジェクトのアクティビティを読み込めませんでした。';
+
+  @override
+  String get activityLoadMore => 'さらに表示';
+
+  @override
+  String get activityUnknownActor => '不明なユーザー';
+
+  @override
+  String get activityPush => 'プッシュ';
+
+  @override
+  String get activityEvent => 'プロジェクトのアクティビティ';
+
+  @override
+  String activityBy(String actor, String action) {
+    return '$actorが$action';
+  }
+
+  @override
   String get environmentsTitle => '環境';
 
   @override

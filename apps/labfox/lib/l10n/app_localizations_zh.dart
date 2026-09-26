@@ -30,6 +30,41 @@ class AppLocalizationsZh extends AppLocalizations {
   String get releaseUpcoming => '即将发布';
 
   @override
+  String get activityTitle => '动态';
+
+  @override
+  String get activityAll => '全部';
+
+  @override
+  String get activityIssues => '议题';
+
+  @override
+  String get activityMergeRequests => '合并请求';
+
+  @override
+  String get activityEmpty => '暂无近期动态。';
+
+  @override
+  String get activityError => '无法加载项目动态。';
+
+  @override
+  String get activityLoadMore => '加载更多';
+
+  @override
+  String get activityUnknownActor => '未知用户';
+
+  @override
+  String get activityPush => '推送';
+
+  @override
+  String get activityEvent => '项目动态';
+
+  @override
+  String activityBy(String actor, String action) {
+    return '$actor $action';
+  }
+
+  @override
   String get environmentsTitle => '环境';
 
   @override

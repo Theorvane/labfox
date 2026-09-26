@@ -30,6 +30,41 @@ class AppLocalizationsHi extends AppLocalizations {
   String get releaseUpcoming => 'आगामी';
 
   @override
+  String get activityTitle => 'गतिविधि';
+
+  @override
+  String get activityAll => 'सभी';
+
+  @override
+  String get activityIssues => 'समस्याएँ';
+
+  @override
+  String get activityMergeRequests => 'मर्ज अनुरोध';
+
+  @override
+  String get activityEmpty => 'हाल की कोई गतिविधि नहीं है।';
+
+  @override
+  String get activityError => 'प्रोजेक्ट गतिविधि लोड नहीं हो सकी।';
+
+  @override
+  String get activityLoadMore => 'और देखें';
+
+  @override
+  String get activityUnknownActor => 'अज्ञात उपयोगकर्ता';
+
+  @override
+  String get activityPush => 'पुश';
+
+  @override
+  String get activityEvent => 'प्रोजेक्ट गतिविधि';
+
+  @override
+  String activityBy(String actor, String action) {
+    return '$actor ने $action';
+  }
+
+  @override
   String get environmentsTitle => 'परिवेश';
 
   @override
