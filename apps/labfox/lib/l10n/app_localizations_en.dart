@@ -72,6 +72,27 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get releasesTitle => 'Releases';
+
+  @override
+  String get releasesEmpty => 'No releases yet.';
+
+  @override
+  String get releasesError => 'Could not load releases.';
+
+  @override
+  String get releaseDetailError => 'Could not load this release.';
+
+  @override
+  String get releaseAssetsTitle => 'Assets';
+
+  @override
+  String get releaseLoadMore => 'Load more';
+
+  @override
+  String get releaseUpcoming => 'Upcoming';
+
+  @override
   String get activityTitle => 'Activity';
 
   @override
