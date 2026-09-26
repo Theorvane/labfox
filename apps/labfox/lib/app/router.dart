@@ -49,6 +49,7 @@ import '../features/settings/presentation/settings_screen.dart';
 import '../features/settings/presentation/subscription_screen.dart';
 import '../features/shell/presentation/app_shell.dart';
 import '../features/snippets/presentation/snippets_screen.dart';
+import '../features/tags/presentation/tags_screen.dart';
 import '../features/wiki/presentation/wiki_page_screen.dart';
 import '../features/wiki/presentation/wiki_pages_screen.dart';
 
@@ -80,6 +81,9 @@ abstract final class Routes {
   static String projectLabels(int id) => '/projects/$id/labels';
   static String projectLabel(int id, int labelId) =>
       '/projects/$id/labels/$labelId';
+  static String tags(int id) => '/projects/$id/tags';
+  static String tag(int id, String name) =>
+      '/projects/$id/tags/view?name=${Uri.encodeQueryComponent(name)}';
   static String snippets(int id) => '/projects/$id/snippets';
   static String snippet(int id, int snippetId) =>
       '/projects/$id/snippets/$snippetId';
@@ -416,6 +420,19 @@ final routerProvider = Provider<GoRouter>((ref) {
                 path: 'branches',
                 builder: (context, state) => BranchesScreen(
                   projectId: int.parse(state.pathParameters['id']!),
+                ),
+              ),
+              GoRoute(
+                path: 'tags',
+                builder: (context, state) => TagsScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+              ),
+              GoRoute(
+                path: 'tags/view',
+                builder: (context, state) => TagDetailScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                  name: state.uri.queryParameters['name']!,
                 ),
               ),
               GoRoute(
