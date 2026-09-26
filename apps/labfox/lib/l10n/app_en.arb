@@ -1,5 +1,8 @@
 {
   "@@locale": "en",
+  "groupLabelsTitle": "Group labels",
+  "groupLabelsEmpty": "No group labels yet",
+  "groupLabelsError": "Couldn't load group labels.",
   "deploymentsTitle": "Deployments",
   "deploymentsAll": "All",
   "deploymentsSuccess": "Success",

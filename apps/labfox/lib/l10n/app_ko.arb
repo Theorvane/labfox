@@ -1,5 +1,8 @@
 {
   "@@locale": "ko",
+  "groupLabelsTitle": "그룹 라벨",
+  "groupLabelsEmpty": "그룹 라벨이 아직 없습니다",
+  "groupLabelsError": "그룹 라벨을 불러올 수 없습니다.",
   "deploymentsTitle": "배포",
   "deploymentsAll": "전체",
   "deploymentsSuccess": "성공",

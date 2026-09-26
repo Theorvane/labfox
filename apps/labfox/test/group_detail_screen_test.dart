@@ -48,6 +48,11 @@ Future<void> _pump(
         builder: (_, state) =>
             Scaffold(body: Text('Project ${state.pathParameters['id']}')),
       ),
+      GoRoute(
+        path: '/groups/:id/labels',
+        builder: (_, state) =>
+            Scaffold(body: Text('Labels of ${state.pathParameters['id']}')),
+      ),
     ],
   );
   await tester.pumpWidget(
@@ -97,6 +102,14 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Project 7'), findsOneWidget);
+  });
+
+  testWidgets('opens group labels', (tester) async {
+    await _pump(tester, const AsyncData(_overview));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Group labels'));
+    await tester.pumpAndSettle();
+    expect(find.text('Labels of 42'), findsOneWidget);
   });
 
   testWidgets('opens a subgroup in the app', (tester) async {

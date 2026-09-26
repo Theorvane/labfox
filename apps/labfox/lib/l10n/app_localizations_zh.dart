@@ -9,6 +9,15 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
+  String get groupLabelsTitle => '群组标签';
+
+  @override
+  String get groupLabelsEmpty => '暂无群组标签';
+
+  @override
+  String get groupLabelsError => '无法加载群组标签。';
+
+  @override
   String get deploymentsTitle => '部署';
 
   @override

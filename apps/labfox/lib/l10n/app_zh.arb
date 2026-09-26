@@ -1,5 +1,8 @@
 {
   "@@locale": "zh",
+  "groupLabelsTitle": "群组标签",
+  "groupLabelsEmpty": "暂无群组标签",
+  "groupLabelsError": "无法加载群组标签。",
   "deploymentsTitle": "部署",
   "deploymentsAll": "全部",
   "deploymentsSuccess": "成功",

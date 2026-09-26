@@ -9,6 +9,15 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get groupLabelsTitle => 'Group labels';
+
+  @override
+  String get groupLabelsEmpty => 'No group labels yet';
+
+  @override
+  String get groupLabelsError => 'Couldn\'t load group labels.';
+
+  @override
   String get deploymentsTitle => 'Deployments';
 
   @override

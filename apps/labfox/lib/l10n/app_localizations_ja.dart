@@ -9,6 +9,15 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get groupLabelsTitle => 'グループラベル';
+
+  @override
+  String get groupLabelsEmpty => 'グループラベルはまだありません';
+
+  @override
+  String get groupLabelsError => 'グループラベルを読み込めませんでした。';
+
+  @override
   String get deploymentsTitle => 'デプロイ';
 
   @override

@@ -8,16 +8,25 @@ import 'package:intl/intl.dart';
 import '../../../app/router.dart';
 import '../../../core/ui/work_meta.dart';
 import '../../../l10n/app_localizations.dart';
+import 'controllers/group_labels_controller.dart';
 import 'controllers/project_labels_controller.dart';
 
-/// Browses project labels and those inherited from ancestor groups.
+/// Browses project or group labels and those inherited from ancestors.
 class ProjectLabelsScreen extends ConsumerStatefulWidget {
-  const ProjectLabelsScreen({required this.projectId, super.key});
-  final int projectId;
+  const ProjectLabelsScreen({this.projectId, this.groupId, super.key})
+    : assert((projectId == null) != (groupId == null));
+  final int? projectId;
+  final int? groupId;
 
   @override
   ConsumerState<ProjectLabelsScreen> createState() =>
       _ProjectLabelsScreenState();
+}
+
+/// Group route using the same responsive label presentation.
+class GroupLabelsScreen extends ProjectLabelsScreen {
+  const GroupLabelsScreen({required int groupId, super.key})
+    : super(groupId: groupId);
 }
 
 class _ProjectLabelsScreenState extends ConsumerState<ProjectLabelsScreen> {
@@ -26,17 +35,26 @@ class _ProjectLabelsScreenState extends ConsumerState<ProjectLabelsScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final labels = ref.watch(projectLabelsControllerProvider(widget.projectId));
+    final labels = widget.groupId == null
+        ? ref.watch(projectLabelsControllerProvider(widget.projectId!))
+        : ref.watch(groupLabelsControllerProvider(widget.groupId!));
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.projectLabelsTitle),
+        title: Text(
+          widget.groupId == null
+              ? l10n.projectLabelsTitle
+              : l10n.groupLabelsTitle,
+        ),
         actions: [
           IconButton(
             icon: const Icon(LabFoxIcons.add),
             tooltip: l10n.projectLabelNew,
             onPressed: () => showDialog<void>(
               context: context,
-              builder: (_) => _CreateLabelDialog(projectId: widget.projectId),
+              builder: (_) => _CreateLabelDialog(
+                projectId: widget.projectId,
+                groupId: widget.groupId,
+              ),
             ),
           ),
         ],
@@ -44,15 +62,22 @@ class _ProjectLabelsScreenState extends ConsumerState<ProjectLabelsScreen> {
       body: labels.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (_, _) => _Error(
-          message: l10n.projectLabelsError,
-          onRetry: () =>
-              ref.invalidate(projectLabelsControllerProvider(widget.projectId)),
+          message: widget.groupId == null
+              ? l10n.projectLabelsError
+              : l10n.groupLabelsError,
+          onRetry: () => widget.groupId == null
+              ? ref.invalidate(
+                  projectLabelsControllerProvider(widget.projectId!),
+                )
+              : ref.invalidate(groupLabelsControllerProvider(widget.groupId!)),
         ),
         data: (items) {
           if (items.isEmpty) {
             return EmptyState(
               icon: LabFoxIcons.label,
-              title: l10n.projectLabelsEmpty,
+              title: widget.groupId == null
+                  ? l10n.projectLabelsEmpty
+                  : l10n.groupLabelsEmpty,
             );
           }
           final filtered = items
@@ -62,9 +87,13 @@ class _ProjectLabelsScreenState extends ConsumerState<ProjectLabelsScreen> {
               )
               .toList();
           return RefreshIndicator(
-            onRefresh: () => ref.refresh(
-              projectLabelsControllerProvider(widget.projectId).future,
-            ),
+            onRefresh: () => widget.groupId == null
+                ? ref.refresh(
+                    projectLabelsControllerProvider(widget.projectId!).future,
+                  )
+                : ref.refresh(
+                    groupLabelsControllerProvider(widget.groupId!).future,
+                  ),
             child: Center(
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 900),
@@ -110,13 +139,15 @@ class _ProjectLabelsScreenState extends ConsumerState<ProjectLabelsScreen> {
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                            if (!label.isProjectLabel)
+                            if (widget.groupId == null && !label.isProjectLabel)
                               Text(l10n.projectLabelGroup),
                           ],
                         ),
                         trailing: const Icon(LabFoxIcons.chevron),
                         onTap: () => context.push(
-                          Routes.projectLabel(widget.projectId, label.id),
+                          widget.groupId == null
+                              ? Routes.projectLabel(widget.projectId!, label.id)
+                              : Routes.groupLabel(widget.groupId!, label.id),
                         ),
                       ),
                       const Divider(height: 1),
@@ -132,30 +163,44 @@ class _ProjectLabelsScreenState extends ConsumerState<ProjectLabelsScreen> {
   }
 }
 
-/// Loads a label by project id and label id, independently of list state.
+/// Loads a label by scope and label id, independently of list state.
 class ProjectLabelDetailScreen extends ConsumerWidget {
   const ProjectLabelDetailScreen({
-    required this.projectId,
+    this.projectId,
+    this.groupId,
     required this.labelId,
     super.key,
-  });
-  final int projectId;
+  }) : assert((projectId == null) != (groupId == null));
+  final int? projectId;
+  final int? groupId;
   final int labelId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final key = ProjectLabelRef(projectId, labelId);
-    final label = ref.watch(projectLabelProvider(key));
+    final label = groupId == null
+        ? ref.watch(projectLabelProvider(ProjectLabelRef(projectId!, labelId)))
+        : ref.watch(groupLabelProvider(GroupLabelRef(groupId!, labelId)));
     return Scaffold(
       appBar: AppBar(
-        title: Text(label.valueOrNull?.name ?? l10n.projectLabelsTitle),
+        title: Text(
+          label.valueOrNull?.name ??
+              (groupId == null
+                  ? l10n.projectLabelsTitle
+                  : l10n.groupLabelsTitle),
+        ),
       ),
       body: label.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (_, _) => _Error(
           message: l10n.projectLabelError,
-          onRetry: () => ref.invalidate(projectLabelProvider(key)),
+          onRetry: () => groupId == null
+              ? ref.invalidate(
+                  projectLabelProvider(ProjectLabelRef(projectId!, labelId)),
+                )
+              : ref.invalidate(
+                  groupLabelProvider(GroupLabelRef(groupId!, labelId)),
+                ),
         ),
         data: (item) => Center(
           child: ConstrainedBox(
@@ -179,7 +224,9 @@ class ProjectLabelDetailScreen extends ConsumerWidget {
                 ],
                 const SizedBox(height: LabFoxSpacing.md),
                 Text(
-                  item.isProjectLabel
+                  groupId != null
+                      ? l10n.projectLabelGroup
+                      : item.isProjectLabel
                       ? l10n.projectLabelProject
                       : l10n.projectLabelGroup,
                 ),
@@ -205,6 +252,15 @@ class ProjectLabelDetailScreen extends ConsumerWidget {
   }
 }
 
+/// Group label details, independently restorable from the route.
+class GroupLabelDetailScreen extends ProjectLabelDetailScreen {
+  const GroupLabelDetailScreen({
+    required int groupId,
+    required super.labelId,
+    super.key,
+  }) : super(groupId: groupId);
+}
+
 class _Count extends StatelessWidget {
   const _Count({required this.label, required this.count});
   final String label;
@@ -223,8 +279,10 @@ class _Count extends StatelessWidget {
 }
 
 class _CreateLabelDialog extends ConsumerStatefulWidget {
-  const _CreateLabelDialog({required this.projectId});
-  final int projectId;
+  const _CreateLabelDialog({this.projectId, this.groupId})
+    : assert((projectId == null) != (groupId == null));
+  final int? projectId;
+  final int? groupId;
 
   @override
   ConsumerState<_CreateLabelDialog> createState() => _CreateLabelDialogState();
@@ -250,15 +308,20 @@ class _CreateLabelDialogState extends ConsumerState<_CreateLabelDialog> {
     final l10n = AppLocalizations.of(context);
     setState(() => _saving = true);
     try {
-      await ref
-          .read(projectLabelsControllerProvider(widget.projectId).notifier)
-          .create(
-            name: _name.text.trim(),
-            color: _color.text.trim().toUpperCase(),
-            description: _description.text.trim().isEmpty
-                ? null
-                : _description.text.trim(),
-          );
+      final name = _name.text.trim();
+      final color = _color.text.trim().toUpperCase();
+      final description = _description.text.trim().isEmpty
+          ? null
+          : _description.text.trim();
+      if (widget.groupId == null) {
+        await ref
+            .read(projectLabelsControllerProvider(widget.projectId!).notifier)
+            .create(name: name, color: color, description: description);
+      } else {
+        await ref
+            .read(groupLabelsControllerProvider(widget.groupId!).notifier)
+            .create(name: name, color: color, description: description);
+      }
       if (mounted) Navigator.of(context).pop();
     } catch (_) {
       if (mounted) {

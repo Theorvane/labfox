@@ -1,5 +1,8 @@
 {
   "@@locale": "hi",
+  "groupLabelsTitle": "समूह लेबल",
+  "groupLabelsEmpty": "अभी कोई समूह लेबल नहीं है",
+  "groupLabelsError": "समूह लेबल लोड नहीं हो सके।",
   "deploymentsTitle": "डिप्लॉयमेंट",
   "deploymentsAll": "सभी",
   "deploymentsSuccess": "सफल",

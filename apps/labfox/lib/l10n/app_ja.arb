@@ -1,5 +1,8 @@
 {
   "@@locale": "ja",
+  "groupLabelsTitle": "グループラベル",
+  "groupLabelsEmpty": "グループラベルはまだありません",
+  "groupLabelsError": "グループラベルを読み込めませんでした。",
   "deploymentsTitle": "デプロイ",
   "deploymentsAll": "すべて",
   "deploymentsSuccess": "成功",

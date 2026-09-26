@@ -104,6 +104,24 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
+  /// No description provided for @groupLabelsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Group labels'**
+  String get groupLabelsTitle;
+
+  /// No description provided for @groupLabelsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No group labels yet'**
+  String get groupLabelsEmpty;
+
+  /// No description provided for @groupLabelsError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load group labels.'**
+  String get groupLabelsError;
+
   /// No description provided for @deploymentsTitle.
   ///
   /// In en, this message translates to:

@@ -9,6 +9,15 @@ class AppLocalizationsHi extends AppLocalizations {
   AppLocalizationsHi([String locale = 'hi']) : super(locale);
 
   @override
+  String get groupLabelsTitle => 'समूह लेबल';
+
+  @override
+  String get groupLabelsEmpty => 'अभी कोई समूह लेबल नहीं है';
+
+  @override
+  String get groupLabelsError => 'समूह लेबल लोड नहीं हो सके।';
+
+  @override
   String get deploymentsTitle => 'डिप्लॉयमेंट';
 
   @override
