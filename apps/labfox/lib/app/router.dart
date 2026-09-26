@@ -79,6 +79,9 @@ abstract final class Routes {
   static const String subscription = '/settings/subscription';
   static const String groups = '/groups';
   static String group(int id) => '/groups/$id';
+  static String groupMilestones(int id) => '/groups/$id/milestones';
+  static String groupMilestone(int id, int milestoneId) =>
+      '/groups/$id/milestones/$milestoneId';
   static const String projects = '/projects';
   // Account-level lists, mirroring GitLab's /dashboard URLs.
   static const String myIssues = '/dashboard/issues';
@@ -265,6 +268,25 @@ final routerProvider = Provider<GoRouter>((ref) {
             builder: (context, state) => GroupDetailScreen(
               groupId: int.parse(state.pathParameters['id']!),
             ),
+            routes: [
+              GoRoute(
+                path: 'milestones',
+                builder: (context, state) => MilestonesScreen.group(
+                  groupId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':milestoneId',
+                    builder: (context, state) => MilestoneDetailScreen.group(
+                      groupId: int.parse(state.pathParameters['id']!),
+                      milestoneId: int.parse(
+                        state.pathParameters['milestoneId']!,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       ),
