@@ -3,6 +3,7 @@ import 'package:gitlab_api/gitlab_api.dart';
 import 'package:gitlab_models/gitlab_models.dart';
 
 import '../../../../core/auth/gitlab_client_provider.dart';
+import '../../data/group_members_repository.dart';
 import '../../data/project_members_repository.dart';
 
 final projectMembersRepositoryProvider =
@@ -11,20 +12,30 @@ final projectMembersRepositoryProvider =
       return client == null ? null : ProjectMembersRepository(client);
     });
 
-class MemberListRef {
-  const MemberListRef({required this.projectId, required this.query});
+final groupMembersRepositoryProvider = FutureProvider<GroupMembersRepository?>((
+  ref,
+) async {
+  final client = await ref.watch(gitLabClientProvider.future);
+  return client == null ? null : GroupMembersRepository(client);
+});
 
-  final int projectId;
+class MemberListRef {
+  const MemberListRef({this.projectId, this.groupId, required this.query})
+    : assert((projectId == null) != (groupId == null));
+
+  final int? projectId;
+  final int? groupId;
   final String query;
 
   @override
   bool operator ==(Object other) =>
       other is MemberListRef &&
       projectId == other.projectId &&
+      groupId == other.groupId &&
       query == other.query;
 
   @override
-  int get hashCode => Object.hash(projectId, query);
+  int get hashCode => Object.hash(projectId, groupId, query);
 }
 
 /// Server-side member search and response-header pagination.
@@ -34,10 +45,18 @@ class ProjectMembersController
 
   @override
   Future<Paginated<ProjectMember>> build(MemberListRef arg) async {
+    if (arg.groupId != null) {
+      final repository = await ref.watch(groupMembersRepositoryProvider.future);
+      if (repository == null) throw StateError('No authenticated account');
+      return repository.list(
+        arg.groupId!,
+        query: arg.query.isEmpty ? null : arg.query,
+      );
+    }
     final repository = await ref.watch(projectMembersRepositoryProvider.future);
     if (repository == null) throw StateError('No authenticated account');
     return repository.list(
-      arg.projectId,
+      arg.projectId!,
       query: arg.query.isEmpty ? null : arg.query,
     );
   }
@@ -49,15 +68,28 @@ class ProjectMembersController
     if (current == null || page == null) return;
     _loadingMore = true;
     try {
-      final repository = await ref.read(
-        projectMembersRepositoryProvider.future,
-      );
-      if (repository == null) throw StateError('No authenticated account');
-      final next = await repository.list(
-        arg.projectId,
-        query: arg.query.isEmpty ? null : arg.query,
-        page: page,
-      );
+      late final Paginated<ProjectMember> next;
+      if (arg.groupId != null) {
+        final repository = await ref.read(
+          groupMembersRepositoryProvider.future,
+        );
+        if (repository == null) throw StateError('No authenticated account');
+        next = await repository.list(
+          arg.groupId!,
+          query: arg.query.isEmpty ? null : arg.query,
+          page: page,
+        );
+      } else {
+        final repository = await ref.read(
+          projectMembersRepositoryProvider.future,
+        );
+        if (repository == null) throw StateError('No authenticated account');
+        next = await repository.list(
+          arg.projectId!,
+          query: arg.query.isEmpty ? null : arg.query,
+          page: page,
+        );
+      }
       state = AsyncData(
         Paginated(
           items: [...current.items, ...next.items],

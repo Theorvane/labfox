@@ -34,6 +34,11 @@ class GroupDetailScreen extends ConsumerWidget {
             icon: const Icon(LabFoxIcons.milestone),
             onPressed: () => context.push(Routes.groupMilestones(groupId)),
           ),
+          IconButton(
+            tooltip: l10n.groupMembersTitle,
+            icon: const Icon(LabFoxIcons.person),
+            onPressed: () => context.push(Routes.groupMembers(groupId)),
+          ),
           ShareLinkButton(url: group?.webUrl),
         ],
       ),

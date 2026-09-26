@@ -1,5 +1,9 @@
 {
   "@@locale": "ja",
+  "groupMembersTitle": "グループメンバー",
+  "groupMembersSearch": "グループメンバーを検索",
+  "groupMembersEmpty": "グループメンバーが見つかりません。",
+  "groupMembersError": "グループメンバーを読み込めませんでした。",
   "pipelineSchedulesTitle": "パイプラインスケジュール",
   "pipelineSchedulesAll": "すべて",
   "pipelineSchedulesActive": "有効",
