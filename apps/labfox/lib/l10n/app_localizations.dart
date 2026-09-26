@@ -2090,6 +2090,96 @@ abstract class AppLocalizations {
   /// **'Switch account'**
   String get meAccounts;
 
+  /// No description provided for @tagsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tags'**
+  String get tagsTitle;
+
+  /// No description provided for @tagsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No tags yet'**
+  String get tagsEmpty;
+
+  /// No description provided for @tagsError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load tags.'**
+  String get tagsError;
+
+  /// No description provided for @tagsNoMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'No matching tags'**
+  String get tagsNoMatch;
+
+  /// No description provided for @tagSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search tags'**
+  String get tagSearchHint;
+
+  /// No description provided for @tagError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load this tag.'**
+  String get tagError;
+
+  /// No description provided for @tagProtected.
+  ///
+  /// In en, this message translates to:
+  /// **'Protected tag'**
+  String get tagProtected;
+
+  /// No description provided for @tagNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New tag'**
+  String get tagNew;
+
+  /// No description provided for @tagName.
+  ///
+  /// In en, this message translates to:
+  /// **'Tag name'**
+  String get tagName;
+
+  /// No description provided for @tagFromRef.
+  ///
+  /// In en, this message translates to:
+  /// **'Create from branch, tag, or commit SHA'**
+  String get tagFromRef;
+
+  /// No description provided for @tagMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Message (optional)'**
+  String get tagMessage;
+
+  /// No description provided for @tagPipelineNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Creating a tag may start a CI/CD pipeline.'**
+  String get tagPipelineNotice;
+
+  /// No description provided for @tagFieldRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required'**
+  String get tagFieldRequired;
+
+  /// No description provided for @tagCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'Create tag'**
+  String get tagCreate;
+
+  /// No description provided for @tagCreateError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t create the tag. Check your permissions and the reference.'**
+  String get tagCreateError;
+
   /// No description provided for @snippetsTitle.
   ///
   /// In en, this message translates to:

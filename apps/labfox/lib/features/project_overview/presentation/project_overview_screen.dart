@@ -293,6 +293,12 @@ class _CodeSection extends StatelessWidget {
           label: l10n.projectOverviewBrowseCode,
           onTap: () => context.push(Routes.repository(project.id, branch)),
         ),
+        LauncherTile(
+          icon: LabFoxIcons.branch,
+          color: status.pending.foreground,
+          label: l10n.tagsTitle,
+          onTap: () => context.push(Routes.tags(project.id)),
+        ),
       ],
     );
   }

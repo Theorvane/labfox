@@ -28,6 +28,7 @@ export 'src/project_member.dart';
 export 'src/registry_repository.dart';
 export 'src/registry_tag.dart';
 export 'src/repository_entry.dart';
+export 'src/repository_tag.dart';
 export 'src/snippet.dart';
 export 'src/todo.dart';
 export 'src/unified_diff.dart';
