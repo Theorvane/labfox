@@ -83,6 +83,27 @@ class AppLocalizationsHi extends AppLocalizations {
   String get deploymentUser => 'डिप्लॉय करने वाला';
 
   @override
+  String get releasesTitle => 'रिलीज़';
+
+  @override
+  String get releasesEmpty => 'अभी कोई रिलीज़ नहीं है।';
+
+  @override
+  String get releasesError => 'रिलीज़ लोड नहीं हो सकीं।';
+
+  @override
+  String get releaseDetailError => 'यह रिलीज़ लोड नहीं हो सकी।';
+
+  @override
+  String get releaseAssetsTitle => 'एसेट';
+
+  @override
+  String get releaseLoadMore => 'और लोड करें';
+
+  @override
+  String get releaseUpcoming => 'आगामी';
+
+  @override
   String get activityTitle => 'गतिविधि';
 
   @override

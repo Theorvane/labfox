@@ -83,6 +83,27 @@ class AppLocalizationsZh extends AppLocalizations {
   String get deploymentUser => '部署者';
 
   @override
+  String get releasesTitle => '发行版';
+
+  @override
+  String get releasesEmpty => '暂无发行版。';
+
+  @override
+  String get releasesError => '无法加载发行版。';
+
+  @override
+  String get releaseDetailError => '无法加载此发行版。';
+
+  @override
+  String get releaseAssetsTitle => '资源';
+
+  @override
+  String get releaseLoadMore => '加载更多';
+
+  @override
+  String get releaseUpcoming => '即将发布';
+
+  @override
   String get activityTitle => '动态';
 
   @override

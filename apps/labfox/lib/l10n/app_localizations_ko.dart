@@ -83,6 +83,27 @@ class AppLocalizationsKo extends AppLocalizations {
   String get deploymentUser => '배포자';
 
   @override
+  String get releasesTitle => '릴리스';
+
+  @override
+  String get releasesEmpty => '릴리스가 아직 없습니다.';
+
+  @override
+  String get releasesError => '릴리스를 불러올 수 없습니다.';
+
+  @override
+  String get releaseDetailError => '이 릴리스를 불러올 수 없습니다.';
+
+  @override
+  String get releaseAssetsTitle => '에셋';
+
+  @override
+  String get releaseLoadMore => '더 보기';
+
+  @override
+  String get releaseUpcoming => '예정';
+
+  @override
   String get activityTitle => '활동';
 
   @override

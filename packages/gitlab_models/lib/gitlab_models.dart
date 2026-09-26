@@ -14,6 +14,7 @@ export 'src/gitlab_deployment.dart';
 export 'src/gitlab_environment.dart';
 export 'src/gitlab_milestone.dart';
 export 'src/gitlab_package.dart';
+export 'src/gitlab_release.dart';
 export 'src/group.dart';
 export 'src/issue.dart';
 export 'src/job.dart';
