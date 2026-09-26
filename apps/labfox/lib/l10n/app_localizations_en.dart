@@ -1071,6 +1071,52 @@ class AppLocalizationsEn extends AppLocalizations {
   String get meAccounts => 'Switch account';
 
   @override
+  String get tagsTitle => 'Tags';
+
+  @override
+  String get tagsEmpty => 'No tags yet';
+
+  @override
+  String get tagsError => 'Couldn\'t load tags.';
+
+  @override
+  String get tagsNoMatch => 'No matching tags';
+
+  @override
+  String get tagSearchHint => 'Search tags';
+
+  @override
+  String get tagError => 'Couldn\'t load this tag.';
+
+  @override
+  String get tagProtected => 'Protected tag';
+
+  @override
+  String get tagNew => 'New tag';
+
+  @override
+  String get tagName => 'Tag name';
+
+  @override
+  String get tagFromRef => 'Create from branch, tag, or commit SHA';
+
+  @override
+  String get tagMessage => 'Message (optional)';
+
+  @override
+  String get tagPipelineNotice => 'Creating a tag may start a CI/CD pipeline.';
+
+  @override
+  String get tagFieldRequired => 'This field is required';
+
+  @override
+  String get tagCreate => 'Create tag';
+
+  @override
+  String get tagCreateError =>
+      'Couldn\'t create the tag. Check your permissions and the reference.';
+
+  @override
   String get snippetsTitle => 'Snippets';
 
   @override
