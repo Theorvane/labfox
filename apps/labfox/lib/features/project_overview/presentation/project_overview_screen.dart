@@ -240,6 +240,12 @@ class _Categories extends StatelessWidget {
             onTap: () => context.push(Routes.packages(project.id)),
           ),
         LauncherTile(
+          icon: LabFoxIcons.label,
+          color: status.pending.foreground,
+          label: l10n.projectLabelsTitle,
+          onTap: () => context.push(Routes.projectLabels(project.id)),
+        ),
+        LauncherTile(
           icon: LabFoxIcons.person,
           color: status.pending.foreground,
           label: l10n.projectMembersTitle,
@@ -256,6 +262,12 @@ class _Categories extends StatelessWidget {
           color: status.running.foreground,
           label: l10n.environmentsTitle,
           onTap: () => context.push(Routes.environments(project.id)),
+        ),
+        LauncherTile(
+          icon: LabFoxIcons.pipeline,
+          color: status.running.foreground,
+          label: l10n.deploymentsTitle,
+          onTap: () => context.push(Routes.deployments(project.id)),
         ),
         if (branch != null)
           LauncherTile(

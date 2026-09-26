@@ -70,6 +70,80 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get deploymentsTitle => '部署';
+
+  @override
+  String get deploymentsAll => '全部';
+
+  @override
+  String get deploymentsSuccess => '成功';
+
+  @override
+  String get deploymentsFailed => '失败';
+
+  @override
+  String get deploymentsRunning => '运行中';
+
+  @override
+  String get deploymentsCanceled => '已取消';
+
+  @override
+  String get deploymentsCreated => '已创建';
+
+  @override
+  String get deploymentsBlocked => '已阻止';
+
+  @override
+  String get deploymentsUnknownStatus => '未知状态';
+
+  @override
+  String get deploymentsEmpty => '没有找到部署。';
+
+  @override
+  String get deploymentsError => '无法加载部署。';
+
+  @override
+  String get deploymentsLoadMore => '加载更多';
+
+  @override
+  String get deploymentsEnvironmentSearch => '按环境名称筛选';
+
+  @override
+  String get deploymentsUnknownEnvironment => '未知环境';
+
+  @override
+  String get deploymentDetailError => '无法加载此部署。';
+
+  @override
+  String deploymentNumber(int number) {
+    return '部署 #$number';
+  }
+
+  @override
+  String get deploymentEnvironment => '环境';
+
+  @override
+  String get deploymentRef => '引用';
+
+  @override
+  String get deploymentCommit => '提交';
+
+  @override
+  String get deploymentJob => '作业';
+
+  @override
+  String get deploymentPipeline => '流水线';
+
+  @override
+  String get deploymentCreatedAt => '创建时间';
+
+  @override
+  String get deploymentUpdatedAt => '更新时间';
+
+  @override
+  String get deploymentUser => '部署者';
+
+  @override
   String get releasesTitle => '发行版';
 
   @override
@@ -1146,6 +1220,63 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get meAccounts => '切换账户';
+
+  @override
+  String get projectLabelsTitle => '标签';
+
+  @override
+  String get projectLabelsError => '无法加载标签。';
+
+  @override
+  String get projectLabelsEmpty => '暂无标签';
+
+  @override
+  String get projectLabelsNoMatch => '没有匹配的标签';
+
+  @override
+  String get projectLabelSearch => '搜索标签';
+
+  @override
+  String get projectLabelNew => '新建标签';
+
+  @override
+  String get projectLabelGroup => '群组标签';
+
+  @override
+  String get projectLabelProject => '项目标签';
+
+  @override
+  String get projectLabelError => '无法加载此标签。';
+
+  @override
+  String get projectLabelOpenIssues => '未关闭的议题';
+
+  @override
+  String get projectLabelClosedIssues => '已关闭的议题';
+
+  @override
+  String get projectLabelOpenMrs => '未关闭的合并请求';
+
+  @override
+  String get projectLabelName => '名称';
+
+  @override
+  String get projectLabelColor => '颜色 (#RRGGBB)';
+
+  @override
+  String get projectLabelDescription => '描述（可选）';
+
+  @override
+  String get projectLabelRequired => '此项为必填项';
+
+  @override
+  String get projectLabelInvalidColor => '请输入类似 #5843AD 的颜色';
+
+  @override
+  String get projectLabelCreate => '创建标签';
+
+  @override
+  String get projectLabelCreateError => '无法创建标签。请检查权限和输入内容。';
 
   @override
   String get tagsTitle => '标签';

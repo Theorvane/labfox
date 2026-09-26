@@ -70,6 +70,80 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get deploymentsTitle => 'デプロイ';
+
+  @override
+  String get deploymentsAll => 'すべて';
+
+  @override
+  String get deploymentsSuccess => '成功';
+
+  @override
+  String get deploymentsFailed => '失敗';
+
+  @override
+  String get deploymentsRunning => '実行中';
+
+  @override
+  String get deploymentsCanceled => 'キャンセル';
+
+  @override
+  String get deploymentsCreated => '作成済み';
+
+  @override
+  String get deploymentsBlocked => 'ブロック';
+
+  @override
+  String get deploymentsUnknownStatus => '不明な状態';
+
+  @override
+  String get deploymentsEmpty => 'デプロイはありません。';
+
+  @override
+  String get deploymentsError => 'デプロイを読み込めませんでした。';
+
+  @override
+  String get deploymentsLoadMore => 'さらに読み込む';
+
+  @override
+  String get deploymentsEnvironmentSearch => '環境名で絞り込み';
+
+  @override
+  String get deploymentsUnknownEnvironment => '不明な環境';
+
+  @override
+  String get deploymentDetailError => 'このデプロイを読み込めませんでした。';
+
+  @override
+  String deploymentNumber(int number) {
+    return 'デプロイ #$number';
+  }
+
+  @override
+  String get deploymentEnvironment => '環境';
+
+  @override
+  String get deploymentRef => '参照';
+
+  @override
+  String get deploymentCommit => 'コミット';
+
+  @override
+  String get deploymentJob => 'ジョブ';
+
+  @override
+  String get deploymentPipeline => 'パイプライン';
+
+  @override
+  String get deploymentCreatedAt => '作成日時';
+
+  @override
+  String get deploymentUpdatedAt => '更新日時';
+
+  @override
+  String get deploymentUser => 'デプロイ担当';
+
+  @override
   String get releasesTitle => 'リリース';
 
   @override
@@ -1149,6 +1223,63 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get meAccounts => 'アカウント切り替え';
+
+  @override
+  String get projectLabelsTitle => 'ラベル';
+
+  @override
+  String get projectLabelsError => 'ラベルを読み込めませんでした。';
+
+  @override
+  String get projectLabelsEmpty => 'ラベルはまだありません';
+
+  @override
+  String get projectLabelsNoMatch => '一致するラベルがありません';
+
+  @override
+  String get projectLabelSearch => 'ラベルを検索';
+
+  @override
+  String get projectLabelNew => '新しいラベル';
+
+  @override
+  String get projectLabelGroup => 'グループラベル';
+
+  @override
+  String get projectLabelProject => 'プロジェクトラベル';
+
+  @override
+  String get projectLabelError => 'このラベルを読み込めませんでした。';
+
+  @override
+  String get projectLabelOpenIssues => '未解決の課題';
+
+  @override
+  String get projectLabelClosedIssues => '終了した課題';
+
+  @override
+  String get projectLabelOpenMrs => '未処理のマージリクエスト';
+
+  @override
+  String get projectLabelName => '名前';
+
+  @override
+  String get projectLabelColor => '色 (#RRGGBB)';
+
+  @override
+  String get projectLabelDescription => '説明（任意）';
+
+  @override
+  String get projectLabelRequired => '必須項目です';
+
+  @override
+  String get projectLabelInvalidColor => '#5843AD のような色を入力してください';
+
+  @override
+  String get projectLabelCreate => 'ラベルを作成';
+
+  @override
+  String get projectLabelCreateError => 'ラベルを作成できませんでした。権限と入力内容を確認してください。';
 
   @override
   String get tagsTitle => 'タグ';
