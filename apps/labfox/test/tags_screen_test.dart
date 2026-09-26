@@ -41,7 +41,13 @@ void main() {
     ]);
     expect(find.text('v1.0.0'), findsOneWidget);
     expect(find.text('Ship'), findsOneWidget);
-    expect(find.byIcon(Icons.lock_outline), findsOneWidget);
+    expect(
+      find.descendant(
+        of: find.widgetWithText(ListTile, 'v1.0.0'),
+        matching: find.byIcon(Icons.lock_outline),
+      ),
+      findsOneWidget,
+    );
   });
 
   testWidgets('shows an empty state without tags', (tester) async {

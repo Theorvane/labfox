@@ -31,6 +31,7 @@ export 'src/pipelines/pipelines_api.dart';
 export 'src/projects/projects_api.dart';
 export 'src/releases/releases_api.dart';
 export 'src/repository/protected_branches_api.dart';
+export 'src/repository/protected_tags_api.dart';
 export 'src/repository/repository_api.dart';
 export 'src/repository/repository_file.dart';
 export 'src/search/search_api.dart';

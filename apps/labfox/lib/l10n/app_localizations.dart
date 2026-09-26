@@ -104,6 +104,36 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
+  /// No description provided for @protectedTagsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Protected tags'**
+  String get protectedTagsTitle;
+
+  /// No description provided for @protectedTagsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No protected tag rules found.'**
+  String get protectedTagsEmpty;
+
+  /// No description provided for @protectedTagsError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load protected tags.'**
+  String get protectedTagsError;
+
+  /// No description provided for @protectedTagsLoadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get protectedTagsLoadMore;
+
+  /// No description provided for @protectedTagCreateAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Allowed to create'**
+  String get protectedTagCreateAccess;
+
   /// No description provided for @protectedBranchesTitle.
   ///
   /// In en, this message translates to:

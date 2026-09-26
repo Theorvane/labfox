@@ -9,6 +9,21 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get protectedTagsTitle => 'Protected tags';
+
+  @override
+  String get protectedTagsEmpty => 'No protected tag rules found.';
+
+  @override
+  String get protectedTagsError => 'Could not load protected tags.';
+
+  @override
+  String get protectedTagsLoadMore => 'Load more';
+
+  @override
+  String get protectedTagCreateAccess => 'Allowed to create';
+
+  @override
   String get protectedBranchesTitle => 'Protected branches';
 
   @override

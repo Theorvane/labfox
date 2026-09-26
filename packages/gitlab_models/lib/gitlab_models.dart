@@ -32,6 +32,7 @@ export 'src/project_event.dart';
 export 'src/project_label.dart';
 export 'src/project_member.dart';
 export 'src/protected_branch.dart';
+export 'src/protected_tag.dart';
 export 'src/registry_repository.dart';
 export 'src/registry_tag.dart';
 export 'src/repository_entry.dart';

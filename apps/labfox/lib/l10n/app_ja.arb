@@ -1,5 +1,10 @@
 {
   "@@locale": "ja",
+  "protectedTagsTitle": "保護されたタグ",
+  "protectedTagsEmpty": "保護タグのルールがありません。",
+  "protectedTagsError": "保護されたタグを読み込めませんでした。",
+  "protectedTagsLoadMore": "さらに表示",
+  "protectedTagCreateAccess": "作成権限",
   "protectedBranchesTitle": "保護されたブランチ",
   "protectedBranchesEmpty": "保護ブランチのルールがありません。",
   "protectedBranchesError": "保護されたブランチを読み込めませんでした。",

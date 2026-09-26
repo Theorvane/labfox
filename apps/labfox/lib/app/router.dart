@@ -48,6 +48,8 @@ import '../features/project_overview/presentation/project_overview_screen.dart';
 import '../features/projects/presentation/projects_screen.dart';
 import '../features/protected_branches/presentation/protected_branch_detail_screen.dart';
 import '../features/protected_branches/presentation/protected_branches_screen.dart';
+import '../features/protected_tags/presentation/protected_tag_detail_screen.dart';
+import '../features/protected_tags/presentation/protected_tags_screen.dart';
 import '../features/releases/presentation/release_detail_screen.dart';
 import '../features/releases/presentation/releases_screen.dart';
 import '../features/repository/presentation/file_viewer_screen.dart';
@@ -148,6 +150,9 @@ abstract final class Routes {
   static String protectedBranches(int id) => '/projects/$id/protected_branches';
   static String protectedBranch(int id, String name) =>
       '/projects/$id/protected_branches/${Uri.encodeComponent(name)}';
+  static String protectedTags(int id) => '/projects/$id/protected_tags';
+  static String protectedTag(int id, String name) =>
+      '/projects/$id/protected_tags/${Uri.encodeComponent(name)}';
   static String commits(int id, String ref) =>
       '/projects/$id/commits?ref=${Uri.encodeQueryComponent(ref)}';
   static String commit(int id, String sha) => '/projects/$id/commit/$sha';
@@ -540,6 +545,21 @@ final routerProvider = Provider<GoRouter>((ref) {
                   GoRoute(
                     path: ':name',
                     builder: (context, state) => ProtectedBranchDetailScreen(
+                      projectId: int.parse(state.pathParameters['id']!),
+                      name: state.pathParameters['name']!,
+                    ),
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: 'protected_tags',
+                builder: (context, state) => ProtectedTagsScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':name',
+                    builder: (context, state) => ProtectedTagDetailScreen(
                       projectId: int.parse(state.pathParameters['id']!),
                       name: state.pathParameters['name']!,
                     ),
