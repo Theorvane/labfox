@@ -25,9 +25,9 @@ work, not as a fixed denominator.
 - Update the snapshot, evidence, and issue/PR links in the same PR that changes
   a row. Do not calculate a GitLab parity percentage from this incomplete list.
 
-Snapshot at baseline: **18 known work packages**, **1 scoped issue**, **0
-packages shipped**. This is a lower bound on remaining work, **not 18 PRs** or
-an ETA. The shipped baseline is excluded from that count.
+Snapshot (2026-09-27): **18 known work packages**, **1 in review**, **17
+queued**, **0 packages shipped**. This is a lower bound on remaining work,
+**not 18 PRs** or an ETA. The shipped baseline is excluded from that count.
 
 ## Shipped baseline by workflow
 
@@ -51,7 +51,7 @@ issues and PRs. Keep it open until its full acceptance boundary is verified.
 
 | ID | Priority | Work package and acceptance boundary | Status | Tracking |
 | --- | --- | --- | --- | --- |
-| MW-01 | P1 | Group protected environments: list/detail, deploy/approval rules, role/tier errors, narrow/wide tests. | Queued | [#326](https://github.com/Theorvane/labfox/issues/326) |
+| MW-01 | P1 | Group protected environments: list/detail, deploy/approval rules, role/tier errors, narrow/wide tests. | In review | [#326](https://github.com/Theorvane/labfox/issues/326), [PR #328](https://github.com/Theorvane/labfox/pull/328) |
 | MW-02 | P1 | Project protection-rule creation, update, and removal with permission checks. | Queued | Issue needed |
 | MW-03 | P1 | Project/group settings inventory and authorized general/repository/CI changes. | Queued | Issue needed |
 | MW-04 | P1 | Member invitations, role/expiry changes, and removal for groups/projects. | Queued | Issue needed |
