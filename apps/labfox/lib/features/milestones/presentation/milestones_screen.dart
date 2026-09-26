@@ -10,8 +10,7 @@ import 'controllers/milestones_controller.dart';
 
 /// Active and closed project milestones.
 class MilestonesScreen extends ConsumerStatefulWidget {
-  const MilestonesScreen({required this.projectId, super.key})
-    : groupId = null;
+  const MilestonesScreen({required this.projectId, super.key}) : groupId = null;
 
   const MilestonesScreen.group({required this.groupId, super.key})
     : projectId = null;
