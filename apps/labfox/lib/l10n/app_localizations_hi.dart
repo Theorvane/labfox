@@ -9,6 +9,67 @@ class AppLocalizationsHi extends AppLocalizations {
   AppLocalizationsHi([String locale = 'hi']) : super(locale);
 
   @override
+  String get pipelineSchedulesTitle => 'पाइपलाइन शेड्यूल';
+
+  @override
+  String get pipelineSchedulesAll => 'सभी';
+
+  @override
+  String get pipelineSchedulesActive => 'सक्रिय';
+
+  @override
+  String get pipelineSchedulesInactive => 'निष्क्रिय';
+
+  @override
+  String get pipelineSchedulesEmpty => 'कोई पाइपलाइन शेड्यूल नहीं मिला।';
+
+  @override
+  String get pipelineSchedulesError => 'पाइपलाइन शेड्यूल लोड नहीं हो सके।';
+
+  @override
+  String get pipelineSchedulesLoadMore => 'और लोड करें';
+
+  @override
+  String get pipelineScheduleDetailError => 'यह शेड्यूल लोड नहीं हो सका।';
+
+  @override
+  String pipelineScheduleNextRun(String date) {
+    return 'अगला रन: $date';
+  }
+
+  @override
+  String get pipelineScheduleNextRunLabel => 'अगला रन';
+
+  @override
+  String get pipelineScheduleRef => 'रेफ़';
+
+  @override
+  String get pipelineScheduleCron => 'शेड्यूल';
+
+  @override
+  String get pipelineScheduleTimezone => 'समय क्षेत्र';
+
+  @override
+  String get pipelineScheduleOwner => 'स्वामी';
+
+  @override
+  String get pipelineScheduleRunNow => 'अभी चलाएँ';
+
+  @override
+  String get pipelineScheduleRunSuccess => 'पाइपलाइन शेड्यूल शुरू हुआ।';
+
+  @override
+  String get pipelineScheduleRunError => 'पाइपलाइन शेड्यूल नहीं चल सका।';
+
+  @override
+  String get pipelineScheduleLastPipeline => 'पिछली पाइपलाइन';
+
+  @override
+  String pipelineSchedulePipelineNumber(int number) {
+    return 'पाइपलाइन #$number';
+  }
+
+  @override
   String get deploymentsTitle => 'डिप्लॉयमेंट';
 
   @override

@@ -104,6 +104,120 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
+  /// No description provided for @pipelineSchedulesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pipeline schedules'**
+  String get pipelineSchedulesTitle;
+
+  /// No description provided for @pipelineSchedulesAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get pipelineSchedulesAll;
+
+  /// No description provided for @pipelineSchedulesActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get pipelineSchedulesActive;
+
+  /// No description provided for @pipelineSchedulesInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get pipelineSchedulesInactive;
+
+  /// No description provided for @pipelineSchedulesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No pipeline schedules found.'**
+  String get pipelineSchedulesEmpty;
+
+  /// No description provided for @pipelineSchedulesError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load pipeline schedules.'**
+  String get pipelineSchedulesError;
+
+  /// No description provided for @pipelineSchedulesLoadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get pipelineSchedulesLoadMore;
+
+  /// No description provided for @pipelineScheduleDetailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this pipeline schedule.'**
+  String get pipelineScheduleDetailError;
+
+  /// No description provided for @pipelineScheduleNextRun.
+  ///
+  /// In en, this message translates to:
+  /// **'Next run: {date}'**
+  String pipelineScheduleNextRun(String date);
+
+  /// No description provided for @pipelineScheduleNextRunLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Next run'**
+  String get pipelineScheduleNextRunLabel;
+
+  /// No description provided for @pipelineScheduleRef.
+  ///
+  /// In en, this message translates to:
+  /// **'Ref'**
+  String get pipelineScheduleRef;
+
+  /// No description provided for @pipelineScheduleCron.
+  ///
+  /// In en, this message translates to:
+  /// **'Schedule'**
+  String get pipelineScheduleCron;
+
+  /// No description provided for @pipelineScheduleTimezone.
+  ///
+  /// In en, this message translates to:
+  /// **'Time zone'**
+  String get pipelineScheduleTimezone;
+
+  /// No description provided for @pipelineScheduleOwner.
+  ///
+  /// In en, this message translates to:
+  /// **'Owner'**
+  String get pipelineScheduleOwner;
+
+  /// No description provided for @pipelineScheduleRunNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Run now'**
+  String get pipelineScheduleRunNow;
+
+  /// No description provided for @pipelineScheduleRunSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Pipeline schedule started.'**
+  String get pipelineScheduleRunSuccess;
+
+  /// No description provided for @pipelineScheduleRunError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not run this pipeline schedule.'**
+  String get pipelineScheduleRunError;
+
+  /// No description provided for @pipelineScheduleLastPipeline.
+  ///
+  /// In en, this message translates to:
+  /// **'Last pipeline'**
+  String get pipelineScheduleLastPipeline;
+
+  /// No description provided for @pipelineSchedulePipelineNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Pipeline #{number}'**
+  String pipelineSchedulePipelineNumber(int number);
+
   /// No description provided for @deploymentsTitle.
   ///
   /// In en, this message translates to:

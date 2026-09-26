@@ -14,6 +14,7 @@ import 'merge_requests/merge_requests_api.dart';
 import 'milestones/milestones_api.dart';
 import 'notes/notes_api.dart';
 import 'packages/packages_api.dart';
+import 'pipeline_schedules/pipeline_schedules_api.dart';
 import 'pipelines/pipelines_api.dart';
 import 'projects/projects_api.dart';
 import 'releases/releases_api.dart';
@@ -70,6 +71,7 @@ class GitLabClient {
     milestones = MilestonesApi(_dio);
     notes = NotesApi(_dio);
     packages = PackagesApi(_dio);
+    pipelineSchedules = PipelineSchedulesApi(_dio);
     pipelines = PipelinesApi(_dio);
     jobs = JobsApi(_dio);
     projectLabels = ProjectLabelsApi(_dio);
@@ -149,6 +151,7 @@ class GitLabClient {
   late final NotesApi notes;
   late final PackagesApi packages;
   late final PipelinesApi pipelines;
+  late final PipelineSchedulesApi pipelineSchedules;
   late final JobsApi jobs;
   late final ProjectLabelsApi projectLabels;
   late final TodosApi todos;
