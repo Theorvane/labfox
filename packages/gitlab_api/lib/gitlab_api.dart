@@ -12,6 +12,7 @@ export 'src/environments/environments_api.dart';
 export 'src/environments/protected_environments_api.dart';
 export 'src/events/events_api.dart';
 export 'src/gitlab_client.dart';
+export 'src/groups/group_protected_environments_api.dart';
 export 'src/groups/groups_api.dart';
 export 'src/issues/issue_links_api.dart';
 export 'src/issues/issues_api.dart';

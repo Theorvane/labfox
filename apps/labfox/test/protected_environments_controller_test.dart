@@ -30,6 +30,21 @@ class _Repository extends ProtectedEnvironmentsRepository {
           )
         : const Paginated(items: [ProtectedEnvironment(name: 'staging')]);
   }
+
+  @override
+  Future<Paginated<ProtectedEnvironment>> listGroup(
+    int groupId, {
+    int page = 1,
+  }) async {
+    expect(groupId, 9);
+    pages.add(page);
+    return page == 1
+        ? const Paginated(
+            items: [ProtectedEnvironment(name: 'production')],
+            nextPage: 2,
+          )
+        : const Paginated(items: [ProtectedEnvironment(name: 'staging')]);
+  }
 }
 
 void main() {
@@ -44,6 +59,29 @@ void main() {
     );
     addTearDown(container.dispose);
     final provider = protectedEnvironmentsControllerProvider(7);
+
+    await container.read(provider.future);
+    await container.read(provider.notifier).loadMore();
+    await container.read(provider.notifier).loadMore();
+
+    expect(repository.pages, [1, 2]);
+    expect(
+      container.read(provider).requireValue.items.map((rule) => rule.name),
+      ['production', 'staging'],
+    );
+  });
+
+  test('appends each group protected environment page once', () async {
+    final repository = _Repository();
+    final container = ProviderContainer(
+      overrides: [
+        protectedEnvironmentsRepositoryProvider.overrideWith(
+          (ref) async => repository,
+        ),
+      ],
+    );
+    addTearDown(container.dispose);
+    final provider = groupProtectedEnvironmentsControllerProvider(9);
 
     await container.read(provider.future);
     await container.read(provider.notifier).loadMore();

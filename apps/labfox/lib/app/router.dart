@@ -92,6 +92,10 @@ abstract final class Routes {
   static String groupLabel(int id, int labelId) =>
       '/groups/$id/labels/$labelId';
   static String groupMembers(int id) => '/groups/$id/members';
+  static String groupProtectedEnvironments(int id) =>
+      '/groups/$id/protected_environments';
+  static String groupProtectedEnvironment(int id, String name) =>
+      '/groups/$id/protected_environments/${Uri.encodeComponent(name)}';
   static const String projects = '/projects';
   // Account-level lists, mirroring GitLab's /dashboard URLs.
   static const String myIssues = '/dashboard/issues';
@@ -326,6 +330,22 @@ final routerProvider = Provider<GoRouter>((ref) {
                 builder: (context, state) => GroupMembersScreen(
                   groupId: int.parse(state.pathParameters['id']!),
                 ),
+              ),
+              GoRoute(
+                path: 'protected_environments',
+                builder: (context, state) => ProtectedEnvironmentsScreen.group(
+                  groupId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':name',
+                    builder: (context, state) =>
+                        ProtectedEnvironmentDetailScreen.group(
+                          groupId: int.parse(state.pathParameters['id']!),
+                          name: state.pathParameters['name']!,
+                        ),
+                  ),
+                ],
               ),
             ],
           ),

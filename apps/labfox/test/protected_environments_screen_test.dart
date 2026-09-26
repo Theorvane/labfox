@@ -21,6 +21,18 @@ const _rule = ProtectedEnvironment(
   ],
 );
 
+const _groupRule = ProtectedEnvironment(
+  name: 'production',
+  requiredApprovalCount: 2,
+  deployAccessLevels: [ProtectedEnvironmentAccess(description: 'Maintainers')],
+  approvalRules: [
+    ProtectedEnvironmentAccess(
+      description: 'Security team',
+      requiredApprovals: 2,
+    ),
+  ],
+);
+
 class _List extends ProtectedEnvironmentsController {
   @override
   Future<Paginated<ProtectedEnvironment>> build(int projectId) async =>
@@ -31,6 +43,12 @@ class _Forbidden extends ProtectedEnvironmentsController {
   @override
   Future<Paginated<ProtectedEnvironment>> build(int projectId) async =>
       throw const GitLabForbiddenException('Forbidden', statusCode: 403);
+}
+
+class _GroupList extends GroupProtectedEnvironmentsController {
+  @override
+  Future<Paginated<ProtectedEnvironment>> build(int groupId) async =>
+      const Paginated(items: [_groupRule]);
 }
 
 Future<void> _pump(WidgetTester tester, Size size) async {
@@ -77,6 +95,61 @@ Future<void> _pump(WidgetTester tester, Size size) async {
 }
 
 void main() {
+  for (final size in [const Size(390, 844), const Size(1200, 800)]) {
+    testWidgets('opens group deployment rules at ${size.width}', (
+      tester,
+    ) async {
+      tester.view.physicalSize = size;
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      final router = GoRouter(
+        initialLocation: '/groups/5/protected_environments',
+        routes: [
+          GoRoute(
+            path: '/groups/:id/protected_environments',
+            builder: (_, state) => ProtectedEnvironmentsScreen.group(
+              groupId: int.parse(state.pathParameters['id']!),
+            ),
+            routes: [
+              GoRoute(
+                path: ':name',
+                builder: (_, state) => ProtectedEnvironmentDetailScreen.group(
+                  groupId: int.parse(state.pathParameters['id']!),
+                  name: state.pathParameters['name']!,
+                ),
+              ),
+            ],
+          ),
+        ],
+      );
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            groupProtectedEnvironmentsControllerProvider.overrideWith(
+              _GroupList.new,
+            ),
+            groupProtectedEnvironmentDetailProvider.overrideWith(
+              (ref, key) async => _groupRule,
+            ),
+          ],
+          child: MaterialApp.router(
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            routerConfig: router,
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('production'));
+      await tester.pumpAndSettle();
+      expect(find.text('Allowed to deploy'), findsOneWidget);
+      expect(find.text('Approval rules'), findsOneWidget);
+      expect(find.text('Security team'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    });
+  }
+
   testWidgets('explains unavailable or forbidden protected environments', (
     tester,
   ) async {

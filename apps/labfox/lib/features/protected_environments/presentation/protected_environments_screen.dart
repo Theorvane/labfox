@@ -8,23 +8,36 @@ import '../../../app/router.dart';
 import '../../../l10n/app_localizations.dart';
 import 'controllers/protected_environments_controller.dart';
 
-/// Project protected deployment environments.
+/// Project or group protected deployment environments.
 class ProtectedEnvironmentsScreen extends ConsumerWidget {
-  const ProtectedEnvironmentsScreen({required this.projectId, super.key});
+  const ProtectedEnvironmentsScreen({required this.projectId, super.key})
+    : groupId = null;
 
-  final int projectId;
+  const ProtectedEnvironmentsScreen.group({required this.groupId, super.key})
+    : projectId = null;
+
+  final int? projectId;
+  final int? groupId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final rules = ref.watch(protectedEnvironmentsControllerProvider(projectId));
+    final projectId = this.projectId;
+    final groupId = this.groupId;
+    final rules = groupId == null
+        ? ref.watch(protectedEnvironmentsControllerProvider(projectId!))
+        : ref.watch(groupProtectedEnvironmentsControllerProvider(groupId));
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.protectedEnvironmentsTitle),
         leading: BackButton(
           onPressed: () => context.canPop()
               ? context.pop()
-              : context.go(Routes.environments(projectId)),
+              : context.go(
+                  groupId == null
+                      ? Routes.environments(projectId!)
+                      : Routes.group(groupId),
+                ),
         ),
       ),
       body: rules.when(
@@ -40,9 +53,13 @@ class ProtectedEnvironmentsScreen extends ConsumerWidget {
               ),
               const SizedBox(height: LabFoxSpacing.md),
               FilledButton(
-                onPressed: () => ref.invalidate(
-                  protectedEnvironmentsControllerProvider(projectId),
-                ),
+                onPressed: () => groupId == null
+                    ? ref.invalidate(
+                        protectedEnvironmentsControllerProvider(projectId!),
+                      )
+                    : ref.invalidate(
+                        groupProtectedEnvironmentsControllerProvider(groupId),
+                      ),
                 child: Text(l10n.retry),
               ),
             ],
@@ -54,9 +71,17 @@ class ProtectedEnvironmentsScreen extends ConsumerWidget {
                 title: l10n.protectedEnvironmentsEmpty,
               )
             : RefreshIndicator(
-                onRefresh: () => ref.refresh(
-                  protectedEnvironmentsControllerProvider(projectId).future,
-                ),
+                onRefresh: () => groupId == null
+                    ? ref.refresh(
+                        protectedEnvironmentsControllerProvider(
+                          projectId!,
+                        ).future,
+                      )
+                    : ref.refresh(
+                        groupProtectedEnvironmentsControllerProvider(
+                          groupId,
+                        ).future,
+                      ),
                 child: ListView(
                   physics: const AlwaysScrollableScrollPhysics(),
                   children: [
@@ -82,21 +107,34 @@ class ProtectedEnvironmentsScreen extends ConsumerWidget {
                                         : null,
                                     trailing: const Icon(LabFoxIcons.chevron),
                                     onTap: () => context.push(
-                                      Routes.protectedEnvironment(
-                                        projectId,
-                                        rule.name,
-                                      ),
+                                      groupId == null
+                                          ? Routes.protectedEnvironment(
+                                              projectId!,
+                                              rule.name,
+                                            )
+                                          : Routes.groupProtectedEnvironment(
+                                              groupId,
+                                              rule.name,
+                                            ),
                                     ),
                                   ),
                                 if (page.hasMore)
                                   TextButton(
-                                    onPressed: () => ref
-                                        .read(
-                                          protectedEnvironmentsControllerProvider(
-                                            projectId,
-                                          ).notifier,
-                                        )
-                                        .loadMore(),
+                                    onPressed: () => groupId == null
+                                        ? ref
+                                              .read(
+                                                protectedEnvironmentsControllerProvider(
+                                                  projectId!,
+                                                ).notifier,
+                                              )
+                                              .loadMore()
+                                        : ref
+                                              .read(
+                                                groupProtectedEnvironmentsControllerProvider(
+                                                  groupId,
+                                                ).notifier,
+                                              )
+                                              .loadMore(),
                                     child: Text(
                                       l10n.protectedEnvironmentsLoadMore,
                                     ),
