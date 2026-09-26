@@ -1069,6 +1069,51 @@ class AppLocalizationsJa extends AppLocalizations {
   String get meAccounts => 'アカウント切り替え';
 
   @override
+  String get tagsTitle => 'タグ';
+
+  @override
+  String get tagsEmpty => 'タグはまだありません';
+
+  @override
+  String get tagsError => 'タグを読み込めませんでした。';
+
+  @override
+  String get tagsNoMatch => '一致するタグがありません';
+
+  @override
+  String get tagSearchHint => 'タグを検索';
+
+  @override
+  String get tagError => 'このタグを読み込めませんでした。';
+
+  @override
+  String get tagProtected => '保護されたタグ';
+
+  @override
+  String get tagNew => '新しいタグ';
+
+  @override
+  String get tagName => 'タグ名';
+
+  @override
+  String get tagFromRef => 'ブランチ、タグ、またはコミットSHAから作成';
+
+  @override
+  String get tagMessage => 'メッセージ（任意）';
+
+  @override
+  String get tagPipelineNotice => 'タグを作成するとCI/CDパイプラインが開始される場合があります。';
+
+  @override
+  String get tagFieldRequired => '必須項目です';
+
+  @override
+  String get tagCreate => 'タグを作成';
+
+  @override
+  String get tagCreateError => 'タグを作成できませんでした。権限と参照元を確認してください。';
+
+  @override
   String get snippetsTitle => 'スニペット';
 
   @override
