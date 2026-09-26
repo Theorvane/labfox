@@ -24,6 +24,32 @@ class AppLocalizationsJa extends AppLocalizations {
   String get protectedTagCreateAccess => '作成権限';
 
   @override
+  String get protectedEnvironmentsTitle => '保護された環境';
+
+  @override
+  String get protectedEnvironmentsEmpty => '保護環境のルールがありません。';
+
+  @override
+  String get protectedEnvironmentsError => '保護された環境を読み込めませんでした。';
+
+  @override
+  String get protectedEnvironmentsUnavailable => '保護環境を利用できないか、アクセス権がありません。';
+
+  @override
+  String get protectedEnvironmentsLoadMore => 'さらに表示';
+
+  @override
+  String get protectedEnvironmentDeployAccess => 'デプロイ権限';
+
+  @override
+  String get protectedEnvironmentApprovalRules => '承認ルール';
+
+  @override
+  String protectedEnvironmentApprovalCount(int count) {
+    return '必要な承認数: $count';
+  }
+
+  @override
   String get protectedBranchesTitle => '保護されたブランチ';
 
   @override

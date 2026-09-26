@@ -24,6 +24,33 @@ class AppLocalizationsKo extends AppLocalizations {
   String get protectedTagCreateAccess => '생성 권한';
 
   @override
+  String get protectedEnvironmentsTitle => '보호 환경';
+
+  @override
+  String get protectedEnvironmentsEmpty => '보호 환경 규칙이 없습니다.';
+
+  @override
+  String get protectedEnvironmentsError => '보호 환경을 불러올 수 없습니다.';
+
+  @override
+  String get protectedEnvironmentsUnavailable =>
+      '보호 환경을 사용할 수 없거나 접근 권한이 없습니다.';
+
+  @override
+  String get protectedEnvironmentsLoadMore => '더 보기';
+
+  @override
+  String get protectedEnvironmentDeployAccess => '배포 권한';
+
+  @override
+  String get protectedEnvironmentApprovalRules => '승인 규칙';
+
+  @override
+  String protectedEnvironmentApprovalCount(int count) {
+    return '필요한 승인: $count';
+  }
+
+  @override
   String get protectedBranchesTitle => '보호 브랜치';
 
   @override

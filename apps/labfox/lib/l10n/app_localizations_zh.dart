@@ -24,6 +24,32 @@ class AppLocalizationsZh extends AppLocalizations {
   String get protectedTagCreateAccess => '允许创建';
 
   @override
+  String get protectedEnvironmentsTitle => '受保护环境';
+
+  @override
+  String get protectedEnvironmentsEmpty => '没有受保护环境规则。';
+
+  @override
+  String get protectedEnvironmentsError => '无法加载受保护环境。';
+
+  @override
+  String get protectedEnvironmentsUnavailable => '受保护环境不可用，或您没有访问权限。';
+
+  @override
+  String get protectedEnvironmentsLoadMore => '加载更多';
+
+  @override
+  String get protectedEnvironmentDeployAccess => '允许部署';
+
+  @override
+  String get protectedEnvironmentApprovalRules => '批准规则';
+
+  @override
+  String protectedEnvironmentApprovalCount(int count) {
+    return '所需批准数：$count';
+  }
+
+  @override
   String get protectedBranchesTitle => '受保护分支';
 
   @override
