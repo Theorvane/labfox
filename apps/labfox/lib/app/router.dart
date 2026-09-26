@@ -14,6 +14,8 @@ import '../features/commits/presentation/commits_screen.dart';
 import '../features/container_registry/presentation/container_registry_screen.dart';
 import '../features/container_registry/presentation/container_repository_screen.dart';
 import '../features/container_registry/presentation/container_tag_screen.dart';
+import '../features/deployments/presentation/deployment_detail_screen.dart';
+import '../features/deployments/presentation/deployments_screen.dart';
 import '../features/diff/presentation/changes_screen.dart';
 import '../features/diff/presentation/controllers/diff_controllers.dart';
 import '../features/environments/presentation/environment_detail_screen.dart';
@@ -39,6 +41,7 @@ import '../features/package_registry/presentation/package_list_screen.dart';
 import '../features/pipelines/presentation/pipeline_detail_screen.dart';
 import '../features/pipelines/presentation/pipelines_screen.dart';
 import '../features/profile/presentation/me_screen.dart';
+import '../features/project_labels/presentation/project_labels_screen.dart';
 import '../features/project_overview/presentation/project_overview_screen.dart';
 import '../features/projects/presentation/projects_screen.dart';
 import '../features/releases/presentation/release_detail_screen.dart';
@@ -82,6 +85,9 @@ abstract final class Routes {
 
   static String projectOverview(int id) => '/projects/$id';
   static String projectActivity(int id) => '/projects/$id/activity';
+  static String projectLabels(int id) => '/projects/$id/labels';
+  static String projectLabel(int id, int labelId) =>
+      '/projects/$id/labels/$labelId';
   static String releases(int id) => '/projects/$id/releases';
   static String release(int id, String tagName) =>
       '/projects/$id/releases/${Uri.encodeComponent(tagName)}';
@@ -111,6 +117,10 @@ abstract final class Routes {
   static String environments(int id) => '/projects/$id/environments';
   static String environment(int id, int environmentId) =>
       '/projects/$id/environments/$environmentId';
+  static String deployments(int id, {String? environment}) =>
+      '/projects/$id/deployments${environment == null ? '' : '?environment=${Uri.encodeQueryComponent(environment)}'}';
+  static String deployment(int id, int deploymentId) =>
+      '/projects/$id/deployments/$deploymentId';
 
   // Repository browsing. The tree path and file path travel as a query
   // parameter, not a nested segment, because a repository path contains its own
@@ -394,6 +404,24 @@ final routerProvider = Provider<GoRouter>((ref) {
                 ],
               ),
               GoRoute(
+                path: 'deployments',
+                builder: (context, state) => DeploymentsScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                  initialEnvironment: state.uri.queryParameters['environment'],
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':deploymentId',
+                    builder: (context, state) => DeploymentDetailScreen(
+                      projectId: int.parse(state.pathParameters['id']!),
+                      deploymentId: int.parse(
+                        state.pathParameters['deploymentId']!,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              GoRoute(
                 path: 'tree',
                 builder: (context, state) {
                   final id = int.parse(state.pathParameters['id']!);
@@ -405,6 +433,19 @@ final routerProvider = Provider<GoRouter>((ref) {
                     path: path,
                   );
                 },
+              ),
+              GoRoute(
+                path: 'labels',
+                builder: (context, state) => ProjectLabelsScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+              ),
+              GoRoute(
+                path: 'labels/:labelId',
+                builder: (context, state) => ProjectLabelDetailScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                  labelId: int.parse(state.pathParameters['labelId']!),
+                ),
               ),
               GoRoute(
                 path: 'snippets',

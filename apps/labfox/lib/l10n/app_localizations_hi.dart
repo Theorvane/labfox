@@ -21,6 +21,80 @@ class AppLocalizationsHi extends AppLocalizations {
   String get groupMembersError => 'समूह सदस्यों को लोड नहीं किया जा सका।';
 
   @override
+  String get deploymentsTitle => 'डिप्लॉयमेंट';
+
+  @override
+  String get deploymentsAll => 'सभी';
+
+  @override
+  String get deploymentsSuccess => 'सफल';
+
+  @override
+  String get deploymentsFailed => 'विफल';
+
+  @override
+  String get deploymentsRunning => 'चल रहा है';
+
+  @override
+  String get deploymentsCanceled => 'रद्द';
+
+  @override
+  String get deploymentsCreated => 'बनाया गया';
+
+  @override
+  String get deploymentsBlocked => 'अवरुद्ध';
+
+  @override
+  String get deploymentsUnknownStatus => 'अज्ञात स्थिति';
+
+  @override
+  String get deploymentsEmpty => 'कोई डिप्लॉयमेंट नहीं मिला।';
+
+  @override
+  String get deploymentsError => 'डिप्लॉयमेंट लोड नहीं हो सके।';
+
+  @override
+  String get deploymentsLoadMore => 'और लोड करें';
+
+  @override
+  String get deploymentsEnvironmentSearch => 'परिवेश के नाम से फ़िल्टर करें';
+
+  @override
+  String get deploymentsUnknownEnvironment => 'अज्ञात परिवेश';
+
+  @override
+  String get deploymentDetailError => 'यह डिप्लॉयमेंट लोड नहीं हो सका।';
+
+  @override
+  String deploymentNumber(int number) {
+    return 'डिप्लॉयमेंट #$number';
+  }
+
+  @override
+  String get deploymentEnvironment => 'परिवेश';
+
+  @override
+  String get deploymentRef => 'रेफ़';
+
+  @override
+  String get deploymentCommit => 'कमिट';
+
+  @override
+  String get deploymentJob => 'जॉब';
+
+  @override
+  String get deploymentPipeline => 'पाइपलाइन';
+
+  @override
+  String get deploymentCreatedAt => 'बनाया गया';
+
+  @override
+  String get deploymentUpdatedAt => 'अपडेट किया गया';
+
+  @override
+  String get deploymentUser => 'डिप्लॉय करने वाला';
+
+  @override
   String get releasesTitle => 'रिलीज़';
 
   @override
@@ -1116,6 +1190,64 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get meAccounts => 'खाता बदलें';
+
+  @override
+  String get projectLabelsTitle => 'लेबल';
+
+  @override
+  String get projectLabelsError => 'लेबल लोड नहीं हो सके।';
+
+  @override
+  String get projectLabelsEmpty => 'अभी कोई लेबल नहीं है';
+
+  @override
+  String get projectLabelsNoMatch => 'कोई मेल खाता लेबल नहीं है';
+
+  @override
+  String get projectLabelSearch => 'लेबल खोजें';
+
+  @override
+  String get projectLabelNew => 'नया लेबल';
+
+  @override
+  String get projectLabelGroup => 'समूह लेबल';
+
+  @override
+  String get projectLabelProject => 'प्रोजेक्ट लेबल';
+
+  @override
+  String get projectLabelError => 'यह लेबल लोड नहीं हो सका।';
+
+  @override
+  String get projectLabelOpenIssues => 'खुले इश्यू';
+
+  @override
+  String get projectLabelClosedIssues => 'बंद इश्यू';
+
+  @override
+  String get projectLabelOpenMrs => 'खुले मर्ज अनुरोध';
+
+  @override
+  String get projectLabelName => 'नाम';
+
+  @override
+  String get projectLabelColor => 'रंग (#RRGGBB)';
+
+  @override
+  String get projectLabelDescription => 'विवरण (वैकल्पिक)';
+
+  @override
+  String get projectLabelRequired => 'यह फ़ील्ड आवश्यक है';
+
+  @override
+  String get projectLabelInvalidColor => '#5843AD जैसा रंग दर्ज करें';
+
+  @override
+  String get projectLabelCreate => 'लेबल बनाएं';
+
+  @override
+  String get projectLabelCreateError =>
+      'लेबल नहीं बन सका। अनुमतियाँ और इनपुट जांचें।';
 
   @override
   String get tagsTitle => 'टैग';

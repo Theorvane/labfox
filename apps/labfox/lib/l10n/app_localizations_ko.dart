@@ -21,6 +21,80 @@ class AppLocalizationsKo extends AppLocalizations {
   String get groupMembersError => '그룹 멤버를 불러올 수 없습니다.';
 
   @override
+  String get deploymentsTitle => '배포';
+
+  @override
+  String get deploymentsAll => '전체';
+
+  @override
+  String get deploymentsSuccess => '성공';
+
+  @override
+  String get deploymentsFailed => '실패';
+
+  @override
+  String get deploymentsRunning => '진행 중';
+
+  @override
+  String get deploymentsCanceled => '취소됨';
+
+  @override
+  String get deploymentsCreated => '생성됨';
+
+  @override
+  String get deploymentsBlocked => '차단됨';
+
+  @override
+  String get deploymentsUnknownStatus => '알 수 없는 상태';
+
+  @override
+  String get deploymentsEmpty => '배포 내역이 없습니다.';
+
+  @override
+  String get deploymentsError => '배포 내역을 불러올 수 없습니다.';
+
+  @override
+  String get deploymentsLoadMore => '더 보기';
+
+  @override
+  String get deploymentsEnvironmentSearch => '환경 이름으로 필터';
+
+  @override
+  String get deploymentsUnknownEnvironment => '알 수 없는 환경';
+
+  @override
+  String get deploymentDetailError => '이 배포를 불러올 수 없습니다.';
+
+  @override
+  String deploymentNumber(int number) {
+    return '배포 #$number';
+  }
+
+  @override
+  String get deploymentEnvironment => '환경';
+
+  @override
+  String get deploymentRef => '참조';
+
+  @override
+  String get deploymentCommit => '커밋';
+
+  @override
+  String get deploymentJob => '작업';
+
+  @override
+  String get deploymentPipeline => '파이프라인';
+
+  @override
+  String get deploymentCreatedAt => '생성';
+
+  @override
+  String get deploymentUpdatedAt => '업데이트';
+
+  @override
+  String get deploymentUser => '배포자';
+
+  @override
   String get releasesTitle => '릴리스';
 
   @override
@@ -1101,6 +1175,63 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get meAccounts => '계정 전환';
+
+  @override
+  String get projectLabelsTitle => '라벨';
+
+  @override
+  String get projectLabelsError => '라벨을 불러올 수 없습니다.';
+
+  @override
+  String get projectLabelsEmpty => '라벨이 없습니다';
+
+  @override
+  String get projectLabelsNoMatch => '일치하는 라벨이 없습니다';
+
+  @override
+  String get projectLabelSearch => '라벨 검색';
+
+  @override
+  String get projectLabelNew => '새 라벨';
+
+  @override
+  String get projectLabelGroup => '그룹 라벨';
+
+  @override
+  String get projectLabelProject => '프로젝트 라벨';
+
+  @override
+  String get projectLabelError => '이 라벨을 불러올 수 없습니다.';
+
+  @override
+  String get projectLabelOpenIssues => '열린 이슈';
+
+  @override
+  String get projectLabelClosedIssues => '닫힌 이슈';
+
+  @override
+  String get projectLabelOpenMrs => '열린 머지 리퀘스트';
+
+  @override
+  String get projectLabelName => '이름';
+
+  @override
+  String get projectLabelColor => '색상 (#RRGGBB)';
+
+  @override
+  String get projectLabelDescription => '설명 (선택 사항)';
+
+  @override
+  String get projectLabelRequired => '필수 입력 항목입니다';
+
+  @override
+  String get projectLabelInvalidColor => '#5843AD와 같은 색상을 입력하세요';
+
+  @override
+  String get projectLabelCreate => '라벨 만들기';
+
+  @override
+  String get projectLabelCreateError => '라벨을 만들 수 없습니다. 권한과 입력값을 확인하세요.';
 
   @override
   String get tagsTitle => '태그';

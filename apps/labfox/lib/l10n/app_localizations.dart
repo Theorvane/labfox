@@ -128,6 +128,150 @@ abstract class AppLocalizations {
   /// **'Could not load group members.'**
   String get groupMembersError;
 
+  /// No description provided for @deploymentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Deployments'**
+  String get deploymentsTitle;
+
+  /// No description provided for @deploymentsAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get deploymentsAll;
+
+  /// No description provided for @deploymentsSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get deploymentsSuccess;
+
+  /// No description provided for @deploymentsFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed'**
+  String get deploymentsFailed;
+
+  /// No description provided for @deploymentsRunning.
+  ///
+  /// In en, this message translates to:
+  /// **'Running'**
+  String get deploymentsRunning;
+
+  /// No description provided for @deploymentsCanceled.
+  ///
+  /// In en, this message translates to:
+  /// **'Canceled'**
+  String get deploymentsCanceled;
+
+  /// No description provided for @deploymentsCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get deploymentsCreated;
+
+  /// No description provided for @deploymentsBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Blocked'**
+  String get deploymentsBlocked;
+
+  /// No description provided for @deploymentsUnknownStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown status'**
+  String get deploymentsUnknownStatus;
+
+  /// No description provided for @deploymentsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No deployments found.'**
+  String get deploymentsEmpty;
+
+  /// No description provided for @deploymentsError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load deployments.'**
+  String get deploymentsError;
+
+  /// No description provided for @deploymentsLoadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get deploymentsLoadMore;
+
+  /// No description provided for @deploymentsEnvironmentSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter by environment name'**
+  String get deploymentsEnvironmentSearch;
+
+  /// No description provided for @deploymentsUnknownEnvironment.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown environment'**
+  String get deploymentsUnknownEnvironment;
+
+  /// No description provided for @deploymentDetailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this deployment.'**
+  String get deploymentDetailError;
+
+  /// No description provided for @deploymentNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Deployment #{number}'**
+  String deploymentNumber(int number);
+
+  /// No description provided for @deploymentEnvironment.
+  ///
+  /// In en, this message translates to:
+  /// **'Environment'**
+  String get deploymentEnvironment;
+
+  /// No description provided for @deploymentRef.
+  ///
+  /// In en, this message translates to:
+  /// **'Ref'**
+  String get deploymentRef;
+
+  /// No description provided for @deploymentCommit.
+  ///
+  /// In en, this message translates to:
+  /// **'Commit'**
+  String get deploymentCommit;
+
+  /// No description provided for @deploymentJob.
+  ///
+  /// In en, this message translates to:
+  /// **'Job'**
+  String get deploymentJob;
+
+  /// No description provided for @deploymentPipeline.
+  ///
+  /// In en, this message translates to:
+  /// **'Pipeline'**
+  String get deploymentPipeline;
+
+  /// No description provided for @deploymentCreatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get deploymentCreatedAt;
+
+  /// No description provided for @deploymentUpdatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Updated'**
+  String get deploymentUpdatedAt;
+
+  /// No description provided for @deploymentUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Deployed by'**
+  String get deploymentUser;
+
   /// No description provided for @releasesTitle.
   ///
   /// In en, this message translates to:
@@ -2221,6 +2365,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Switch account'**
   String get meAccounts;
+
+  /// No description provided for @projectLabelsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Labels'**
+  String get projectLabelsTitle;
+
+  /// No description provided for @projectLabelsError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load labels.'**
+  String get projectLabelsError;
+
+  /// No description provided for @projectLabelsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No labels yet'**
+  String get projectLabelsEmpty;
+
+  /// No description provided for @projectLabelsNoMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'No matching labels'**
+  String get projectLabelsNoMatch;
+
+  /// No description provided for @projectLabelSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search labels'**
+  String get projectLabelSearch;
+
+  /// No description provided for @projectLabelNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New label'**
+  String get projectLabelNew;
+
+  /// No description provided for @projectLabelGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'Group label'**
+  String get projectLabelGroup;
+
+  /// No description provided for @projectLabelProject.
+  ///
+  /// In en, this message translates to:
+  /// **'Project label'**
+  String get projectLabelProject;
+
+  /// No description provided for @projectLabelError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load this label.'**
+  String get projectLabelError;
+
+  /// No description provided for @projectLabelOpenIssues.
+  ///
+  /// In en, this message translates to:
+  /// **'Open issues'**
+  String get projectLabelOpenIssues;
+
+  /// No description provided for @projectLabelClosedIssues.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed issues'**
+  String get projectLabelClosedIssues;
+
+  /// No description provided for @projectLabelOpenMrs.
+  ///
+  /// In en, this message translates to:
+  /// **'Open merge requests'**
+  String get projectLabelOpenMrs;
+
+  /// No description provided for @projectLabelName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get projectLabelName;
+
+  /// No description provided for @projectLabelColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Color (#RRGGBB)'**
+  String get projectLabelColor;
+
+  /// No description provided for @projectLabelDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Description (optional)'**
+  String get projectLabelDescription;
+
+  /// No description provided for @projectLabelRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required'**
+  String get projectLabelRequired;
+
+  /// No description provided for @projectLabelInvalidColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a color like #5843AD'**
+  String get projectLabelInvalidColor;
+
+  /// No description provided for @projectLabelCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'Create label'**
+  String get projectLabelCreate;
+
+  /// No description provided for @projectLabelCreateError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t create the label. Check your permissions and input.'**
+  String get projectLabelCreateError;
 
   /// No description provided for @tagsTitle.
   ///
