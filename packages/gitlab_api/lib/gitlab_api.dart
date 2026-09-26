@@ -8,6 +8,7 @@ export 'src/common/exceptions.dart';
 export 'src/common/paginated.dart';
 export 'src/container_registry/container_registry_api.dart';
 export 'src/environments/environments_api.dart';
+export 'src/events/events_api.dart';
 export 'src/gitlab_client.dart';
 export 'src/groups/groups_api.dart';
 export 'src/issues/issues_api.dart';

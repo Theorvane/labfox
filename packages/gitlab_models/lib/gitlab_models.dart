@@ -24,6 +24,7 @@ export 'src/oauth_token.dart';
 export 'src/package_file.dart';
 export 'src/pipeline.dart';
 export 'src/project.dart';
+export 'src/project_event.dart';
 export 'src/project_label.dart';
 export 'src/project_member.dart';
 export 'src/registry_repository.dart';
