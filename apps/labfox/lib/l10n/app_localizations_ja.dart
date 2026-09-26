@@ -9,6 +9,24 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get linkedIssuesTitle => '関連するイシュー';
+
+  @override
+  String get linkedIssuesError => '関連するイシューを読み込めませんでした。';
+
+  @override
+  String get linkedIssuesLoadMore => 'さらに表示';
+
+  @override
+  String get linkedIssuesRelatesTo => '関連あり';
+
+  @override
+  String get linkedIssuesBlocks => 'ブロックする';
+
+  @override
+  String get linkedIssuesBlockedBy => 'ブロックされる';
+
+  @override
   String get groupLabelsTitle => 'グループラベル';
 
   @override

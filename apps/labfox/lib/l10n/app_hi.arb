@@ -1,5 +1,11 @@
 {
   "@@locale": "hi",
+  "linkedIssuesTitle": "लिंक किए गए इश्यू",
+  "linkedIssuesError": "लिंक किए गए इश्यू लोड नहीं हो सके।",
+  "linkedIssuesLoadMore": "और दिखाएं",
+  "linkedIssuesRelatesTo": "संबंधित",
+  "linkedIssuesBlocks": "ब्लॉक करता है",
+  "linkedIssuesBlockedBy": "इसके द्वारा ब्लॉक",
   "groupLabelsTitle": "समूह लेबल",
   "groupLabelsEmpty": "अभी कोई समूह लेबल नहीं है",
   "groupLabelsError": "समूह लेबल लोड नहीं हो सके।",

@@ -1,5 +1,11 @@
 {
   "@@locale": "zh",
+  "linkedIssuesTitle": "关联议题",
+  "linkedIssuesError": "无法加载关联议题。",
+  "linkedIssuesLoadMore": "加载更多",
+  "linkedIssuesRelatesTo": "相关",
+  "linkedIssuesBlocks": "阻塞",
+  "linkedIssuesBlockedBy": "被阻塞",
   "groupLabelsTitle": "群组标签",
   "groupLabelsEmpty": "暂无群组标签",
   "groupLabelsError": "无法加载群组标签。",
