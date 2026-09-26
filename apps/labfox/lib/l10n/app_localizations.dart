@@ -122,6 +122,30 @@ abstract class AppLocalizations {
   /// **'Couldn\'t load group labels.'**
   String get groupLabelsError;
 
+  /// No description provided for @groupMembersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Group members'**
+  String get groupMembersTitle;
+
+  /// No description provided for @groupMembersSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search group members'**
+  String get groupMembersSearch;
+
+  /// No description provided for @groupMembersEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No group members found.'**
+  String get groupMembersEmpty;
+
+  /// No description provided for @groupMembersError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load group members.'**
+  String get groupMembersError;
+
   /// No description provided for @pipelineSchedulesTitle.
   ///
   /// In en, this message translates to:

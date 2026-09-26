@@ -9,15 +9,23 @@ import '../../../app/router.dart';
 import '../../../l10n/app_localizations.dart';
 import 'controllers/members_controller.dart';
 
-/// A project's effective members, including inherited and shared access.
+/// Effective project or group members, including inherited and shared access.
 class ProjectMembersScreen extends ConsumerStatefulWidget {
-  const ProjectMembersScreen({required this.projectId, super.key});
+  const ProjectMembersScreen({this.projectId, this.groupId, super.key})
+    : assert((projectId == null) != (groupId == null));
 
-  final int projectId;
+  final int? projectId;
+  final int? groupId;
 
   @override
   ConsumerState<ProjectMembersScreen> createState() =>
       _ProjectMembersScreenState();
+}
+
+/// Group-flavored entry point that reuses the member list presentation.
+class GroupMembersScreen extends ProjectMembersScreen {
+  const GroupMembersScreen({required int groupId, super.key})
+    : super(groupId: groupId);
 }
 
 class _ProjectMembersScreenState extends ConsumerState<ProjectMembersScreen> {
@@ -33,15 +41,27 @@ class _ProjectMembersScreenState extends ConsumerState<ProjectMembersScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final key = MemberListRef(projectId: widget.projectId, query: _query);
+    final key = MemberListRef(
+      projectId: widget.projectId,
+      groupId: widget.groupId,
+      query: _query,
+    );
     final members = ref.watch(projectMembersControllerProvider(key));
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.projectMembersTitle),
+        title: Text(
+          widget.groupId == null
+              ? l10n.projectMembersTitle
+              : l10n.groupMembersTitle,
+        ),
         leading: BackButton(
           onPressed: () => context.canPop()
               ? context.pop()
-              : context.go(Routes.projectOverview(widget.projectId)),
+              : context.go(
+                  widget.groupId == null
+                      ? Routes.projectOverview(widget.projectId!)
+                      : Routes.group(widget.groupId!),
+                ),
         ),
       ),
       body: Column(
@@ -56,7 +76,9 @@ class _ProjectMembersScreenState extends ConsumerState<ProjectMembersScreen> {
                   textInputAction: TextInputAction.search,
                   decoration: InputDecoration(
                     prefixIcon: const Icon(LabFoxIcons.search),
-                    hintText: l10n.projectMembersSearch,
+                    hintText: widget.groupId == null
+                        ? l10n.projectMembersSearch
+                        : l10n.groupMembersSearch,
                     border: const OutlineInputBorder(),
                     suffixIcon: _search.text.isEmpty
                         ? null
@@ -82,7 +104,11 @@ class _ProjectMembersScreenState extends ConsumerState<ProjectMembersScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(l10n.projectMembersError),
+                    Text(
+                      widget.groupId == null
+                          ? l10n.projectMembersError
+                          : l10n.groupMembersError,
+                    ),
                     const SizedBox(height: LabFoxSpacing.md),
                     FilledButton(
                       onPressed: () =>
@@ -93,7 +119,13 @@ class _ProjectMembersScreenState extends ConsumerState<ProjectMembersScreen> {
                 ),
               ),
               data: (page) => page.items.isEmpty
-                  ? Center(child: Text(l10n.projectMembersEmpty))
+                  ? Center(
+                      child: Text(
+                        widget.groupId == null
+                            ? l10n.projectMembersEmpty
+                            : l10n.groupMembersEmpty,
+                      ),
+                    )
                   : RefreshIndicator(
                       onRefresh: () => ref.refresh(
                         projectMembersControllerProvider(key).future,

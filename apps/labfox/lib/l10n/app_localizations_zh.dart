@@ -18,6 +18,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get groupLabelsError => '无法加载群组标签。';
 
   @override
+  String get groupMembersTitle => '群组成员';
+
+  @override
+  String get groupMembersSearch => '搜索群组成员';
+
+  @override
+  String get groupMembersEmpty => '没有找到群组成员。';
+
+  @override
+  String get groupMembersError => '无法加载群组成员。';
+
+  @override
   String get pipelineSchedulesTitle => '流水线计划';
 
   @override

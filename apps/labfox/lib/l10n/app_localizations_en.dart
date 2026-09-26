@@ -18,6 +18,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get groupLabelsError => 'Couldn\'t load group labels.';
 
   @override
+  String get groupMembersTitle => 'Group members';
+
+  @override
+  String get groupMembersSearch => 'Search group members';
+
+  @override
+  String get groupMembersEmpty => 'No group members found.';
+
+  @override
+  String get groupMembersError => 'Could not load group members.';
+
+  @override
   String get pipelineSchedulesTitle => 'Pipeline schedules';
 
   @override

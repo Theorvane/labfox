@@ -18,6 +18,18 @@ class AppLocalizationsHi extends AppLocalizations {
   String get groupLabelsError => 'समूह लेबल लोड नहीं हो सके।';
 
   @override
+  String get groupMembersTitle => 'समूह सदस्य';
+
+  @override
+  String get groupMembersSearch => 'समूह सदस्यों को खोजें';
+
+  @override
+  String get groupMembersEmpty => 'कोई समूह सदस्य नहीं मिला।';
+
+  @override
+  String get groupMembersError => 'समूह सदस्यों को लोड नहीं किया जा सका।';
+
+  @override
   String get pipelineSchedulesTitle => 'पाइपलाइन शेड्यूल';
 
   @override

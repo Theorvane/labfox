@@ -18,6 +18,18 @@ class AppLocalizationsJa extends AppLocalizations {
   String get groupLabelsError => 'グループラベルを読み込めませんでした。';
 
   @override
+  String get groupMembersTitle => 'グループメンバー';
+
+  @override
+  String get groupMembersSearch => 'グループメンバーを検索';
+
+  @override
+  String get groupMembersEmpty => 'グループメンバーが見つかりません。';
+
+  @override
+  String get groupMembersError => 'グループメンバーを読み込めませんでした。';
+
+  @override
   String get pipelineSchedulesTitle => 'パイプラインスケジュール';
 
   @override
