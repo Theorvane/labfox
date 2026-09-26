@@ -38,6 +38,8 @@ import '../features/milestones/presentation/milestone_detail_screen.dart';
 import '../features/milestones/presentation/milestones_screen.dart';
 import '../features/package_registry/presentation/package_detail_screen.dart';
 import '../features/package_registry/presentation/package_list_screen.dart';
+import '../features/pipeline_schedules/presentation/pipeline_schedule_detail_screen.dart';
+import '../features/pipeline_schedules/presentation/pipeline_schedules_screen.dart';
 import '../features/pipelines/presentation/pipeline_detail_screen.dart';
 import '../features/pipelines/presentation/pipelines_screen.dart';
 import '../features/profile/presentation/me_screen.dart';
@@ -148,6 +150,9 @@ abstract final class Routes {
   static String mergeRequest(int id, int iid) =>
       '/projects/$id/merge_requests/$iid';
   static String pipelines(int id) => '/projects/$id/pipelines';
+  static String pipelineSchedules(int id) => '/projects/$id/pipeline_schedules';
+  static String pipelineSchedule(int id, int scheduleId) =>
+      '/projects/$id/pipeline_schedules/$scheduleId';
   static String pipeline(int id, int pipelineId) =>
       '/projects/$id/pipelines/$pipelineId';
   static String job(int id, int jobId) => '/projects/$id/jobs/$jobId';
@@ -555,6 +560,23 @@ final routerProvider = Provider<GoRouter>((ref) {
                 builder: (context, state) => NewMergeRequestScreen(
                   projectId: int.parse(state.pathParameters['id']!),
                 ),
+              ),
+              GoRoute(
+                path: 'pipeline_schedules',
+                builder: (context, state) => PipelineSchedulesScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':scheduleId',
+                    builder: (context, state) => PipelineScheduleDetailScreen(
+                      projectId: int.parse(state.pathParameters['id']!),
+                      scheduleId: int.parse(
+                        state.pathParameters['scheduleId']!,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               GoRoute(
                 path: 'pipelines',
