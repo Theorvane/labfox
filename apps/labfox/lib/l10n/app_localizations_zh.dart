@@ -9,6 +9,42 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
+  String get protectedBranchesTitle => '受保护分支';
+
+  @override
+  String get protectedBranchesEmpty => '没有受保护分支规则。';
+
+  @override
+  String get protectedBranchesError => '无法加载受保护分支。';
+
+  @override
+  String get protectedBranchesLoadMore => '加载更多';
+
+  @override
+  String get protectedBranchPushAccess => '允许推送';
+
+  @override
+  String get protectedBranchMergeAccess => '允许合并';
+
+  @override
+  String get protectedBranchForcePush => '强制推送';
+
+  @override
+  String get protectedBranchCodeOwnerApproval => '代码所有者批准';
+
+  @override
+  String get protectedBranchInherited => '继承自群组';
+
+  @override
+  String get protectedBranchEnabled => '启用';
+
+  @override
+  String get protectedBranchDisabled => '禁用';
+
+  @override
+  String get protectedBranchNoAccess => '无权限规则';
+
+  @override
   String get linkedIssuesTitle => '关联议题';
 
   @override

@@ -46,6 +46,8 @@ import '../features/profile/presentation/me_screen.dart';
 import '../features/project_labels/presentation/project_labels_screen.dart';
 import '../features/project_overview/presentation/project_overview_screen.dart';
 import '../features/projects/presentation/projects_screen.dart';
+import '../features/protected_branches/presentation/protected_branch_detail_screen.dart';
+import '../features/protected_branches/presentation/protected_branches_screen.dart';
 import '../features/releases/presentation/release_detail_screen.dart';
 import '../features/releases/presentation/releases_screen.dart';
 import '../features/repository/presentation/file_viewer_screen.dart';
@@ -143,6 +145,9 @@ abstract final class Routes {
       '/projects/$id/file?ref=${Uri.encodeQueryComponent(ref)}'
       '&path=${Uri.encodeQueryComponent(path)}';
   static String branches(int id) => '/projects/$id/branches';
+  static String protectedBranches(int id) => '/projects/$id/protected_branches';
+  static String protectedBranch(int id, String name) =>
+      '/projects/$id/protected_branches/${Uri.encodeComponent(name)}';
   static String commits(int id, String ref) =>
       '/projects/$id/commits?ref=${Uri.encodeQueryComponent(ref)}';
   static String commit(int id, String sha) => '/projects/$id/commit/$sha';
@@ -525,6 +530,21 @@ final routerProvider = Provider<GoRouter>((ref) {
                 builder: (context, state) => BranchesScreen(
                   projectId: int.parse(state.pathParameters['id']!),
                 ),
+              ),
+              GoRoute(
+                path: 'protected_branches',
+                builder: (context, state) => ProtectedBranchesScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':name',
+                    builder: (context, state) => ProtectedBranchDetailScreen(
+                      projectId: int.parse(state.pathParameters['id']!),
+                      name: state.pathParameters['name']!,
+                    ),
+                  ),
+                ],
               ),
               GoRoute(
                 path: 'tags',
