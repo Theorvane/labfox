@@ -18,6 +18,67 @@ class AppLocalizationsKo extends AppLocalizations {
   String get groupLabelsError => '그룹 라벨을 불러올 수 없습니다.';
 
   @override
+  String get pipelineSchedulesTitle => '파이프라인 일정';
+
+  @override
+  String get pipelineSchedulesAll => '전체';
+
+  @override
+  String get pipelineSchedulesActive => '활성';
+
+  @override
+  String get pipelineSchedulesInactive => '비활성';
+
+  @override
+  String get pipelineSchedulesEmpty => '파이프라인 일정이 없습니다.';
+
+  @override
+  String get pipelineSchedulesError => '파이프라인 일정을 불러올 수 없습니다.';
+
+  @override
+  String get pipelineSchedulesLoadMore => '더 보기';
+
+  @override
+  String get pipelineScheduleDetailError => '이 파이프라인 일정을 불러올 수 없습니다.';
+
+  @override
+  String pipelineScheduleNextRun(String date) {
+    return '다음 실행: $date';
+  }
+
+  @override
+  String get pipelineScheduleNextRunLabel => '다음 실행';
+
+  @override
+  String get pipelineScheduleRef => '참조';
+
+  @override
+  String get pipelineScheduleCron => '일정';
+
+  @override
+  String get pipelineScheduleTimezone => '시간대';
+
+  @override
+  String get pipelineScheduleOwner => '소유자';
+
+  @override
+  String get pipelineScheduleRunNow => '지금 실행';
+
+  @override
+  String get pipelineScheduleRunSuccess => '파이프라인 일정을 실행했습니다.';
+
+  @override
+  String get pipelineScheduleRunError => '파이프라인 일정을 실행할 수 없습니다.';
+
+  @override
+  String get pipelineScheduleLastPipeline => '마지막 파이프라인';
+
+  @override
+  String pipelineSchedulePipelineNumber(int number) {
+    return '파이프라인 #$number';
+  }
+
+  @override
   String get deploymentsTitle => '배포';
 
   @override

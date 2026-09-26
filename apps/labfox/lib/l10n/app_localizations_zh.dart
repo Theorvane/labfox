@@ -18,6 +18,67 @@ class AppLocalizationsZh extends AppLocalizations {
   String get groupLabelsError => '无法加载群组标签。';
 
   @override
+  String get pipelineSchedulesTitle => '流水线计划';
+
+  @override
+  String get pipelineSchedulesAll => '全部';
+
+  @override
+  String get pipelineSchedulesActive => '启用';
+
+  @override
+  String get pipelineSchedulesInactive => '停用';
+
+  @override
+  String get pipelineSchedulesEmpty => '没有找到流水线计划。';
+
+  @override
+  String get pipelineSchedulesError => '无法加载流水线计划。';
+
+  @override
+  String get pipelineSchedulesLoadMore => '加载更多';
+
+  @override
+  String get pipelineScheduleDetailError => '无法加载此流水线计划。';
+
+  @override
+  String pipelineScheduleNextRun(String date) {
+    return '下次运行：$date';
+  }
+
+  @override
+  String get pipelineScheduleNextRunLabel => '下次运行';
+
+  @override
+  String get pipelineScheduleRef => '引用';
+
+  @override
+  String get pipelineScheduleCron => '计划';
+
+  @override
+  String get pipelineScheduleTimezone => '时区';
+
+  @override
+  String get pipelineScheduleOwner => '所有者';
+
+  @override
+  String get pipelineScheduleRunNow => '立即运行';
+
+  @override
+  String get pipelineScheduleRunSuccess => '流水线计划已启动。';
+
+  @override
+  String get pipelineScheduleRunError => '无法运行此流水线计划。';
+
+  @override
+  String get pipelineScheduleLastPipeline => '上次流水线';
+
+  @override
+  String pipelineSchedulePipelineNumber(int number) {
+    return '流水线 #$number';
+  }
+
+  @override
   String get deploymentsTitle => '部署';
 
   @override
