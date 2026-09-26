@@ -1,5 +1,10 @@
 {
   "@@locale": "hi",
+  "protectedTagsTitle": "सुरक्षित टैग",
+  "protectedTagsEmpty": "कोई सुरक्षित टैग नियम नहीं मिला।",
+  "protectedTagsError": "सुरक्षित टैग लोड नहीं हो सके।",
+  "protectedTagsLoadMore": "और दिखाएं",
+  "protectedTagCreateAccess": "बनाने की अनुमति",
   "protectedBranchesTitle": "सुरक्षित ब्रांच",
   "protectedBranchesEmpty": "कोई सुरक्षित ब्रांच नियम नहीं मिला।",
   "protectedBranchesError": "सुरक्षित ब्रांच लोड नहीं हो सके।",

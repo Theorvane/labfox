@@ -9,6 +9,21 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
+  String get protectedTagsTitle => '보호 태그';
+
+  @override
+  String get protectedTagsEmpty => '보호 태그 규칙이 없습니다.';
+
+  @override
+  String get protectedTagsError => '보호 태그를 불러올 수 없습니다.';
+
+  @override
+  String get protectedTagsLoadMore => '더 보기';
+
+  @override
+  String get protectedTagCreateAccess => '생성 권한';
+
+  @override
   String get protectedBranchesTitle => '보호 브랜치';
 
   @override

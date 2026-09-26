@@ -29,6 +29,11 @@ class _TagsScreenState extends ConsumerState<TagsScreen> {
         title: Text(l10n.tagsTitle),
         actions: [
           IconButton(
+            icon: const Icon(LabFoxIcons.private),
+            tooltip: l10n.protectedTagsTitle,
+            onPressed: () => context.push(Routes.protectedTags(projectId)),
+          ),
+          IconButton(
             icon: const Icon(LabFoxIcons.add),
             tooltip: l10n.tagNew,
             onPressed: () => showDialog<void>(

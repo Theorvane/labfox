@@ -9,6 +9,21 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
+  String get protectedTagsTitle => '受保护标签';
+
+  @override
+  String get protectedTagsEmpty => '没有受保护标签规则。';
+
+  @override
+  String get protectedTagsError => '无法加载受保护标签。';
+
+  @override
+  String get protectedTagsLoadMore => '加载更多';
+
+  @override
+  String get protectedTagCreateAccess => '允许创建';
+
+  @override
   String get protectedBranchesTitle => '受保护分支';
 
   @override

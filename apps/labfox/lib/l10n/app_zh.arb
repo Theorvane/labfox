@@ -1,5 +1,10 @@
 {
   "@@locale": "zh",
+  "protectedTagsTitle": "受保护标签",
+  "protectedTagsEmpty": "没有受保护标签规则。",
+  "protectedTagsError": "无法加载受保护标签。",
+  "protectedTagsLoadMore": "加载更多",
+  "protectedTagCreateAccess": "允许创建",
   "protectedBranchesTitle": "受保护分支",
   "protectedBranchesEmpty": "没有受保护分支规则。",
   "protectedBranchesError": "无法加载受保护分支。",

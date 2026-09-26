@@ -9,6 +9,21 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get protectedTagsTitle => '保護されたタグ';
+
+  @override
+  String get protectedTagsEmpty => '保護タグのルールがありません。';
+
+  @override
+  String get protectedTagsError => '保護されたタグを読み込めませんでした。';
+
+  @override
+  String get protectedTagsLoadMore => 'さらに表示';
+
+  @override
+  String get protectedTagCreateAccess => '作成権限';
+
+  @override
   String get protectedBranchesTitle => '保護されたブランチ';
 
   @override

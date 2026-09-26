@@ -9,6 +9,21 @@ class AppLocalizationsHi extends AppLocalizations {
   AppLocalizationsHi([String locale = 'hi']) : super(locale);
 
   @override
+  String get protectedTagsTitle => 'सुरक्षित टैग';
+
+  @override
+  String get protectedTagsEmpty => 'कोई सुरक्षित टैग नियम नहीं मिला।';
+
+  @override
+  String get protectedTagsError => 'सुरक्षित टैग लोड नहीं हो सके।';
+
+  @override
+  String get protectedTagsLoadMore => 'और दिखाएं';
+
+  @override
+  String get protectedTagCreateAccess => 'बनाने की अनुमति';
+
+  @override
   String get protectedBranchesTitle => 'सुरक्षित ब्रांच';
 
   @override

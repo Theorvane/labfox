@@ -1,5 +1,10 @@
 {
   "@@locale": "en",
+  "protectedTagsTitle": "Protected tags",
+  "protectedTagsEmpty": "No protected tag rules found.",
+  "protectedTagsError": "Could not load protected tags.",
+  "protectedTagsLoadMore": "Load more",
+  "protectedTagCreateAccess": "Allowed to create",
   "protectedBranchesTitle": "Protected branches",
   "protectedBranchesEmpty": "No protected branch rules found.",
   "protectedBranchesError": "Could not load protected branches.",

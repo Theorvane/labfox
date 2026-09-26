@@ -23,6 +23,7 @@ import 'pipelines/pipelines_api.dart';
 import 'projects/projects_api.dart';
 import 'releases/releases_api.dart';
 import 'repository/protected_branches_api.dart';
+import 'repository/protected_tags_api.dart';
 import 'repository/repository_api.dart';
 import 'search/search_api.dart';
 import 'snippets/snippets_api.dart';
@@ -70,6 +71,7 @@ class GitLabClient {
     projects = ProjectsApi(_dio);
     repository = RepositoryApi(_dio);
     protectedBranches = ProtectedBranchesApi(_dio);
+    protectedTags = ProtectedTagsApi(_dio);
     releases = ReleasesApi(_dio);
     issues = IssuesApi(_dio);
     issueLinks = IssueLinksApi(_dio);
@@ -154,6 +156,7 @@ class GitLabClient {
   late final ProjectsApi projects;
   late final RepositoryApi repository;
   late final ProtectedBranchesApi protectedBranches;
+  late final ProtectedTagsApi protectedTags;
   late final ReleasesApi releases;
   late final IssuesApi issues;
   late final IssueLinksApi issueLinks;
