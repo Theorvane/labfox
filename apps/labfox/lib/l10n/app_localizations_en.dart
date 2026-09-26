@@ -9,6 +9,80 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get deploymentsTitle => 'Deployments';
+
+  @override
+  String get deploymentsAll => 'All';
+
+  @override
+  String get deploymentsSuccess => 'Success';
+
+  @override
+  String get deploymentsFailed => 'Failed';
+
+  @override
+  String get deploymentsRunning => 'Running';
+
+  @override
+  String get deploymentsCanceled => 'Canceled';
+
+  @override
+  String get deploymentsCreated => 'Created';
+
+  @override
+  String get deploymentsBlocked => 'Blocked';
+
+  @override
+  String get deploymentsUnknownStatus => 'Unknown status';
+
+  @override
+  String get deploymentsEmpty => 'No deployments found.';
+
+  @override
+  String get deploymentsError => 'Could not load deployments.';
+
+  @override
+  String get deploymentsLoadMore => 'Load more';
+
+  @override
+  String get deploymentsEnvironmentSearch => 'Filter by environment name';
+
+  @override
+  String get deploymentsUnknownEnvironment => 'Unknown environment';
+
+  @override
+  String get deploymentDetailError => 'Could not load this deployment.';
+
+  @override
+  String deploymentNumber(int number) {
+    return 'Deployment #$number';
+  }
+
+  @override
+  String get deploymentEnvironment => 'Environment';
+
+  @override
+  String get deploymentRef => 'Ref';
+
+  @override
+  String get deploymentCommit => 'Commit';
+
+  @override
+  String get deploymentJob => 'Job';
+
+  @override
+  String get deploymentPipeline => 'Pipeline';
+
+  @override
+  String get deploymentCreatedAt => 'Created';
+
+  @override
+  String get deploymentUpdatedAt => 'Updated';
+
+  @override
+  String get deploymentUser => 'Deployed by';
+
+  @override
   String get releasesTitle => 'Releases';
 
   @override

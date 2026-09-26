@@ -14,6 +14,8 @@ import '../features/commits/presentation/commits_screen.dart';
 import '../features/container_registry/presentation/container_registry_screen.dart';
 import '../features/container_registry/presentation/container_repository_screen.dart';
 import '../features/container_registry/presentation/container_tag_screen.dart';
+import '../features/deployments/presentation/deployment_detail_screen.dart';
+import '../features/deployments/presentation/deployments_screen.dart';
 import '../features/diff/presentation/changes_screen.dart';
 import '../features/diff/presentation/controllers/diff_controllers.dart';
 import '../features/environments/presentation/environment_detail_screen.dart';
@@ -114,6 +116,10 @@ abstract final class Routes {
   static String environments(int id) => '/projects/$id/environments';
   static String environment(int id, int environmentId) =>
       '/projects/$id/environments/$environmentId';
+  static String deployments(int id, {String? environment}) =>
+      '/projects/$id/deployments${environment == null ? '' : '?environment=${Uri.encodeQueryComponent(environment)}'}';
+  static String deployment(int id, int deploymentId) =>
+      '/projects/$id/deployments/$deploymentId';
 
   // Repository browsing. The tree path and file path travel as a query
   // parameter, not a nested segment, because a repository path contains its own
@@ -383,6 +389,24 @@ final routerProvider = Provider<GoRouter>((ref) {
                       projectId: int.parse(state.pathParameters['id']!),
                       environmentId: int.parse(
                         state.pathParameters['environmentId']!,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: 'deployments',
+                builder: (context, state) => DeploymentsScreen(
+                  projectId: int.parse(state.pathParameters['id']!),
+                  initialEnvironment: state.uri.queryParameters['environment'],
+                ),
+                routes: [
+                  GoRoute(
+                    path: ':deploymentId',
+                    builder: (context, state) => DeploymentDetailScreen(
+                      projectId: int.parse(state.pathParameters['id']!),
+                      deploymentId: int.parse(
+                        state.pathParameters['deploymentId']!,
                       ),
                     ),
                   ),

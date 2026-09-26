@@ -257,6 +257,12 @@ class _Categories extends StatelessWidget {
           label: l10n.environmentsTitle,
           onTap: () => context.push(Routes.environments(project.id)),
         ),
+        LauncherTile(
+          icon: LabFoxIcons.pipeline,
+          color: status.running.foreground,
+          label: l10n.deploymentsTitle,
+          onTap: () => context.push(Routes.deployments(project.id)),
+        ),
         if (branch != null)
           LauncherTile(
             icon: LabFoxIcons.history,

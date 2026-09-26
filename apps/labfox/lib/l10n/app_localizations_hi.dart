@@ -9,6 +9,80 @@ class AppLocalizationsHi extends AppLocalizations {
   AppLocalizationsHi([String locale = 'hi']) : super(locale);
 
   @override
+  String get deploymentsTitle => 'डिप्लॉयमेंट';
+
+  @override
+  String get deploymentsAll => 'सभी';
+
+  @override
+  String get deploymentsSuccess => 'सफल';
+
+  @override
+  String get deploymentsFailed => 'विफल';
+
+  @override
+  String get deploymentsRunning => 'चल रहा है';
+
+  @override
+  String get deploymentsCanceled => 'रद्द';
+
+  @override
+  String get deploymentsCreated => 'बनाया गया';
+
+  @override
+  String get deploymentsBlocked => 'अवरुद्ध';
+
+  @override
+  String get deploymentsUnknownStatus => 'अज्ञात स्थिति';
+
+  @override
+  String get deploymentsEmpty => 'कोई डिप्लॉयमेंट नहीं मिला।';
+
+  @override
+  String get deploymentsError => 'डिप्लॉयमेंट लोड नहीं हो सके।';
+
+  @override
+  String get deploymentsLoadMore => 'और लोड करें';
+
+  @override
+  String get deploymentsEnvironmentSearch => 'परिवेश के नाम से फ़िल्टर करें';
+
+  @override
+  String get deploymentsUnknownEnvironment => 'अज्ञात परिवेश';
+
+  @override
+  String get deploymentDetailError => 'यह डिप्लॉयमेंट लोड नहीं हो सका।';
+
+  @override
+  String deploymentNumber(int number) {
+    return 'डिप्लॉयमेंट #$number';
+  }
+
+  @override
+  String get deploymentEnvironment => 'परिवेश';
+
+  @override
+  String get deploymentRef => 'रेफ़';
+
+  @override
+  String get deploymentCommit => 'कमिट';
+
+  @override
+  String get deploymentJob => 'जॉब';
+
+  @override
+  String get deploymentPipeline => 'पाइपलाइन';
+
+  @override
+  String get deploymentCreatedAt => 'बनाया गया';
+
+  @override
+  String get deploymentUpdatedAt => 'अपडेट किया गया';
+
+  @override
+  String get deploymentUser => 'डिप्लॉय करने वाला';
+
+  @override
   String get releasesTitle => 'रिलीज़';
 
   @override

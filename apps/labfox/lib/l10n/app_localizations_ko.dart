@@ -9,6 +9,80 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
+  String get deploymentsTitle => '배포';
+
+  @override
+  String get deploymentsAll => '전체';
+
+  @override
+  String get deploymentsSuccess => '성공';
+
+  @override
+  String get deploymentsFailed => '실패';
+
+  @override
+  String get deploymentsRunning => '진행 중';
+
+  @override
+  String get deploymentsCanceled => '취소됨';
+
+  @override
+  String get deploymentsCreated => '생성됨';
+
+  @override
+  String get deploymentsBlocked => '차단됨';
+
+  @override
+  String get deploymentsUnknownStatus => '알 수 없는 상태';
+
+  @override
+  String get deploymentsEmpty => '배포 내역이 없습니다.';
+
+  @override
+  String get deploymentsError => '배포 내역을 불러올 수 없습니다.';
+
+  @override
+  String get deploymentsLoadMore => '더 보기';
+
+  @override
+  String get deploymentsEnvironmentSearch => '환경 이름으로 필터';
+
+  @override
+  String get deploymentsUnknownEnvironment => '알 수 없는 환경';
+
+  @override
+  String get deploymentDetailError => '이 배포를 불러올 수 없습니다.';
+
+  @override
+  String deploymentNumber(int number) {
+    return '배포 #$number';
+  }
+
+  @override
+  String get deploymentEnvironment => '환경';
+
+  @override
+  String get deploymentRef => '참조';
+
+  @override
+  String get deploymentCommit => '커밋';
+
+  @override
+  String get deploymentJob => '작업';
+
+  @override
+  String get deploymentPipeline => '파이프라인';
+
+  @override
+  String get deploymentCreatedAt => '생성';
+
+  @override
+  String get deploymentUpdatedAt => '업데이트';
+
+  @override
+  String get deploymentUser => '배포자';
+
+  @override
   String get releasesTitle => '릴리스';
 
   @override

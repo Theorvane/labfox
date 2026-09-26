@@ -10,6 +10,7 @@ export 'src/branch.dart';
 export 'src/ci_status.dart';
 export 'src/commit.dart';
 export 'src/file_diff.dart';
+export 'src/gitlab_deployment.dart';
 export 'src/gitlab_environment.dart';
 export 'src/gitlab_milestone.dart';
 export 'src/gitlab_package.dart';

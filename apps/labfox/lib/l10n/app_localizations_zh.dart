@@ -9,6 +9,80 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
+  String get deploymentsTitle => '部署';
+
+  @override
+  String get deploymentsAll => '全部';
+
+  @override
+  String get deploymentsSuccess => '成功';
+
+  @override
+  String get deploymentsFailed => '失败';
+
+  @override
+  String get deploymentsRunning => '运行中';
+
+  @override
+  String get deploymentsCanceled => '已取消';
+
+  @override
+  String get deploymentsCreated => '已创建';
+
+  @override
+  String get deploymentsBlocked => '已阻止';
+
+  @override
+  String get deploymentsUnknownStatus => '未知状态';
+
+  @override
+  String get deploymentsEmpty => '没有找到部署。';
+
+  @override
+  String get deploymentsError => '无法加载部署。';
+
+  @override
+  String get deploymentsLoadMore => '加载更多';
+
+  @override
+  String get deploymentsEnvironmentSearch => '按环境名称筛选';
+
+  @override
+  String get deploymentsUnknownEnvironment => '未知环境';
+
+  @override
+  String get deploymentDetailError => '无法加载此部署。';
+
+  @override
+  String deploymentNumber(int number) {
+    return '部署 #$number';
+  }
+
+  @override
+  String get deploymentEnvironment => '环境';
+
+  @override
+  String get deploymentRef => '引用';
+
+  @override
+  String get deploymentCommit => '提交';
+
+  @override
+  String get deploymentJob => '作业';
+
+  @override
+  String get deploymentPipeline => '流水线';
+
+  @override
+  String get deploymentCreatedAt => '创建时间';
+
+  @override
+  String get deploymentUpdatedAt => '更新时间';
+
+  @override
+  String get deploymentUser => '部署者';
+
+  @override
   String get releasesTitle => '发行版';
 
   @override
